@@ -1,3 +1,4 @@
+
 # Ideas Proyecto Regionales
 
 - [ ] Crear modelo productos - proveedor/stock
@@ -22,3 +23,5 @@
   - Tabla Promos.  
 
   No se debe actualizar la tabla completa de Pedidos de manera automática (¡NUNCA!); solo se toman los nuevos datos del nuevo pedido en la tabla Pedidos pero no se actualiza completa para que no modifique el precio de otros pedidos anteriormente realizados.
+
+Puede que convenga hacer una tabla por cada tipo de producto? PENSALO!
