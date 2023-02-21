@@ -4,6 +4,7 @@ from django.db import models
 class Stock(models.Model):
 
     colores = (("VDE","verde"),("BDO","bordó"),("AZL","azul"),("NRA","negra"),("BCA","blanca"),("BGE","beige"))
+    
     nombre = models.CharField(verbose_name="Nombre", max_length=32)
     tipo = models.CharField(verbose_name="Tipo", max_length=32)
     color = models.CharField(verbose_name="Color",null=True, blank=True, max_length=32, choices=colores)
