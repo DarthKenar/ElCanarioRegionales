@@ -1,19 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../../styles/output.css" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
-    <h1>Hola Lucia</h1>
-    <ol>
-        <li>alpargatas</li>
-        <li>indumetaria</li>
-        <li>alpargatas</li>
-        <li>alpargatas</li>
-        <li>alpargatas</li>
-    </ol>
+    <h1>Buscar Productos:</h1>
+    <form action="/productos/buscar" method="GET">
+        <div class="bg-amber-800 p-3 m-3">
+            <input type="text" name="producto_input">
+            <input type="submit" value="Buscar">
+        </div>
+
+        
+
+        {% if articulos %}
+            <output type="text" name="producto_output">Se encontraron {{articulos.count}} artículos.</output>
+            <table class="table-auto bg-red-300">
+                <thead class="p-3 m-3">
+                  <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Tipo</th>
+                    <th>Color</th>
+                    <th>Material</th>
+                    <th>Talle</th>
+                    <th>Precio de Compra</th>
+                    <th>Incremento</th>
+                    <th>Precio de Venta</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for articulo in articulos %}
+                    <tr>
+                        
+                        <td>{{articulo.id}}</td>
+                        <td>{{articulo.nombre}}</td>
+                        <td>{{articulo.tipo}}</td>
+                        <td>{{articulo.color}}</td>
+                        <td>{{articulo.material}}</td>
+                        <td>{{articulo.talle}}</td>
+                        <td>{{articulo.precio_compra}}</td>
+                        <td>{{articulo.incremento}}</td>
+                        <td>{{articulo.precio_venta}}</td>
+        
+                    </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+
+        {% else %}
+            <p>No se encuentra ningun artículo para el nombre buscado: {{query}}</p>
+        {% endif %}
+
+    </form>
+
+
 </body>
 </html>
