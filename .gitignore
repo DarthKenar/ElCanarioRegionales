@@ -1,0 +1,9 @@
+node_modules
+*.toml
+*.js
+*.json
+*.venv
+elCanario/__pycache__/*.pyc
+productos/__pycache__/*.pyc
+*.pyc 
+*/__pycache__
