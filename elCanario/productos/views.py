@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from productos.models import Stock
+from productos.models import Producto
 from django.http import HttpResponse
 # Create your views here.
 
@@ -17,12 +17,15 @@ def buscar(request):
     
     if producto:
 
-        articulos = Stock.objects.filter(nombre__icontains=producto)
-        return render(request,"productos.html",context={"articulos":articulos,"query":producto})
+        articulos = Producto.objects.filter(nombre__icontains=producto)
+        return render(request,"productos.html",context={"articulos":articulos,"query":producto, "respuesta": "No se encuentra ningun artículo para el nombre buscado:"})
     
     else:
         
-        return HttpResponse("Debe ingresar un artículo en el campo de búsqueda")
+        return HttpResponse("""
+        <h1>Debe ingresar un artículo en el campo de búsqueda</h1>
+
+        """)
     
 
 
