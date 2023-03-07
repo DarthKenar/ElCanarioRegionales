@@ -1,18 +1,10 @@
 {% extends 'footer.html' %}
 {% load static %}
-<!DOCTYPE html>
-    <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link type="text/css" href="{% static 'css/header.css' %}" rel="stylesheet">
-        <title>Document</title>
-    </head>
-    {% block head %}
+
+    {% block content_one %}
         <body>
             <div class="fondo_header">
-            <h1>ESTE ES EL HEADER</h1>
+            <h1 style="background-color: darkmagenta;">ESTE ES EL HEADER</h1>
             <ul>
                 <li>
                     <a href="/orders">Pedidos</a>
@@ -26,11 +18,9 @@
             </ul>
             </div>
         </body>
-
-            {% block content %}{% endblock %}
-            
-    
+        {% block content_two %}{% endblock %}
     {% endblock %}
-</html>
+<!-- Este bloque corresponde al block content de las plantillas que heredan el header.html -->
+
 
 

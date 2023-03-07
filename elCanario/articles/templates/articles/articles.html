@@ -1,7 +1,7 @@
 
 {% extends './header.html' %}
 
-{% block content %}
+{% block content_two %}
     <h1>Buscar Productos:</h1>
     <table class="table-auto bg-red-300">
         {% if articles_all %}
@@ -37,7 +37,7 @@
             </tbody>        
         {% else %}
             <p>{{ answer_all }}</p>
-        {% endif%}
+        {% endif %}
     <form action="/articles/search" method="GET">
         <div class="bg-amber-800 p-3 m-3">
             <input type="text" name="article_input">

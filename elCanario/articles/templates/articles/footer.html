@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    {% block head %}{% endblock %}
 </head>
 <body>
-    {% block head %}{% endblock %}
+    {% block content_one %}{% endblock %}
     <div style="background-color: darkgray;">
         <h1>ESTE ES EL FOOTER</h1>
     </div>

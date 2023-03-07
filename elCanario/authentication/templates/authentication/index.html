@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta lang="es">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'footer.html' %}
+{% block head %}
+    <title>Canario Regionales</title>
+{% endblock %}
+{% block content_one %}
     <h1 style="text-align: center;">Bienvenido</h1>
     <h2 style="text-align: center;">Si estas viendo esto, es porque entraste.</h2>
     <h3>Usuario: {{ user.username }}</h3>
@@ -29,6 +25,4 @@
             <input type="submit" value="Pedidos" name="orders">
         </div>
     </form>
-
-</body>
-</html>
+{% endblock %}
