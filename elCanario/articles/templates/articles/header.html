@@ -1,0 +1,36 @@
+{% extends 'footer.html' %}
+{% load static %}
+<!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link type="text/css" href="{% static 'css/header.css' %}" rel="stylesheet">
+        <title>Document</title>
+    </head>
+    {% block head %}
+        <body>
+            <div class="fondo_header">
+            <h1>ESTE ES EL HEADER</h1>
+            <ul>
+                <li>
+                    <a href="/orders">Pedidos</a>
+                </li>
+                <li>
+                    <a href="/articles">Artículos</a>
+                </li>
+                <li>
+                    <a href="/customers">Clientes</a>
+                </li>
+            </ul>
+            </div>
+        </body>
+
+            {% block content %}{% endblock %}
+            
+    
+    {% endblock %}
+</html>
+
+
