@@ -6,7 +6,7 @@ Examples:
 Function views
     1. Add an import:  from my_app import views
     2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
+Class-based views 
     1. Add an import:  from other_app.views import Home
     2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
 Including another URLconf
@@ -15,14 +15,29 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from productos import views as p_views
-from authentication import views as a_views
+from articles import views as articles_views
+from authentication import views as auth_views
+
+#Para archivos estaticos durante el desarrollo, no deben estar en produccion
+#For static files during development, they must not be in production.
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('productos/', p_views.productos),
-    path('productos/buscar/', p_views.buscar),
-    path('', a_views.login),
-    path('register/', a_views.register),
-    path('index/',a_views.index),
-    path('login/buscar/', a_views.search_user)
+
+    #Este es el login (LOGRADO), deberia usar el admin de django
+    #This is the login (DONE), I should use django admin.
+    path('', auth_views.login), 
+    path('login/buscar/', auth_views.search_user),
+    
+    #Estas son las vistas que deriban a cada una de las secciones de control (Pedidos, Artículos, Clientes)
+    #These are the views that lead to each of the control sections (Orders, Articles, Customers).
+    path('orders', articles_views.section_orders),
+
+    path('articles', articles_views.section_articles),
+    path('articles/search/', articles_views.search_article),
+
+    path('customers', articles_views.section_customers),
+
 ]
