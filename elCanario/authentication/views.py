@@ -10,6 +10,7 @@ def search_register(request):
     )"""
     
     pass
+
 def search_user(request):
     """
     Primero comprobar:
@@ -22,7 +23,7 @@ def search_user(request):
 
     try:
         
-        user = User.objects.get(nombre = username_or_email_input, contrasenia = password_input)
+        user = User.objects.get(username = username_or_email_input, password = password_input)
 
     except User.DoesNotExist:
 
@@ -32,36 +33,6 @@ def search_user(request):
         #return render(request,"productos.html",context={"articulos":articulos,"query":producto})
     return render(request, template_name='index.html', context={"user": user})
         
-def index(request):
-
-    return render(request, template_name='index.html', context={})
-
 def login(request):
     
     return render(request, template_name='login.html', context={})
-
-def register(request):
-    
-    return render(request, template_name='register.html', context={})
-"""
-
-def productos(request):
-    return render(request,template_name='productos.html', context={}) #request = HttpRequest
-
-# def buscar(request):
-#     producto = f"El producto buscado es: {request.GET['producto_input']}"
-#     return HttpResponse(producto)
-
-
-def buscar(request):
-
-    producto = request.GET['producto_input']
-    
-    if producto:
-
-        articulos = Producto.objects.filter(nombre__icontains=producto)
-        return render(request,"productos.html",context={"articulos":articulos,"query":producto})
-    
-    else:
-        
-        return HttpResponse("Debe ingresar un artículo en el campo de búsqueda")"""
