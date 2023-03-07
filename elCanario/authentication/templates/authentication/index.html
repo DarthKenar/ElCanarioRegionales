@@ -1,28 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta lang="es">
     <title>Document</title>
 </head>
 <body>
     <h1 style="text-align: center;">Bienvenido</h1>
     <h2 style="text-align: center;">Si estas viendo esto, es porque entraste.</h2>
-    <h3>Usuario: {{ user.nombre }}</h3>
-    <h3>Correo: {{ user.correo }}</h3>
-    <form action="/index/section">
+    <h3>Usuario: {{ user.username }}</h3>
+    <h3>Correo: {{ user.email }}</h3>
 
-        <div>
-            <link rel="stylesheet" href="">
+    <form action="/articles">
+        <div style="padding: 50px; background-color: rgb(115, 110, 187);">
+            <input type="submit" value="Artículos" name="articles">
         </div>
-        <div>
-            <link rel="stylesheet" href="">
-        </div>
-        <div>
-            <link rel="stylesheet" href="">
-        </div>
-
     </form>
+
+    <form action="/customers">
+        <div style="padding: 50px; background-color: rgb(143, 83, 83);">
+            <input type="submit" value="Clientes" name="customers">
+        </div>
+    </form>
+
+    <form action="/orders">
+        <div style="padding: 50px; background-color: rgb(74, 156, 74);">
+            <input type="submit" value="Pedidos" name="orders">
+        </div>
+    </form>
+
 </body>
 </html>
