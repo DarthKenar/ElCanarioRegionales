@@ -1,24 +1,30 @@
 {% extends 'footer.html' %}
 {% load static %}
+    {% block head_one %}
+        <head>
+            {% block head_two %}{% endblock %}
+        </head>
+        <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    {% endblock %}
 
     {% block content_one %}
         <body>
             <div class="fondo_header">
-            <h1 style="background-color: darkmagenta;">ESTE ES EL HEADER</h1>
-            <ul>
-                <li>
-                    <a href="/orders">Pedidos</a>
-                </li>
-                <li>
-                    <a href="/articles">Artículos</a>
-                </li>
-                <li>
-                    <a href="/customers">Clientes</a>
-                </li>
-            </ul>
+                <h1>ESTE ES EL HEADER</h1>
+                <ul>
+                    <li>
+                        <a href="{% url 'orders' %}">Pedidos</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'articles' %}">Artículos</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'customers' %}">Clientes</a>
+                    </li>
+                </ul>
             </div>
+            {% block content_two %}{% endblock %}
         </body>
-        {% block content_two %}{% endblock %}
     {% endblock %}
 <!-- Este bloque corresponde al block content de las plantillas que heredan el header.html -->
 
