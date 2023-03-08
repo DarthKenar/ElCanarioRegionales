@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from articles import views as articles_views
 from authentication import views as auth_views
-
+from django.conf import settings
 #Para archivos estaticos durante el desarrollo, no deben estar en produccion
 #For static files during development, they must not be in production.
 from django.conf import settings
@@ -33,11 +33,13 @@ urlpatterns = [
     
     #Estas son las vistas que deriban a cada una de las secciones de control (Pedidos, Artículos, Clientes)
     #These are the views that lead to each of the control sections (Orders, Articles, Customers).
-    path('orders', articles_views.section_orders),
+    path('orders', articles_views.section_orders, name="orders"),
 
-    path('articles', articles_views.section_articles),
+    path('articles', articles_views.section_articles, name="articles"),
     path('articles/search/', articles_views.search_article),
 
-    path('customers', articles_views.section_customers),
+    path('customers', articles_views.section_customers, name="customers"),
 
 ]
+
+urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
