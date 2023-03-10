@@ -30,7 +30,7 @@ def section_articles(request):
     
     else:
 
-        datatype = {
+        datatype_dict = {
             0: "selection_empty",
             1: "id",
             2: "article_name",
@@ -48,46 +48,46 @@ def section_articles(request):
 
         if article_input:
 
-            if datatype_input == datatype[1]:
-                data_type = "ID"
+            if datatype_input == datatype_dict[1]:
+                datatype = "ID"
                 articles = Articles.objects.filter(id__icontains=article_input)
-            elif datatype_input == datatype[2]:
-                data_type = "Nombre"
+            elif datatype_input == datatype_dict[2]:
+                datatype = "Nombre"
                 articles = Articles.objects.filter(article_name__icontains=article_input)
-            elif datatype_input == datatype[3]:
-                data_type = "Categoría"
-                articles = Categories.objects.filter(category_id__icontains=article_input)
-            elif datatype_input == datatype[4]:
-                data_type = "Color"
+            elif datatype_input == datatype_dict[3]:
+                datatype = "Categoría"
+                articles = Categories.objects.filter(category_name__icontains=article_input)
+            elif datatype_input == datatype_dict[4]:
+                datatype = "Color"
                 articles = Articles.objects.filter(color_id__icontains=article_input)
-            elif datatype_input == datatype[5]:
-                data_type = "Material"
+            elif datatype_input == datatype_dict[5]:
+                datatype = "Material"
                 articles = Articles.objects.filter(material_id__icontains=article_input)
-            elif datatype_input == datatype[6]:
-                data_type = "Talle/Tamaño"
+            elif datatype_input == datatype_dict[6]:
+                datatype = "Talle/Tamaño"
                 articles = Articles.objects.filter(size_id__icontains=article_input)
-            elif datatype_input == datatype[7]:
-                data_type = "Precio de compra"
+            elif datatype_input == datatype_dict[7]:
+                datatype = "Precio de compra"
                 articles = Articles.objects.filter(buy_price__icontains=article_input)
-            elif datatype_input == datatype[8]:
-                data_type = "Incremento"
+            elif datatype_input == datatype_dict[8]:
+                datatype = "Incremento"
                 articles = Articles.objects.filter(increase__icontains=article_input)
-            else: #datatype_input == datatype[9]:
-                data_type = "Precio de venta"
+            else: #datatype_input == datatype_dict[9]:
+                datatype = "Precio de venta"
                 articles = Articles.objects.filter(sell_price__icontains=article_input)
             
             if not articles:
 
                 answer_negative = "No se encuentra:"
 
-                context={"articles_searched":articles,"article_input":article_input, "articles_any": articles, "answer_negative": answer_negative, "datatype_input": datatype_input }
+                context={"articles_searched":articles,"article_input":article_input, "articles_any": articles, "answer_negative": answer_negative, "datatype_input": datatype }
                 return section_articles_deliver(request,context)
             
             else:
 
                 answer = "Se está buscando:"
         
-                context={"articles_searched":articles,"article_input":article_input, "articles_any": articles, "datatype_input": datatype_input, "answer": answer}
+                context={"articles_searched":articles,"article_input":article_input, "articles_any": articles, "datatype_input": datatype, "answer": answer}
                 return section_articles_deliver(request,context)
         
         else:
