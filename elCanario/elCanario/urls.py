@@ -28,7 +28,7 @@ urlpatterns = [
 
     #Este es el login (LOGRADO), deberia usar el admin de django
     #This is the login (DONE), I should use django admin.
-    path('', auth_views.login), 
+    path('', auth_views.login, name="home"), 
     path('login/buscar/', auth_views.search_user),
     
     #Estas son las vistas que deriban a cada una de las secciones de control (Pedidos, Artículos, Clientes)
@@ -36,7 +36,7 @@ urlpatterns = [
     path('orders', articles_views.section_orders, name="orders"),
 
     path('articles', articles_views.section_articles, name="articles"),
-    path('articles/search/', articles_views.search_article),
+    path('articles/categories', articles_views.section_articles_categories, name="categories"),
 
     path('customers', articles_views.section_customers, name="customers"),
 
