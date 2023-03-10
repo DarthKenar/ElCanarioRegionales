@@ -4,82 +4,86 @@
     <title>Artículos - Canario Regionales</title>
 {% endblock %}
 {% block content_two %}
-    <h1>Buscar Productos:</h1>
-    <table class="table-auto bg-red-300">
-        {% if articles_all %}
-            <output class="bg-red-400" type="text" name="articles_output">Hay {{articles_all.count}} artículos en la Base de datos.</output>
-            <thead class="p-3 m-3">
-                <tr>
-                    <th>Id</th>
-                    <th>Nombre</th>
-                    <th>Tipo</th>
-                    <th>Color</th>
-                    <th>Material</th>
-                    <th>Talle</th>
-                    <th>Precio de Compra</th>
-                    <th>Incremento</th>
-                    <th>Precio de Venta</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for article in articles_all %}
-                
-                    <tr>
-                        <td>{{article.id}}</td>
-                        <td>{{article.article_name}}</td>
-                        <td>{{article.category_id}}</td>
-                        <td>{{article.color_id}}</td>
-                        <td>{{article.material_id}}</td>
-                        <td>{{article.size_id}}</td>
-                        <td>{{article.buy_price}}</td>
-                        <td>{{article.increase}}</td>
-                        <td>{{article.sell_price}}</td>
-                    </tr>
-                {% endfor %} 
-            </tbody>        
-        {% else %}
-            <p>{{ answer_all }}</p>
-        {% endif %}
-    <form action="/articles/search" method="GET">
-        <div class="bg-amber-800 p-3 m-3">
-            <input type="text" name="article_input">
-            <input class="bg-orange-600 hover:bg-red-700" type="submit" value="Buscar">
+
+    
+    <div class="bg-gradient-to-tr from-yellow-300 to-yellow-500 rounded-md p-4 m-8">
+        <div class="py-2">
+            {% if articles_searched %}
+                <output class="" type="text">Se está buscando: <b>{{query_search}}</b></output><br>
+                <output class="" type="text">Cantidad de artículos entonctrados: <b>{{ articles_searched.count }}</b>.</output>
+            {% endif %}
+            {% if articles_all %}
+                <output class="" type="text">Cantidad de artículos totales en la base de datos: <b>{{ articles_all.count }}</b>.</output>
+                <output type="text">{{ answer }}</output>
+            {% else %}
+                <output type="text">{{ answer_negative }}</output>
+            {% endif %}
         </div>
-        {% if articles %}
-            <output class="bg-red-400" type="text" name="articles_output">Se está buscando: {{query_search}}</output><br>
-            <output class="bg-red-400" type="text" name="articles_output">Se encontraron {{articles.count}} artículos.</output>
+        <div class="flex flex-row">
+            <div class="basis-1/3 flex justify-around">
+
+                <form action="{% url 'articles' %}" method="GET">
+                    <input class="invisible" style="display: none;" type="text" name="first_time_articles" value="0">
+                    <b class="text-black font-sans font-bold">Buscar:</b>
+                    <select class="bg-yellow-50 rounded-sm px-2" name="datatype_input">
+                        <option value="selection_empty">Selecciona un tipo de búsqueda</option>
+                        <option value="id">ID</option>
+                        <option value="article_name">Nombre</option>
+                        <option value="category_id">Categoría</option>
+                        <option value="color_id">Color</option>
+                        <option value="material_id">Material</option>
+                        <option value="size_id">Talle/Tamaño</option>
+                        <option value="buy_price">Precio de Compra</option>
+                        <option value="increase">Incremento</option>
+                        <option value="sell_price">Precio de Venta</option>
+                    </select>
+                    <input class="bg-yellow-50 rounded-sm px-2" type="text" name="article_input">
+                    <input class="text-sm rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-yellow-800 to-yellow-600 px-8 py-1 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" value="Buscar">
+                </form>
+
+            </div>
+
+            <form action="{% url 'categories' %}">
+                <div class="basis-2/3 flex justify-around">
+                    <input class="invisible" type="text" name="first_time_categories" value="1">
+                    <input class="text-sm rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-yellow-800 to-yellow-600 px-8 py-1 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" value="Categories">
+                </div>
+            </form>
+
+        </div>
+    </div>
+    {% if articles_any %}
+        
+        <table class="table-auto bg-gradient-to-tr from-yellow-500 to-yellow-300 border-separate border-2 border-yellow-50 rounded-md p-4 m-8 hover:bg-gradient-to-bl transition duration-1000 hover:from-yellow-500 hover:to-yellow-300">
             <thead class="p-3 m-3">
                 <tr>
-                    <th>Id</th>
-                    <th>Nombre</th>
-                    <th>Tipo</th>
-                    <th>Color</th>
-                    <th>Material</th>
-                    <th>Talle</th>
-                    <th>Precio de Compra</th>
-                    <th>Incremento</th>
-                    <th>Precio de Venta</th>
+                    <th class="m-4 bg-yellow-300">Id</th>
+                    <th class="m-4 bg-yellow-300">Nombre</th>
+                    <th class="m-4 bg-yellow-300">Tipo</th>
+                    <th class="m-4 bg-yellow-300">Color</th>
+                    <th class="m-4 bg-yellow-300">Material</th>
+                    <th class="m-4 bg-yellow-300">Talle</th>
+                    <th class="m-4 bg-yellow-300">Precio de Compra</th>
+                    <th class="m-4 bg-yellow-300">Incremento</th>
+                    <th class="m-4 bg-yellow-300">Precio de Venta</th>
                 </tr>
             </thead>
             <tbody>
-                {% for article in articles %}
+                {% for article in articles_any %}
                     <tr>
-                        <td>{{article.id}}</td>
-                        <td>{{article.article_name}}</td>
-                        <td>{{article.category_id}}</td>
-                        <td>{{article.color_id}}</td>
-                        <td>{{article.material_id}}</td>
-                        <td>{{article.size_id}}</td>
-                        <td>{{article.buy_price}}</td>
-                        <td>{{article.increase}}</td>
-                        <td>{{article.sell_price}}</td>
+                        <td class="m-4 px-12 bg-yellow-200">{{article.id}}</td>
+                        <td class="m-4 px-12 bg-yellow-200">{{article.article_name}}</td>
+                        <td class="m-4 px-12 bg-yellow-200">{{article.category_id}}</td>
+                        <td class="m-4 px-12 bg-yellow-200">{{article.color_id}}</td>
+                        <td class="m-4 px-12 bg-yellow-200">{{article.material_id}}</td>
+                        <td class="m-4 px-12 bg-yellow-200">{{article.size_id}}</td>
+                        <td class="m-4 px-12 bg-yellow-200">{{article.buy_price}}</td>
+                        <td class="m-4 px-12 bg-yellow-200">{{article.increase}}</td>
+                        <td class="m-4 px-12 bg-yellow-200">{{article.sell_price}}</td>
                     </tr>
                 {% endfor %}
             </tbody>
-        {% else %}
-            <p>{{ answer_search }} {{ query_search }}</p>
-        {% endif %}
-        
-    </form>
-    </table>
+        </table>
+    {% endif %}
+    
 {% endblock %}

@@ -4,22 +4,32 @@
         <head>
             {% block head_two %}{% endblock %}
         </head>
-        <link rel="stylesheet" href="{% static 'css/header.css' %}">
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     {% endblock %}
 
     {% block content_one %}
-        <body>
-            <div class="fondo_header">
-                <h1>ESTE ES EL HEADER</h1>
-                <ul>
-                    <li>
-                        <a href="{% url 'orders' %}">Pedidos</a>
+        <form action="{% url 'home' %}">
+            <input type="submit" value="Volver">
+        </form>
+        <body class="bg-yellow-100">
+            <div class="bg-gradient-to-tr from-yellow-500 to-yellow-300 rounded-md  border-2 p-4 m-8">
+                <ul class="flex justify-around bg-center p-2">
+                    <li class="">
+                        <form action="{% url 'orders' %}">
+                            <!-- <input class="invisible" style="display: none;" type="text" name="first_time_orders" value="1"> -->
+                            <input class="text-lg rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-yellow-800 to-yellow-600 px-12 py-4 shadow-md shadow-slate-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" value="Pedidos" />
+                        </form>
                     </li>
-                    <li>
-                        <a href="{% url 'articles' %}">Artículos</a>
+                    <li class="">
+                        <form action="{% url 'articles' %}">
+                            <input class="invisible" style="display: none;" type="text" name="first_time_articles" value="1">
+                            <input class="text-lg rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-yellow-800 to-yellow-600 px-12 py-4 shadow-md shadow-slate-800 transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" value="Artículos">
+                        </form>
                     </li>
-                    <li>
-                        <a href="{% url 'customers' %}">Clientes</a>
+                        <form action="{% url 'customers' %}">
+                            <!-- <input class="invisible" style="display: none;" type="text" name="first_time_customers" value="1"> -->
+                            <input class="text-lg rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-yellow-800 to-yellow-600 px-12 py-4 shadow-md shadow-slate-800 transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-150 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" value="Clientes">
+                        </form>
                     </li>
                 </ul>
             </div>
