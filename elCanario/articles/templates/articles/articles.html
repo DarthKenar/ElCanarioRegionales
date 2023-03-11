@@ -1,4 +1,3 @@
-
 {% extends './header.html' %}
 {% block head_two %}
     <title>Artículos - Canario Regionales</title>
@@ -6,7 +5,7 @@
 {% block content_two %}
 
     
-    <div class="bg-gradient-to-tr from-yellow-300 to-yellow-500 rounded-md p-4 m-8">
+    <div class="bg-gradient-to-tr from-amber-100 to-amber-300 rounded-md p-4 m-8">
         <div class="py-2">
 
             
@@ -20,7 +19,6 @@
                         <output type="text">{{ answer_negative }}</output>
                     {% endif %}
                 {% else%}
-                <!-- <output class="" type="text">Cantidad de artículos totales en la base de datos: <b>{{ articles_all.count }}</b>.</output> -->
                     <output type="text">{{ answer_negative }} <b> {{datatype_input}}: {{article_input}}</b></output>
                 {% endif %}
             {% endif %}
@@ -33,7 +31,7 @@
                 <form action="{% url 'articles' %}" method="GET">
                     <input class="invisible" style="display: none;" type="text" name="first_time_articles" value="0">
                     <b class="text-black font-sans font-bold">Buscar:</b>
-                    <select class="bg-yellow-50 rounded-sm px-2" name="datatype_input">
+                    <select class="bg-amber-50 rounded-sm px-2" name="datatype_input">
                         <option value="id">ID</option>
                         <option value="article_name">Nombre</option>
                         <option value="category_id">Categoría</option>
@@ -44,55 +42,59 @@
                         <option value="increase">Incremento</option>
                         <option value="sell_price">Precio de Venta</option>
                     </select>
-                    <input class="bg-yellow-50 rounded-sm px-2" type="text" name="article_input">
-                    <input class="text-sm rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-yellow-800 to-yellow-600 px-8 py-1 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" value="Buscar">
+                    <input class="bg-amber-50 rounded-sm px-2" type="text" name="article_input">
+                    <input class="text-sm font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700  px-8 py-1 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" value="Buscar">
                 </form>
 
             </div>
-
-            <form action="{% url 'categories' %}">
+            
+            <form action="{% url 'categories' %}">  
                 <div class="basis-2/3 flex justify-around">
                     <input class="invisible" type="text" name="first_time_categories" value="1">
-                    <input class="text-sm rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-yellow-800 to-yellow-600 px-8 py-1 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" value="Categories">
+                    <input class="text-sm font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-8 py-1 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" value="Categorías">
                 </div>
             </form>
 
         </div>
     </div>
     {% if articles_any %}
-        
-        <table class="table-auto bg-gradient-to-tr from-yellow-500 to-yellow-300 border-separate border-2 border-yellow-50 rounded-md p-4 m-8 hover:bg-gradient-to-bl transition  hover:from-yellow-500 hover:to-yellow-300 duration-1000">
-            <thead class="p-3 m-3">
-                <tr>
-                    <th class="m-4 bg-yellow-300">Id</th>
-                    <th class="m-4 bg-yellow-300">Nombre</th>
-                    <th class="m-4 bg-yellow-300">Tipo</th>
-                    <th class="m-4 bg-yellow-300">Color</th>
-                    <th class="m-4 bg-yellow-300">Material</th>
-                    <th class="m-4 bg-yellow-300">Talle</th>
-                    <th class="m-4 bg-yellow-300">Precio de Compra</th>
-                    <th class="m-4 bg-yellow-300">Incremento</th>
-                    <th class="m-4 bg-yellow-300">Precio de Venta</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for article in articles_any %}
-                    <tr>
-                        <td class="m-4 px-12 bg-yellow-200">{{article.id}}</td>
-                        <td class="m-4 px-12 bg-yellow-200">{{article.article_name}}</td>
-                        <td class="m-4 px-12 bg-yellow-200">{{article.category_id}}</td>
-                        <td class="m-4 px-12 bg-yellow-200">{{article.color_id}}</td>
-                        <td class="m-4 px-12 bg-yellow-200">{{article.material_id}}</td>
-                        <td class="m-4 px-12 bg-yellow-200">{{article.size_id}}</td>
-                        <td class="m-4 px-12 bg-yellow-200">{{article.buy_price}}</td>
-                        <td class="m-4 px-12 bg-yellow-200">{{article.increase}}</td>
-                        <td class="m-4 px-12 bg-yellow-200">{{article.sell_price}}</td>
+    <div>
+        <div>
+            <table class="table-auto font-mono  text-red-900  shadow-slate-600 shadow-md bg-amber-200 border-separate border-2 border-amber-100 rounded-md p-4 m-8 transition duration-300 hover:shadow-slate-600 hover:shadow-sm">
+                <thead class="p-3 m-3">
+                    <tr class="bg-amber-300">
+                        <th class="m-4 ">Id</th>
+                        <th class="m-4 ">Nombre</th>
+                        <th class="m-4 ">Tipo</th>
+                        <th class="m-4 ">Color</th>
+                        <th class="m-4 ">Material</th>
+                        <th class="m-4 ">Talle</th>
+                        <th class="m-4 ">Precio de Compra</th>
+                        <th class="m-4 ">Incremento</th>
+                        <th class="m-4 ">Precio de Venta</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody class="bg-amber-100">
+                    {% for article in articles_any %}
+                        <tr>
+                            <td class="m-4 px-12 ">{{article.id}}</td>
+                            <td class="m-4 px-12 ">{{article.article_name}}</td>
+                            <td class="m-4 px-12 ">{{article.category_id}}</td>
+                            <td class="m-4 px-12 ">{{article.color_id}}</td>
+                            <td class="m-4 px-12 ">{{article.material_id}}</td>
+                            <td class="m-4 px-12 ">{{article.size_id}}</td>
+                            <td class="m-4 px-12  tabular-nums slashed-zero">{{article.buy_price}}</td>
+                            <td class="m-4 px-12  tabular-nums slashed-zero">{{article.increase}}</td>
+                            <td class="m-4 px-12  tabular-nums slashed-zero">{{article.sell_price}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div>
 
         </div>
+    </div>
     {% endif %}
     
 {% endblock %}

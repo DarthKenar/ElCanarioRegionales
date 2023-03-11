@@ -1,34 +1,34 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="es" >
 <head>
+  {% load static %}
   <meta charset="UTF-8">
   <title>Login</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <link rel="text/css" href="{% static 'css/styles.css' %}">
 
 </head> 
-<body class="bg-yellow-100">
+<body class="bg-amber-50">
 <!-- partial:index.partial.html -->
-<div class="grid grid-cols-2 gap-4 place-content-center h-48 bg-orange-500">
-  <h2>Login</h2>
-  <form id="login-form" action="/login/buscar" method="GET">
-    <p>
-    <input name="username_input" type="text" id="username" name="username" placeholder="Nombre de Usuario" required><i class="validation"><span></span><span></span></i>
-    </p>
-    <p>
-    <input name="password_input" type="password" id="password" name="password" placeholder="Contraseña" required><i class="validation"><span></span><span></span></i>
-    </p>
-    <p>
-    <input type="submit" id="login" value="Entrar">
-    </p>
-    <p>{{ respuesta }}</p>
-  </form>
-  <div id="create-account-wrap">
-    <p>No estas registrado? <a href="https://wa.me/+542615878046">Pide al administrador que te genere una cuenta</a><p>
-  </div><!--create-account-wrap-->
-</div><!--login-form-wrap-->
-<!-- partial -->
-  
+  <div class="grid grid-cols-2 gap-4 place-content-center bg-gradient-to-tr from-amber-100 to-amber-300 rounded-md p-4 m-8">
+    <h2>Login</h2>
+    <form id="login-form" action="/login/buscar" method="GET">
+      <p>
+      <input name="username_input" type="text" id="username" name="username" placeholder="Nombre de Usuario" required><i class="validation"><span></span><span></span></i>
+      </p>
+      <p>
+      <input name="password_input" type="password" id="password" name="password" placeholder="Contraseña" required><i class="validation"><span></span><span></span></i>
+      </p>
+      <p>
+      <input type="submit" id="login" value="Entrar">
+      </p>
+      <p>{{ respuesta }}</p>
+    </form>
+    <div id="create-account-wrap">
+      <p>No estas registrado? <a href="https://wa.me/+542615878046">Pide al administrador que te genere una cuenta</a><p>
+    </div><!--create-account-wrap-->
+  </div><!--login-form-wrap-->
+  <!-- partial -->
+    
 </body>
 </html>
