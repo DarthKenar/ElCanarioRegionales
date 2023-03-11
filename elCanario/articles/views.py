@@ -19,8 +19,8 @@ def section_articles_deliver(request, context: dict):
 
 def section_articles(request):
 
-    first_time_articles = request.GET['first_time_articles'] #no se porque tira error
-    #first_time_articles = '1'
+    first_time_articles = request.GET['first_time_articles']
+    
     if first_time_articles == '1':
 
         answer = "Artículos en la Base de datos"
