@@ -33,12 +33,17 @@ urlpatterns = [
     
     #Estas son las vistas que deriban a cada una de las secciones de control (Pedidos, Artículos, Clientes)
     #These are the views that lead to each of the control sections (Orders, Articles, Customers).
-    path('orders', articles_views.section_orders, name="orders"),
+    path('orders', articles_views.orders_all, name="orders_all"),
 
-    path('articles', articles_views.section_articles, name="articles"),
-    path('articles/categories', articles_views.section_articles_categories, name="categories"),
+    path('articles', articles_views.articles_all, name="articles_all"),
+    path('articles_create', articles_views.articles_create, name="articles_create"),
+    path('articles_read', articles_views.articles_read, name="articles_read"),
+    path('articles_update', articles_views.articles_update, name="articles_update"),
+    path('articles_delete', articles_views.articles_delete, name="articles_delete"),
 
-    path('customers', articles_views.section_customers, name="customers"),
+    path('articles/categories', articles_views.articles_categories_all, name="categories_all"),
+
+    path('customers', articles_views.customers_all, name="customers_all"),
 
 ]
 
