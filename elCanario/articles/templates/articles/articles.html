@@ -58,14 +58,14 @@
         </div>
     </div>
     {% if articles_any %}
-    <div>
-        <div>
+    <div class="flex flex-row">
+        <div class="flex justify-around">
             <table class="table-auto font-mono  text-red-900  shadow-slate-600 shadow-md bg-amber-200 border-separate border-2 border-amber-100 rounded-md p-4 m-8 transition duration-300 hover:shadow-slate-600 hover:shadow-sm">
                 <thead class="p-3 m-3">
                     <tr class="bg-amber-300">
                         <th class="m-4 ">Id</th>
                         <th class="m-4 ">Nombre</th>
-                        <th class="m-4 ">Tipo</th>
+                        <th class="m-4 ">Categoría</th>
                         <th class="m-4 ">Color</th>
                         <th class="m-4 ">Material</th>
                         <th class="m-4 ">Talle</th>
@@ -87,6 +87,12 @@
                             <td class="m-4 px-12  tabular-nums slashed-zero">{{article.increase}}</td>
                             <td class="m-4 px-12  tabular-nums slashed-zero">{{article.sell_price}}</td>
                         </tr>
+                        <form action="">
+
+                        </form>
+                        <form action="">
+                            
+                        </form>
                     {% endfor %}
                 </tbody>
             </table>
