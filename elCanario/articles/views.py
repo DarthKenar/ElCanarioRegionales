@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from articles.models import Articles, Categories
+from articles.models import Articles, Categories, Colors, Sizes, Materials
 from django.http import HttpResponse
 # Create your views here.
 
@@ -14,7 +14,7 @@ def section_customers(request):
 
 ##ARTICLES SECTION
 def section_articles_deliver(request, context: dict): 
-
+    
     return render(request,"articles.html", context)
 
 def section_articles(request):
@@ -56,16 +56,20 @@ def section_articles(request):
                 articles = Articles.objects.filter(article_name__icontains=article_input)
             elif datatype_input == datatype_dict[3]:
                 datatype = "Categoría"
-                articles = Categories.objects.filter(category_name__icontains=article_input)
+                category_object = Categories.objects.filter(category_name__icontains=article_input)
+                articles = Articles.objects.filter(category_id__in=category_object)
             elif datatype_input == datatype_dict[4]:
                 datatype = "Color"
-                articles = Articles.objects.filter(color_id__icontains=article_input)
+                color_object = Colors.objects.filter(color_name__icontains=article_input)
+                articles = Articles.objects.filter(color_id__in=color_object)
             elif datatype_input == datatype_dict[5]:
                 datatype = "Material"
-                articles = Articles.objects.filter(material_id__icontains=article_input)
+                material_object = Materials.objects.filter(material_name__icontains=article_input)
+                articles = Articles.objects.filter(material_id__in=material_object)
             elif datatype_input == datatype_dict[6]:
                 datatype = "Talle/Tamaño"
-                articles = Articles.objects.filter(size_id__icontains=article_input)
+                size_object = Sizes.objects.filter(size_name__icontains=article_input)
+                articles = Articles.objects.filter(size_id__in=size_object)
             elif datatype_input == datatype_dict[7]:
                 datatype = "Precio de compra"
                 articles = Articles.objects.filter(buy_price__icontains=article_input)
@@ -119,7 +123,20 @@ def section_articles_categories(request):
         context = {"category_input": category_input}
         return section_articles_categories_deliver(request, context)
 
+def section_articles_crud_deliver(request, context):
+    return render(request,template_name="articles_crud.html", context={})
 
+def article_create(request):
+    pass #te debe reenviar al formulario html para agregar articulos
+    #section_articles_crud_deliver(request)
 
+def article_delete(request):
+    pass #te debe eliminar el artículo seleccionado. toma los valores de ese artículo y los busca en la tabla para eliminarlos
+    #section_articles_crud_deliver(request)
 
+def article_update(request):
+    pass
+    #section_articles_crud_deliver(request)
 
+def article_crud_confirm(request):
+    pass
