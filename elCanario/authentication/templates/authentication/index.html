@@ -8,24 +8,22 @@
     <h3>Usuario: {{ user.username }}</h3>
     <h3>Correo: {{ user.email }}</h3>
 
-    <form action="/articles">
-        <div style="padding: 50px; background-color: rgb(115, 110, 187);">
-            <input class="invisible" style="display: none;" type="text" name="first_time_articles" value="1">
+    <div style="padding: 50px; background-color: rgb(115, 110, 187);">
+        <form action="{% url 'articles_all' %}">
             <input type="submit" value="Artículos" name="articles">
-        </div>
-    </form>
+        </form>
+    </div>
 
-    <form action="/customers">
-        <div style="padding: 50px; background-color: rgb(143, 83, 83);">
-            <!-- <input class="invisible" type="text" name="first_time_customers" value="1"> -->
+    <div style="padding: 50px; background-color: rgb(143, 83, 83);">
+        <form action="{% url 'customers_all' %}">
             <input type="submit" value="Clientes" name="customers">
-        </div>
-    </form>
+        </form>
+    </div>
 
-    <form action="/orders">
-        <div style="padding: 50px; background-color: rgb(74, 156, 74);">
-            <!-- <input class="invisible" type="text" name="first_time_orders" value="1"> -->
+    <div style="padding: 50px; background-color: rgb(74, 156, 74);">
+        <form action="{% url 'orders_all' %}">
             <input type="submit" value="Pedidos" name="orders">
-        </div>
-    </form>
+        </form>
+    </div>
+
 {% endblock %}
