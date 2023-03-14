@@ -103,8 +103,13 @@ def section_articles_crud_deliver(request, context):
     return render(request,template_name="articles_crud.html", context={})
 
 def articles_create(request):
-    pass #te debe reenviar al formulario html para agregar articulos
-    #section_articles_crud_deliver(request)
+
+    context = {}
+    return render(request,template_name='articles_crud.html',context = context)
+
+def articles_create_confirm(request):
+    context = {}
+    return articles_deliver(request, context)
 
 def articles_delete(request):
     pass #te debe eliminar el artículo seleccionado. toma los valores de ese artículo y los busca en la tabla para eliminarlos
@@ -114,8 +119,7 @@ def articles_update(request):
     pass
     #section_articles_crud_deliver(request)
 
-def articles_crud_confirm(request):
-    pass
+
 
 ## ARTICLES_CATEGORIES
 
