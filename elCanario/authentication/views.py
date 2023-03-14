@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from .models import User
 # Create your views here.
 def search_register(request):
@@ -18,12 +18,12 @@ def search_user(request):
         - que la contraseña elegida para el usuario sea correcta
         responder a cualquiera de las dos. "El usuario o contraseña son incorrectos."
     """
-    username_or_email_input = request.GET['username_input']
+    username_input = request.GET['username_input']
     password_input = request.GET['password_input']
 
     try:
         
-        user = User.objects.get(username = username_or_email_input, password = password_input)
+        user = User.objects.get(username = username_input, password = password_input)
 
     except User.DoesNotExist:
 
@@ -36,3 +36,6 @@ def search_user(request):
 def login(request):
     
     return render(request, template_name='login.html', context={})
+
+def home(request):
+    return render(request, template_name='index.html')
