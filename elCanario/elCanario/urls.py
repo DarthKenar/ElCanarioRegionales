@@ -28,15 +28,17 @@ urlpatterns = [
 
     #Este es el login (LOGRADO), deberia usar el admin de django
     #This is the login (DONE), I should use django admin.
-    path('', auth_views.login, name="home"), 
-    path('login/buscar/', auth_views.search_user),
-    
+    path('', auth_views.login, name="login"),
+
+    path('login/buscar/', auth_views.search_user, name="login_search"),
+    path('home', auth_views.home, name="home"),
     #Estas son las vistas que deriban a cada una de las secciones de control (Pedidos, Artículos, Clientes)
     #These are the views that lead to each of the control sections (Orders, Articles, Customers).
     path('orders', articles_views.orders_all, name="orders_all"),
 
     path('articles', articles_views.articles_all, name="articles_all"),
     path('articles_create', articles_views.articles_create, name="articles_create"),
+    path('articles_create/confirm', articles_views.articles_create_confirm, name="articles_create_confirm"),
     path('articles_read', articles_views.articles_read, name="articles_read"),
     path('articles_update', articles_views.articles_update, name="articles_update"),
     path('articles_delete', articles_views.articles_delete, name="articles_delete"),
@@ -48,3 +50,8 @@ urlpatterns = [
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
+
+htmx_urlpatterns = [
+]
+
+urlpatterns += htmx_urlpatterns
