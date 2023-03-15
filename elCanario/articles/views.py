@@ -100,12 +100,12 @@ def articles_read(request):
 
 
 def section_articles_crud_deliver(request, context):
-    return render(request,template_name="articles_crud.html", context={})
+    return render(request,template_name="articles_create.html", context={})
 
 def articles_create(request):
 
     context = {}
-    return render(request,template_name='articles_crud.html',context = context)
+    return render(request,template_name='articles_create.html',context = context)
 
 def articles_create_confirm(request):
     context = {}
@@ -140,3 +140,23 @@ def articles_categories_all(request):
 ## ARTICLES_COLORS
 ## ARTICLES_MATERIALS
 ## ARTICLES_SIZES
+
+#HTMX
+##ARTICLES_CREATE.HTML
+def sell_price_calculator(request):
+    
+    buy_price = request.GET['article_buy_price_input']
+    increase = request.GET['article_increase_input']
+    
+    if buy_price and increase:
+
+        buy_price_float = float(buy_price)
+        increase_float = float(increase)
+        #increase_float = (increase_float / 100) + 1
+        calculator = (buy_price_float * increase_float)
+        context = {"calculator": str(calculator)}
+        return render(request, template_name='articles_create_htmx.html', context=context)
+    
+    else:
+        context={calculator:"Complete los campos para calcular el precio de venta"}
+        return render(request, template_name='articles_create_htmx.html', context=context)
