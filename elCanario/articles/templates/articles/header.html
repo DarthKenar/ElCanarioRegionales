@@ -12,22 +12,28 @@
     {% endblock %}
 
     {% block content_one %}
+
         <form action="{% url 'home' %}">
-            
-            <ion-icon name="arrow-undo-outline" aria-hidden="true" size="large" class="text-sm font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 p-2 m-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
+            <button ion-button icon-only type="submit">
+                <ion-icon name="home-outline" 
                 
-            </ion-icon>
+                size="large"
+                class="text-sm font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 p-2 m-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer"
+                ></ion-icon>
+            </button>
+              
         </form>
+
         <!-- text-sm font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 -->
         <body class="bg-cover bg-center" style="background-image: url('static/img/smoke-bg.png')">
             <div class="bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md  border-2 p-4 m-8 shadow-slate-600 shadow-md border-separate border-amber-100 transition duration-300 hover:shadow-slate-600 hover:shadow-sm">
                 <ul class="flex justify-around bg-center p-2">
-                    <li class="">
+                    <li>
                         <form action="{% url 'orders_all' %}">
                             <input class="text-lg font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-12 py-4 shadow-md shadow-slate-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" value="Pedidos" />
                         </form>
                     </li>
-                    <li class="">
+                    <li>
                         <form action="{% url 'articles_all' %}">
                             <input class="text-lg font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-12 py-4 shadow-md shadow-slate-800 transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" value="Artículos">
                         </form>
@@ -43,7 +49,7 @@
             <!-- ICONS RESOURSES WHIT IONICONS -->
             <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
             <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
+            
         </body>
     {% endblock %}
 <!-- Este bloque corresponde al block content de las plantillas que heredan el header.html -->
