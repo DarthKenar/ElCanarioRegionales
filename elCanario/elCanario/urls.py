@@ -52,6 +52,7 @@ urlpatterns = [
 urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
 
 htmx_urlpatterns = [
+    path('sell_price_calculator', articles_views.sell_price_calculator, name="calculator"),
 ]
 
 urlpatterns += htmx_urlpatterns
