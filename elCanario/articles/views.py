@@ -46,35 +46,35 @@ def articles_read(request):
 
         if datatype_input == datatype_dict[1]:
             datatype = "ID"
-            articles = Articles.objects.filter(id__icontains=article_input)
+            articles = Articles.objects.filter(id__startswith=article_input)
         elif datatype_input == datatype_dict[2]:
             datatype = "Nombre"
-            articles = Articles.objects.filter(article_name__icontains=article_input)
+            articles = Articles.objects.filter(article_name__startswith=article_input)
         elif datatype_input == datatype_dict[3]:
             datatype = "Categoría"
-            category_object = Categories.objects.filter(category_name__icontains=article_input)
+            category_object = Categories.objects.filter(category_name__startswith=article_input)
             articles = Articles.objects.filter(category_id__in=category_object)
         elif datatype_input == datatype_dict[4]:
             datatype = "Color"
-            color_object = Colors.objects.filter(color_name__icontains=article_input)
+            color_object = Colors.objects.filter(color_name__startswiths=article_input)
             articles = Articles.objects.filter(color_id__in=color_object)
         elif datatype_input == datatype_dict[5]:
             datatype = "Material"
-            material_object = Materials.objects.filter(material_name__icontains=article_input)
+            material_object = Materials.objects.filter(material_name__startswith=article_input)
             articles = Articles.objects.filter(material_id__in=material_object)
         elif datatype_input == datatype_dict[6]:
             datatype = "Talle/Tamaño"
-            size_object = Sizes.objects.filter(size_name__icontains=article_input)
+            size_object = Sizes.objects.filter(size_name__startswith=article_input)
             articles = Articles.objects.filter(size_id__in=size_object)
         elif datatype_input == datatype_dict[7]:
             datatype = "Precio de compra"
-            articles = Articles.objects.filter(buy_price__icontains=article_input)
+            articles = Articles.objects.filter(buy_price__startswith=article_input)
         elif datatype_input == datatype_dict[8]:
             datatype = "Incremento"
-            articles = Articles.objects.filter(increase__icontains=article_input)
+            articles = Articles.objects.filter(increase__startswith=article_input)
         else: #datatype_input == datatype_dict[9]:
             datatype = "Precio de venta"
-            articles = Articles.objects.filter(sell_price__icontains=article_input)
+            articles = Articles.objects.filter(sell_price__startswith=article_input)
         
         if not articles:
 
@@ -149,14 +149,21 @@ def sell_price_calculator(request):
     increase = request.GET['article_increase_input']
     
     if buy_price and increase:
+        
+        try:
 
-        buy_price_float = float(buy_price)
-        increase_float = float(increase)
-        #increase_float = (increase_float / 100) + 1
-        calculator = (buy_price_float * increase_float)
-        context = {"calculator": str(calculator)}
-        return render(request, template_name='articles_create_htmx.html', context=context)
+            buy_price_float = float(buy_price)
+            increase_float = float(increase)
+
+        except ValueError:
+
+            context = {'answer_calculator': 'Los datos ingresados deben ser numéricos'}
+            return render(request, template_name='articles_create_calculator_error.html', context=context)
+        
+        calculator =buy_price_float + ((buy_price_float * increase_float) / 100)
+        context = {"answer_calculator": str(calculator)}
+        return render(request, template_name='articles_create_calculator_right.html', context=context)
     
-    else:
-        context={calculator:"Complete los campos para calcular el precio de venta"}
-        return render(request, template_name='articles_create_htmx.html', context=context)
+    # else:
+        
+    #     return render(request, template_name='articles_create_htmx.html', context=context)
