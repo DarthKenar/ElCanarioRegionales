@@ -4,11 +4,11 @@ from django.http import HttpResponse
 # Create your views here.
 
 ##ORDERS SECTION
-def orders_all(request):
+def orders(request):
     return render(request, template_name="orders.html",context={})
 
 ##CUSTOMERS SECTION
-def customers_all(request):
+def customers(request):
     return render(request, template_name="customers.html",context={})
 
 
@@ -17,14 +17,34 @@ def articles_deliver(request, context: dict):
     
     return render(request,"articles.html", context)
 
-def articles_all(request):
+def articles(request):
 
     answer = "Artículos en la Base de datos"
     articles = Articles.objects.all()
     context = {"articles_all":articles, "articles_any": articles, "answer":answer}
     return articles_deliver(request, context)
     
+def articles_materials(request):
 
+    answer = "Artículos en la Base de datos"
+    articles = Articles.objects.all()
+    context = {"articles_all":articles, "articles_any": articles, "answer":answer}
+    return articles_deliver(request, context)
+
+def articles_colors(request):
+
+    answer = "Artículos en la Base de datos"
+    articles = Articles.objects.all()
+    context = {"articles_all":articles, "articles_any": articles, "answer":answer}
+    return articles_deliver(request, context)
+
+def articles_sizes(request):
+
+    answer = "Artículos en la Base de datos"
+    articles = Articles.objects.all()
+    context = {"articles_all":articles, "articles_any": articles, "answer":answer}
+    return articles_deliver(request, context)
+    
 def articles_read(request):
     datatype_dict = {
         0: "selection_empty",
@@ -104,8 +124,15 @@ def section_articles_crud_deliver(request, context):
 
 def articles_create(request):
 
+    
     context = {}
     return render(request,template_name='articles_create.html',context = context)
+
+
+
+
+
+
 
 def articles_create_confirm(request):
     context = {}
@@ -120,22 +147,40 @@ def articles_update(request):
     #section_articles_crud_deliver(request)
 
 
-
 ## ARTICLES_CATEGORIES
 
-def articles_categories_deliver(request, context: dict): 
+def articles_categories_deliver(request, template, context: dict): 
 
-    return render(request,"categories.html", context)
+    return render(request,template, context)
 
-def articles_categories_all(request):
 
+def articles_categories(request):
+    template = "categories.html"
     categories = Categories.objects.all()
     context = {"categories": categories}
-    return articles_categories_deliver(request, context)
+    return articles_categories_deliver(request, template, context)
 
-    # category_input = request.GET['category_input']
-    # context = {"category_input": category_input}
-    # return articles_categories_deliver(request, context)
+def articles_categories_save(request):
+
+    
+    categories = Categories.objects.all()
+    category_input = request.GET['category_input']
+    context = {"category_input": category_input, "categories": categories}
+
+    if category_input:
+
+        object = Categories(category_name = category_input)
+        object.save()
+
+        
+        template = "categories_table_right.html"
+        return articles_categories_deliver(request, template, context)
+    
+    else:
+
+        template = "categories_table_error.html"
+        return articles_categories_deliver(request, template, context)
+
 
 ## ARTICLES_COLORS
 ## ARTICLES_MATERIALS
@@ -144,26 +189,30 @@ def articles_categories_all(request):
 #HTMX
 ##ARTICLES_CREATE.HTML
 def sell_price_calculator(request):
-    
+
+
+
     buy_price = request.GET['article_buy_price_input']
     increase = request.GET['article_increase_input']
-    
-    if buy_price and increase:
-        
-        try:
 
+    if (buy_price != "" and buy_price.isalpha()) or  (increase != "" and increase.isalpha()):
+        return render(request, template_name='articles_create_calculator_string_error.html')
+
+    elif increase == "" or buy_price == "":
+        return render(request, template_name='articles_create_calculator_empty.html')
+    
+    else:
+
+        try:
             buy_price_float = float(buy_price)
             increase_float = float(increase)
-
         except ValueError:
 
-            context = {'answer_calculator': 'Los datos ingresados deben ser numéricos'}
-            return render(request, template_name='articles_create_calculator_error.html', context=context)
+            return render(request, template_name='articles_create_calculator_string_error.html')
         
-        calculator =buy_price_float + ((buy_price_float * increase_float) / 100)
-        context = {"answer_calculator": str(calculator)}
-        return render(request, template_name='articles_create_calculator_right.html', context=context)
-    
-    # else:
+        else:
+            calculator =buy_price_float + ((buy_price_float * increase_float) / 100)
+            context = {"answer_calculator": str(calculator)}
+            return render(request, template_name='articles_create_calculator_right.html', context=context)
+
         
-    #     return render(request, template_name='articles_create_htmx.html', context=context)
