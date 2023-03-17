@@ -14,44 +14,37 @@
           <label class="italic px-2">Nombre*: </label>
           <input class="bg-amber-50 rounded-sm px-2" type="text" name="article_name_input">
         </div>
-        <div class="p-4 m-4">
-          <label class="italic px-2" >Categoría*: </label>
-          <input class="bg-amber-50 rounded-sm px-2" type="text" name="article_category_input">
-        </div>
-        <div class="p-4 m-4">
-          <label class="italic px-2">Color: </label>
-          <input class="bg-amber-50 rounded-sm px-2" type="text" name="article_color_input">
-        </div>
-        <div class="p-4 m-4">
-          <label class="italic px-2">Material: </label>
-          <input class="bg-amber-50 rounded-sm px-2" type="text" name="article_material_input">
-        </div>
-        <div class="p-4 m-4">
-          <label class="italic px-2">Talle/Tamaño: </label>
-          <input class="bg-amber-50 rounded-sm px-2" type="text" name="article_size_input">
-        </div>
+
+        {% include 'articles_create_table_variables.html' %}
+
         <div class="p-4 m-4">
           <label class="italic px-2">Precio Compra: </label>
           <input class="bg-amber-50 rounded-sm px-2" type="text" name="article_buy_price_input" hx-get="{% url 'calculator' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#article_sell_price_output" hx-select="#article_sell_price_output" hx-include="[name='article_increase_input']" >
-          {{answer_buy_price}}
         </div>
         <div class="p-4 m-4">
           <label class="italic px-2">Incremento: </label>
           <input class="bg-amber-50 rounded-sm px-2" type="text" name="article_increase_input" hx-get="{% url 'calculator' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#article_sell_price_output" hx-select="#article_sell_price_output" hx-include="[name='article_buy_price_input']">
           <label>%</label>
-          {{answer_increase}}
         </div>
         <div class="p-4 m-4" id="article_sell_price_output">
           <label class="italic px-2">Precio Venta: </label>
-          <output class="bg-amber-50 rounded-sm px-2 empty:hidden" type="text">
+          <output class="bg-amber-50 rounded-sm px-2 empty:hidden" type="text" name="article_sell_price_input">
         </div>
 
         <div class="grid place-content-end">
-          <form action="{% url 'articles_create_confirm' %}">
-              <ion-icon name="save-outline" size="large" aria-label="Favorite" class="text-sm font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 p-2 m-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
-                <!-- <input class="text-sm font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-8 py-1 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" value="Guardar"> -->
-              </ion-icon>
+          <form hx-get="{% url 'articles_create_confirm' %}">
+            <button ion-button icon-only type="submit" hx-include="[name='article_name_input',name='article_category_input', name='article_color_input', name='article_material_input', name='article_size_input', name='article_buy_price_input', name='article_increase_input', name='article_sell_price_input']" hx-target="#article_create_answer" hx-swap="outerHTML" hx-select="#article_create_answer">
+              <ion-icon name="save-outline" 
+              size="large"
+              class="text-sm font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 p-2 m-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer"
+              ></ion-icon>
+            </button>
+
           </form>
+
+
+        </div>
+        <div id="article_create_answer">
         </div>
       </div>
     </div>

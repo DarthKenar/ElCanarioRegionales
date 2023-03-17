@@ -18,41 +18,50 @@ from django.urls import path
 from articles import views as articles_views
 from authentication import views as auth_views
 from django.conf import settings
-#Para archivos estaticos durante el desarrollo, no deben estar en produccion
-#For static files during development, they must not be in production.
-from django.conf import settings
-from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    #Este es el login (LOGRADO), deberia usar el admin de django
-    #This is the login (DONE), I should use django admin.
+    #LOGIN SECTION & HOME
     path('', auth_views.login, name="login"),
-
     path('login/buscar/', auth_views.search_user, name="login_search"),
     path('home', auth_views.home, name="home"),
-    #Estas son las vistas que deriban a cada una de las secciones de control (Pedidos, Artículos, Clientes)
-    #These are the views that lead to each of the control sections (Orders, Articles, Customers).
-    path('orders', articles_views.orders_all, name="orders_all"),
 
-    path('articles', articles_views.articles_all, name="articles_all"),
-    path('articles_create', articles_views.articles_create, name="articles_create"),
-    path('articles_create/confirm', articles_views.articles_create_confirm, name="articles_create_confirm"),
-    path('articles_read', articles_views.articles_read, name="articles_read"),
-    path('articles_update', articles_views.articles_update, name="articles_update"),
-    path('articles_delete', articles_views.articles_delete, name="articles_delete"),
+    # ORDERS SECTION
+    path('orders', articles_views.orders, name="orders"),
 
-    path('articles/categories', articles_views.articles_categories_all, name="categories_all"),
+    ## ARTICLES SECTIONS
+    path('articles', articles_views.articles, name="articles"),
+    
+    path('articlesCategories', articles_views.articles_categories, name="categories"),
+    path('articlesColors', articles_views.articles_colors, name="colors"),
+    path('articlesMaterials', articles_views.articles_materials, name="materials"),
+    path('articlesSizes', articles_views.articles_sizes, name="sizes"),
 
-    path('customers', articles_views.customers_all, name="customers_all"),
+    #CUSTOMERS
+    path('customers', articles_views.customers, name="customers"),
 
 ]
-
-urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
 
 htmx_urlpatterns = [
     path('sell_price_calculator', articles_views.sell_price_calculator, name="calculator"),
-]
+    
+    path('articles/categories/save', articles_views.articles_categories_save, name="category_save"),
 
+    #revisar bien estas urls -  pasarlas a HTMX
+    path('articles_create', articles_views.articles_create, name="articles_create"),
+    path('articles_create/confirm', articles_views.articles_create_confirm, name="articles_create_confirm"),
+
+    path('articles_read', articles_views.articles_read, name="articles_read"),
+    path('articles_update', articles_views.articles_update, name="articles_update"),
+    path('articles_delete', articles_views.articles_delete, name="articles_delete"),
+]
 urlpatterns += htmx_urlpatterns
+
+
+#STATIC AND IMAGES
+if settings.DEBUG:
+    from django.conf.urls.static import static
+    urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
+    urlpatterns += static(settings.IMG_URL, document_root = settings.IMG_ROOT)

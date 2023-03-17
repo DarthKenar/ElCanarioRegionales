@@ -59,7 +59,7 @@ ROOT_URLCONF = 'elCanario.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'articles/templates/articles/','authentication/templates/authentication/','elCanario/templates/elCanario/','articles/templates/articles/htmx'],
+        'DIRS': [BASE_DIR / 'articles/templates/articles/','authentication/templates/authentication/','elCanario/templates/elCanario/','articles/templates/articles/htmx','articles/templates/articles/partials'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -132,3 +132,6 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+IMG_URL = '/static/img'
+IMG_ROOT = os.path.join(BASE_DIR, "img")

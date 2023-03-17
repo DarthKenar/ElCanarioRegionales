@@ -9,19 +9,19 @@
     <h3>Correo: {{ user.email }}</h3>
 
     <div style="padding: 50px; background-color: rgb(115, 110, 187);">
-        <form action="{% url 'articles_all' %}">
+        <form action="{% url 'articles' %}">
             <input type="submit" value="Artículos" name="articles">
         </form>
     </div>
 
     <div style="padding: 50px; background-color: rgb(143, 83, 83);">
-        <form action="{% url 'customers_all' %}">
+        <form action="{% url 'customers' %}">
             <input type="submit" value="Clientes" name="customers">
         </form>
     </div>
 
     <div style="padding: 50px; background-color: rgb(74, 156, 74);">
-        <form action="{% url 'orders_all' %}">
+        <form action="{% url 'orders' %}">
             <input type="submit" value="Pedidos" name="orders">
         </form>
     </div>

@@ -10,6 +10,7 @@ authors = [
 dependencies = [
     "django>=4.1.7",
     "psycopg2>=2.9.5",
+    "djlint>=1.19.16",
 ]
 requires-python = ">=3.11"
 readme = "README.md"

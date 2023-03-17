@@ -1,14 +1,16 @@
 {% extends './header.html' %}
+{% load static %}
 {% block head_two %}
     <title>Artículos - Canario Regionales</title>
 {% endblock %}
 {% block content_two %}
-    <form action="{% url 'categories_all' %}">
-        <div class="bg-gradient-to-tr from-yellow-300 to-yellow-500 rounded-md p-4 m-8">
-            <input class="invisible" style="display: none;" type="text" name="first_time_categories" value="0">
-            <input class="bg-yellow-50 rounded-sm px-2" type="text" name="category_input">
-            <input class="text-sm rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-yellow-800 to-yellow-600 px-8 py-1 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" value="Guardar">
-        </div>
-    </form>
+
+    
+    <div class="bg-gradient-to-tr from-yellow-300 to-yellow-500 rounded-md p-4 m-8">
+        <input class="bg-yellow-50 rounded-sm px-2" type="text" name="category_input">
+        <input class="text-sm rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-yellow-800 to-yellow-600 px-8 py-1 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" value="Guardar" hx-get="{% url 'category_save' %}" hx-trigger="click" hx-target="#categories_table" hx-swap="outerHTML" hx-select="#categories_table" hx-include="[name='category_input']">
+    </div>
+    
+    {% include 'categories_table.html' %}
 
 {% endblock %}

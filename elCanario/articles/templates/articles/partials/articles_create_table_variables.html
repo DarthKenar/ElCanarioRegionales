@@ -1,0 +1,38 @@
+
+<div class="p-4 m-4">
+    <label class="italic px-2" >Categoría*: </label>
+    <select class="bg-amber-50 rounded-sm px-2" name="article_category_input">
+        <option value="{{category.id}}"></option>
+        {% for category in categories %}
+            <option value="{{category.id}}">{{category.category_name}}</option>
+        {% endfor %}
+    </select>
+</div>
+<div class="p-4 m-4">
+    <label class="italic px-2">Color: </label>
+    <select class="bg-amber-50 rounded-sm px-2" name="article_color_input">
+        <option value="{{category.id}}"></option>
+        {% for color in colors %}
+            <option value="{{color.id}}">{{color.color_name}}</option>
+        {% endfor %}
+    </select>
+</div>
+<div class="p-4 m-4">
+    <label class="italic px-2">Material: </label>
+    <select class="bg-amber-50 rounded-sm px-2" name="article_material_input">
+        <option value="{{category.id}}"></option>
+        {% for material in materials %}
+            <option value="{{material.id}}">{{material.material_name}}</option>
+        {% endfor %}
+    </select>
+</div>
+<div class="p-4 m-4">
+    <label class="italic px-2">Talle/Tamaño: </label>
+    <select class="bg-amber-50 rounded-sm px-2" name="article_size_input">
+        <option value="{{category.id}}"></option>
+        {% for size in sizes %}
+            <option value="{{size.id}}">{{size.size_name}}</option>
+        {% endfor %}
+    </select>
+</div>
+        

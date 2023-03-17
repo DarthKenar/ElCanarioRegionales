@@ -119,24 +119,46 @@ def articles_read(request):
         return articles_deliver(request, context)
 
 
-def section_articles_crud_deliver(request, context):
-    return render(request,template_name="articles_create.html", context={})
 
 def articles_create(request):
 
-    
-    context = {}
+    categories = Categories.objects.all()
+    colors = Colors.objects.all()
+    materials = Materials.objects.all()
+    sizes = Sizes.objects.all()
+
+    context = {"categories":categories,"colors":colors,"materials":materials,"sizes":sizes}
     return render(request,template_name='articles_create.html',context = context)
 
 
 
-
-
-
-
 def articles_create_confirm(request):
-    context = {}
-    return articles_deliver(request, context)
+
+    article_name_input = request.GET['article_name_input']
+    article_category_input = request.GET['article_category_input']
+    article_color_input = request.GET['article_color_input']
+    article_material_input = request.GET['article_material_input']
+    article_size_input = request.GET['article_size_input']
+    article_buy_price_input = request.GET['article_buy_price_input']
+    article_increase_input = request.GET['article_increase_input']
+    article_sell_price_input = request.GET['article_sell_price_input']
+
+
+    template = "articles_create_save_right.html"
+
+    context = {"article_name_input": article_name_input,
+               "article_category_input":article_category_input,
+               "article_color_input":article_color_input,
+               "article_material_input":article_material_input,
+               "article_size_input":article_size_input,
+               "article_buy_price_input":article_buy_price_input,
+               "article_increase_input":article_increase_input,
+               "article_sell_price_input":article_sell_price_input
+               }
+    return render(request,template,context)
+
+
+
 
 def articles_delete(request):
     pass #te debe eliminar el artículo seleccionado. toma los valores de ese artículo y los busca en la tabla para eliminarlos
@@ -166,20 +188,26 @@ def articles_categories_save(request):
     categories = Categories.objects.all()
     category_input = request.GET['category_input']
     context = {"category_input": category_input, "categories": categories}
+    
+    if category_input == "":
 
-    if category_input:
-
-        object = Categories(category_name = category_input)
-        object.save()
-
-        
-        template = "categories_table_right.html"
+        template = "categories_table_empty_error.html"
         return articles_categories_deliver(request, template, context)
     
     else:
 
-        template = "categories_table_error.html"
-        return articles_categories_deliver(request, template, context)
+        try:
+
+            object = Categories(category_name = category_input)
+            object.save()
+            template = "categories_table_right.html"
+            return articles_categories_deliver(request, template, context)
+        except Exception as e:
+            print("-"*100)
+            print(f"ESTE ES EL ERROR -----------> {e.__str__} ")
+            print("-"*100)
+            template = "categories_table_duplicate_error.html"
+            return articles_categories_deliver(request, template, context)
 
 
 ## ARTICLES_COLORS
