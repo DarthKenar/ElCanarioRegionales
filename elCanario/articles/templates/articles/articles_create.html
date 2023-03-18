@@ -12,36 +12,28 @@
         <h1 class="font-mono text-lg text-center font-bold">Agregar Artículo</h1>
         <div class="p-4 m-4">
           <label class="italic px-2">Nombre*: </label>
-          <input class="bg-amber-50 rounded-sm px-2" type="text" name="article_name_input">
+          <input class="bg-amber-50 rounded-sm px-2" type="text" name="article_name_input" id="article_name_input">
         </div>
 
         {% include 'articles_create_table_variables.html' %}
 
         <div class="p-4 m-4">
           <label class="italic px-2">Precio Compra: </label>
-          <input class="bg-amber-50 rounded-sm px-2" type="text" name="article_buy_price_input" hx-get="{% url 'calculator' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#article_sell_price_output" hx-select="#article_sell_price_output" hx-include="[name='article_increase_input']" >
+          <input class="bg-amber-50 rounded-sm px-2" type="text" name="article_buy_price_input" id="article_buy_price_input" hx-get="{% url 'calculator' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#article_sell_price_output" hx-include="[name='article_increase_input']" >
         </div>
         <div class="p-4 m-4">
           <label class="italic px-2">Incremento: </label>
-          <input class="bg-amber-50 rounded-sm px-2" type="text" name="article_increase_input" hx-get="{% url 'calculator' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#article_sell_price_output" hx-select="#article_sell_price_output" hx-include="[name='article_buy_price_input']">
+          <input class="bg-amber-50 rounded-sm px-2" type="text" name="article_increase_input" id="article_increase_input" hx-get="{% url 'calculator' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#article_sell_price_output" hx-include="[name='article_buy_price_input']">
           <label>%</label>
         </div>
         <div class="p-4 m-4" id="article_sell_price_output">
           <label class="italic px-2">Precio Venta: </label>
-          <output class="bg-amber-50 rounded-sm px-2 empty:hidden" type="text" name="article_sell_price_input">
+          <input class="bg-amber-50 rounded-sm px-2 empty:hidden" type="text" name="article_sell_price_input" id="article_sell_price_input">
         </div>
 
         <div class="grid place-content-end">
-          <form hx-get="{% url 'articles_create_confirm' %}">
-            <button ion-button icon-only type="submit" hx-include="[name='article_name_input',name='article_category_input', name='article_color_input', name='article_material_input', name='article_size_input', name='article_buy_price_input', name='article_increase_input', name='article_sell_price_input']" hx-target="#article_create_answer" hx-swap="outerHTML" hx-select="#article_create_answer">
-              <ion-icon name="save-outline" 
-              size="large"
-              class="text-sm font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 p-2 m-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer"
-              ></ion-icon>
-            </button>
 
-          </form>
-
+            <button class="text-sm font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 p-2 m-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" hx-get="{% url 'articles_create_confirm' %}" hx-trigger="click" hx-include="#article_name_input, #article_category_input, #article_color_input, #article_material_input, #article_size_input, #article_buy_price_input, #article_increase_input, #article_sell_price_input" hx-target="#article_create_answer" hx-swap="outerHTML">Guardar</button>
 
         </div>
         <div id="article_create_answer">

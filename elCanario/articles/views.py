@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from articles.models import Articles, Categories, Colors, Sizes, Materials
 from django.http import HttpResponse
 # Create your views here.
@@ -131,10 +131,29 @@ def articles_create(request):
     return render(request,template_name='articles_create.html',context = context)
 
 
+def get_category(input: str) -> object:
+    print("-----------------------")
+    category_object = get_object_or_404(Categories, id = input)
+    return category_object
+
+def get_color(input: str) -> object:
+    print("-----------------------")
+    color_object = get_object_or_404(Colors, id = input)
+    return color_object
+
+def get_material(input: str) -> object:
+    print("-----------------------")
+    material_object = get_object_or_404(Materials, id = input)
+    return material_object
+
+def get_size(input: str) -> object:
+    print("-----------------------")
+    size_object = get_object_or_404(Sizes, id = input)
+    return size_object
 
 def articles_create_confirm(request):
 
-    article_name_input = request.GET['article_name_input']
+    article_name_input = request.GET.get("article_name_input",None)
     article_category_input = request.GET['article_category_input']
     article_color_input = request.GET['article_color_input']
     article_material_input = request.GET['article_material_input']
@@ -146,6 +165,23 @@ def articles_create_confirm(request):
 
     template = "articles_create_save_right.html"
 
+    print("TIPO DE DATO DE article_buy_price_input -->",type(article_buy_price_input))
+    print("TIPO DE DATO DE article_increase_input -->",type(article_increase_input))
+    print("TIPO DE DATO DE article_sell_price_input -->",type(article_sell_price_input))
+
+    article = Articles(
+        article_name = article_name_input,
+        category_id = get_category(article_category_input),
+        color_id = get_color(article_color_input),
+        material_id = get_material(article_material_input), 
+        size_id = get_size(article_size_input), 
+        buy_price = float(article_buy_price_input), 
+        increase = float(article_increase_input),
+        sell_price = float(article_sell_price_input.replace(',', '.'))
+        )
+    
+    article.save()
+
     context = {"article_name_input": article_name_input,
                "article_category_input":article_category_input,
                "article_color_input":article_color_input,
@@ -153,11 +189,11 @@ def articles_create_confirm(request):
                "article_size_input":article_size_input,
                "article_buy_price_input":article_buy_price_input,
                "article_increase_input":article_increase_input,
-               "article_sell_price_input":article_sell_price_input
+               "article_sell_price_input":article_sell_price_input,
+               "article_saved": article
                }
+
     return render(request,template,context)
-
-
 
 
 def articles_delete(request):
@@ -218,29 +254,32 @@ def articles_categories_save(request):
 ##ARTICLES_CREATE.HTML
 def sell_price_calculator(request):
 
-
-
     buy_price = request.GET['article_buy_price_input']
     increase = request.GET['article_increase_input']
 
     if (buy_price != "" and buy_price.isalpha()) or  (increase != "" and increase.isalpha()):
+
         return render(request, template_name='articles_create_calculator_string_error.html')
 
     elif increase == "" or buy_price == "":
+
         return render(request, template_name='articles_create_calculator_empty.html')
     
     else:
 
         try:
+
             buy_price_float = float(buy_price)
             increase_float = float(increase)
+
         except ValueError:
 
             return render(request, template_name='articles_create_calculator_string_error.html')
         
         else:
+
             calculator =buy_price_float + ((buy_price_float * increase_float) / 100)
-            context = {"answer_calculator": str(calculator)}
+            context = {"answer_calculator": calculator}
             return render(request, template_name='articles_create_calculator_right.html', context=context)
 
         
