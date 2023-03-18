@@ -51,7 +51,7 @@ htmx_urlpatterns = [
 
     #revisar bien estas urls -  pasarlas a HTMX
     path('articles_create', articles_views.articles_create, name="articles_create"),
-    path('articles_create/confirm', articles_views.articles_create_confirm, name="articles_create_confirm"),
+    path('articles_create_confirm', articles_views.articles_create_confirm, name="articles_create_confirm"),
 
     path('articles_read', articles_views.articles_read, name="articles_read"),
     path('articles_update', articles_views.articles_update, name="articles_update"),
