@@ -2,31 +2,42 @@
 <!DOCTYPE html>
 <html lang="es" >
 <head>
-  <meta charset="UTF-8">
   <title>Login</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-  <link rel="text/css" href="{% static 'css/styles.css' %}">
-
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <!-- HTMX -->
+  <script src="https://unpkg.com/htmx.org@1.8.6" integrity="sha384-Bj8qm/6B+71E6FQSySofJOUjA/gq330vEqjFx9LakWybUySyI1IQHwPtbTU7bNwx" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </head> 
 <body class="bg-amber-50">
-  <div class="grid grid-cols-2 gap-4 place-content-center bg-gradient-to-tr from-amber-100 to-amber-300 rounded-md p-4 m-8">
-    <h2>Login</h2>
-    <form id="login-form" action="{% url 'login_search' %}" method="GET">
-      <p>
-      <input name="username_input" type="text" id="username" name="username" placeholder="Nombre de Usuario" required><i class="validation"><span></span><span></span></i>
-      </p>
-      <p>
-      <input name="password_input" type="password" id="password" name="password" placeholder="Contraseña" required><i class="validation"><span></span><span></span></i>
-      </p>
-      <p>
-      <input type="submit" id="login" value="Entrar">
-      </p>
-      <p>{{ respuesta }}</p>
-    </form>
-    <div id="create-account-wrap">
-      <p>No estas registrado? <a href="https://wa.me/+542615878046">Pide al administrador que te genere una cuenta</a><p>
+  <div class="relative flex min-h-screen flex-col justify-center overflow-hidden py-2 sm:py-12">
+    <div class="bg-gradient-to-tr from-amber-100 to-amber-300 rounded-md py-4 m-8 relative px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-10">
+      <div class="mx-auto max-w-md">
+        <div>
+          <h1 class="font-mono text-center text-xl">Login</h1>
+        </div>
+        <form action="{% url 'login_search' %}" method="POST">
+          {% csrf_token %}
+          <div class="grid place-content-center">
+            <input class="bg-amber-50 rounded-sm font-mono my-2" name="username_input" type="text" id="username_input" placeholder="Nombre de Usuario" required>
+          </div>
+          <div class="grid place-content-center">
+            <input class="bg-amber-50 rounded-sm font-mono my-2"  name="password_input" type="password" id="password_input" placeholder="Contraseña">
+          </div>
+          <div class="grid place-content-end">
+              <button ion-button icon-only type="submit">
+                <ion-icon class="text-sm font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 p-2 m-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer content-center" name="enter-outline" size="large"></ion-icon>
+              </button>
+          </div>
+        </form>
+        <div class="text-red-600">
+          {{answer_error}}
+        </div>
+      </div>      
     </div>
   </div>
-    
 </body>
 </html>

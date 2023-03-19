@@ -24,8 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     #LOGIN SECTION & HOME
-    path('', auth_views.login, name="login"),
-    path('login/buscar/', auth_views.search_user, name="login_search"),
+    path('', auth_views.login_view, name="login"),
+    path('login_search/', auth_views.search_user, name="login_search"),
     path('home', auth_views.home, name="home"),
 
     # ORDERS SECTION
@@ -55,7 +55,7 @@ htmx_urlpatterns = [
 
     path('articles_read', articles_views.articles_read, name="articles_read"),
     path('articles_update', articles_views.articles_update, name="articles_update"),
-    path('articles_delete', articles_views.articles_delete, name="articles_delete"),
+    path('articles_delete/<int:id>', articles_views.articles_delete, name="articles_delete"),
 ]
 urlpatterns += htmx_urlpatterns
 

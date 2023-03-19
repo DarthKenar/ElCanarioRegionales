@@ -1,5 +1,8 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from .models import User
+from django.views.decorators.csrf import csrf_protect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
 # Create your views here.
 def search_register(request):
     """
@@ -11,31 +14,30 @@ def search_register(request):
     
     pass
 
+@csrf_protect
 def search_user(request):
-    """
-    Primero comprobar:
-        - que el usuario esté en la base de datos
-        - que la contraseña elegida para el usuario sea correcta
-        responder a cualquiera de las dos. "El usuario o contraseña son incorrectos."
-    """
-    username_input = request.GET['username_input']
-    password_input = request.GET['password_input']
-
-    try:
-        
-        user = User.objects.get(username = username_input, password = password_input)
-
-    except User.DoesNotExist:
-
-        
-
-        return render(request,'login.html', context={"respuesta":"No se ha podido ingresar al sistema, revise los datos ingresados."})
-        #return render(request,"productos.html",context={"articulos":articulos,"query":producto})
-    return render(request, template_name='index.html', context={"user": user})
-        
-def login(request):
     
+    if request.method == 'POST':
+
+        username_input = request.POST['username_input']
+        password_input = request.POST['password_input']
+    
+        user = authenticate(request, username=username_input, password=password_input)
+
+        if user is not None:
+
+            login(request, user)
+            return redirect('home')
+        
+        else:
+            context = {"answer_error":"<p> Usuario o contraseña incorrectos</p>"}
+            return render(request, 'login.html')
+    else:
+        return render(request, 'login.html')
+
+def login_view(request):
     return render(request, template_name='login.html', context={})
 
+@login_required
 def home(request):
-    return render(request, template_name='index.html')
+    return render(request, template_name='home.html')
