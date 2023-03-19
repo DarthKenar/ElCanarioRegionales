@@ -30,8 +30,8 @@ def search_user(request):
             return redirect('home')
         
         else:
-            context = {"answer_error":"<p> Usuario o contraseña incorrectos</p>"}
-            return render(request, 'login.html')
+            context = {"answer_error":"Usuario o contraseña incorrectos"}
+            return render(request, 'login.html', context)
     else:
         return render(request, 'login.html')
 
