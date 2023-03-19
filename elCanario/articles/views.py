@@ -196,10 +196,26 @@ def articles_create_confirm(request):
     return render(request,template,context)
 
 
-def articles_delete(request):
-    pass #te debe eliminar el artículo seleccionado. toma los valores de ese artículo y los busca en la tabla para eliminarlos
-    #section_articles_crud_deliver(request)
+def articles_delete(request, article_id):
 
+    try:
+
+        article_to_delete = get_object_or_404(Articles, id=article_id)
+
+    except Exception as e:
+
+        print(f"ESTE ES EL ERROR --------> {e}")
+        template = "articles_delete_error.html"
+        context = {"article": article_to_delete}
+        return render(request, template, context)
+    
+    else:
+
+        article_to_delete.delete()
+        template = "articles_delete_right.html"
+        context = {"article": article_to_delete}
+        return render(request, template, context)
+    
 def articles_update(request):
     pass
     #section_articles_crud_deliver(request)
