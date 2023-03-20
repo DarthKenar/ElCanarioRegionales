@@ -17,15 +17,17 @@
     <div class="bg-gradient-to-tr from-amber-100 to-amber-300 rounded-md py-4 m-8 relative px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-10">
       <div class="mx-auto max-w-md">
         <div>
-          <h1 class="font-mono text-center text-xl">Login</h1>
+          <h1 class="font-mono text-center text-xl my-2">Login</h1>
         </div>
         <form action="{% url 'login_search' %}" method="POST">
           {% csrf_token %}
           <div class="grid place-content-center">
+            <label for="username_input" class="rounded-sm font-mono my-2">Nombre de usuario:</label>
             <input class="bg-amber-50 rounded-sm font-mono my-2" name="username_input" type="text" id="username_input" placeholder="Nombre de Usuario" required>
           </div>
           <div class="grid place-content-center">
-            <input class="bg-amber-50 rounded-sm font-mono my-2"  name="password_input" type="password" id="password_input" placeholder="Contraseña">
+            <label for="password_input" class="rounded-sm font-mono my-2">Contraseña:</label>
+            <input class="bg-amber-50 rounded-sm font-mono my-2"  name="password_input" type="password" id="password_input" placeholder="Contraseña" required>
           </div>
           <div class="grid place-content-end">
               <button ion-button icon-only type="submit">
