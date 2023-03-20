@@ -45,9 +45,13 @@ urlpatterns = [
 ]
 
 htmx_urlpatterns = [
+    #ARTICLES SETCIONS
     path('sell_price_calculator', articles_views.sell_price_calculator, name="calculator"),
-    
     path('articles/categories/save', articles_views.articles_categories_save, name="category_save"),
+    path('articles/colors/save', articles_views.articles_colors_save, name="color_save"),
+    path('articles/materials/save', articles_views.articles_materials_save, name="material_save"),
+    path('articles/sizes/save', articles_views.articles_sizes_save, name="size_save"),
+
 
     #revisar bien estas urls -  pasarlas a HTMX
     path('articles_create', articles_views.articles_create, name="articles_create"),

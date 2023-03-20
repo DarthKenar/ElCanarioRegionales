@@ -1,51 +1,67 @@
 from django.shortcuts import render, get_object_or_404
 from articles.models import Articles, Categories, Colors, Sizes, Materials
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_protect
 # Create your views here.
 
 ##ORDERS SECTION
+@login_required
 def orders(request):
     return render(request, template_name="orders.html",context={})
 
 ##CUSTOMERS SECTION
+@login_required
 def customers(request):
     return render(request, template_name="customers.html",context={})
 
 
 ##ARTICLES SECTION
-def articles_deliver(request, context: dict): 
+@login_required
+def articles_deliver(request, template: str,context: dict): 
     
-    return render(request,"articles.html", context)
+    return render(request, template, context)
 
 def articles(request):
 
     answer = "Artículos en la Base de datos"
     articles = Articles.objects.all()
     context = {"articles_all":articles, "articles_any": articles, "answer":answer}
-    return articles_deliver(request, context)
-    
+    template = "articles.html"
+    return articles_deliver(request, template, context)
+
+
 def articles_materials(request):
 
     answer = "Artículos en la Base de datos"
     articles = Articles.objects.all()
     context = {"articles_all":articles, "articles_any": articles, "answer":answer}
-    return articles_deliver(request, context)
+    template = "articles.html"
+    return articles_deliver(request, template, context)
+
 
 def articles_colors(request):
 
     answer = "Artículos en la Base de datos"
     articles = Articles.objects.all()
     context = {"articles_all":articles, "articles_any": articles, "answer":answer}
-    return articles_deliver(request, context)
+    template = "articles.html"
+    return articles_deliver(request, template, context)
+
 
 def articles_sizes(request):
 
     answer = "Artículos en la Base de datos"
     articles = Articles.objects.all()
     context = {"articles_all":articles, "articles_any": articles, "answer":answer}
-    return articles_deliver(request, context)
-    
+    template = "articles.html"
+    return articles_deliver(request, template,  context)
+
+
 def articles_read(request):
+
+    template = "articles.html"
+
     datatype_dict = {
         0: "selection_empty",
         1: "id",
@@ -101,14 +117,14 @@ def articles_read(request):
             answer_negative = "No se encuentra:"
 
             context={"articles_searched":articles,"article_input":article_input, "articles_any": articles, "answer_negative": answer_negative, "datatype_input": datatype }
-            return articles_deliver(request,context)
+            return articles_deliver(request, template, context)
         
         else:
 
             answer = "Se está buscando:"
     
             context={"articles_searched":articles,"article_input":article_input, "articles_any": articles, "datatype_input": datatype, "answer": answer}
-            return articles_deliver(request,context)
+            return articles_deliver(request, template, context)
     
     else:
 
@@ -116,9 +132,8 @@ def articles_read(request):
         answer = "Artículos en la Base de datos"
         articles = Articles.objects.all()
         context = {"articles_all":articles, "articles_any": articles, "answer_negative":answer_negative, "answer":answer}
-        return articles_deliver(request, context)
-
-
+        return articles_deliver(request, template, context)
+    
 
 def articles_create(request):
 
@@ -128,7 +143,8 @@ def articles_create(request):
     sizes = Sizes.objects.all()
 
     context = {"categories":categories,"colors":colors,"materials":materials,"sizes":sizes}
-    return render(request,template_name='articles_create.html',context = context)
+    template='articles_create.html'
+    return articles_deliver(request, template, context)
 
 
 def get_category(input: str) -> object:
@@ -153,7 +169,7 @@ def get_size(input: str) -> object:
 
 def articles_create_confirm(request):
 
-    article_name_input = request.GET.get("article_name_input",None)
+    article_name_input = request.GET["article_name_input"]
     article_category_input = request.GET['article_category_input']
     article_color_input = request.GET['article_color_input']
     article_material_input = request.GET['article_material_input']
@@ -193,36 +209,40 @@ def articles_create_confirm(request):
                "article_saved": article
                }
 
-    return render(request,template,context)
+    return articles_deliver(request, template, context)
 
-
-def articles_delete(request, article_id):
+@csrf_protect
+def articles_delete(request, id):
 
     try:
 
-        article_to_delete = get_object_or_404(Articles, id=article_id)
+        article_to_delete = get_object_or_404(Articles, id=id)
 
     except Exception as e:
 
         print(f"ESTE ES EL ERROR --------> {e}")
         template = "articles_delete_error.html"
-        context = {"article": article_to_delete}
-        return render(request, template, context)
+        context = {}
+        return articles_deliver(request, template, context)
     
     else:
-
-        article_to_delete.delete()
+        
+        article_to_delete.delete() 
+        #puede que tenga un error de logica porque puede que borre el objeto antes de guardarlo en el contexto y mostrarlo en el template
         template = "articles_delete_right.html"
-        context = {"article": article_to_delete}
-        return render(request, template, context)
+        answer = "Artículos en la Base de datos"
+        articles = Articles.objects.all()
+        context = {"articles_all":articles, "articles_any": articles, "answer":answer, "article": article_to_delete}
+        return articles_deliver(request, template, context)
     
+
 def articles_update(request):
     pass
     #section_articles_crud_deliver(request)
 
 
 ## ARTICLES_CATEGORIES
-
+@login_required
 def articles_categories_deliver(request, template, context: dict): 
 
     return render(request,template, context)
@@ -233,6 +253,7 @@ def articles_categories(request):
     categories = Categories.objects.all()
     context = {"categories": categories}
     return articles_categories_deliver(request, template, context)
+
 
 def articles_categories_save(request):
 
@@ -263,8 +284,122 @@ def articles_categories_save(request):
 
 
 ## ARTICLES_COLORS
+@login_required
+def articles_colors_deliver(request, template, context: dict): 
+
+    return render(request,template, context)
+
+
+def articles_colors(request):
+    template = "colors.html"
+    colors = Colors.objects.all()
+    context = {"colors": colors}
+    return articles_colors_deliver(request, template, context)
+
+
+def articles_colors_save(request):
+
+    
+    colors = Colors.objects.all()
+    color_input = request.GET['color_input']
+    context = {"color_input": color_input, "colors": colors}
+    
+    if color_input == "":
+
+        template = "colors_table_empty_error.html"
+        return articles_colors_deliver(request, template, context)
+    
+    else:
+
+        try:
+
+            object = Colors(color_name = color_input)
+            object.save()
+            template = "colors_table_right.html"
+            return articles_colors_deliver(request, template, context)
+        except Exception as e:
+            print("-"*100)
+            print(f"ESTE ES EL ERROR -----------> {e.__str__} ")
+            print("-"*100)
+            template = "colors_table_duplicate_error.html"
+            return articles_colors_deliver(request, template, context)
 ## ARTICLES_MATERIALS
+@login_required
+def articles_materials_deliver(request, template, context: dict): 
+
+    return render(request,template, context)
+
+def articles_materials(request):
+    template = "materials.html"
+    materials = Materials.objects.all()
+    context = {"materials": materials}
+    return articles_materials_deliver(request, template, context)
+
+def articles_materials_save(request):
+
+    
+    materials = Materials.objects.all()
+    material_input = request.GET['material_input']
+    context = {"material_input": material_input, "materials": materials}
+    
+    if material_input == "":
+
+        template = "materials_table_empty_error.html"
+        return articles_materials_deliver(request, template, context)
+    
+    else:
+
+        try:
+
+            object = Materials(material_name = material_input)
+            object.save()
+            template = "materials_table_right.html"
+            return articles_materials_deliver(request, template, context)
+        except Exception as e:
+            print("-"*100)
+            print(f"ESTE ES EL ERROR -----------> {e.__str__} ")
+            print("-"*100)
+            template = "materials_table_duplicate_error.html"
+            return articles_materials_deliver(request, template, context)
 ## ARTICLES_SIZES
+@login_required
+def articles_sizes_deliver(request, template, context: dict): 
+
+    return render(request,template, context)
+
+def articles_sizes(request):
+    template = "sizes.html"
+    sizes = Sizes.objects.all()
+    context = {"sizes": sizes}
+    return articles_sizes_deliver(request, template, context)
+
+
+def articles_sizes_save(request):
+
+    
+    sizes = Sizes.objects.all()
+    size_input = request.GET['size_input']
+    context = {"size_input": size_input, "sizes": sizes}
+    
+    if size_input == "":
+
+        template = "sizes_table_empty_error.html"
+        return articles_sizes_deliver(request, template, context)
+    
+    else:
+
+        try:
+
+            object = Sizes(size_name = size_input)
+            object.save()
+            template = "sizes_table_right.html"
+            return articles_sizes_deliver(request, template, context)
+        except Exception as e:
+            print("-"*100)
+            print(f"ESTE ES EL ERROR -----------> {e.__str__} ")
+            print("-"*100)
+            template = "sizes_table_duplicate_error.html"
+            return articles_sizes_deliver(request, template, context)
 
 #HTMX
 ##ARTICLES_CREATE.HTML
