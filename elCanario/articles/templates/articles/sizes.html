@@ -1,0 +1,16 @@
+{% extends './header.html' %}
+{% load static %}
+{% block head_two %}
+    <title>Tamaños/Talles - Canario Regionales</title>
+{% endblock %}
+{% block content_two %}
+
+    
+    <div class="bg-gradient-to-tr from-yellow-300 to-yellow-500 rounded-md p-4 m-8">
+        <input class="bg-yellow-50 rounded-sm px-2" type="text" name="size_input">
+        <input class="text-sm rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-yellow-800 to-yellow-600 px-8 py-1 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" value="Guardar" hx-get="{% url 'size_save' %}" hx-trigger="click" hx-target="#sizes_table" hx-swap="outerHTML" hx-select="#sizes_table" hx-include="[name='size_input']">
+    </div>
+    
+    {% include 'sizes_table.html' %}
+
+{% endblock %}

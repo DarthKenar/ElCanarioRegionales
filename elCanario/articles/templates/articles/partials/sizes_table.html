@@ -1,4 +1,4 @@
-<div class="relative flex min-h-screen flex-col justify-center overflow-hidden py-2 sm:py-12" id="categories_table">
+<div class="relative flex min-h-screen flex-col justify-center overflow-hidden py-2 sm:py-12" id="sizes_table">
     <div class="bg-gradient-to-tr from-amber-100 to-amber-300 rounded-md p-4 m-8 relative px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-10">
         <div class="mx-auto max-w-md">
             <table class="table-auto font-mono  text-red-900  shadow-slate-600 shadow-md bg-amber-200 border-separate border-2 border-amber-100 rounded-md p-4 m-8 transition duration-300 hover:shadow-slate-600 hover:shadow-sm">
@@ -9,9 +9,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for category in  categories %}
+                    {% for size in  sizes %}
                         <tr class="bg-amber-100">
-                            <td>{{category.category_name}}</td>
+                            <td>{{size.size_name}}</td>
                             <td>                                
                                 <form action="">
                                     <ion-icon class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" name="create-outline"></ion-icon>
@@ -25,5 +25,3 @@
         </div>
     </div>
 </div>
-
-
