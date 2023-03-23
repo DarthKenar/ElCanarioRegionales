@@ -1,6 +1,4 @@
-<div id="answer">
-    <div  class="text-center">
-    </div>
+{% if articles_any %}
     <table class="table-auto font-mono  text-red-900  shadow-slate-600 shadow-md bg-amber-200 border-separate border-2 border-amber-100 rounded-md p-4 m-8 transition duration-300 hover:shadow-slate-600 hover:shadow-sm">
         <thead class="p-3 m-3">
             <tr class="bg-amber-300">
@@ -19,12 +17,36 @@
         <tbody class="bg-amber-100">
             {% for article in articles_any %}
                 <tr>
+                    
                     <td class="m-4 px-12 " id="{{article.id}}">{{article.id}}</td>
+
                     <td class="m-4 px-12 ">{{article.article_name}}</td>
+                    
+
                     <td class="m-4 px-12 ">{{article.category_id}}</td>
+                    
+
+                    {% if article.color_id == None %}
+                    <td class="m-4 px-12 ">-</td>
+                    {% else %}
                     <td class="m-4 px-12 ">{{article.color_id}}</td>
+                    {% endif %}
+                    
+
+                    {% if article.material_id == None %}
+                    <td class="m-4 px-12 ">-</td>
+                    {% else %}
                     <td class="m-4 px-12 ">{{article.material_id}}</td>
+                    {% endif %}
+                    
+
+                    {% if article.size_id == None %}
+                    <td class="m-4 px-12 ">-</td>
+                    {% else %}
                     <td class="m-4 px-12 ">{{article.size_id}}</td>
+                    {% endif %}
+                    
+
                     <td class="m-4 px-12  tabular-nums slashed-zero">{{article.buy_price}}</td>
                     <td class="m-4 px-12  tabular-nums slashed-zero">{{article.increase}}</td>
                     <td class="m-4 px-12  tabular-nums slashed-zero">{{article.sell_price}}</td>
@@ -40,5 +62,5 @@
                 </tr>
             {% endfor %}
         </tbody>
-    </table> 
-</div>
+    </table>
+{% endif %}

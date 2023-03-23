@@ -3,27 +3,29 @@
     <title>Canario Regionales</title>
 {% endblock %}
 {% block content_one %}
+
+
+    
     <h1 style="text-align: center;">Bienvenido</h1>
     <h2 style="text-align: center;">Si estas viendo esto, es porque entraste.</h2>
-    <h3>Usuario: {{ user.username }}</h3>
-    <h3>Correo: {{ user.email }}</h3>
-
-    <div style="padding: 50px; background-color: rgb(115, 110, 187);">
-        <form action="{% url 'articles' %}">
-            <input type="submit" value="Artículos" name="articles">
-        </form>
-    </div>
-
-    <div style="padding: 50px; background-color: rgb(143, 83, 83);">
-        <form action="{% url 'customers' %}">
-            <input type="submit" value="Clientes" name="customers">
-        </form>
-    </div>
-
-    <div style="padding: 50px; background-color: rgb(74, 156, 74);">
-        <form action="{% url 'orders' %}">
-            <input type="submit" value="Pedidos" name="orders">
-        </form>
-    </div>
-
+    <div class="grid grid-rows-3 grid-flow-col gap-4">
+        <div class="row-span-3 bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md  border-2 p-4 m-8 shadow-slate-600 shadow-md border-separate border-amber-100 transition duration-300 hover:shadow-slate-600 hover:shadow-sm">
+            
+            <form action="{% url 'orders' %}">
+                <input class="text-lg font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-12 py-4 shadow-md shadow-slate-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-300 hover:shadow-xl hover:shadow-slate-400 m-4 mx-8 cursor-pointer max-w-xs" type="submit" value="Pedidos" name="orders"></input>
+            </form>
+            <form action="{% url 'articles' %}">
+                <input class="text-lg font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-12 py-4 shadow-md shadow-slate-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-300 hover:shadow-xl hover:shadow-slate-400 m-4 mx-8 cursor-pointer max-w-xs" type="submit" value="Artículos" name="articles"></input>
+            </form>
+            <form action="{% url 'customers' %}">
+                <input class="text-lg font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-12 py-4 shadow-md shadow-slate-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-300 hover:shadow-xl hover:shadow-slate-400 m-4 mx-8 cursor-pointer max-w-xs"type="submit" value="Clientes" name="customers"></input>
+            </form>
+        </div>
+        <div class="col-span-2 bg-amber-300">
+            <h3>Usuario: {{ user.username }}</h3>
+            <h3>Correo: {{ user.email }}</h3>
+            <!-- imagen de usuario -->
+        </div>
+        <div class="col-span-2 row-span-2 bg-lime-300">03</div>
+      </div>
 {% endblock %}

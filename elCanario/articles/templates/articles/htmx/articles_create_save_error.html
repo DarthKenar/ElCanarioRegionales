@@ -2,18 +2,18 @@
     <h1 class="font-mono text-lg text-center font-bold">Agregar Artículo</h1>
     <div class="p-4 m-4">
         <label class="italic px-2">Nombre*: </label>
-        <input class="bg-amber-50 rounded-sm px-2" hx-get="{% url 'name_check' %}" hx-target="#answer_article_name" hx-trigger="keyup changed delay:300ms" hx-swap="outerHTML" type="text" name="article_name_input" id="article_name_input" required >
-        <output class="text-green-600" id="answer_article_name">{{answer_article_name}}</output>
+        <input class="bg-amber-50 rounded-sm px-2" hx-get="{% url 'name_check' %}" hx-target="#answer_article_name" hx-trigger="keyup changed delay:300ms" hx-swap="outerHTML" type="text" name="article_name_input" id="article_name_input" value="{{ article_name_input }}" required>
+        <output class="text-red-600" id="answer_article_name">{{answer_article_name}}</output>
     </div>
     <div class="p-4 m-4">
         <label class="italic px-2" >Categoría*: </label>
-        <select class="bg-amber-50 rounded-sm px-2" name="article_category_input" id="article_category_input" required hg-get="{% url 'category_check' %}" hx-target="#answer_category_id" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" required>
+        <select class="bg-amber-50 rounded-sm px-2" hx-get="{% url 'category_check' %}" hx-target="#answer_category_id"  hx-trigger="change" hx-swap="outerHTML" name="article_category_input" id="article_category_input" required>
             <option value="Empty"></option>
             {% for category in categories %}
-                <option value="{{category.id}}">{{category.category_name}}</option>
+                <option value="{{category.id}}" {% if category.id == article_category_input %} selected {% endif %} >{{category.category_name}}</option>
             {% endfor %}
-        </select>
-        <output class="text-red-500" id="answer_category_id">{{answer_category_id}}</output>
+        </select><br>
+        <output class="text-red-600" id="answer_category_id">{{answer_category_id}}</output>
     </div>
     <div class="p-4 m-4">
         <label class="italic px-2">Color: </label>
@@ -54,7 +54,7 @@
     <div class="p-4 m-4" id="article_sell_price_output">
       <label class="italic px-2">Precio Venta*: </label>
       <input class="bg-amber-50 rounded-sm px-2 empty:hidden" type="text" name="article_sell_price_input" id="article_sell_price_input" readonly>
-      <output class="text-red-500" id="answer_sell_price">{{answer_sell_price}}</output>
+      <output class="text-red-600" id="answer_sell_price">{{answer_sell_price}}</output>
     </div>
 
     <div class="grid place-content-end">
@@ -63,6 +63,7 @@
 
     </div>
     <div>
-        <output class="rounded-sm px-2 empty:hidden text-green-600">El artículo artículo {{article_name_input}} se ha guardado correctamente</output>
+        <output class="rounded-sm px-2 empty:hidden text-red-600">No se ha guardado ningún artículo.</output>
     </div>
   </div>
+

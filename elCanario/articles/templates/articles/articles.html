@@ -4,30 +4,10 @@
 {% endblock %}
 {% block content_two %}
     <div class="bg-gradient-to-tr from-amber-100 to-amber-300 rounded-md p-4 m-8 shadow-slate-600 shadow-md border-separate border-2 border-amber-100 transition duration-300 hover:shadow-slate-600 hover:shadow-sm">
-        <div class="py-2">
-
-            {% if articles_searched %}
-                <output class="" type="text">{{answer}} <b> {{datatype_input}}: {{article_input}}</b></output><br>
-                <output class="" type="text">Cantidad de artículos entonctrados: <b>{{ articles_searched.count }}</b>.</output>
-            {% else %}
-                {% if articles_all %}
-                    <output>{{answer}} <b>{{articles_all.count}}</b></output>
-                    {% if not article_input %}
-                        <output type="text">{{ answer_negative }}</output>
-                    {% endif %}
-                {% else%}
-                    <output type="text">{{ answer_negative }} <b> {{datatype_input}}: {{article_input}}</b></output>
-                {% endif %}
-            {% endif %}
-
-
-        </div>
         <div class="flex flex-row">
-            <div class="basis-2/3 flex justify-around">
-
-                <form action="{% url 'articles_read' %}" method="GET">
-                    <b class="text-black font-sans font-bold">Buscar:</b>
-                    <select class="bg-amber-50 rounded-sm px-2" name="datatype_input">
+            <div class="basis-2/3 flex justify-around place-content-start">
+                    <label class="text-black font-sans font-bold mx-2" for="article_input">Buscar:</label>
+                    <select class="bg-amber-50 rounded-sm px-2 mx-2" name="datatype_input" id="datatype_input">
                         <option value="id">ID</option>
                         <option value="article_name">Nombre</option>
                         <option value="category_id">Categoría</option>
@@ -38,9 +18,9 @@
                         <option value="increase">Incremento</option>
                         <option value="sell_price">Precio de Venta</option>
                     </select>
-                    <input class="bg-amber-50 rounded-sm px-2" type="text" name="article_input">
-                    <button  type="submit" ion-button icon-only><ion-icon size="large" name="search-circle-outline" class="text-sm font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700  px-8 py-1 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer"> </ion-icon></button>
-                </form>
+                    <input class="bg-amber-50 rounded-sm px-2 mx-2" type="text" hx-get="{% url 'articles_read' %}" hx-include="#datatype_input" name="article_input" id="article_input" hx-target="#answer" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms">
+                    <!-- <button  type="submit" ion-button icon-only><ion-icon size="large" name="search-circle-outline" class="text-sm font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700  px-8 py-1 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer"> </ion-icon></button> -->
+                
                 <form action="{% url 'articles_create' %}">
                     <input class="text-sm font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-8 py-1 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" value="+">
                 </form>
@@ -59,12 +39,15 @@
                     <input class="text-sm font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-1 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" value="Talles">
                 </form>
             </div>
-
         </div>
     </div>
-    {% if articles_any %}
-    <div>
-        {% include 'articles_table.html' %}
+    <div id="answer">
+        {% if articles_any %}
+            <div>
+                
+                {% include 'articles_table.html' %}
+            </div>
+        {% endif %}
     </div>
-    {% endif %}
+    
 {% endblock %}

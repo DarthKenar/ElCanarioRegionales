@@ -4,6 +4,10 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 # Create your views here.
+
+def login_view(request):
+    return render(request, template_name='login.html', context={})
+
 def search_register(request):
     """
     Cuando el usuario se registra primero se debe comprobar que no exista ningun usuario con ese nombre 
@@ -34,9 +38,6 @@ def search_user(request):
             return render(request, 'login.html', context)
     else:
         return render(request, 'login.html')
-
-def login_view(request):
-    return render(request, template_name='login.html', context={})
 
 @login_required
 def home(request):

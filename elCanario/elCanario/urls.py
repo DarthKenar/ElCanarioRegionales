@@ -33,7 +33,10 @@ urlpatterns = [
 
     ## ARTICLES SECTIONS
     path('articles', articles_views.articles, name="articles"),
-    
+
+    path('articles_create', articles_views.articles_create, name="articles_create"),
+    path('articles_create_category_check', articles_views.articles_create_category_check, name="category_check"),
+
     path('articlesCategories', articles_views.articles_categories, name="categories"),
     path('articlesColors', articles_views.articles_colors, name="colors"),
     path('articlesMaterials', articles_views.articles_materials, name="materials"),
@@ -46,20 +49,27 @@ urlpatterns = [
 
 htmx_urlpatterns = [
     #ARTICLES SETCIONS
-    path('sell_price_calculator', articles_views.sell_price_calculator, name="calculator"),
-    path('articles/categories/save', articles_views.articles_categories_save, name="category_save"),
-    path('articles/colors/save', articles_views.articles_colors_save, name="color_save"),
-    path('articles/materials/save', articles_views.articles_materials_save, name="material_save"),
-    path('articles/sizes/save', articles_views.articles_sizes_save, name="size_save"),
-
-
-    #revisar bien estas urls -  pasarlas a HTMX
-    path('articles_create', articles_views.articles_create, name="articles_create"),
-    path('articles_create_confirm', articles_views.articles_create_confirm, name="articles_create_confirm"),
-
     path('articles_read', articles_views.articles_read, name="articles_read"),
     path('articles_update', articles_views.articles_update, name="articles_update"),
     path('articles_delete/<int:id>', articles_views.articles_delete, name="articles_delete"),
+
+        ##ARTICLES CREATE FUNCTIONS
+    path('article_create_name_check',articles_views.articles_create_name_check, name="name_check"),
+    path('sell_price_calculator', articles_views.articles_create_sell_price_calculator, name="calculator"),
+    path('articles_create_confirm', articles_views.articles_create_confirm, name="articles_create_confirm"),
+
+        #ARTICLES CATEGORIES
+    path('articles/categories/save', articles_views.articles_categories_save, name="category_save"),
+
+        #ARTICLES COLORS
+    path('articles/colors/save', articles_views.articles_colors_save, name="color_save"),
+
+        #ARTICLES MATERIALS
+    path('articles/materials/save', articles_views.articles_materials_save, name="material_save"),
+
+        #ARTICLES SIZES
+    path('articles/sizes/save', articles_views.articles_sizes_save, name="size_save"),
+
 ]
 urlpatterns += htmx_urlpatterns
 
