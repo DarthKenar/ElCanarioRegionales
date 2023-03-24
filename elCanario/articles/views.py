@@ -3,7 +3,6 @@ from articles.models import Articles, Categories, Colors, Sizes, Materials
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
-# Create your views here.
 
 # ORDERS SECTION
 @login_required
@@ -221,8 +220,11 @@ def articles_create_confirm(request):
     article_increase_input = request.GET['article_increase_input']
     article_sell_price_input = request.GET['article_sell_price_input']
 
+    if article_category_input != 'Empty':
+        article_category_input= int(article_category_input)
+
     context = {"article_name_input": article_name_input,
-                "article_category_input":int(article_category_input),
+                "article_category_input":article_category_input,
                 "article_color_input":article_color_input,
                 "article_material_input":article_material_input,
                 "article_size_input":article_size_input,
