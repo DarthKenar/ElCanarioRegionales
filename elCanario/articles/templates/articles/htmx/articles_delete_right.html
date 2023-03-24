@@ -1,4 +1,4 @@
-<div id="answer">
+<div id="answer_delete">
     <div class="text-center">
         <output class="text-green-600">Se eliminó correctamente el artículo {{article.article_name}}</output>
     </div>
@@ -30,12 +30,22 @@
                     <td class="m-4 px-12  tabular-nums slashed-zero">{{article.increase}}</td>
                     <td class="m-4 px-12  tabular-nums slashed-zero">{{article.sell_price}}</td>
                     <td>
-                        <form action="">
-                            <ion-icon class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" name="create-outline"></ion-icon>
+                        <form action="{% url 'articles_update' id=article.id %}" method="GET">
+                            <button ion-button icon-only type="submit">
+                                <ion-icon name="create-outline" 
+                                
+                                class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer"
+                                ></ion-icon>
+                            </button>
                         </form>
-                        <form hx-delete="{% url 'articles_delete' id=article.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#answer" hx-confirm="¿Está seguro de que desea eliminar este artículo?">
+                        <form hx-delete="{% url 'articles_delete' id=article.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#answer_delete" hx-confirm="¿Está seguro de que desea eliminar el articulo: {{article.article_name}}?">
                             {% csrf_token %}
-                            <input class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" value="Eliminar"  >
+                            <button type="submit" value="Eliminar" ion-button icon-only >
+                                <ion-icon name="trash-outline" 
+                                    
+                                class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer"
+                                ></ion-icon>
+                            </button>
                         </form>
                     </td>
                 </tr>
