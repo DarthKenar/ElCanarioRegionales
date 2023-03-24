@@ -1,3 +1,6 @@
-![English documentation][english]
+[English documentation][English]
 
-[english]: <'/../DOCUMENTATION/readme_eng.md'>
+[Spanish documentation][Spanish]
+
+[English]: /DOCUMENTATION/readme_eng.md
+[Spanish]: /DOCUMENTATION/readme_esp.md
