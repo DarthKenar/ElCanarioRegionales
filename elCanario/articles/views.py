@@ -31,7 +31,9 @@ def articles(request):
 
     answer = "Artículos en la Base de datos"
     articles = Articles.objects.all()
-    context = {"articles_all":articles, "articles_any": articles, "answer":answer}
+    context = {"articles_all":articles,
+               "articles_any": articles,
+               "answer":answer}
     template = "articles.html"
     return articles_deliver(request, template, context)
 
@@ -116,7 +118,10 @@ def articles_create(request):
     materials = Materials.objects.all()
     sizes = Sizes.objects.all()
 
-    context = {"categories":categories,"colors":colors,"materials":materials,"sizes":sizes}
+    context = {"categories":categories,
+               "colors":colors,
+               "materials":materials,
+               "sizes":sizes}
     template='articles_create.html'
     return articles_deliver(request, template, context)
 
@@ -233,7 +238,10 @@ def articles_create_confirm(request):
                 "article_sell_price_input":article_sell_price_input,
                 }
     
-    context_variables = {"categories":categories,"colors":colors,"materials":materials,"sizes":sizes}
+    context_variables = {"categories":categories,
+                         "colors":colors,
+                         "materials":materials,
+                         "sizes":sizes}
     context.update(context_variables)
 
     # conditions to save
@@ -261,6 +269,7 @@ def articles_create_confirm(request):
         return articles_deliver(request, template, context)
     
     else:
+
         if article_color_input != 'Empty':
             article_color_input = articles_create_confirm_get_color(article_color_input)
         else:
@@ -297,7 +306,7 @@ def articles_create_confirm(request):
 
         return articles_deliver(request, template, context)
 
-#Articles delete
+#Articles delete ##REVISAR EL CONTEXTO
 @csrf_protect
 def articles_delete(request, id):
 
@@ -319,13 +328,74 @@ def articles_delete(request, id):
         template = "articles_delete_right.html"
         answer = "Artículos en la Base de datos"
         articles = Articles.objects.all()
-        context = {"articles_all":articles, "articles_any": articles, "answer":answer, "article": article_to_delete}
+        context = {"articles_all":articles,
+                   "articles_any": articles,
+                   "answer":answer,
+                   "article": article_to_delete}
         return articles_deliver(request, template, context)
 
 #Articles update
 @csrf_protect
-def articles_update(request):
-    pass
+def articles_update(request, id):
+    """Show update form for the article chosed """
+
+    try:
+
+        article_to_update = get_object_or_404(Articles, id=id)
+
+    except:
+
+        template = "articles_update_form_error.html"
+        context={}
+        return articles_deliver(request, template, context)
+    
+    else:
+
+        context={}
+
+        categories = Categories.objects.all()
+        colors = Colors.objects.all()
+        materials = Materials.objects.all()
+        sizes = Sizes.objects.all()
+        """Obtener categorias colores talles y materiales, guardarlos en variables y pasarlos como contexto"""
+        
+        article_category_object = article_to_update.category_id
+        article_color_object = article_to_update.color_id
+        article_material_object = article_to_update.material_id
+        article_size_object = article_to_update.size_id
+        
+        article_category_input = article_category_object.id
+
+        try:
+            article_color_input = article_color_object.id
+        except:
+            article_color_input = 'Empty'
+
+        try:
+            article_material_input = article_material_object.id
+        except:
+            article_material_input = 'Empty'
+            
+        try:
+            article_size_input = article_size_object.id
+        except:
+            article_size_input = 'Empty'
+
+
+
+        context.update({"article_category_input":article_category_input,
+                        "article_color_input":article_color_input,
+                        "article_material_input":article_material_input,
+                        "article_size_input":article_size_input})
+        context.update({"categories":categories,
+                        "colors":colors,
+                        "materials":materials,
+                        "sizes":sizes})
+        context.update({"article":article_to_update})
+
+        template='articles_update.html'
+
+        return articles_deliver(request, template, context)
 
 ## Articles Categories SECTION
 def articles_categories(request):

@@ -1,0 +1,71 @@
+<div class="mx-auto max-w-md" id="article_update_answer">
+    <h1 class="font-mono text-lg text-center font-bold">Editar Artículo id: {{article.id}}</h1>
+    <div class="p-4 m-4">
+        <label class="italic px-2">Nombre*: </label>
+        <input class="bg-amber-50 rounded-sm px-2" hx-get="{% url 'name_check' %}" hx-target="#answer_article_name" hx-trigger="keyup changed delay:300ms" hx-swap="outerHTML" type="text" name="article_name_input" id="article_name_input" value="{{ article.article_name }}" required>
+        <div>
+            <output class="text-red-600" id="answer_article_name">{{answer_article_name}}</output>
+        </div>
+    </div>
+    <div class="p-4 m-4">
+        <label class="italic px-2" >Categoría*: </label>
+        <select class="bg-amber-50 rounded-sm px-2" hx-get="{% url 'category_check' %}" hx-target="#answer_category_id"  hx-trigger="change" hx-swap="outerHTML" name="article_category_input" id="article_category_input" required>
+            <option value="Empty"></option>
+            {% for category in categories %}
+                <option value="{{category.id}}" {% if category.id == article_category_input %} selected {% endif %} >{{category.category_name}}</option>
+            {% endfor %}
+        </select><br>
+        <output class="text-red-600" id="answer_category_id">{{answer_category_id}}</output>
+    </div>
+    <div class="p-4 m-4">
+        <label class="italic px-2">Color: </label>
+        <select class="bg-amber-50 rounded-sm px-2" name="article_color_input" id="article_color_input">
+            <option value="Empty"></option>
+            {% for color in colors %}
+                <option value="{{color.id}}" {% if color.id == article_color_input %} selected {% endif %} >{{color.color_name}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="p-4 m-4">
+        <label class="italic px-2">Material: </label>
+        <select class="bg-amber-50 rounded-sm px-2" name="article_material_input" id="article_material_input">
+            <option value="Empty"></option>
+            {% for material in materials %}
+                <option value="{{material.id}}" {% if material.id == article_material_input %} selected {% endif %} >{{material.material_name}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="p-4 m-4">
+        <label class="italic px-2">Talle/Tamaño: </label>
+        <select class="bg-amber-50 rounded-sm px-2" name="article_size_input" id="article_size_input">
+            <option value="Empty"></option>
+            {% for size in sizes %}
+                <option value="{{size.id}}" {% if size.id == article_size_input %} selected {% endif %} >{{size.size_name}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="p-4 m-4">
+      <label class="italic px-2">Precio Compra*: </label>
+      <input class="bg-amber-50 rounded-sm px-2" type="text" name="article_buy_price_input" id="article_buy_price_input" hx-get="{% url 'calculator' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#article_sell_price_output" hx-include="[name='article_increase_input']" value="{{article_buy_price_input}}" required >
+    </div>
+    <div class="p-4 m-4">
+      <label class="italic px-2">Incremento*: </label>
+      <input class="bg-amber-50 rounded-sm px-2" type="text" name="article_increase_input" id="article_increase_input" hx-get="{% url 'calculator' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#article_sell_price_output" hx-include="[name='article_buy_price_input']" value="{{article_increase_input}}" required>
+      <label>%</label>
+    </div>
+    <div class="p-4 m-4" id="article_sell_price_output">
+      <label class="italic px-2">Precio Venta*: </label>
+      <input class="bg-amber-50 rounded-sm px-2 empty:hidden" type="text" name="article_sell_price_input" id="article_sell_price_input" value="{{article_sell_price_input}}" readonly>{{article_sell_price_input}}</input>
+      <div>
+        <output class="text-red-600" id="answer_sell_price">{{answer_sell_price}}</output>
+      </div>
+    </div>
+
+    <div class="grid place-content-end">
+
+        <button class="text-sm font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 p-2 m-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" hx-get="{% url 'articles_create_confirm' %}" hx-trigger="click" hx-include="#article_name_input, #article_category_input, #article_color_input, #article_material_input, #article_size_input, #article_buy_price_input, #article_increase_input, #article_sell_price_input" hx-target="#article_create_answer" hx-swap="outerHTML">Guardar</button>
+
+    </div>
+
+  </div>
+
