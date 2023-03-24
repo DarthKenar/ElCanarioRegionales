@@ -50,14 +50,14 @@ urlpatterns = [
 htmx_urlpatterns = [
     #ARTICLES SETCIONS
     path('articles_read', articles_views.articles_read, name="articles_read"),
-    path('articles_update', articles_views.articles_update, name="articles_update"),
+    path('articles_update/<int:id>', articles_views.articles_update, name="articles_update"),
     path('articles_delete/<int:id>', articles_views.articles_delete, name="articles_delete"),
 
         ##ARTICLES CREATE FUNCTIONS
     path('article_create_name_check',articles_views.articles_create_name_check, name="name_check"),
     path('sell_price_calculator', articles_views.articles_create_sell_price_calculator, name="calculator"),
     path('articles_create_confirm', articles_views.articles_create_confirm, name="articles_create_confirm"),
-
+    
         #ARTICLES CATEGORIES
     path('articles/categories/save', articles_views.articles_categories_save, name="category_save"),
 
