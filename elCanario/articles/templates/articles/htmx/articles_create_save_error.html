@@ -3,7 +3,9 @@
     <div class="p-4 m-4">
         <label class="italic px-2">Nombre*: </label>
         <input class="bg-amber-50 rounded-sm px-2" hx-get="{% url 'name_check' %}" hx-target="#answer_article_name" hx-trigger="keyup changed delay:300ms" hx-swap="outerHTML" type="text" name="article_name_input" id="article_name_input" value="{{ article_name_input }}" required>
-        <output class="text-red-600" id="answer_article_name">{{answer_article_name}}</output>
+        <div>
+            <output class="text-red-600" id="answer_article_name">{{answer_article_name}}</output>
+        </div>
     </div>
     <div class="p-4 m-4">
         <label class="italic px-2" >Categoría*: </label>
@@ -54,7 +56,9 @@
     <div class="p-4 m-4" id="article_sell_price_output">
       <label class="italic px-2">Precio Venta*: </label>
       <input class="bg-amber-50 rounded-sm px-2 empty:hidden" type="text" name="article_sell_price_input" id="article_sell_price_input" value="{{article_sell_price_input}}" readonly>{{article_sell_price_input}}</input>
-      <output class="text-red-600" id="answer_sell_price">{{answer_sell_price}}</output>
+      <div>
+        <output class="text-red-600" id="answer_sell_price">{{answer_sell_price}}</output>
+      </div>
     </div>
 
     <div class="grid place-content-end">
