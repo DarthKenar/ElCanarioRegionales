@@ -149,17 +149,17 @@ def articles_create_name_check(request):
     
 def articles_create_category_check(request):
     
+    context = {}
     article_category_input = request.GET['article_category_input']
-    print(article_category_input)
 
     if article_category_input == 'Empty':
 
-        context = {"answer_category_id": "Es obligatorio seleccionar una categoría."}
+        context["answer_category_id"] = "Es obligatorio seleccionar una categoría."
         template = "articles_create_category_error.html"
         return articles_deliver(request, template, context)
     
     else:
-        context = {"answer_category_id": ""}
+        context["answer_category_id"] = ""
         template = "articles_create_category_error.html"
         return articles_deliver(request, template, context)
     
@@ -177,34 +177,45 @@ def articles_create_confirm_get_size(input: str) -> object:
     return size_object
 
 def articles_create_sell_price_calculator(request):
-
+    context = {}
     buy_price = request.GET['article_buy_price_input']
     increase = request.GET['article_increase_input']
 
-    if (buy_price != "" and buy_price.isalpha()) or  (increase != "" and increase.isalpha()):
+    error_any = False
 
-        return render(request, template_name='articles_create_calculator_string_error.html')
+    if increase == "" or buy_price == "":
+        error_any = True
+        context["answer_empty_error"] = "Debes completar los campos para calcular el precio de venta"
 
-    elif increase == "" or buy_price == "":
-
-        return render(request, template_name='articles_create_calculator_empty.html')
+    if buy_price.isalpha() or  increase.isalpha():
+        error_any = True
+        context["answer_string_error"] = "Los datos ingresados deben ser numéricos"
+        
+    if error_any:
+        "show any error"
+        template = "articles_create_calculator_error.html"
+        return articles_deliver(request, template, context)
     
     else:
 
         try:
-
+            
             buy_price_float = float(buy_price)
             increase_float = float(increase)
 
         except ValueError:
 
-            return render(request, template_name='articles_create_calculator_string_error.html')
+            context["answer_string_error"] = "Los datos ingresados deben ser numéricos"
+
+            template='articles_create_calculator_error.html'
+            return articles_deliver(request, template, context)
         
         else:
 
-            calculator =buy_price_float + ((buy_price_float * increase_float) / 100)
-            context = {"answer_calculator": calculator}
-            return render(request, template_name='articles_create_calculator_right.html', context=context)
+            calculator = buy_price_float + ((buy_price_float * increase_float) / 100)
+            context["answer_calculator"] = calculator
+            template = "articles_create_calculator_right.html"
+            return articles_deliver(request, template, context)
 
 def articles_create_confirm(request):
     
@@ -357,7 +368,7 @@ def articles_update(request, id):
         colors = Colors.objects.all()
         materials = Materials.objects.all()
         sizes = Sizes.objects.all()
-        """Obtener categorias colores talles y materiales, guardarlos en variables y pasarlos como contexto"""
+        
         
         article_category_object = article_to_update.category_id
         article_color_object = article_to_update.color_id
@@ -381,7 +392,7 @@ def articles_update(request, id):
         except:
             article_size_input = 'Empty'
 
-
+        
 
         context.update({"article_category_input":article_category_input,
                         "article_color_input":article_color_input,
@@ -392,6 +403,12 @@ def articles_update(request, id):
                         "materials":materials,
                         "sizes":sizes})
         context.update({"article":article_to_update})
+
+        buy_price = article_to_update.buy_price
+        increase = article_to_update.increase
+        sell_price = article_to_update.sell_price
+
+        context.update({})
 
         template='articles_update.html'
 
