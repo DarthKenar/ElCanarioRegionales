@@ -217,6 +217,31 @@ def articles_create_sell_price_calculator(request):
             template = "articles_create_calculator_right.html"
             return articles_deliver(request, template, context)
 
+def search_any_error(context: dict, name_input:str, category_input:str, sell_price:str) -> bool:
+
+    any_error = False
+
+    if name_input == '':
+        any_error = True
+        context['answer_article_name'] = 'Es obligatorio completar el nombre.'
+    elif not name_input.isalpha():
+        any_error = True
+        context['answer_article_name'] = 'El nombre del artículo no debe contener números, simbolos o espacios.'
+
+    if category_input == 'Empty':
+        any_error = True
+        context['answer_category_id'] = 'Es obligatorio seleccionar una categoría.'
+    
+
+    try:
+        float(sell_price)
+    except:
+
+        any_error = True
+        context['answer_sell_price'] = "No se puede calcular correctamente el precio de venta."
+
+    return(any_error, context)
+
 def articles_create_confirm(request):
     
     categories = Categories.objects.all()
@@ -253,30 +278,18 @@ def articles_create_confirm(request):
                          "colors":colors,
                          "materials":materials,
                          "sizes":sizes}
+    
     context.update(context_variables)
 
     # conditions to save
-    if article_name_input == '':
-        any_error = True
-        context['answer_article_name'] = 'Es obligatorio completar el nombre.'
-    elif not article_name_input.isalpha():
-        any_error = True
-        context['answer_article_name'] = 'El nombre del artículo no debe contener números, simbolos o espacios.'
-
-    if article_category_input == 'Empty':
-        any_error = True
-        context['answer_category_id'] = 'Es obligatorio seleccionar una categoría.'
+    any_error, context = search_any_error(context, article_name_input, article_category_input, article_sell_price_input)
     
-
-    if article_buy_price_input == '' or article_increase_input == '' or article_sell_price_input == '':
-        any_error = True
-        context['answer_sell_price'] = "No puede guardar un artículo sin haber calculado el precio de venta. Intentelo nuevamente"
-
     # end of conditions to save 
     if any_error == True:
 
         # for render error answers
         template = 'articles_create_save_error.html'
+        context["answer_save_error"] = "No se ha actualizado el artículo."
         return articles_deliver(request, template, context)
     
     else:
@@ -404,13 +417,104 @@ def articles_update(request, id):
                         "sizes":sizes})
         context.update({"article":article_to_update})
 
-        buy_price = article_to_update.buy_price
-        increase = article_to_update.increase
+        buy_price = str(article_to_update.buy_price).replace(",",".")
+        increase = str(article_to_update.increase).replace(",",".")
         sell_price = article_to_update.sell_price
 
-        context.update({})
+        context["article_buy_price_input"] = buy_price
+        context["article_increase_input"] = increase
+        context["article_sell_price_input"] = sell_price
 
         template='articles_update.html'
+
+        return articles_deliver(request, template, context)
+    
+def articles_update_confirm(request, id):
+    context = {}
+    context["answer_save_error"] = "No se ha actualizado el artículo."
+    
+    categories = Categories.objects.all()
+    colors = Colors.objects.all()
+    materials = Materials.objects.all()
+    sizes = Sizes.objects.all()
+
+    
+    any_error = False
+
+    article_name_input = request.GET["article_name_input"]
+    article_category_input = request.GET['article_category_input']
+    article_color_input = request.GET['article_color_input']
+    article_material_input = request.GET['article_material_input']
+    article_size_input = request.GET['article_size_input']
+    article_buy_price_input = request.GET['article_buy_price_input']
+    article_increase_input = request.GET['article_increase_input']
+    article_sell_price_input = request.GET['article_sell_price_input']
+
+    if article_category_input != 'Empty':
+        article_category_input= int(article_category_input)
+
+    context = {"article_name_input": article_name_input,
+                "article_category_input":article_category_input,
+                "article_color_input":article_color_input,
+                "article_material_input":article_material_input,
+                "article_size_input":article_size_input,
+                "article_buy_price_input":article_buy_price_input,
+                "article_increase_input":article_increase_input,
+                "article_sell_price_input":article_sell_price_input,
+                }
+    
+    context_variables = {"categories":categories,
+                         "colors":colors,
+                         "materials":materials,
+                         "sizes":sizes}
+    
+    context.update(context_variables)
+
+    # conditions to save
+    any_error, context = search_any_error(context, article_name_input, article_category_input, article_sell_price_input)
+    
+    # end of conditions to save 
+    if any_error == True:
+
+        # for render error answers
+        template = 'articles_create_save_error.html'
+        return articles_deliver(request, template, context)
+    
+    else:
+
+        if article_color_input != 'Empty':
+            article_color_input = articles_create_confirm_get_color(article_color_input)
+        else:
+            article_color_input = None
+
+        if article_material_input != 'Empty':
+            article_material_input = articles_create_confirm_get_material(article_material_input)
+        else:
+            article_material_input = None
+
+        if article_size_input != 'Empty':
+            article_size_input = articles_create_confirm_get_size(article_size_input)
+        else:
+            article_size_input = None
+
+        article = Articles(
+            article_name = article_name_input,
+            category_id = articles_create_confirm_get_category(article_category_input),
+            color_id = article_color_input,
+            material_id = article_material_input,
+            size_id = article_size_input, 
+            buy_price = float(article_buy_price_input), 
+            increase = float(article_increase_input),
+            sell_price = float(article_sell_price_input.replace(',', '.'))
+            )
+
+        article.save()
+        template = "articles_create_save_right.html"
+        context["article_saved"] = article
+
+        context["answer_article_name"] = ""
+        context["answer_category_id"] = ""
+        context["answer_sell_price"] = ""
 
         return articles_deliver(request, template, context)
 
