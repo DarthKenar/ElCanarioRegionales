@@ -1,0 +1,46 @@
+<div class="mx-auto max-w-md" id="article_update_answer">
+
+    <h1 class="font-mono text-lg text-center font-bold">Editar Artículo id: {{article_to_update.id}}</h1>
+    <div class="p-4 m-4">
+        <label class="italic px-2">Nombre*: </label>
+        <input class="bg-amber-50 rounded-sm px-2" readonly>{{ article_to_update.article_name }}</input>
+
+    </div>
+    <div class="p-4 m-4">
+        <label class="italic px-2" >Categoría*: </label>
+        <input class="text-red-600" id="answer_category_id" readonly>{{category.category_name}}</input>
+    </div>
+    <div class="p-4 m-4">
+        <label class="italic px-2">Color: </label>
+        <input class="bg-amber-50 rounded-sm px-2" readonly>{{color.color_name}}</input>
+    </div>
+    <div class="p-4 m-4">
+        <label class="italic px-2">Material: </label>
+        <input class="bg-amber-50 rounded-sm px-2" readonly>{{material.material_name}}</input>
+    </div>
+    <div class="p-4 m-4">
+        <label class="italic px-2">Talle/Tamaño: </label>
+        <input class="bg-amber-50 rounded-sm px-2" readonly>{{size.size_name}}</input>
+    </div>
+    <div class="p-4 m-4">
+        <label class="italic px-2">Precio Compra*: </label>
+        <input class="bg-amber-50 rounded-sm px-2" readonly>{{article_buy_price_input}}</input>
+    </div>
+    <div class="p-4 m-4">
+        <label class="italic px-2">Precio Compra*: </label>
+        <input class="bg-amber-50 rounded-sm px-2" readonly>{{article_increase_input}}</input>
+        <label class="bg-amber-50 rounded-sm px-2" >%</label>
+    </div>
+    <div class="p-4 m-4" id="article_sell_price_output">
+        <label class="italic px-2">Precio Compra*: </label>
+        <input class="bg-amber-50 rounded-sm px-2" readonly>{{article_sell_price_input}}</input>
+    </div>
+
+    <div>
+        <output class="rounded-sm px-2 empty:hidden text-green-600">{{answer_save_right}}</output>
+    </div>
+    <form action="url 'articles'">
+        <button type="submit">Volver</button>
+    </form>
+  </div>
+

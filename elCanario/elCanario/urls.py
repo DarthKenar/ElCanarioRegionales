@@ -35,7 +35,9 @@ urlpatterns = [
     path('articles', articles_views.articles, name="articles"),
 
     path('articles_create', articles_views.articles_create, name="articles_create"),
-    path('articles_create_category_check', articles_views.articles_create_category_check, name="category_check"),
+    path('articles_read', articles_views.articles_read, name="articles_read"),
+    path('articles_update/<int:id>', articles_views.articles_update, name="articles_update"),
+    path('articles_delete/<int:id>', articles_views.articles_delete, name="articles_delete"),
 
     path('articlesCategories', articles_views.articles_categories, name="categories"),
     path('articlesColors', articles_views.articles_colors, name="colors"),
@@ -49,15 +51,18 @@ urlpatterns = [
 
 htmx_urlpatterns = [
     #ARTICLES SETCIONS
-    path('articles_read', articles_views.articles_read, name="articles_read"),
-    path('articles_update/<int:id>', articles_views.articles_update, name="articles_update"),
-    path('articles_delete/<int:id>', articles_views.articles_delete, name="articles_delete"),
+
 
         ##ARTICLES CREATE FUNCTIONS
     path('article_create_name_check',articles_views.articles_create_name_check, name="name_check"),
-    path('sell_price_calculator', articles_views.articles_create_sell_price_calculator, name="calculator"),
+    path('articles_create_category_check', articles_views.articles_create_category_check, name="category_check"),
+    path('create_sell_price_calculator', articles_views.articles_create_calculator, name="calculator"),
     path('articles_create_confirm', articles_views.articles_create_confirm, name="articles_create_confirm"),
-    
+        ##ARTICLES UPDATE FUNCTIONS
+    path('article_update_name_check/<int:id>',articles_views.articles_update_name_check, name="update_name_check"),
+    path('articles_update_category_check/<int:id>', articles_views.articles_update_category_check, name="update_category_check"),
+    path('update_sell_price_calculator/<int:id>', articles_views.articles_update_calculator, name="update_calculator"),
+    path('articles_update_confirm/<int:id>', articles_views.articles_update_confirm, name="articles_update_confirm"),
         #ARTICLES CATEGORIES
     path('articles/categories/save', articles_views.articles_categories_save, name="category_save"),
 
