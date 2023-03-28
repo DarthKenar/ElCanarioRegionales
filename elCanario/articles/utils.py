@@ -1,6 +1,13 @@
 from django.shortcuts import get_object_or_404
 from articles.models import Categories, Colors, Sizes, Materials
 
+def title(title: str)->str:
+    """get a string title and returns the first letter of the word in upper case and the others in lower case"""
+    try:
+        return title.title()
+    except(TypeError, ValueError):
+        return title
+    
 def is_empty(s):
     """
     Returns True if the string is empty or contains only blanks.
@@ -8,19 +15,31 @@ def is_empty(s):
     return s is None or s.strip() == ''
 
 def articles_create_confirm_get_category(input: int) -> object:
+    """retrieves an id(int) and returns the object corresponding to that id"""
+
     category_object = get_object_or_404(Categories, id = input)
     return category_object
+
 def articles_create_confirm_get_color(input: int) -> object:
+    """retrieves an id(int) and returns the object corresponding to that id"""
+
     color_object = get_object_or_404(Colors, id = input)
     return color_object
+
 def articles_create_confirm_get_material(input: int) -> object:
+    """retrieves an id(int) and returns the object corresponding to that id"""
+
     material_object = get_object_or_404(Materials, id = input)
     return material_object
+
 def articles_create_confirm_get_size(input: int) -> object:
+    """retrieves an id(int) and returns the object corresponding to that id"""
+
     size_object = get_object_or_404(Sizes, id = input)
     return size_object
 
 def str_to_int_if_possible(input:str):
+    """converts a string to an integer if possible"""
 
     if input.isnumeric():
         input = int(input)
@@ -28,6 +47,12 @@ def str_to_int_if_possible(input:str):
     return input
 
 def name_check(article_name_input:str)->dict:
+    """checks that the name meets the following conditions:
+        -is not empty
+        -not alphanumeric
+    in these cases returns a response that is added to the context to be used by another function.
+    if no errors are found then an empty string is returned.
+    """
 
     if article_name_input == '':
 
@@ -44,6 +69,9 @@ def name_check(article_name_input:str)->dict:
     return context
         
 def category_check(article_category_input:str, context:dict)->dict:
+    """checks that the category is not empty.
+    If it is empty then it adds a new error response to the context to be used by another function.
+    If the category is selected then it returns the error response as an empty string."""
 
     if article_category_input == 'Empty':
 
@@ -55,6 +83,9 @@ def category_check(article_category_input:str, context:dict)->dict:
     return context
 
 def search_any_error(name_input:str, category_input:str, sell_price:str, context: dict) -> bool:
+    """check that no errors are found for the fields "name", "category" and "sell_price".
+    returns the error answers if one of them is founded
+    """
 
     any_error = False
 
@@ -75,12 +106,17 @@ def search_any_error(name_input:str, category_input:str, sell_price:str, context
     except:
 
         any_error = True
-        context['answer_sell_price'] = "No se puede calcular correctamente el precio de venta."
+        context['answer_sell_price'] = "Porfavor, calcule correctamente el precio de venta."
 
     return(any_error, context)
 
 def get_objects(article_category_input: str,article_color_input: str,article_material_input:str,article_size_input: str)->dict:
-
+    """receives four ids(str) as a string and returns a dictionary containing the retrieved objects:
+        -category
+        -color
+        -material
+        -size
+    """
     if article_category_input != 'Empty':
 
         article_category_input= int(article_category_input)
