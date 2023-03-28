@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404
 from articles.models import Categories, Colors, Sizes, Materials
+from typing import Tuple
 
 def title(title: str)->str:
     """get a string title and returns the first letter of the word in upper case and the others in lower case"""
@@ -82,9 +83,12 @@ def category_check(article_category_input:str, context:dict)->dict:
 
     return context
 
-def search_any_error(name_input:str, category_input:str, sell_price:str, context: dict) -> bool:
+def search_any_error(name_input:str, category_input:str, sell_price:str, context: dict) -> Tuple[bool,dict]:
     """check that no errors are found for the fields "name", "category" and "sell_price".
-    returns the error answers if one of them is founded
+    returns two objects:
+        1- boolean: If one error is founded returns True else, False
+        2- dictionary: The error answers if one of them is founded
+         
     """
 
     any_error = False
@@ -142,7 +146,7 @@ def get_objects(article_category_input: str,article_color_input: str,article_mat
 
     if article_size_input != 'Empty':
 
-        articles_create_confirm_get_size = int(articles_create_confirm_get_size)
+        article_size_input = int(article_size_input)
         article_size_object = articles_create_confirm_get_size(article_size_input)
 
     else:
