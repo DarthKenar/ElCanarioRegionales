@@ -227,7 +227,7 @@ def articles_create_confirm(request):
         objects = get_objects(article_category_input,article_color_input,article_material_input,article_size_input)
 
         article = Articles(
-            article_name = article_name_input,
+            article_name = title(article_name_input),
             category_id = objects["article_category_object"],
             color_id = objects["article_color_object"],
             material_id = objects["article_material_object"],
@@ -405,7 +405,7 @@ def articles_update_confirm(request, id):
     context = {}
 
     article_to_update = get_object_or_404(Articles, id=id)
-
+    
     article_name_input = request.GET["article_name_input"]
     article_category_input = request.GET['article_category_input']
     article_color_input = request.GET['article_color_input']
@@ -414,16 +414,22 @@ def articles_update_confirm(request, id):
     article_buy_price_input = request.GET['article_buy_price_input']
     article_increase_input = request.GET['article_increase_input']
     article_sell_price_input = request.GET['article_sell_price_input']
-
-    context.update(get_objects(article_category_input,article_color_input,article_material_input,article_size_input))
-
-    context = {
-        "article_name_input": article_name_input,
-        "article_buy_price_input":article_buy_price_input,
-        "article_increase_input":article_increase_input,
-        "article_sell_price_input":article_sell_price_input,
-                }
     
+    context.update({
+    "article_name_input": article_name_input,
+    "article_category_input": str_to_int_if_possible(article_category_input),
+    "article_color_input":str_to_int_if_possible(article_color_input),
+    "article_material_input":str_to_int_if_possible(article_material_input),
+    "article_size_input":str_to_int_if_possible(article_size_input),
+    "article_buy_price_input":article_buy_price_input,
+    "article_increase_input":article_increase_input,
+    "article_sell_price_input":article_sell_price_input,
+            })
+
+    # conditions to save
+    any_error, context = search_any_error(article_name_input, article_category_input, article_sell_price_input, context)
+    # end of conditions to save 
+
     categories = Categories.objects.all()
     colors = Colors.objects.all()
     materials = Materials.objects.all()
@@ -433,12 +439,9 @@ def articles_update_confirm(request, id):
         "categories":categories,
         "colors":colors,
         "materials":materials,
-        "sizes":sizes})
-
-    # conditions to save
-    any_error, context = search_any_error(article_name_input, article_category_input, article_sell_price_input, context)
-    # end of conditions to save 
-
+        "sizes":sizes
+        })
+    
     if any_error == True:
 
         # for render error answers
@@ -447,26 +450,28 @@ def articles_update_confirm(request, id):
         return articles_deliver(request, template, context)
     
     else:
+        objects = get_objects(article_category_input,article_color_input,article_material_input,article_size_input)
 
-        article_to_update.article_name = article_name_input
-        article_to_update.category_id = article_category_input
-        article_to_update.color_id = article_color_input
-        article_to_update.material_id = article_material_input
-        article_to_update.size_id = article_size_input
+        article_to_update.article_name = title(article_name_input)
+        article_to_update.category_id = objects["article_category_object"]
+        article_to_update.color_id = objects["article_color_object"]
+        article_to_update.material_id = objects["article_material_object"]
+        article_to_update.size_id = objects["article_size_object"]
         article_to_update.buy_price = float(article_buy_price_input)
         article_to_update.increase = float(article_increase_input)
         article_to_update.sell_price = float(article_sell_price_input.replace(',','.'))
 
         article_to_update.save()
+        
+        context["article_to_update"] = get_object_or_404(Articles, id=id)
 
         template = "articles_update_save_right.html"
         
         context["answer_article_name"] = ""
         context["answer_category_id"] = ""
         context["answer_sell_price"] = ""
-
+        print("="*100)
         return articles_deliver(request, template, context)
-
 ## Articles Categories SECTION
 def articles_categories(request):
     template = "categories.html"
