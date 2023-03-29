@@ -472,7 +472,6 @@ def articles_update_confirm(request, id):
         context["answer_article_name"] = ""
         context["answer_category_id"] = ""
         context["answer_sell_price"] = ""
-        print("="*100)
         return articles_deliver(request, template, context)
 ## Articles Categories SECTION
 def articles_categories(request):
