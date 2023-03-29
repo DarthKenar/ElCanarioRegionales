@@ -238,8 +238,10 @@ def articles_create_confirm(request):
             )
 
         article.save()
+
         template = "articles_create_save_right.html"
-        
+
+        context["answer_save_right"] = f"El artículo {article.article_name} se ha guardado correctamente"
         context["answer_article_name"] = ""
         context["answer_category_id"] = ""
         context["answer_sell_price"] = ""
@@ -257,12 +259,12 @@ def articles_delete(request, id):
         article_to_delete = get_object_or_404(Articles, id=id)
 
     except Exception as e:
-
+        context["article_to_delete"] = article_to_delete
         template = "articles_delete_error.html"
         return articles_deliver(request, template, context)
     
     else:
-        
+        context["article_deleted_name"] = article_to_delete.article_name
         article_to_delete.delete() 
 
         template = "articles_delete_right.html"
@@ -273,7 +275,7 @@ def articles_delete(request, id):
         context.update({"articles_all":articles,
                    "articles_any": articles,
                    "answer":answer,
-                   "article": article_to_delete})
+                   })
         
         return articles_deliver(request, template, context)
 

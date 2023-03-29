@@ -63,7 +63,9 @@
 
     <div class="grid place-content-end">
 
-        <button class="text-sm font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 p-2 m-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" hx-get="{% url 'articles_update_confirm' id=article_to_update.id %}" hx-trigger="click" hx-include="#article_name_input, #article_category_input, #article_color_input, #article_material_input, #article_size_input, #article_buy_price_input, #article_increase_input, #article_sell_price_input" hx-target="#article_update_answer" hx-swap="outerHTML">Guardar</button>
+        <button ion-button icon-only type="submit" hx-get="{% url 'articles_update_confirm' id=article_to_update.id %}" hx-trigger="click" hx-include="#article_name_input, #article_category_input, #article_color_input, #article_material_input, #article_size_input, #article_buy_price_input, #article_increase_input, #article_sell_price_input" hx-target="#article_update_answer" hx-swap="outerHTML">
+            <ion-icon class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" name="save-outline"></ion-icon>
+        </button>
 
     </div>
 

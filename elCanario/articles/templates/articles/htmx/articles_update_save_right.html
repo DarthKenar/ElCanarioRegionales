@@ -40,7 +40,7 @@
         <output class="rounded-sm px-2 empty:hidden text-green-600">{{answer_save_right}}</output>
     </div>
     <form action="{% url 'articles' %}">
-        <button class="text-sm font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 p-2 m-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit">Volver</button>
+        <button ion-button icon-only  type="submit"><ion-icon class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" name="arrow-undo-outline"></ion-icon></button>
     </form>
   </div>
 
