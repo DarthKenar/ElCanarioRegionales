@@ -1,0 +1,1 @@
+<input class="bg-amber-50 rounded-sm px-2 mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'articles_read_name' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#answer" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms">

@@ -1,0 +1,6 @@
+<select class="bg-amber-50 rounded-sm px-2" hx-get="{% url 'articles_read_size' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#answer" hx-swap="outerHTML" hx-trigger="change">
+    <option value="Empty"></option>
+    {% for size in sizes %}
+        <option value="{{size.id}}">{{size.size_name}}</option>
+    {% endfor %}
+</select>

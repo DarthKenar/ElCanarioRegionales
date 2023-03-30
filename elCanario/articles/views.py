@@ -40,9 +40,10 @@ def articles(request):
 
 ### Articles read
 def articles_read(request):
+    
+    context = {}
 
     datatype_dict = {
-        0: "selection_empty",
         1: "id",
         2: "article_name",
         3: "category_id",
@@ -55,61 +56,230 @@ def articles_read(request):
     }
 
     datatype_input = request.GET['datatype_input']
-    article_input = request.GET['article_input']
 
-    if article_input:
+    if datatype_input == datatype_dict[1]:
 
-        if datatype_input == datatype_dict[1]:
-            datatype = "ID"
-            articles = Articles.objects.filter(id__startswith=article_input)
-        elif datatype_input == datatype_dict[2]:
-            datatype = "Nombre"
-            articles = Articles.objects.filter(article_name__startswith=article_input)
-        elif datatype_input == datatype_dict[3]:
-            datatype = "Categoría"
-            category_object = Categories.objects.filter(category_name__startswith=article_input)
-            articles = Articles.objects.filter(category_id__in=category_object)
-        elif datatype_input == datatype_dict[4]:
-            datatype = "Color"
-            color_object = Colors.objects.filter(color_name__startswiths=article_input)
-            articles = Articles.objects.filter(color_id__in=color_object)
-        elif datatype_input == datatype_dict[5]:
-            datatype = "Material"
-            material_object = Materials.objects.filter(material_name__startswith=article_input)
-            articles = Articles.objects.filter(material_id__in=material_object)
-        elif datatype_input == datatype_dict[6]:
-            datatype = "Talle/Tamaño"
-            size_object = Sizes.objects.filter(size_name__startswith=article_input)
-            articles = Articles.objects.filter(size_id__in=size_object)
-        elif datatype_input == datatype_dict[7]:
-            datatype = "Precio de compra"
-            articles = Articles.objects.filter(buy_price__startswith=article_input)
-        elif datatype_input == datatype_dict[8]:
-            datatype = "Incremento"
-            articles = Articles.objects.filter(increase__startswith=article_input)
-        else: #datatype_input == datatype_dict[9]:
-            datatype = "Precio de venta"
-            articles = Articles.objects.filter(sell_price__startswith=article_input)
+        context["datatype_input"] = datatype_input
+        template = "articles_search_datatype_id.html"
+        context["datatype"] = "Id"
+
+    elif datatype_input == datatype_dict[2]:
+
+        context["datatype_input"] = datatype_input
+        template = "articles_search_datatype_name.html"
+        context["datatype"] = "Nombre"
         
-        if not articles:
-            """If article is not found"""
+    elif datatype_input == datatype_dict[3]:
 
-            template = 'articles_search_not_found.html'
-            context={"article_input":article_input, "articles_any": articles, "datatype_input": datatype }
-            return articles_deliver(request, template, context)
+        context["categories"] = Categories.objects.all()
+        context["datatype_input"] = datatype_input
+        template = "articles_search_datatype_category.html"
         
-        else:
+        # datatype = "Categoría"
+        # category_object = Categories.objects.filter(category_name__startswith=article_input)
+        # articles = Articles.objects.filter(category_id__in=category_object)
 
-            template="articles_search_right.html"
-            context={"article_input":article_input, "articles_any": articles, "datatype_input": datatype}
-            return articles_deliver(request, template, context)
-    
+    elif datatype_input == datatype_dict[4]:
+
+        context["colors"] = Colors.objects.all()
+        context["datatype_input"] = datatype_input
+        template = "articles_search_datatype_color.html"
+        
+        # datatype = "Color"
+        # color_object = Colors.objects.filter(color_name__startswiths=article_input)
+        # articles = Articles.objects.filter(color_id__in=color_object)
+
+    elif datatype_input == datatype_dict[5]:
+
+        context["materials"] = Materials.objects.all()
+        context["datatype_input"] = datatype_input
+        template = "articles_search_datatype_material.html"
+        
+        # datatype = "Material"
+        # material_object = Materials.objects.filter(material_name__startswith=article_input)
+        # articles = Articles.objects.filter(material_id__in=material_object)
+
+    elif datatype_input == datatype_dict[6]:
+
+        context["sizes"] = Sizes.objects.all()
+        context["datatype_input"] = datatype_input
+        template = "articles_search_datatype_size.html"
+        
+        # datatype = "Talle/Tamaño"
+        # size_object = Sizes.objects.filter(size_name__startswith=article_input)
+        # articles = Articles.objects.filter(size_id__in=size_object)
+
+    elif datatype_input == datatype_dict[7]:
+
+        context["datatype_input"] = datatype_input
+        template = "articles_search_datatype_buy_price.html"
+        context["datatype"] = "Precio de compra"
+
+    elif datatype_input == datatype_dict[8]:
+
+        context["datatype_input"] = datatype_input
+        template = "articles_search_datatype_increase.html"
+        context["datatype"] = "Incremento"
+
+    else: #datatype_input == datatype_dict[9]:
+
+        context["datatype_input"] = datatype_input
+        template = "articles_search_datatype_sell_price.html"
+        context["datatype"] = "Precio de venta"
+
+
+    return articles_deliver(request,template,context)
+
+def articles_read_id(request):
+
+    context = {}
+
+    search_input = request.GET["search_input"]
+
+    context["datatype"] = "Id"
+    context["articles_any"] = Articles.objects.filter(id__startswith=search_input)
+
+    template = "articles_search_right.html"
+    return articles_deliver(request, template, context)
+ 
+def articles_read_name(request):
+
+    context = {}
+
+    search_input = request.GET["search_input"]
+
+    context["datatype"] = "Nombre"
+    context["articles_any"] = Articles.objects.filter(article_name__startswith=search_input)
+
+    template = "articles_search_right.html"
+    return articles_deliver(request, template, context)
+ 
+def articles_read_category(request):
+
+    context = {}
+
+    search_input = request.GET["search_input"]
+    if search_input == "Empty":
+        context["articles_any"]  = Articles.objects.all()
     else:
 
-        template="articles_search_input_empty.html"
-        articles = Articles.objects.all()
-        context = {"articles_any": articles}
-        return articles_deliver(request, template, context)
+        context["datatype"] = "Categorías"
+        context["articles_any"] = Articles.objects.filter(category_id=get_object_or_404(Categories,id=search_input))
+
+    template = "articles_search_right.html"
+    return articles_deliver(request, template, context)
+ 
+def articles_read_color(request):
+
+    context = {}
+
+    search_input = request.GET["search_input"]
+    if search_input == "Empty":
+        context["articles_any"]  = Articles.objects.all()
+    else:
+
+        context["datatype"] = "Colores"
+        context["articles_any"] = Articles.objects.filter(color_id=get_object_or_404(Colors,id=search_input))
+
+    template = "articles_search_right.html"
+    return articles_deliver(request, template, context)
+
+def articles_read_material(request):
+
+    context = {}
+
+    search_input = request.GET["search_input"]
+    if search_input == "Empty":
+        context["articles_any"]  = Articles.objects.all()
+    else:
+
+        context["datatype"] = "Materiales"
+        context["articles_any"] = Articles.objects.filter(material_id=get_object_or_404(Materials,id=search_input))
+
+    template = "articles_search_right.html"
+    return articles_deliver(request, template, context)
+ 
+def articles_read_size(request):
+
+    context = {}
+
+    search_input = request.GET["search_input"]
+    if search_input == "Empty":
+        context["articles_any"]  = Articles.objects.all()
+    else:
+
+        context["datatype"] = "Tamaños"
+        context["articles_any"] = Articles.objects.filter(size_id=get_object_or_404(Sizes,id=search_input))
+
+    template = "articles_search_right.html"
+    return articles_deliver(request, template, context)
+ 
+def articles_read_buy_price(request):
+
+    context = {}
+
+    search_input = request.GET["search_input"]
+
+    context["datatype"] = "Precio de compra"
+    context["articles_any"] = Articles.objects.filter(buy_price__startswith=search_input)
+
+    template = "articles_search_right.html"
+    return articles_deliver(request, template, context)
+ 
+def articles_read_increase(request):
+
+    context = {}
+
+    search_input = request.GET["search_input"]
+
+    context["datatype"] = "Incremento"
+    context["articles_any"] = Articles.objects.filter(increase__startswith=search_input)
+
+    template = "articles_search_right.html"
+    return articles_deliver(request, template, context)
+ 
+def articles_read_sell_price(request):
+
+    context = {}
+
+    search_input = request.GET["search_input"]
+
+    context["datatype"] = "Precio de venta"
+    context["articles_any"] = Articles.objects.filter(sell_price__startswith=search_input)
+
+    template = "articles_search_right.html"
+    return articles_deliver(request, template, context)
+ 
+# def articles_read(request):
+
+
+
+    
+#     article_input = request.GET['article_input']
+
+#     if article_input:
+
+
+        
+#         if not articles:
+#             """If article is not found"""
+
+#             template = 'articles_search_not_found.html'
+#             context={"article_input":article_input, "articles_any": articles, "datatype_input": datatype }
+#             return articles_deliver(request, template, context)
+        
+#         else:
+
+#             template="articles_search_right.html"
+#             context={"article_input":article_input, "articles_any": articles, "datatype_input": datatype}
+#             return articles_deliver(request, template, context)
+    
+#     else:
+
+#         template="articles_search_input_empty.html"
+#         articles = Articles.objects.all()
+#         context = {"articles_any": articles}
+#         return articles_deliver(request, template, context)
     
 ### Articles create
 def articles_create(request):

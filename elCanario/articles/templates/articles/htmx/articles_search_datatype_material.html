@@ -1,0 +1,6 @@
+<select class="bg-amber-50 rounded-sm px-2" hx-get="{% url 'articles_read_material' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#answer" hx-swap="outerHTML" hx-trigger="change">
+    <option value="Empty"></option>
+    {% for material in materials %}
+        <option value="{{material.id}}">{{material.material_name}}</option>
+    {% endfor %}
+</select>
