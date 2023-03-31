@@ -55,6 +55,7 @@ def articles_read(request):
         9: "sell_price"
     }
 
+    context["articles_any"] = Articles.objects.all()
     datatype_input = request.GET['datatype_input']
 
     if datatype_input == datatype_dict[1]:
@@ -135,11 +136,15 @@ def articles_read_id(request):
     context = {}
 
     search_input = request.GET["search_input"]
-
+    context["search_input"] = search_input
     context["datatype"] = "Id"
-    context["articles_any"] = Articles.objects.filter(id__startswith=search_input)
-
     template = "articles_search_right.html"
+
+    if is_empty(search_input):
+        context["articles_any"] = Articles.objects.all()
+    else:
+        context["articles_any"] = Articles.objects.filter(id__startswith=search_input)
+
     return articles_deliver(request, template, context)
  
 def articles_read_name(request):
@@ -147,11 +152,18 @@ def articles_read_name(request):
     context = {}
 
     search_input = request.GET["search_input"]
-
+    context["search_input"] = search_input
     context["datatype"] = "Nombre"
-    context["articles_any"] = Articles.objects.filter(article_name__startswith=search_input)
-
+    
     template = "articles_search_right.html"
+
+    if is_empty(search_input):
+        
+        context["articles_any"] = Articles.objects.all()
+    else:
+        
+        context["articles_any"] = Articles.objects.filter(article_name__startswith=search_input)
+
     return articles_deliver(request, template, context)
  
 def articles_read_category(request):
@@ -159,7 +171,9 @@ def articles_read_category(request):
     context = {}
 
     search_input = request.GET["search_input"]
+    context["search_input"] = search_input
     if search_input == "Empty":
+        print("CATEGORIAEMPTY"*100)
         context["articles_any"]  = Articles.objects.all()
     else:
 
@@ -174,6 +188,7 @@ def articles_read_color(request):
     context = {}
 
     search_input = request.GET["search_input"]
+    context["search_input"] = search_input
     if search_input == "Empty":
         context["articles_any"]  = Articles.objects.all()
     else:
@@ -189,6 +204,7 @@ def articles_read_material(request):
     context = {}
 
     search_input = request.GET["search_input"]
+    context["search_input"] = search_input
     if search_input == "Empty":
         context["articles_any"]  = Articles.objects.all()
     else:
@@ -204,6 +220,7 @@ def articles_read_size(request):
     context = {}
 
     search_input = request.GET["search_input"]
+    context["search_input"] = search_input
     if search_input == "Empty":
         context["articles_any"]  = Articles.objects.all()
     else:
@@ -219,9 +236,13 @@ def articles_read_buy_price(request):
     context = {}
 
     search_input = request.GET["search_input"]
-
+    context["search_input"] = search_input
     context["datatype"] = "Precio de compra"
-    context["articles_any"] = Articles.objects.filter(buy_price__startswith=search_input)
+    
+    if is_empty(search_input):
+        context["articles_any"] = Articles.objects.all()
+    else:
+        context["articles_any"] = Articles.objects.filter(buy_price__startswith=search_input)
 
     template = "articles_search_right.html"
     return articles_deliver(request, template, context)
@@ -231,9 +252,13 @@ def articles_read_increase(request):
     context = {}
 
     search_input = request.GET["search_input"]
-
+    context["search_input"] = search_input
     context["datatype"] = "Incremento"
-    context["articles_any"] = Articles.objects.filter(increase__startswith=search_input)
+    
+    if is_empty(search_input):
+        context["articles_any"] = Articles.objects.all()
+    else:
+        context["articles_any"] = Articles.objects.filter(increase__startswith=search_input)
 
     template = "articles_search_right.html"
     return articles_deliver(request, template, context)
@@ -243,11 +268,16 @@ def articles_read_sell_price(request):
     context = {}
 
     search_input = request.GET["search_input"]
-
+    context["search_input"] = search_input
     context["datatype"] = "Precio de venta"
-    context["articles_any"] = Articles.objects.filter(sell_price__startswith=search_input)
-
     template = "articles_search_right.html"
+
+    if is_empty(search_input):
+        context["articles_any"] = Articles.objects.all()
+    else:
+        context["articles_any"] = Articles.objects.filter(sell_price__startswith=search_input)
+
+    
     return articles_deliver(request, template, context)
  
 # def articles_read(request):
