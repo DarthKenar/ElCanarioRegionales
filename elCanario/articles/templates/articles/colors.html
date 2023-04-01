@@ -11,6 +11,9 @@
         <input class="text-sm font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-1 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" value="Guardar" hx-get="{% url 'color_save' %}" hx-trigger="click" hx-target="#colors_table" hx-swap="outerHTML" hx-select="#colors_table" hx-include="[name='color_input']">
     </div>
     
-    {% include 'colors_table.html' %}
+    <div id="colors_table">
+        {% include 'colors_table.html' %}
+    </div>
+    
 
 {% endblock %}

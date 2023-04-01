@@ -10,7 +10,9 @@
         <input class="bg-yellow-50 rounded-sm px-2" type="text" name="category_input">
         <input class="text-sm font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-1 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" value="Guardar" hx-get="{% url 'category_save' %}" hx-trigger="click" hx-target="#categories_table" hx-swap="outerHTML" hx-select="#categories_table" hx-include="[name='category_input']">
     </div>
+    <div id="categories_table">
+        {% include 'categories_table.html' %}
+    </div>
     
-    {% include 'categories_table.html' %}
 
 {% endblock %}
