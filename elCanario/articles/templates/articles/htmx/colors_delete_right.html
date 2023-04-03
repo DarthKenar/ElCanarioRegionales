@@ -1,10 +1,3 @@
-{% extends './header.html' %}
-{% load static %}
-{% block head_two %}
-    <title>Colores - Canario Regionales</title>
-{% endblock %}
-{% block content_two %}
-
 <div id="colors_table">
 
     <div class="grid grid-cols-2 place-content-center bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md  border-2 p-4 m-8 shadow-slate-600 shadow-md border-separate border-amber-100 transition duration-300 hover:shadow-slate-600 hover:shadow-sm" >
@@ -15,17 +8,20 @@
         </div>
     
         <div class="grid place-content-center gap-4">
-            <output></output>
+            <output class="text-green-600" type="text">Se ha eliminado correctamente el color: {{color_deleted_name}} </output>
         </div>
     
     </div>
     <div >
         {% include 'colors_table.html' %}
     </div>
-</div>
-
-{% endblock %}
+    {% if articles_any %}
 
 
+    <p>Color {{color_deleted_name}} eliminado para los siguientes arículos:</p>
     
+    {% include 'articles_table.html' %}
+        
 
+{% endif %}
+</div>

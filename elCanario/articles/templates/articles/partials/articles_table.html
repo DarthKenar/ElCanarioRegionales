@@ -1,77 +1,77 @@
 {% if articles_any %}
-    <table class="table-auto font-mono  text-red-900  shadow-slate-600 shadow-md bg-amber-200 border-separate border-2 border-amber-100 rounded-md p-4 m-8 transition duration-300 hover:shadow-slate-600 hover:shadow-sm">
-        <thead class="p-3 m-3">
-            <tr class="bg-amber-300">
-                <th class="m-4 ">Id</th>
-                <th class="m-4 ">Nombre</th>
-                <th class="m-4 ">Categoría</th>
-                <th class="m-4 ">Color</th>
-                <th class="m-4 ">Material</th>
-                <th class="m-4 ">Talle</th>
-                <th class="m-4 ">Precio de Compra</th>
-                <th class="m-4 ">Incremento</th>
-                <th class="m-4 ">Precio de Venta</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody class="bg-amber-100">
-            {% for article in articles_any %}
-                <tr>
-                    
-                    <td class="m-4 px-12 " id="{{article.id}}">{{article.id}}</td>
+<table class="table-auto font-mono  text-red-900  shadow-slate-600 shadow-md bg-amber-200 border-separate border-2 border-amber-100 rounded-md p-4 m-8 transition duration-300 hover:shadow-slate-600 hover:shadow-sm">
+    <thead class="p-3 m-3">
+        <tr class="bg-amber-300">
+            <th class="m-4 ">Id</th>
+            <th class="m-4 ">Nombre</th>
+            <th class="m-4 ">Categoría</th>
+            <th class="m-4 ">Color</th>
+            <th class="m-4 ">Material</th>
+            <th class="m-4 ">Talle</th>
+            <th class="m-4 ">Precio de Compra</th>
+            <th class="m-4 ">Incremento</th>
+            <th class="m-4 ">Precio de Venta</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody class="bg-amber-100">
+        {% for article in articles_any %}
+            <tr>
+                
+                <td class="m-4 px-12 " id="{{article.id}}">{{article.id}}</td>
 
-                    <td class="m-4 px-12 ">{{article.article_name}}</td>
-                    
+                <td class="m-4 px-12 ">{{article.article_name}}</td>
+                
 
-                    <td class="m-4 px-12 ">{{article.category_id}}</td>
-                    
+                <td class="m-4 px-12 ">{{article.category_id}}</td>
+                
 
-                    {% if article.color_id == None %}
-                    <td class="m-4 px-12 ">-</td>
-                    {% else %}
-                    <td class="m-4 px-12 ">{{article.color_id}}</td>
-                    {% endif %}
-                    
+                {% if article.color_id == None %}
+                <td class="m-4 px-12 ">-</td>
+                {% else %}
+                <td class="m-4 px-12 ">{{article.color_id}}</td>
+                {% endif %}
+                
 
-                    {% if article.material_id == None %}
-                    <td class="m-4 px-12 ">-</td>
-                    {% else %}
-                    <td class="m-4 px-12 ">{{article.material_id}}</td>
-                    {% endif %}
-                    
+                {% if article.material_id == None %}
+                <td class="m-4 px-12 ">-</td>
+                {% else %}
+                <td class="m-4 px-12 ">{{article.material_id}}</td>
+                {% endif %}
+                
 
-                    {% if article.size_id == None %}
-                    <td class="m-4 px-12 ">-</td>
-                    {% else %}
-                    <td class="m-4 px-12 ">{{article.size_id}}</td>
-                    {% endif %}
-                    
+                {% if article.size_id == None %}
+                <td class="m-4 px-12 ">-</td>
+                {% else %}
+                <td class="m-4 px-12 ">{{article.size_id}}</td>
+                {% endif %}
+                
 
-                    <td class="m-4 px-12  tabular-nums slashed-zero">{{article.buy_price}}</td>
-                    <td class="m-4 px-12  tabular-nums slashed-zero">{{article.increase}}</td>
-                    <td class="m-4 px-12  tabular-nums slashed-zero">{{article.sell_price}}</td>
-                    <td>
-                        <form action="{% url 'articles_update' id=article.id %}" method="GET">
-                            <button ion-button icon-only type="submit">
-                                <ion-icon name="create-outline" 
+                <td class="m-4 px-12  tabular-nums slashed-zero">{{article.buy_price}}</td>
+                <td class="m-4 px-12  tabular-nums slashed-zero">{{article.increase}}</td>
+                <td class="m-4 px-12  tabular-nums slashed-zero">{{article.sell_price}}</td>
+                <td>
+                    <form action="{% url 'articles_update' id=article.id %}" method="GET">
+                        <button ion-button icon-only type="submit">
+                            <ion-icon name="create-outline" 
+                            
+                            class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer"
+                            ></ion-icon>
+                        </button>
+                            
+                    </form>
+                    <form hx-delete="{% url 'articles_delete' id=article.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#search_answer_table" hx-confirm="¿Está seguro de que desea eliminar el articulo: {{article.article_name}}?">
+                        {% csrf_token %}
+                        <button type="submit" ion-button icon-only >
+                            <ion-icon name="trash-outline" 
                                 
-                                class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer"
-                                ></ion-icon>
-                            </button>
-                              
-                        </form>
-                        <form hx-delete="{% url 'articles_delete' id=article.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#search_answer_table" hx-confirm="¿Está seguro de que desea eliminar el articulo: {{article.article_name}}?">
-                            {% csrf_token %}
-                            <button type="submit" ion-button icon-only >
-                                <ion-icon name="trash-outline" 
-                                    
-                                class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer"
-                                ></ion-icon>
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                            class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer"
+                            ></ion-icon>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endif %}
