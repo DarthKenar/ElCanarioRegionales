@@ -76,16 +76,23 @@ htmx_urlpatterns = [
 
         #ARTICLES CATEGORIES
     path('articles/categories/save', articles_views.articles_categories_save, name="category_save"),
+    path('articles/categories/update/<int:id>', articles_views.articles_categories_update, name="category_update"),
+    path('articles/categories/delete/<int:id>', articles_views.articles_categories_delete, name="category_delete"),
 
         #ARTICLES COLORS
     path('articles/colors/save', articles_views.articles_colors_save, name="color_save"),
+    path('articles/colors/update/<int:id>', articles_views.articles_colors_update, name="color_update"),
+    path('articles/colors/delete/<int:id>', articles_views.articles_colors_delete, name="color_delete"),
 
         #ARTICLES MATERIALS
     path('articles/materials/save', articles_views.articles_materials_save, name="material_save"),
+    path('articles/materials/update/<int:id>', articles_views.articles_materials_update, name="material_update"),
+    path('articles/materials/delete/<int:id>', articles_views.articles_materials_delete, name="material_delete"),
 
         #ARTICLES SIZES
     path('articles/sizes/save', articles_views.articles_sizes_save, name="size_save"),
-    
+    path('articles/sizes/update/<int:id>', articles_views.articles_sizes_update, name="size_update"),
+    path('articles/sizes/delete/<int:id>', articles_views.articles_sizes_delete, name="size_delete"),
 ]
 urlpatterns += htmx_urlpatterns
 

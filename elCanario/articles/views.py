@@ -158,10 +158,10 @@ def articles_read_name(request):
     template = "articles_search_right.html"
 
     if is_empty(search_input):
-        
+        print("EMPTY"*100)
         context["articles_any"] = Articles.objects.all()
     else:
-        
+        print("FULL"*100)
         context["articles_any"] = Articles.objects.filter(article_name__startswith=search_input)
 
     return articles_deliver(request, template, context)
@@ -279,38 +279,7 @@ def articles_read_sell_price(request):
 
     
     return articles_deliver(request, template, context)
- 
-# def articles_read(request):
 
-
-
-    
-#     article_input = request.GET['article_input']
-
-#     if article_input:
-
-
-        
-#         if not articles:
-#             """If article is not found"""
-
-#             template = 'articles_search_not_found.html'
-#             context={"article_input":article_input, "articles_any": articles, "datatype_input": datatype }
-#             return articles_deliver(request, template, context)
-        
-#         else:
-
-#             template="articles_search_right.html"
-#             context={"article_input":article_input, "articles_any": articles, "datatype_input": datatype}
-#             return articles_deliver(request, template, context)
-    
-#     else:
-
-#         template="articles_search_input_empty.html"
-#         articles = Articles.objects.all()
-#         context = {"articles_any": articles}
-#         return articles_deliver(request, template, context)
-    
 ### Articles create
 def articles_create(request):
 
@@ -708,6 +677,22 @@ def articles_categories_save(request):
             template = "categories_table_duplicate_error.html"
             return articles_deliver(request, template, context)
 
+def articles_categories_update(request, id):
+
+    pass
+
+def articles_categories_delete(request, id):
+
+    category_to_delete = get_object_or_404(Categories, id = id)
+    context = {}
+    context["category_deleted_name"] = category_to_delete.category_name
+    category_to_delete.delete()
+    template = "categories_delete_right.html"
+
+    categories = Categories.objects.all()
+    context["categories"] = categories
+
+    return articles_deliver(request, template, context)
 
 ## Articles colors SECTION
 def articles_colors(request):
@@ -737,15 +722,52 @@ def articles_colors_save(request):
             object.save()
             template = "colors_table_right.html"
             return articles_deliver(request, template, context)
+        
         except Exception as e:
+            
             print("-"*100)
             print(f"ESTE ES EL ERROR -----------> {e.__str__} ")
             print("-"*100)
             template = "colors_table_duplicate_error.html"
             return articles_deliver(request, template, context)
         
+def articles_colors_update(request, id):
+    pass
+
+def articles_colors_delete(request, id):
+
+    color_to_delete = get_object_or_404(Colors, id = id)
+    context = {}
+    context["color_deleted_name"] = color_to_delete.color_name
+    template = "colors_delete_right.html"
+    colors = Colors.objects.all()
+    context["colors"] = colors
+    
+    try:
+
+        color_to_delete.delete()
+
+    except Exception as e:
+
+        print("-"*10,f"{e}","-"*10)
+        articles = Articles.objects.filter(color_id = color_to_delete)
+        print(articles,"*"*100)
+        context["articles_any"] = articles
+
+        if articles:
+
+            for article in articles:
+
+                article.color_id = None
+                article.save()
+
+        color_to_delete.delete()
+
+    return articles_deliver(request, template, context)
+
 ## Articles materials SECTION
 def articles_materials(request):
+
     template = "materials.html"
     materials = Materials.objects.all()
     context = {"materials": materials}
@@ -778,6 +800,22 @@ def articles_materials_save(request):
             print("-"*100)
             template = "materials_table_duplicate_error.html"
             return articles_deliver(request, template, context)
+        
+def articles_materials_update(request, id):
+    pass
+
+def articles_materials_delete(request, id):
+
+    material_to_delete = get_object_or_404(Materials, id = id)
+    context = {}
+    context["material_deleted_name"] = material_to_delete.color_name
+    template = "materials_delete_right.html"
+    materials = Materials.objects.all()
+    context["materials"] = materials
+
+    material_to_delete.delete()
+
+    return articles_deliver(request, template, context)
 
 ## Articles sizes SECTION
 
@@ -814,6 +852,22 @@ def articles_sizes_save(request):
             print("-"*100)
             template = "sizes_table_duplicate_error.html"
             return articles_deliver(request, template, context)
+        
+def articles_sizes_update(request, id):
+    pass
+
+def articles_sizes_delete(request, id):
+
+    size_to_delete = get_object_or_404(Sizes, id = id)
+    context = {}
+    context["size_deleted_name"] = size_to_delete.size_name
+    template = "sizes_delete_right.html"
+    sizes = Sizes.objects.all()
+    context["sizes"] = sizes
+
+    size_to_delete.delete()
+
+    return articles_deliver(request, template, context)
 
 # CUSTOMERS SECTION
 
