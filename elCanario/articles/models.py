@@ -1,111 +1,88 @@
 from django.db import models
-#from ..authentication import models as auth_models
+from django.core.exceptions import ValidationError
+from django.core.validators import MinValueValidator, MaxValueValidator
 # Create your models here.
 class Categories(models.Model):
-
-    category_name = models.CharField(verbose_name="Categoría", max_length=30, unique=True)
-
-    class Meta:
-
-        verbose_name = "Categoría"
-        verbose_name_plural = "Categorías"
+    name = models.CharField(max_length=100)
 
     def __str__(self) -> str:
-
-        return f"{self.category_name}"
-
-
-class Colors(models.Model):
-
-    color_name = models.CharField(verbose_name="Color", max_length=30, unique=True)
-
-    def __str__(self) -> str:
-
-        return f"{self.color_name}"
+        return f'{self.name}'
     
     class Meta:
+        verbose_name = 'Categoría'
+        verbose_name_plural = 'Categorías'
+        ordering = ['name']
 
-        verbose_name = "Color"
-        verbose_name_plural = "Colores"
-    
-
-class Materials(models.Model):
-
-    material_name = models.CharField(verbose_name="Material", max_length=30, unique=True)
-
-    def __str__(self) -> str:
-
-        return f"{self.material_name}"
-    
-    class Meta:
-
-        verbose_name = "Material"
-        verbose_name_plural = "Materiales"
-
-
-class Sizes(models.Model):
-
-    size_name = models.CharField(verbose_name="Talle", max_length=32, unique=True)
+class Values(models.Model):
+    name = models.CharField(max_length=100)
+    category_id = models.ForeignKey(Categories,on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-
-        return f"{self.size_name}"
+        return f'categoria: {self.category_id.name}: valor: {self.name}'
     
     class Meta:
-
-        verbose_name = "Talle"
-        verbose_name_plural = "Talles"
-
+        unique_together = ('name', 'category_id')
+        verbose_name = 'Valor'
+        verbose_name_plural = 'Valores'
+        ordering = ['name']
 
 class Articles(models.Model):
+    name = models.CharField(verbose_name="Nombre",max_length=100)
+    characteristics_id = models.ManyToManyField(Values,related_name='characteristics_id', blank=True, through='ArticlesValues')
+    buy_price = models.DecimalField(verbose_name="Precio de compra", max_digits=10, decimal_places=2, validators=[MinValueValidator(0.0)])
+    increase = models.DecimalField(verbose_name="Incremento", max_digits=10, decimal_places=2, validators=[MinValueValidator(0.0)])
+    sell_price = models.DecimalField(verbose_name="Precio de venta", max_digits=10, decimal_places=2, validators=[MinValueValidator(0.0)])
 
-    article_name = models.CharField(verbose_name="Nombre", max_length=32)
-    category_id = models.ForeignKey(Categories, verbose_name="Categoría", max_length=32,blank=True, null=True ,on_delete=models.DO_NOTHING)
-    color_id = models.ForeignKey(Colors, verbose_name="Color", max_length=32,blank=True , null=True,on_delete=models.DO_NOTHING)
-    material_id = models.ForeignKey(Materials, verbose_name="Material", max_length=32,blank=True, null=True , on_delete=models.DO_NOTHING)
-    size_id = models.ForeignKey(Sizes, verbose_name="Talle", max_length=32,blank=True, null=True , on_delete=models.DO_NOTHING)
-    buy_price = models.FloatField(verbose_name="$ COMPRA")
-    increase = models.FloatField(verbose_name="Incremento del Precio", help_text=f"Numero que hace referencia al porcentaje de incremento", default=1.7)
-    sell_price = models.FloatField(verbose_name="$ VENTA", help_text="Es el resultante del precio de compra multiplicado su incremento.")
+
+    def __str__(self) -> str:
+        return f"{self.name}"
 
     class Meta:
+        verbose_name = 'Artículo'
+        verbose_name_plural = 'Artículos'
+        ordering = ['name']
 
-        verbose_name = "Artículo"
-        verbose_name_plural = "Artículos"
-        ordering = ['article_name','category_id']
-    
-    def description(self):
+class ArticlesValues(models.Model):
+    article_id = models.ForeignKey(Articles,on_delete=models.CASCADE)
+    category_id = models.ForeignKey(Categories, on_delete=models.CASCADE)
+    value_id = models.ForeignKey(Values,on_delete=models.CASCADE)
 
-        return f"{self.article_name} , {self.category_id}"
-    
-    def __str__(self) -> str:
+    class Meta:
+        unique_together = ('article_id', 'category_id')
+        verbose_name = "Valores y Categorías de Artículo"
+        verbose_name_plural = "Valores y Categorías de Artículos"
 
-        return self.description()
+    def clean(self) -> None:
 
+        if self.category_id != self.value_id.category_id:
+            raise ValidationError(f"Value ({self.value_id.name}) does not correspond to category ({self.category_id.name})")
+
+####################
 
 class Customers(models.Model):
+    name = models.CharField(max_length=100)
+    phone_number = models.CharField(max_length=20)
+    address = models.CharField(max_length=200)
+    email = models.EmailField(max_length=254)
+    total_purchased = models.DecimalField(max_digits=10, decimal_places=2, editable=False, blank=True, null=True)
 
-    customer_name = models.CharField(verbose_name="Cliente", max_length=32)
-    phone_number = models.CharField(verbose_name="Numero de Teléfono", max_length=32, help_text="Este es un campo de texto en el cual se debe ingresar el numero de teléfono del cliente")
-    address = models.CharField(verbose_name="Domicilio", max_length=128,blank=True, null=True ,default="Avenida siempre viva", help_text="Este es un campo de texto en el cual se debe ingresar el domicilio del cliente")
-    email = models.EmailField(verbose_name="Correo Electrónico",blank=True, null=True , default="nombre@correo.com")
-    total_purchased = models.FloatField(verbose_name="Total Comprado", editable=False, blank=True,null=True, default=0)
-
+    def __str__(self):
+        return self.nombre
     class Meta:
 
         verbose_name = "Cliente"
         verbose_name_plural = "Clientes"
-        ordering = ['customer_name',]
+        ordering = ['name']
     
     def __str__(self) -> str:
 
-        return f"{self.customer_name}, {self.phone_number}"
+        return f"{self.name}, {self.phone_number}"
 
 
 class Stocks(models.Model):
     
-    article_id = models.ForeignKey(Articles,verbose_name="Artículo", on_delete=models.CASCADE, unique=True) 
-    stock = models.PositiveSmallIntegerField(verbose_name="Existencias") #Values from 0 to 32767
+    article_id = models.OneToOneField(Articles,verbose_name="Artículo", on_delete=models.CASCADE)
+    stock = models.PositiveSmallIntegerField(verbose_name="Existencias", default=0) #Values from 0 to 32767
 
     class Meta:
 
@@ -115,36 +92,41 @@ class Stocks(models.Model):
     
     def __str__(self) -> str:
 
-        return f"{self.article_id}, {self.stock}"
+        return f"{self.article_id.name}, {self.stock}"
 
 
 class Promotions(models.Model):
     
-    promotion_name = models.CharField(verbose_name="Nombre",max_length=32)
-    articles_id = models.ForeignKey(Articles, verbose_name="Productos", on_delete=models.CASCADE)
-    discount = models.FloatField(verbose_name="Descuento")
-    sell_price = models.FloatField(verbose_name="$ VENTA")
-
+    promotion_name = models.CharField(verbose_name="Nombre",max_length=100, unique=True)
+    articles_id = models.ManyToManyField(Articles, verbose_name="Artículos", through="PromotionsArticles")
+    discount = models.DecimalField(verbose_name="Descuento", max_digits=3, decimal_places=2, validators=[MinValueValidator(0.0), MaxValueValidator(100.0)])
+    sell_price = models.DecimalField(verbose_name="$ VENTA", max_digits=10, decimal_places=2, validators=[MinValueValidator(0.0)])
+    remainder = models.SmallIntegerField(verbose_name="Cantidad restante", blank=True, null=True)
     class Meta:
 
+        
         verbose_name = "Promoción"
         verbose_name_plural = "Promociones"
-        ordering = ['promotion_name','articles_id']
+        ordering = ['sell_price']
     
     def __str__(self) -> str:
 
         return f"{self.promotion_name}, {self.articles_id}, {self.discount}, {self.sell_price}"
 
+class PromotionsArticles(models.Model):
+    article_id = models.ForeignKey(Articles,on_delete=models.CASCADE)
+    promotion_id = models.ForeignKey(Promotions, on_delete=models.CASCADE)
 
 class Orders(models.Model):
 
     customer_id = models.ForeignKey(Customers,verbose_name="Cliente", on_delete=models.CASCADE)
-    article_id = models.ForeignKey(Articles, verbose_name="Artículos", on_delete=models.CASCADE)
+    articles_id = models.ManyToManyField(Articles, verbose_name="Artículos", through="OrdersArticles")
     articles_quantity = models.PositiveSmallIntegerField(verbose_name="Cantidad de Artículos", editable=False, blank=True, null=True)
-    total_pay = models.PositiveIntegerField(verbose_name="Total a pagar", editable=False, blank=True, null=True)
-    creation_date = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
+    total_pay = models.DecimalField(verbose_name="Total a pagar", max_digits=10, decimal_places=2, editable=False, blank=True, null=True)
+    details = models.TextField(verbose_name="Detalles", blank=True, null=True)
+    creation_date = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación", editable=False)
+    updated_date = models.DateTimeField(auto_now=True,verbose_name="Fecha de ultima modificación", editable=False)
     delivery_status = models.BooleanField(verbose_name="Estado de la entrega", default=False)
-    #created_by = models.ForeignKey(to=auth_models.User,verbose_name="Cargado por") (NO SE PUEDE HCER ESTO YA QUE TRAE LA INFORMACION DESDE OTRA APP)
 
     class Meta:
 
@@ -154,24 +136,25 @@ class Orders(models.Model):
     
     def __str__(self) -> str:
 
-        return f"{self.customer_id}, {self.article_id}, {self.articles_quantity}"
+        return f"nombre: {self.customer_id.name}, tel: {self.customer_id.phone_number}, total: {self.total_pay}, Estado: {self.delivery_status}"
 
 
+class OrdersArticles(models.Model):
+    article_id = models.ForeignKey(Articles,on_delete=models.CASCADE)
+    orders_id = models.ForeignKey(Orders, on_delete=models.CASCADE)
 class Expenses(models.Model):
 
-    expense_name = models.CharField(verbose_name="Nombre", max_length=32)
-    description = models.CharField(verbose_name="Descripcion", max_length=128, blank=True, null=True, help_text="breve descripción del gasto si fuese necesario. *Campo NO obligatorio")
-    quantity = models.PositiveSmallIntegerField(verbose_name="Cantidad", default=1, help_text="Cantidad de productos comprados")
-    total_cost = models.FloatField(verbose_name="Precio", help_text="Precio de compra del producto adquirido.")
+    name = models.CharField(verbose_name="Nombre", max_length=32)
+    description = models.TextField(verbose_name="Descripcion", max_length=128, blank=True, null=True)
+    quantity = models.PositiveSmallIntegerField(verbose_name="Cantidad", default=1)
+    total_cost = models.DecimalField(verbose_name="Precio", max_digits=10, decimal_places=2)
 
     class Meta:
 
         verbose_name = "Gasto"
         verbose_name_plural = "Gastos"
-        ordering = ['total_cost','expense_name']
+        ordering = ['total_cost']
     
     def __str__(self) -> str:
 
-        return f"{self.expense_name},{self.description},{self.quantity},{self.total_cost}"
-    
-"""La idea que no se imprementar es que cuando un cliente compre, a este se le suma en "total_comprado" el total gastado por el cliente."""
+        return f"{self.name},{self.description},{self.quantity},{self.total_cost}"
