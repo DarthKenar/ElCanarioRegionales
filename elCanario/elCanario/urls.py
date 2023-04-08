@@ -15,52 +15,49 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-# from articles import views as articles_views
-# from authentication import views as auth_views
-# from django.conf import settings
+from articles import views as articles_views
+from authentication import views as auth_views
+from django.conf import settings
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),]
+    path('admin/', admin.site.urls),
 
-#     #LOGIN SECTION & HOME
-#     path('', auth_views.login_view, name="login"),
-#     path('login_search/', auth_views.search_user, name="login_search"),
-#     path('home', auth_views.home, name="home"),
+    #LOGIN SECTION & HOME
+    path('', auth_views.login_view, name="login"),
+    path('login_search/', auth_views.search_user, name="login_search"),
+    path('home', auth_views.home, name="home"),
 
-#     # ORDERS SECTION
-#     path('orders', articles_views.orders, name="orders"),
+    # ORDERS SECTION
+    path('orders', articles_views.orders, name="orders"),
 
-#     ## ARTICLES SECTIONS
-#     path('articles', articles_views.articles, name="articles"),
+    ## ARTICLES SECTIONS
+    path('articles', articles_views.articles, name="articles"),
 
-#     path('articles_create', articles_views.articles_create, name="articles_create"),
-#     path('articles_read', articles_views.articles_read, name="articles_read"),
-#     path('articles_update/<int:id>', articles_views.articles_update, name="articles_update"),
-#     path('articles_delete/<int:id>', articles_views.articles_delete, name="articles_delete"),
+    path('articles_create', articles_views.articles_create, name="articles_create"),
+    path('articles_read', articles_views.articles_read, name="articles_read"),
+    path('articles_update/<int:id>', articles_views.articles_update, name="articles_update"),
+    path('articles_delete/<int:id>', articles_views.articles_delete, name="articles_delete"),
 
-#     path('articlesCategories', articles_views.articles_categories, name="categories"),
+    path('articlesCategories', articles_views.articles_categories, name="categories"),
 #     path('articlesColors', articles_views.articles_colors, name="colors"),
 #     path('articlesMaterials', articles_views.articles_materials, name="materials"),
 #     path('articlesSizes', articles_views.articles_sizes, name="sizes"),
 
-#     #CUSTOMERS
-#     path('customers', articles_views.customers, name="customers"),
+    #CUSTOMERS
+    path('customers', articles_views.customers, name="customers"),
     
-# ]
 
-# htmx_urlpatterns = [
+]
+htmx_urlpatterns = [
 #     #ARTICLES SETCIONS
 #         ##ARTICLUES READ FUNCTIONS
-#     path('articles_read_id', articles_views.articles_read_id, name="articles_read_id"),
-#     path('articles_read_name', articles_views.articles_read_name, name="articles_read_name"),
-#     path('articles_read_category', articles_views.articles_read_category, name="articles_read_category"),
-#     path('articles_read_color', articles_views.articles_read_color, name="articles_read_color"),
-#     path('articles_read_material', articles_views.articles_read_material, name="articles_read_material"),
-#     path('articles_read_size', articles_views.articles_read_size, name="articles_read_size"),
-#     path('articles_read_buy_price', articles_views.articles_read_buy_price, name="articles_read_buy_price"),
-#     path('articles_read_increase', articles_views.articles_read_increase, name="articles_read_increase"),
-#     path('articles_read_sell_price', articles_views.articles_read_sell_price, name="articles_read_sell_price"),
+    path('articles_read_id', articles_views.articles_read_id, name="articles_read_id"),
+    path('articles_read_name', articles_views.articles_read_name, name="articles_read_name"),
+    path('articles_read_values',articles_views.articles_read_values, name="articles_read_values"),
+    path('articles_read_buy_price', articles_views.articles_read_buy_price, name="articles_read_buy_price"),
+    path('articles_read_increase', articles_views.articles_read_increase, name="articles_read_increase"),
+    path('articles_read_sell_price', articles_views.articles_read_sell_price, name="articles_read_sell_price"),
 
 #         ##ARTICLES CREATE FUNCTIONS
 #     path('article_create_name_check',articles_views.articles_create_name_check, name="name_check"),
@@ -93,8 +90,8 @@ urlpatterns = [
 #     path('articles/sizes/save', articles_views.articles_sizes_save, name="size_save"),
 #     path('articles/sizes/update/<int:id>', articles_views.articles_sizes_update, name="size_update"),
 #     path('articles/sizes/delete/<int:id>', articles_views.articles_sizes_delete, name="size_delete"),
-# ]
-# urlpatterns += htmx_urlpatterns
+]
+urlpatterns += htmx_urlpatterns
 
 
 # #STATIC AND IMAGES

@@ -10,7 +10,7 @@ class AdminCategories(admin.ModelAdmin):
     ordering = ['name']
 
 class AdminValues(admin.ModelAdmin):
-    list_display=['name', 'category_id']
+    list_display=['category_id','name']
 
 class AdminArticles(admin.ModelAdmin):
     list_display=['name','buy_price','increase','sell_price']

@@ -1,187 +1,299 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from articles.models import Categories, Values, Articles, ArticlesValues, Customers, Stocks, Promotions, Orders, Expenses
-from django.http import HttpResponse
-from django.views.decorators.csrf import csrf_protect
-from .utils import *
-
-
+# from django.shortcuts import render, get_object_or_404, redirect
+# from articles.models import Categories, Values, Articles, ArticlesValues, Customers, Stocks, Promotions, Orders, Expenses
+# from django.http import HttpResponse
+# from django.contrib.auth.decorators import login_required
+# from django.views.decorators.csrf import csrf_protect
+# from .utils import *
 
 # # ORDERS SECTION
-def orders(request):
-    return render_login_required(request, template_name="orders.html",context={})
+# @login_required
+# def orders_deliver(request, template: str,context: dict): 
+#     """
+#     This function is used for all functions that require the user to be logged in.
+#     This function is used by all the Orders section functions that render a template.
+#     """
+
+#     return render(request, template, context)
+
+# def orders(request):
+#     return render(request, template_name="orders.html",context={})
 
 # # ARTICLES SECTION
+# @login_required
+# def articles_deliver(request, template: str,context: dict): 
+#     """
+#     This function is used for all functions that require the user to be logged in.
+#     This function is used by all the Articles section functions that render a template.
+#     """
 
-def articles(request):
+#     return render(request, template, context)
 
-    answer = "Artículos en la Base de datos"
+# def articles(request):
+
+#     answer = "Artículos en la Base de datos"
+#     articles = Articles.objects.all()
+#     context = {"articles_all":articles,
+#                "articles_any": articles,
+#                "answer":answer}
+#     template = "articles.html"
+#     return articles_deliver(request, template, context)
+
+# ### Articles read
+# def articles_read(request):
     
-    articles = Articles.objects.all()
-    articles_values = ArticlesValues.objects.all()
-    values = Values.objects.all()
-    categories = Categories.objects.all()
-    
+#     context = {}
 
-    context = {
-                "articles_any": articles,
-                "answer":answer,
-                "categories": categories,
-                "articles_values": articles_values
-               }
-    template = "articles.html"
-    return render_login_required(request, template, context)
+#     datatype_dict = {
+#         1: "id",
+#         2: "article_name",
+#         3: "category_id",
+#         4: "color_id",
+#         5: "material_id",
+#         6: "size_id",
+#         7: "buy_price",
+#         8: "increase",
+#         9: "sell_price"
+#     }
 
-### Articles read
-def articles_read(request):
-    
-    context = {}
+#     context["articles_any"] = Articles.objects.all()
+#     datatype_input = request.GET['datatype_input']
 
-    datatype_dict = {
-                    1: "id",
-                    2: "article_name",
-                    3: "buy_price",
-                    4: "increase",
-                    5: "sell_price"
-                    }
+#     if datatype_input == datatype_dict[1]:
 
-    context["articles_any"] = Articles.objects.all()
-    datatype_input = request.GET['datatype_input']
+#         context["datatype_input"] = datatype_input
+#         template = "articles_search_datatype_id.html"
+#         context["datatype"] = "Id"
 
-    if datatype_input == datatype_dict[1]:
+#     elif datatype_input == datatype_dict[2]:
 
-        context["datatype_input"] = datatype_input
-        template = "articles_search_datatype_id.html"
-        context["datatype"] = "Id"
-
-    elif datatype_input == datatype_dict[2]:
-
-        context["datatype_input"] = datatype_input
-        template = "articles_search_datatype_name.html"
-        context["datatype"] = "Nombre"
+#         context["datatype_input"] = datatype_input
+#         template = "articles_search_datatype_name.html"
+#         context["datatype"] = "Nombre"
         
-    elif datatype_input == datatype_dict[3]:
+#     elif datatype_input == datatype_dict[3]:
 
-        context["datatype_input"] = datatype_input
-        template = "articles_search_datatype_buy_price.html"
-        context["datatype"] = "Precio de compra"
+#         context["categories"] = Categories.objects.all()
+#         context["datatype_input"] = datatype_input
+#         template = "articles_search_datatype_category.html"
+        
+#         # datatype = "Categoría"
+#         # category_object = Categories.objects.filter(category_name__startswith=article_input)
+#         # articles = Articles.objects.filter(category_id__in=category_object)
 
-    elif datatype_input == datatype_dict[4]:
+#     elif datatype_input == datatype_dict[4]:
 
-        context["datatype_input"] = datatype_input
-        template = "articles_search_datatype_increase.html"
-        context["datatype"] = "Incremento"
+#         context["colors"] = Colors.objects.all()
+#         context["datatype_input"] = datatype_input
+#         template = "articles_search_datatype_color.html"
+        
+#         # datatype = "Color"
+#         # color_object = Colors.objects.filter(color_name__startswiths=article_input)
+#         # articles = Articles.objects.filter(color_id__in=color_object)
 
-    else: #datatype_input == datatype_dict[5]:
+#     elif datatype_input == datatype_dict[5]:
 
-        context["datatype_input"] = datatype_input
-        template = "articles_search_datatype_sell_price.html"
-        context["datatype"] = "Precio de venta"
+#         context["materials"] = Materials.objects.all()
+#         context["datatype_input"] = datatype_input
+#         template = "articles_search_datatype_material.html"
+        
+#         # datatype = "Material"
+#         # material_object = Materials.objects.filter(material_name__startswith=article_input)
+#         # articles = Articles.objects.filter(material_id__in=material_object)
+
+#     elif datatype_input == datatype_dict[6]:
+
+#         context["sizes"] = Sizes.objects.all()
+#         context["datatype_input"] = datatype_input
+#         template = "articles_search_datatype_size.html"
+        
+#         # datatype = "Talle/Tamaño"
+#         # size_object = Sizes.objects.filter(size_name__startswith=article_input)
+#         # articles = Articles.objects.filter(size_id__in=size_object)
+
+#     elif datatype_input == datatype_dict[7]:
+
+#         context["datatype_input"] = datatype_input
+#         template = "articles_search_datatype_buy_price.html"
+#         context["datatype"] = "Precio de compra"
+
+#     elif datatype_input == datatype_dict[8]:
+
+#         context["datatype_input"] = datatype_input
+#         template = "articles_search_datatype_increase.html"
+#         context["datatype"] = "Incremento"
+
+#     else: #datatype_input == datatype_dict[9]:
+
+#         context["datatype_input"] = datatype_input
+#         template = "articles_search_datatype_sell_price.html"
+#         context["datatype"] = "Precio de venta"
 
 
-    return render_login_required(request,template,context)
+#     return articles_deliver(request,template,context)
 
-def articles_read_id(request):
+# def articles_read_id(request):
 
-    context = {}
+#     context = {}
 
-    search_input = request.GET["search_input"]
-    context["search_input"] = search_input
-    context["datatype"] = "Id"
-    template = "articles_search_right.html"
+#     search_input = request.GET["search_input"]
+#     context["search_input"] = search_input
+#     context["datatype"] = "Id"
+#     template = "articles_search_right.html"
 
-    if is_empty(search_input):
-        context["articles_any"] = Articles.objects.all()
-    else:
-        context["articles_any"] = Articles.objects.filter(id__startswith=search_input)
+#     if is_empty(search_input):
+#         context["articles_any"] = Articles.objects.all()
+#     else:
+#         context["articles_any"] = Articles.objects.filter(id__startswith=search_input)
 
-    return render_login_required(request, template, context)
+#     return articles_deliver(request, template, context)
  
-def articles_read_name(request):
+# def articles_read_name(request):
 
-    context = {}
+#     context = {}
 
-    search_input = request.GET["search_input"]
-    context["search_input"] = search_input
-    context["datatype"] = "Nombre"
+#     search_input = request.GET["search_input"]
+#     context["search_input"] = search_input
+#     context["datatype"] = "Nombre"
     
-    template = "articles_search_right.html"
+#     template = "articles_search_right.html"
 
-    if is_empty(search_input):
-        print("EMPTY"*100)
-        context["articles_any"] = Articles.objects.all()
-    else:
-        print("FULL"*100)
-        context["articles_any"] = Articles.objects.filter(article_name__startswith=search_input)
+#     if is_empty(search_input):
+#         print("EMPTY"*100)
+#         context["articles_any"] = Articles.objects.all()
+#     else:
+#         print("FULL"*100)
+#         context["articles_any"] = Articles.objects.filter(article_name__startswith=search_input)
 
-    return render_login_required(request, template, context)
-
-def articles_read_values(request):
-
-    pass
-def articles_read_buy_price(request):
-
-    context = {}
-
-    search_input = request.GET["search_input"]
-    context["search_input"] = search_input
-    context["datatype"] = "Precio de compra"
-    
-    if is_empty(search_input):
-        context["articles_any"] = Articles.objects.all()
-    else:
-        context["articles_any"] = Articles.objects.filter(buy_price__startswith=search_input)
-
-    template = "articles_search_right.html"
-    return render_login_required(request, template, context)
+#     return articles_deliver(request, template, context)
  
-def articles_read_increase(request):
+# def articles_read_category(request):
 
-    context = {}
+#     context = {}
 
-    search_input = request.GET["search_input"]
-    context["search_input"] = search_input
-    context["datatype"] = "Incremento"
-    
-    if is_empty(search_input):
-        context["articles_any"] = Articles.objects.all()
-    else:
-        context["articles_any"] = Articles.objects.filter(increase__startswith=search_input)
+#     search_input = request.GET["search_input"]
+#     context["search_input"] = search_input
+#     if search_input == "Empty":
+#         print("CATEGORIAEMPTY"*100)
+#         context["articles_any"]  = Articles.objects.all()
+#     else:
 
-    template = "articles_search_right.html"
-    return render_login_required(request, template, context)
+#         context["datatype"] = "Categorías"
+#         context["articles_any"] = Articles.objects.filter(category_id=get_object_or_404(Categories,id=search_input))
+
+#     template = "articles_search_right.html"
+#     return articles_deliver(request, template, context)
  
-def articles_read_sell_price(request):
+# def articles_read_color(request):
 
-    context = {}
+#     context = {}
 
-    search_input = request.GET["search_input"]
-    context["search_input"] = search_input
-    context["datatype"] = "Precio de venta"
-    template = "articles_search_right.html"
+#     search_input = request.GET["search_input"]
+#     context["search_input"] = search_input
+#     if search_input == "Empty":
+#         context["articles_any"]  = Articles.objects.all()
+#     else:
 
-    if is_empty(search_input):
-        context["articles_any"] = Articles.objects.all()
-    else:
-        context["articles_any"] = Articles.objects.filter(sell_price__startswith=search_input)
+#         context["datatype"] = "Colores"
+#         context["articles_any"] = Articles.objects.filter(color_id=get_object_or_404(Colors,id=search_input))
+
+#     template = "articles_search_right.html"
+#     return articles_deliver(request, template, context)
+
+# def articles_read_material(request):
+
+#     context = {}
+
+#     search_input = request.GET["search_input"]
+#     context["search_input"] = search_input
+#     if search_input == "Empty":
+#         context["articles_any"]  = Articles.objects.all()
+#     else:
+
+#         context["datatype"] = "Materiales"
+#         context["articles_any"] = Articles.objects.filter(material_id=get_object_or_404(Materials,id=search_input))
+
+#     template = "articles_search_right.html"
+#     return articles_deliver(request, template, context)
+ 
+# def articles_read_size(request):
+
+#     context = {}
+
+#     search_input = request.GET["search_input"]
+#     context["search_input"] = search_input
+#     if search_input == "Empty":
+#         context["articles_any"]  = Articles.objects.all()
+#     else:
+
+#         context["datatype"] = "Tamaños"
+#         context["articles_any"] = Articles.objects.filter(size_id=get_object_or_404(Sizes,id=search_input))
+
+#     template = "articles_search_right.html"
+#     return articles_deliver(request, template, context)
+ 
+# def articles_read_buy_price(request):
+
+#     context = {}
+
+#     search_input = request.GET["search_input"]
+#     context["search_input"] = search_input
+#     context["datatype"] = "Precio de compra"
+    
+#     if is_empty(search_input):
+#         context["articles_any"] = Articles.objects.all()
+#     else:
+#         context["articles_any"] = Articles.objects.filter(buy_price__startswith=search_input)
+
+#     template = "articles_search_right.html"
+#     return articles_deliver(request, template, context)
+ 
+# def articles_read_increase(request):
+
+#     context = {}
+
+#     search_input = request.GET["search_input"]
+#     context["search_input"] = search_input
+#     context["datatype"] = "Incremento"
+    
+#     if is_empty(search_input):
+#         context["articles_any"] = Articles.objects.all()
+#     else:
+#         context["articles_any"] = Articles.objects.filter(increase__startswith=search_input)
+
+#     template = "articles_search_right.html"
+#     return articles_deliver(request, template, context)
+ 
+# def articles_read_sell_price(request):
+
+#     context = {}
+
+#     search_input = request.GET["search_input"]
+#     context["search_input"] = search_input
+#     context["datatype"] = "Precio de venta"
+#     template = "articles_search_right.html"
+
+#     if is_empty(search_input):
+#         context["articles_any"] = Articles.objects.all()
+#     else:
+#         context["articles_any"] = Articles.objects.filter(sell_price__startswith=search_input)
 
     
-    return render_login_required(request, template, context)
+#     return articles_deliver(request, template, context)
 
-### Articles create
-def articles_create(request):
+# ### Articles create
+# def articles_create(request):
 
-    categories = Categories.objects.all()
-    # colors = Colors.objects.all()
-    # materials = Materials.objects.all()
-    # sizes = Sizes.objects.all()
-    context = {"categories":categories,
-            #    "colors":colors,
-            #    "materials":materials,
-            #    "sizes":sizes
-               }
-    template='articles_create.html'
+#     categories = Categories.objects.all()
+#     colors = Colors.objects.all()
+#     materials = Materials.objects.all()
+#     sizes = Sizes.objects.all()
+#     context = {"categories":categories,
+#                "colors":colors,
+#                "materials":materials,
+#                "sizes":sizes}
+#     template='articles_create.html'
 
-    return render_login_required(request, template, context)
+#     return articles_deliver(request, template, context)
 
 # def articles_create_name_check(request):
 
@@ -189,7 +301,7 @@ def articles_create(request):
 #     article_name_input = request.GET['article_name_input']
 #     template = "articles_create_name_error.html"
 #     context.update(name_check(article_name_input))
-#     return render_login_required(request, template, context)
+#     return articles_deliver(request, template, context)
 
 # def articles_create_category_check(request):
     
@@ -197,7 +309,7 @@ def articles_create(request):
 #     article_category_input = request.GET['article_category_input']
 #     context.update(category_check(article_category_input, context))
 #     template = "articles_create_category_error.html"
-#     return render_login_required(request, template, context)
+#     return articles_deliver(request, template, context)
     
 # def articles_create_calculator(request):
 #     context = {}
@@ -217,7 +329,7 @@ def articles_create(request):
 #     if error_any:
 #         "show any error"
 #         template = "articles_create_calculator_error.html"
-#         return render_login_required(request, template, context)
+#         return articles_deliver(request, template, context)
     
 #     else:
 
@@ -229,7 +341,7 @@ def articles_create(request):
 #         context["answer_calculator"] = calculator
 #         template = "articles_create_calculator_right.html"
 
-#     return render_login_required(request, template, context)
+#     return articles_deliver(request, template, context)
     
 # def articles_create_confirm(request):
       
@@ -277,7 +389,7 @@ def articles_create(request):
 #         # for render error answers
 #         template = 'articles_create_save_error.html'
 #         context["answer_save_error"] = "No se ha creado el artículo."
-#         return render_login_required(request, template, context)
+#         return articles_deliver(request, template, context)
     
 #     else:
 
@@ -303,98 +415,98 @@ def articles_create(request):
 #         context["answer_category_id"] = ""
 #         context["answer_sell_price"] = ""
 
-#         return render_login_required(request, template, context)
+#         return articles_deliver(request, template, context)
 
-#Articles delete ##REVISAR EL CONTEXTO
-@csrf_protect
-def articles_delete(request, id):
+# #Articles delete ##REVISAR EL CONTEXTO
+# @csrf_protect
+# def articles_delete(request, id):
 
-    context = {}
+#     context = {}
 
-    try:
+#     try:
 
-        article_to_delete = get_object_or_404(Articles, id=id)
+#         article_to_delete = get_object_or_404(Articles, id=id)
 
-    except Exception as e:
-        context["article_to_delete"] = article_to_delete
-        template = "articles_delete_error.html"
-        return render_login_required(request, template, context)
+#     except Exception as e:
+#         context["article_to_delete"] = article_to_delete
+#         template = "articles_delete_error.html"
+#         return articles_deliver(request, template, context)
     
-    else:
-        context["article_deleted_name"] = article_to_delete.article_name
-        article_to_delete.delete() 
+#     else:
+#         context["article_deleted_name"] = article_to_delete.article_name
+#         article_to_delete.delete() 
 
-        template = "articles_delete_right.html"
-        answer = "Artículos en la Base de datos"
+#         template = "articles_delete_right.html"
+#         answer = "Artículos en la Base de datos"
 
-        articles = Articles.objects.all()
+#         articles = Articles.objects.all()
 
-        context.update({"articles_all":articles,
-                   "articles_any": articles,
-                   "answer":answer,
-                   })
+#         context.update({"articles_all":articles,
+#                    "articles_any": articles,
+#                    "answer":answer,
+#                    })
         
-        return render_login_required(request, template, context)
+#         return articles_deliver(request, template, context)
 
-@csrf_protect
-def articles_update(request, id):
-    """Show update form for the article chosed """
+# @csrf_protect
+# def articles_update(request, id):
+#     """Show update form for the article chosed """
 
-    article_to_update = get_object_or_404(Articles, id=id)
+#     article_to_update = get_object_or_404(Articles, id=id)
 
-    context={}
+#     context={}
 
-    categories = Categories.objects.all()
-    colors = Colors.objects.all()
-    materials = Materials.objects.all()
-    sizes = Sizes.objects.all()
+#     categories = Categories.objects.all()
+#     colors = Colors.objects.all()
+#     materials = Materials.objects.all()
+#     sizes = Sizes.objects.all()
     
     
-    article_category_object = article_to_update.category_id
-    article_color_object = article_to_update.color_id
-    article_material_object = article_to_update.material_id
-    article_size_object = article_to_update.size_id
+#     article_category_object = article_to_update.category_id
+#     article_color_object = article_to_update.color_id
+#     article_material_object = article_to_update.material_id
+#     article_size_object = article_to_update.size_id
 
-    article_category_input = article_category_object.id
+#     article_category_input = article_category_object.id
 
-    try:
-        article_color_input = article_color_object.id
-    except:
-        article_color_input = 'Empty'
+#     try:
+#         article_color_input = article_color_object.id
+#     except:
+#         article_color_input = 'Empty'
 
-    try:
-        article_material_input = article_material_object.id
-    except:
-        article_material_input = 'Empty'
+#     try:
+#         article_material_input = article_material_object.id
+#     except:
+#         article_material_input = 'Empty'
         
-    try:
-        article_size_input = article_size_object.id
-    except:
-        article_size_input = 'Empty'
+#     try:
+#         article_size_input = article_size_object.id
+#     except:
+#         article_size_input = 'Empty'
 
     
 
-    context.update({"article_category_input":article_category_input,
-                    "article_color_input":article_color_input,
-                    "article_material_input":article_material_input,
-                    "article_size_input":article_size_input})
-    context.update({"categories":categories,
-                    "colors":colors,
-                    "materials":materials,
-                    "sizes":sizes})
-    context.update({"article_to_update":article_to_update})
+#     context.update({"article_category_input":article_category_input,
+#                     "article_color_input":article_color_input,
+#                     "article_material_input":article_material_input,
+#                     "article_size_input":article_size_input})
+#     context.update({"categories":categories,
+#                     "colors":colors,
+#                     "materials":materials,
+#                     "sizes":sizes})
+#     context.update({"article_to_update":article_to_update})
 
-    buy_price = str(article_to_update.buy_price).replace(",",".")
-    increase = str(article_to_update.increase).replace(",",".")
-    sell_price = article_to_update.sell_price
+#     buy_price = str(article_to_update.buy_price).replace(",",".")
+#     increase = str(article_to_update.increase).replace(",",".")
+#     sell_price = article_to_update.sell_price
 
-    context["article_buy_price_input"] = buy_price
-    context["article_increase_input"] = increase
-    context["article_sell_price_input"] = sell_price
+#     context["article_buy_price_input"] = buy_price
+#     context["article_increase_input"] = increase
+#     context["article_sell_price_input"] = sell_price
 
-    template='articles_update.html'
+#     template='articles_update.html'
 
-    return render_login_required(request, template, context)
+#     return articles_deliver(request, template, context)
     
 # def articles_update_name_check(request, id):
 
@@ -406,7 +518,7 @@ def articles_update(request, id):
 #     article_name_input = request.GET['article_name_input']
 #     template = "articles_create_name_error.html"
 #     context.update(name_check(article_name_input))
-#     return render_login_required(request, template, context)
+#     return articles_deliver(request, template, context)
 
 # def articles_update_category_check(request, id):
     
@@ -419,7 +531,7 @@ def articles_update(request, id):
 #     article_category_input = request.GET['article_category_input']
 #     context.update(category_check(article_category_input, context))
 #     template = "articles_create_category_error.html"
-#     return render_login_required(request, template, context)
+#     return articles_deliver(request, template, context)
 
 # def articles_update_calculator(request, id):
 
@@ -444,7 +556,7 @@ def articles_update(request, id):
 #     if error_any:
 #         "show any error"
 #         template = "articles_create_calculator_error.html"
-#         return render_login_required(request, template, context)
+#         return articles_deliver(request, template, context)
     
 #     else:
 
@@ -456,7 +568,7 @@ def articles_update(request, id):
 #         context["answer_calculator"] = calculator
 #         template = "articles_create_calculator_right.html"
 
-#     return render_login_required(request, template, context)
+#     return articles_deliver(request, template, context)
 
 # def articles_update_confirm(request, id):
       
@@ -506,7 +618,7 @@ def articles_update(request, id):
 #         # for render error answers
 #         template = 'articles_update_save_error.html'
 #         context["answer_save_error"] = "No se ha actualizado el artículo."
-#         return render_login_required(request, template, context)
+#         return articles_deliver(request, template, context)
     
 #     else:
 #         objects = get_objects(article_category_input,article_color_input,article_material_input,article_size_input)
@@ -529,13 +641,13 @@ def articles_update(request, id):
 #         context["answer_article_name"] = ""
 #         context["answer_category_id"] = ""
 #         context["answer_sell_price"] = ""
-#         return render_login_required(request, template, context)
+#         return articles_deliver(request, template, context)
 # ## Articles Categories SECTION
-def articles_categories(request):
-    template = "categories.html"
-    categories = Categories.objects.all()
-    context = {"categories": categories}
-    return render_login_required(request, template, context)
+# def articles_categories(request):
+#     template = "categories.html"
+#     categories = Categories.objects.all()
+#     context = {"categories": categories}
+#     return articles_deliver(request, template, context)
 
 # ## Articles Categories Create
 # def articles_categories_save(request):
@@ -548,7 +660,7 @@ def articles_categories(request):
 #     if category_input == "":
 
 #         template = "categories_table_empty_error.html"
-#         return render_login_required(request, template, context)
+#         return articles_deliver(request, template, context)
     
 #     else:
 
@@ -557,13 +669,13 @@ def articles_categories(request):
 #             object = Categories(category_name = category_input)
 #             object.save()
 #             template = "categories_table_right.html"
-#             return render_login_required(request, template, context)
+#             return articles_deliver(request, template, context)
 #         except Exception as e:
 #             print("-"*100)
 #             print(f"ESTE ES EL ERROR -----------> {e.__str__} ")
 #             print("-"*100)
 #             template = "categories_table_duplicate_error.html"
-#             return render_login_required(request, template, context)
+#             return articles_deliver(request, template, context)
 
 # def articles_categories_update(request, id):
 
@@ -580,14 +692,14 @@ def articles_categories(request):
 #     categories = Categories.objects.all()
 #     context["categories"] = categories
 
-#     return render_login_required(request, template, context)
+#     return articles_deliver(request, template, context)
 
 # ## Articles colors SECTION
 # def articles_colors(request):
 #     template = "colors.html"
 #     colors = Colors.objects.all()
 #     context = {"colors": colors}
-#     return render_login_required(request, template, context)
+#     return articles_deliver(request, template, context)
 
 # ## Articles colors create
 # def articles_colors_save(request):
@@ -600,7 +712,7 @@ def articles_categories(request):
 #     if color_input == "":
 
 #         template = "colors_table_empty_error.html"
-#         return render_login_required(request, template, context)
+#         return articles_deliver(request, template, context)
     
 #     else:
 
@@ -609,7 +721,7 @@ def articles_categories(request):
 #             object = Colors(color_name = color_input)
 #             object.save()
 #             template = "colors_table_right.html"
-#             return render_login_required(request, template, context)
+#             return articles_deliver(request, template, context)
         
 #         except Exception as e:
             
@@ -617,7 +729,7 @@ def articles_categories(request):
 #             print(f"ESTE ES EL ERROR -----------> {e.__str__} ")
 #             print("-"*100)
 #             template = "colors_table_duplicate_error.html"
-#             return render_login_required(request, template, context)
+#             return articles_deliver(request, template, context)
         
 # def articles_colors_update(request, id):
 #     pass
@@ -651,7 +763,7 @@ def articles_categories(request):
 
 #         color_to_delete.delete()
 
-#     return render_login_required(request, template, context)
+#     return articles_deliver(request, template, context)
 
 # ## Articles materials SECTION
 # def articles_materials(request):
@@ -659,7 +771,7 @@ def articles_categories(request):
 #     template = "materials.html"
 #     materials = Materials.objects.all()
 #     context = {"materials": materials}
-#     return render_login_required(request, template, context)
+#     return articles_deliver(request, template, context)
 
 # ## Articles materials create
 # def articles_materials_save(request):
@@ -672,7 +784,7 @@ def articles_categories(request):
 #     if material_input == "":
 
 #         template = "materials_table_empty_error.html"
-#         return render_login_required(request, template, context)
+#         return articles_deliver(request, template, context)
     
 #     else:
 
@@ -681,13 +793,13 @@ def articles_categories(request):
 #             object = Materials(material_name = material_input)
 #             object.save()
 #             template = "materials_table_right.html"
-#             return render_login_required(request, template, context)
+#             return articles_deliver(request, template, context)
 #         except Exception as e:
 #             print("-"*100)
 #             print(f"ESTE ES EL ERROR -----------> {e.__str__} ")
 #             print("-"*100)
 #             template = "materials_table_duplicate_error.html"
-#             return render_login_required(request, template, context)
+#             return articles_deliver(request, template, context)
         
 # def articles_materials_update(request, id):
 #     pass
@@ -703,7 +815,7 @@ def articles_categories(request):
 
 #     material_to_delete.delete()
 
-#     return render_login_required(request, template, context)
+#     return articles_deliver(request, template, context)
 
 # ## Articles sizes SECTION
 
@@ -711,7 +823,7 @@ def articles_categories(request):
 #     template = "sizes.html"
 #     sizes = Sizes.objects.all()
 #     context = {"sizes": sizes}
-#     return render_login_required(request, template, context)
+#     return articles_deliver(request, template, context)
 
 # ## Articles sizes create
 # def articles_sizes_save(request):
@@ -724,7 +836,7 @@ def articles_categories(request):
 #     if size_input == "":
 
 #         template = "sizes_table_empty_error.html"
-#         return render_login_required(request, template, context)
+#         return articles_deliver(request, template, context)
     
 #     else:
 
@@ -733,13 +845,13 @@ def articles_categories(request):
 #             object = Sizes(size_name = size_input)
 #             object.save()
 #             template = "sizes_table_right.html"
-#             return render_login_required(request, template, context)
+#             return articles_deliver(request, template, context)
 #         except Exception as e:
 #             print("-"*100)
 #             print(f"ESTE ES EL ERROR -----------> {e.__str__} ")
 #             print("-"*100)
 #             template = "sizes_table_duplicate_error.html"
-#             return render_login_required(request, template, context)
+#             return articles_deliver(request, template, context)
         
 # def articles_sizes_update(request, id):
 #     pass
@@ -755,9 +867,9 @@ def articles_categories(request):
 
 #     size_to_delete.delete()
 
-#     return render_login_required(request, template, context)
+#     return articles_deliver(request, template, context)
 
-# CUSTOMERS SECTION
+# # CUSTOMERS SECTION
 
-def customers(request):
-    return render_login_required(request, template_name="customers.html",context={})
+# def customers(request):
+#     return render(request, template_name="customers.html",context={})

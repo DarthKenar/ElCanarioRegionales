@@ -1,6 +1,16 @@
 # from django.shortcuts import get_object_or_404
 # from articles.models import Categories, Colors, Sizes, Materials
 # from typing import Tuple
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def render_login_required(request, template: str,context: dict): 
+    """
+    This function is used for all functions that require the user to be logged in.
+    """
+
+    return render(request, template, context)
 
 # def title(title: str)->str:
 #     """get a string title and returns the first letter of the word in upper case and the others in lower case"""
@@ -9,11 +19,11 @@
 #     except(TypeError, ValueError):
 #         return title
     
-# def is_empty(s):
-#     """
-#     Returns True if the string is empty or contains only blanks.
-#     """
-#     return s is None or s.strip() == ''
+def is_empty(s):
+    """
+    Returns True if the string is empty or contains only blanks.
+    """
+    return s is None or s.strip() == ''
 
 # def articles_create_confirm_get_category(input: int) -> object:
 #     """retrieves an id(int) and returns the object corresponding to that id"""

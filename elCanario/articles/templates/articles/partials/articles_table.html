@@ -4,10 +4,10 @@
         <tr class="bg-amber-300">
             <th class="m-4 ">Id</th>
             <th class="m-4 ">Nombre</th>
-            <th class="m-4 ">Categoría</th>
-            <th class="m-4 ">Color</th>
-            <th class="m-4 ">Material</th>
-            <th class="m-4 ">Talle</th>
+            {% for categorie in categories %}
+            <th>{{categorie.name}}</th>
+            
+            {% endfor %}
             <th class="m-4 ">Precio de Compra</th>
             <th class="m-4 ">Incremento</th>
             <th class="m-4 ">Precio de Venta</th>
@@ -20,38 +20,28 @@
                 
                 <td class="m-4 px-12 " id="{{article.id}}">{{article.id}}</td>
 
-                <td class="m-4 px-12 ">{{article.article_name}}</td>
-                
+                <td class="m-4 px-12 ">{{article.name}}</td>
 
-                <td class="m-4 px-12 ">{{article.category_id}}</td>
-                
+                <!-- Itera para cada una de las columnas -->
+                {% load custom_tags %}
 
-                {% if article.color_id == None %}
-                <td class="m-4 px-12 ">-</td>
-                {% else %}
-                <td class="m-4 px-12 ">{{article.color_id}}</td>
-                {% endif %}
-                
-
-                {% if article.material_id == None %}
-                <td class="m-4 px-12 ">-</td>
-                {% else %}
-                <td class="m-4 px-12 ">{{article.material_id}}</td>
-                {% endif %}
-                
-
-                {% if article.size_id == None %}
-                <td class="m-4 px-12 ">-</td>
-                {% else %}
-                <td class="m-4 px-12 ">{{article.size_id}}</td>
-                {% endif %}
-                
+                {% for category in categories %}
+                    {% with article.characteristics_id.all|filter_by_category:category as values %}
+                        {% if values %}
+                            {% for value in values %}
+                                <td class="m-4 px-12 tabular-nums slashed-zero">{{ value.name }}</td>
+                            {% endfor %}
+                        {% else %}
+                            <td class="m-4 px-12 tabular-nums slashed-zero">-</td>
+                        {% endif %}
+                    {% endwith %}
+                {% endfor %}
 
                 <td class="m-4 px-12  tabular-nums slashed-zero">{{article.buy_price}}</td>
                 <td class="m-4 px-12  tabular-nums slashed-zero">{{article.increase}}</td>
                 <td class="m-4 px-12  tabular-nums slashed-zero">{{article.sell_price}}</td>
                 <td>
-                    <form action="{% url 'articles_update' id=article.id %}" method="GET">
+                    <!-- <form action="{% url 'articles_update' id=article.id %}" method="GET">
                         <button ion-button icon-only type="submit">
                             <ion-icon name="create-outline" 
                             
@@ -68,7 +58,7 @@
                             class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer"
                             ></ion-icon>
                         </button>
-                    </form>
+                    </form> -->
                 </td>
             </tr>
         {% endfor %}
