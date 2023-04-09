@@ -1,7 +1,17 @@
-<div id="search_answer_table">
+<div id="search_answer">
     <div>
         
         <output class="" type="text">Cantidad de artículos entonctrados: <b>{{ articles_any.count }}</b>.</output>
     </div>
-    {% include 'articles_table.html' %}
-</div> 
+
+    {% include 'search_header.html' %}
+    
+    <div>
+        {% if articles_any %}
+            <div>
+                
+                {% include 'articles_table.html' %}
+            </div>
+        {% endif %}
+    </div>
+</div>
