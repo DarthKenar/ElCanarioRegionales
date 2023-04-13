@@ -2,7 +2,7 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 # Create your models here.
-class Categories(models.Model):
+class Category(models.Model):
     name = models.CharField(max_length=100)
 
     def __str__(self) -> str:
@@ -13,9 +13,9 @@ class Categories(models.Model):
         verbose_name_plural = 'Categorías'
         ordering = ['name']
 
-class Values(models.Model):
+class Value(models.Model):
     name = models.CharField(max_length=100)
-    category_id = models.ForeignKey(Categories,on_delete=models.CASCADE)
+    category_id = models.ForeignKey(Category,on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return f'categoria: {self.category_id.name}: valor: {self.name}'
@@ -26,9 +26,9 @@ class Values(models.Model):
         verbose_name_plural = 'Valores'
         ordering = ['name']
 
-class Articles(models.Model):
+class Article(models.Model):
     name = models.CharField(verbose_name="Nombre",max_length=100)
-    characteristics_id = models.ManyToManyField(Values,related_name='characteristics_id', blank=True, through='ArticlesValues')
+    characteristics_id = models.ManyToManyField(Value,related_name='characteristics_id', blank=True, through='ArticleValue')
     buy_price = models.DecimalField(verbose_name="Precio de compra", max_digits=10, decimal_places=2, validators=[MinValueValidator(0.0)])
     increase = models.DecimalField(verbose_name="Incremento", max_digits=10, decimal_places=2, validators=[MinValueValidator(0.0)])
     sell_price = models.DecimalField(verbose_name="Precio de venta", max_digits=10, decimal_places=2, validators=[MinValueValidator(0.0)])
@@ -42,10 +42,10 @@ class Articles(models.Model):
         verbose_name_plural = 'Artículos'
         ordering = ['name']
 
-class ArticlesValues(models.Model):
-    article_id = models.ForeignKey(Articles,on_delete=models.CASCADE)
-    category_id = models.ForeignKey(Categories, on_delete=models.CASCADE)
-    value_id = models.ForeignKey(Values,on_delete=models.CASCADE)
+class ArticleValue(models.Model):
+    article_id = models.ForeignKey(Article,on_delete=models.CASCADE)
+    category_id = models.ForeignKey(Category, on_delete=models.CASCADE)
+    value_id = models.ForeignKey(Value,on_delete=models.CASCADE)
 
     class Meta:
         unique_together = ('article_id', 'category_id')
@@ -59,7 +59,7 @@ class ArticlesValues(models.Model):
 
 ####################
 
-class Customers(models.Model):
+class Customer(models.Model):
     name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=20)
     address = models.CharField(max_length=200)
@@ -79,11 +79,11 @@ class Customers(models.Model):
         return f"{self.name}, {self.phone_number}"
 
 
-class Stocks(models.Model):
+class Stock(models.Model):
     
-    article_id = models.OneToOneField(Articles,verbose_name="Artículo", on_delete=models.CASCADE)
-    stock = models.PositiveSmallIntegerField(verbose_name="Existencias", default=0) #Values from 0 to 32767
-
+    article_id = models.OneToOneField(Article,verbose_name="Artículo", on_delete=models.CASCADE)
+    stock = models.PositiveSmallIntegerField(verbose_name="Existencias", default=0) #Value from 0 to 32767
+    
     class Meta:
 
         verbose_name = "Stock"
@@ -95,10 +95,10 @@ class Stocks(models.Model):
         return f"{self.article_id.name}, {self.stock}"
 
 
-class Promotions(models.Model):
+class Promotion(models.Model):
     
-    promotion_name = models.CharField(verbose_name="Nombre",max_length=100, unique=True)
-    articles_id = models.ManyToManyField(Articles, verbose_name="Artículos", through="PromotionsArticles")
+    name = models.CharField(verbose_name="Nombre",max_length=100, unique=True)
+    article_id = models.ManyToManyField(Article, verbose_name="Artículos", through="ArticlePromotion")
     discount = models.DecimalField(verbose_name="Descuento", max_digits=3, decimal_places=2, validators=[MinValueValidator(0.0), MaxValueValidator(100.0)])
     sell_price = models.DecimalField(verbose_name="$ VENTA", max_digits=10, decimal_places=2, validators=[MinValueValidator(0.0)])
     remainder = models.SmallIntegerField(verbose_name="Cantidad restante", blank=True, null=True)
@@ -111,17 +111,17 @@ class Promotions(models.Model):
     
     def __str__(self) -> str:
 
-        return f"{self.promotion_name}, {self.articles_id}, {self.discount}, {self.sell_price}"
+        return f"{self.promotion_name}, {self.article_id}, {self.discount}, {self.sell_price}"
 
-class PromotionsArticles(models.Model):
-    article_id = models.ForeignKey(Articles,on_delete=models.CASCADE)
-    promotion_id = models.ForeignKey(Promotions, on_delete=models.CASCADE)
+class ArticlePromotion(models.Model):
+    article_id = models.ForeignKey(Article,on_delete=models.CASCADE)
+    promotion_id = models.ForeignKey(Promotion, on_delete=models.CASCADE)
 
-class Orders(models.Model):
+class Order(models.Model):
 
-    customer_id = models.ForeignKey(Customers,verbose_name="Cliente", on_delete=models.CASCADE)
-    articles_id = models.ManyToManyField(Articles, verbose_name="Artículos", through="OrdersArticles")
-    articles_quantity = models.PositiveSmallIntegerField(verbose_name="Cantidad de Artículos", editable=False, blank=True, null=True)
+    customer_id = models.ForeignKey(Customer,verbose_name="Cliente", on_delete=models.CASCADE)
+    article_id = models.ManyToManyField(Article, verbose_name="Artículos", through="ArticleOrder")
+    article_quantity = models.PositiveSmallIntegerField(verbose_name="Cantidad de Artículos", editable=False, blank=True, null=True)
     total_pay = models.DecimalField(verbose_name="Total a pagar", max_digits=10, decimal_places=2, editable=False, blank=True, null=True)
     details = models.TextField(verbose_name="Detalles", blank=True, null=True)
     creation_date = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación", editable=False)
@@ -139,10 +139,12 @@ class Orders(models.Model):
         return f"nombre: {self.customer_id.name}, tel: {self.customer_id.phone_number}, total: {self.total_pay}, Estado: {self.delivery_status}"
 
 
-class OrdersArticles(models.Model):
-    article_id = models.ForeignKey(Articles,on_delete=models.CASCADE)
-    orders_id = models.ForeignKey(Orders, on_delete=models.CASCADE)
-class Expenses(models.Model):
+class ArticleOrder(models.Model):
+    article_id = models.ForeignKey(Article,on_delete=models.CASCADE)
+    order_id = models.ForeignKey(Order, on_delete=models.CASCADE)
+
+
+class Expense(models.Model):
 
     name = models.CharField(verbose_name="Nombre", max_length=32)
     description = models.TextField(verbose_name="Descripcion", max_length=128, blank=True, null=True)

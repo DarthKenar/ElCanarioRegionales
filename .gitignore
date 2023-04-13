@@ -6,3 +6,4 @@ node_modules
 __pycache__/
 strategies/
 elCanario/db.sqlite3
+DOCUMENTATION/goals.md

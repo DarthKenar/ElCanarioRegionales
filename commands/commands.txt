@@ -1,0 +1,10 @@
+#Commands graph
+
+# Only certains models
+py manage.py graph_models -a -I Model1,Model2,Modeletc -o my_project_subsystem.png
+
+Category,Value,Article,ArticleValue,Customer,Stock,Promotion,PromotionArticle,Order,OrderArticle,Expense
+
+py manage.py graph_models -a -I Category,Value,Article,ArticleValue,Customer,Stock,Promotion,PromotionArticle,Order,OrderArticle,Expense -o models_diagram.png
+
+py manage.py graph_models -a -g -o my_project_visualized.png

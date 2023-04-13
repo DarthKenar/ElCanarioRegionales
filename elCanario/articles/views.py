@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from articles.models import Categories, Values, Articles, ArticlesValues, Customers, Stocks, Promotions, Orders, Expenses
+from articles.models import Category, Value, Article, ArticleValue, Customer, Stock, Promotion, Order, Expense
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_protect
 from .utils import *
@@ -8,33 +8,49 @@ from .utils import *
 
 # # ORDERS SECTION
 def orders(request):
-    return render_login_required(request, template_name="orders.html",context={})
 
-# # ARTICLES SECTION
+    template = "orders.html"
+
+    return render_login_required(request, template,context={})
+
+# # ARTICLEs SECTION
 
 def articles(request):
 
-    answer = "Artículos en la Base de datos"
-    
-    articles = Articles.objects.all()
-    articles_values = ArticlesValues.objects.all()
-    categories = Categories.objects.all()
-    
+    template = "articles.html"
 
+    articles = Article.objects.all()
+    categories = Category.objects.all()
+
+    answer = "Artículos en la Base de datos"
     context = {
                 "articles_any": articles,
                 "answer":answer,
                 "categories": categories,
-                "articles_values": articles_values
+                "datatype_input": 'name',
+                "datatype": 'Nombre'
                }
-    template = "articles.html"
+    
     return render_login_required(request, template, context)
 
 ### Articles read
-def articles_read(request):
-    
+def articles_read_datatype(request):
+
+    template = "articles_search_datatype.html"
     context = {}
+    datatype_input = request.GET['datatype_input']
+
+    articles = Article.objects.all()
+    categories = Category.objects.all()
     
+    context["articles_any"] = articles
+
+    if datatype_input.strip().isnumeric():
+        datatype_input = int(datatype_input.strip())
+        category = Category.objects.get(id = datatype_input)
+        context["datatype_input"] = category
+        context["articles_any"] = Article.objects.filter(characteristics_id__category_id=category)
+        
     datatype_dict = {
                     1: "id",
                     2: "name",
@@ -42,12 +58,11 @@ def articles_read(request):
                     4: "increase",
                     5: "sell_price"
                     }
+    
+    context["categories"] = categories
+    # context["articles_values"] = articles_values
+    context["datatype_input"] = datatype_input
 
-    context["articles_any"] = Articles.objects.all()
-    context["categories"] = Categories.objects.all()
-    context["articles_values"] = ArticlesValues.objects.all()
-    datatype_input = request.GET['datatype_input']
-    template = "articles_search_datatype.html"
     if datatype_input == datatype_dict[1]:
 
         context["datatype_input"] = datatype_input
@@ -55,17 +70,14 @@ def articles_read(request):
 
     elif datatype_input == datatype_dict[2]:
 
-        context["datatype_input"] = datatype_input
         context["datatype"] = "Nombre"
         
     elif datatype_input == datatype_dict[3]:
 
-        context["datatype_input"] = datatype_input
         context["datatype"] = "Precio de compra"
 
     elif datatype_input == datatype_dict[4]:
 
-        context["datatype_input"] = datatype_input
         context["datatype"] = "Incremento"
 
     else: #datatype_input == datatype_dict[5]:
@@ -73,73 +85,74 @@ def articles_read(request):
         context["datatype_input"] = datatype_input
         context["datatype"] = "Precio de venta"
 
-
     return render_login_required(request,template,context)
 
 def articles_read_id(request):
 
-    context = {}
+    template = "articles_search_right.html"
 
     search_input = request.GET["search_input"]
+
+    context = {}
+
+    if is_empty(search_input):
+        context["articles_any"] = Article.objects.all()
+        
+    else:
+        context["articles_any"] = Article.objects.filter(id=search_input)
+
+    categories = Category.objects.all()
+
     context["search_input"] = search_input
     context["datatype_input"] = "id"
     context["datatype"] = "Id"
-    template = "articles_search_right.html"
-        
-    context["categories"] = Categories.objects.all()
-    context["articles_values"] = ArticlesValues.objects.all()
-
-    if is_empty(search_input):
-        context["articles_any"] = Articles.objects.all()
-        
-    else:
-        context["articles_any"] = Articles.objects.filter(id=search_input)
+    context["categorie"] = categories
 
     return render_login_required(request, template, context)
  
 def articles_read_name(request):
 
-    context = {}
-
+    template = "articles_search_right.html"
     search_input = request.GET["search_input"]
+    
+    context = {}
+    
+    if is_empty(search_input):
+        print("EMPTY"*100)
+        context["articles_any"] = Article.objects.all()
+    else:
+        print("FULL"*100)
+        context["articles_any"] = Article.objects.filter(name__startswith=search_input)    
     
     context["search_input"] = search_input
     context["datatype_input"] = "name"
-    context["categories"] = Categories.objects.all()
-    context["articles_values"] = ArticlesValues.objects.all()
+    context["categorie"] = Category.objects.all()
+    context["articles_value"] = ArticleValue.objects.all()
     context["datatype"] = "Nombre"
-
-    template = "articles_search_right.html"
-
-    if is_empty(search_input):
-        print("EMPTY"*100)
-        context["articles_any"] = Articles.objects.all()
-    else:
-        print("FULL"*100)
-        context["articles_any"] = Articles.objects.filter(name__startswith=search_input)
 
     return render_login_required(request, template, context)
 
-def articles_read_values(request):
+def articles_read_data(request):
 
     pass
 def articles_read_buy_price(request):
 
+    template = "articles_search_right.html"
+    search_input = request.GET["search_input"]
+
     context = {}
 
-    search_input = request.GET["search_input"]
+    if is_empty(search_input):
+        context["articles_any"] = Article.objects.all()
+    else:
+        context["articles_any"] = Article.objects.filter(buy_price__startswith=search_input)
+
     context["search_input"] = search_input
     context["datatype_input"] = "buy_price"
-    context["categories"] = Categories.objects.all()
-    context["articles_values"] = ArticlesValues.objects.all()
+    context["categorie"] = Category.objects.all()
+    context["articles_value"] = ArticleValue.objects.all()
     context["datatype"] = "Precio de compra:"
 
-    if is_empty(search_input):
-        context["articles_any"] = Articles.objects.all()
-    else:
-        context["articles_any"] = Articles.objects.filter(buy_price__startswith=search_input)
-
-    template = "articles_search_right.html"
     return render_login_required(request, template, context)
  
 def articles_read_increase(request):
@@ -149,14 +162,14 @@ def articles_read_increase(request):
     search_input = request.GET["search_input"]
     context["search_input"] = search_input
     context["datatype_input"] = "increase"
-    context["categories"] = Categories.objects.all()
-    context["articles_values"] = ArticlesValues.objects.all()
-    context["datatype"] = Articles.increase
+    context["categorie"] = Category.objects.all()
+    context["articles_value"] = ArticleValue.objects.all()
+    context["datatype"] = Article.increase
 
     if is_empty(search_input):
-        context["articles_any"] = Articles.objects.all()
+        context["articles_any"] = Article.objects.all()
     else:
-        context["articles_any"] = Articles.objects.filter(increase__startswith=search_input)
+        context["articles_any"] = Article.objects.filter(increase__startswith=search_input)
 
     template = "articles_search_right.html"
     return render_login_required(request, template, context)
@@ -164,8 +177,8 @@ def articles_read_increase(request):
 def articles_read_sell_price(request):
 
     context = {}
-    context["categories"] = Categories.objects.all()
-    context["articles_values"] = ArticlesValues.objects.all()
+    context["categorie"] = Category.objects.all()
+    context["articles_value"] = ArticleValue.objects.all()
     context["datatype_input"] = "sell_price"
 
     search_input = request.GET["search_input"]
@@ -174,9 +187,9 @@ def articles_read_sell_price(request):
     template = "articles_search_right.html"
 
     if is_empty(search_input):
-        context["articles_any"] = Articles.objects.all()
+        context["articles_any"] = Article.objects.all()
     else:
-        context["articles_any"] = Articles.objects.filter(sell_price__startswith=search_input)
+        context["articles_any"] = Article.objects.filter(sell_price__startswith=search_input)
 
     
     return render_login_required(request, template, context)
@@ -184,7 +197,7 @@ def articles_read_sell_price(request):
 ### Articles create
 def articles_create(request):
 
-    categories = Categories.objects.all()
+    categories = Category.objects.all()
     # colors = Colors.objects.all()
     # materials = Materials.objects.all()
     # sizes = Sizes.objects.all()
@@ -200,23 +213,23 @@ def articles_create(request):
 # def articles_create_name_check(request):
 
 #     context = {}
-#     article_name_input = request.GET['article_name_input']
+#     articles_name_input = request.GET['articles_name_input']
 #     template = "articles_create_name_error.html"
-#     context.update(name_check(article_name_input))
+#     context.update(name_check(articles_name_input))
 #     return render_login_required(request, template, context)
 
 # def articles_create_category_check(request):
     
 #     context = {}
-#     article_category_input = request.GET['article_category_input']
-#     context.update(category_check(article_category_input, context))
+#     articles_category_input = request.GET['articles_category_input']
+#     context.update(category_check(articles_category_input, context))
 #     template = "articles_create_category_error.html"
 #     return render_login_required(request, template, context)
     
 # def articles_create_calculator(request):
 #     context = {}
-#     buy_price = request.GET['article_buy_price_input']
-#     increase = request.GET['article_increase_input']
+#     buy_price = request.GET['articles_buy_price_input']
+#     increase = request.GET['articles_increase_input']
 #     error_any = False
 
 #     if is_empty(increase) or is_empty(buy_price):
@@ -250,30 +263,30 @@ def articles_create(request):
 #     any_error = False
 #     context = {}
 
-#     article_name_input = request.GET["article_name_input"]
-#     article_category_input = request.GET['article_category_input']
-#     article_color_input = request.GET['article_color_input']
-#     article_material_input = request.GET['article_material_input']
-#     article_size_input = request.GET['article_size_input']
-#     article_buy_price_input = request.GET['article_buy_price_input']
-#     article_increase_input = request.GET['article_increase_input']
-#     article_sell_price_input = request.GET['article_sell_price_input']
+#     articles_name_input = request.GET["articles_name_input"]
+#     articles_category_input = request.GET['articles_category_input']
+#     articles_color_input = request.GET['articles_color_input']
+#     articles_material_input = request.GET['articles_material_input']
+#     articles_size_input = request.GET['articles_size_input']
+#     articles_buy_price_input = request.GET['articles_buy_price_input']
+#     articles_increase_input = request.GET['articles_increase_input']
+#     articles_sell_price_input = request.GET['articles_sell_price_input']
 
 #     context.update({
-#         "article_name_input": article_name_input,
-#         "article_category_input": str_to_int_if_possible(article_category_input),
-#         "article_color_input":str_to_int_if_possible(article_color_input),
-#         "article_material_input":str_to_int_if_possible(article_material_input),
-#         "article_size_input":str_to_int_if_possible(article_size_input),
-#         "article_buy_price_input":article_buy_price_input,
-#         "article_increase_input":article_increase_input,
-#         "article_sell_price_input":article_sell_price_input,
+#         "articles_name_input": articles_name_input,
+#         "articles_category_input": str_to_int_if_possible(articles_category_input),
+#         "articles_color_input":str_to_int_if_possible(articles_color_input),
+#         "articles_material_input":str_to_int_if_possible(articles_material_input),
+#         "articles_size_input":str_to_int_if_possible(articles_size_input),
+#         "articles_buy_price_input":articles_buy_price_input,
+#         "articles_increase_input":articles_increase_input,
+#         "articles_sell_price_input":articles_sell_price_input,
 #                 })
     
 #     # conditions to save
-#     any_error, context = search_any_error(article_name_input, article_category_input, article_sell_price_input, context)
+#     any_error, context = search_any_error(articles_name_input, articles_category_input, articles_sell_price_input, context)
     
-#     categories = Categories.objects.all()
+#     categories = Categorie.objects.all()
 #     materials = Materials.objects.all()
 #     colors = Colors.objects.all()
 #     sizes = Sizes.objects.all()
@@ -295,25 +308,25 @@ def articles_create(request):
     
 #     else:
 
-#         objects = get_objects(article_category_input,article_color_input,article_material_input,article_size_input)
+#         objects = get_objects(articles_category_input,articles_color_input,articles_material_input,articles_size_input)
 
-#         article = Articles(
-#             article_name = title(article_name_input),
-#             category_id = objects["article_category_object"],
-#             color_id = objects["article_color_object"],
-#             material_id = objects["article_material_object"],
-#             size_id = objects["article_size_object"], 
-#             buy_price = float(article_buy_price_input), 
-#             increase = float(article_increase_input),
-#             sell_price = float(article_sell_price_input.replace(',', '.'))
+#         articles = Article(
+#             articles_name = title(articles_name_input),
+#             category_id = objects["articles_category_object"],
+#             color_id = objects["articles_color_object"],
+#             material_id = objects["articles_material_object"],
+#             size_id = objects["articles_size_object"], 
+#             buy_price = float(articles_buy_price_input), 
+#             increase = float(articles_increase_input),
+#             sell_price = float(articles_sell_price_input.replace(',', '.'))
 #             )
 
-#         article.save()
+#         articles.save()
 
 #         template = "articles_create_save_right.html"
 
-#         context["answer_save_right"] = f"El artículo {article.article_name} se ha guardado correctamente"
-#         context["answer_article_name"] = ""
+#         context["answer_save_right"] = f"El artículo {article.name} se ha guardado correctamente"
+#         context["answer_articles_name"] = ""
 #         context["answer_category_id"] = ""
 #         context["answer_sell_price"] = ""
 
@@ -327,21 +340,21 @@ def articles_delete(request, id):
 
     try:
 
-        article_to_delete = get_object_or_404(Articles, id=id)
+        articles_to_delete = get_object_or_404(Article, id=id)
 
     except Exception as e:
-        context["article_to_delete"] = article_to_delete
+        context["articles_to_delete"] = articles_to_delete
         template = "articles_delete_error.html"
         return render_login_required(request, template, context)
     
     else:
-        context["article_deleted_name"] = article_to_delete.article_name
-        article_to_delete.delete() 
+        context["articles_deleted_name"] = articles_to_delete.articles_name
+        articles_to_delete.delete() 
 
         template = "articles_delete_right.html"
         answer = "Artículos en la Base de datos"
 
-        articles = Articles.objects.all()
+        articles = Article.objects.all()
 
         context.update({"articles_all":articles,
                    "articles_any": articles,
@@ -352,74 +365,75 @@ def articles_delete(request, id):
 
 @csrf_protect
 def articles_update(request, id):
-    """Show update form for the article chosed """
+    pass
+    # """Show update form for the articles chosed """
 
-    article_to_update = get_object_or_404(Articles, id=id)
+    # articles_to_update = get_object_or_404(Articles, id=id)
 
-    context={}
+    # context={}
 
-    categories = Categories.objects.all()
-    colors = Colors.objects.all()
-    materials = Materials.objects.all()
-    sizes = Sizes.objects.all()
+    # categorie = Categorie.objects.all()
+    # colors = Colors.objects.all()
+    # materials = Materials.objects.all()
+    # sizes = Sizes.objects.all()
     
     
-    article_category_object = article_to_update.category_id
-    article_color_object = article_to_update.color_id
-    article_material_object = article_to_update.material_id
-    article_size_object = article_to_update.size_id
+    # articles_category_object = articles_to_update.category_id
+    # articles_color_object = articles_to_update.color_id
+    # articles_material_object = articles_to_update.material_id
+    # articles_size_object = articles_to_update.size_id
 
-    article_category_input = article_category_object.id
+    # articles_category_input = articles_category_object.id
 
-    try:
-        article_color_input = article_color_object.id
-    except:
-        article_color_input = 'Empty'
+    # try:
+    #     articles_color_input = articles_color_object.id
+    # except:
+    #     articles_color_input = 'Empty'
 
-    try:
-        article_material_input = article_material_object.id
-    except:
-        article_material_input = 'Empty'
+    # try:
+    #     articles_material_input = articles_material_object.id
+    # except:
+    #     articles_material_input = 'Empty'
         
-    try:
-        article_size_input = article_size_object.id
-    except:
-        article_size_input = 'Empty'
+    # try:
+    #     articles_size_input = articles_size_object.id
+    # except:
+    #     articles_size_input = 'Empty'
 
     
 
-    context.update({"article_category_input":article_category_input,
-                    "article_color_input":article_color_input,
-                    "article_material_input":article_material_input,
-                    "article_size_input":article_size_input})
-    context.update({"categories":categories,
-                    "colors":colors,
-                    "materials":materials,
-                    "sizes":sizes})
-    context.update({"article_to_update":article_to_update})
+    # context.update({"articles_category_input":articles_category_input,
+    #                 "articles_color_input":articles_color_input,
+    #                 "articles_material_input":articles_material_input,
+    #                 "articles_size_input":articles_size_input})
+    # context.update({"categorie":categorie,
+    #                 "colors":colors,
+    #                 "materials":materials,
+    #                 "sizes":sizes})
+    # context.update({"articles_to_update":articles_to_update})
 
-    buy_price = str(article_to_update.buy_price).replace(",",".")
-    increase = str(article_to_update.increase).replace(",",".")
-    sell_price = article_to_update.sell_price
+    # buy_price = str(articles_to_update.buy_price).replace(",",".")
+    # increase = str(articles_to_update.increase).replace(",",".")
+    # sell_price = articles_to_update.sell_price
 
-    context["article_buy_price_input"] = buy_price
-    context["article_increase_input"] = increase
-    context["article_sell_price_input"] = sell_price
+    # context["articles_buy_price_input"] = buy_price
+    # context["articles_increase_input"] = increase
+    # context["articles_sell_price_input"] = sell_price
 
-    template='articles_update.html'
+    # template='articles_update.html'
 
-    return render_login_required(request, template, context)
+    # return render_login_required(request, template, context)
     
 # def articles_update_name_check(request, id):
 
 #     context = {}
 
-#     article_to_update = get_object_or_404(Articles, id=id)
-#     context.update({"article_to_update":article_to_update})
+#     articles_to_update = get_object_or_404(Articles, id=id)
+#     context.update({"articles_to_update":articles_to_update})
 
-#     article_name_input = request.GET['article_name_input']
+#     articles_name_input = request.GET['articles_name_input']
 #     template = "articles_create_name_error.html"
-#     context.update(name_check(article_name_input))
+#     context.update(name_check(articles_name_input))
 #     return render_login_required(request, template, context)
 
 # def articles_update_category_check(request, id):
@@ -427,11 +441,11 @@ def articles_update(request, id):
     
 #     context = {}
 
-#     article_to_update = get_object_or_404(Articles, id=id)
-#     context.update({"article_to_update":article_to_update})
+#     articles_to_update = get_object_or_404(Articles, id=id)
+#     context.update({"articles_to_update":articles_to_update})
 
-#     article_category_input = request.GET['article_category_input']
-#     context.update(category_check(article_category_input, context))
+#     articles_category_input = request.GET['articles_category_input']
+#     context.update(category_check(articles_category_input, context))
 #     template = "articles_create_category_error.html"
 #     return render_login_required(request, template, context)
 
@@ -439,11 +453,11 @@ def articles_update(request, id):
 
 #     context = {}
 
-#     article_to_update = get_object_or_404(Articles, id=id)
-#     context.update({"article_to_update":article_to_update})
+#     articles_to_update = get_object_or_404(Articles, id=id)
+#     context.update({"articles_to_update":articles_to_update})
 
-#     buy_price = request.GET['article_buy_price_input']
-#     increase = request.GET['article_increase_input']
+#     buy_price = request.GET['articles_buy_price_input']
+#     increase = request.GET['articles_increase_input']
 #     error_any = False
 
 #     if is_empty(increase) or is_empty(buy_price):
@@ -477,39 +491,39 @@ def articles_update(request, id):
 #     any_error = False
 #     context = {}
 
-#     article_to_update = get_object_or_404(Articles, id=id)
+#     articles_to_update = get_object_or_404(Articles, id=id)
     
-#     article_name_input = request.GET["article_name_input"]
-#     article_category_input = request.GET['article_category_input']
-#     article_color_input = request.GET['article_color_input']
-#     article_material_input = request.GET['article_material_input']
-#     article_size_input = request.GET['article_size_input']
-#     article_buy_price_input = request.GET['article_buy_price_input']
-#     article_increase_input = request.GET['article_increase_input']
-#     article_sell_price_input = request.GET['article_sell_price_input']
+#     articles_name_input = request.GET["articles_name_input"]
+#     articles_category_input = request.GET['articles_category_input']
+#     articles_color_input = request.GET['articles_color_input']
+#     articles_material_input = request.GET['articles_material_input']
+#     articles_size_input = request.GET['articles_size_input']
+#     articles_buy_price_input = request.GET['articles_buy_price_input']
+#     articles_increase_input = request.GET['articles_increase_input']
+#     articles_sell_price_input = request.GET['articles_sell_price_input']
     
 #     context.update({
-#     "article_name_input": article_name_input,
-#     "article_category_input": str_to_int_if_possible(article_category_input),
-#     "article_color_input":str_to_int_if_possible(article_color_input),
-#     "article_material_input":str_to_int_if_possible(article_material_input),
-#     "article_size_input":str_to_int_if_possible(article_size_input),
-#     "article_buy_price_input":article_buy_price_input,
-#     "article_increase_input":article_increase_input,
-#     "article_sell_price_input":article_sell_price_input,
+#     "articles_name_input": articles_name_input,
+#     "articles_category_input": str_to_int_if_possible(articles_category_input),
+#     "articles_color_input":str_to_int_if_possible(articles_color_input),
+#     "articles_material_input":str_to_int_if_possible(articles_material_input),
+#     "articles_size_input":str_to_int_if_possible(articles_size_input),
+#     "articles_buy_price_input":articles_buy_price_input,
+#     "articles_increase_input":articles_increase_input,
+#     "articles_sell_price_input":articles_sell_price_input,
 #             })
 
 #     # conditions to save
-#     any_error, context = search_any_error(article_name_input, article_category_input, article_sell_price_input, context)
+#     any_error, context = search_any_error(articles_name_input, articles_category_input, articles_sell_price_input, context)
 #     # end of conditions to save 
 
-#     categories = Categories.objects.all()
+#     categorie = Categorie.objects.all()
 #     colors = Colors.objects.all()
 #     materials = Materials.objects.all()
 #     sizes = Sizes.objects.all()
 
 #     context.update({
-#         "categories":categories,
+#         "categorie":categorie,
 #         "colors":colors,
 #         "materials":materials,
 #         "sizes":sizes
@@ -523,76 +537,76 @@ def articles_update(request, id):
 #         return render_login_required(request, template, context)
     
 #     else:
-#         objects = get_objects(article_category_input,article_color_input,article_material_input,article_size_input)
+#         objects = get_objects(articles_category_input,articles_color_input,articles_material_input,articles_size_input)
 
-#         article_to_update.article_name = title(article_name_input)
-#         article_to_update.category_id = objects["article_category_object"]
-#         article_to_update.color_id = objects["article_color_object"]
-#         article_to_update.material_id = objects["article_material_object"]
-#         article_to_update.size_id = objects["article_size_object"]
-#         article_to_update.buy_price = float(article_buy_price_input)
-#         article_to_update.increase = float(article_increase_input)
-#         article_to_update.sell_price = float(article_sell_price_input.replace(',','.'))
+#         articles_to_update.articles_name = title(articles_name_input)
+#         articles_to_update.category_id = objects["articles_category_object"]
+#         articles_to_update.color_id = objects["articles_color_object"]
+#         articles_to_update.material_id = objects["articles_material_object"]
+#         articles_to_update.size_id = objects["articles_size_object"]
+#         articles_to_update.buy_price = float(articles_buy_price_input)
+#         articles_to_update.increase = float(articles_increase_input)
+#         articles_to_update.sell_price = float(articles_sell_price_input.replace(',','.'))
 
-#         article_to_update.save()
+#         articles_to_update.save()
         
-#         context["article_to_update"] = get_object_or_404(Articles, id=id)
+#         context["articles_to_update"] = get_object_or_404(Articles, id=id)
 
 #         template = "articles_update_save_right.html"
         
-#         context["answer_article_name"] = ""
+#         context["answer_articles_name"] = ""
 #         context["answer_category_id"] = ""
 #         context["answer_sell_price"] = ""
 #         return render_login_required(request, template, context)
-# ## Articles Categories SECTION
+# ## Articles Categorie SECTION
 def articles_categories(request):
-    template = "categories.html"
-    categories = Categories.objects.all()
-    context = {"categories": categories}
+    template = "categorie.html"
+    categorie = Category.objects.all()
+    context = {"categorie": categorie}
     return render_login_required(request, template, context)
 
-# ## Articles Categories Create
-# def articles_categories_save(request):
+# ## Articles Categorie Create
+# def articles_categorie_save(request):
 
     
-#     categories = Categories.objects.all()
+#     categorie = Categorie.objects.all()
 #     category_input = request.GET['category_input']
-#     context = {"category_input": category_input, "categories": categories}
+#     context = {"category_input": category_input, "categorie": categorie}
     
 #     if category_input == "":
 
-#         template = "categories_table_empty_error.html"
+#         template = "categorie_table_empty_error.html"
 #         return render_login_required(request, template, context)
     
 #     else:
 
 #         try:
 
-#             object = Categories(category_name = category_input)
+#             object = Categorie(category_name = category_input)
 #             object.save()
-#             template = "categories_table_right.html"
+#             template = "categorie_table_right.html"
 #             return render_login_required(request, template, context)
 #         except Exception as e:
 #             print("-"*100)
 #             print(f"ESTE ES EL ERROR -----------> {e.__str__} ")
 #             print("-"*100)
-#             template = "categories_table_duplicate_error.html"
+#             template = "categorie_table_duplicate_error.html"
 #             return render_login_required(request, template, context)
 
-# def articles_categories_update(request, id):
+# def articles_categorie_update(request, id):
 
 #     pass
 
-# def articles_categories_delete(request, id):
+# def articles_categorie_delete(request, id):
 
-#     category_to_delete = get_object_or_404(Categories, id = id)
+#     category_to_delete = get_object_or_404(Categorie, id = id)
 #     context = {}
 #     context["category_deleted_name"] = category_to_delete.category_name
 #     category_to_delete.delete()
-#     template = "categories_delete_right.html"
+#     template = "categorie_delete_right.html"
 
-#     categories = Categories.objects.all()
-#     context["categories"] = categories
+#     categorie = Categorie.objects.all()
+#     context["categorie"] = categorie
 
 #     return render_login_required(request, template, context)
 
@@ -658,10 +672,10 @@ def articles_categories(request):
 
 #         if articles:
 
-#             for article in articles:
+#             for articles in articles:
 
-#                 article.color_id = None
-#                 article.save()
+#                 articles.color_id = None
+#                 articles.save()
 
 #         color_to_delete.delete()
 
@@ -771,7 +785,8 @@ def articles_categories(request):
 
 #     return render_login_required(request, template, context)
 
-# CUSTOMERS SECTION
+# CUSTOMER SECTION
 
 def customers(request):
-    return render_login_required(request, template_name="customers.html",context={})
+    template="customers.html"
+    return render_login_required(request, template,context={})

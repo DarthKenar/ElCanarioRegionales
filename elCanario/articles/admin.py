@@ -1,54 +1,55 @@
 from django.contrib import admin
-from .models import Categories, Values, Articles, ArticlesValues, Customers, Stocks, Promotions, Orders, Expenses
+from .models import *
 
 # Register your models here.
 
-class AdminCategories(admin.ModelAdmin):
+class AdminCategory(admin.ModelAdmin):
     list_display=['name']
     search_fields = ["name"]
     list_filter = ["name"]
     ordering = ['name']
 
-class AdminValues(admin.ModelAdmin):
+class AdminValue(admin.ModelAdmin):
     list_display=['category_id','name']
 
-class AdminArticles(admin.ModelAdmin):
+class AdminArticle(admin.ModelAdmin):
     list_display=['name','buy_price','increase','sell_price']
     ordering = ['sell_price']
 
-class AdminArticlesValues(admin.ModelAdmin):
+class AdminArticleValue(admin.ModelAdmin):
     list_display=['article_id','value_id','category_id']
     
 
 
-class AdminCustomers(admin.ModelAdmin):
+class AdminCustomer(admin.ModelAdmin):
     list_display=['name','phone_number','address','email','total_purchased']
 
-class AdminStocks(admin.ModelAdmin):
+class AdminStock(admin.ModelAdmin):
     list_display=['article_id','stock']
 
 
-class AdminPromotions(admin.ModelAdmin):
-    list_display=['promotion_name','discount','sell_price', 'remainder']
+class AdminPromotion(admin.ModelAdmin):
+    list_display=['name','discount','sell_price', 'remainder']
 
-class AdminOrders(admin.ModelAdmin):
-    list_display=['customer_id','articles_quantity','total_pay','details','creation_date','updated_date','delivery_status']
+class AdminOrder(admin.ModelAdmin):
+    list_display=['customer_id','total_pay','details','creation_date','updated_date','delivery_status']
 
-class AdminExpenses(admin.ModelAdmin):
+class AdminExpense(admin.ModelAdmin):
     list_display=['name','description','quantity','total_cost']
+# class AdminOrdersArticles(admin.ModelAdmin):
+#     list_display=['article_id','orders_id']
 
 
+admin.site.register(Category, AdminCategory)
+admin.site.register(Value, AdminValue)
+admin.site.register(Article, AdminArticle)
+admin.site.register(ArticleValue, AdminArticleValue)
 
-admin.site.register(Categories, AdminCategories)
-admin.site.register(Values, AdminValues)
-admin.site.register(Articles, AdminArticles)
-admin.site.register(ArticlesValues, AdminArticlesValues)
-
-admin.site.register(Customers,AdminCustomers)
-admin.site.register(Stocks,AdminStocks)
-admin.site.register(Promotions,AdminPromotions)
-admin.site.register(Orders,AdminOrders)
-admin.site.register(Expenses,AdminExpenses)
-
+admin.site.register(Customer,AdminCustomer)
+admin.site.register(Stock,AdminStock)
+admin.site.register(Promotion,AdminPromotion)
+admin.site.register(Order,AdminOrder)
+admin.site.register(Expense,AdminExpense)
+# admin.site.register(OrdersArticles,AdminOrdersArticles)
 
 

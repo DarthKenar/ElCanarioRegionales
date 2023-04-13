@@ -35,7 +35,8 @@ urlpatterns = [
     path('articles', articles_views.articles, name="articles"),
 
     path('articles_create', articles_views.articles_create, name="articles_create"),
-    path('articles_read', articles_views.articles_read, name="articles_read"),
+    path('articles_read_datatype', articles_views.articles_read_datatype, name="articles_read_datatype"),
+    path('articles_read_data', articles_views.articles_read_data, name="articles_read_data"),
     path('articles_update/<int:id>', articles_views.articles_update, name="articles_update"),
     path('articles_delete/<int:id>', articles_views.articles_delete, name="articles_delete"),
 
@@ -54,7 +55,6 @@ htmx_urlpatterns = [
 #         ##ARTICLUES READ FUNCTIONS
     path('articles_read_id', articles_views.articles_read_id, name="articles_read_id"),
     path('articles_read_name', articles_views.articles_read_name, name="articles_read_name"),
-    path('articles_read_values',articles_views.articles_read_values, name="articles_read_values"),
     path('articles_read_buy_price', articles_views.articles_read_buy_price, name="articles_read_buy_price"),
     path('articles_read_increase', articles_views.articles_read_increase, name="articles_read_increase"),
     path('articles_read_sell_price', articles_views.articles_read_sell_price, name="articles_read_sell_price"),
