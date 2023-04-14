@@ -6,24 +6,24 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def render_login_required(request, template: str,context: dict): 
-    """
-    This function is used for all functions that require the user to be logged in.
-    """
+    """This function is used for all functions that require the user to be logged in."""
 
     return render(request, template, context)
+
 def value_in_context_is_empty(QuerySet:any)-> bool:
     """Checks if the QuerySet is empty or not, returning True if it is empty and False if it has one or more elements inside."""
+
     quantity = QuerySet.count()
-    print(quantity)
     if quantity < 1:
         return True
     else:
         return False
+    
 def is_empty(s):
-    """
-    Returns True if the string is empty or contains only blanks.
-    """
+    """Returns True if the string is empty or contains only blanks."""
+
     return s is None or s.strip() == ''
+
 # def title(title: str)->str:
 #     """get a string title and returns the first letter of the word in upper case and the others in lower case"""
 #     try:

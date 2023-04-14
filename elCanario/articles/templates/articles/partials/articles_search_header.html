@@ -19,13 +19,15 @@
                 {% if datatype_input == 'id' %}<input class="bg-amber-50 rounded-sm px-2 mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'articles_read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_answer_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>{% endif %}
                 {% if datatype_input == 'name' %}<input class="bg-amber-50 rounded-sm px-2 mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'articles_read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_answer_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>{% endif %}
                 {% for category in categories %}
-                {% if datatype_input == category.id %}
-                    <select class="bg-amber-50 rounded-sm px-2 mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'articles_read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_answer_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms">
-                        {% for value in values %}
-                        <option value="{{value.id}}">{{value.name}}</option>
-                        {% endfor %}
-                    </select>
-                {% endif %}
+                    {% if datatype_input == category.id %}
+                        <select class="bg-amber-50 rounded-sm px-2 mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'articles_read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_answer_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms">
+                            {% for value in values %}
+
+                            <option value="{{value.id}}">{{value.name}}</option>
+                            
+                            {% endfor %}
+                        </select>
+                    {% endif %}
                 {% endfor %}
                 {% if datatype_input == 'buy_price' %}<input class="bg-amber-50 rounded-sm px-2 mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'articles_read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_answer_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>{% endif %}
                 {% if datatype_input == 'increase' %}<input class="bg-amber-50 rounded-sm px-2 mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'articles_read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_answer_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>{% endif %}

@@ -53,6 +53,7 @@ def articles_read_datatype(request):
         context["datatype_input"] = category.id
         context["datatype"] = category.name
 
+        context["values"] = Value.objects.filter(category_id=category)
     else:
 
         datatype_dict = {
@@ -126,11 +127,12 @@ def articles_read_data(request):
             context["datatype"] = "Precio de venta:"
 
         if value_in_context_is_empty(context["articles_any"]):
+            print("HOLAASDASD")
             template = "articles_search_not_found.html"
 
     categories = Category.objects.all()
     context["search_input"] = search_input
-    context["categorie"] = categories
+    context["categories"] = categories
 
     return render_login_required(request, template, context)
 
