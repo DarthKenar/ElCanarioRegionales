@@ -127,7 +127,6 @@ def articles_read_data(request):
             context["datatype"] = "Precio de venta:"
 
         if value_in_context_is_empty(context["articles_any"]):
-            print("HOLAASDASD")
             template = "articles_search_not_found.html"
 
     categories = Category.objects.all()
