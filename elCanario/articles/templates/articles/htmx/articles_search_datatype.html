@@ -1,9 +1,9 @@
-<div id="search_answer">
-    <p>Se esta buscando tipo de dato blabla</p>
-    {% include 'search_header.html' %}
+<div id="search_answer_datatype">
+    <p>Se esta buscando {{datatype}}</p>
+    {% include 'articles_search_header.html' %}
     <div>
         {% if articles_any %}
-            <div>
+            <div id="search_answer_data">
                 
                 {% include 'articles_table.html' %}
             </div>

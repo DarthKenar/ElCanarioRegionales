@@ -1,16 +1,8 @@
-<div id="search_answer">
+{% if articles_any %}
+<div id="search_answer_data">
     <div>
         <output class="text-red-600" type="text">No se encuentran artículos para: <b> {{datatype}}: {{search_input}}</b></output>
     </div>
-
-    {% include 'search_header.html' %}
-    
-    <div>
-        {% if articles_any %}
-            <div>
-                
-                {% include 'articles_table.html' %}
-            </div>
-        {% endif %}
-    </div>
+    {% include 'articles_table.html' %}
 </div>
+{% endif %}

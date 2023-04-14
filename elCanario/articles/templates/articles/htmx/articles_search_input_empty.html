@@ -1,17 +1,9 @@
-<div id="search_answer">
-    <div>
-        <output type="text">Por favor, completa el campo de búsqueda</output>
-        <output type="text">Artículos en la Base de datos<b>{{ articles_any.count }}</b></output>
-    </div>
-
-    {% include 'search_header.html' %}
-    
-    <div>
-        {% if articles_any %}
+{% if articles_any %}
+    <div id="search_answer_data">
             <div>
-                
-                {% include 'articles_table.html' %}
+                <output type="text">Por favor, completa el campo de búsqueda</output>
+                <output type="text">Artículos en la Base de datos<b>{{ articles_any.count }}</b></output>
             </div>
-        {% endif %}
+        {% include 'articles_table.html' %}
     </div>
-</div>
+{% endif %}

@@ -3,13 +3,13 @@
     <title>Artículos - Canario Regionales</title>
 {% endblock %}
 {% block content_two %}
-    <div id="search_answer">
+    <div id="search_answer_datatype">
 
-        {% include 'search_header.html'%}
+        {% include 'articles_search_header.html'%}
 
         <div>
             {% if articles_any %}
-                <div>
+                <div id="search_answer_data">
                     
                     {% include 'articles_table.html' %}
                 </div>

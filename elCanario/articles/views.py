@@ -40,158 +40,98 @@ def articles_read_datatype(request):
     context = {}
     datatype_input = request.GET['datatype_input']
 
-    articles = Article.objects.all()
     categories = Category.objects.all()
+    context["categories"] = categories
     
-    context["articles_any"] = articles
-
     if datatype_input.strip().isnumeric():
+
         datatype_input = int(datatype_input.strip())
         category = Category.objects.get(id = datatype_input)
-        context["datatype_input"] = category
+
         context["articles_any"] = Article.objects.filter(characteristics_id__category_id=category)
         
-    datatype_dict = {
-                    1: "id",
-                    2: "name",
-                    3: "buy_price",
-                    4: "increase",
-                    5: "sell_price"
-                    }
-    
-    context["categories"] = categories
-    # context["articles_values"] = articles_values
-    context["datatype_input"] = datatype_input
+        context["datatype_input"] = category.id
+        context["datatype"] = category.name
 
-    if datatype_input == datatype_dict[1]:
+    else:
 
-        context["datatype_input"] = datatype_input
-        context["datatype"] = "Id"
-
-    elif datatype_input == datatype_dict[2]:
-
-        context["datatype"] = "Nombre"
+        datatype_dict = {
+                        1: "id",
+                        2: "name",
+                        3: "buy_price",
+                        4: "increase",
+                        5: "sell_price"
+                        }
         
-    elif datatype_input == datatype_dict[3]:
-
-        context["datatype"] = "Precio de compra"
-
-    elif datatype_input == datatype_dict[4]:
-
-        context["datatype"] = "Incremento"
-
-    else: #datatype_input == datatype_dict[5]:
-
+        articles = Article.objects.all()
         context["datatype_input"] = datatype_input
-        context["datatype"] = "Precio de venta"
+        context["articles_any"] = articles
+
+        if datatype_input == datatype_dict[1]:
+
+            context["datatype_input"] = datatype_input
+            context["datatype"] = "Id"
+
+        elif datatype_input == datatype_dict[2]:
+
+            context["datatype"] = "Nombre"
+            
+        elif datatype_input == datatype_dict[3]:
+
+            context["datatype"] = "Precio de compra"
+
+        elif datatype_input == datatype_dict[4]:
+
+            context["datatype"] = "Incremento"
+
+        else: #datatype_input == datatype_dict[5]
+
+            context["datatype_input"] = datatype_input
+            context["datatype"] = "Precio de venta"
+            
 
     return render_login_required(request,template,context)
-
-def articles_read_id(request):
+def articles_read_data(request):
 
     template = "articles_search_right.html"
 
     search_input = request.GET["search_input"]
-
+    datatype_input = request.GET["datatype_input"]
     context = {}
 
     if is_empty(search_input):
+        template = "articles_search_input_empty.html"
         context["articles_any"] = Article.objects.all()
         
     else:
-        context["articles_any"] = Article.objects.filter(id=search_input)
+        if datatype_input == "id":
+            context["articles_any"] = Article.objects.filter(id=search_input)
+            context["datatype_input"] = "id"
+            context["datatype"] = "Id:"
+        elif datatype_input == "name":
+            context["articles_any"] = Article.objects.filter(name__startswith=search_input) 
+            context["datatype_input"] = "name"
+            context["datatype"] = "Nombre:"
+        elif datatype_input == "buy_price":
+            context["articles_any"] = Article.objects.filter(buy_price__startswith=search_input)
+            context["datatype_input"] = "buy_price"
+            context["datatype"] = "Precio de compra:"
+        elif datatype_input == "increase":
+            context["articles_any"] = Article.objects.filter(increase__startswith=search_input)
+            context["datatype_input"] = "increase"
+            context["datatype"] = "Incremento:"
+        elif datatype_input == "sell_price":
+            context["articles_any"] = Article.objects.filter(sell_price__startswith=search_input)
+            context["datatype_input"] = "sell_price"
+            context["datatype"] = "Precio de venta:"
+
+        if value_in_context_is_empty(context["articles_any"]):
+            template = "articles_search_not_found.html"
 
     categories = Category.objects.all()
-
     context["search_input"] = search_input
-    context["datatype_input"] = "id"
-    context["datatype"] = "Id"
     context["categorie"] = categories
 
-    return render_login_required(request, template, context)
- 
-def articles_read_name(request):
-
-    template = "articles_search_right.html"
-    search_input = request.GET["search_input"]
-    
-    context = {}
-    
-    if is_empty(search_input):
-        print("EMPTY"*100)
-        context["articles_any"] = Article.objects.all()
-    else:
-        print("FULL"*100)
-        context["articles_any"] = Article.objects.filter(name__startswith=search_input)    
-    
-    context["search_input"] = search_input
-    context["datatype_input"] = "name"
-    context["categorie"] = Category.objects.all()
-    context["articles_value"] = ArticleValue.objects.all()
-    context["datatype"] = "Nombre"
-
-    return render_login_required(request, template, context)
-
-def articles_read_data(request):
-
-    pass
-def articles_read_buy_price(request):
-
-    template = "articles_search_right.html"
-    search_input = request.GET["search_input"]
-
-    context = {}
-
-    if is_empty(search_input):
-        context["articles_any"] = Article.objects.all()
-    else:
-        context["articles_any"] = Article.objects.filter(buy_price__startswith=search_input)
-
-    context["search_input"] = search_input
-    context["datatype_input"] = "buy_price"
-    context["categorie"] = Category.objects.all()
-    context["articles_value"] = ArticleValue.objects.all()
-    context["datatype"] = "Precio de compra:"
-
-    return render_login_required(request, template, context)
- 
-def articles_read_increase(request):
-
-    context = {}
-
-    search_input = request.GET["search_input"]
-    context["search_input"] = search_input
-    context["datatype_input"] = "increase"
-    context["categorie"] = Category.objects.all()
-    context["articles_value"] = ArticleValue.objects.all()
-    context["datatype"] = Article.increase
-
-    if is_empty(search_input):
-        context["articles_any"] = Article.objects.all()
-    else:
-        context["articles_any"] = Article.objects.filter(increase__startswith=search_input)
-
-    template = "articles_search_right.html"
-    return render_login_required(request, template, context)
- 
-def articles_read_sell_price(request):
-
-    context = {}
-    context["categorie"] = Category.objects.all()
-    context["articles_value"] = ArticleValue.objects.all()
-    context["datatype_input"] = "sell_price"
-
-    search_input = request.GET["search_input"]
-    context["search_input"] = search_input
-    
-    template = "articles_search_right.html"
-
-    if is_empty(search_input):
-        context["articles_any"] = Article.objects.all()
-    else:
-        context["articles_any"] = Article.objects.filter(sell_price__startswith=search_input)
-
-    
     return render_login_required(request, template, context)
 
 ### Articles create

@@ -2,7 +2,7 @@
     <div class="flex flex-row">
         <div class="basis-1/3 flex place-content-start">
                 <label class="text-black font-sans font-bold mx-2" for="search_input">Buscar:</label>
-                <select class="bg-amber-50 rounded-sm px-2 mx-2" name="datatype_input" id="datatype_input" hx-get="{% url 'articles_read_datatype' %}" hx-target="#search_answer"  hx-trigger="change" hx-swap="outerHTML">
+                <select class="bg-amber-50 rounded-sm px-2 mx-2" name="datatype_input" id="datatype_input" hx-get="{% url 'articles_read_datatype' %}" hx-target="#search_answer_datatype"  hx-trigger="change" hx-swap="outerHTML">
                     <option value="id" {% if datatype_input == "id" %} selected {% endif %}>ID</option>
                     <option value="name" {% if datatype_input == "name" %} selected {% endif %}>Nombre</option>
                     <!-- Ingresar en bucle todos los titulos o categorías disponibles -->
@@ -15,20 +15,21 @@
                     <option value="increase" {% if datatype_input == "increase" %} selected {% endif %}>Incremento</option>
                     <option value="sell_price" {% if datatype_input == "sell_price" %} selected {% endif %}>Precio de Venta</option>
                 </select>
-                {% if datatype_input == 'id' %}<input class="bg-amber-50 rounded-sm px-2 mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'articles_read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_answer" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>{% endif %}
-                {% if datatype_input == 'name' %}<input class="bg-amber-50 rounded-sm px-2 mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'articles_read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_answer" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>{% endif %}
+
+                {% if datatype_input == 'id' %}<input class="bg-amber-50 rounded-sm px-2 mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'articles_read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_answer_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>{% endif %}
+                {% if datatype_input == 'name' %}<input class="bg-amber-50 rounded-sm px-2 mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'articles_read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_answer_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>{% endif %}
                 {% for category in categories %}
                 {% if datatype_input == category.id %}
-                    <select class="bg-amber-50 rounded-sm px-2 mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'articles_read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_answer" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms">
+                    <select class="bg-amber-50 rounded-sm px-2 mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'articles_read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_answer_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms">
                         {% for value in values %}
                         <option value="{{value.id}}">{{value.name}}</option>
                         {% endfor %}
                     </select>
                 {% endif %}
                 {% endfor %}
-                {% if datatype_input == 'buy_price' %}<input class="bg-amber-50 rounded-sm px-2 mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'articles_read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_answer" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>{% endif %}
-                {% if datatype_input == 'increase' %}<input class="bg-amber-50 rounded-sm px-2 mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'articles_read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_answer" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>{% endif %}
-                {% if datatype_input == 'sell_price' %}<input class="bg-amber-50 rounded-sm px-2 mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'articles_read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_answer" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>{% endif %}
+                {% if datatype_input == 'buy_price' %}<input class="bg-amber-50 rounded-sm px-2 mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'articles_read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_answer_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>{% endif %}
+                {% if datatype_input == 'increase' %}<input class="bg-amber-50 rounded-sm px-2 mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'articles_read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_answer_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>{% endif %}
+                {% if datatype_input == 'sell_price' %}<input class="bg-amber-50 rounded-sm px-2 mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'articles_read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_answer_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>{% endif %}
         </div>
         <!-- <div class="basis-1/3 flex place-content-center">
             <form action="{% url 'articles_create' %}">
