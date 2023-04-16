@@ -2,15 +2,15 @@
 title: articles App
 ---
 erDiagram 
-    Article one or zero to many ArticleValue : contains
-    Article |o--|| ArticlePromotion : places
-    Article |o--|| ArticleOrder : places
-    Article |o--|| Stock : places
-    ArticleValue |o--|| Value : places
-    ArticleValue |o--|| Category : places
-    Value |o--|| Category : places
-    ArticlePromotion |o--|| Promotion : places
-    ArticleOrder |o--|| Order : places
+    Article one or zero to many ArticleValue : characteristics_id
+    Article |o--|| ArticlePromotion : in
+    Article |o--|| ArticleOrder : in
+    Article |o--|| Stock : in
+    ArticleValue |o--|| Value : get
+    ArticleValue |o--|| Category : get
+    Value |o--|| Category : get
+    ArticlePromotion |o--|| Promotion : get
+    ArticleOrder |o--|| Order : get
     Order |o--|| Customer : places
     Article {
         id BigAutoField
