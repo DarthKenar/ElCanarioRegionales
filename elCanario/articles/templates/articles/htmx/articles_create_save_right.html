@@ -1,47 +1,26 @@
 <div class="mx-auto max-w-md" id="article_create_answer">
     <h1 class="font-mono text-lg text-center font-bold">Agregar Artículo</h1>
     <div class="p-4 m-4">
-        <label class="italic px-2">Nombre*: </label>
-        <input class="bg-amber-50 rounded-sm px-2" hx-get="{% url 'name_check' %}" hx-target="#answer_article_name" hx-trigger="keyup changed delay:300ms" hx-swap="outerHTML" type="text" name="article_name_input" id="article_name_input" required >
-        <output class="text-green-600" id="answer_article_name">{{answer_article_name}}</output>
+      <label class="italic px-2">Nombre*: </label>
+      <input class="bg-amber-50 rounded-sm px-2" hx-get="{% url 'name_check' %}" type="text" hx-target="#answer_article_name" hx-trigger="keyup changed delay:200ms" hx-swap="outerHTML" name="article_name_input" id="article_name_input" required >
+      <output class="text-red-600" id="answer_article_name">{{answer_article_name}}</output>
     </div>
-    <div class="p-4 m-4">
-        <label class="italic px-2" >Categoría*: </label>
-        <select class="bg-amber-50 rounded-sm px-2" name="article_category_input" id="article_category_input" required hg-get="{% url 'category_check' %}" hx-target="#answer_category_id" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" required>
-            <option value="Empty"></option>
-            {% for category in categories %}
-                <option value="{{category.id}}">{{category.category_name}}</option>
-            {% endfor %}
-        </select>
-        <output class="text-red-500" id="answer_category_id">{{answer_category_id}}</output>
-    </div>
-    <div class="p-4 m-4">
-        <label class="italic px-2">Color: </label>
-        <select class="bg-amber-50 rounded-sm px-2" name="article_color_input" id="article_color_input">
-            <option value="Empty"></option>
-            {% for color in colors %}
-                <option value="{{color.id}}">{{color.color_name}}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <div class="p-4 m-4">
-        <label class="italic px-2">Material: </label>
-        <select class="bg-amber-50 rounded-sm px-2" name="article_material_input" id="article_material_input">
-            <option value="Empty"></option>
-            {% for material in materials %}
-                <option value="{{material.id}}">{{material.material_name}}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <div class="p-4 m-4">
-        <label class="italic px-2">Talle/Tamaño: </label>
-        <select class="bg-amber-50 rounded-sm px-2" name="article_size_input" id="article_size_input">
-            <option value="Empty"></option>
-            {% for size in sizes %}
-                <option value="{{size.id}}">{{size.size_name}}</option>
-            {% endfor %}
-        </select>
-    </div>
+    {% for category in categories %}
+        <div class="p-4 m-4">
+            <label class="italic px-2" for="article_value_input">{{category.name}}: </label>
+            <select class="bg-amber-50 rounded-sm px-2" id = "{{category.id}}" name="category-{{category.id}}">
+                <option value=""></option>
+                {% load custom_tags %}
+                {% with values|filter_by_category:category as values_for_category %}
+                    {% for value in values_for_category %}
+                    <option value="{{value.id}}">{{value.name}}</option>
+                    {% endfor %}
+                {% endwith %}
+            </select>
+            <output class="text-red-600" id="answer_category_id">{{answer_category_id}}</output>
+        </div>
+    {% endfor %}
+
     <div class="p-4 m-4">
       <label class="italic px-2">Precio Compra*: </label>
       <input class="bg-amber-50 rounded-sm px-2" type="text" name="article_buy_price_input" id="article_buy_price_input" hx-get="{% url 'calculator' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#article_sell_price_output" hx-include="[name='article_increase_input']" required >
@@ -58,11 +37,13 @@
     </div>
 
     <div class="grid place-content-end">
-        <button ion-button icon-only type="submit" hx-get="{% url 'articles_create_confirm' %}" hx-trigger="click" hx-include="#article_name_input, #article_category_input, #article_color_input, #article_material_input, #article_size_input, #article_buy_price_input, #article_increase_input, #article_sell_price_input" hx-target="#article_create_answer" hx-swap="outerHTML">
+
+        <button ion-button icon-only type="submit" hx-get="{% url 'articles_create_confirm' %}" hx-trigger="click" hx-include="#article_name_input,[name^='category-'],#article_buy_price_input, #article_increase_input, #article_sell_price_input" hx-target="#article_create_answer" hx-swap="outerHTML">
             <ion-icon class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" name="save-outline"></ion-icon>
         </button>
+
     </div>
     <div>
         <output class="rounded-sm px-2 empty:hidden text-green-600">{{answer_save_right}}</output>
     </div>
-  </div>
+</div>

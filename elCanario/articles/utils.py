@@ -1,8 +1,9 @@
 # from django.shortcuts import get_object_or_404
 # from articles.models import Categories, Colors, Sizes, Materials
-# from typing import Tuple
+from typing import Tuple
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from .models import Category, Value
 
 @login_required
 def render_login_required(request, template: str,context: dict): 
@@ -24,36 +25,13 @@ def is_empty(s):
 
     return s is None or s.strip() == ''
 
-# def title(title: str)->str:
-#     """get a string title and returns the first letter of the word in upper case and the others in lower case"""
-#     try:
-#         return title.title()
-#     except(TypeError, ValueError):
-#         return title
+def title(title: str)->str:
+    """get a string title and returns the first letter of the word in upper case and the others in lower case"""
+    try:
+        return title.title()
+    except(TypeError, ValueError):
+        return title
     
-# def articles_create_confirm_get_category(input: int) -> object:
-#     """retrieves an id(int) and returns the object corresponding to that id"""
-
-#     category_object = get_object_or_404(Categories, id = input)
-#     return category_object
-
-# def articles_create_confirm_get_color(input: int) -> object:
-#     """retrieves an id(int) and returns the object corresponding to that id"""
-
-#     color_object = get_object_or_404(Colors, id = input)
-#     return color_object
-
-# def articles_create_confirm_get_material(input: int) -> object:
-#     """retrieves an id(int) and returns the object corresponding to that id"""
-
-#     material_object = get_object_or_404(Materials, id = input)
-#     return material_object
-
-# def articles_create_confirm_get_size(input: int) -> object:
-#     """retrieves an id(int) and returns the object corresponding to that id"""
-
-#     size_object = get_object_or_404(Sizes, id = input)
-#     return size_object
 
 # def str_to_int_if_possible(input:str):
 #     """converts a string to an integer if possible"""
@@ -63,115 +41,163 @@ def is_empty(s):
 
 #     return input
 
-# def name_check(article_name_input:str)->dict:
-#     """checks that the name meets the following conditions:
-#         -is not empty
-#         -not alphanumeric
-#     in these cases returns a response that is added to the context to be used by another function.
-#     if no errors are found then an empty string is returned.
-#     """
+def name_check(article_name_input:str)->dict:
+    """checks that the name meets the following conditions:
+        -is not empty
+        -not alphanumeric
+    in these cases returns a response that is added to the context to be used by another function.
+    if no errors are found then an empty string is returned.
+    """
 
-#     if article_name_input == '':
+    if article_name_input == '':
 
-#         context = {"answer_article_name": "Este campo es obligatorio"}
+        context = {"answer_article_name": "Este campo es obligatorio"}
         
-#     elif not article_name_input.isalpha():
+    elif not article_name_input.isalpha():
         
-#         context = {"answer_article_name": "El nombre del artículo no debe contener números, simbolos o espacios."}
+        context = {"answer_article_name": "El nombre del artículo no debe contener números, simbolos o espacios."}
     
-#     else:
+    else:
         
-#         context = {"answer_article_name": ""}
+        context = {"answer_article_name": ""}
     
-#     return context
-        
-# def category_check(article_category_input:str, context:dict)->dict:
-#     """checks that the category is not empty.
-#     If it is empty then it adds a new error response to the context to be used by another function.
-#     If the category is selected then it returns the error response as an empty string."""
+    return context
+def calculator_check(increase: str, buy_price: str) -> Tuple[dict, bool]:
+    """
+        - Receives the buy price* and increase*
+        - Check these for errors (such as being empty or containing letters).
+        - Returns a tuple with: (dict, boolean)
+            - dict: error responses
+            - boolean: If there is an error, true, otherwise false.
+    """
+    context = {}
+    error_any = False
+    if is_empty(increase) or is_empty(buy_price):
 
-#     if article_category_input == 'Empty':
+        error_any = True
+        context["answer_empty_error"] = "Debes completar los campos para calcular el precio de venta"
 
-#         context["answer_category_id"] = "Es obligatorio seleccionar una categoría."
-    
-#     else:
-#         context["answer_category_id"] = ""
+    if not buy_price.replace(".","0",1).isnumeric() or  not increase.replace(".","0",1).isnumeric():
+        error_any = True
+        context["answer_string_error"] = "Los datos ingresados deben ser numéricos"
 
-#     return context
-
-# def search_any_error(name_input:str, category_input:str, sell_price:str, context: dict) -> Tuple[bool,dict]:
-#     """check that no errors are found for the fields "name", "category" and "sell_price".
-#     returns two objects:
-#         1- boolean: If one error is founded returns True else, False
-#         2- dictionary: The error answers if one of them is founded
+    return context, error_any
+def search_any_error(name_input:str, sell_price:str, context: dict) -> Tuple[dict,bool]:
+    """check that no errors are found for the fields "name" and "sell_price".
+    returns:
+        1- boolean: If one error is founded returns True else, False
+        2- dictionary: The error answers if one of them is founded
          
-#     """
+    """
 
-#     any_error = False
+    any_error = False
 
-#     if name_input == "":
-#         any_error = True
-#         context['answer_article_name'] = 'Es obligatorio completar el nombre.'
-#     elif not name_input.isalpha():
-#         any_error = True
-#         context['answer_article_name'] = 'El nombre del artículo no debe contener números, simbolos o espacios.'
+    if name_input == "":
+        any_error = True
+        context['answer_article_name'] = 'Es obligatorio completar el nombre.'
+    elif not name_input.isalpha():
+        any_error = True
+        context['answer_article_name'] = 'El nombre del artículo no debe contener números, simbolos o espacios.'
 
-#     if category_input == 'Empty':
-#         any_error = True
-#         context['answer_category_id'] = 'Es obligatorio seleccionar una categoría.'
-    
+    try:
+        float(sell_price.replace(",",".",1))
+    except:
 
-#     try:
-#         float(sell_price.replace(",",".",1))
-#     except:
+        any_error = True
+        context['answer_sell_price'] = "Porfavor, calcule correctamente el precio de venta."
 
-#         any_error = True
-#         context['answer_sell_price'] = "Porfavor, calcule correctamente el precio de venta."
+    return(context, any_error)
 
-#     return(any_error, context)
 
-# def get_objects(article_category_input: str,article_color_input: str,article_material_input:str,article_size_input: str)->dict:
-#     """receives four ids(str) as a string and returns a dictionary containing the retrieved objects:
-#         -category
-#         -color
-#         -material
-#         -size
-#     """
-#     if article_category_input != 'Empty':
+def get_values_for_categories(request: object) -> dict:
+    """
+    It obtains the selected values and saves them in a dictionary in which the structure is as follows:
+    dict={'category.id': 'value_id'}
+    Note the difference between calling the id attribute for the category and storing the instance of value as value
+    """
 
-#         article_category_input= int(article_category_input)
-#         article_category_object = articles_create_confirm_get_category(article_category_input)
+    categories = Category.objects.all()
+    values_dict = {}
+    for category in categories:
+        
+        if request.GET['category-'+str(category.id)] != '':
+            values_dict[str(category.id)]= Value.objects.get(id = int(request.GET['category-'+str(category.id)]))
+        else:
+            values_dict[str(category.id)]= None
 
-#     if article_color_input != 'Empty':
+    return values_dict
 
-#         article_color_input = int(article_color_input)
-#         article_color_object = articles_create_confirm_get_color(article_color_input)
 
-#     else:
 
-#         article_color_object = None
+#AUTO GENERATE fields
+from .models import Article, Category, Value, ArticleValue
+import random
 
-#     if article_material_input != 'Empty':
 
-#         article_material_input = int(article_material_input)
-#         article_material_object = articles_create_confirm_get_material(article_material_input)
+def generate_articles(num):
+    names = ["co", "la","fla","men","pri","pro","sul","so","fa","ar","si","lla","fre","ir","gas","dor","mir","cro","no","va","ri","ta"]
+    for _ in range(num):
+        article = Article(
+            name = f"{random.choice(names)}" + f"{random.choice(names)}" + f"{random.choice(names)}",
+            buy_price = random.uniform(100, 500),
+            increase = random.uniform(0,300),
+        )
+        article.sell_price = article.buy_price + ((article.buy_price * article.increase) / 100)
 
-#     else:
+        try:
+            article.save()
+            
+        except:
+            num -= 1
+            pass
+    print(f"{num} articles generated correctly!")
 
-#         article_material_object = None
+def generate_categories_values(num_cat, num_val):
+    names = ["Material", "Tipo", "Color", "Forma", "Tamaño", "Peso", "Marca", "Modelo", "Estilo", "Textura", "Sabor", "Olor", "Sonido", "Temperatura", "Dureza", "Flexibilidad", "Transparencia", "Brillo", "Elasticidad", "Resistencia", "Impermeabilidad", "Porosidad", "Adherencia", "Conductividad", "Reflectividad", "Refractividad", "Densidad", "Viscosidad", "Solubilidad","Fragilidad"]
+    for _ in range(num_cat):
+        category = Category(
+            name = random.choice(names)
+        )
+        try:
+            category.save()
+        except:
+            num_cat -= 1
+            pass
+        else:
+            names = ["Algodón", "Seda", "Lana", "Cuero", "Madera", "Metal", "Plástico", "Vidrio", "Piedra", "Papel", "Zapato", "Camisa", "Pantalón", "Vestido", "Sombrero", "Guante", "Bufanda", "Corbata", "Rojo", "Azul", "Verde", "Amarillo", "Naranja", "Morado", "Negro", "Blanco", "Gris", "Marrón", "Rosa", "Beige","Circular","Cuadrado","Triangular","Rectangular","Hexagonal","Pequeño","Mediano","Grande","Ligero","Pesado","Nike","Adidas","Puma","Reebok","Under Armour","Levis","Calvin Klein","Tommy Hilfiger","Ralph Lauren","Lacoste","Moderno","Clásico","Vintage","Rústico","Urbano","Elegante","Casual","Deportivo","Suave","Áspero","Dulce","Salado","Amargo","Ácido","Picante","Umami","Floral","Cítrico","Herbáceo","Amaderado","Silencioso","Ruidoso","Musical"]
+            for _ in range(num_val):
 
-#     if article_size_input != 'Empty':
+                value = Value(
+                    category_id = category,
+                    name = random.choice(names)
+                )
+                try:
+                    value.save()
+                except:
+                    num_val -= 1
+                    pass
+        print(f"{num_val} values for {category.name} generated correctly!")
+    print(f"{num_cat} categories generated correctly!") 
 
-#         article_size_input = int(article_size_input)
-#         article_size_object = articles_create_confirm_get_size(article_size_input)
+def generate_category_values_for_articles(num):
+    values = Value.objects.all()
+    articles = Article.objects.all()
+    for _ in range(num):
+        value_choiced = random.choice(values)
+        article_value = ArticleValue(
+            category_id = value_choiced.category_id,
+            value_id = value_choiced,
+            article_id = random.choice(articles)
+        )
+        
+        try:
+            article_value.save()
+        except:
+            num -= 1
+            pass
+    print(f"{num} relations category values for articles")
 
-#     else:
-
-#         article_size_object = None
-
-#     objects = {"article_category_object":article_category_object,
-#                "article_color_object":article_color_object,
-#                "article_material_object":article_material_object,
-#                "article_size_object":article_size_object
-#                }
-#     return objects
+def generate(num):
+    generate_articles(num*2)
+    generate_categories_values(num,round(num/2))
+    generate_category_values_for_articles(num*20)

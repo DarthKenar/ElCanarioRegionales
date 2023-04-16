@@ -39,11 +39,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles'
 ]
+#own apps
 INSTALLED_APPS += [
-    'django_extensions',
+    
     'articles',
     'authentication'
 ]
+#For development
+DEV_INSTALLED_APPS = [
+    'django_extensions',
+    'django_seed']
+
+INSTALLED_APPS += DEV_INSTALLED_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
