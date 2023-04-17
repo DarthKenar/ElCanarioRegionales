@@ -88,8 +88,8 @@ htmx_urlpatterns = [
 urlpatterns += htmx_urlpatterns
 
 
-# #STATIC AND IMAGES
-# if settings.DEBUG:
-#     from django.conf.urls.static import static
-#     urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
-#     urlpatterns += static(settings.IMG_URL, document_root = settings.IMG_ROOT)
+#STATIC AND IMAGES
+if settings.DEBUG:
+    from django.conf.urls.static import static
+    urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
+    urlpatterns += static(settings.IMG_URL, document_root = settings.IMG_ROOT)

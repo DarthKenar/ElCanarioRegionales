@@ -47,8 +47,8 @@ INSTALLED_APPS += [
 ]
 #For development
 DEV_INSTALLED_APPS = [
-    'django_extensions',
-    'django_seed']
+    'django_extensions'
+    ]
 
 INSTALLED_APPS += DEV_INSTALLED_APPS
 

@@ -3,6 +3,7 @@
     {% block head_one %}
         <head>
             {% block head_two %}{% endblock %}
+            <link rel="stylesheet" href="{% static 'css/tailwind.css' %}">
             <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
             <!-- HTMX -->
@@ -25,7 +26,7 @@
         </form>
 
         <body class="bg-cover bg-center" style="background-image: url('static/img/smoke-bg.png')">
-            <div class="bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md  border-2 p-4 m-8 shadow-slate-600 shadow-md border-separate border-amber-100 transition duration-300 hover:shadow-slate-600 hover:shadow-sm">
+            <div class="bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md  border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100">
                 <ul class="flex justify-around bg-center p-2">
                     <li>
                         <form action="{% url 'orders' %}">

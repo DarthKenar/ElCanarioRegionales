@@ -1,8 +1,8 @@
 {% if articles_any %}
     <div id="search_answer_data">
-        <div>
-            <output type="text">Por favor, completa el campo de búsqueda</output><br>
-            <output type="text">Artículos en la Base de datos<b>{{ articles_any.count }}</b></output>
+        <div class="bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md  border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100">
+            <output class="font-bold empty:hidden cursor-default text-red-600 appear" type="text">Por favor, completa el campo de búsqueda</output><br>
+            <output class="font-bold empty:hidden cursor-default appear" type="text">Artículos en la Base de datos:<b> {{ articles_any.count }} </b></output>
         </div>
         {% include 'articles_table.html' %}
     </div>
