@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 # Create your models here.
 class Category(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
 
     def __str__(self) -> str:
         return f'{self.name}'
@@ -27,7 +27,7 @@ class Value(models.Model):
         ordering = ['name']
 
 class Article(models.Model):
-    name = models.CharField(verbose_name="Nombre",max_length=100)
+    name = models.CharField(verbose_name="Nombre",max_length=100, unique=True)
     characteristics_id = models.ManyToManyField(Value,related_name='characteristics_id', blank=True, through='ArticleValue')
     buy_price = models.DecimalField(verbose_name="Precio de compra", max_digits=10, decimal_places=2, validators=[MinValueValidator(0.0)])
     increase = models.DecimalField(verbose_name="Incremento", max_digits=10, decimal_places=2, validators=[MinValueValidator(0.0)])
