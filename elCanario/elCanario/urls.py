@@ -37,13 +37,10 @@ urlpatterns = [
     path('articles_create', articles_views.articles_create, name="articles_create"),
     path('articles_read_datatype', articles_views.articles_read_datatype, name="articles_read_datatype"),
     path('articles_read_data', articles_views.articles_read_data, name="articles_read_data"),
-    path('articles_update/<int:id>', articles_views.articles_update, name="articles_update"),
-    path('articles_delete/<int:id>', articles_views.articles_delete, name="articles_delete"),
+    path('articles_update/<int:id>', articles_views.article_update, name="articles_update"),
+    path('articles_delete/<int:id>', articles_views.article_delete, name="articles_delete"),
 
     path('articlesCategories', articles_views.articles_categories, name="categories"),
-#     path('articlesColors', articles_views.articles_colors, name="colors"),
-#     path('articlesMaterials', articles_views.articles_materials, name="materials"),
-#     path('articlesSizes', articles_views.articles_sizes, name="sizes"),
 
     #CUSTOMERS
     path('customers', articles_views.customers, name="customers"),
@@ -66,9 +63,10 @@ htmx_urlpatterns = [
 #     path('articles_update_confirm/<int:id>', articles_views.articles_update_confirm, name="articles_update_confirm"),
 
 #         #ARTICLES CATEGORIES
-#     path('articles/categories/save', articles_views.articles_categories_save, name="category_save"),
-#     path('articles/categories/update/<int:id>', articles_views.articles_categories_update, name="category_update"),
-#     path('articles/categories/delete/<int:id>', articles_views.articles_categories_delete, name="category_delete"),
+    path('articles/categories/create', articles_views.articles_categories_create, name="category_create"),
+    path('articles/categories/values/create/<int:id>', articles_views.articles_category_value_create, name="value_create"),
+    path('articles/categories/update/<int:id>', articles_views.articles_category_update, name="category_update"),
+    path('articles/categories/delete/<int:id>', articles_views.articles_category_delete, name="category_delete"),
 
 #         #ARTICLES COLORS
 #     path('articles/colors/save', articles_views.articles_colors_save, name="color_save"),

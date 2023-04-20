@@ -1,43 +1,100 @@
-<div class="relative flex min-h-screen flex-col justify-center overflow-hidden py-2 sm:py-12">
-    {% if categories %}
-    <div class="mx-auto max-w-md">
-        <table class="table-auto font-mono  text-red-900  shadow-slate-600 shadow-md bg-amber-200 border-separate border-2 border-amber-100 rounded-md p-4 m-8 transition duration-300 hover:shadow-slate-600 hover:shadow-sm">
-            <thead class="p-3 m-3">
-                <tr class="bg-amber-300">
-                    <th>Nombre</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for category in  categories %}
-                    <tr class="bg-amber-100">
-                        <td>{{category.category_name}}</td>
-                        <td>
-                            <form action="{% url 'category_update' id=category.id %}" method="GET">
-                                <button ion-button icon-only type="submit">
-                                    <ion-icon name="create-outline" 
-                                    
-                                    class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer"
-                                    ></ion-icon>
-                                </button>
-                                    
-                            </form>
-                            <form hx-delete="{% url 'category_delete' id=category.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#categories_table" hx-confirm="¿Está seguro de que desea eliminar la categoría: {{category.category_name}}?">
-                                {% csrf_token %}
-                                <button type="submit" ion-button icon-only >
-                                    <ion-icon name="trash-outline" 
+<div id="categories_table" class="overflow-x-auto">
+    <div class="flex flex-col md:flex-row" class="md:flex md:justify-center">
+        <div class="md:w-1/2 bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md  border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100">
+            <div class="max-w-xs mx-auto flex justify-center items-center space-x-4 bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md  border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100">
+                
+                <form hx-post="{% url 'category_create' %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#category_value_section" hx-include="[name='category_name_new']" class="flex justify-between">
+                    <input type="text" class="w-full mr-2" name="category_name_new" id="category_name_new">
+                    <button  ion-button icon-only type="submit">
+                        <ion-icon title="Crear Categoría" class="mx-4 text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" name="add-circle-outline"></ion-icon>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Contenido de la primera columna -->
+            <!-- Primera columna debe contener una lista de todas las categorías -->
+            {% if categories %}
+
+                <table class="mx-auto table-auto font-mono text-red-900  shadow-slate-600 shadow-sm bg-amber-200 border-separate border-2 border-amber-100 rounded-md p-4 m-8">
+
+                    <thead class="p-3 m-3">
+                        <tr class="bg-amber-300">
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-amber-100">
+                    {% for category in categories %}
+                        <tr>
+                            <td>{{category.id}}</td>
+                            <td>{{category.name}}</td>
+                            <td class="flex justify-between">
+                                <form action="{% url 'category_update' id=category.id %}" method="GET">
+                                    <button ion-button icon-only type="submit">
+                                        <ion-icon name="create-outline" 
                                         
-                                    class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer"
-                                    ></ion-icon>
-                                </button>
-                            </form> 
+                                        class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer mr-2"
+                                        ></ion-icon>
+                                    </button>
+                                        
+                                </form>
+                                <form hx-delete="{% url 'category_delete' id=category.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#category_value_section" hx-confirm="¿Está seguro de que desea eliminar la categoría: {{category.name}}?">
+                                    <button type="submit" ion-button icon-only >
+                                        <ion-icon name="trash-outline" 
+                                            
+                                        class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer"
+                                        ></ion-icon>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        
+                    {% endfor %}
+                    </tbody>
+
+                </table>
+            
+            {% endif %}
+        </div>
+        
+        <div class="md:w-1/2 bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md  border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100">
+            <div>
+                <b value="category_selected.id" class="text-center">{{answer_title_values}}</b>
+            </div>
+            {% if category_selected %}
+            <div class="max-w-xs mx-auto flex justify-center items-center space-x-4 bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md  border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100">
+                <input type="text" class="w-full" name="value_name_new" id="value_name_new">
+                <form hx-post="{% url 'value_create' id=category_selected.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#category_value_section" hx-include="[name='value_name_new']">
+                    <button  ion-button icon-only type="submit">
+                        <ion-icon title="Crear Valor" class="mx-4 text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" name="add-circle-outline"></ion-icon>
+                    </button>
+                </form>
+            </div>
+            {% endif %}
+            {% if values %}
+            <table class="mx-auto table-auto font-mono text-red-900  shadow-slate-600 shadow-sm bg-amber-200 border-separate border-2 border-amber-100 rounded-md p-4 m-8">
+                <thead class="p-3 m-3">
+                    <tr class="bg-amber-300">
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-amber-100">
+                    {% for value in values %}
+                    <tr>
+                        <td>{{value.id}}</td>
+                        <td>{{value.name}}</td>
+                        <td>
+                            <button id="boton-borrar-valor">Borrar</button>
+                            <button id="boton-actualizar-valor">Actualizar</button>
                         </td>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
     </div>
-    {% endif %}
 </div>
-
-
