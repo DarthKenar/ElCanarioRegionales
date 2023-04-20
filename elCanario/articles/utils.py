@@ -4,7 +4,7 @@ from typing import Tuple
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .models import Category, Value
-
+import re
 @login_required
 def render_login_required(request, template: str,context: dict): 
     """This function is used for all functions that require the user to be logged in."""
@@ -82,6 +82,23 @@ def calculator_check(increase: str, buy_price: str) -> Tuple[dict, bool]:
         context["answer_string_error"] = "Los datos ingresados deben ser numéricos"
 
     return context, error_any
+def search_any_error_in_name_field(name_input:str,context: dict) -> Tuple[dict,bool]:
+    """check that no errors are found for the name field.
+    returns:
+        1- boolean: If one error is founded returns True else, False
+        2- dictionary: The error answers if one of them is founded
+        """
+    any_error = False
+
+    if name_input == "":
+        any_error = True
+        context['answer_error_name'] = 'Es obligatorio completar el nombre.'
+    elif not name_input.isalpha():
+        any_error = True
+        context['answer_error_name'] = 'El nombre no debe contener números, simbolos o espacios.'
+
+    return(context, any_error)
+
 def search_any_error(name_input:str, sell_price:str, context: dict) -> Tuple[dict,bool]:
     """check that no errors are found for the fields "name" and "sell_price".
     returns:
@@ -91,13 +108,7 @@ def search_any_error(name_input:str, sell_price:str, context: dict) -> Tuple[dic
     """
 
     any_error = False
-
-    if name_input == "":
-        any_error = True
-        context['answer_article_name'] = 'Es obligatorio completar el nombre.'
-    elif not name_input.isalpha():
-        any_error = True
-        context['answer_article_name'] = 'El nombre del artículo no debe contener números, simbolos o espacios.'
+    search_any_error_in_name_field(name_input, context)
 
     try:
         float(sell_price.replace(",",".",1))
@@ -127,7 +138,13 @@ def get_values_for_categories(request: object) -> dict:
 
     return values_dict
 
+def string_has_internal_spaces(name:str, context) -> Tuple[dict,bool]:
 
+
+    has_internal_spaces = bool(re.search(r'\S\s+\S', name))
+    if has_internal_spaces:
+        context['answer_error_name'] = "El nombre no debe contener espacios."
+    return context, has_internal_spaces
 
 #AUTO GENERATE fields
 from .models import Article, Category, Value, ArticleValue
