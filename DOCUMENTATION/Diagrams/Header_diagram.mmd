@@ -1,9 +1,9 @@
 flowchart TB
   subgraph HEADER
     direction TB
-    Obutton([orders])
-    Abutton([articles])
-    Cbutton([customers])
+    Obutton[/orders/]
+    Abutton[/articles/]
+    Cbutton[/customers/]
   end
   subgraph ORDERS
     direction TB
@@ -15,6 +15,7 @@ flowchart TB
     Cdb[(Category)] --o A
     Ahtml{{"articles.html"}}
     A --> Ahtml
+    
   end
   subgraph CUSTOMERS
     direction TB
@@ -23,7 +24,5 @@ flowchart TB
   Abutton --- ARTICLES
   Obutton --- ORDERS
   Cbutton --- CUSTOMERS
-  
-  
-  
+
     

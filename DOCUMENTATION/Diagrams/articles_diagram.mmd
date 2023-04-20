@@ -1,0 +1,62 @@
+flowchart TB
+    subgraph ARTICLES [1- articles.html]
+        direction TB
+        DTinput[/datatype_input/]
+        Sinput[/search_input/]
+        C[/Categories/]
+        Aid([article.id 1*])
+        Acreate[/articles_create/]
+        AIDdelete[/article_delete/]
+        AIDupdate[/article_update/]
+        Aid --- AIDdelete
+        Aid --- AIDupdate
+        commentAid>1* article.id for each article listed.] --- Aid
+    end
+    subgraph DTI [datatype_input]
+        direction TB
+        ARDTprocess[[articles_read_datatype]]
+
+        DTIhtml{{articles_search_datatype.html}}
+        DTinputInside[/datatype_input/]
+        categoriesDB[(Category)]
+        categoriesDB <== asd === ARDTprocess
+        DTinputInside --> ARDTprocess
+        DTIhtml --> ARDTprocess
+
+    end
+    subgraph SI [search_input]
+        direction TB
+        ARDprocess[[articles_read_data]]
+    end
+    subgraph AC [article_create]
+        ACprocess[[articles_create]]
+    end
+    subgraph AIDD [article_delete]
+        direction TB
+        wrre
+    end
+    subgraph AIDU [article_update]
+        direction TB
+        Chtmlj{{"customers.html"}}
+    end
+    subgraph CAT [categories]
+        direction TB
+        asda
+    end
+
+    DTinput -- trigger --- DTI
+    Sinput -- trigger --- SI
+    C -- trigger ---- CAT
+    AIDdelete -- trigger --- AIDD
+    AIDupdate -- trigger --- AIDU
+    Acreate -- trigger --- AC
+    subgraph LR[login_required]
+        LRprocess[["login required"]]
+    end
+    DTI --- LR
+    SI --- LR
+    AIDU --- LR
+    AIDD --- LR
+    CAT --- seccionCategorias
+    AC ---- seccionCrearArtículos
+
