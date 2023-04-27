@@ -40,7 +40,7 @@ urlpatterns = [
     path('articles_update/<int:id>', articles_views.article_update, name="articles_update"),
     path('articles_delete/<int:id>', articles_views.article_delete, name="articles_delete"),
 
-    path('articlesCategories', articles_views.articles_categories, name="categories"),
+    path('articles_categories', articles_views.articles_categories, name="categories"),
 
     #CUSTOMERS
     path('customers', articles_views.customers, name="customers"),
@@ -64,24 +64,14 @@ htmx_urlpatterns = [
 
 #         #ARTICLES CATEGORIES
     path('articles/categories/create', articles_views.articles_categories_create, name="category_create"),
-    path('articles/categories/values/create/<int:id>', articles_views.articles_category_value_create, name="value_create"),
-    path('articles/categories/update/<int:id>', articles_views.articles_category_update, name="category_update"),
+    path('articles/categories/update/<int:id>/<path:path>', articles_views.articles_category_update, name="category_update"),
+    path('articles/categories/update/name/<int:id>', articles_views.articles_category_update_name, name="category_update_name"),
     path('articles/categories/delete/<int:id>', articles_views.articles_category_delete, name="category_delete"),
+    path('articles/categories/values/create/<int:id>', articles_views.articles_category_value_create, name="value_create"),
+    path('articles/categories/values/update/<int:id>', articles_views.articles_value_update, name="value_update"),
+    path('articles/categories/values/update/name/<int:id>', articles_views.articles_value_update_name, name="value_update_name"),
+    path('articles/categories/values/delete/<int:id>', articles_views.articles_value_delete, name="value_delete"),
 
-#         #ARTICLES COLORS
-#     path('articles/colors/save', articles_views.articles_colors_save, name="color_save"),
-#     path('articles/colors/update/<int:id>', articles_views.articles_colors_update, name="color_update"),
-#     path('articles/colors/delete/<int:id>', articles_views.articles_colors_delete, name="color_delete"),
-
-#         #ARTICLES MATERIALS
-#     path('articles/materials/save', articles_views.articles_materials_save, name="material_save"),
-#     path('articles/materials/update/<int:id>', articles_views.articles_materials_update, name="material_update"),
-#     path('articles/materials/delete/<int:id>', articles_views.articles_materials_delete, name="material_delete"),
-
-#         #ARTICLES SIZES
-#     path('articles/sizes/save', articles_views.articles_sizes_save, name="size_save"),
-#     path('articles/sizes/update/<int:id>', articles_views.articles_sizes_update, name="size_update"),
-#     path('articles/sizes/delete/<int:id>', articles_views.articles_sizes_delete, name="size_delete"),
 ]
 urlpatterns += htmx_urlpatterns
 

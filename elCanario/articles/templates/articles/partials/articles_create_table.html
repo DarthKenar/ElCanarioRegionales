@@ -1,46 +1,54 @@
-<div class="mx-auto max-w-md" id="article_create_answer">
-    <h1 class="font-mono text-lg text-center font-bold">Agregar Artículo</h1>
-    <div class="p-4 m-4">
-      <label class="italic px-2">Nombre*: </label>
-      <input class="bg-amber-50 rounded-sm px-2" hx-get="{% url 'name_check' %}" type="text" hx-target="#answer_article_name" hx-trigger="keyup changed delay:200ms" hx-swap="outerHTML" name="article_name_input" id="article_name_input" required >
-      <output class="text-red-600" id="answer_article_name">{{answer_article_name}}</output>
-    </div>
-    {% for category in categories %}
-        <div class="p-4 m-4">
-            <label class="italic px-2" for="article_value_input">{{category.name}}: </label>
-            <select class="bg-amber-50 rounded-sm px-2" id = "{{category.id}}" name="category-{{category.id}}">
-                <option value=""></option>
-                {% load custom_tags %}
-                {% with values|filter_by_category:category as values_for_category %}
-                    {% for value in values_for_category %}
-                    <option value="{{value.id}}">{{value.name}}</option>
-                    {% endfor %}
-                {% endwith %}
-            </select>
-            <output class="text-red-600" id="answer_category_id">{{answer_category_id}}</output>
-        </div>
-    {% endfor %}
 
-    <div class="p-4 m-4">
-      <label class="italic px-2">Precio Compra*: </label>
-      <input class="bg-amber-50 rounded-sm px-2" type="text" name="article_buy_price_input" id="article_buy_price_input" hx-get="{% url 'calculator' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#article_sell_price_output" hx-include="[name='article_increase_input']" required >
+<h1 class="font-mono text-lg text-center font-bold">Agregar Artículo</h1>
+<div class="p-4 m-4">
+  <label class="italic px-2">Nombre*: </label>
+  <input class="bg-amber-50 rounded-sm px-2" hx-get="{% url 'name_check' %}" type="text" hx-target="#answer_article_name" hx-trigger="keyup changed delay:200ms" hx-swap="outerHTML" name="article_name_input" id="article_name_input" required >
+  <output class="text-red-600" id="answer_article_name">{{answer_article_name}}</output>
+</div>
+{% for category in categories %}
+    <div class="p-4 m-4 flex justify-between">
+        <form action="{% url 'category_update' id=category.id path=request.path %}" method="GET">
+          <button ion-button icon-only type="submit">
+              <ion-icon name="create-outline" 
+              
+              class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer mr-2"
+              ></ion-icon>
+          </button>
+              
+        </form>
+        <label class="italic px-2" for="article_value_input">{{category.name}}: </label>
+        <select class="bg-amber-50 rounded-sm px-2" id = "{{category.id}}" name="category-{{category.id}}">
+            <option value=""></option>
+            {% load custom_tags %}
+            {% with values|filter_by_category:category as values_for_category %}
+                {% for value in values_for_category %}
+                <option value="{{value.id}}">{{value.name}}</option>
+                {% endfor %}
+            {% endwith %}
+        </select>
+        <output class="text-red-600" id="answer_category_id">{{answer_category_id}}</output>
     </div>
-    <div class="p-4 m-4">
-      <label class="italic px-2">Incremento*: </label>
-      <input class="bg-amber-50 rounded-sm px-2" type="text" name="article_increase_input" id="article_increase_input" hx-get="{% url 'calculator' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#article_sell_price_output" hx-include="[name='article_buy_price_input']" required>
-      <label>%</label>
-    </div>
-    <div class="p-4 m-4" id="article_sell_price_output">
-      <label class="italic px-2">Precio Venta*: </label>
-      <input class="bg-amber-50 rounded-sm px-2 empty:hidden" type="text" name="article_sell_price_input" id="article_sell_price_input" readonly>
-      <output class="text-red-500" id="answer_sell_price">{{answer_sell_price}}</output>
-    </div>
+{% endfor %}
 
-    <div class="grid place-content-end">
+<div class="p-4 m-4">
+  <label class="italic px-2">Precio Compra*: </label>
+  <input class="bg-amber-50 rounded-sm px-2" type="text" name="article_buy_price_input" id="article_buy_price_input" hx-get="{% url 'calculator' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#article_sell_price_output" hx-include="[name='article_increase_input']" required >
+</div>
+<div class="p-4 m-4">
+  <label class="italic px-2">Incremento*: </label>
+  <input class="bg-amber-50 rounded-sm px-2" type="text" name="article_increase_input" id="article_increase_input" hx-get="{% url 'calculator' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#article_sell_price_output" hx-include="[name='article_buy_price_input']" required>
+  <label>%</label>
+</div>
+<div class="p-4 m-4" id="article_sell_price_output">
+  <label class="italic px-2">Precio Venta*: </label>
+  <input class="bg-amber-50 rounded-sm px-2 empty:hidden" type="text" name="article_sell_price_input" id="article_sell_price_input" readonly>
+  <output class="text-red-500" id="answer_sell_price">{{answer_sell_price}}</output>
+</div>
 
-        <button ion-button icon-only type="submit" hx-get="{% url 'articles_create_confirm' %}" hx-trigger="click" hx-include="#article_name_input,[name^='category-'],#article_buy_price_input, #article_increase_input, #article_sell_price_input" hx-target="#article_create_answer" hx-swap="outerHTML">
-            <ion-icon class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" name="save-outline"></ion-icon>
-        </button>
+<div class="grid place-content-end">
 
-    </div>
-  </div>
+    <button ion-button icon-only type="submit" hx-get="{% url 'articles_create_confirm' %}" hx-trigger="click" hx-include="#article_name_input,[name^='category-'],#article_buy_price_input, #article_increase_input, #article_sell_price_input" hx-target="#article_create_answer" hx-swap="outerHTML">
+        <ion-icon class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" name="save-outline"></ion-icon>
+    </button>
+
+</div>

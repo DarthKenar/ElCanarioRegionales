@@ -92,6 +92,7 @@ def articles_read_datatype(request):
             
 
     return render_login_required(request,template,context)
+
 def articles_read_data(request):
 
     template = "articles_search_right.html"
@@ -99,7 +100,7 @@ def articles_read_data(request):
     search_input = request.GET["search_input"]
     datatype_input = request.GET["datatype_input"]
     context = {}
-
+    
     if is_empty(search_input):
         
         template = "articles_search_input_empty.html"
@@ -267,25 +268,21 @@ def article_delete(request, id):
 
     try:
 
-        articles_to_delete = get_object_or_404(Article, id=id)
+        article_to_delete = get_object_or_404(Article, id=id)
 
     except Exception as e:
-        context["articles_to_delete"] = articles_to_delete
         template = "articles_delete_error.html"
         return render_login_required(request, template, context)
     
     else:
-        context["articles_deleted_name"] = articles_to_delete.articles_name
-        articles_to_delete.delete() 
-
+        context["answer"] = f"Se eliminó correctamente el artículo {article_to_delete.name}"
+        article_to_delete.delete()
         template = "articles_delete_right.html"
-        answer = "Artículos en la Base de datos"
 
         articles = Article.objects.all()
 
-        context.update({"articles_all":articles,
+        context.update({
                    "articles_any": articles,
-                   "answer":answer,
                    })
         
         return render_login_required(request, template, context)
@@ -305,21 +302,23 @@ def articles_categories(request):
 
 def articles_categories_create(request):
 
-    category = request.POST["category_name_new"].strip().title()
+    category_name = request.POST["category_name_new"].strip().title()
     
     context = {}
     context["categories"] = Category.objects.all()
     any_error = False
-    context, any_error = search_any_error_in_name_field(category, context)
+    context, any_error = search_any_error_in_name_field(category_name, context)
+    context, any_error = name_already_in_db(category_name, Category, context)
+    context, any_error = is_empty_name(category_name, context)
     if any_error == False:
-        cat = Category(name=category)
+        cat = Category(name=category_name)
         cat.save()
         context['category_selected'] = cat
         context["answer_title_values"] = f"Agregar valores a: {cat.name}"
-        template = "articles_category_create_right.html"
+        template = "articles_category_section_right.html"
         context["answer"] = f"La categoría {cat.name} se ha guardado correctamente!"
     else:
-        template = "articles_category_create_error.html"
+        template = "articles_category_section_error.html"
         context["answer"] = "No se ha podido guardar la categoría!"
 
     return render_login_required(request, template, context)
@@ -329,35 +328,64 @@ def articles_category_value_create(request,id):
     context["categories"] = Category.objects.all()
     cat = Category.objects.get(id = id)
     context['category_selected'] = cat
-    value = request.POST['value_name_new'].strip().title()
+    value_name = request.POST['value_name_new'].strip().title()
     
-    context, any_error = string_has_internal_spaces(value, context)
-    
+    context, any_error = string_has_internal_spaces(value_name, context)
+    context, any_error = name_already_in_db(value_name, Category, context)
+    context, any_error = is_empty_name(value_name, context)
     if any_error == False:
         val = Value(
             category_id = cat,
-            name = value
+            name = value_name
                     )
         val.save()
-        template = 'articles_value_create_right.html'
-        context['answer'] = f'Se guardó correctamente el valor: {value} , para la categoría: {cat.name}'
+        template = 'articles_category_section_right.html'
+        context['answer'] = f'Se guardó correctamente el valor: {value_name} , para la categoría: {cat.name}'
         context['values'] = Value.objects.filter(category_id = cat)
     else:
         
-        context["answer"] = f"No se ha podido guardar el valor: {value}, para la categoría: {cat.name}"
-        template = 'articles_value_create_error.html'
+        context["answer"] = f"No se ha podido guardar el valor: {value_name}, para la categoría: {cat.name}"
+        template = 'articles_category_section_error.html'
         context['values'] = Value.objects.filter(category_id = cat)
 
     return render_login_required(request, template, context)
-def articles_category_update(request,id):
 
+def articles_category_update(request,id, path):
+
+    if "articles_categories" in path:
+        template = "articles_category_section_right.html"
+    else: 
+        template = "categories.html"
     context={}
     cat = Category.objects.get(id = id)
     context["categories"] = Category.objects.all()
     context['category_selected'] = cat
     context['values'] = Value.objects.filter(category_id = cat)
     context["answer_title_values"] = f"Categoría seleccionada: {cat.name}"
-    template = "categories.html"
+    context["name_category_edition"] = True
+    
+    return render_login_required(request, template, context)
+
+def articles_category_update_name(request, id):
+    context={}
+    new_name = request.POST['category_name_update'].strip().title()
+    context, any_error = search_any_error_in_name_field(new_name, context)
+    context, any_error = name_already_in_db(new_name, Category, context)
+    cat = Category.objects.get(id = id)
+    if any_error == False:
+        context['answer'] = f'Se ha actualizado correctamente la categoría {cat.name} --> {new_name}!'
+        cat.name = new_name
+        cat.save()
+        template = "articles_category_section_right.html"
+    else:
+        context['answer'] = f'No se puede actualizar el nombre de la categoría {cat.name} --> {new_name}!'
+        template = "articles_category_section_error.html"
+    context['category_selected'] = cat
+    context["categories"] = Category.objects.all()
+    context['values'] = Value.objects.filter(category_id = cat)
+    context["answer_title_values"] = f"Categoría seleccionada: {cat.name}"
+    context["name_category_edition"] = False
+
     return render_login_required(request, template, context)
 def articles_category_delete(request, id):
 
@@ -366,7 +394,59 @@ def articles_category_delete(request, id):
     context["answer"] = f"La categoría {cat.name} ha sido eliminada."
     cat.delete()
     context["categories"] = Category.objects.all()
-    template = "articles_category_delete_right.html"
+    template = "articles_category_section_right.html"
+    return render_login_required(request, template, context)
+
+def articles_value_delete(request, id):
+
+    context={}
+    val = Value.objects.get(id = id)
+    cat = val.category_id
+    context["answer"] = f"De la categoría {cat.name}, el valor {val.name} ha sido eliminado."
+    val.delete()
+    context["categories"] = Category.objects.all()
+    template = "articles_category_section_right.html"
+    context['values'] = Value.objects.filter(category_id = cat)
+    context['category_selected'] = cat
+    return render_login_required(request, template, context)
+
+
+def articles_value_update(request, id):
+
+    context={}
+    val = Value.objects.get(id = id)
+    cat = val.category_id
+    context["categories"] = Category.objects.all()
+    context['category_selected'] = cat
+    context['value_selected'] = val
+    context['values'] = Value.objects.filter(category_id = cat)
+    context["answer_title_values"] = f"Categoría seleccionada: {cat.name}"
+    context["name_value_edition"] = True
+    template = "articles_category_section_right.html"
+    return render_login_required(request, template, context)
+
+def articles_value_update_name(request, id):
+    context={}
+    new_name = request.POST['value_name_update'].strip().title()
+    context, any_error = name_already_in_db(new_name, Category, context)
+    context, any_error = is_empty_name(new_name, context)
+    val = Value.objects.get(id = id)
+    cat = val.category_id
+    context['category_selected'] = cat
+    if any_error == False:
+        val.name = new_name
+        val.save()
+        template = "articles_category_section_right.html"
+        context['answer'] = f'Se ha actualizado correctamente el valor {val.name} --> {new_name}!'
+    else:
+        context['answer'] = f'No se puede actualizar el nombre del valor{val.name} --> {new_name}!'
+        template = "articles_category_section_error.html"
+    context['value_selected'] = val
+    context["categories"] = Category.objects.all()
+    context['values'] = Value.objects.filter(category_id = cat)
+    context["answer_title_values"] = f"Categoría seleccionada: {cat.name}"
+    context["name_value_edition"] = False
+
     return render_login_required(request, template, context)
 
 def customers(request):
