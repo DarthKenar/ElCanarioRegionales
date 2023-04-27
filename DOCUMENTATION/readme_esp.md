@@ -29,9 +29,12 @@ Información adicional:
     - Durante la fase de desarrollo se estará utilizando SQLite3 para que quien descargue el proyecto pueda interactuar rapidamente con las funcionalidades del sistema.
 
 DOCUMENTACION:
-    [.Diagrama de modelos:][modelos]
+
+- [.Diagrama de modelos][modelos]
+- [ScreenShots][screenshots]
 
 [VOLVER][volver]
 
 [volver]: /README.md
 [modelos]: /DOCUMENTATION/diagram_models.mmd
+[screenshots]: /DOCUMENTATION/images/
