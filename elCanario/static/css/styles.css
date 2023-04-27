@@ -21,6 +21,9 @@
     height: 0%;
   }
 } */
+ion-icon {
+  pointer-events: none;
+}
 .vanish {
   animation: fadeout 1s;
   animation-delay: 3s;
