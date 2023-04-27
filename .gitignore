@@ -7,3 +7,5 @@ __pycache__/
 strategies/
 elCanario/db.sqlite3
 DOCUMENTATION/goals.md
+DOCUMENTATION/ideas.md
+elCanario/my_project_visualized.png
