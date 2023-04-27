@@ -4,11 +4,11 @@
 
 [login](/DOCUMENTATION/images/login.jpg)
 
-## LOGIN:
+## BUSCAR ARTÍCULOS:
 
 [buscar artículos](/DOCUMENTATION/images/articles_search.jpg)
 
-## LOGIN:
+## CREAR ARTÍCULOS:
 
 [crear artículos](/DOCUMENTATION/images/login.jpg)
 
