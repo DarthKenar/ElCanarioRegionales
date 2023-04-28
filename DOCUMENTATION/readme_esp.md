@@ -37,4 +37,4 @@ DOCUMENTACION:
 
 [volver]: /README.md
 [modelos]: /DOCUMENTATION/diagram_models.mmd
-[screenshots]: /DOCUMENTATION/images/
+[screenshots]: /DOCUMENTATION/images.md
