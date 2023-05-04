@@ -40,16 +40,16 @@
                 <td class="lg:m-4 md:m-4 lg:px-12 md:px-12  tabular-nums slashed-zero">{{article.buy_price}}</td>
                 <td class="lg:m-4 md:m-4 lg:px-12 md:px-12  tabular-nums slashed-zero">{{article.increase}}</td>
                 <td class="lg:m-4 md:m-4 lg:px-12 md:px-12  tabular-nums slashed-zero">{{article.sell_price}}</td>
-                <td>
-                    <!-- <form action="{% url 'articles_update' id=article.id %}" method="GET">
+                <td class="flex mx-2">
+                    <form action="{% url 'article_update' id=article.id %}" method="GET">
                         <button ion-button icon-only type="submit">
                             <ion-icon name="create-outline" 
                             
-                            class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer"
+                            class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 mx-2 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer"
                             ></ion-icon>
                         </button>
                             
-                    </form> -->
+                    </form>
                     <form hx-delete="{% url 'articles_delete' id=article.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#search_answer_data" hx-confirm="¿Está seguro de que desea eliminar el articulo: {{article.article_name}}?">
                         {% csrf_token %}
                         <button type="submit" ion-button icon-only >

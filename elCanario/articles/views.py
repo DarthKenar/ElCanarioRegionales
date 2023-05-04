@@ -289,7 +289,16 @@ def article_delete(request, id):
 
 @csrf_protect
 def article_update(request, id):
-    pass
+    context = {}
+    categories = Category.objects.all()
+    values = Value.objects.all()
+    context = {"categories":categories,
+               "values":values,
+               }
+    template = 'articles_update.html'
+    article_to_update = Article.objects.get(id = id)
+    context['article_to_update'] = article_to_update
+    return render_login_required(request, template, context)    
 
 # ## Articles Categorie SECTION
 def articles_categories(request):
