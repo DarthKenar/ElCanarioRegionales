@@ -292,9 +292,11 @@ def article_delete(request, id):
         template = "articles_delete_right.html"
 
         articles = Article.objects.all()
+        categories = Category.objects.all()
 
         context.update({
                    "articles_any": articles,
+                   "categories": categories
                    })
         
         return render_login_required(request, template, context)
