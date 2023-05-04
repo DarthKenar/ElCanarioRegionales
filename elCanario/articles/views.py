@@ -101,7 +101,7 @@ def articles_read_data(request):
     datatype_input = request.GET["datatype_input"]
     context = {}
     
-    if is_empty(search_input):
+    if string_is_empty(search_input):
         
         template = "articles_search_input_empty.html"
         context["articles_any"] = Article.objects.all()
@@ -166,9 +166,10 @@ def articles_create(request):
 def articles_create_name_check(request):
 
     context = {}
-    article_name_input = request.GET['article_name_input']
+    article_name_input = request.GET['article_name_input'].strip().title()
     template = "articles_create_name_error.html"
     context.update(name_check(article_name_input))
+    context, any_error = name_already_in_db(article_name_input, Article, context)
     return render_login_required(request, template, context)
 
 def articles_create_calculator(request):
@@ -177,7 +178,7 @@ def articles_create_calculator(request):
     increase = request.GET['article_increase_input']
     error_any = False
 
-    context, error_any = calculator_check(increase, buy_price)
+    context, error_any = calculator_check(increase, buy_price, context)
 
     if error_any:
         """show any error"""
@@ -203,23 +204,32 @@ def articles_create_confirm(request):
     values = Value.objects.all()
     context["categories"] = categories
     context["values"] = values
+
     article_name_input = request.GET["article_name_input"]
     article_buy_price_input = request.GET['article_buy_price_input']
     article_increase_input = request.GET['article_increase_input']
-    article_sell_price_input = request.GET['article_sell_price_input']
+    answer_calculator = request.GET['article_sell_price_input'].replace(',', '.')
 
     context.update({
         "article_name_input": article_name_input,
         "article_buy_price_input":article_buy_price_input,
         "article_increase_input":article_increase_input,
-        "article_sell_price_input":article_sell_price_input,
+        "answer_calculator":answer_calculator,
                 })
     
     # conditions to save
-    context, any_error = search_any_error(article_name_input, article_sell_price_input, context)
+    error_context = {}
+    error_context, search_any_error_in_name_field_bool = search_any_error_in_name_field(article_name_input, context)
+    error_context, calculator_check_bool = calculator_check(article_increase_input,article_buy_price_input, context)
+    error_context, name_already_in_db_bool = name_already_in_db(article_name_input, Article, context)
     values_dict = get_values_for_categories(request)
     # end of conditions to save 
-    
+
+    if search_any_error_in_name_field_bool == True or calculator_check_bool == True or name_already_in_db_bool == True:
+
+        any_error = True
+        context.update(error_context)
+
     if any_error == True:
 
         # for render error answers
@@ -229,12 +239,15 @@ def articles_create_confirm(request):
         return render_login_required(request, template, context)
 
     else:
-
+        context.pop("article_name_input")
+        context.pop("article_buy_price_input")
+        context.pop("article_increase_input")
+        context.pop("answer_calculator")
         article = Article(
             name = title(article_name_input),
             buy_price = float(article_buy_price_input), 
             increase = float(article_increase_input),
-            sell_price = float(article_sell_price_input.replace(',', '.'))
+            sell_price = float(answer_calculator)
             )
         
         article.save()
@@ -256,7 +269,6 @@ def articles_create_confirm(request):
         context["answer_save_right"] = f"El artículo {article.name} se ha guardado correctamente"
         context["answer_articles_name"] = ""
         context["answer_category_id"] = ""
-        context["answer_sell_price"] = ""
 
         return render_login_required(request, template, context)
 
@@ -316,9 +328,15 @@ def articles_categories_create(request):
     context = {}
     context["categories"] = Category.objects.all()
     any_error = False
-    context, any_error = search_any_error_in_name_field(category_name, context)
-    context, any_error = name_already_in_db(category_name, Category, context)
-    context, any_error = is_empty_name(category_name, context)
+    error_context, search_any_error_in_name_field_bool = search_any_error_in_name_field(category_name, context)
+    error_context, name_already_in_db_bool = name_already_in_db(category_name, Category, context)
+    error_context, is_empty_name_bool = is_empty_name(category_name, context)
+    error_context, name_already_in_db_bool = name_already_in_db(category_name, Category, context)
+
+    if search_any_error_in_name_field_bool == True or name_already_in_db_bool == True or is_empty_name_bool == True:
+        any_error = True
+        context = error_context
+
     if any_error == False:
         cat = Category(name=category_name)
         cat.save()
@@ -338,10 +356,14 @@ def articles_category_value_create(request,id):
     cat = Category.objects.get(id = id)
     context['category_selected'] = cat
     value_name = request.POST['value_name_new'].strip().title()
+    any_error = False
+
+    context, name_already_in_db_bool = name_already_in_db(value_name, Value, context)
+    context, is_empty_name_bool = is_empty_name(value_name, context)
     
-    context, any_error = string_has_internal_spaces(value_name, context)
-    context, any_error = name_already_in_db(value_name, Category, context)
-    context, any_error = is_empty_name(value_name, context)
+    if name_already_in_db_bool == True or is_empty_name_bool == True:
+        any_error = True
+
     if any_error == False:
         val = Value(
             category_id = cat,
@@ -361,7 +383,7 @@ def articles_category_value_create(request,id):
 
 def articles_category_update(request,id, path):
 
-    if "articles_categories" in path:
+    if "articles/categories" in path:
         template = "articles_category_section_right.html"
     else: 
         template = "categories.html"

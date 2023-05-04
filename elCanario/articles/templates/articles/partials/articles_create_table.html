@@ -2,8 +2,10 @@
 <h1 class="font-mono text-lg text-center font-bold">Agregar Artículo</h1>
 <div class="p-4 m-4">
   <label class="italic px-2">Nombre*: </label>
-  <input class="bg-amber-50 rounded-sm px-2" hx-get="{% url 'name_check' %}" type="text" hx-target="#answer_article_name" hx-trigger="keyup changed delay:200ms" hx-swap="outerHTML" name="article_name_input" id="article_name_input" required >
-  <output class="text-red-600" id="answer_article_name">{{answer_article_name}}</output>
+  <input class="bg-amber-50 rounded-sm px-2" hx-get="{% url 'name_check' %}" type="text" hx-target="#answer_article_name" hx-trigger="keyup changed delay:200ms" hx-swap="outerHTML" name="article_name_input" id="article_name_input" required value="{{article_name_input}}">
+  <div id="answer_article_name">
+    <output class="font-bold empty:hidden cursor-default text-red-600 appear" >{{answer_error_name}}</output>
+  </div>
 </div>
 {% for category in categories %}
     <div class="p-4 m-4 flex justify-between">
@@ -32,17 +34,21 @@
 
 <div class="p-4 m-4">
   <label class="italic px-2">Precio Compra*: </label>
-  <input class="bg-amber-50 rounded-sm px-2" type="text" name="article_buy_price_input" id="article_buy_price_input" hx-get="{% url 'calculator' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#article_sell_price_output" hx-include="[name='article_increase_input']" required >
+  <input class="bg-amber-50 rounded-sm px-2" type="text" name="article_buy_price_input" id="article_buy_price_input" hx-get="{% url 'calculator' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#article_sell_price_output" hx-include="[name='article_increase_input']" required value="{{article_buy_price_input}}" >
 </div>
 <div class="p-4 m-4">
   <label class="italic px-2">Incremento*: </label>
-  <input class="bg-amber-50 rounded-sm px-2" type="text" name="article_increase_input" id="article_increase_input" hx-get="{% url 'calculator' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#article_sell_price_output" hx-include="[name='article_buy_price_input']" required>
+  <input class="bg-amber-50 rounded-sm px-2" type="text" name="article_increase_input" id="article_increase_input" hx-get="{% url 'calculator' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#article_sell_price_output" hx-include="[name='article_buy_price_input']" required value="{{article_increase_input}}">
   <label>%</label>
 </div>
 <div class="p-4 m-4" id="article_sell_price_output">
   <label class="italic px-2">Precio Venta*: </label>
-  <input class="bg-amber-50 rounded-sm px-2 empty:hidden" type="text" name="article_sell_price_input" id="article_sell_price_input" readonly>
-  <output class="text-red-500" id="answer_sell_price">{{answer_sell_price}}</output>
+  <input class="bg-amber-50 rounded-sm px-2 empty:hidden" type="text" name="article_sell_price_input" id="article_sell_price_input" value="{{ answer_calculator }}">{{ answer_calculator }}</input>
+  <br>
+  <output class="font-bold empty:hidden cursor-default text-red-600 appear" type="text">{{answer_string_error}}</output>
+  <br>
+  <output class="font-bold empty:hidden cursor-default text-red-600 appear" type="text">{{answer_empty_error}}</output>
+
 </div>
 
 <div class="grid place-content-end">

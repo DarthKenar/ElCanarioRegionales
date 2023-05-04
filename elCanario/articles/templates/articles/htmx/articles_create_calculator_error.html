@@ -1,9 +1,8 @@
 <div class="p-4 m-4" id="article_sell_price_output">
     <label class="italic px-2">Precio Venta*: </label>
-    <input class="bg-amber-50 rounded-sm px-2 empty:hidden" type="text" name="article_sell_price_input" id="article_sell_price_input"></input>
+    <input class="bg-amber-50 rounded-sm px-2 empty:hidden" type="text" name="article_sell_price_input" id="article_sell_price_input" value="{{ answer_calculator }}">{{ answer_calculator }}</input>
     <br>
     <output class="font-bold empty:hidden cursor-default text-red-600 appear" type="text">{{answer_string_error}}</output>
     <br>
     <output class="font-bold empty:hidden cursor-default text-red-600 appear" type="text">{{answer_empty_error}}</output>
-
 </div>

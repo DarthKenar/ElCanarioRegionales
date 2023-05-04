@@ -39,7 +39,7 @@ urlpatterns = [
     path('articles_update/<int:id>', articles_views.article_update, name="article_update"),
     path('articles_delete/<int:id>', articles_views.article_delete, name="articles_delete"),
 
-    path('articles_categories', articles_views.articles_categories, name="categories"),
+    path('articles/categories', articles_views.articles_categories, name="categories"),
 
     #CUSTOMERS
     path('customers', articles_views.customers, name="customers"),

@@ -20,7 +20,7 @@ def value_in_context_is_empty(QuerySet:any)-> bool:
     else:
         return False
     
-def is_empty(s):
+def string_is_empty(s):
     """Returns True if the string is empty or contains only blanks."""
 
     return s is None or s.strip() == ''
@@ -37,23 +37,23 @@ def name_check(article_name_input:str)->dict:
         -is not empty
         -not alphanumeric
     in these cases returns a response that is added to the context to be used by another function.
-    if no errors are found then an empty string is returned.
+    if no errors are found then an empty string is returned as answer.
     """
 
     if article_name_input == '':
 
-        context = {"answer_article_name": "Este campo es obligatorio"}
+        context = {"answer_error_name": "Este campo es obligatorio"}
         
     elif not article_name_input.isalpha():
         
-        context = {"answer_article_name": "El nombre del artículo no debe contener números, simbolos o espacios."}
+        context = {"answer_error_name": "El nombre del artículo no debe contener números, simbolos o espacios."}
     
     else:
         
-        context = {"answer_article_name": ""}
+        context = {"answer_error_name": ""}
     
     return context
-def calculator_check(increase: str, buy_price: str) -> Tuple[dict, bool]:
+def calculator_check(increase: str, buy_price: str, context: dict) -> Tuple[dict, bool]:
     """
         - Receives the buy price* and increase*
         - Check these for errors (such as being empty or containing letters).
@@ -61,9 +61,9 @@ def calculator_check(increase: str, buy_price: str) -> Tuple[dict, bool]:
             - dict: error responses
             - boolean: If there is an error, true, otherwise false.
     """
-    context = {}
+
     error_any = False
-    if is_empty(increase) or is_empty(buy_price):
+    if string_is_empty(increase) or string_is_empty(buy_price):
 
         error_any = True
         context["answer_empty_error"] = "Debes completar los campos para calcular el precio de venta"
@@ -87,26 +87,6 @@ def search_any_error_in_name_field(name_input:str,context: dict) -> Tuple[dict,b
     elif not name_input.isalpha():
         any_error = True
         context['answer_error_name'] = 'El nombre no debe contener números, simbolos o espacios.'
-
-    return(context, any_error)
-
-def search_any_error(name_input:str, sell_price:str, context: dict) -> Tuple[dict,bool]:
-    """check that no errors are found for the fields "name" and "sell_price".
-    returns:
-        1- boolean: If one error is founded returns True else, False
-        2- dictionary: The error answers if one of them is founded
-         
-    """
-
-    any_error = False
-    search_any_error_in_name_field(name_input, context)
-
-    try:
-        float(sell_price.replace(",",".",1))
-    except:
-
-        any_error = True
-        context['answer_sell_price'] = "Porfavor, calcule correctamente el precio de venta."
 
     return(context, any_error)
 
@@ -138,8 +118,10 @@ def string_has_internal_spaces(name:str, context) -> Tuple[dict,bool]:
     return context, has_internal_spaces
 
 def name_already_in_db(name:str, Model:object, context:dict) -> Tuple[dict,bool]:
+
     any_error = False
     query = Model.objects.all()
+    name = name.strip().title()
     for obj in query:
         if obj.name == name:
             any_error = True
@@ -149,8 +131,8 @@ def name_already_in_db(name:str, Model:object, context:dict) -> Tuple[dict,bool]
 
 def is_empty_name(s: str, context: dict) -> Tuple[dict, bool]:
     """Returns True if the string is empty or contains only blanks."""
-
-    any_error =  s is None or s.strip() == ''
+    
+    any_error =  string_is_empty(s)
     if any_error == True:
         context['answer_error_name'] = 'Es obligatorio completar el nombre.'
     return context, any_error
