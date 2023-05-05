@@ -21,17 +21,16 @@
         <select class="bg-amber-50 rounded-sm px-2" id = "{{category.id}}" name="category-{{category.id}}">
             <option value=""></option>
             {% load custom_tags %}
+            <!-- obtengo todos los valores para cada category (categoría) -->
             {% with values|filter_by_category:category as values_for_category %}
+
                 {% for value in values_for_category %}
-                    {% with article_to_update.characteristics_id.all|filter_by_category:category as values %}
-                    {% if values %}
-                        {% for value in values %}
+                <!-- si muestro cada value acá imprimiría todos los valores para cada categoría-->
+                    {% if value in article_to_update.characteristics_id.all %}
                         <option value="{{value.id}}" selected >{{value.name}}</option>
-                        {% endfor %}
                     {% else %}
                         <option value="{{value.id}}">{{value.name}}</option>
                     {% endif %}
-                    {% endwith %}
                 {% endfor %}
             {% endwith %}
         </select>
