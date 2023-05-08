@@ -325,11 +325,11 @@ def articles_update_confirm(request, id):
     
     values_dict = get_values_for_categories(request)
     # end of conditions to save 
+    if not article_name_input == article_to_update.name:
+        if search_any_error_in_name_field_bool == True or calculator_check_bool == True or name_already_in_db_bool == True:
 
-    if search_any_error_in_name_field_bool == True or calculator_check_bool == True or name_already_in_db_bool == True:
-
-        any_error = True
-        context.update(error_context)
+            any_error = True
+            context.update(error_context)
 
     if any_error == True:
 
@@ -344,6 +344,7 @@ def articles_update_confirm(request, id):
     else:
 
         template = "articles_create_save_right.html"
+        
         context.pop("article_name_input")
         context.pop("article_buy_price_input")
         context.pop("article_increase_input")
@@ -497,12 +498,8 @@ def articles_category_update(request,cat_id,path,art_id=None):
     context={}
     category_to_update = Category.objects.get(id = cat_id)
 
-    print("-"*10)
-    print(f"{art_id}"*10)
-    
     if not string_is_empty(art_id):
         article_to_update = Article.objects.get(id = art_id)
-        print("AAAAAAAAA"*10)
         context['article_to_update'] = article_to_update
         context['articles_any'] = [article_to_update]
 
