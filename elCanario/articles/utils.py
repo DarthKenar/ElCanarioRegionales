@@ -142,6 +142,7 @@ def is_empty_name(s: str, context: dict) -> Tuple[dict, bool]:
     return context, any_error
 
 def delete_old_values(article):
+    "removes the values related to an article, this function is used to re-record the new values that an article has in articles_update."
     query = ArticleValue.objects.filter(article_id = article.id)
     for obj in query:
         obj.delete()
