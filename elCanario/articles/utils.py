@@ -3,7 +3,7 @@
 from typing import Tuple
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from .models import Category, Value
+from .models import Category, Value, ArticleValue
 import re
 @login_required
 def render_login_required(request, template: str,context: dict): 
@@ -22,7 +22,7 @@ def value_in_context_is_empty(QuerySet:any)-> bool:
     
 def string_is_empty(s):
     """Returns True if the string is empty or contains only blanks."""
-
+    print("Its empty name? --> checking...")
     return s is None or s.strip() == ''
 
 def title(title: str)->str:
@@ -118,12 +118,15 @@ def string_has_internal_spaces(name:str, context) -> Tuple[dict,bool]:
     return context, has_internal_spaces
 
 def name_already_in_db(name:str, Model:object, context:dict) -> Tuple[dict,bool]:
+    """Returns the answer in a dictionary (updating it) and True in case the entered name is found in the database"""
 
+    print("name already in db? --> checking...")
     any_error = False
     query = Model.objects.all()
     name = name.strip().title()
     for obj in query:
         if obj.name == name:
+            print(f" TRUE - name {name} is already in db!")
             any_error = True
             context["answer_error_name"] = f"El nombre {name} ya existe!"
     
@@ -132,7 +135,13 @@ def name_already_in_db(name:str, Model:object, context:dict) -> Tuple[dict,bool]
 def is_empty_name(s: str, context: dict) -> Tuple[dict, bool]:
     """Returns True if the string is empty or contains only blanks."""
     
+    
     any_error =  string_is_empty(s)
     if any_error == True:
         context['answer_error_name'] = 'Es obligatorio completar el nombre.'
     return context, any_error
+
+def delete_old_values(article):
+    query = ArticleValue.objects.filter(article_id = article.id)
+    for obj in query:
+        obj.delete()
