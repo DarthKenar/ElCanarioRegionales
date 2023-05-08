@@ -3,12 +3,21 @@
         <div class="md:w-1/2 bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md  border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100">
             <div class="max-w-xs mx-auto flex justify-center items-center space-x-4 bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md  border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100">
                 <label class="text-black font-sans font-bold mx-2" for="category_name_new">Agregar Categoría:</label>
-                <form hx-post="{% url 'category_create' %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#category_value_section" hx-include="[name='category_name_new']" class="flex justify-between">
-                    <input type="text" class="w-full mr-2 bg-amber-50 rounded-sm px-2 mx-2" name="category_name_new" id="category_name_new">
-                    <button  ion-button icon-only type="submit">
-                        <ion-icon title="Crear Categoría" class="mx-4 text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" name="add-circle-outline"></ion-icon>
-                    </button>
-                </form>
+                {% if article_to_update %}
+                    <form hx-post="{% url 'category_create' art_id=article_to_update.id%}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#category_value_section" hx-include="[name='category_name_new']" class="flex justify-between">
+                        <input type="text" class="w-full mr-2 bg-amber-50 rounded-sm px-2 mx-2" name="category_name_new" id="category_name_new">
+                        <button  ion-button icon-only type="submit">
+                            <ion-icon title="Crear Categoría" class="mx-4 text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" name="add-circle-outline"></ion-icon>
+                        </button>
+                    </form>
+                {% else %}
+                    <form hx-post="{% url 'category_create' %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#category_value_section" hx-include="[name='category_name_new']" class="flex justify-between">
+                        <input type="text" class="w-full mr-2 bg-amber-50 rounded-sm px-2 mx-2" name="category_name_new" id="category_name_new">
+                        <button  ion-button icon-only type="submit">
+                            <ion-icon title="Crear Categoría" class="mx-4 text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" name="add-circle-outline"></ion-icon>
+                        </button>
+                    </form>
+                {% endif %}
             </div>
 
             <!-- Contenido de la primera columna -->
@@ -33,18 +42,30 @@
                             
                             <td>{{category.name}}</td>
                             {% if name_category_edition %}
-                                {% if category_selected == category %}
+                                {% if category_to_update == category %}
                                     
                                     <td>
-                                        <form class="flex justify-between" hx-post="{% url 'category_update_name' id=category.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#category_value_section" hx-include="[name='category_name_update']">
-                                            <input class="w-full mr-2 bg-amber-50 rounded-sm px-2 mx-2" type="text" id="category_name_update" name="category_name_update" value="{{category.name}}">
-                                            <button ion-button icon-only type="submit">
-                                                <ion-icon name="save-outline" 
-                                                
-                                                class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer mr-2"
-                                                ></ion-icon>
-                                            </button>
-                                        </form>
+                                        {% if article_to_update %}
+                                            <form class="flex justify-between" hx-post="{% url 'category_update_name' cat_id=category.id art_id=article_to_update.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#category_value_section" hx-include="[name='category_name_update']">
+                                                <input class="w-full mr-2 bg-amber-50 rounded-sm px-2 mx-2" type="text" id="category_name_update" name="category_name_update" value="{{category.name}}">
+                                                <button ion-button icon-only type="submit">
+                                                    <ion-icon name="save-outline" 
+                                                    
+                                                    class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer mr-2"
+                                                    ></ion-icon>
+                                                </button>
+                                            </form>
+                                        {% else %}
+                                            <form class="flex justify-between" hx-post="{% url 'category_update_name' cat_id=category.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#category_value_section" hx-include="[name='category_name_update']">
+                                                <input class="w-full mr-2 bg-amber-50 rounded-sm px-2 mx-2" type="text" id="category_name_update" name="category_name_update" value="{{category.name}}">
+                                                <button ion-button icon-only type="submit">
+                                                    <ion-icon name="save-outline" 
+                                                    
+                                                    class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer mr-2"
+                                                    ></ion-icon>
+                                                </button>
+                                            </form>
+                                        {% endif %}
                                     </td>
                                 {% else %}
                                     <td></td>
@@ -52,23 +73,41 @@
 
                             {% endif %}
                             <td class="flex justify-between">
-                                <form hx-get="{% url 'category_update' id=category.id path=request.path %}" hx-swap="outerHTML" hx-target="#category_value_section" >
-                                    <button ion-button icon-only type="submit">
-                                        <ion-icon name="create-outline" 
-                                        
-                                        class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer mr-2"
-                                        ></ion-icon>
-                                    </button>
-                                        
-                                </form>
-                                <form hx-delete="{% url 'category_delete' id=category.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#category_value_section" hx-confirm="¿Está seguro de que desea eliminar la categoría: {{category.name}}?">
-                                    <button type="submit" ion-button icon-only >
-                                        <ion-icon name="trash-outline" 
+                                {% if article_to_update %}
+                                    <form hx-get="{% url 'category_update' cat_id=category.id path=request.path art_id=article_to_update.id %}" hx-swap="outerHTML" hx-target="#category_value_section" >
+                                        <button ion-button icon-only type="submit">
+                                            <ion-icon name="create-outline" 
                                             
-                                        class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer"
-                                        ></ion-icon>
-                                    </button>
-                                </form>
+                                            class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer mr-2"
+                                            ></ion-icon>
+                                        </button>
+                                    </form>
+                                    <form hx-delete="{% url 'category_delete' cat_id=category.id art_id=article_to_update.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#category_value_section" hx-confirm="¿Está seguro de que desea eliminar la categoría: {{category.name}}?">
+                                        <button type="submit" ion-button icon-only >
+                                            <ion-icon name="trash-outline" 
+                                                
+                                            class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer"
+                                            ></ion-icon>
+                                        </button>
+                                    </form>
+                                {% else %}
+                                    <form hx-get="{% url 'category_update' cat_id=category.id path=request.path %}" hx-swap="outerHTML" hx-target="#category_value_section" >
+                                        <button ion-button icon-only type="submit">
+                                            <ion-icon name="create-outline" 
+                                            
+                                            class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer mr-2"
+                                            ></ion-icon>
+                                        </button>
+                                    </form>
+                                    <form hx-delete="{% url 'category_delete' cat_id=category.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#category_value_section" hx-confirm="¿Está seguro de que desea eliminar la categoría: {{category.name}}?">
+                                        <button type="submit" ion-button icon-only >
+                                            <ion-icon name="trash-outline" 
+                                                
+                                            class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer"
+                                            ></ion-icon>
+                                        </button>
+                                    </form>
+                                {% endif %}
                             </td>
                         </tr>
                         
@@ -82,17 +121,27 @@
         
         <div class="md:w-1/2 bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md  border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100">
             <div>
-                <b value="category_selected.id" class="text-center">{{answer_title_values}}</b>
+                <b value="category_to_update.id" class="text-center">{{answer_title_values}}</b>
             </div>
-            {% if category_selected %}
+            {% if category_to_update %}
             <div class="max-w-xs mx-auto flex justify-center items-center space-x-4 bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md  border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100">
-                <form hx-post="{% url 'value_create' id=category_selected.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#category_value_section" hx-include="[name='value_name_new']" class="flex justify-between">
-                    <label class="text-black font-sans font-bold mx-2" for="value_name_new">Agregar valor:</label>
-                    <input type="text" class="w-full mr-2 bg-amber-50 rounded-sm px-2 mx-2" name="value_name_new" id="value_name_new">
-                    <button  ion-button icon-only type="submit">
-                        <ion-icon title="Crear Valor" class="mx-4 text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" name="add-circle-outline"></ion-icon>
-                    </button>
-                </form>
+                {% if article_to_update %}
+                    <form hx-post="{% url 'value_create' cat_id=category_to_update.id art_id=article_to_update.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#category_value_section" hx-include="[name='value_name_new']" class="flex justify-between">
+                        <label class="text-black font-sans font-bold mx-2" for="value_name_new">Agregar valor:</label>
+                        <input type="text" class="w-full mr-2 bg-amber-50 rounded-sm px-2 mx-2" name="value_name_new" id="value_name_new">
+                        <button  ion-button icon-only type="submit">
+                            <ion-icon title="Crear Valor" class="mx-4 text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" name="add-circle-outline"></ion-icon>
+                        </button>
+                    </form>
+                {% else %}
+                    <form hx-post="{% url 'value_create' cat_id=category_to_update.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#category_value_section" hx-include="[name='value_name_new']" class="flex justify-between">
+                        <label class="text-black font-sans font-bold mx-2" for="value_name_new">Agregar valor:</label>
+                        <input type="text" class="w-full mr-2 bg-amber-50 rounded-sm px-2 mx-2" name="value_name_new" id="value_name_new">
+                        <button  ion-button icon-only type="submit">
+                            <ion-icon title="Crear Valor" class="mx-4 text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" name="add-circle-outline"></ion-icon>
+                        </button>
+                    </form>
+                {% endif %}
             </div>
             {% endif %}
             {% if values %}
@@ -111,18 +160,30 @@
                     <tr>
                         <td>{{value.name}}</td>
                         {% if name_value_edition %}
-                            {% if value_selected == value %}
+                            {% if value_to_update == value %}
                                 
                                 <td>
-                                    <form class="flex justify-between" hx-post="{% url 'value_update_name' id=value.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#category_value_section" hx-include="[name='value_name_update']">
-                                        <input class="w-full mr-2 bg-amber-50 rounded-sm px-2 mx-2" type="text" id="value_name_update" name="value_name_update" value="{{value.name}}">
-                                        <button ion-button icon-only type="submit">
-                                            <ion-icon name="save-outline" 
-                                            
-                                            class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer mr-2"
-                                            ></ion-icon>
-                                        </button>
-                                    </form>
+                                    {% if article_to_update %}
+                                        <form class="flex justify-between" hx-post="{% url 'value_update_name' val_id=value.id art_id=article_to_update.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#category_value_section" hx-include="[name='value_name_update']">
+                                            <input class="w-full mr-2 bg-amber-50 rounded-sm px-2 mx-2" type="text" id="value_name_update" name="value_name_update" value="{{value.name}}">
+                                            <button ion-button icon-only type="submit">
+                                                <ion-icon name="save-outline" 
+                                                
+                                                class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer mr-2"
+                                                ></ion-icon>
+                                            </button>
+                                        </form>
+                                    {% else %}
+                                        <form class="flex justify-between" hx-post="{% url 'value_update_name' val_id=value.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#category_value_section" hx-include="[name='value_name_update']">
+                                            <input class="w-full mr-2 bg-amber-50 rounded-sm px-2 mx-2" type="text" id="value_name_update" name="value_name_update" value="{{value.name}}">
+                                            <button ion-button icon-only type="submit">
+                                                <ion-icon name="save-outline" 
+                                                
+                                                class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer mr-2"
+                                                ></ion-icon>
+                                            </button>
+                                        </form>
+                                    {% endif %}
                                 </td>
                             {% else %}
                                 <td></td>
@@ -130,24 +191,41 @@
 
                         {% endif %} 
                         <td class="flex justify-between">
-
-                            <form hx-get="{% url 'value_update' id=value.id %}" hx-swap="outerHTML" hx-target="#category_value_section" >
-                                <button ion-button icon-only type="submit">
-                                    <ion-icon name="create-outline" 
-                                    
-                                    class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer mr-2"
-                                    ></ion-icon>
-                                </button>
-                                    
-                            </form>
-                            <form hx-delete="{% url 'value_delete' id=value.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#category_value_section" hx-confirm="¿Está seguro de que desea eliminar el valor: {{value.name}}?">
-                                <button type="submit" ion-button icon-only >
-                                    <ion-icon name="trash-outline" 
+                            {% if article_to_update %}
+                                <form hx-get="{% url 'value_update' val_id=value.id art_id=article_to_update.id %}" hx-swap="outerHTML" hx-target="#category_value_section" >
+                                    <button ion-button icon-only type="submit">
+                                        <ion-icon name="create-outline" 
                                         
-                                    class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer"
-                                    ></ion-icon>
-                                </button>
-                            </form>
+                                        class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer mr-2"
+                                        ></ion-icon>
+                                    </button>
+                                </form>
+                                <form hx-delete="{% url 'value_delete' val_id=value.id art_id=article_to_update.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#category_value_section" hx-confirm="¿Está seguro de que desea eliminar el valor: {{value.name}}?">
+                                    <button type="submit" ion-button icon-only >
+                                        <ion-icon name="trash-outline" 
+                                            
+                                        class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer"
+                                        ></ion-icon>
+                                    </button>
+                                </form>
+                            {% else %}
+                                <form hx-get="{% url 'value_update' val_id=value.id %}" hx-swap="outerHTML" hx-target="#category_value_section" >
+                                    <button ion-button icon-only type="submit">
+                                        <ion-icon name="create-outline" 
+                                        
+                                        class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer mr-2"
+                                        ></ion-icon>
+                                    </button>
+                                </form>
+                                <form hx-delete="{% url 'value_delete' val_id=value.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#category_value_section" hx-confirm="¿Está seguro de que desea eliminar el valor: {{value.name}}?">
+                                    <button type="submit" ion-button icon-only >
+                                        <ion-icon name="trash-outline" 
+                                            
+                                        class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer"
+                                        ></ion-icon>
+                                    </button>
+                                </form>
+                            {% endif %}
                         </td>
                     </tr>
                     {% endfor %}
@@ -157,3 +235,4 @@
         </div>
     </div>
 </div>
+{% include 'articles_table.html' %}

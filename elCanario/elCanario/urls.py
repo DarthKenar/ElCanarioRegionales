@@ -54,16 +54,27 @@ htmx_urlpatterns = [
     path('article_create_name_check',articles_views.articles_create_name_check, name="name_check"),
     path('create_sell_price_calculator', articles_views.articles_create_calculator, name="calculator"),
     path('articles_create_confirm', articles_views.articles_create_confirm, name="articles_create_confirm"),
+        ##ARTICLES UPDATE FUNCTIONS
+    path('article_update_name_check/<int:id>', articles_views.articles_update_name_check, name="name_update_check"),
+    path('articles_update_confirm/<int:id>', articles_views.articles_update_confirm, name="articles_update_confirm"),
 
 #         #ARTICLES CATEGORIES
-    path('articles/categories/create', articles_views.articles_categories_create, name="category_create"),
-    path('articles/categories/update/<int:id>/<path:path>', articles_views.articles_category_update, name="category_update"),
-    path('articles/categories/update/name/<int:id>', articles_views.articles_category_update_name, name="category_update_name"),
-    path('articles/categories/delete/<int:id>', articles_views.articles_category_delete, name="category_delete"),
-    path('articles/categories/values/create/<int:id>', articles_views.articles_category_value_create, name="value_create"),
-    path('articles/categories/values/update/<int:id>', articles_views.articles_value_update, name="value_update"),
-    path('articles/categories/values/update/name/<int:id>', articles_views.articles_value_update_name, name="value_update_name"),
-    path('articles/categories/values/delete/<int:id>', articles_views.articles_value_delete, name="value_delete"),
+    path('articles/categories/create/(?P<art_id>[0-9]+)', articles_views.articles_category_create, name="category_create"),
+    path('articles/categories/create', articles_views.articles_category_create, name="category_create"),
+    path('articles/categories/update/<int:cat_id>/<path:path>/(?P<art_id>[0-9]+)', articles_views.articles_category_update, name="category_update"),
+    path('articles/categories/update/<int:cat_id>/<path:path>', articles_views.articles_category_update, name="category_update"),
+    path('articles/categories/update/name/<int:cat_id>/(?P<art_id>[0-9]+)', articles_views.articles_category_update_name, name="category_update_name"),
+    path('articles/categories/update/name/<int:cat_id>', articles_views.articles_category_update_name, name="category_update_name"),
+    path('articles/categories/delete/<int:cat_id>/(?P<art_id>[0-9]+)', articles_views.articles_category_delete, name="category_delete"),
+    path('articles/categories/delete/<int:cat_id>', articles_views.articles_category_delete, name="category_delete"),
+    path('articles/categories/values/create/<int:cat_id>/(?P<art_id>[0-9]+)', articles_views.articles_category_value_create, name="value_create"),
+    path('articles/categories/values/create/<int:cat_id>', articles_views.articles_category_value_create, name="value_create"),
+    path('articles/categories/values/update/<int:val_id>/(?P<art_id>[0-9]+)', articles_views.articles_value_update, name="value_update"),
+    path('articles/categories/values/update/<int:val_id>', articles_views.articles_value_update, name="value_update"),
+    path('articles/categories/values/update/name/<int:val_id>/(?P<art_id>[0-9]+)', articles_views.articles_value_update_name, name="value_update_name"),
+    path('articles/categories/values/update/name/<int:val_id>', articles_views.articles_value_update_name, name="value_update_name"),
+    path('articles/categories/values/delete/<int:val_id>/(?P<art_id>[0-9]+)', articles_views.articles_value_delete, name="value_delete"),
+    path('articles/categories/values/delete/<int:val_id>', articles_views.articles_value_delete, name="value_delete"),
 
 ]
 urlpatterns += htmx_urlpatterns
