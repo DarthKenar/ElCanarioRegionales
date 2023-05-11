@@ -47,13 +47,11 @@ def articles_read_datatype(request):
 
         datatype_input = int(datatype_input.strip())
         category = Category.objects.get(id = datatype_input)
-
-        context["articles_any"] = Article.objects.filter(characteristics_id__category_id=category)
-        
         context["datatype_input"] = category.id
         context["datatype"] = category.name
-
+        context["articles_any"] = Article.objects.filter(characteristics_id__category_id=category)
         context["values"] = Value.objects.filter(category_id=category)
+        
     else:
 
         datatype_dict = {
@@ -90,7 +88,8 @@ def articles_read_datatype(request):
             context["datatype_input"] = datatype_input
             context["datatype"] = "Precio de venta"
             
-
+        print("articles_any:", context.get("articles_any"))
+        
     return render_login_required(request,template,context)
 
 def articles_read_data(request):
