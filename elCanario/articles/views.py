@@ -20,13 +20,11 @@ def articles(request):
     template = "articles.html"
 
     articles = Article.objects.all()
-    categories = Category.objects.all()
 
     answer = "Artículos en la Base de datos"
     context = {
                 "articles_any": articles,
                 "answer":answer,
-                "categories": categories,
                 "datatype_input": 'name',
                 "datatype": 'Nombre'
                }
@@ -40,18 +38,19 @@ def articles_read_datatype(request):
     context = {}
     datatype_input = request.GET['datatype_input']
 
-    categories = Category.objects.all()
-    context["categories"] = categories
     
     if datatype_input.strip().isnumeric():
 
         datatype_input = int(datatype_input.strip())
         category = Category.objects.get(id = datatype_input)
-        context["datatype_input"] = category.id
-        context["datatype"] = category.name
-        context["articles_any"] = Article.objects.filter(characteristics_id__category_id=category)
-        context["values"] = Value.objects.filter(category_id=category)
-        
+
+        context.update({
+            "datatype_input": category.id,
+            "datatype": category.name,
+            "articles_any": Article.objects.filter(characteristics_id__category_id=category),
+            "values": Value.objects.filter(category_id=category)
+        })
+
     else:
 
         datatype_dict = {
@@ -63,9 +62,11 @@ def articles_read_datatype(request):
                         }
         
         articles = Article.objects.all()
-        context["datatype_input"] = datatype_input
-        context["articles_any"] = articles
 
+        context.update({
+            "datatype_input": datatype_input,
+            "articles_any": articles
+        })
         if datatype_input == datatype_dict[1]:
 
             context["datatype_input"] = datatype_input

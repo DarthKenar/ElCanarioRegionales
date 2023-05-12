@@ -60,7 +60,7 @@ class Test_articles(TestCase):
         response = client.get(reverse('articles'))
 
         articles = Article.objects.all()
-        categories = Category.objects.all()
+
         answer = "Artículos en la Base de datos"
         expected_context = {
             "answer":answer,
@@ -71,7 +71,6 @@ class Test_articles(TestCase):
         #Al tener un error de comparacion con las QuerySet se hará de la siguiente manera:
         #para las respuestas de contextos que contengan objetos...
         self.assertQuerysetEqual(response.context['articles_any'], articles)
-        self.assertQuerysetEqual(response.context['categories'], categories)
         self.assertDictContainsSubset(expected_context,response.context)
         # determinamos el template que debería utilizar
         self.assertTemplateUsed(response, 'articles.html')
@@ -83,28 +82,28 @@ class Test_articles(TestCase):
         # 1- determinamos la url-name que se utiliza y los valores que recibirá la función
         client = Client()
         response = client.get(reverse('articles_read_datatype'), data={'datatype_input': 'name'})
-        print(response.context) # declaracion de depuracion
         #logeamos
         client.login(username = 'admin', password = '1234')
         # 2- elementos en el contexto:
             #Modelos que utilizamos de la base de datos
-        categories = Category.objects.all()
         articles = Article.objects.all()
             #contexto específico
         expected_context = {
             "datatype_input": 'name',
             "datatype": "Nombre"
         }
-        print("articles:", articles)
+        print(response.context) # declaracion de depuracion
+        print("articles_any:", articles)
+        
             #Al tener un error de comparacion con las QuerySet se hará de la siguiente manera:
             #para las respuestas de contextos que contengan objetos...
         self.assertQuerysetEqual(response.context['articles_any'], articles)
-        self.assertQuerysetEqual(response.context['categories'], categories)
         self.assertDictContainsSubset(expected_context,response.context)
         # 3- determinamos el template que debería utilizar
         self.assertTemplateUsed(response, 'articles_search_datatype.html')
         # 4- determinamos el codigo de respuesta
         self.assertEqual(response.status_code, 200)
+
 
     
     

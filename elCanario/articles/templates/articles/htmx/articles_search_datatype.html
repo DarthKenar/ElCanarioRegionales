@@ -1,4 +1,8 @@
 <div id="search_answer_datatype">
+    
+    {% load custom_tags %}
+    {% get_all_categories as categories %}
+
     {% include 'articles_search_header.html' %}
     <div>
         <div id="search_answer_data">

@@ -4,9 +4,8 @@
         <tr class="bg-amber-300">
             <th class="lg:m-4 md:m-4 ">Id</th>
             <th class="lg:m-4 md:m-4 ">Nombre</th>
-            {% for categorie in categories %}
-            <th>{{categorie.name}}</th>
-            
+            {% for category in categories %}
+                <th>{{category.name}}</th>
             {% endfor %}
             <th class="lg:m-4 md:m-4 ">Precio de Compra</th>
             <th class="lg:m-4 md:m-4 ">Incremento</th>

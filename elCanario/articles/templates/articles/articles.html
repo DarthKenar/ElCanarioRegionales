@@ -3,6 +3,10 @@
     <title>Buscar Artículos - Canario Regionales</title>
 {% endblock %}
 {% block content_two %}
+
+    {% load custom_tags %}
+    {% get_all_categories as categories %}
+
     <div id="search_answer_datatype">
 
         {% include 'articles_search_header.html'%}
