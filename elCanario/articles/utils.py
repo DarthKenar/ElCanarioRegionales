@@ -146,3 +146,11 @@ def delete_old_values(article):
     query = ArticleValue.objects.filter(article_id = article.id)
     for obj in query:
         obj.delete()
+
+def str_to_bool_external_link(external_link: str) -> bool:
+    """gets a string as 'True' or 'False' and converts it to Boolean returning this value"""
+    if external_link == 'True':
+        external_link = True
+    else:
+        external_link = False
+    return external_link

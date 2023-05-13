@@ -489,11 +489,21 @@ def articles_category_value_create(request,cat_id, art_id=None):
 
     return render_login_required(request, template, context)
 
-def articles_category_update(request, path, cat_id, art_id=None):
+def articles_category_update(request, external_link, cat_id, art_id=None):
+    print("external_link -->", external_link)
     
-    if "articles/categories" in path:
+    print("External Link type", type(external_link))
+    print("CAT_ID -->", cat_id)
+    print("ART_ID -->", art_id)
+    external_link = str_to_bool_external_link(external_link)
+
+    if external_link == False:
+        print("NOT EXTERNAL LINK", external_link)
+        print("External Link type", type(external_link))
         template = "articles_category_section.html"
     else: 
+        print("EXTERNAL LINK", external_link)
+        print("External Link type", type(external_link))
         template = "categories.html"
 
     context={}
