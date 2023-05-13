@@ -154,3 +154,11 @@ def str_to_bool_external_link(external_link: str) -> bool:
     else:
         external_link = False
     return external_link
+def is_the_same_name(new_name:str, old_name:str, context: dict) -> Tuple[dict, bool]:
+    any_error = False
+    if new_name.strip().title() == old_name.strip().title():
+        any_error = True
+        context.update({
+            'answer_error_name': 'El anterior nombre y el nuevo son iguales'
+        })
+    return context, any_error
