@@ -10,7 +10,7 @@
 {% for category in categories %}
     <div class="p-4 m-4 flex justify-between">
         <!-- Button to edit category -->
-        <form action="{% url 'category_update' cat_id=category.id path=request.path art_id=article_to_update.id %}" method="GET">
+        <form action="{% url 'category_update' path=request.path cat_id=category.id art_id=article_to_update.id  %}" method="GET">
           <button ion-button icon-only type="submit">
               <ion-icon name="create-outline" 
               

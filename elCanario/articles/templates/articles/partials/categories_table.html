@@ -74,7 +74,7 @@
                             {% endif %}
                             <td class="flex justify-between">
                                 {% if article_to_update %}
-                                    <form hx-get="{% url 'category_update' cat_id=category.id path=request.path art_id=article_to_update.id %}" hx-swap="outerHTML" hx-target="#category_value_section" >
+                                    <form hx-get="{% url 'category_update' path=request.path cat_id=category.id art_id=article_to_update.id %}" hx-swap="outerHTML" hx-target="#category_value_section" >
                                         <button ion-button icon-only type="submit">
                                             <ion-icon name="create-outline" 
                                             
@@ -91,7 +91,7 @@
                                         </button>
                                     </form>
                                 {% else %}
-                                    <form hx-get="{% url 'category_update' cat_id=category.id path=request.path %}" hx-swap="outerHTML" hx-target="#category_value_section" >
+                                    <form hx-get="{% url 'category_update' path=request.path cat_id=category.id  %}" hx-swap="outerHTML" hx-target="#category_value_section" >
                                         <button ion-button icon-only type="submit">
                                             <ion-icon name="create-outline" 
                                             
@@ -192,7 +192,7 @@
                         {% endif %} 
                         <td class="flex justify-between">
                             {% if article_to_update %}
-                                <form hx-get="{% url 'value_update' val_id=value.id art_id=article_to_update.id %}" hx-swap="outerHTML" hx-target="#category_value_section" >
+                                <form hx-get="{% url 'value_update' cat_id=category.id val_id=value.id art_id=article_to_update.id %}" hx-swap="outerHTML" hx-target="#category_value_section" >
                                     <button ion-button icon-only type="submit">
                                         <ion-icon name="create-outline" 
                                         
@@ -200,7 +200,7 @@
                                         ></ion-icon>
                                     </button>
                                 </form>
-                                <form hx-delete="{% url 'value_delete' val_id=value.id art_id=article_to_update.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#category_value_section" hx-confirm="¿Está seguro de que desea eliminar el valor: {{value.name}}?">
+                                <form hx-delete="{% url 'value_delete' cat_id=category.id val_id=value.id art_id=article_to_update.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#category_value_section" hx-confirm="¿Está seguro de que desea eliminar el valor: {{value.name}}?">
                                     <button type="submit" ion-button icon-only >
                                         <ion-icon name="trash-outline" 
                                             
