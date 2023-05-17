@@ -156,6 +156,8 @@ def articles_create_calculator(request):
     return render_login_required(request, template, context)
     
 def articles_create_confirm(request):
+
+    template = 'articles_create_save.html'
       
     any_error = False
     context = {}
@@ -195,13 +197,10 @@ def articles_create_confirm(request):
 
         # for render error answers
         context.update(values_dict)
-        template = 'articles_create_save_error.html'
         context["answer_save_error"] = "No se ha creado el artículo, revise los campos nuevamente."
         return render_login_required(request, template, context)
 
     else:
-
-        template = "articles_create_save_right.html"
 
         context.pop("article_name_input")
         context.pop("article_buy_price_input")
@@ -233,6 +232,8 @@ def articles_create_confirm(request):
         return render_login_required(request, template, context)
 
 def articles_update_confirm(request, id):
+
+    template = "articles_create_save.html"
 
     any_error = False
     context = {}
@@ -277,8 +278,6 @@ def articles_update_confirm(request, id):
 
     if any_error == True:
 
-        template = 'articles_create_save_error.html'
-        
         # for render error answer
         context.update(values_dict)
         context["answer_save_error"] = "No se ha creado el artículo, revise los campos nuevamente."
@@ -286,8 +285,6 @@ def articles_update_confirm(request, id):
         return render_login_required(request, template, context)
 
     else:
-
-        template = "articles_create_save_right.html"
         
         context.pop("article_name_input")
         context.pop("article_buy_price_input")

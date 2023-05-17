@@ -1,0 +1,15 @@
+<div class="mx-auto max-w-md" id="article_create_answer">
+  {% include 'articles_create_table.html' %}
+  {% if answer_save_error %}
+    <div>
+        <output class="font-bold empty:hidden cursor-default vanish text-red-600">{{answer_save_error}}</output>
+    </div>
+  {% endif %}
+  {% if answer_save_right %}
+    <div>
+      <output class="font-bold empty:hidden vanish cursor-default text-green-600">{{answer_save_right}}</output>
+    </div>
+  {% endif %}
+  
+</div>
+
