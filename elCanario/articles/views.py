@@ -131,6 +131,10 @@ def articles_update_name_check(request, id):
     return render_login_required(request, template, context)
 
 def articles_create_calculator(request):
+
+    template = "articles_create_calculator.html"
+
+
     context = {}
     buy_price = request.GET['article_buy_price_input'].replace(',', '.')
     increase = request.GET['article_increase_input'].replace(',', '.')
@@ -139,12 +143,11 @@ def articles_create_calculator(request):
     context, error_any = calculator_check(increase, buy_price, context)
 
     if error_any:
-        template = "articles_create_calculator_error.html"
         """show any error"""
         return render_login_required(request, template, context)
     
     else:
-        template = "articles_create_calculator_right.html"
+        
         buy_price_float = float(buy_price)
         increase_float = float(increase)
         calculator = buy_price_float + ((buy_price_float * increase_float) / 100)
@@ -545,7 +548,7 @@ def articles_value_update(request, cat_id, val_id, art_id=None):
     value_to_update = Value.objects.get(id = val_id)
 
     template = 'articles_category_value_section.html'
-    
+
     if not string_is_empty(art_id):
         article_to_update = Article.objects.get(id = art_id)
         context['article_to_update'] = article_to_update
