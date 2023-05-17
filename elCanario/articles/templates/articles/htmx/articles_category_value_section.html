@@ -1,0 +1,18 @@
+<div id="articles_category_value_section">
+    {% if answer_error_name %}
+        <div class="bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100 appear-vanish">
+            <output class="font-bold empty:hidden cursor-default appear vanish text-red-600" type="text">{{answer}}</output><br>
+            <output class="font-bold empty:hidden cursor-default appear vanish text-red-600" type="text">{{answer_error_name}}</output>
+        </div>}
+    {% else %}
+        {% if answer %}
+            <div class="bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100 appear-vanish">
+                <output class="font-bold empty:hidden cursor-default text-green-600" type="text">{{answer}}</output>
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {% include 'categories_table.html' %}
+
+</div>
+

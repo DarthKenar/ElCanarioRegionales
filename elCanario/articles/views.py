@@ -363,6 +363,7 @@ def articles_categories(request):
 
 def articles_category_create(request, art_id=None):
 
+    template = 'articles_category_value_section.html'
     category_name = request.POST["category_name_new"].strip().title()
     context = {}
     context["categories"] = Category.objects.all()
@@ -383,19 +384,19 @@ def articles_category_create(request, art_id=None):
         context = error_context
 
     if any_error == False:
-        template = 'articles_category_section_right.html'
         category_to_save = Category(name=category_name)
         category_to_save.save()
         context['category_to_update'] = category_to_save
         context["answer_title_values"] = f"Agregar valores a: {category_to_save.name}"
         context["answer"] = f"La categoría {category_to_save.name} se ha guardado correctamente!"
     else:
-        template = 'articles_category_section_error.html'
         context["answer"] = "No se ha podido guardar la categoría!"
 
     return render_login_required(request, template, context)
 
 def articles_category_value_create(request,cat_id, art_id=None):
+
+    template = 'articles_category_value_section.html'
 
     context={}
     context["categories"] = Category.objects.all()
@@ -418,7 +419,6 @@ def articles_category_value_create(request,cat_id, art_id=None):
         any_error = True
     
     if any_error == False:
-        template = 'articles_category_section_right.html'
         value_to_update = Value(
             category_id = category_to_update,
             name = value_name
@@ -427,7 +427,6 @@ def articles_category_value_create(request,cat_id, art_id=None):
         context['answer'] = f'Se guardó correctamente el valor: {value_name} , para la categoría: {category_to_update.name}'
         context['values'] = Value.objects.filter(category_id = category_to_update)
     else:
-        template = 'articles_category_section_error.html'
         context["answer"] = f"No se ha podido guardar el valor: {value_name}, para la categoría: {category_to_update.name}"
         context['values'] = Value.objects.filter(category_id = category_to_update)
 
@@ -444,7 +443,7 @@ def articles_category_update(request, external_link, cat_id, art_id=None):
     if external_link == False:
         print("NOT EXTERNAL LINK", external_link)
         print("External Link type", type(external_link))
-        template = "articles_category_section_right.html"
+        template = "articles_category_value_section.html"
     else: 
         print("EXTERNAL LINK", external_link)
         print("External Link type", type(external_link))
@@ -469,6 +468,7 @@ def articles_category_update(request, external_link, cat_id, art_id=None):
 
 def articles_category_update_name(request, cat_id, art_id=None):
 
+    template = 'articles_category_value_section.html'
     context={}
 
     category_to_update = Category.objects.get(id = cat_id)
@@ -486,12 +486,10 @@ def articles_category_update_name(request, cat_id, art_id=None):
         context['articles_any'] = [article_to_update]
 
     if search_any_error_in_name_field_bool == False and is_the_same_name_bool == False and name_already_in_db_bool == False:
-        template = 'articles_category_section_right.html'
         context['answer'] = f'Se ha actualizado correctamente la categoría {category_to_update.name} --> {new_name}!'
         category_to_update.name = new_name
         category_to_update.save()
     else:
-        template = 'articles_category_section_error.html'
         context['answer'] = f'No se puede actualizar el nombre de la categoría {category_to_update.name} --> {new_name}!'
 
     context["categories"] = Category.objects.all()
@@ -502,7 +500,8 @@ def articles_category_update_name(request, cat_id, art_id=None):
     return render_login_required(request, template, context)
 def articles_category_delete(request, cat_id, art_id=None):
 
-    template = 'articles_category_section_right.html'
+    template = 'articles_category_value_section.html'
+
     if not string_is_empty(art_id):
         article_to_update = Article.objects.get(id = art_id)
         context['article_to_update'] = article_to_update
@@ -517,11 +516,11 @@ def articles_category_delete(request, cat_id, art_id=None):
 
 def articles_value_delete(request, cat_id, val_id, art_id=None):
 
+    template = 'articles_category_value_section.html'
+
     context={}
     value_to_update = Value.objects.get(id = val_id)
 
-    template = 'articles_category_section_right.html'
-    
     if not string_is_empty(art_id):
         article_to_update = Article.objects.get(id = art_id)
         context['article_to_update'] = article_to_update
@@ -545,7 +544,8 @@ def articles_value_update(request, cat_id, val_id, art_id=None):
     context={}
     value_to_update = Value.objects.get(id = val_id)
 
-    template = 'articles_category_section_right.html'
+    template = 'articles_category_value_section.html'
+    
     if not string_is_empty(art_id):
         article_to_update = Article.objects.get(id = art_id)
         context['article_to_update'] = article_to_update
@@ -564,6 +564,8 @@ def articles_value_update(request, cat_id, val_id, art_id=None):
 
 def articles_value_update_name(request, val_id, art_id=None):
 
+    template = 'articles_category_value_section.html'
+
     context={}
     new_name = request.POST['value_name_update'].strip().title()
     value_to_update = Value.objects.get(id = val_id)
@@ -581,12 +583,10 @@ def articles_value_update_name(request, val_id, art_id=None):
         context['articles_any'] = [article_to_update]
     
     if is_the_same_name_bool == False and is_empty_name_bool == False and name_already_in_db_bool == False:
-        template = 'articles_category_section_right.html'
         context['answer'] = f'Se ha actualizado correctamente el valor {value_to_update.name} --> {new_name}!'
         value_to_update.name = new_name
         value_to_update.save()
     else:
-        template = 'articles_category_section_error.html'
         context['answer'] = f'No se puede actualizar el nombre del valor {value_to_update.name} --> {new_name}!'
 
     context['value_to_update'] = value_to_update
