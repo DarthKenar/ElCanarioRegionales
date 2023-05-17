@@ -1,0 +1,18 @@
+<div id="articles_search_data" >
+    {% if articles_any.count > 0 %}
+        <div class="bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100">
+            {% if answer_error_name %}
+                <output class="font-bold empty:hidden cursor-default text-red-600 appear" type="text">{{answer_error_name}}</output><br>
+            {% endif %}
+            {% if article_delete_answer %}
+                <output class="font-bold empty:hidden cursor-default text-red-600 appear" type="text">{{article_delete_answer}}</output><br>
+            {% endif %}
+            <output class="font-bold empty:hidden cursor-default appear text-green-600" type="text">Cantidad de artículos entonctrados: <b>{{ articles_any.count }}</b>.</output>
+        </div>
+        {% include 'articles_table.html' %}
+    {% else %}
+        <div class="bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100">
+            <output class="font-bold empty:hidden cursor-default text-red-600 appear" type="text">No se encuentran artículos para: <b> {{datatype}} {{value}}</b></output>
+        </div>
+    {% endif %}
+</div>

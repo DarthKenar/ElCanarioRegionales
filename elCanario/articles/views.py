@@ -20,7 +20,7 @@ def articles(request):
     template = "articles.html"
 
     articles = Article.objects.all()
-
+    
     answer = "Artículos en la Base de datos"
     context = {
                 "articles_any": articles,
@@ -36,114 +36,55 @@ def articles_read_datatype(request):
 
     template = "articles_search_datatype.html"
     context = {}
-    datatype_input = request.GET['datatype_input']
 
+    datatype_input = request.GET['datatype_input'].strip()
     
-    if datatype_input.strip().isnumeric():
+    if datatype_input.isnumeric():
+        """if numeric, the user has selected some category as data type"""
 
-        datatype_input = int(datatype_input.strip())
-        category = Category.objects.get(id = datatype_input)
-
-        context.update({
-            "datatype_input": category.id,
-            "datatype": category.name,
-            "articles_any": Article.objects.filter(characteristics_id__category_id=category),
-            "values": Value.objects.filter(category_id=category)
-        })
+        context.update(get_articles_by_category_datatype(datatype_input))
 
     else:
-
-        datatype_dict = {
-                        1: "id",
-                        2: "name",
-                        3: "buy_price",
-                        4: "increase",
-                        5: "sell_price"
-                        }
+        """if not numeric, the user has selected some article native field as data type"""
         
-        articles = Article.objects.all()
+        context.update(get_articles_by_native_datatype(datatype_input))
 
-        context.update({
-            "datatype_input": datatype_input,
-            "articles_any": articles
-        })
-        if datatype_input == datatype_dict[1]:
-
-            context["datatype_input"] = datatype_input
-            context["datatype"] = "Id"
-
-        elif datatype_input == datatype_dict[2]:
-
-            context["datatype"] = "Nombre"
-            
-        elif datatype_input == datatype_dict[3]:
-
-            context["datatype"] = "Precio de compra"
-
-        elif datatype_input == datatype_dict[4]:
-
-            context["datatype"] = "Incremento"
-
-        else: #datatype_input == datatype_dict[5]
-
-            context["datatype_input"] = datatype_input
-            context["datatype"] = "Precio de venta"
-            
-        print("articles_any:", context.get("articles_any"))
-        
     return render_login_required(request,template,context)
 
 def articles_read_data(request):
 
-    template = "articles_search_right.html"
+    template = "articles_search_data.html"
 
-    search_input = request.GET["search_input"]
-    datatype_input = request.GET["datatype_input"]
+    search_input = request.GET["search_input"].strip()
+    datatype_input = request.GET["datatype_input"].strip()
     context = {}
     
-    if string_is_empty(search_input):
-        
-        template = "articles_search_input_empty.html"
-        context["articles_any"] = Article.objects.all()
+    if datatype_input.isnumeric():
+        """comprueba que la seleccion del usuario sea una categoría"""
 
-    elif datatype_input.strip().isnumeric():
-        
-        datatype_input = int(datatype_input)
-        search_input = int(search_input)
+        if string_is_empty(search_input):
+            """trae todos los artículos que contengan valores en esa categoría"""
+            context.update(get_articles_by_category_datatype(datatype_input))
 
-        category = Category.objects.get(id = datatype_input)
-        value = Value.objects.get(id = search_input)
-        context["articles_any"] = Article.objects.filter(characteristics_id=value)
-        context["datatype_input"] = category.id
-        context["datatype"] = category.name
-        context["value"] = value.name
+        else:
+            """trae todos los artículos que tengan ese valor específico"""
+            context.update(get_articles_for_value_of_category(datatype_input,search_input))
 
     else:
-        search_input = search_input.strip()
-        context["value"] = search_input
-        if datatype_input == "id":
-            context["articles_any"] = Article.objects.filter(id__startswith=search_input)
-            context["datatype_input"] = "id"
-            context["datatype"] = "Id:"
-        elif datatype_input == "name":
-            context["articles_any"] = Article.objects.filter(name__startswith=search_input) 
-            context["datatype_input"] = "name"
-            context["datatype"] = "Nombre:"
-        elif datatype_input == "buy_price":
-            context["articles_any"] = Article.objects.filter(buy_price__startswith=search_input)
-            context["datatype_input"] = "buy_price"
-            context["datatype"] = "Precio de compra:"
-        elif datatype_input == "increase":
-            context["articles_any"] = Article.objects.filter(increase__startswith=search_input)
-            context["datatype_input"] = "increase"
-            context["datatype"] = "Incremento:"
-        elif datatype_input == "sell_price":
-            context["articles_any"] = Article.objects.filter(sell_price__startswith=search_input)
-            context["datatype_input"] = "sell_price"
-            context["datatype"] = "Precio de venta:"
+        """el usuario ha seleccionado como tipo de búsqueda un tipo de dato nativo, (no categoría)"""
 
-    if value_in_context_is_empty(context["articles_any"]):
-        template = "articles_search_not_found.html"
+        if string_is_empty(search_input):
+            """Si el campo de búsqueda está vacío se mostrarán todos los artículos"""
+            context["articles_any"] = Article.objects.all()
+
+        else:
+            """Si el campo de búsqueda no está vacío, se buscará de acuerdo a un tipo de dato nativo, (no categoría)"""
+            context.update(get_articles_for_search_input_in_native_datatype(datatype_input, search_input))
+
+
+    # if value_in_context_is_empty(context["articles_any"]):
+    #     """Una vez que realiza la búsqueda de artículos, si no se encuentran, trae todos igualmente en vez de no traer ninguno"""
+    #     template = "articles_search_data.html"
         
     categories = Category.objects.all()
     context["search_input"] = search_input
@@ -377,15 +318,15 @@ def articles_update_confirm(request, id):
 def article_delete(request, id):
 
     context = {}
-
+    template = "articles_search_data.html"
     try:
         article_to_delete = get_object_or_404(Article, id=id)
     except Exception as e:
-        template = "articles_delete_error.html"
+        
         return render_login_required(request, template, context)
     else:
-        template = "articles_delete_right.html"
-        context["answer"] = f"Se eliminó correctamente el artículo {article_to_delete.name}"
+        
+        context["article_delete_answer"] = f"Se eliminó correctamente el artículo {article_to_delete.name}"
         article_to_delete.delete()
         articles = Article.objects.all()
         categories = Category.objects.all()
@@ -478,11 +419,11 @@ def articles_category_value_create(request,cat_id, art_id=None):
     
     if any_error == False:
         template = 'articles_category_section_right.html'
-        val = Value(
+        value_to_update = Value(
             category_id = category_to_update,
             name = value_name
                     )
-        val.save()
+        value_to_update.save()
         context['answer'] = f'Se guardó correctamente el valor: {value_name} , para la categoría: {category_to_update.name}'
         context['values'] = Value.objects.filter(category_id = category_to_update)
     else:
@@ -577,7 +518,7 @@ def articles_category_delete(request, cat_id, art_id=None):
 def articles_value_delete(request, cat_id, val_id, art_id=None):
 
     context={}
-    val = Value.objects.get(id = val_id)
+    value_to_update = Value.objects.get(id = val_id)
 
     template = 'articles_category_section_right.html'
     
@@ -589,8 +530,8 @@ def articles_value_delete(request, cat_id, val_id, art_id=None):
     category_to_update = Category.objects.get(id = cat_id)
     context['category_to_update'] = category_to_update
     
-    context["answer"] = f"De la categoría {category_to_update.name}, el valor {val.name} ha sido eliminado."
-    val.delete()
+    context["answer"] = f"De la categoría {category_to_update.name}, el valor {value_to_update.name} ha sido eliminado."
+    value_to_update.delete()
 
 
 
@@ -602,7 +543,7 @@ def articles_value_delete(request, cat_id, val_id, art_id=None):
 def articles_value_update(request, cat_id, val_id, art_id=None):
 
     context={}
-    val = Value.objects.get(id = val_id)
+    value_to_update = Value.objects.get(id = val_id)
 
     template = 'articles_category_section_right.html'
     if not string_is_empty(art_id):
@@ -615,7 +556,7 @@ def articles_value_update(request, cat_id, val_id, art_id=None):
 
     context["categories"] = Category.objects.all()
     
-    context['value_to_update'] = val
+    context['value_to_update'] = value_to_update
     context['values'] = Value.objects.filter(category_id = category_to_update)
     context["answer_title_values"] = f"Categoría seleccionada: {category_to_update.name}"
     context["name_value_edition"] = True
@@ -625,13 +566,13 @@ def articles_value_update_name(request, val_id, art_id=None):
 
     context={}
     new_name = request.POST['value_name_update'].strip().title()
-    val = Value.objects.get(id = val_id)
+    value_to_update = Value.objects.get(id = val_id)
     context, is_empty_name_bool = is_empty_name(new_name, context)
     context, name_already_in_db_bool = name_already_in_db(new_name, Value, context)
-    context, is_the_same_name_bool = is_the_same_name(new_name, val.name, context)
+    context, is_the_same_name_bool = is_the_same_name(new_name, value_to_update.name, context)
 
 
-    category_to_update = Category.objects.get(id = val.category_id.id)
+    category_to_update = Category.objects.get(id = value_to_update.category_id.id)
     context['category_to_update'] = category_to_update
 
     if not string_is_empty(art_id):
@@ -641,14 +582,14 @@ def articles_value_update_name(request, val_id, art_id=None):
     
     if is_the_same_name_bool == False and is_empty_name_bool == False and name_already_in_db_bool == False:
         template = 'articles_category_section_right.html'
-        context['answer'] = f'Se ha actualizado correctamente el valor {val.name} --> {new_name}!'
-        val.name = new_name
-        val.save()
+        context['answer'] = f'Se ha actualizado correctamente el valor {value_to_update.name} --> {new_name}!'
+        value_to_update.name = new_name
+        value_to_update.save()
     else:
         template = 'articles_category_section_error.html'
-        context['answer'] = f'No se puede actualizar el nombre del valor {val.name} --> {new_name}!'
+        context['answer'] = f'No se puede actualizar el nombre del valor {value_to_update.name} --> {new_name}!'
 
-    context['value_to_update'] = val
+    context['value_to_update'] = value_to_update
     context["categories"] = Category.objects.all()
     context['values'] = Value.objects.filter(category_id = category_to_update)
     context["answer_title_values"] = f"Categoría seleccionada: {category_to_update.name}"
@@ -660,4 +601,46 @@ def customers(request):
 
     template="customers.html"
 
-    return render_login_required(request, template,context={})
+    customers = Customer.objects.all()
+
+    answer = "Clientes en la Base de datos"
+    context = {
+                "customers_any": customers,
+                "answer":answer,
+                "datatype_input": 'name',
+                "datatype": 'Nombre'
+               }
+
+    return render_login_required(request, template, context)
+
+def customers_read_datatype(request):
+
+    template = 'customers_search_datatype.html'
+    context = {}
+    datatype_input = request.GET['datatype_input'].strip()
+
+    context.update(get_customers_by_native_datatype(datatype_input))
+
+    return render_login_required(request, template, context)
+
+def customers_read_data(request):
+
+    template = "customers_search_right.html"
+
+    search_input = request.GET["search_input"].strip()
+    datatype_input = request.GET["datatype_input"].strip()
+    context = {}
+
+    if string_is_empty(search_input):
+        """Si el campo de búsqueda está vacío se mostrarán todos los artículos"""
+        context["articles_any"] = Customer.objects.all()
+
+    else:
+        """Si el campo de búsqueda no está vacío, se buscará de acuerdo a un tipo de dato nativo, (no categoría)"""
+        context.update(get_customers_for_search_input_in_native_datatype(datatype_input, search_input))
+
+    return render_login_required(request, template, context)
+def customers_create(request):
+    template = 'customers_search_right.html'
+    context = {}
+    return render_login_required(request, template, context)

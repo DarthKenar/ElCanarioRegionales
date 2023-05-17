@@ -49,7 +49,7 @@
                         </button>
                             
                     </form>
-                    <form hx-delete="{% url 'articles_delete' id=article.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#search_answer_data" hx-confirm="¿Está seguro de que desea eliminar el articulo: {{article.name}}?">
+                    <form hx-delete="{% url 'articles_delete' id=article.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_search_data" hx-confirm="¿Está seguro de que desea eliminar el articulo: {{article.name}}?">
                         {% csrf_token %}
                         <button type="submit" ion-button icon-only >
                             <ion-icon name="trash-outline" 

@@ -3,7 +3,17 @@
     <title>Clientes - Canario Regionales</title>
 {% endblock %}
 {% block content_two %}
-        <h1>   
-                Esta es la seccion Clientes
-        </h1>
+
+    <div id="search_answer_datatype">
+
+        {% include 'customers_search_header.html' %}
+
+        <div id="search_answer_data">
+                
+            {% include 'customers_table.html' %}
+
+        </div>
+
+    </div>
+        
 {% endblock %}

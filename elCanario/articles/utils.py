@@ -3,7 +3,7 @@
 from typing import Tuple
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from .models import Category, Value, ArticleValue
+from .models import Category, Value, ArticleValue, Article, Customer
 import re
 @login_required
 def render_login_required(request, template: str,context: dict): 
@@ -11,14 +11,14 @@ def render_login_required(request, template: str,context: dict):
 
     return render(request, template, context)
 
-def value_in_context_is_empty(QuerySet:any)-> bool:
-    """Checks if the QuerySet is empty or not, returning True if it is empty and False if it has one or more elements inside."""
+# def value_in_context_is_empty(QuerySet:any)-> bool:
+#     """Checks if the QuerySet is empty or not, returning True if it is empty and False if it has one or more elements inside."""
 
-    quantity = QuerySet.count()
-    if quantity < 1:
-        return True
-    else:
-        return False
+#     quantity = QuerySet.count()
+#     if quantity < 1:
+#         return True
+#     else:
+#         return False
     
 def string_is_empty(s):
     """Returns True if the string is empty or contains only blanks."""
@@ -154,6 +154,7 @@ def str_to_bool_external_link(external_link: str) -> bool:
     else:
         external_link = False
     return external_link
+
 def is_the_same_name(new_name:str, old_name:str, context: dict) -> Tuple[dict, bool]:
     any_error = False
     if new_name.strip().title() == old_name.strip().title():
@@ -162,3 +163,171 @@ def is_the_same_name(new_name:str, old_name:str, context: dict) -> Tuple[dict, b
             'answer_error_name': 'El anterior nombre y el nuevo son iguales'
         })
     return context, any_error
+
+def get_articles_by_category_datatype(datatype_input: str) -> dict:
+
+    context = {}
+
+    datatype_input = int(datatype_input)
+    category = Category.objects.get(id = datatype_input)
+
+    context.update({
+        "datatype_input": category.id,
+        "datatype": category.name,
+        "articles_any": Article.objects.filter(characteristics_id__category_id=category),
+        "values": Value.objects.filter(category_id=category)
+    })
+
+    return context
+
+def get_articles_by_native_datatype(datatype_input: str) -> dict:
+
+    context = {}
+
+    datatype_dict = {
+                    1: "id",
+                    2: "name",
+                    3: "buy_price",
+                    4: "increase",
+                    5: "sell_price"
+                    }
+    
+    articles = Article.objects.all()
+
+    context.update({
+        "datatype_input": datatype_input,
+        "articles_any": articles
+    })
+    
+    if datatype_input == datatype_dict[1]:
+
+        context["datatype_input"] = datatype_input
+        context["datatype"] = "Id"
+
+    elif datatype_input == datatype_dict[2]:
+
+        context["datatype"] = "Nombre"
+        
+    elif datatype_input == datatype_dict[3]:
+
+        context["datatype"] = "Precio de compra"
+
+    elif datatype_input == datatype_dict[4]:
+
+        context["datatype"] = "Incremento"
+
+    else: #datatype_input == datatype_dict[5]
+
+        context["datatype_input"] = datatype_input
+        context["datatype"] = "Precio de venta"
+    
+    return context
+
+def get_customers_by_native_datatype(datatype_input: str) -> dict:
+    context = {}
+    datatype_dict = {
+                    1: "id",
+                    2: "name",
+                    3: "phone_number",
+                    4: "email",
+                    5: "address"
+                    }
+    
+    customers = Customer.objects.all()
+
+    context.update({
+        "datatype_input": datatype_input,
+        "customers_any": customers
+    })
+
+    if datatype_input == datatype_dict[1]:
+
+        context["datatype_input"] = datatype_input
+        context["datatype"] = "Id"
+
+    elif datatype_input == datatype_dict[2]:
+
+        context["datatype"] = "Nombre"
+        
+    elif datatype_input == datatype_dict[3]:
+
+        context["datatype"] = "Teléfono"
+
+    elif datatype_input == datatype_dict[4]:
+
+        context["datatype"] = "E-mail"
+
+    else: #datatype_input == datatype_dict[5]
+
+        context["datatype_input"] = datatype_input
+        context["datatype"] = "Dirección"
+
+    return context
+
+def get_articles_for_value_of_category(datatype_input: str,search_input: str) -> dict:
+        
+        context = {}
+        datatype_input = int(datatype_input)
+        search_input = int(search_input)
+
+        category = Category.objects.get(id = datatype_input)
+        value = Value.objects.get(id = search_input)
+        context["articles_any"] = Article.objects.filter(characteristics_id=value)
+        context["datatype_input"] = category.id
+        context["datatype"] = category.name
+        context["value"] = value.name
+
+        return context
+def get_articles_for_search_input_in_native_datatype(datatype_input:str, search_input:str) -> dict:
+
+    context = {}
+    context["value"] = search_input
+
+    if datatype_input == "id":
+        context["articles_any"] = Article.objects.filter(id__startswith=search_input)
+        context["datatype_input"] = "id"
+        context["datatype"] = "Id:"
+    elif datatype_input == "name":
+        context["articles_any"] = Article.objects.filter(name__startswith=search_input) 
+        context["datatype_input"] = "name"
+        context["datatype"] = "Nombre:"
+    elif datatype_input == "buy_price":
+        context["articles_any"] = Article.objects.filter(buy_price__startswith=search_input)
+        context["datatype_input"] = "buy_price"
+        context["datatype"] = "Precio de compra:"
+    elif datatype_input == "increase":
+        context["articles_any"] = Article.objects.filter(increase__startswith=search_input)
+        context["datatype_input"] = "increase"
+        context["datatype"] = "Incremento:"
+    elif datatype_input == "sell_price":
+        context["articles_any"] = Article.objects.filter(sell_price__startswith=search_input)
+        context["datatype_input"] = "sell_price"
+        context["datatype"] = "Precio de venta:"
+
+    return context
+
+def get_customers_for_search_input_in_native_datatype(datatype_input:str, search_input:str) -> dict:
+
+    context = {}
+    context["value"] = search_input
+
+    if datatype_input == "id":
+        context["customers_any"] = Article.objects.filter(id__startswith=search_input)
+        context["datatype_input"] = "id"
+        context["datatype"] = "Id:"
+    elif datatype_input == "address":
+        context["customers_any"] = Article.objects.filter(address__startswith=search_input) 
+        context["datatype_input"] = "address"
+        context["datatype"] = "Dirección:"
+    elif datatype_input == "email":
+        context["customers_any"] = Article.objects.filter(email__startswith=search_input)
+        context["datatype_input"] = "email"
+        context["datatype"] = "Email:"
+    elif datatype_input == "name":
+        context["customers_any"] = Article.objects.filter(name__startswith=search_input)
+        context["datatype_input"] = "name"
+        context["datatype"] = "Nombre:"
+    elif datatype_input == "phone_number":
+        context["customers_any"] = Article.objects.filter(phone_number__startswith=search_input)
+        context["datatype_input"] = "phone_number"
+        context["datatype"] = "Numero de teléfono:"

@@ -32,19 +32,21 @@ urlpatterns = [
     path('orders', articles_views.orders, name="orders"),
 
     ## ARTICLES SECTIONS
-    path('articles', articles_views.articles, name="articles"),
+    path('articles', articles_views.articles, name="articles"), #va a articles section
     path('articles_create', articles_views.articles_create, name="articles_create"),
-    path('articles_read_datatype', articles_views.articles_read_datatype, name="articles_read_datatype"),
-    path('articles_read_data', articles_views.articles_read_data, name="articles_read_data"),
+    path('articles_read_datatype', articles_views.articles_read_datatype, name="articles_read_datatype"), #vuelve a articles section
+    path('articles_read_data', articles_views.articles_read_data, name="articles_read_data"), #vuelve a articles section
     path('articles_update/<int:id>', articles_views.article_update, name="article_update"),
-    path('articles_delete/<int:id>', articles_views.article_delete, name="articles_delete"),
-
+    path('articles_delete/<int:id>', articles_views.article_delete, name="articles_delete"), #vuelve a articles section
     path('articles/categories', articles_views.articles_categories, name="categories"),
 
     #CUSTOMERS
     path('customers', articles_views.customers, name="customers"),
-    
-
+    path('customers_create', articles_views.customers_create, name="customers_create"),
+    path('customers_read_datatype', articles_views.customers_read_datatype, name="customers_read_datatype"),
+    path('customers_read_data', articles_views.customers_read_data, name="customers_read_data"),
+    # path('customers_update/<int:id>', articles_views.customers_read_data_update, name="customers_update"),
+    # path('customers_delete/<int:id>', articles_views.customers_read_data_delete, name="customers_delete"),
 ]
 htmx_urlpatterns = [
 #     #ARTICLES SETCIONS
