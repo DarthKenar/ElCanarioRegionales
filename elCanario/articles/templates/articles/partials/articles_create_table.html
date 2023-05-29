@@ -22,7 +22,7 @@
             {% load custom_tags %}
             {% with values|filter_by_category:category as values_for_category %}
                 {% for value in values_for_category %}
-                <option value="{{value.id}}">{{value.name}}</option>
+                <option value="{{value.id}}" {% if value.id in values_selected %} selected {% endif %}>{{value.name}}</option>
                 {% endfor %}
             {% endwith %}
         </select>

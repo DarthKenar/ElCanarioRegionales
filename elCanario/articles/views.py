@@ -80,11 +80,6 @@ def articles_read_data(request):
         else:
             """Si el campo de búsqueda no está vacío, se buscará de acuerdo a un tipo de dato nativo, (no categoría)"""
             context.update(get_articles_for_search_input_in_native_datatype(datatype_input, search_input))
-
-
-    # if value_in_context_is_empty(context["articles_any"]):
-    #     """Una vez que realiza la búsqueda de artículos, si no se encuentran, trae todos igualmente en vez de no traer ninguno"""
-    #     template = "articles_search_data.html"
         
     categories = Category.objects.all()
     context["search_input"] = search_input
@@ -103,7 +98,6 @@ def articles_create(request):
                "values":values,
                }
     
-
     return render_login_required(request, template, context)
 
 def articles_create_name_check(request):
@@ -138,11 +132,11 @@ def articles_create_calculator(request):
     context = {}
     buy_price = request.GET['article_buy_price_input'].replace(',', '.')
     increase = request.GET['article_increase_input'].replace(',', '.')
-    error_any = False
+    any_error = False
 
-    context, error_any = calculator_check(increase, buy_price, context)
+    context, any_error = calculator_check(increase, buy_price, context)
 
-    if error_any:
+    if any_error:
         """show any error"""
         return render_login_required(request, template, context)
     
@@ -192,6 +186,9 @@ def articles_create_confirm(request):
 
         any_error = True
         context.update(error_context)
+        #if there is any error I must keep the values that were selected in each category.
+        context.update(keep_selected_values(request))
+
 
     if any_error == True:
 

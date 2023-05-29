@@ -331,3 +331,19 @@ def get_customers_for_search_input_in_native_datatype(datatype_input:str, search
         context["customers_any"] = Article.objects.filter(phone_number__startswith=search_input)
         context["datatype_input"] = "phone_number"
         context["datatype"] = "Numero de teléfono:"
+def keep_selected_values(request)->dict:
+    print(type(request))
+    """
+    received: request
+    returns: dictionary
+    returns a dictionary containing a list in the key 'selected_values' with the ids of the selected values. 
+    It is used to keep the selected values when trying to create an article."""
+    values_selected:list = []
+    categories = Category.objects.all()
+
+    for category in categories:
+        
+        if not request.GET[f"category-{category.id}"] == "":
+            values_selected.append(int(request.GET[f"category-{category.id}"]))
+
+    return {"values_selected":values_selected}
