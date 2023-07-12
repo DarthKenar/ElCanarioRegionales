@@ -9,3 +9,8 @@ elCanario/db.sqlite3
 DOCUMENTATION/goals.md
 DOCUMENTATION/ideas.md
 elCanario/my_project_visualized.png
+elCanario/pdm.lock
+elCanario/README.md
+elCanario/__pypackages__/
+commands/*
+elCanario/db.sqlite3

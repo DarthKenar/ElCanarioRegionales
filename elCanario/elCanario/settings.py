@@ -26,7 +26,9 @@ SECRET_KEY = 'django-insecure-ca1=v!^hnf)sqqwze==dn&8@y-1z%=j0f1kwhagbvm+$bq8^tw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+
+# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['.vercer.app']
 
 
 # Application definition
@@ -46,11 +48,11 @@ INSTALLED_APPS += [
     'authentication'
 ]
 #For development
-DEV_INSTALLED_APPS = [
-    'django_extensions'
-    ]
+# DEV_INSTALLED_APPS = [
+#     'django_extensions'
+#     ]
 
-INSTALLED_APPS += DEV_INSTALLED_APPS
+# INSTALLED_APPS += DEV_INSTALLED_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -92,7 +94,16 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'regionales',
+#         'USER': 'postgres',
+#         'PASSWORD': '9875410',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -104,6 +115,17 @@ DATABASES = {
 #             'options': '-c search_path=public',
 #             'dbname': os.path.join(BASE_DIR, 'regionales'),
 #         }
+#     }
+# }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'your_db_name', 
+#         'USER': 'postgres',
+#         'PASSWORD': 'your_db_password',
+#         'HOST': '127.0.0.1', 
+#         'PORT': '5432',
+#         'dbname': os.path.join(BASE_DIR, 'regionales'),
 #     }
 # }
 
