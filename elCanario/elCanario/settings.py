@@ -28,7 +28,7 @@ DEBUG = True
 
 
 # ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = ['.vercer.app']
+ALLOWED_HOSTS = ['127.0.0.1','.vercer.app']
 
 
 # Application definition
@@ -82,28 +82,28 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'elCanario.wsgi.application'
+WSGI_APPLICATION = 'elCanario.wsgi.app'
 
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'regionales',
-#         'USER': 'postgres',
-#         'PASSWORD': '9875410',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'regionales',
+        'USER': 'postgres',
+        'PASSWORD': '9875410',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
