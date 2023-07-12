@@ -97,10 +97,10 @@ WSGI_APPLICATION = 'elCanario.wsgi.app'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'regionales',
-        'USER': 'postgres',
-        'PASSWORD': '9875410',
-        'HOST': 'localhost',
+        'NAME': 'verceldb',
+        'USER': 'default',
+        'PASSWORD': 'ktL5rIxR4XVJ',
+        'HOST': 'ep-floral-sound-641112-pooler.us-east-1.postgres.vercel-storage.com',
         'PORT': '5432',
     }
 }
