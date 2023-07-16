@@ -1,58 +1,46 @@
-{% extends 'footer.html' %}
 {% load static %}
-    {% block head_one %}
-        <head>
-            {% block head_two %}{% endblock %}
-            <link rel="stylesheet" href="{% static 'css/tailwind.css' %}">
-            <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-
-            <!-- HTMX -->
-            <script src="https://unpkg.com/htmx.org@1.8.6" integrity="sha384-Bj8qm/6B+71E6FQSySofJOUjA/gq330vEqjFx9LakWybUySyI1IQHwPtbTU7bNwx" crossorigin="anonymous"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'articles/tailwind.css' %}">
+    <link rel="stylesheet" href="{% static 'articles/styles.css' %}">
+    <!-- HTMX -->
+    <script src="https://unpkg.com/htmx.org@1.8.6" integrity="sha384-Bj8qm/6B+71E6FQSySofJOUjA/gq330vEqjFx9LakWybUySyI1IQHwPtbTU7bNwx" crossorigin="anonymous"></script>
+    <!-- ICONS RESOURSES WHIT IONICONS -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</head>
+<form action="{% url 'home' %}">
+    <button ion-button icon-only type="submit">
+        <ion-icon name="home-outline" 
         
-        </head>
-    {% endblock %}
-
-    {% block content_one %}
-
-        <form action="{% url 'home' %}">
-            <button ion-button icon-only type="submit">
-                <ion-icon name="home-outline" 
-                
-                size="large"
-                class="text-sm font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 p-2 m-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer"
-                ></ion-icon>
-            </button>
-              
-        </form>
-
-        <body class="bg-cover bg-center" style="background-image: url('static/img/smoke-bg.png')">
-            <div class="bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md  border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100">
-                <ul class="flex justify-around bg-center p-2">
-                    <li>
-                        <form action="{% url 'orders' %}">
-                            <input class="text-lg font-mono text-amber-50 {% if request.path == '/orders' %} text-yellow-300 text-4xl {% endif %} font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-12 py-4 shadow-md shadow-slate-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" value="Pedidos" />
-                        </form>
-                    </li>
-                    <li>
-                        <form action="{% url 'articles' %}">
-                            <input class="text-lg font-mono text-amber-50 {% if request.path == '/articles' %} text-yellow-300 text-4xl {% endif %} font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-12 py-4 shadow-md shadow-slate-800 transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" value="Artículos">
-                        </form>
-                    </li>
-                        <form action="{% url 'customers' %}">
-                            <input class="text-lg font-mono text-amber-50 {% if request.path == '/customers' %} text-yellow-300 text-4xl {% endif %} font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-12 py-4 shadow-md shadow-slate-800 transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-150 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" value="Clientes">
-                        </form>
-                    </li>
-                </ul>
-            </div>
-            {% block content_two %}{% endblock %}
-
-            <!-- ICONS RESOURSES WHIT IONICONS -->
-            <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-            <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-            {{ request.path }}
-        </body>
-    {% endblock %}
-<!-- Este bloque corresponde al block content de las plantillas que heredan el header.html -->
+        size="large"
+        class="text-sm font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 p-2 m-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer"
+        ></ion-icon>
+    </button>
+        
+</form>
+<body class="bg-cover bg-center" style="background-image: url('static/articles/smoke-bg.png')">
+    <div class="bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md  border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100">
+        <ul class="flex justify-around bg-center p-2">
+            <li>
+                <form action="{% url 'orders' %}">
+                    <input class="text-lg font-mono text-amber-50 {% if request.path == '/orders' %} text-yellow-300 text-4xl {% endif %} font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-12 py-4 shadow-md shadow-slate-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" value="Orders" />
+                </form>
+            </li>
+            <li>
+                <form action="{% url 'articles' %}">
+                    <input class="text-lg font-mono text-amber-50 {% if request.path == '/articles' %} text-yellow-300 text-4xl {% endif %} font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-12 py-4 shadow-md shadow-slate-800 transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" value="Articles">
+                </form>
+            </li>
+                <form action="{% url 'customers' %}">
+                    <input class="text-lg font-mono text-amber-50 {% if request.path == '/customers' %} text-yellow-300 text-4xl {% endif %} font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-12 py-4 shadow-md shadow-slate-800 transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-150 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" value="Customers">
+                </form>
+            </li>
+        </ul>
+    </div>
+</body>
 
 
 

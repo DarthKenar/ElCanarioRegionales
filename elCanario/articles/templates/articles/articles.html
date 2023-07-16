@@ -1,20 +1,16 @@
-{% extends './header.html' %}
-{% block head_two %}
-    <title>Buscar Artículos - Canario Regionales</title>
-{% endblock %}
-{% block content_two %}
+{% include 'header.html' %}
+<head>
+    <title>Search Articles- Canario Regionales</title>
+</head>
+{% load custom_tags %}
+{% get_all_categories as categories %}
+<div id="articles_search_datatype">
 
-    {% load custom_tags %}
-    {% get_all_categories as categories %}
+    {% include 'articles_search_header.html'%}
 
-    <div id="articles_search_datatype">
-
-        {% include 'articles_search_header.html'%}
-
-        <div id="articles_search_data">
-            
-            {% include 'articles_table.html' %}
-        </div>
+    <div id="articles_search_data">
+        
+        {% include 'articles_table.html' %}
     </div>
-
-{% endblock %}
+</div>
+{% include 'footer.html' %}

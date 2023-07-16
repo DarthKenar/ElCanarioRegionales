@@ -1,31 +1,41 @@
-{% extends 'footer.html' %}
-{% block head_one %}
-    <title>Canario Regionales</title>
-{% endblock %}
-{% block content_one %}
-
-
-    
-    <h1 style="text-align: center;">Bienvenido</h1>
-    <h2 style="text-align: center;">Si estas viendo esto, es porque entraste.</h2>
+{% load static %}
+<!DOCTYPE html>
+<html lang="es" >
+<head>
+    <title>Canario Regionales</title><title>Canario Regionales</title>
+  <link rel="stylesheet" href="{% static 'authentication/tailwind.css' %}">
+  <link rel="stylesheet" href="{% static 'authentication/styles.css' %}">
+  <!-- HTMX -->
+  <script src="https://unpkg.com/htmx.org@1.8.6" integrity="sha384-Bj8qm/6B+71E6FQSySofJOUjA/gq330vEqjFx9LakWybUySyI1IQHwPtbTU7bNwx" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</head>
+<body class="bg-cover bg-center" style="background-image: url('static/articles/smoke-bg.png')">
     <div class="grid grid-rows-3 grid-flow-col gap-4">
         <div class="row-span-3 bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md  border-2 p-4 m-8 shadow-slate-600 shadow-md border-separate border-amber-100 transition duration-300 hover:shadow-slate-600 hover:shadow-sm">
             
             <form action="{% url 'orders' %}">
-                <input class="text-lg font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-12 py-4 shadow-md shadow-slate-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-300 hover:shadow-xl hover:shadow-slate-400 m-4 mx-8 cursor-pointer max-w-xs" type="submit" value="Pedidos" name="orders"></input>
+                <input class="text-lg font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-12 py-4 shadow-md shadow-slate-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-300 hover:shadow-xl hover:shadow-slate-400 m-4 mx-8 cursor-pointer max-w-xs" type="submit" value="Orders" name="orders"></input>
             </form>
             <form action="{% url 'articles' %}">
-                <input class="text-lg font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-12 py-4 shadow-md shadow-slate-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-300 hover:shadow-xl hover:shadow-slate-400 m-4 mx-8 cursor-pointer max-w-xs" type="submit" value="Artículos" name="articles"></input>
+                <input class="text-lg font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-12 py-4 shadow-md shadow-slate-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-300 hover:shadow-xl hover:shadow-slate-400 m-4 mx-8 cursor-pointer max-w-xs" type="submit" value="Articles" name="articles"></input>
             </form>
             <form action="{% url 'customers' %}">
-                <input class="text-lg font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-12 py-4 shadow-md shadow-slate-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-300 hover:shadow-xl hover:shadow-slate-400 m-4 mx-8 cursor-pointer max-w-xs"type="submit" value="Clientes" name="customers"></input>
+                <input class="text-lg font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-12 py-4 shadow-md shadow-slate-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-300 hover:shadow-xl hover:shadow-slate-400 m-4 mx-8 cursor-pointer max-w-xs"type="submit" value="Customers" name="customers"></input>
             </form>
         </div>
         <div class="col-span-2 bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md  border-2 p-4 m-8 shadow-slate-600 shadow-md border-separate border-amber-100 transition duration-300 hover:shadow-slate-600 hover:shadow-sm">
-            <h3>Usuario: {{ user.username }}</h3>
-            <h3>Correo: {{ user.email }}</h3>
+            <h3>User: {{ user.username }}</h3>
+            <h3>E-mail: {{ user.email }}</h3>
             <!-- imagen de usuario -->
         </div>
-        <div class="col-span-2 row-span-2 bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md  border-2 p-4 m-8 shadow-slate-600 shadow-md border-separate border-amber-100 transition duration-300 hover:shadow-slate-600 hover:shadow-sm">03</div>
-      </div>
-{% endblock %}
+        <div class="col-span-2 row-span-2 bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md  border-2 p-4 m-8 shadow-slate-600 shadow-md border-separate border-amber-100 transition duration-300 hover:shadow-slate-600 hover:shadow-sm">
+            03
+        </div>
+    </div>
+</body>
+
+{% include 'footer.html' %}

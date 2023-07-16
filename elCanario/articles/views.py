@@ -21,7 +21,7 @@ def articles(request):
 
     articles = Article.objects.all()
     
-    answer = "Artículos en la Base de datos"
+    answer = "Articles in Database"
     context = {
                 "articles_any": articles,
                 "answer":answer,
@@ -60,25 +60,25 @@ def articles_read_data(request):
     context = {}
     
     if datatype_input.isnumeric():
-        """comprueba que la seleccion del usuario sea una categoría"""
+        """checks that the user's selection is a category"""
 
         if string_is_empty(search_input):
-            """trae todos los artículos que contengan valores en esa categoría"""
+            """fetches all items containing values in that category"""
             context.update(get_articles_by_category_datatype(datatype_input))
 
         else:
-            """trae todos los artículos que tengan ese valor específico"""
+            """brings all items that have that specific value"""
             context.update(get_articles_for_value_of_category(datatype_input,search_input))
 
     else:
-        """el usuario ha seleccionado como tipo de búsqueda un tipo de dato nativo, (no categoría)"""
+        """the user has selected as search type a native data type, (no category)"""
 
         if string_is_empty(search_input):
-            """Si el campo de búsqueda está vacío se mostrarán todos los artículos"""
+            """If the search field is empty, all items will be displayed."""
             context["articles_any"] = Article.objects.all()
 
         else:
-            """Si el campo de búsqueda no está vacío, se buscará de acuerdo a un tipo de dato nativo, (no categoría)"""
+            """If the search field is not empty, it will be searched according to a native data type (not category)."""
             context.update(get_articles_for_search_input_in_native_datatype(datatype_input, search_input))
         
     categories = Category.objects.all()
@@ -194,7 +194,7 @@ def articles_create_confirm(request):
 
         # for render error answers
         context.update(values_dict)
-        context["answer_save_error"] = "No se ha creado el artículo, revise los campos nuevamente."
+        context["answer_save_error"] = "The item has not been created, please check the fields again."
         return render_login_required(request, template, context)
 
     else:
@@ -222,7 +222,7 @@ def articles_create_confirm(request):
                 )
                 article_value.save()
 
-        context["answer_save_right"] = f"El artículo {article.name} se ha guardado correctamente"
+        context["answer_save_right"] = f"The article {article.name} has been saved correctly"
         context["answer_articles_name"] = ""
         context["answer_category_id"] = ""
 
@@ -277,7 +277,7 @@ def articles_update_confirm(request, id):
 
         # for render error answer
         context.update(values_dict)
-        context["answer_save_error"] = "No se ha creado el artículo, revise los campos nuevamente."
+        context["answer_save_error"] = "The item has not been created, please check the fields again."
         context["article_to_update"] = article_to_update
         return render_login_required(request, template, context)
 
@@ -305,7 +305,7 @@ def articles_update_confirm(request, id):
                 )
                 article_value.save()
 
-        context["answer_save_right"] = f"El artículo {article_to_update.name} se ha actualizado correctamente"
+        context["answer_save_right"] = f"The article {article_to_update.name} has been successfully updated"
         context["answer_articles_name"] = ""
         context["answer_category_id"] = ""
 
@@ -323,7 +323,7 @@ def article_delete(request, id):
         return render_login_required(request, template, context)
     else:
         
-        context["article_delete_answer"] = f"Se eliminó correctamente el artículo {article_to_delete.name}"
+        context["article_delete_answer"] = f"The article {article_to_delete.name} was correctly deleted"
         article_to_delete.delete()
         articles = Article.objects.all()
         categories = Category.objects.all()
@@ -384,10 +384,10 @@ def articles_category_create(request, art_id=None):
         category_to_save = Category(name=category_name)
         category_to_save.save()
         context['category_to_update'] = category_to_save
-        context["answer_title_values"] = f"Agregar valores a: {category_to_save.name}"
-        context["answer"] = f"La categoría {category_to_save.name} se ha guardado correctamente!"
+        context["answer_title_values"] = f"Add values to: {category_to_save.name}"
+        context["answer"] = f"The category {category_to_save.name} has been successfully saved!"
     else:
-        context["answer"] = "No se ha podido guardar la categoría!"
+        context["answer"] = "Category could not be saved!"
 
     return render_login_required(request, template, context)
 
@@ -421,10 +421,10 @@ def articles_category_value_create(request,cat_id, art_id=None):
             name = value_name
                     )
         value_to_update.save()
-        context['answer'] = f'Se guardó correctamente el valor: {value_name} , para la categoría: {category_to_update.name}'
+        context['answer'] = f'The value {value_name} was saved correctly for the category: {category_to_update.name}'
         context['values'] = Value.objects.filter(category_id = category_to_update)
     else:
-        context["answer"] = f"No se ha podido guardar el valor: {value_name}, para la categoría: {category_to_update.name}"
+        context["answer"] = f"The value {value_name} could not be saved for the category: {category_to_update.name}"
         context['values'] = Value.objects.filter(category_id = category_to_update)
 
     return render_login_required(request, template, context)
@@ -457,7 +457,7 @@ def articles_category_update(request, external_link, cat_id, art_id=None):
 
     context["categories"] = Category.objects.all()
     context['values'] = Value.objects.filter(category_id = category_to_update)
-    context["answer_title_values"] = f"Categoría seleccionada: {category_to_update.name}"
+    context["answer_title_values"] = f"Selected category: {category_to_update.name}"
     context["name_category_edition"] = True
     
     
@@ -483,15 +483,15 @@ def articles_category_update_name(request, cat_id, art_id=None):
         context['articles_any'] = [article_to_update]
 
     if search_any_error_in_name_field_bool == False and is_the_same_name_bool == False and name_already_in_db_bool == False:
-        context['answer'] = f'Se ha actualizado correctamente la categoría {category_to_update.name} --> {new_name}!'
+        context['answer'] = f'Category has been successfully updated {category_to_update.name} --> {new_name}!'
         category_to_update.name = new_name
         category_to_update.save()
     else:
-        context['answer'] = f'No se puede actualizar el nombre de la categoría {category_to_update.name} --> {new_name}!'
+        context['answer'] = f'Unable to update the category name {category_to_update.name} --> {new_name}!'
 
     context["categories"] = Category.objects.all()
     context['values'] = Value.objects.filter(category_id = category_to_update)
-    context["answer_title_values"] = f"Categoría seleccionada: {category_to_update.name}"
+    context["answer_title_values"] = f"Selected category: {category_to_update.name}"
     context["name_category_edition"] = False
 
     return render_login_required(request, template, context)
@@ -506,7 +506,7 @@ def articles_category_delete(request, cat_id, art_id=None):
 
     context={}
     category_to_update = Category.objects.get(id = cat_id)
-    context["answer"] = f"La categoría {category_to_update.name} ha sido eliminada."
+    context["answer"] = f"The category {category_to_update.name} has been eliminated."
     category_to_update.delete()
     context["categories"] = Category.objects.all()
     return render_login_required(request, template, context)
@@ -525,8 +525,7 @@ def articles_value_delete(request, cat_id, val_id, art_id=None):
 
     category_to_update = Category.objects.get(id = cat_id)
     context['category_to_update'] = category_to_update
-    
-    context["answer"] = f"De la categoría {category_to_update.name}, el valor {value_to_update.name} ha sido eliminado."
+    context["answer"] = f"The value {value_to_update.name} has been removed from the category {category_to_update.name}"
     value_to_update.delete()
 
 
@@ -555,7 +554,7 @@ def articles_value_update(request, cat_id, val_id, art_id=None):
     
     context['value_to_update'] = value_to_update
     context['values'] = Value.objects.filter(category_id = category_to_update)
-    context["answer_title_values"] = f"Categoría seleccionada: {category_to_update.name}"
+    context["answer_title_values"] = f"Selected category: {category_to_update.name}"
     context["name_value_edition"] = True
     return render_login_required(request, template, context)
 
@@ -580,16 +579,16 @@ def articles_value_update_name(request, val_id, art_id=None):
         context['articles_any'] = [article_to_update]
     
     if is_the_same_name_bool == False and is_empty_name_bool == False and name_already_in_db_bool == False:
-        context['answer'] = f'Se ha actualizado correctamente el valor {value_to_update.name} --> {new_name}!'
+        context['answer'] = f'The value has been updated correctly: {value_to_update.name} --> {new_name}!'
         value_to_update.name = new_name
         value_to_update.save()
     else:
-        context['answer'] = f'No se puede actualizar el nombre del valor {value_to_update.name} --> {new_name}!'
+        context['answer'] = f'Unable to update the value name: {value_to_update.name} --> {new_name}!'
 
     context['value_to_update'] = value_to_update
     context["categories"] = Category.objects.all()
     context['values'] = Value.objects.filter(category_id = category_to_update)
-    context["answer_title_values"] = f"Categoría seleccionada: {category_to_update.name}"
+    context["answer_title_values"] = f"Selected category: {category_to_update.name}"
     context["name_value_edition"] = False
 
     return render_login_required(request, template, context)
@@ -600,12 +599,12 @@ def customers(request):
 
     customers = Customer.objects.all()
 
-    answer = "Clientes en la Base de datos"
+    answer = "Customers in Database"
     context = {
                 "customers_any": customers,
                 "answer":answer,
                 "datatype_input": 'name',
-                "datatype": 'Nombre'
+                "datatype": 'Name'
                }
 
     return render_login_required(request, template, context)
@@ -629,11 +628,11 @@ def customers_read_data(request):
     context = {}
 
     if string_is_empty(search_input):
-        """Si el campo de búsqueda está vacío se mostrarán todos los artículos"""
+        """If the search field is empty, all items will be displayed."""
         context["articles_any"] = Customer.objects.all()
 
     else:
-        """Si el campo de búsqueda no está vacío, se buscará de acuerdo a un tipo de dato nativo, (no categoría)"""
+        """If the search field is not empty, it will be searched according to a native data type (not category)."""
         context.update(get_customers_for_search_input_in_native_datatype(datatype_input, search_input))
 
     return render_login_required(request, template, context)

@@ -42,11 +42,11 @@ def name_check(article_name_input:str)->dict:
 
     if article_name_input == '':
 
-        context = {"answer_error_name": "Este campo es obligatorio"}
+        context = {"answer_error_name": "This field is required"}
         
     elif not article_name_input.isalpha():
         
-        context = {"answer_error_name": "El nombre del artículo no debe contener números, simbolos o espacios."}
+        context = {"answer_error_name": "The item name must not contain numbers, symbols or spaces."}
     
     else:
         
@@ -66,11 +66,11 @@ def calculator_check(increase: str, buy_price: str, context: dict) -> Tuple[dict
     if string_is_empty(increase) or string_is_empty(buy_price):
 
         error_any = True
-        context["answer_empty_error"] = "Debes completar los campos para calcular el precio de venta"
+        context["answer_empty_error"] = "You must fill in the fields to calculate the selling price."
 
     if not buy_price.replace(".","0",1).isnumeric() or  not increase.replace(".","0",1).isnumeric():
         error_any = True
-        context["answer_string_error"] = "Los datos ingresados deben ser numéricos"
+        context["answer_string_error"] = "The data entered must be numeric"
 
     return context, error_any
 def search_any_error_in_name_field(name_input:str,context: dict) -> Tuple[dict,bool]:
@@ -83,10 +83,10 @@ def search_any_error_in_name_field(name_input:str,context: dict) -> Tuple[dict,b
 
     if name_input == "":
         any_error = True
-        context['answer_error_name'] = 'Es obligatorio completar el nombre.'
+        context['answer_error_name'] = 'It is mandatory to fill in the name.'
     elif not name_input.isalpha():
         any_error = True
-        context['answer_error_name'] = 'El nombre no debe contener números, simbolos o espacios.'
+        context['answer_error_name'] = 'The name must not contain numbers, symbols or spaces.'
 
     return(context, any_error)
 
@@ -114,7 +114,7 @@ def string_has_internal_spaces(name:str, context) -> Tuple[dict,bool]:
 
     has_internal_spaces = bool(re.search(r'\S\s+\S', name))
     if has_internal_spaces:
-        context['answer_error_name'] = "El nombre no debe contener espacios."
+        context['answer_error_name'] = "The name must not contain spaces."
     return context, has_internal_spaces
 
 def name_already_in_db(name:str, Model:object, context:dict) -> Tuple[dict,bool]:
@@ -128,7 +128,7 @@ def name_already_in_db(name:str, Model:object, context:dict) -> Tuple[dict,bool]
         if obj.name == name:
             print(f" TRUE - name {name} is already in db!")
             any_error = True
-            context["answer_error_name"] = f"El nombre {name} ya existe!"
+            context["answer_error_name"] = f"The name {name} already exists!"
     
     return context, any_error
 
@@ -138,7 +138,7 @@ def is_empty_name(s: str, context: dict) -> Tuple[dict, bool]:
     
     any_error =  string_is_empty(s)
     if any_error == True:
-        context['answer_error_name'] = 'Es obligatorio completar el nombre.'
+        context['answer_error_name'] = 'Complete the name is obligatory.'
     return context, any_error
 
 def delete_old_values(article):
@@ -160,7 +160,7 @@ def is_the_same_name(new_name:str, old_name:str, context: dict) -> Tuple[dict, b
     if new_name.strip().title() == old_name.strip().title():
         any_error = True
         context.update({
-            'answer_error_name': 'El anterior nombre y el nuevo son iguales'
+            'answer_error_name': 'The old name and the new name are the same'
         })
     return context, any_error
 
@@ -206,20 +206,20 @@ def get_articles_by_native_datatype(datatype_input: str) -> dict:
 
     elif datatype_input == datatype_dict[2]:
 
-        context["datatype"] = "Nombre"
+        context["datatype"] = "Name"
         
     elif datatype_input == datatype_dict[3]:
 
-        context["datatype"] = "Precio de compra"
+        context["datatype"] = "Buy price"
 
     elif datatype_input == datatype_dict[4]:
 
-        context["datatype"] = "Incremento"
+        context["datatype"] = "Increment"
 
     else: #datatype_input == datatype_dict[5]
 
         context["datatype_input"] = datatype_input
-        context["datatype"] = "Precio de venta"
+        context["datatype"] = "Sell price"
     
     return context
 

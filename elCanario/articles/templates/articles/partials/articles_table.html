@@ -3,13 +3,13 @@
     <thead class="p-3 m-3">
         <tr class="bg-amber-300">
             <th class="lg:m-4 md:m-4 ">Id</th>
-            <th class="lg:m-4 md:m-4 ">Nombre</th>
+            <th class="lg:m-4 md:m-4 ">Name</th>
             {% for category in categories %}
                 <th>{{category.name}}</th>
             {% endfor %}
-            <th class="lg:m-4 md:m-4 ">Precio de Compra</th>
-            <th class="lg:m-4 md:m-4 ">Incremento</th>
-            <th class="lg:m-4 md:m-4 ">Precio de Venta</th>
+            <th class="lg:m-4 md:m-4 ">Buy price</th>
+            <th class="lg:m-4 md:m-4 ">Increment</th>
+            <th class="lg:m-4 md:m-4 ">Sell price</th>
             <th></th>
         </tr>
     </thead>
@@ -52,8 +52,7 @@
                     <form hx-delete="{% url 'articles_delete' id=article.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_search_data" hx-confirm="¿Está seguro de que desea eliminar el articulo: {{article.name}}?">
                         {% csrf_token %}
                         <button type="submit" ion-button icon-only >
-                            <ion-icon name="trash-outline" 
-                                
+                            <ion-icon name="trash-outline"
                             class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer"
                             ></ion-icon>
                         </button>

@@ -1,19 +1,16 @@
-{% extends './header.html' %}
-{% block head_two %}
-    <title>Clientes - Canario Regionales</title>
-{% endblock %}
-{% block content_two %}
+{% include 'header.html' %}
+<head>
+    <title>Customers - Canario Regionales</title>
+</head>
+<div id="search_answer_datatype">
 
-    <div id="search_answer_datatype">
+    {% include 'customers_search_header.html' %}
 
-        {% include 'customers_search_header.html' %}
-
-        <div id="search_answer_data">
-                
-            {% include 'customers_table.html' %}
-
-        </div>
+    <div id="search_answer_data">
+            
+        {% include 'customers_table.html' %}
 
     </div>
-        
-{% endblock %}
+
+</div>
+{% include 'footer.html' %}
