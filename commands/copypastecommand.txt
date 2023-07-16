@@ -1,1 +1,0 @@
-npx tailwindcss -o elCanario/static/css/tailwind.css --watch

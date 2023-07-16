@@ -14,3 +14,4 @@ elCanario/README.md
 elCanario/__pypackages__/
 commands/*
 elCanario/db.sqlite3
+commands
