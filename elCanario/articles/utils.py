@@ -32,28 +32,6 @@ def title(title: str)->str:
     except(TypeError, ValueError):
         return title
 
-########################
-def name_check(article_name_input:str)->dict:
-    """checks that the name meets the following conditions:
-        -is not empty
-        -not alphanumeric
-    in these cases returns a response that is added to the context to be used by another function.
-    if no errors are found then an empty string is returned as answer.
-    """
-
-    if article_name_input == '':
-
-        context = {"answer_error_name": "This field is required"}
-        
-    elif not article_name_input.isalpha():
-        
-        context = {"answer_error_name": "The item name must not contain numbers, symbols or spaces."}
-    
-    else:
-        
-        context = {"answer_error_name": ""}
-    
-    return context
 def calculator_check(increase: str, buy_price: str, context: dict) -> Tuple[dict, bool]:
     """Check if they contain errors such as being empty or containing letters. The increase and buyprice fields must be numeric.
 
@@ -77,7 +55,7 @@ def calculator_check(increase: str, buy_price: str, context: dict) -> Tuple[dict
         context["answer_string_error"] = "The data entered must be numeric"
 
     return context, error_any
-def search_any_error_in_name_field(name_input:str,context: dict) -> Tuple[dict,bool]:
+def search_any_error_in_name_field(name_input:str, context: dict) -> Tuple[dict,bool]:
     """checks that it is not an empty string and checks that it is not different from an alphanumeric string
 
     Args:
@@ -164,7 +142,7 @@ def name_already_in_db(name:str, Model:object, context:dict) -> Tuple[dict,bool]
             print(f" TRUE - name {name} is already in db!")
             any_error = True
             context["answer_error_name"] = f"The name {name} already exists!"
-    
+        
     return context, any_error
 
 def is_empty_name(s: str, context: dict) -> Tuple[dict, bool]:

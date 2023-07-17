@@ -106,7 +106,7 @@ def articles_create_name_check(request):
 
     context = {}
     article_name_input = request.GET['article_name_input'].strip().title()
-    context.update(name_check(article_name_input))
+    context, any_error = search_any_error_in_name_field(article_name_input, context)
     context, any_error = name_already_in_db(article_name_input, Article, context)
     return render_login_required(request, template, context)
 
@@ -119,7 +119,7 @@ def articles_update_name_check(request, id):
     article_to_update = Article.objects.get(id=id)
     
     if not article_name_input == article_to_update.name:
-        context.update(name_check(article_name_input))
+        context, any_error = search_any_error_in_name_field(article_name_input,context)
         context, any_error = name_already_in_db(article_name_input, Article, context)
     context["article_to_update"] = article_to_update
     return render_login_required(request, template, context)
