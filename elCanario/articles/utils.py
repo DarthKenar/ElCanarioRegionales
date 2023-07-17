@@ -20,13 +20,30 @@ def render_login_required(request, template: str,context: dict):
 #     else:
 #         return False
     
-def string_is_empty(s):
-    """Returns True if the string is empty or contains only blanks."""
-    print("Its empty name? --> checking...")
+def string_is_empty(s:str)-> bool:
+    """Returns True if the string is empty or contains only blanks.
+
+    Args:
+        s (str): string, field to check
+
+    Returns:
+        bool: verification (true if the string is empty or contains only blanks.)
+    """
+
     return s is None or s.strip() == ''
 
 def title(title: str)->str:
-    """get a string title and returns the first letter of the word in upper case and the others in lower case"""
+    """get a string and returns the first letter of the word in upper case and the others in lower case.
+
+    Args:
+        title (str): name to title.
+
+    Returns:
+        str: the name entitled.
+
+    Raise: (TypeError, ValueError)
+        if unable to do so, it returns the same title as obtained.
+    """
     try:
         return title.title()
     except(TypeError, ValueError):
@@ -162,14 +179,27 @@ def is_empty_name(s: str, context: dict) -> Tuple[dict, bool]:
         context['answer_error_name'] = 'Complete the name is obligatory.'
     return context, any_error
 
-def delete_old_values(article):
-    "removes the values related to an article, this function is used to re-record the new values that an article has in articles_update."
+def delete_old_values(article: object) -> None:
+    """Deletes the values related to an item.
+        
+        - This function is useful when you need to re-record the new values that an item has. 
+
+    Args:
+        article (object): An article object
+    """
     query = ArticleValue.objects.filter(article_id = article.id)
     for obj in query:
         obj.delete()
 
-def str_to_bool_external_link(external_link: str) -> bool:
-    """gets a string as 'True' or 'False' and converts it to Boolean returning this value"""
+def true_or_false_str_to_bool(external_link: str) -> bool:
+    """receives true or false as a string and returns it as a boolean data type
+
+    Args:
+        external_link (str): "True" or "False" string
+
+    Returns:
+        bool: True or False depending on the string
+    """
     if external_link == 'True':
         external_link = True
     else:
@@ -185,12 +215,19 @@ def is_the_same_name(new_name:str, old_name:str, context: dict) -> Tuple[dict, b
         })
     return context, any_error
 
-def get_articles_by_category_datatype(datatype_input: str) -> dict:
+def get_articles_by_category(category_selected: str) -> dict:
+    """fetches items containing values in the received category
 
+    Args:
+        datatype_input (str): category selected
+
+    Returns:
+        dict: Returns in the dictionary the category itself, the name of the category, all articles found and all values contained in that category.
+    """
     context = {}
 
-    datatype_input = int(datatype_input)
-    category = Category.objects.get(id = datatype_input)
+    category_selected = int(category_selected)
+    category = Category.objects.get(id = category_selected)
 
     context.update({
         "datatype_input": category.id,
@@ -202,6 +239,15 @@ def get_articles_by_category_datatype(datatype_input: str) -> dict:
     return context
 
 def get_articles_by_native_datatype(datatype_input: str) -> dict:
+    """gets the articles depending on the native data type of the articles table and will fetch all articles that have any value in that data type. 
+    Native data type is understood as attributes of the articles model.
+    
+    Args:
+        datatype_input (str): selected attribute specific to the model articles as data type 
+
+    Returns:
+        _type_: returns the values that will be needed in the context dictionary, are selected datatypes, filtered articles, list of datatypes for selection
+    """
 
     context = {}
 
@@ -245,6 +291,16 @@ def get_articles_by_native_datatype(datatype_input: str) -> dict:
     return context
 
 def get_customers_by_native_datatype(datatype_input: str) -> dict:
+    """gets the customers depending on the native data type of the customers table will fetch all customers that have any value in that data type.. Native data type is understood as attributes of the customers model.
+    
+    Native data type is understood as attributes of the customers model.
+
+    Args:
+        datatype_input (str): selected attribute specific to the model customers as data type 
+
+    Returns:
+        _type_: returns the values that will be needed in the context dictionary, are selected datatypes, filtered customers, list of datatypes for selection
+    """
     context = {}
     datatype_dict = {
                     1: "id",
@@ -268,11 +324,11 @@ def get_customers_by_native_datatype(datatype_input: str) -> dict:
 
     elif datatype_input == datatype_dict[2]:
 
-        context["datatype"] = "Nombre"
+        context["datatype"] = "Name"
         
     elif datatype_input == datatype_dict[3]:
 
-        context["datatype"] = "Teléfono"
+        context["datatype"] = "Phone Number"
 
     elif datatype_input == datatype_dict[4]:
 
@@ -281,12 +337,20 @@ def get_customers_by_native_datatype(datatype_input: str) -> dict:
     else: #datatype_input == datatype_dict[5]
 
         context["datatype_input"] = datatype_input
-        context["datatype"] = "Dirección"
+        context["datatype"] = "Addres"
 
     return context
 
 def get_articles_for_value_of_category(datatype_input: str,search_input: str) -> dict:
-        
+        """obtains the articles that correspond to the value set in the selected category
+
+        Args:
+            datatype_input (str): corresponds to the type of data to search
+            search_input (str): corresponds to the value to be searched according to datatype_input (category selected)
+
+        Returns:
+            dict: returns the values that will be needed in the context dictionary, are selected datatypes, filtered articles, list of datatypes for selection
+        """
         context = {}
         datatype_input = int(datatype_input)
         search_input = int(search_input)
@@ -300,7 +364,17 @@ def get_articles_for_value_of_category(datatype_input: str,search_input: str) ->
 
         return context
 def get_articles_for_search_input_in_native_datatype(datatype_input:str, search_input:str) -> dict:
+    """gets the articles that correspond to the value set in the selected native data type.
 
+    Native data type is understood as attributes of the articles model.
+    
+    Args:
+        datatype_input (str): corresponds to the data type to search for.
+        search_input (str): corresponds to the value to search according to datatype_input.
+
+    Returns:
+        dict: returns the values that will be needed in the context dictionary, are selected datatypes, filtered articles, list of datatypes to select
+    """
     context = {}
     context["value"] = search_input
 
@@ -328,7 +402,17 @@ def get_articles_for_search_input_in_native_datatype(datatype_input:str, search_
     return context
 
 def get_customers_for_search_input_in_native_datatype(datatype_input:str, search_input:str) -> dict:
+    """gets the customers that correspond to the value set in the selected native data type.
 
+    Native data type is understood as attributes of the customers model.
+    
+    Args:
+        datatype_input (str): corresponds to the data type to search for.
+        search_input (str): corresponds to the value to search according to datatype_input.
+
+    Returns:
+        dict: returns the values that will be needed in the context dictionary, are selected datatypes, filtered customers, list of datatypes to select
+    """
     context = {}
     context["value"] = search_input
 
@@ -352,13 +436,18 @@ def get_customers_for_search_input_in_native_datatype(datatype_input:str, search
         context["customers_any"] = Article.objects.filter(phone_number__startswith=search_input)
         context["datatype_input"] = "phone_number"
         context["datatype"] = "Numero de teléfono:"
-def keep_selected_values(request)->dict:
-    print(type(request))
+def keep_selected_values(request: object)->dict:
+    """keeps the values selected when creating an article when the form needs to be reloaded for different reasons:
+        e.g. when you get an error in a field.
+
+    Args:
+        request (object): request
+
+    Returns:
+        dict: The dictionary contains a list of all user selected values -> {"values_selected":list}
     """
-    received: request
-    returns: dictionary
-    returns a dictionary containing a list in the key 'selected_values' with the ids of the selected values. 
-    It is used to keep the selected values when trying to create an article."""
+    print(type(request))
+
     values_selected:list = []
     categories = Category.objects.all()
 

@@ -42,7 +42,7 @@ def articles_read_datatype(request):
     if datatype_input.isnumeric():
         """if numeric, the user has selected some category as data type"""
 
-        context.update(get_articles_by_category_datatype(datatype_input))
+        context.update(get_articles_by_category(datatype_input))
 
     else:
         """if not numeric, the user has selected some article native field as data type"""
@@ -64,7 +64,7 @@ def articles_read_data(request):
 
         if string_is_empty(search_input):
             """fetches all items containing values in that category"""
-            context.update(get_articles_by_category_datatype(datatype_input))
+            context.update(get_articles_by_category(datatype_input))
 
         else:
             """brings all items that have that specific value"""
@@ -429,13 +429,27 @@ def articles_category_value_create(request,cat_id, art_id=None):
 
     return render_login_required(request, template, context)
 
-def articles_category_update(request, external_link, cat_id, art_id=None):
+def articles_category_update(request: object, external_link: str, cat_id:int, art_id:str) -> HttpResponse:
+    """redirects to the categories section taking the article with it.
+        This is done in order to update the data in the categories section and then be able to edit the article easily.
+
+    Args:
+        request (_type_): request
+        external_link (_type_): _description_
+        cat_id (_type_): _description_
+        art_id (_type_, optional): _description_. Defaults to None.
+
+    Returns:
+        HttpResponse: If the editing of the selected category is requested from a page external to the category section, the httpResponse template will be that of the category section and will add the category to be edited and the article from which it was selected to the context.
+                    In case the edition is made from the same category section, it does not send the article from which the edition was requested and will return a partial template response.
+    """
     print("external_link -->", external_link)
     
     print("External Link type", type(external_link))
-    print("CAT_ID -->", cat_id)
-    print("ART_ID -->", art_id)
-    external_link = str_to_bool_external_link(external_link)
+    print("CAT_ID -->", type(cat_id), f"cat_id {cat_id}")
+    print("ART_ID -->", type(art_id), f"art_id {art_id}")
+
+    external_link = true_or_false_str_to_bool(external_link)
 
     if external_link == False:
         print("NOT EXTERNAL LINK", external_link)
