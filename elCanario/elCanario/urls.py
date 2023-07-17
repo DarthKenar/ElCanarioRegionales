@@ -20,6 +20,7 @@ from authentication import views as auth_views
 from django.conf import settings
 
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 
@@ -80,3 +81,8 @@ htmx_urlpatterns = [
 
 ]
 urlpatterns += htmx_urlpatterns
+
+if settings.DEBUG:
+    
+    from django.conf.urls.static import static
+    urlpatterns+= static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

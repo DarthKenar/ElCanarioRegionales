@@ -31,7 +31,8 @@ def title(title: str)->str:
         return title.title()
     except(TypeError, ValueError):
         return title
-    
+
+########################
 def name_check(article_name_input:str)->dict:
     """checks that the name meets the following conditions:
         -is not empty
@@ -54,12 +55,15 @@ def name_check(article_name_input:str)->dict:
     
     return context
 def calculator_check(increase: str, buy_price: str, context: dict) -> Tuple[dict, bool]:
-    """
-        - Receives the buy price* and increase*
-        - Check these for errors (such as being empty or containing letters).
-        - Returns a tuple with: (dict, boolean)
-            - dict: error responses
-            - boolean: If there is an error, true, otherwise false.
+    """Check if they contain errors such as being empty or containing letters. The increase and buyprice fields must be numeric.
+
+    Args:
+        increase (str): percentage increase received as string
+        buy_price (str): buy price received as string
+        context (dict): the context for renaming the value of the key used as a response to the user is received
+
+    Returns:
+        Tuple[dict, bool]: returns in the first position the context and in the second position the boolean answer
     """
 
     error_any = False
@@ -74,11 +78,15 @@ def calculator_check(increase: str, buy_price: str, context: dict) -> Tuple[dict
 
     return context, error_any
 def search_any_error_in_name_field(name_input:str,context: dict) -> Tuple[dict,bool]:
-    """check that no errors are found for the name field.
-    returns:
-        1- boolean: If one error is founded returns True else, False
-        2- dictionary: The error answers if one of them is founded
-        """
+    """checks that it is not an empty string and checks that it is not different from an alphanumeric string
+
+    Args:
+        name_input (str): name to check
+        context (dict): the context for renaming the value of the key used as a response to the user is received
+
+    Returns:
+        Tuple[dict,bool]: returns in the first position the context and in the second position the boolean answer
+    """
     any_error = False
 
     if name_input == "":
@@ -92,10 +100,20 @@ def search_any_error_in_name_field(name_input:str,context: dict) -> Tuple[dict,b
 
 
 def get_values_for_categories(request: object) -> dict:
-    """
-    It obtains the selected values and saves them in a dictionary in which the structure is as follows:
-    dict={'category.id': 'value_id'}
-    Note the difference between calling the id attribute for the category and storing the instance of value as value
+    print(request)
+    """Gets the values selected for each of the categories (used to store the values of each category of an article being created) and saves them in a dictionary whose structure is as follows
+
+        dict={'category.id': 'value_id'}
+
+        The dictionary can be used to return in context the chosen categories and their respective values
+
+    Args:
+        request (object): the object to be received is the request with all the values selected for the existing categories
+
+    Returns:
+        dict: 
+            dict={'category.id': 'value_id'}
+            - all categories and selected values
     """
 
     categories = Category.objects.all()
@@ -110,7 +128,15 @@ def get_values_for_categories(request: object) -> dict:
     return values_dict
 
 def string_has_internal_spaces(name:str, context) -> Tuple[dict,bool]:
+    """check that the string has spaces
 
+    Args:
+        name (str): name or string to check
+        context (_type_): the context for renaming the value of the key used as a response to the user is received
+
+    Returns:
+        Tuple[dict,bool]: returns in the first position the context and in the second position the boolean answer
+    """
 
     has_internal_spaces = bool(re.search(r'\S\s+\S', name))
     if has_internal_spaces:
@@ -118,7 +144,16 @@ def string_has_internal_spaces(name:str, context) -> Tuple[dict,bool]:
     return context, has_internal_spaces
 
 def name_already_in_db(name:str, Model:object, context:dict) -> Tuple[dict,bool]:
-    """Returns the answer in a dictionary (updating it) and True in case the entered name is found in the database"""
+    """Returns the answer in a dictionary (updating it) and True in case the entered name is found in the database
+
+    Args:
+        name (str): name to check
+        Model (object): database model in which the name is searched
+        context (dict): the context for renaming the value of the key used as a response to the user is received
+
+    Returns:
+        Tuple[dict,bool]: returns in the first position the context and in the second position the boolean answer
+    """
 
     print("name already in db? --> checking...")
     any_error = False
@@ -133,7 +168,15 @@ def name_already_in_db(name:str, Model:object, context:dict) -> Tuple[dict,bool]
     return context, any_error
 
 def is_empty_name(s: str, context: dict) -> Tuple[dict, bool]:
-    """Returns True if the string is empty or contains only blanks."""
+    """Returns True if the string is empty or contains only blanks.
+
+
+    Args:
+        s (str): string to check
+        context (dict): the context for renaming the value of the key used as a response to the user is received
+    Returns:
+        Tuple[dict, bool]: returns in the first position the context and in the second position the boolean answer
+    """
     
     
     any_error =  string_is_empty(s)

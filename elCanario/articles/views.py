@@ -620,7 +620,7 @@ def customers_read_datatype(request):
     return render_login_required(request, template, context)
 
 def customers_read_data(request):
-
+    
     template = "customers_search_right.html"
 
     search_input = request.GET["search_input"].strip()
