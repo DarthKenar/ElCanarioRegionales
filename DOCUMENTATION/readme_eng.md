@@ -4,8 +4,6 @@
 
 This application is being developed for elCanarioRegionales, in order to facilitate the administration of the sale of regional products of Argentina.
 
-My own venture that I have with my girlfriend.
-
 [@elcanario.regionales](https://www.instagram.com/elcanario.regionales/)
 
 ## Objectives of the application

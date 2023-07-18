@@ -4,8 +4,6 @@
 
 Esta aplicacion esta siendo desarrollada para elCanarioRegionales, en función de facilitar la administración de la venta de productos regionales de Argentina.
 
-Emprendimiento propio que tengo junto a mi novia.
-
 [@elcanario.regionales](https://www.instagram.com/elcanario.regionales/)
 
 ## Objetivos de la aplicacion
