@@ -1,4 +1,4 @@
-## Regionales
+# El Canario Regionales (project name, brand name)
 
 ## Introduction
 
@@ -15,6 +15,13 @@ My own venture that I have with my girlfriend.
     - Manage orders.
     - To administer the expenses and the profits of the enterprise.
 
+## Acceso
+
+    - Para acceder a la aplicación es necesario logearse con las siguientes credenciales:
+      - User: admin
+      - Password: 1234
+      - 
+
 ## Clarifications for developers
 
 Application developed in [Django](https://www.djangoproject.com/), [HTMX](https://htmx.org/) and [TAILWINDS](https://tailwindcss.com/).
@@ -22,7 +29,6 @@ Application developed in [Django](https://www.djangoproject.com/), [HTMX](https:
 Database used: [Posgresql](https://www.postgresql.org/)
 
     - The code lacks JS functions thanks to the use of HTMX and its ease in making AJAX requests. 
-  
 
 Additional information:
 

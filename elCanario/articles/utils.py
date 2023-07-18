@@ -95,7 +95,6 @@ def search_any_error_in_name_field(name_input:str, context: dict) -> Tuple[dict,
 
 
 def get_values_for_categories(request: object) -> dict:
-    print(request)
     """Gets the values selected for each of the categories (used to store the values of each category of an article being created) and saves them in a dictionary whose structure is as follows
 
         dict={'category.id': 'value_id'}
@@ -342,27 +341,27 @@ def get_customers_by_native_datatype(datatype_input: str) -> dict:
     return context
 
 def get_articles_for_value_of_category(datatype_input: str,search_input: str) -> dict:
-        """obtains the articles that correspond to the value set in the selected category
+    """obtains the articles that correspond to the value set in the selected category
 
-        Args:
-            datatype_input (str): corresponds to the type of data to search
-            search_input (str): corresponds to the value to be searched according to datatype_input (category selected)
+    Args:
+        datatype_input (str): corresponds to the type of data to search
+        search_input (str): corresponds to the value to be searched according to datatype_input (category selected)
 
-        Returns:
-            dict: returns the values that will be needed in the context dictionary, are selected datatypes, filtered articles, list of datatypes for selection
-        """
-        context = {}
-        datatype_input = int(datatype_input)
-        search_input = int(search_input)
+    Returns:
+        dict: returns the values that will be needed in the context dictionary, are selected datatypes, filtered articles, list of datatypes for selection
+    """
+    context = {}
+    datatype_input = int(datatype_input)
+    search_input = int(search_input)
 
-        category = Category.objects.get(id = datatype_input)
-        value = Value.objects.get(id = search_input)
-        context["articles_any"] = Article.objects.filter(characteristics_id=value)
-        context["datatype_input"] = category.id
-        context["datatype"] = category.name
-        context["value"] = value.name
+    category = Category.objects.get(id = datatype_input)
+    value = Value.objects.get(id = search_input)
+    context["articles_any"] = Article.objects.filter(characteristics_id=value)
+    context["datatype_input"] = category.id
+    context["datatype"] = category.name
+    context["value"] = value.name
 
-        return context
+    return context
 def get_articles_for_search_input_in_native_datatype(datatype_input:str, search_input:str) -> dict:
     """gets the articles that correspond to the value set in the selected native data type.
 
