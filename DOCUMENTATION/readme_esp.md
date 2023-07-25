@@ -2,16 +2,25 @@
 
 ## Introducción
 
-Esta aplicacion esta siendo desarrollada para elCanarioRegionales, en función de facilitar la administración de la venta de productos regionales de Argentina.
+Esta aplicacion esta siendo desarrollada para elCanarioRegionales, en función de facilitar la administración y venta de productos regionales Argentinos.
 
+Instagram del emprendimiento!
 [@elcanario.regionales](https://www.instagram.com/elcanario.regionales/)
 
 ## Objetivos de la aplicacion
 
-    - Manipular artículos regionales y su respectivo stock.
+    - Manipular artículos y su respectivo stock.
     - Administrar información clientes para sus respectivos pedidos.
       - Administrar los pedidos.
     - Administrar las gastos y las ganancias de el emprendimiento.
+## Integración con Api de terceros:
+
+    ---Dalor Value in BCRA
+    fintech/ar/bcra/dolar_value 
+    
+    ---
+    
+    ---
 
 ## Acceso
 

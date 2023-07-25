@@ -1,24 +1,33 @@
-# El Canario Regionales (project name, brand name)
+## El Canario Regional
 
 ## Introduction
 
-This application is being developed for elCanarioRegionales, in order to facilitate the administration of the sale of regional products of Argentina.
+This application is being developed for elCanarioRegionales, in order to facilitate the management and sale of Argentine regional products.
 
+Instagram of the project!
 [@elcanario.regionales](https://www.instagram.com/elcanario.regionales/)
 
 ## Objectives of the application
 
-    - Manage regional products and their respective stock (possibly in the future).
+    - Handle items and their respective stock.
     - Manage customer information for their respective orders.
-    - Manage orders.
-    - To administer the expenses and the profits of the enterprise.
+      - Manage orders.
+    - Manage expenses and profits of the enterprise.
 
-## Acceso
+## Integration with third party Api:
 
-    - Para acceder a la aplicación es necesario logearse con las siguientes credenciales:
+    ---Dalor Value in BCRA
+    fintech/ar/bcra/dolar_value 
+    
+    ---
+    
+    ---
+    
+## Access
+
+    - To access the application it is necessary to log in with the following credentials:
       - User: admin
       - Password: 1234
-      - 
 
 ## Clarifications for developers
 
