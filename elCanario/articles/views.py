@@ -308,8 +308,13 @@ def articles_update_confirm(request, id):
         context["answer_save_right"] = f"The article {article_to_update.name} has been successfully updated"
         context["answer_articles_name"] = ""
         context["answer_category_id"] = ""
+        template = 'articles_create_save.html'
 
-        return render_login_required(request, template, context)
+        categories = Category.objects.all()
+        values = Value.objects.all()
+        context["categories"] = categories
+        context["values"] = values
+        return render(request, template, context)
 #Articles delete
 @csrf_protect
 def article_delete(request, id):
@@ -435,9 +440,9 @@ def articles_category_update(request: object, external_link: str, cat_id:int, ar
 
     Args:
         request (_type_): request
-        external_link (_type_): _description_
-        cat_id (_type_): _description_
-        art_id (_type_, optional): _description_. Defaults to None.
+        external_link (str): _description_
+        cat_id (int): _description_
+        art_id (str, optional): _description_. Defaults to None.
 
     Returns:
         HttpResponse: If the editing of the selected category is requested from a page external to the category section, the httpResponse template will be that of the category section and will add the category to be edited and the article from which it was selected to the context.
