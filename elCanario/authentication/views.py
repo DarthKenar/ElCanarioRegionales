@@ -3,6 +3,8 @@ from .models import User
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
+
+
 # Create your views here.
 
 def login_view(request):
@@ -41,4 +43,12 @@ def search_user(request):
 
 @login_required
 def home(request):
-    return render(request, template_name='home.html')
+    from django.utils import timezone
+    now = timezone.now()
+    template='home.html'
+    context = {"dolar_price": now}
+
+    return render(request, template, context)
+
+
+

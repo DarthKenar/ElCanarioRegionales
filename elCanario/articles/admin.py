@@ -40,11 +40,12 @@ class AdminExpense(admin.ModelAdmin):
 #     list_display=['article_id','orders_id']
 
 
+
+
 admin.site.register(Category, AdminCategory)
 admin.site.register(Value, AdminValue)
 admin.site.register(Article, AdminArticle)
 admin.site.register(ArticleValue, AdminArticleValue)
-
 admin.site.register(Customer,AdminCustomer)
 admin.site.register(Stock,AdminStock)
 admin.site.register(Promotion,AdminPromotion)

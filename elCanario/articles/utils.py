@@ -456,3 +456,4 @@ def keep_selected_values(request: object)->dict:
             values_selected.append(int(request.GET[f"category-{category.id}"]))
 
     return {"values_selected":values_selected}
+
