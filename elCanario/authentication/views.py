@@ -1,9 +1,12 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import User
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
-
+from django.utils import timezone
+import aiohttp
+from authentication.utils import get_today_date_all
+from dollar.models import DollarGraph
 
 # Create your views here.
 
@@ -43,12 +46,21 @@ def search_user(request):
 
 @login_required
 def home(request):
-    from django.utils import timezone
-    now = timezone.now()
-    template='home.html'
-    context = {"dolar_price": now}
+    day, month, year = get_today_date_all()
+    print(day)
+    print(month)
+    print(year)
+    # si no se guardasen repetidos podría usar este metodo
+    # dollar_price = get_object_or_404(DollarGraph, date = f"{year}-{month}-{day}")
+    #SE USA ESTA FORMA PORQJUE SE GUARDAN REPETIDOS:.. porque se guardan repetidos?
+    dollar_price = DollarGraph.objects.filter(date = f"{year}-{month}-{day}")
+    dollar_price = dollar_price.first()
 
+    context = {"dollar_price": dollar_price.price}
+    template = "home.html"
     return render(request, template, context)
+
+    
 
 
 

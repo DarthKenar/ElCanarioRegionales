@@ -1,6 +1,8 @@
 from django.apps import AppConfig
 
-
 class DollarConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'dollar'
+
+    def ready(self):
+        import dollar.tasks

@@ -45,7 +45,8 @@ INSTALLED_APPS = [
 INSTALLED_APPS += [
     
     'articles',
-    'authentication'
+    'authentication',
+    'dollar'
 ]
 #For development
 # DEV_INSTALLED_APPS = [
