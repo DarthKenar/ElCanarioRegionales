@@ -3,22 +3,14 @@
 from typing import Tuple
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from .models import Category, Value, ArticleValue, Article, Customer
+from articles.models import Category, Value, ArticleValue, Article
+from customers.models import Customer
 import re
 @login_required
 def render_login_required(request, template: str,context: dict): 
     """This function is used for all functions that require the user to be logged in."""
 
     return render(request, template, context)
-
-# def value_in_context_is_empty(QuerySet:any)-> bool:
-#     """Checks if the QuerySet is empty or not, returning True if it is empty and False if it has one or more elements inside."""
-
-#     quantity = QuerySet.count()
-#     if quantity < 1:
-#         return True
-#     else:
-#         return False
     
 def string_is_empty(s:str)-> bool:
     """Returns True if the string is empty or contains only blanks.

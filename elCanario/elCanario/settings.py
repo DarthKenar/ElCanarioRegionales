@@ -46,8 +46,12 @@ INSTALLED_APPS += [
     
     'articles',
     'authentication',
-    'dollar'
+    'customers',
+    'dollar',
+    'orders'
+
 ]
+
 #For development
 # DEV_INSTALLED_APPS = [
 #     'django_extensions'
@@ -70,7 +74,7 @@ ROOT_URLCONF = 'elCanario.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'articles/templates/articles/','authentication/templates/authentication/','elCanario/templates/elCanario/','articles/templates/articles/htmx','articles/templates/articles/partials'],
+        'DIRS': [BASE_DIR / 'articles/templates/articles/','authentication/templates/authentication/','elCanario/templates/elCanario/','customers/templates/customers/','orders/templates/orders/','dollar/templates/dollar/','articles/templates/articles/htmx','articles/templates/articles/partials','authentication/templates/authentication/htmx','authentication/templates/authentication/partials','customers/templates/customers/htmx','customers/templates/customers/partials','orders/templates/orders/htmx','orders/templates/orders/partials'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

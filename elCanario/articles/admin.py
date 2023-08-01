@@ -18,11 +18,6 @@ class AdminArticle(admin.ModelAdmin):
 
 class AdminArticleValue(admin.ModelAdmin):
     list_display=['article_id','value_id','category_id']
-    
-
-
-class AdminCustomer(admin.ModelAdmin):
-    list_display=['name','phone_number','address','email','total_purchased']
 
 class AdminStock(admin.ModelAdmin):
     list_display=['article_id','stock']
@@ -31,8 +26,7 @@ class AdminStock(admin.ModelAdmin):
 class AdminPromotion(admin.ModelAdmin):
     list_display=['name','discount','sell_price', 'remainder']
 
-class AdminOrder(admin.ModelAdmin):
-    list_display=['customer_id','total_pay','details','creation_date','updated_date','delivery_status']
+
 
 class AdminExpense(admin.ModelAdmin):
     list_display=['name','description','quantity','total_cost']
@@ -46,10 +40,10 @@ admin.site.register(Category, AdminCategory)
 admin.site.register(Value, AdminValue)
 admin.site.register(Article, AdminArticle)
 admin.site.register(ArticleValue, AdminArticleValue)
-admin.site.register(Customer,AdminCustomer)
+
 admin.site.register(Stock,AdminStock)
 admin.site.register(Promotion,AdminPromotion)
-admin.site.register(Order,AdminOrder)
+
 admin.site.register(Expense,AdminExpense)
 # admin.site.register(OrdersArticles,AdminOrdersArticles)
 
