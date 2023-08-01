@@ -48,8 +48,8 @@ INSTALLED_APPS += [
     'authentication',
     'customers',
     'dollar',
-    'orders'
-
+    'orders',
+    'expenses'
 ]
 
 #For development

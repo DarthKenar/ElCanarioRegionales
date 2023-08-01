@@ -28,10 +28,6 @@ class AdminPromotion(admin.ModelAdmin):
 
 
 
-class AdminExpense(admin.ModelAdmin):
-    list_display=['name','description','quantity','total_cost']
-# class AdminOrdersArticles(admin.ModelAdmin):
-#     list_display=['article_id','orders_id']
 
 
 
@@ -43,8 +39,4 @@ admin.site.register(ArticleValue, AdminArticleValue)
 
 admin.site.register(Stock,AdminStock)
 admin.site.register(Promotion,AdminPromotion)
-
-admin.site.register(Expense,AdminExpense)
-# admin.site.register(OrdersArticles,AdminOrdersArticles)
-
 

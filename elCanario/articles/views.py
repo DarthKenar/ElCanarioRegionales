@@ -1,36 +1,24 @@
+from typing import Any, Dict
 from django.shortcuts import render, get_object_or_404, redirect
-from articles.models import Category, Value, Article, ArticleValue, Stock, Promotion, Expense
-from customers.models import Customer
+from articles.models import Category, Value, Article, ArticleValue, Stock, Promotion
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_protect
 from elCanario.utils import *
-
-
-
-# # ORDERS SECTION
-def orders(request):
-
-    template = "orders.html"
-
-    return render_login_required(request, template,context={})
+from django.views.generic import ListView
 
 # # ARTICLEs SECTION
 
-def articles(request):
 
-    template = "articles.html"
+class ArticlesListView(ListView):
+    model = Article
+    template_name = 'articles.html'
 
-    articles = Article.objects.all()
-    
-    answer = "Articles in Database"
-    context = {
-                "articles_any": articles,
-                "answer":answer,
-                "datatype_input": 'name',
-                "datatype": 'Nombre'
-               }
-    
-    return render_login_required(request, template, context)
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["datatype"] = 'Nombre'
+        context["datatype_input"] = 'name'
+        context["answer"] = "Articles in Database"
+        return context
 
 ### Articles read
 def articles_read_datatype(request):

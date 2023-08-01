@@ -7,7 +7,7 @@
             {% if article_delete_answer %}
                 <output class="font-bold empty:hidden cursor-default text-red-600 appear" type="text">{{article_delete_answer}}</output><br>
             {% endif %}
-            <output class="font-bold empty:hidden cursor-default appear text-green-600" type="text">Cantidad de artículos entonctrados: <b>{{ articles_any.count }}</b>.</output>
+            <output class="font-bold empty:hidden cursor-default appear text-green-600" type="text">Articles found: <b>{{ articles_any.count }}</b>.</output>
         </div>
         {% include 'articles_table.html' %}
     {% else %}
