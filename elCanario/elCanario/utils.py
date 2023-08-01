@@ -223,7 +223,6 @@ def get_articles_by_category(category_selected: str) -> dict:
     context.update({
         "datatype_input": category.id,
         "datatype": category.name,
-        "articles_any": Article.objects.filter(characteristics_id__category_id=category),
         "values": Value.objects.filter(category_id=category)
     })
 
@@ -241,22 +240,17 @@ def get_articles_by_native_datatype(datatype_input: str) -> dict:
     """
 
     context = {}
-
+    articles = Article.objects.all()
     datatype_dict = {
                     1: "id",
                     2: "name",
                     3: "buy_price",
                     4: "increase",
-                    5: "sell_price"
-                    }
-    
-    articles = Article.objects.all()
-
+                    5: "sell_price"}
     context.update({
-        "datatype_input": datatype_input,
-        "articles_any": articles
-    })
-    
+                    "datatype_input": datatype_input,
+                    "articles_any": articles})
+
     if datatype_input == datatype_dict[1]:
 
         context["datatype_input"] = datatype_input
@@ -348,14 +342,26 @@ def get_articles_for_value_of_category(datatype_input: str,search_input: str) ->
 
     category = Category.objects.get(id = datatype_input)
     value = Value.objects.get(id = search_input)
-    context["articles_any"] = Article.objects.filter(characteristics_id=value)
     context["datatype_input"] = category.id
     context["datatype"] = category.name
     context["value"] = value.name
 
     return context
-def get_articles_for_search_input_in_native_datatype(datatype_input:str, search_input:str) -> dict:
-    """gets the articles that correspond to the value set in the selected native data type.
+def get_articles_for_search_input_in_native_datatype(datatype_input:str, search_input:str) -> object:
+
+    if datatype_input == "id":
+        return Article.objects.filter(id__startswith=search_input)
+    elif datatype_input == "name":
+        return Article.objects.filter(name__startswith=search_input) 
+    elif datatype_input == "buy_price":
+        return Article.objects.filter(buy_price__startswith=search_input)
+    elif datatype_input == "increase":
+        return Article.objects.filter(increase__startswith=search_input)
+    elif datatype_input == "sell_price":
+        return Article.objects.filter(sell_price__startswith=search_input)
+
+def get_context_for_search_input_in_native_datatype(datatype_input:str, search_input:str) -> dict:
+    """gets the context that correspond to the value set in the selected native data type.
 
     Native data type is understood as attributes of the articles model.
     
@@ -364,30 +370,21 @@ def get_articles_for_search_input_in_native_datatype(datatype_input:str, search_
         search_input (str): corresponds to the value to search according to datatype_input.
 
     Returns:
-        dict: returns the values that will be needed in the context dictionary, are selected datatypes, filtered articles, list of datatypes to select
+        dict: returns the values that will be needed in the context dictionary, are selected datatypes, list of datatypes to select
     """
     context = {}
     context["value"] = search_input
+    context["datatype_input"] = datatype_input
 
     if datatype_input == "id":
-        context["articles_any"] = Article.objects.filter(id__startswith=search_input)
-        context["datatype_input"] = "id"
         context["datatype"] = "Id:"
     elif datatype_input == "name":
-        context["articles_any"] = Article.objects.filter(name__startswith=search_input) 
-        context["datatype_input"] = "name"
         context["datatype"] = "Nombre:"
     elif datatype_input == "buy_price":
-        context["articles_any"] = Article.objects.filter(buy_price__startswith=search_input)
-        context["datatype_input"] = "buy_price"
         context["datatype"] = "Precio de compra:"
     elif datatype_input == "increase":
-        context["articles_any"] = Article.objects.filter(increase__startswith=search_input)
-        context["datatype_input"] = "increase"
         context["datatype"] = "Incremento:"
     elif datatype_input == "sell_price":
-        context["articles_any"] = Article.objects.filter(sell_price__startswith=search_input)
-        context["datatype_input"] = "sell_price"
         context["datatype"] = "Precio de venta:"
 
     return context

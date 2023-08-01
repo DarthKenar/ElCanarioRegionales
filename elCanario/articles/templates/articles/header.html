@@ -25,16 +25,16 @@
     <div class="bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md  border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100">
         <ul class="flex justify-around bg-center p-2">
             <li>
-                <form action="{% url 'orders' %}">
+                <form action="{% url 'orders:orders' %}">
                     <input class="text-lg font-mono text-amber-50 {% if request.path == '/orders' %} text-yellow-300 text-4xl {% endif %} font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-12 py-4 shadow-md shadow-slate-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" value="Orders" />
                 </form>
             </li>
             <li>
-                <form action="{% url 'articles' %}">
+                <form action="{% url 'articles:articles' %}">
                     <input class="text-lg font-mono text-amber-50 {% if request.path == '/articles' %} text-yellow-300 text-4xl {% endif %} font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-12 py-4 shadow-md shadow-slate-800 transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" value="Articles">
                 </form>
             </li>
-                <form action="{% url 'customers' %}">
+                <form action="{% url 'customers:customers' %}">
                     <input class="text-lg font-mono text-amber-50 {% if request.path == '/customers' %} text-yellow-300 text-4xl {% endif %} font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-12 py-4 shadow-md shadow-slate-800 transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-150 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" value="Customers">
                 </form>
             </li>

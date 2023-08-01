@@ -17,13 +17,13 @@
     <div class="grid grid-rows-3 grid-flow-col gap-4">
         <div class="row-span-3 bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md  border-2 p-4 m-8 shadow-slate-600 shadow-md border-separate border-amber-100 transition duration-300 hover:shadow-slate-600 hover:shadow-sm">
             
-            <form action="{% url 'orders' %}">
+            <form action="{% url 'orders:orders' %}">
                 <input class="text-lg font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-12 py-4 shadow-md shadow-slate-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-300 hover:shadow-xl hover:shadow-slate-400 m-4 mx-8 cursor-pointer max-w-xs" type="submit" value="Orders" name="orders"></input>
             </form>
-            <form action="{% url 'articles' %}">
+            <form action="{% url 'articles:articles' %}">
                 <input class="text-lg font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-12 py-4 shadow-md shadow-slate-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-300 hover:shadow-xl hover:shadow-slate-400 m-4 mx-8 cursor-pointer max-w-xs" type="submit" value="Articles" name="articles"></input>
             </form>
-            <form action="{% url 'customers' %}">
+            <form action="{% url 'customers:customers' %}">
                 <input class="text-lg font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-12 py-4 shadow-md shadow-slate-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-300 hover:shadow-xl hover:shadow-slate-400 m-4 mx-8 cursor-pointer max-w-xs"type="submit" value="Customers" name="customers"></input>
             </form>
         </div>

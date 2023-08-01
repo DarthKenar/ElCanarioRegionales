@@ -20,7 +20,9 @@ from authentication import views as auth_views
 from customers import views as customers_views
 from orders import views as orders_views
 from django.conf import settings
-
+from articles.urls import articles_urlpatterns
+from customers.urls import customers_urlpatterns
+from orders.urls import orders_urlpatterns
 
 
 urlpatterns = [
@@ -32,19 +34,15 @@ urlpatterns = [
     path('home', auth_views.home, name="home"),
 
     # ORDERS SECTION
-    path('orders', orders_views.orders, name="orders"),
+    path('orders', include(orders_urlpatterns)),
 
     ## ARTICLES SECTIONS
-    path('articles', include('articles.urls')), #va a articles section
+    path('articles', include(articles_urlpatterns)),
 
 
     #CUSTOMERS
-    path('customers', customers_views.customers, name="customers"),
-    path('customers_create', customers_views.customers_create, name="customers_create"),
-    path('customers_read_datatype', customers_views.customers_read_datatype, name="customers_read_datatype"),
-    path('customers_read_data', customers_views.customers_read_data, name="customers_read_data"),
-    # path('customers_update/<int:id>', articles_views.customers_read_data_update, name="customers_update"),
-    # path('customers_delete/<int:id>', articles_views.customers_read_data_delete, name="customers_delete"),
+    path('customers', include(customers_urlpatterns))
+
 ]
 
 if settings.DEBUG:

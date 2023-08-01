@@ -1,15 +1,17 @@
 from typing import Any, Dict
+from django.db.models.query import QuerySet
 from django.shortcuts import render, get_object_or_404, redirect
 from articles.models import Category, Value, Article, ArticleValue, Stock, Promotion
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_protect
 from elCanario.utils import *
-from django.views.generic import ListView
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import UpdateView
+from django.views.generic import TemplateView
 
 # # ARTICLEs SECTION
-
-
-class ArticlesListView(ListView):
+class ArticleListView(ListView):
     model = Article
     template_name = 'articles.html'
 
@@ -21,60 +23,73 @@ class ArticlesListView(ListView):
         return context
 
 ### Articles read
-def articles_read_datatype(request):
+class Read_dataListView(ListView):
+    model = Article
+    template_name = 'articles_search_datatype.html'
 
-    template = "articles_search_datatype.html"
-    context = {}
 
-    datatype_input = request.GET['datatype_input'].strip()
+class Read_datatypeListView(ListView):
+    template_name = 'articles_search_datatype.html'
+    model = Article
     
-    if datatype_input.isnumeric():
-        """if numeric, the user has selected some category as data type"""
+    def get_queryset(self) -> QuerySet[Any]:
+        category_selected = self.request.GET['datatype_input'].strip()
+        if category_selected.isnumeric():
+            category = Category.objects.get(id = category_selected)
+            return Article.objects.filter(characteristics_id__category_id=category)
+        else:
+            return Article.objects.all()
 
-        context.update(get_articles_by_category(datatype_input))
-
-    else:
-        """if not numeric, the user has selected some article native field as data type"""
-        
-        context.update(get_articles_by_native_datatype(datatype_input))
-
-    return render_login_required(request,template,context)
-
-def articles_read_data(request):
-
-    template = "articles_search_data.html"
-
-    search_input = request.GET["search_input"].strip()
-    datatype_input = request.GET["datatype_input"].strip()
-    context = {}
-    
-    if datatype_input.isnumeric():
-        """checks that the user's selection is a category"""
-
-        if string_is_empty(search_input):
-            """fetches all items containing values in that category"""
+    def get_context_data(self, **kwargs):
+        datatype_input = self.request.GET['datatype_input'].strip()
+        context = super().get_context_data(**kwargs)
+        if datatype_input.isnumeric():
+            # if numeric, the user has selected some category as data type
             context.update(get_articles_by_category(datatype_input))
-
         else:
-            """brings all items that have that specific value"""
-            context.update(get_articles_for_value_of_category(datatype_input,search_input))
+            # if not numeric, the user has selected some article native field as data type
+            context.update(get_articles_by_native_datatype(datatype_input))
+        return context
 
-    else:
-        """the user has selected as search type a native data type, (no category)"""
 
-        if string_is_empty(search_input):
-            """If the search field is empty, all items will be displayed."""
-            context["articles_any"] = Article.objects.all()
+class Read_dataListView(ListView):
+    template_name = 'articles_search_data.html'
+    model = Article
 
+    def get_queryset(self) -> QuerySet[Any]:
+        search_input = self.request.GET["search_input"].strip()
+        datatype_input = self.request.GET["datatype_input"].strip()
+        if datatype_input.isnumeric():
+            if string_is_empty(search_input):
+                category_selected = int(category_selected)
+                category = Category.objects.get(id = category_selected)
+                return Article.objects.filter(characteristics_id__category_id=category)
+            else:
+                value = Value.objects.get(id = search_input)
+                return Article.objects.filter(characteristics_id=value)
         else:
-            """If the search field is not empty, it will be searched according to a native data type (not category)."""
-            context.update(get_articles_for_search_input_in_native_datatype(datatype_input, search_input))
-        
-    categories = Category.objects.all()
-    context["search_input"] = search_input
-    context["categories"] = categories
-
-    return render_login_required(request, template, context)
+            if string_is_empty(search_input):
+                return Article.objects.all()
+            else:
+                return get_articles_for_search_input_in_native_datatype(datatype_input, search_input)
+                
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context =  super().get_context_data(**kwargs)
+        search_input = self.request.GET["search_input"].strip()
+        datatype_input = self.request.GET["datatype_input"].strip()
+        categories = Category.objects.all()
+        context["search_input"] = search_input
+        context["categories"] = categories
+        if datatype_input.isnumeric():
+            if string_is_empty(search_input):
+                context.update(get_articles_by_category(datatype_input))
+            else:
+                context.update(get_articles_for_value_of_category(datatype_input,search_input))
+        else:
+            if string_is_empty(search_input):
+                pass
+            else:
+                context.update(get_context_for_search_input_in_native_datatype(datatype_input, search_input))
 
 ### Articles create
 def articles_create(request):
@@ -112,6 +127,11 @@ def articles_update_name_check(request, id):
         context, any_error = name_already_in_db(article_name_input, Article, context)
     context["article_to_update"] = article_to_update
     return render_login_required(request, template, context)
+
+class ArticleUpdateView(UpdateView):
+    model = Article
+    template_name = 'template.html'
+
 
 def articles_create_calculator(request):
 
@@ -327,20 +347,32 @@ def article_delete(request, id):
                    })
         return render_login_required(request, template, context)
 
-@csrf_protect
-def article_update(request, id):
+# @csrf_protect
+# def article_update(request, id):
 
-    template = 'articles_update.html'
+#     template = 'articles_update.html'
 
-    context = {}
-    categories = Category.objects.all()
-    values = Value.objects.all()
-    context = {"categories":categories,
-               "values":values,
-               }
-    article_to_update = Article.objects.get(id = id)
-    context['article_to_update'] = article_to_update
-    return render_login_required(request, template, context)    
+#     context = {}
+#     categories = Category.objects.all()
+#     values = Value.objects.all()
+#     context = {"categories":categories,
+#                "values":values,
+#                }
+#     article_to_update = Article.objects.get(id = id)
+#     context['article_to_update'] = article_to_update
+#     return render_login_required(request, template, context)    
+class ArticleDetailView(DetailView):
+    model = Article
+    template_name = 'articles_update.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        categories = Category.objects.all()
+        values = Value.objects.all()
+        context.update({"categories":categories,
+                        "values":values,})
+        return context
+        
 
 # ## Articles Categorie SECTION
 def articles_categories(request):

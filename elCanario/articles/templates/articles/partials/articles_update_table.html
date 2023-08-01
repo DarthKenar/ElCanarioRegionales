@@ -2,7 +2,7 @@
 <h1 class="font-mono text-lg text-center font-bold">Editar Artículo {{article_to_update.name}}</h1>
 <div class="p-4 m-4">
   <label class="italic px-2">Name*: </label>
-  <input class="bg-amber-50 rounded-sm px-2" hx-get="{% url 'name_update_check' id=article_to_update.id %}" type="text" hx-target="#answer_article_name" hx-trigger="keyup changed delay:200ms" hx-swap="outerHTML" name="article_name_input" id="article_name_input" value="{{article_to_update.name}}" required >
+  <input class="bg-amber-50 rounded-sm px-2" hx-get="{% url 'name_update_check' pk=article_to_update.id %}" type="text" hx-target="#answer_article_name" hx-trigger="keyup changed delay:200ms" hx-swap="outerHTML" name="article_name_input" id="article_name_input" value="{{article_to_update.name}}" required >
   <div id="answer_article_name">
     <output class="font-bold empty:hidden cursor-default text-red-600 appear" >{{answer_error_name}}</output>
   </div>
