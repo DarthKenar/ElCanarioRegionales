@@ -1,18 +1,17 @@
 from django.urls import path
-from articles.views import ArticleListView, ArticleDetailView, Read_datatypeListView, Read_dataListView
-
+from articles.views import ArticleListView, ArticleDetailView, ReadDatatypeListView, ReadDataListView, ArticleCreateView, CategoriesView, ArticleDeleteView
 articles_urlpatterns = ([
 
     path('',ArticleListView.as_view(),name='articles'),
     
     #       ARTICLUES READ FUNCTIONS
 
-    # path('create', articles_views.articles_create, name="create"),
-    path('read_datatype', Read_datatypeListView.as_view(), name="read_datatype"),
-    path('read_data', Read_dataListView.as_view(), name="read_data"),
+    path('create', ArticleCreateView.as_view(), name="create"),
+    path('read_datatype', ReadDatatypeListView.as_view(), name="read_datatype"),
+    path('read_data', ReadDataListView.as_view(), name="read_data"),
     path('update/<int:pk>', ArticleDetailView.as_view(), name="update"),
-    # path('delete/<int:id>', articles_views.article_delete, name="delete"),
-    # path('categories', articles_views.articles_categories, name="categories"),
+    path('delete/<int:pk>', ArticleDeleteView.as_view(), name="delete"),
+    path('categories', CategoriesView.as_view(), name="categories"),
 
     #       ARTICLES CREATE FUNCTIONS
 

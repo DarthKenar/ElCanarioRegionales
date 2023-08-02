@@ -3,12 +3,14 @@ from django.db.models.query import QuerySet
 from django.shortcuts import render, get_object_or_404, redirect
 from articles.models import Category, Value, Article, ArticleValue, Stock, Promotion
 from django.http import HttpResponse
+from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_protect
 from elCanario.utils import *
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import DeleteView
 from django.views.generic import TemplateView
+from django.urls import reverse_lazy
 
 # # ARTICLEs SECTION
 class ArticleListView(ListView):
@@ -22,13 +24,8 @@ class ArticleListView(ListView):
         context["answer"] = "Articles in Database"
         return context
 
-### Articles read
-class Read_dataListView(ListView):
-    model = Article
-    template_name = 'articles_search_datatype.html'
 
-
-class Read_datatypeListView(ListView):
+class ReadDatatypeListView(ListView):
     template_name = 'articles_search_datatype.html'
     model = Article
     
@@ -52,7 +49,7 @@ class Read_datatypeListView(ListView):
         return context
 
 
-class Read_dataListView(ListView):
+class ReadDataListView(ListView):
     template_name = 'articles_search_data.html'
     model = Article
 
@@ -61,7 +58,7 @@ class Read_dataListView(ListView):
         datatype_input = self.request.GET["datatype_input"].strip()
         if datatype_input.isnumeric():
             if string_is_empty(search_input):
-                category_selected = int(category_selected)
+                category_selected = int(datatype_input)
                 category = Category.objects.get(id = category_selected)
                 return Article.objects.filter(characteristics_id__category_id=category)
             else:
@@ -91,19 +88,17 @@ class Read_dataListView(ListView):
             else:
                 context.update(get_context_for_search_input_in_native_datatype(datatype_input, search_input))
 
-### Articles create
-def articles_create(request):
 
-    template='articles_create.html'
+class ArticleCreateView(TemplateView):
+    template_name = 'articles_create.html'
 
-    categories = Category.objects.all()
-    values = Value.objects.all()
-    context = {"categories":categories,
-               "values":values,
-               }
-    
-    return render_login_required(request, template, context)
-
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        categories = Category.objects.all()
+        values = Value.objects.all()
+        context = {"categories":categories,
+                   "values":values}
+        return context
 def articles_create_name_check(request):
 
     template = "articles_create_name_error.html"
@@ -128,7 +123,7 @@ def articles_update_name_check(request, id):
     context["article_to_update"] = article_to_update
     return render_login_required(request, template, context)
 
-class ArticleUpdateView(UpdateView):
+class ArticleUpdateView(TemplateView):
     model = Article
     template_name = 'template.html'
 
@@ -324,43 +319,21 @@ def articles_update_confirm(request, id):
         context["categories"] = categories
         context["values"] = values
         return render(request, template, context)
-#Articles delete
-@csrf_protect
-def article_delete(request, id):
 
-    context = {}
-    template = "articles_search_data.html"
-    try:
-        article_to_delete = get_object_or_404(Article, id=id)
-    except Exception as e:
-        
-        return render_login_required(request, template, context)
-    else:
-        
-        context["article_delete_answer"] = f"The article {article_to_delete.name} was correctly deleted"
-        article_to_delete.delete()
-        articles = Article.objects.all()
+
+@method_decorator(csrf_protect, name='dispatch')
+class ArticleDeleteView(DeleteView):
+    model = Article
+    template_name = 'articles_search_data.html'
+    success_url = reverse_lazy("articles:articles")
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         categories = Category.objects.all()
-        context.update({
-                   "articles_any": articles,
-                   "categories": categories
-                   })
-        return render_login_required(request, template, context)
+        context["article_delete_answer"] = f"The article was correctly deleted"
+        context.update({"categories": categories})
+        return context
+    
 
-# @csrf_protect
-# def article_update(request, id):
-
-#     template = 'articles_update.html'
-
-#     context = {}
-#     categories = Category.objects.all()
-#     values = Value.objects.all()
-#     context = {"categories":categories,
-#                "values":values,
-#                }
-#     article_to_update = Article.objects.get(id = id)
-#     context['article_to_update'] = article_to_update
-#     return render_login_required(request, template, context)    
 class ArticleDetailView(DetailView):
     model = Article
     template_name = 'articles_update.html'
@@ -372,17 +345,16 @@ class ArticleDetailView(DetailView):
         context.update({"categories":categories,
                         "values":values,})
         return context
-        
+    
 
-# ## Articles Categorie SECTION
-def articles_categories(request):
+class CategoriesView(TemplateView):
+    template_name = 'categories.html'
 
-    template = "categories.html"
-
-    categories = Category.objects.all()
-    context = {}
-    context["categories"] = categories
-    return render_login_required(request, template, context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["categories"] = Category.objects.all()
+        return context
+    
 
 def articles_category_create(request, art_id=None):
 

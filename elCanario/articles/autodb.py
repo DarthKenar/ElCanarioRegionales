@@ -70,3 +70,13 @@ def generate(num):
     generate_articles(num*2)
     generate_categories_values(num,round(num/2))
     generate_category_values_for_articles(num*20)
+
+"""for fast use:
+    Enter to shell:
+
+        py manage.py shell
+    
+    In shell use generate functions:
+        from articles import autodb
+        generate(x)
+"""

@@ -40,7 +40,7 @@
                 <td class="lg:m-4 md:m-4 lg:px-12 md:px-12  tabular-nums slashed-zero">{{article.increase}}</td>
                 <td class="lg:m-4 md:m-4 lg:px-12 md:px-12  tabular-nums slashed-zero">{{article.sell_price}}</td>
                 <td class="flex mx-2">
-                    <form action="{% url 'article_update' pk=article.id %}" method="GET">
+                    <form action="{% url 'articles:update' pk=article.id %}" method="GET">
                         <button ion-button icon-only type="submit">
                             <ion-icon name="create-outline" 
                             
@@ -49,7 +49,7 @@
                         </button>
                             
                     </form>
-                    <form hx-delete="{% url 'articles_delete' id=article.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_search_data" hx-confirm="¿Está seguro de que desea eliminar el articulo: {{article.name}}?">
+                    <form hx-delete="{% url 'articles:delete' pk=article.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_search_data" hx-confirm="¿Está seguro de que desea eliminar el articulo: {{article.name}}?">
                         {% csrf_token %}
                         <button type="submit" ion-button icon-only >
                             <ion-icon name="trash-outline"
