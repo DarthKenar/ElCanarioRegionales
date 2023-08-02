@@ -206,7 +206,7 @@ def is_the_same_name(new_name:str, old_name:str, context: dict) -> Tuple[dict, b
         })
     return context, any_error
 
-def get_articles_by_category(category_selected: str) -> dict:
+def get_context_by_category(category_selected: str) -> dict:
     """fetches items containing values in the received category
 
     Args:
@@ -326,7 +326,7 @@ def get_customers_by_native_datatype(datatype_input: str) -> dict:
 
     return context
 
-def get_articles_for_value_of_category(datatype_input: str,search_input: str) -> dict:
+def get_context_for_value_of_category(datatype_input: str,search_input: str) -> dict:
     """obtains the articles that correspond to the value set in the selected category
 
     Args:
@@ -345,8 +345,8 @@ def get_articles_for_value_of_category(datatype_input: str,search_input: str) ->
     context["datatype_input"] = category.id
     context["datatype"] = category.name
     context["value"] = value.name
-
     return context
+
 def get_articles_for_search_input_in_native_datatype(datatype_input:str, search_input:str) -> object:
 
     if datatype_input == "id":
@@ -357,7 +357,7 @@ def get_articles_for_search_input_in_native_datatype(datatype_input:str, search_
         return Article.objects.filter(buy_price__startswith=search_input)
     elif datatype_input == "increase":
         return Article.objects.filter(increase__startswith=search_input)
-    elif datatype_input == "sell_price":
+    else: #datatype_input == "sell_price":
         return Article.objects.filter(sell_price__startswith=search_input)
 
 def get_context_for_search_input_in_native_datatype(datatype_input:str, search_input:str) -> dict:

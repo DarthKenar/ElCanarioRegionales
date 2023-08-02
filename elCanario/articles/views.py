@@ -12,7 +12,6 @@ from django.views.generic.edit import DeleteView
 from django.views.generic import TemplateView
 from django.urls import reverse_lazy
 
-# # ARTICLEs SECTION
 class ArticleListView(ListView):
     model = Article
     template_name = 'articles.html'
@@ -42,7 +41,7 @@ class ReadDatatypeListView(ListView):
         context = super().get_context_data(**kwargs)
         if datatype_input.isnumeric():
             # if numeric, the user has selected some category as data type
-            context.update(get_articles_by_category(datatype_input))
+            context.update(get_context_by_category(datatype_input))
         else:
             # if not numeric, the user has selected some article native field as data type
             context.update(get_articles_by_native_datatype(datatype_input))
@@ -74,19 +73,19 @@ class ReadDataListView(ListView):
         context =  super().get_context_data(**kwargs)
         search_input = self.request.GET["search_input"].strip()
         datatype_input = self.request.GET["datatype_input"].strip()
-        categories = Category.objects.all()
         context["search_input"] = search_input
-        context["categories"] = categories
+        context["categories"] = Category.objects.all()
         if datatype_input.isnumeric():
             if string_is_empty(search_input):
-                context.update(get_articles_by_category(datatype_input))
+                context.update(get_context_by_category(datatype_input))
             else:
-                context.update(get_articles_for_value_of_category(datatype_input,search_input))
+                context.update(get_context_for_value_of_category(datatype_input,search_input))
         else:
             if string_is_empty(search_input):
                 pass
             else:
                 context.update(get_context_for_search_input_in_native_datatype(datatype_input, search_input))
+        return context
 
 
 class ArticleCreateView(TemplateView):
@@ -99,6 +98,8 @@ class ArticleCreateView(TemplateView):
         context = {"categories":categories,
                    "values":values}
         return context
+
+
 def articles_create_name_check(request):
 
     template = "articles_create_name_error.html"
@@ -109,19 +110,18 @@ def articles_create_name_check(request):
     context, any_error = name_already_in_db(article_name_input, Article, context)
     return render_login_required(request, template, context)
 
-def articles_update_name_check(request, id):
 
+def articles_update_name_check(request, id):
     template = "articles_create_name_error.html"
-    
     context = {}
     article_name_input = request.GET['article_name_input'].strip().title()
     article_to_update = Article.objects.get(id=id)
-    
     if not article_name_input == article_to_update.name:
         context, any_error = search_any_error_in_name_field(article_name_input,context)
         context, any_error = name_already_in_db(article_name_input, Article, context)
     context["article_to_update"] = article_to_update
     return render_login_required(request, template, context)
+
 
 class ArticleUpdateView(TemplateView):
     model = Article
