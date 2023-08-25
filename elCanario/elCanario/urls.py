@@ -15,10 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from authentication import views as auth_views
+from django.conf import settings
 
 from authentication import views as auth_views
-from customers import views as customers_views
-from orders import views as orders_views
 from django.conf import settings
 from articles.urls import articles_urlpatterns
 from customers.urls import customers_urlpatterns
@@ -26,6 +26,7 @@ from orders.urls import orders_urlpatterns
 
 
 urlpatterns = [
+    path('', include('pwa.urls')),
     path('admin/', admin.site.urls),
 
     #LOGIN SECTION & HOME

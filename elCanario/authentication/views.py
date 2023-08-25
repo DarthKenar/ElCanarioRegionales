@@ -50,10 +50,20 @@ def home(request):
     print(day)
     print(month)
     print(year)
-    dollar_price = DollarGraph.objects.filter(date = f"{year}-{month}-{day}")
-    dollar_price = dollar_price.first()
+    # si no se guardasen repetidos podría usar este metodo
+    # dollar_price = get_object_or_404(DollarGraph, date = f"{year}-{month}-{day}")
+    #SE USA ESTA FORMA PORQJUE SE GUARDAN REPETIDOS:.. porque se guardan repetidos?
+    try:
+        
+        dollar_price = DollarGraph.objects.filter(date = f"{year}-{month}-{day}")
+        dollar_price = dollar_price.first()
+        context = {"dollar_price": dollar_price.price}
+    except:
+        print("No se encuentra un precio para el dolar")
+        context = {"dollar_price": 'No hay precios para mostrar'}
 
-    context = {"dollar_price": 'xxx'}
+    #Agrego este codigo para evitar el error de ejecuccion por primera vez
+    
     template = "home.html"
     return render(request, template, context)
 
