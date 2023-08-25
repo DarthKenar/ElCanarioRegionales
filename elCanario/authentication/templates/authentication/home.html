@@ -3,18 +3,21 @@
 <html lang="es" >
 <head>
     <title>Canario Regionales</title><title>Canario Regionales</title>
-  <link rel="stylesheet" href="{% static 'css/tailwind.css' %}">
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-  <!-- HTMX -->
-  <script src="https://unpkg.com/htmx.org@1.8.6" integrity="sha384-Bj8qm/6B+71E6FQSySofJOUjA/gq330vEqjFx9LakWybUySyI1IQHwPtbTU7bNwx" crossorigin="anonymous"></script>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="{% static 'css/tailwind.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- HTMX -->
+    <script src="https://unpkg.com/htmx.org@1.8.6" integrity="sha384-Bj8qm/6B+71E6FQSySofJOUjA/gq330vEqjFx9LakWybUySyI1IQHwPtbTU7bNwx" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </head>
-<body class="bg-cover bg-center" style="background-image: url('static/articles/smoke-bg.png')">
-    <div class="grid grid-rows-3 grid-flow-col gap-4">
+<body class="bg-cover bg-center" style="background-image: url('{% static 'img/smoke-bg.png' %}')">
+    <div class="bg-red-600 text-red-500 md:text-blue-500 lg:bg-green-500">
+        pasidnpasdnpasdon
+    </div>
+    <div class="sm:grid sm:grid-rows-3 sm:grid-flow-col sm:gap-4">
         <div class="row-span-3 bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md  border-2 p-4 m-8 shadow-slate-600 shadow-md border-separate border-amber-100 transition duration-300 hover:shadow-slate-600 hover:shadow-sm">
             
             <form action="{% url 'orders:orders' %}">
