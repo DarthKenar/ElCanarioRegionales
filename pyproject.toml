@@ -5,8 +5,28 @@ description = ""
 authors = [
     {name = "Federico Vega",email = "federico_vega22@hotmail.com"},
 ]
-dependencies = []
+dependencies = [
+    "django>=4.2.4",
+    "apscheduler>=3.10.4",
+    "requests>=2.31.0",
+    "aiohttp>=3.8.5",
+    "Pillow>=10.0.0",
+    "django-pwa>=1.1.0",
+]
 requires-python = ">=3.11"
 readme = "README.md"
 license = {text = "MIT"}
 
+[tool.pdm.scripts]
+cov = "pytest elCanario --cov=elCanario --cov-report=html"
+cov-view = {shell = "htmlcov\\index.html"}
+docs = "mkdocs serve -a localhost:7000 -f ./elCanario/mkdocs.yml"
+format = "black elCanario"
+indent = "djhtml elCanario/apps -t 4"
+linter = "ruff elCanario"
+test = "pytest elCanario"
+makemigrations = "elCanario/manage.py makemigrations"
+migrate = "elCanario/manage.py migrate"
+createsuperuser = "python elCanario/manage.py createsuperuser --username='admin' --email='federico_vega22@hotmail.com'"
+server = "elCanario/manage.py runserver"
+collectstatic = "elCanario/manage.py collectstatic"

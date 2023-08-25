@@ -27,8 +27,8 @@ SECRET_KEY = 'django-insecure-ca1=v!^hnf)sqqwze==dn&8@y-1z%=j0f1kwhagbvm+$bq8^tw
 DEBUG = True
 
 
-# ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles'
+    'django.contrib.staticfiles',
+    'pwa'
 ]
 #own apps
 INSTALLED_APPS += [
@@ -118,17 +119,7 @@ DATABASES = {
 #         }
 #     }
 # }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'your_db_name', 
-#         'USER': 'postgres',
-#         'PASSWORD': 'your_db_password',
-#         'HOST': '127.0.0.1', 
-#         'PORT': '5432',
-#         'dbname': os.path.join(BASE_DIR, 'regionales'),
-#     }
-# }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -164,3 +155,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 STATIC_URL = 'static/'
+
+PWA_APP_NAME = "EL CANARIO REGIONALES"
+PWA_APP_DESCRIPTION = "Fede y Luci <3"
+PWA_APP_THEME_COLOR = '#991b1b'
+PWA_APP_BACKGROUND_COLOR = '#fde68a'
+
+PWA_APP_ICONS = [
+    {
+        "src": "static/img/elcanarioregionales-logo-160x160.png",
+        "sizes": "160x160"
+    }
+]
+
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR,'serviceworker.js')
