@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header</title>
+    <link rel="stylesheet" href="../../static/css/tailwind.css">
+    <link rel="stylesheet" href="../../static/css/styles.css">
+</head>
+<body class="bg-cover bg-center" style="background-image: url('static/img/smoke-bg.png')">
+    <div class="bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md  border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100">
+        <ul class="flex justify-around bg-center p-2">
+            <li>
+                <form action="">
+                    <input class="text-lg font-mono text-amber-50 {% if request.path == '/orders' %} text-yellow-300 text-4xl {% endif %} font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-12 py-4 shadow-md shadow-slate-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" value="Orders" />
+                </form>
+            </li>
+            <li>
+                <form action="">
+                    <input class="text-lg font-mono text-amber-50 {% if request.path == '/articles' %} text-yellow-300 text-4xl {% endif %} font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-12 py-4 shadow-md shadow-slate-800 transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" value="Articles">
+                </form>
+            </li>
+                <form action="">
+                    <button  ion-button icon-only type="submit">
+                        <ion-icon title="Crear Artículo" class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" name="people-outline"></ion-icon>
+                    </button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

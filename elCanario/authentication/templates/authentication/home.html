@@ -1,10 +1,12 @@
 {% load static %}
+{% include 'base.html' %}
 <!DOCTYPE html>
 <html lang="es" >
 <head>
-    <title>Canario Regionales</title><title>Canario Regionales</title>
+    <title>Canario Regionales</title>
     <link rel="stylesheet" href="{% static 'css/tailwind.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="{% static 'js/functions.js' %}"></script>
     <!-- HTMX -->
     <script src="https://unpkg.com/htmx.org@1.8.6" integrity="sha384-Bj8qm/6B+71E6FQSySofJOUjA/gq330vEqjFx9LakWybUySyI1IQHwPtbTU7bNwx" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
@@ -13,21 +15,18 @@
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </head>
-<body class="bg-cover bg-center" style="background-image: url('{% static 'img/smoke-bg.png' %}')">
-    <div class="bg-red-600 text-red-500 md:text-blue-500 lg:bg-green-500">
-        pasidnpasdnpasdon
-    </div>
+<body class="bg-cover bg-center" style="background-image: url('static/img/smoke-bg.png')">
     <div class="sm:grid sm:grid-rows-3 sm:grid-flow-col sm:gap-4">
-        <div class="row-span-3 bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md  border-2 p-4 m-8 shadow-slate-600 shadow-md border-separate border-amber-100 transition duration-300 hover:shadow-slate-600 hover:shadow-sm">
+        <div class="sm:row-span-3 sm:bg-gradient-to-tr sm:from-amber-300 sm:to-amber-100 sm:rounded-md sm:border-2 sm:p-4 sm:m-8 sm:shadow-slate-600 sm:shadow-md sm:border-separate sm:border-amber-100 sm:transition sm:duration-300 sm:hover:shadow-slate-600 sm:hover:shadow-sm">
             
             <form action="{% url 'orders' %}">
-                <input class="text-lg font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-12 py-4 shadow-md shadow-slate-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-300 hover:shadow-xl hover:shadow-slate-400 m-4 mx-8 cursor-pointer max-w-xs" type="submit" value="Orders" name="orders"></input>
+                <input class="sm:text-lg sm:font-mono sm:text-amber-50 sm:font-bold sm:rounded-tl-lg sm:rounded-br-lg sm:bg-gradient-to-tr sm:from-red-900 sm:to-red-700 sm:px-12 sm:py-4 sm:shadow-md sm:shadow-slate-800 sm:transition sm:ease-in-out  sm:hover:-translate-y-1 sm:hover:scale-110 sm:duration-300 sm:hover:shadow-xl sm:hover:shadow-slate-400 sm:m-4 sm:mx-8 sm:cursor-pointer sm:max-w-xs" type="submit" value="Orders" name="orders" id="cambiarTexto"></input>
             </form>
             <form action="{% url 'articles' %}">
-                <input class="text-lg font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-12 py-4 shadow-md shadow-slate-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-300 hover:shadow-xl hover:shadow-slate-400 m-4 mx-8 cursor-pointer max-w-xs" type="submit" value="Articles" name="articles"></input>
+                <input class="sm:text-lg sm:font-mono sm:text-amber-50 sm:font-bold sm:rounded-tl-lg sm:rounded-br-lg sm:bg-gradient-to-tr sm:from-red-900 sm:to-red-700 sm:px-12 sm:py-4 sm:shadow-md sm:shadow-slate-800 sm:transition sm:ease-in-out  sm:hover:-translate-y-1 sm:hover:scale-110 sm:duration-300 sm:hover:shadow-xl sm:hover:shadow-slate-400 sm:m-4 sm:mx-8 sm:cursor-pointer sm:max-w-xs" type="submit" value="Articles" name="articles" id="cambiarTexto"></input>
             </form>
             <form action="{% url 'customers' %}">
-                <input class="text-lg font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-12 py-4 shadow-md shadow-slate-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-300 hover:shadow-xl hover:shadow-slate-400 m-4 mx-8 cursor-pointer max-w-xs"type="submit" value="Customers" name="customers"></input>
+                <input class="sm:text-lg sm:font-mono sm:text-amber-50 sm:font-bold sm:rounded-tl-lg sm:rounded-br-lg sm:bg-gradient-to-tr sm:from-red-900 sm:to-red-700 sm:px-12 sm:py-4 sm:shadow-md sm:shadow-slate-800 sm:transition sm:ease-in-out  sm:hover:-translate-y-1 sm:hover:scale-110 sm:duration-300 sm:hover:shadow-xl sm:hover:shadow-slate-400 sm:m-4 sm:mx-8 sm:cursor-pointer sm:max-w-xs" type="submit" value="Customers" name="customers" id="cambiarTexto"></input>
             </form>
         </div>
         <div class="col-span-2 bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md  border-2 p-4 m-8 shadow-slate-600 shadow-md border-separate border-amber-100 transition duration-300 hover:shadow-slate-600 hover:shadow-sm">

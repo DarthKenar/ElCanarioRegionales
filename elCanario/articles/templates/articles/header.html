@@ -35,7 +35,13 @@
                 </form>
             </li>
                 <form action="{% url 'customers' %}">
-                    <input class="text-lg font-mono text-amber-50 {% if request.path == '/customers' %} text-yellow-300 text-4xl {% endif %} font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-12 py-4 shadow-md shadow-slate-800 transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-150 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" value="Customers">
+                    <button class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" ion-button icon-only type="submit">
+                        {% if request.path == '/customers' %}
+                            <ion-icon title="Customers" name="people-circle-outline"></ion-icon>
+                        {% else %}
+                            <ion-icon title="Customers" name="people-outline"></ion-icon>
+                        {% endif %}
+                    </button>
                 </form>
             </li>
         </ul>
