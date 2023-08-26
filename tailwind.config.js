@@ -6,6 +6,9 @@ module.exports = {
   },
   plugins: [],
 }
+
+// PATH
+
 // npx tailwindcss -o elCanario/static/css/tailwind.css --watch
 // npx tailwindcss -o elCanario/articles/static/css/tailwind.css --watch
 // npx tailwindcss -o elCanario/authentication/static/css/tailwind.css --watch
