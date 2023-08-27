@@ -22,7 +22,7 @@
         
 </form>
 <body class="bg-cover bg-center" style="background-image: url('static/img/smoke-bg.png')">
-    <div class="bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md  border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100">
+    <div class="bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md  border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100 hidden sm:block">
         <ul class="flex justify-around bg-center p-2">
             <li>
                 <form action="{% url 'orders:orders' %}">
@@ -45,6 +45,49 @@
                 </form>
             </li>
         </ul>
+    </div>
+    <!-- Phone Menu/Footer -->
+    <div class="h-24 bg-yellow-400 fixed bottom-0 w-full flex justify-evenly items-center sm:hidden z-3">
+        <form action="{% url 'orders' %}">
+            <button  ion-button icon-only type="submit">
+                {% if request.path == '/orders' %}
+                <!-- mostrar icono customers activo -->
+                {% else %}
+                <!-- mostrar icono customers desactivado -->
+                {% endif %}
+                <ion-icon title="Orders" class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" name="cart-outline"></ion-icon>
+            </button>
+        </form>
+        <form action="{% url 'articles' %}">
+            <button  ion-button icon-only type="submit">
+                {% if request.path == '/articles' %}
+                <!-- mostrar icono customers activo -->
+                {% else %}
+                <!-- mostrar icono customers desactivado -->
+                {% endif %}
+                <ion-icon title="Articles" class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" name="documents-outline"></ion-icon>
+            </button>
+        </form>
+        <form action="{% url 'customers' %}">
+            <button  ion-button icon-only type="submit">
+                {% if request.path == '/customers' %}
+                <!-- mostrar icono customers activo -->
+                {% else %}
+                <!-- mostrar icono customers desactivado -->
+                {% endif %}
+                <ion-icon title="Customers" class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" name="people-outline"></ion-icon>
+            </button>
+        </form>
+        <form action="{% url 'settings:general' %}">
+            <button  ion-button icon-only type="submit">
+                {% if request.path == '/settings' %}
+                <!-- mostrar icono customers activo -->
+                {% else %}
+                <!-- mostrar icono customers desactivado -->
+                {% endif %}
+                <ion-icon title="Settings" class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" name="settings-outline"></ion-icon>
+            </button>
+        </form>
     </div>
 </body>
 
