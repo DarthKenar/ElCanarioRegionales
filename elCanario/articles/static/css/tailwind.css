@@ -1,5 +1,5 @@
 /*
-! tailwindcss v3.2.6 | MIT License | https://tailwindcss.com
+! tailwindcss v3.3.3 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -31,6 +31,7 @@
 3. Use a more readable tab size.
 4. Use the user's configured `sans` font-family by default.
 5. Use the user's configured `sans` font-feature-settings by default.
+6. Use the user's configured `sans` font-variation-settings by default.
 */
 
 html {
@@ -47,6 +48,8 @@ html {
   /* 4 */
   font-feature-settings: normal;
   /* 5 */
+  font-variation-settings: normal;
+  /* 6 */
 }
 
 /*
@@ -187,6 +190,10 @@ optgroup,
 select,
 textarea {
   font-family: inherit;
+  /* 1 */
+  font-feature-settings: inherit;
+  /* 1 */
+  font-variation-settings: inherit;
   /* 1 */
   font-size: 100%;
   /* 1 */
@@ -339,6 +346,14 @@ menu {
 }
 
 /*
+Reset default styling for dialogs.
+*/
+
+dialog {
+  padding: 0;
+}
+
+/*
 Prevent resizing textareas horizontally by default.
 */
 
@@ -433,6 +448,9 @@ video {
   --tw-pan-y:  ;
   --tw-pinch-zoom:  ;
   --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
   --tw-ordinal:  ;
   --tw-slashed-zero:  ;
   --tw-numeric-figure:  ;
@@ -480,6 +498,9 @@ video {
   --tw-pan-y:  ;
   --tw-pinch-zoom:  ;
   --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
   --tw-ordinal:  ;
   --tw-slashed-zero:  ;
   --tw-numeric-figure:  ;
@@ -569,14 +590,6 @@ video {
 
 .hidden {
   display: none;
-}
-
-.h-60 {
-  height: 15rem;
-}
-
-.h-2 {
-  height: 0.5rem;
 }
 
 .h-24 {
@@ -679,33 +692,33 @@ video {
 }
 
 .from-amber-100 {
-  --tw-gradient-from: #fef3c7;
-  --tw-gradient-to: rgb(254 243 199 / 0);
+  --tw-gradient-from: #fef3c7 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(254 243 199 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
 .from-amber-300 {
-  --tw-gradient-from: #fcd34d;
-  --tw-gradient-to: rgb(252 211 77 / 0);
+  --tw-gradient-from: #fcd34d var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(252 211 77 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
 .from-red-900 {
-  --tw-gradient-from: #7f1d1d;
-  --tw-gradient-to: rgb(127 29 29 / 0);
+  --tw-gradient-from: #7f1d1d var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(127 29 29 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
 .to-amber-100 {
-  --tw-gradient-to: #fef3c7;
+  --tw-gradient-to: #fef3c7 var(--tw-gradient-to-position);
 }
 
 .to-amber-300 {
-  --tw-gradient-to: #fcd34d;
+  --tw-gradient-to: #fcd34d var(--tw-gradient-to-position);
 }
 
 .to-red-700 {
-  --tw-gradient-to: #b91c1c;
+  --tw-gradient-to: #b91c1c var(--tw-gradient-to-position);
 }
 
 .bg-cover {
@@ -848,9 +861,9 @@ video {
 }
 
 .transition {
-  transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
@@ -999,23 +1012,23 @@ video {
   }
 
   .sm\:from-amber-300 {
-    --tw-gradient-from: #fcd34d;
-    --tw-gradient-to: rgb(252 211 77 / 0);
+    --tw-gradient-from: #fcd34d var(--tw-gradient-from-position);
+    --tw-gradient-to: rgb(252 211 77 / 0) var(--tw-gradient-to-position);
     --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
   }
 
   .sm\:from-red-900 {
-    --tw-gradient-from: #7f1d1d;
-    --tw-gradient-to: rgb(127 29 29 / 0);
+    --tw-gradient-from: #7f1d1d var(--tw-gradient-from-position);
+    --tw-gradient-to: rgb(127 29 29 / 0) var(--tw-gradient-to-position);
     --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
   }
 
   .sm\:to-amber-100 {
-    --tw-gradient-to: #fef3c7;
+    --tw-gradient-to: #fef3c7 var(--tw-gradient-to-position);
   }
 
   .sm\:to-red-700 {
-    --tw-gradient-to: #b91c1c;
+    --tw-gradient-to: #b91c1c var(--tw-gradient-to-position);
   }
 
   .sm\:p-4 {
@@ -1077,9 +1090,9 @@ video {
   }
 
   .sm\:transition {
-    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;
   }
