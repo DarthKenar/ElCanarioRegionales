@@ -43,4 +43,13 @@ ion-icon {
   from {opacity: 0;}
   to {opacity: 1;}
 }
+.z-1 {
+  z-index: 1;
+}
+.z-2 {
+  z-index: 2;
+}
+.z-3 {
+  z-index: 3;
+}
 

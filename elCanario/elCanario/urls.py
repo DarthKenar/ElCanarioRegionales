@@ -22,6 +22,8 @@ from django.conf import settings
 
 
 urlpatterns = [
+    #settings module
+    path('', include('settings.urls')),
     path('', include('pwa.urls')),
     path('admin/', admin.site.urls),
 
