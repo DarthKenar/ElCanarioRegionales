@@ -1,7 +1,7 @@
 <div class="p-4 m-4" id="article_sell_price_output">
     <label class="italic px-2">Sell price*: </label>
     {% if answer_calculator %}
-        <input class="bg-amber-50 rounded-sm px-2 empty:hidden" type="text" name="article_sell_price_input" id="article_sell_price_input" value="{{ answer_calculator }}">{{ answer_calculator }}</input>
+        <input class="bg-amber-50 rounded-sm px-2 empty:hidden cursor-not-allowed" type="text" name="article_sell_price_input" id="article_sell_price_input" value="{{ answer_calculator }}" readonly></input>
         <br>
     {% endif %}
     {% if answer_string_error %}

@@ -434,7 +434,7 @@ def articles_category_value_create(request,cat_id, art_id=None):
 
     return render_login_required(request, template, context)
 
-def articles_category_update(request: object, external_link: str, cat_id:int, art_id:str) -> HttpResponse:
+def articles_category_update(request: object, external_link: str, cat_id:int, art_id:str=None) -> HttpResponse:
     """redirects to the categories section taking the article with it.
         This is done in order to update the data in the categories section and then be able to edit the article easily.
 
