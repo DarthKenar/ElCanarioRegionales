@@ -75,7 +75,7 @@ ROOT_URLCONF = 'elCanario.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'articles/templates/articles/',BASE_DIR / 'authentication/templates/authentication/',BASE_DIR / 'articles/templates/articles/htmx',BASE_DIR / 'articles/templates/articles/partials'],
+        'DIRS': [BASE_DIR / 'articles/templates/articles/',BASE_DIR / 'articles/templates/articles/partials',BASE_DIR / 'articles/templates/articles/htmx',BASE_DIR / 'authentication/templates/authentication/', BASE_DIR / 'orders/templates/orders', BASE_DIR / 'orders/templates/orders/partials', BASE_DIR / 'orders/templates/orders/htmx', BASE_DIR / 'customers/templates/customers', BASE_DIR / 'customers/templates/customers/partials', BASE_DIR / 'customers/templates/customers/htmx'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
