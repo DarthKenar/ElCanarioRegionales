@@ -34,7 +34,7 @@
     </div>
     <!-- Phone Menu/Footer -->
     <div class="h-24 bg-amber-200 fixed bottom-0 w-full flex justify-evenly items-center sm:hidden z-3">
-        <form action="{% url 'orders' %}">
+        <form action="{% url 'orders:orders' %}">
             <button  ion-button icon-only type="submit">
                 {% if request.path == '/orders' %}
                 <!-- mostrar icono customers activo -->
@@ -44,7 +44,7 @@
                 <ion-icon title="Orders" class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" name="cart-outline"></ion-icon>
             </button>
         </form>
-        <form action="{% url 'articles' %}">
+        <form action="{% url 'articles:articles' %}">
             <button  ion-button icon-only type="submit">
                 {% if request.path == '/articles' %}
                 <!-- mostrar icono customers activo -->
@@ -54,7 +54,7 @@
                 <ion-icon title="Articles" class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" name="documents-outline"></ion-icon>
             </button>
         </form>
-        <form action="{% url 'customers' %}">
+        <form action="{% url 'customers:customers' %}">
             <button  ion-button icon-only type="submit">
                 {% if request.path == '/customers' %}
                 <!-- mostrar icono customers activo -->
