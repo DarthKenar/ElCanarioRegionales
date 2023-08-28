@@ -130,8 +130,6 @@ class ArticleUpdateView(TemplateView):
 def articles_create_calculator(request):
 
     template = "articles_create_calculator.html"
-
-
     context = {}
     buy_price = request.GET['article_buy_price_input'].replace(',', '.')
     increase = request.GET['article_increase_input'].replace(',', '.')

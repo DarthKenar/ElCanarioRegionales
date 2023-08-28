@@ -39,15 +39,8 @@
   <input class="bg-amber-50 rounded-sm px-2" type="text" name="article_increase_input" id="article_increase_input" hx-get="{% url 'articles:create_calculator' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#article_sell_price_output" hx-include="[name='article_buy_price_input']" required value="{{article_increase_input}}">
   <label>%</label>
 </div>
-<div class="p-4 m-4" id="article_sell_price_output">
-  <label class="italic px-2">Sell price*: </label>
-  <input class="bg-amber-50 rounded-sm px-2 empty:hidden cursor-not-allowed	" type="text" name="article_sell_price_input" id="article_sell_price_input" value="{{ answer_calculator }}" readonly required></input>
-  <br>
-  <output class="font-bold empty:hidden cursor-default text-red-600 appear" type="text">{{answer_string_error}}</output>
-  <br>
-  <output class="font-bold empty:hidden cursor-default text-red-600 appear" type="text">{{answer_empty_error}}</output>
+{% include 'articles_create_calculator.html' %}
 
-</div>
 
 <div class="grid place-content-end">
 
