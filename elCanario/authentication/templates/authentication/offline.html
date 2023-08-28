@@ -7,4 +7,13 @@
     <div class="flex items-center justify-center">
         <img src="{% static 'img/offline.gif' %}" width="50%" height="50%"></img>
     </div>
+    <form action="{% url 'home' %}">
+        <button ion-button icon-only type="submit">
+            <ion-icon name="home-outline" 
+            
+            size="large"
+            class="text-sm font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 p-2 m-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer"
+            ></ion-icon>
+        </button>
+    </form>
 {% endblock content %}
