@@ -4,6 +4,7 @@ version = ""
 description = ""
 authors = [
     {name = "Federico Vega - HP", email = "federico_Vega22@hotmail.com"},
+    {name = "Federico Vega",email = "federico_vega22@hotmail.com"},
 ]
 dependencies = [
     "django>=4.2.4",
@@ -17,3 +18,8 @@ requires-python = ">=3.11"
 readme = "README.md"
 license = {text = "MIT"}
 
+[tool.pdm.scripts]
+makemigrations = "elCanario/manage.py makemigrations"
+migrate = "elCanario/manage.py migrate"
+createsuperuser = "python elCanario/manage.py createsuperuser --username='admin' --email='ioseph.dev@gmail.com'"
+server = "elCanario/manage.py runserver"

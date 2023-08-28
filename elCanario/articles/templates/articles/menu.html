@@ -1,4 +1,4 @@
-<body class="bg-cover bg-center" style="background-image: url('static/img/smoke-bg.png')">
+<body class="bg-cover bg-no-repeat" style="background-image: url('static/img/smoke-bg.png')">
     <form action="{% url 'home' %}">
         <button ion-button icon-only type="submit">
             <ion-icon name="home-outline" 
@@ -8,7 +8,7 @@
             ></ion-icon>
         </button>
     </form>
-    <div class="bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md  border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100 hidden sm:block">
+    <div class="w-[90%] mx-auto bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md  border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100 hidden sm:block">
         <ul class="flex justify-around bg-center p-2">
             <li>
                 <form action="{% url 'orders:orders' %}">
@@ -33,7 +33,7 @@
         </ul>
     </div>
     <!-- Phone Menu/Footer -->
-    <div class="h-24 bg-yellow-400 fixed bottom-0 w-full flex justify-evenly items-center sm:hidden z-3">
+    <div class="h-24 bg-amber-200 fixed bottom-0 w-full flex justify-evenly items-center sm:hidden z-3">
         <form action="{% url 'orders' %}">
             <button  ion-button icon-only type="submit">
                 {% if request.path == '/orders' %}

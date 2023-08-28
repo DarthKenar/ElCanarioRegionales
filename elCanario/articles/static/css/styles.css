@@ -52,4 +52,10 @@ ion-icon {
 .z-3 {
   z-index: 3;
 }
+.overflow-hidden {
+  overflow: hidden;
+}
 
+.overflow-wrap-break {
+  overflow-wrap: break-word;
+}
