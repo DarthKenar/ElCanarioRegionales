@@ -1,5 +1,9 @@
 from django.urls import path
-from articles.views import ArticleListView, ArticleDetailView, ReadDatatypeListView, ReadDataListView, ArticleCreateView, CategoriesView, ArticleDeleteView
+from articles.views import ArticleListView, ArticleDetailView, ReadDatatypeListView, ReadDataListView, ArticleCreateView, CategoriesView
+from articles.views import article_delete
+#temporaly imports for check templates
+from articles.views import articles_create_name_check, articles_create_calculator, articles_create_confirm
+
 articles_urlpatterns = ([
 
     path('',ArticleListView.as_view(),name='articles'),
@@ -10,18 +14,18 @@ articles_urlpatterns = ([
     path('read_datatype', ReadDatatypeListView.as_view(), name="read_datatype"),
     path('read_data', ReadDataListView.as_view(), name="read_data"),
     path('update/<int:pk>', ArticleDetailView.as_view(), name="update"),
-    path('delete/<int:pk>', ArticleDeleteView.as_view(), name="delete"),
+    path('delete/<int:pk>', article_delete, name="delete"),
     path('categories', CategoriesView.as_view(), name="categories"),
 
     #       ARTICLES CREATE FUNCTIONS
 
-    # path('create_name_check',articles_views.articles_create_name_check, name="name_check"),
-    # path('create_sell_price_calculator', articles_views.articles_create_calculator, name="calculator"),
-    # path('create_confirm', articles_views.articles_create_confirm, name="create_confirm"),
+    path('create_name_check',articles_create_name_check, name="create_name_check"),
+    path('create_sell_price_calculator', articles_create_calculator, name="create_calculator"),
+    path('create_confirm', articles_create_confirm, name="create_confirm"),
 
     #       ARTICLES UPDATE FUNCTIONS
 
-    # path('update_name_check/<int:pk>', articles_views.articles_update_name_check, name="name_update_check"),
+    # path('update_name_check/<int:pk>', articles_views.articles_update_name_check, name="update_name_check"),
     # path('update_confirm/<int:id>', articles_views.articles_update_confirm, name="update_confirm"),
 
     #       ARTICLES CATEGORIES

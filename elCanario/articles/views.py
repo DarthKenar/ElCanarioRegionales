@@ -8,7 +8,6 @@ from django.views.decorators.csrf import csrf_protect
 from elCanario.utils import *
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import DeleteView
 from django.views.generic import TemplateView
 from django.urls import reverse_lazy
 
@@ -321,17 +320,34 @@ def articles_update_confirm(request, id):
         return render(request, template, context)
 
 
-@method_decorator(csrf_protect, name='dispatch')
-class ArticleDeleteView(DeleteView):
-    model = Article
-    template_name = 'articles_search_data.html'
-    success_url = reverse_lazy("articles:articles")
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        categories = Category.objects.all()
-        context["article_delete_answer"] = f"The article was correctly deleted"
-        context.update({"categories": categories})
-        return context
+# @method_decorator(csrf_protect, name='dispatch')
+# class ArticleDeleteView(DeleteView):
+#     model = Article
+#     template_name = 'articles_search_data.html'
+#     success_url = reverse_lazy("articles:articles")
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         categories = Category.objects.all()
+#         context["article_delete_answer"] = f"The article was correctly deleted"
+#         context.update({"categories": categories})
+#         return context
+@csrf_protect
+def article_delete(request, pk):
+    context = {}
+    try:
+        article_to_delete = get_object_or_404(Article, id=pk)
+    except Exception as e:
+        context["article_delete_answer"] = f"El artículo seleccionado no pudo eliminarse porque no existe. ¿? "
+        return render_login_required(request, template, context)
+    else:
+        context["article_delete_answer"] = f"Se eliminó correctamente el artículo {article_to_delete.name}"
+        article_to_delete.delete()
+        template = 'articles_search_data.html'
+        articles = Article.objects.all()
+        context.update({
+                   "article_list": articles,
+                   })
+        return render_login_required(request, template, context)    
     
 
 class ArticleDetailView(DetailView):

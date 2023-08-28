@@ -1,6 +1,6 @@
 <div id="articles_search_data" >
     {% if article_list %}
-        <div class="bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100">
+        <div class="w-[90%] auto-mx bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100">
             {% if answer_error_name %}
                 <output class="font-bold empty:hidden cursor-default text-red-600 appear" type="text">{{answer_error_name}}</output><br>
             {% endif %}
@@ -11,7 +11,8 @@
         </div>
         {% include 'articles_table.html' %}
     {% else %}
-        <div class="bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100">
+        
+        <div class="w-[90%] auto-mx bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100">
             <output class="font-bold empty:hidden cursor-default text-red-600 appear" type="text">No articles found for: <b> {{datatype}} {{value}}</b></output>
         </div>
     {% endif %}
