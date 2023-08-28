@@ -1,18 +1,17 @@
-{% include 'header.html' %}
-<head>
+{% extends 'base.html' %}
+{% block title %}
     <title>Customers - Canario Regionales</title>
-</head>
-<div id="search_answer_datatype">
-
-    {% include 'customers_search_header.html' %}
-
-    <div id="search_answer_data">
-            
-        {% include 'customers_table.html' %}
-
+{% endblock title %}
+{% block content %}
+    {% include 'menu.html' %}
+    <div id="search_answer_datatype">
+        {% include 'customers_search_header.html' %}
+        <div id="search_answer_data">
+            {% include 'customers_table.html' %}
+        </div>
+        <h1 class="text-center">   
+            Customers section in development
+        </h1>
     </div>
-    <h1 class="text-center">   
-        Customers section in development
-    </h1>
-</div>
-{% include 'footer.html' %}
+    {% include 'footer.html' %}
+{% endblock content %}

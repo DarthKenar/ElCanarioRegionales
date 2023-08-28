@@ -1,8 +1,11 @@
-{% include 'header.html' %}
-<head>
-    <title>Categories - Canario Regionales</title>
-</head>
-<div id="articles_category_value_section">
-    {% include 'categories_table.html' %}
-</div>
-{% include 'footer.html' %}
+{% extends 'base.html' %}
+{% block title %}
+    <title>Categories - Canario Regionales</title>    
+{% endblock title %}
+{% block content %}
+    {% include 'menu.html' %}
+    <div id="articles_category_value_section">
+        {% include 'categories_table.html' %}
+    </div>
+    {% include 'footer.html' %}
+{% endblock content %}

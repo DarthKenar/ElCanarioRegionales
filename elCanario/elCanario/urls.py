@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from authentication import views as auth_views
+from articles import views as articles_views
 from django.conf import settings
 
 from authentication import views as auth_views
@@ -44,7 +45,42 @@ urlpatterns = [
 
 
     #CUSTOMERS
-    path('customers', include(customers_urlpatterns))
+    path('customers', articles_views.customers, name="customers"),
+    path('customers_create', articles_views.customers_create, name="customers_create"),
+    path('customers_read_datatype', articles_views.customers_read_datatype, name="customers_read_datatype"),
+    path('customers_read_data', articles_views.customers_read_data, name="customers_read_data"),
+    # path('customers_update/<int:id>', articles_views.customers_read_data_update, name="customers_update"),
+    # path('customers_delete/<int:id>', articles_views.customers_read_data_delete, name="customers_delete"),
+]
+htmx_urlpatterns = [
+#     #ARTICLES SETCIONS
+#       ##ARTICLUES READ FUNCTIONS
+
+        ##ARTICLES CREATE FUNCTIONS
+    path('article_create_name_check',articles_views.articles_create_name_check, name="name_check"),
+    path('create_sell_price_calculator', articles_views.articles_create_calculator, name="calculator"),
+    path('articles_create_confirm', articles_views.articles_create_confirm, name="articles_create_confirm"),
+        ##ARTICLES UPDATE FUNCTIONS
+    path('article_update_name_check/<int:id>', articles_views.articles_update_name_check, name="name_update_check"),
+    path('articles_update_confirm/<int:id>', articles_views.articles_update_confirm, name="articles_update_confirm"),
+
+#         #ARTICLES CATEGORIES
+    path('articles_categories_create/<str:art_id>', articles_views.articles_category_create, name="category_create"),
+    path('articles_categories_create', articles_views.articles_category_create, name="category_create"),
+    path('articles_categories_update/<str:external_link>/<int:cat_id>', articles_views.articles_category_update, name="category_update"),
+    path('articles_categories_update/<str:external_link>/<int:cat_id>/<str:art_id>', articles_views.articles_category_update, name="category_update"),
+    path('articles_categories_update_name/<int:cat_id>', articles_views.articles_category_update_name, name="category_update_name"),
+    path('articles_categories_update_name/<int:cat_id>/<str:art_id>', articles_views.articles_category_update_name, name="category_update_name"),
+    path('articles_categories_delete/<int:cat_id>/<str:art_id>', articles_views.articles_category_delete, name="category_delete"),
+    path('articles_categories_delete/<int:cat_id>', articles_views.articles_category_delete, name="category_delete"),
+    path('articles_categories_values_create/<int:cat_id>/<str:art_id>', articles_views.articles_category_value_create, name="value_create"),
+    path('articles_categories_values_create/<int:cat_id>', articles_views.articles_category_value_create, name="value_create"),
+    path('articles_categories_values_update/<int:cat_id>/<int:val_id>/<str:art_id>', articles_views.articles_value_update, name="value_update"),
+    path('articles_categories_values_update/<int:cat_id>/<int:val_id>', articles_views.articles_value_update, name="value_update"),
+    path('articles_categories_values_update/name/<int:val_id>/<str:art_id>', articles_views.articles_value_update_name, name="value_update_name"),
+    path('articles_categories_values_update/name/<int:val_id>', articles_views.articles_value_update_name, name="value_update_name"),
+    path('articles_categories_values_delete/<int:cat_id>/<int:val_id>/<str:art_id>', articles_views.articles_value_delete, name="value_delete"),
+    path('articles_categories_values_delete/<int:cat_id>/<int:val_id>', articles_views.articles_value_delete, name="value_delete"),
 
 ]
 

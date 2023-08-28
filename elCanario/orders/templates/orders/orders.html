@@ -1,7 +1,11 @@
-{% include 'header.html' %}
-<title>Orders - Canario Regionales</title>
-
-<h1 class="text-center">   
-    Orders section in development
-</h1>
-{% include 'footer.html' %}
+{% extends 'base.html' %}
+{% block title %}
+    <title>Orders - Canario Regionales</title>
+{% endblock title %}
+{% block content %}
+    {% include 'menu.html' %}
+    <h1 class="text-center">   
+        Orders section in development
+    </h1>
+    {% include 'footer.html' %}
+{% endblock content %}

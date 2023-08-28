@@ -1,12 +1,15 @@
-{% include 'header.html' %}
-<head>
+{% extends 'base.html' %}
+{% block title %}
     <title>Edit Article - Canario Regionales</title>
-</head>
-<div class="relative flex min-h-screen flex-col justify-center overflow-hidden py-2 sm:py-12">
-    <div class="bg-gradient-to-tr from-amber-100 to-amber-300 rounded-md p-4 m-8 relative px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-10">
-        <div class="mx-auto max-w-md" id="article_create_answer">
-            {% include 'articles_update_table.html' %}
+{% endblock title %}
+{% block content %}
+    {% include 'menu.html' %}
+    <div class="relative flex min-h-screen flex-col justify-center overflow-hidden py-2 sm:py-12">
+        <div class="bg-gradient-to-tr from-amber-100 to-amber-300 rounded-md p-4 m-8 relative px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-10">
+            <div class="mx-auto max-w-md" id="article_create_answer">
+                {% include 'articles_update_table.html' %}
+            </div>
         </div>
     </div>
-</div>
-{% include 'footer.html' %}
+    {% include 'footer.html' %}
+{% endblock content %}
