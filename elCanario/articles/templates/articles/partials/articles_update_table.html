@@ -2,7 +2,7 @@
 <h1 class="font-mono text-lg text-center font-bold">Editar Artículo {{article_to_update.name}}</h1>
 <div class="p-4 m-4">
   <label class="italic px-2">Name*: </label>
-  <input class="bg-amber-50 rounded-sm px-2" hx-get="{% url 'name_update_check' pk=article_to_update.id %}" type="text" hx-target="#answer_article_name" hx-trigger="keyup changed delay:200ms" hx-swap="outerHTML" name="article_name_input" id="article_name_input" value="{{article_to_update.name}}" required >
+  <input class="bg-amber-50 rounded-sm px-2" hx-get="{% url 'articles:update_name_check' pk=article_to_update.id %}" type="text" hx-target="#answer_article_name" hx-trigger="keyup changed delay:200ms" hx-swap="outerHTML" name="article_name_input" id="article_name_input" value="{{article_to_update.name}}" required >
   <div id="answer_article_name">
     <output class="font-bold empty:hidden cursor-default text-red-600 appear" >{{answer_error_name}}</output>
   </div>
@@ -10,7 +10,7 @@
 {% for category in categories %}
     <div class="p-4 m-4 flex justify-between">
         <!-- Button to edit category -->
-        <form action="{% url 'category_update' external_link="True" cat_id=category.id art_id=article_to_update.id  %}" method="GET">
+        <form action="{% url 'articles:category_update' external_link="True" cat_id=category.id art_id=article_to_update.id  %}" method="GET">
           <button ion-button icon-only type="submit">
               <ion-icon name="create-outline" 
               
@@ -41,11 +41,11 @@
 {% endfor %}
 <div class="p-4 m-4">
   <label class="italic px-2">Sell price*: </label>
-  <input class="bg-amber-50 rounded-sm px-2" type="text" name="article_buy_price_input" id="article_buy_price_input" hx-get="{% url 'calculator' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#article_sell_price_output" hx-include="[name='article_increase_input']" value="{{article_to_update.buy_price}}" required >
+  <input class="bg-amber-50 rounded-sm px-2" type="text" name="article_buy_price_input" id="article_buy_price_input" hx-get="{% url 'articles:create_calculator' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#article_sell_price_output" hx-include="[name='article_increase_input']" value="{{article_to_update.buy_price}}" required >
 </div>
 <div class="p-4 m-4">
   <label class="italic px-2">Increment*: </label>
-  <input class="bg-amber-50 rounded-sm px-2" type="text" name="article_increase_input" id="article_increase_input" hx-get="{% url 'calculator' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#article_sell_price_output" hx-include="[name='article_buy_price_input']" value="{{article_to_update.increase}}" required>
+  <input class="bg-amber-50 rounded-sm px-2" type="text" name="article_increase_input" id="article_increase_input" hx-get="{% url 'articles:create_calculator' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#article_sell_price_output" hx-include="[name='article_buy_price_input']" value="{{article_to_update.increase}}" required>
   <label>%</label>
 </div>
 <div class="p-4 m-4" id="article_sell_price_output">
@@ -56,7 +56,7 @@
 
 <div class="grid place-content-end">
 
-    <button ion-button icon-only type="submit" hx-get="{% url 'articles_update_confirm' id=article_to_update.id %}" hx-trigger="click" hx-include="#article_name_input,[name^='category-'],#article_buy_price_input, #article_increase_input, #article_sell_price_input" hx-target="#article_create_answer" hx-swap="outerHTML">
+    <button ion-button icon-only type="submit" hx-get="{% url 'articles:update_confirm' id=article_to_update.id %}" hx-trigger="click" hx-include="#article_name_input,[name^='category-'],#article_buy_price_input, #article_increase_input, #article_sell_price_input" hx-target="#article_create_answer" hx-swap="outerHTML">
         <ion-icon class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" name="save-outline"></ion-icon>
     </button>
 

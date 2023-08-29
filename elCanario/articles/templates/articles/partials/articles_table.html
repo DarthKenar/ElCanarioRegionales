@@ -5,7 +5,7 @@
             <th class="lg:m-4 md:m-4 max-sm:hidden">Id</th>
             <th class="lg:m-4 md:m-4 ">Name</th>
             {% for category in categories %}
-                <th>{{category.name}}</th>
+                <th class="lg:m-4 md:m-4 max-sm:hidden">{{category.name}}</th>
             {% endfor %}
             <th class="lg:m-4 md:m-4 max-sm:hidden">Buy price</th>
             <th class="lg:m-4 md:m-4 max-sm:hidden">Increment</th>
@@ -44,7 +44,6 @@
                         <button ion-button icon-only type="submit" class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 mx-2 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
                             <ion-icon name="create-outline"></ion-icon>
                         </button>
-                            
                     </form>
                     <form hx-delete="{% url 'articles:delete' pk=article.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_search_data" hx-confirm="¿Está seguro de que desea eliminar el articulo: {{article.name}}?">
                         {% csrf_token %}

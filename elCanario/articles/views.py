@@ -111,11 +111,11 @@ def articles_create_name_check(request):
     return render_login_required(request, template, context)
 
 
-def articles_update_name_check(request, id):
+def articles_update_name_check(request, pk):
     template = "articles_create_name_error.html"
     context = {}
     article_name_input = request.GET['article_name_input'].strip().title()
-    article_to_update = Article.objects.get(id=id)
+    article_to_update = Article.objects.get(id=pk)
     if not article_name_input == article_to_update.name:
         context, any_error = search_any_error_in_name_field(article_name_input,context)
         context, any_error = name_already_in_db(article_name_input, Article, context)
@@ -347,13 +347,16 @@ def article_delete(request, pk):
 class ArticleDetailView(LoginRequiredMixin, DetailView):
     model = Article
     template_name = 'articles_update.html'
-
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         categories = Category.objects.all()
+        pk = self.kwargs.get('pk')
+        article_to_update = get_object_or_404(Article,pk=pk)
         values = Value.objects.all()
         context.update({"categories":categories,
-                        "values":values,})
+                        "values":values,
+                        "article_to_update":article_to_update})
         return context
     
 
@@ -376,7 +379,7 @@ def articles_category_create(request, art_id=None):
     if not string_is_empty(art_id):
         article_to_update = Article.objects.get(id = art_id)
         context['article_to_update'] = article_to_update
-        context['articles_any'] = [article_to_update]
+        context['article_list'] = [article_to_update]
 
     any_error = False
     error_context, search_any_error_in_name_field_bool = search_any_error_in_name_field(category_name, context)
@@ -418,7 +421,7 @@ def articles_category_value_create(request,cat_id, art_id=None):
     if not string_is_empty(art_id):
         article_to_update = Article.objects.get(id = art_id)
         context['article_to_update'] = article_to_update
-        context['articles_any'] = [article_to_update]
+        context['article_list'] = [article_to_update]
 
     if name_already_in_db_bool == True or is_empty_name_bool == True:
         any_error = True
@@ -475,7 +478,7 @@ def articles_category_update(request: object, external_link: str, cat_id:int, ar
     if not string_is_empty(art_id):
         article_to_update = Article.objects.get(id = art_id)
         context['article_to_update'] = article_to_update
-        context['articles_any'] = [article_to_update]
+        context['article_list'] = [article_to_update]
 
     context["categories"] = Category.objects.all()
     context['values'] = Value.objects.filter(category_id = category_to_update)
@@ -502,7 +505,7 @@ def articles_category_update_name(request, cat_id, art_id=None):
     if not string_is_empty(art_id):
         article_to_update = Article.objects.get(id = art_id)
         context['article_to_update'] = article_to_update
-        context['articles_any'] = [article_to_update]
+        context['article_list'] = [article_to_update]
 
     if search_any_error_in_name_field_bool == False and is_the_same_name_bool == False and name_already_in_db_bool == False:
         context['answer'] = f'Category has been successfully updated {category_to_update.name} --> {new_name}!'
@@ -524,7 +527,7 @@ def articles_category_delete(request, cat_id, art_id=None):
     if not string_is_empty(art_id):
         article_to_update = Article.objects.get(id = art_id)
         context['article_to_update'] = article_to_update
-        context['articles_any'] = [article_to_update]
+        context['article_list'] = [article_to_update]
 
     context={}
     category_to_update = Category.objects.get(id = cat_id)
@@ -543,7 +546,7 @@ def articles_value_delete(request, cat_id, val_id, art_id=None):
     if not string_is_empty(art_id):
         article_to_update = Article.objects.get(id = art_id)
         context['article_to_update'] = article_to_update
-        context['articles_any'] = [article_to_update]
+        context['article_list'] = [article_to_update]
 
     category_to_update = Category.objects.get(id = cat_id)
     context['category_to_update'] = category_to_update
@@ -567,7 +570,7 @@ def articles_value_update(request, cat_id, val_id, art_id=None):
     if not string_is_empty(art_id):
         article_to_update = Article.objects.get(id = art_id)
         context['article_to_update'] = article_to_update
-        context['articles_any'] = [article_to_update]
+        context['article_list'] = [article_to_update]
 
     category_to_update = Category.objects.get(id = cat_id)
     context['category_to_update'] = category_to_update
@@ -598,7 +601,7 @@ def articles_value_update_name(request, val_id, art_id=None):
     if not string_is_empty(art_id):
         article_to_update = Article.objects.get(id = art_id)
         context['article_to_update'] = article_to_update
-        context['articles_any'] = [article_to_update]
+        context['article_list'] = [article_to_update]
     
     if is_the_same_name_bool == False and is_empty_name_bool == False and name_already_in_db_bool == False:
         context['answer'] = f'The value has been updated correctly: {value_to_update.name} --> {new_name}!'
