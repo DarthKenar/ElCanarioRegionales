@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import User
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.decorators import login_required
+from elCanario.utils import render_login_required
 from django.contrib.auth import authenticate, login
 from django.utils import timezone
 import aiohttp
@@ -65,7 +66,7 @@ def home(request):
     #Agrego este codigo para evitar el error de ejecuccion por primera vez
     
     template = "home.html"
-    return render(request, template, context)
+    return render_login_required(request, template, context)
 
     
 

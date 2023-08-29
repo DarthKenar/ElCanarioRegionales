@@ -10,8 +10,9 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic import TemplateView
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-class ArticleListView(ListView):
+class ArticleListView(LoginRequiredMixin, ListView):
     model = Article
     template_name = 'articles.html'
 
@@ -23,7 +24,7 @@ class ArticleListView(ListView):
         return context
 
 
-class ReadDatatypeListView(ListView):
+class ReadDatatypeListView(LoginRequiredMixin, ListView):
     template_name = 'articles_search_datatype.html'
     model = Article
     
@@ -47,7 +48,7 @@ class ReadDatatypeListView(ListView):
         return context
 
 
-class ReadDataListView(ListView):
+class ReadDataListView(LoginRequiredMixin, ListView):
     template_name = 'articles_search_data.html'
     model = Article
 
@@ -87,7 +88,7 @@ class ReadDataListView(ListView):
         return context
 
 
-class ArticleCreateView(TemplateView):
+class ArticleCreateView(LoginRequiredMixin, TemplateView):
     template_name = 'articles_create.html'
 
     def get_context_data(self, **kwargs):
@@ -120,11 +121,6 @@ def articles_update_name_check(request, id):
         context, any_error = name_already_in_db(article_name_input, Article, context)
     context["article_to_update"] = article_to_update
     return render_login_required(request, template, context)
-
-
-class ArticleUpdateView(TemplateView):
-    model = Article
-    template_name = 'template.html'
 
 
 def articles_create_calculator(request):
@@ -348,7 +344,7 @@ def article_delete(request, pk):
         return render_login_required(request, template, context)    
     
 
-class ArticleDetailView(DetailView):
+class ArticleDetailView(LoginRequiredMixin, DetailView):
     model = Article
     template_name = 'articles_update.html'
 
@@ -361,7 +357,7 @@ class ArticleDetailView(DetailView):
         return context
     
 
-class CategoriesView(TemplateView):
+class CategoriesView(LoginRequiredMixin, TemplateView):
     template_name = 'categories.html'
 
     def get_context_data(self, **kwargs):

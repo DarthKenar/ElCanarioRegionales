@@ -9,8 +9,10 @@ import re
 @login_required
 def render_login_required(request, template: str,context: dict): 
     """This function is used for all functions that require the user to be logged in."""
-
-    return render(request, template, context)
+    if request.user.is_authenticated:
+        return render(request, template, context)
+    else:
+        return 
     
 def string_is_empty(s:str)-> bool:
     """Returns True if the string is empty or contains only blanks.

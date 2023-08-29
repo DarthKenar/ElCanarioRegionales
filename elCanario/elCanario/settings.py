@@ -155,13 +155,14 @@ USE_I18N = True
 
 USE_TZ = True
 
+LOGIN_URL = '/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 STATIC_URL = 'static/'
 
 PWA_APP_NAME = "EL CANARIO REGIONALES"
-PWA_APP_DESCRIPTION = "Fede y Luci <3"
+PWA_APP_DESCRIPTION = "For Luci whit <3"
 PWA_APP_THEME_COLOR = '#991b1b'
 PWA_APP_BACKGROUND_COLOR = '#fde68a'
 
