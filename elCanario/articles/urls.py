@@ -2,7 +2,7 @@ from django.urls import path
 from articles.views import ArticleListView, ArticleDetailView, ReadDatatypeListView, ReadDataListView, ArticleCreateView, CategoriesView
 from articles.views import article_delete
 #temporaly imports for check templates
-from articles.views import articles_create_name_check, articles_create_calculator, articles_create_confirm
+from articles.views import *
 
 articles_urlpatterns = ([
 
@@ -25,25 +25,25 @@ articles_urlpatterns = ([
 
     #       ARTICLES UPDATE FUNCTIONS
 
-    # path('update_name_check/<int:pk>', articles_views.articles_update_name_check, name="update_name_check"),
-    # path('update_confirm/<int:id>', articles_views.articles_update_confirm, name="update_confirm"),
+    path('update_name_check/<int:pk>', articles_update_name_check, name="update_name_check"),
+    path('update_confirm/<int:id>', articles_update_confirm, name="update_confirm"),
 
     #       ARTICLES CATEGORIES
 
-    # path('categories_create/<str:art_id>', articles_views.articles_category_create, name="category_create"),
-    # path('categories_create', articles_views.articles_category_create, name="category_create"),
-    # path('categories_update/<str:external_link>/<int:cat_id>/<str:art_id>', articles_views.articles_category_update, name="category_update"),
-    # path('categories_update/<str:external_link>/<int:cat_id>', articles_views.articles_category_update, name="category_update"),
-    # path('categories_update_name/<int:cat_id>/<str:art_id>', articles_views.articles_category_update_name, name="category_update_name"),
-    # path('categories_update_name/<int:cat_id>', articles_views.articles_category_update_name, name="category_update_name"),
-    # path('categories_delete/<int:cat_id>/<str:art_id>', articles_views.articles_category_delete, name="category_delete"),
-    # path('categories_delete/<int:cat_id>', articles_views.articles_category_delete, name="category_delete"),
-    # path('categories_values_create/<int:cat_id>/<str:art_id>', articles_views.articles_category_value_create, name="value_create"),
-    # path('categories_values_create/<int:cat_id>', articles_views.articles_category_value_create, name="value_create"),
-    # path('categories_values_update/<int:cat_id>/<int:val_id>/<str:art_id>', articles_views.articles_value_update, name="value_update"),
-    # path('categories_values_update/<int:cat_id>/<int:val_id>', articles_views.articles_value_update, name="value_update"),
-    # path('categories_values_update/name/<int:val_id>/<str:art_id>', articles_views.articles_value_update_name, name="value_update_name"),
-    # path('categories_values_update/name/<int:val_id>', articles_views.articles_value_update_name, name="value_update_name"),
-    # path('categories_values_delete/<int:cat_id>/<int:val_id>/<str:art_id>', articles_views.articles_value_delete, name="value_delete"),
-    # path('categories_values_delete/<int:cat_id>/<int:val_id>', articles_views.articles_value_delete, name="value_delete")
+    path('categories_create/<str:art_id>', articles_category_create, name="category_create"),
+    path('categories_create', articles_category_create, name="category_create"),
+    path('categories_update/<str:external_link>/<int:cat_id>/<str:art_id>', articles_category_update, name="category_update"),
+    path('categories_update/<str:external_link>/<int:cat_id>', articles_category_update, name="category_update"),
+    path('categories_update_name/<int:cat_id>/<str:art_id>', articles_category_update_name, name="category_update_name"),
+    path('categories_update_name/<int:cat_id>', articles_category_update_name, name="category_update_name"),
+    path('categories_delete/<int:cat_id>/<str:art_id>', articles_category_delete, name="category_delete"),
+    path('categories_delete/<int:cat_id>', articles_category_delete, name="category_delete"),
+    path('categories_values_create/<int:cat_id>/<str:art_id>', articles_category_value_create, name="value_create"),
+    path('categories_values_create/<int:cat_id>', articles_category_value_create, name="value_create"),
+    path('categories_values_update/<int:cat_id>/<int:val_id>/<str:art_id>', articles_value_update, name="value_update"),
+    path('categories_values_update/<int:cat_id>/<int:val_id>', articles_value_update, name="value_update"),
+    path('categories_values_update/name/<int:val_id>/<str:art_id>', articles_value_update_name, name="value_update_name"),
+    path('categories_values_update/name/<int:val_id>', articles_value_update_name, name="value_update_name"),
+    path('categories_values_delete/<int:cat_id>/<int:val_id>/<str:art_id>', articles_value_delete, name="value_delete"),
+    path('categories_values_delete/<int:cat_id>/<int:val_id>', articles_value_delete, name="value_delete")
 ], 'articles')

@@ -32,7 +32,7 @@ class Article(models.Model):
     buy_price = models.DecimalField(verbose_name="Buy price", max_digits=10, decimal_places=2, validators=[MinValueValidator(0.0)])
     increase = models.DecimalField(verbose_name="Increment", max_digits=10, decimal_places=2, validators=[MinValueValidator(0.0)])
     sell_price = models.DecimalField(verbose_name="Sell price", max_digits=10, decimal_places=2, validators=[MinValueValidator(0.0)])
-
+    stock = models.PositiveSmallIntegerField(verbose_name="Stock", default=0) #Value from 0 to 32767
 
     def __str__(self) -> str:
         return f"{self.name}"
@@ -58,24 +58,20 @@ class ArticleValue(models.Model):
             raise ValidationError(f"Value ({self.value_id.name}) does not correspond to category ({self.category_id.name})")
 
 ####################
-
-
-
-
-class Stock(models.Model):
+# class Stock(models.Model):
     
-    article_id = models.OneToOneField(Article,verbose_name="Article", on_delete=models.CASCADE)
-    stock = models.PositiveSmallIntegerField(verbose_name="Stock", default=0) #Value from 0 to 32767
+#     article_id = models.OneToOneField(Article,verbose_name="Article", on_delete=models.CASCADE)
+#     stock = models.PositiveSmallIntegerField(verbose_name="Stock", default=0) #Value from 0 to 32767
     
-    class Meta:
+#     class Meta:
 
-        verbose_name = "Stock"
-        verbose_name_plural = "Stocks"
-        ordering = ['article_id','stock']
+#         verbose_name = "Stock"
+#         verbose_name_plural = "Stocks"
+#         ordering = ['article_id','stock']
     
-    def __str__(self) -> str:
+#     def __str__(self) -> str:
 
-        return f"{self.article_id.name}, {self.stock}"
+#         return f"{self.article_id.name}, {self.stock}"
 
 
 class Promotion(models.Model):
