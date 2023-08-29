@@ -123,6 +123,8 @@ def articles_update_name_check(request, id):
     return render_login_required(request, template, context)
 
 
+
+
 def articles_create_calculator(request):
 
     template = "articles_create_calculator.html"

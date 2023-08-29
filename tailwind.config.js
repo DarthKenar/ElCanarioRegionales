@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["elCanario/articles/templates/articles/*.html","elCanario/articles/templates/articles/*/*.html","elCanario/authentication/templates/authentication/*.html"],
+  content: ["elCanario/articles/templates/articles/*.html","elCanario/articles/templates/articles/*/*.html","elCanario/authentication/templates/authentication/*.html","elCanario/customers/templates/customers/*.html"],
   theme: {
     extend: {},
   },

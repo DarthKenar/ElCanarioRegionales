@@ -6,7 +6,8 @@ var filesToCache = [
     '/static/css/styles.css',
     '/static/css/tailwind.css',
     '/static/img/offline.gif',
-    '/static/img/smoke-bg.png'
+    '/static/img/smoke-bg.png',
+    '/static/img/foto-perfil.png'
 ];
 
 // Cache on install
