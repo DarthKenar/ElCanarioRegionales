@@ -37,6 +37,6 @@ admin.site.register(Value, AdminValue)
 admin.site.register(Article, AdminArticle)
 admin.site.register(ArticleValue, AdminArticleValue)
 
-admin.site.register(Stock,AdminStock)
+# admin.site.register(Stock,AdminStock)
 admin.site.register(Promotion,AdminPromotion)
 

@@ -1,7 +1,7 @@
 from typing import Any, Dict
 from django.db.models.query import QuerySet
 from django.shortcuts import render, get_object_or_404, redirect
-from articles.models import Category, Value, Article, ArticleValue, Stock, Promotion
+from articles.models import Category, Value, Article, ArticleValue, Promotion
 from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_protect
