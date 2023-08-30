@@ -5,7 +5,6 @@ erDiagram
     Article one or zero to many ArticleValue : characteristics_id
     Article |o--|| ArticlePromotion : in
     Article |o--|| ArticleOrder : in
-    Article |o--|| Stock : in
     ArticleValue |o--|| Value : get
     ArticleValue |o--|| Category : get
     Value |o--|| Category : get
@@ -14,10 +13,12 @@ erDiagram
     Order |o--|| Customer : places
     Article {
         id BigAutoField
+        image Imagefield
         name CharField
         buy_price DecimalField
         increase DecimalField
         sell_price DecimalField
+        stock PositiveSmallIntergerField
     }
     ArticleValue {
         id BigAutoField
@@ -34,11 +35,6 @@ erDiagram
         id BigAutoField
         article_id ForeingKey
         order_id ForeingKey
-    }
-    Stock {
-        id BigAutoField
-        article_id OneToOneField
-        Stock PositiveSmallIntergerField
     }
     Value {
         id BigAutoField
