@@ -2,7 +2,7 @@
 {% load custom_tags %}
 {% block title %}
     <title>Settings - El Canario Regionales</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js"></script>
     <script>
         Dropzone.autoDiscover = false;
 
@@ -19,7 +19,7 @@
                 }
             });
         });
-    </script>
+    </script> -->
 {% endblock title %}
 {% block content %}
     {% include 'menu.html' %}
@@ -31,20 +31,31 @@
                         <h2 class="text-2xl font-semibold mb-2">Upload your user picture</h2>
                         <p class="text-xs text-gray-500">File should be of format .png</p>
                     </div>
-                    <form action="#" method="post" enctype="multipart/form-data" class="relative w-4/5 h-32 max-w-xs mb-10 bg-gray-100 rounded-lg shadow-inner">
-                        {% csrf_token %}
-                        <input type="file" id="file-upload" class="hidden" >
-                        <label for="file-upload" class="z-20 flex flex-col-reverse items-center justify-center w-full h-full cursor-pointer dropzone" id="profile-picture-dropzone">
-                            <p class="z-10 text-xs font-light text-center text-gray-500">Drag & Drop your files here</p>
-                            <svg class="z-10 w-8 h-8 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path>
-                            </svg>
-                        </label>
-                        <button type="submit">Guardar</button>
-                    </form>
+
+                    {% include 'upload_image_profile_form.html' %}
+
                 </div>
             </div>
         </div>    
  
     {% include 'footer.html' %} 
+    <script>
+        document.getElementById('profile_picture').addEventListener('change', function () {
+            const fileInput = this;
+            const imagePreview = document.getElementById('image-preview');
+        
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+        
+                reader.onload = function (e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = 'block';
+                };
+        
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                imagePreview.style.display = 'none';
+            }
+        });
+    </script>
 {% endblock content %}

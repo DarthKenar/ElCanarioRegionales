@@ -1,0 +1,21 @@
+<div id="upload_image_profile_form">
+    <form hx-post="{% url 'settings:upload_profile_picture' %}" hx-target="#upload_image_profile_form" hx-swap="outerHTML" enctype="multipart/form-data" class="relative w-4/5 h-32 max-w-xs mb-10 bg-gray-100 rounded-lg shadow-inner">
+        {% csrf_token %}
+        <input type="file" id="profile_picture" name="profile_picture">
+        <label for="profile_picture" class="z-20 flex flex-col-reverse items-center justify-center w-full h-full cursor-pointer dropzone" id="profile-picture-dropzone">
+            <p class="z-10 text-xs font-light text-center text-gray-500">Drag & Drop your files here</p>
+            <svg class="z-10 w-8 h-8 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path>
+            </svg>
+        </label>
+        <button type="submit">Guardar</button>
+    </form>
+    <div class="image-preview">
+        <img class="max-w-[160px] max-h-[160px] rounded-full" id="image-preview" src="#" alt="Preview" style="display: none;">
+    </div>
+    {% if upload_image_answer_right %}
+        <output class="text-green-500 vanish">{{upload_image_answer_right}}</output>
+    {% elif upload_image_answer_error %}
+        <output class="text-red-500 vanish">{{upload_image_answer_error}}</output>
+    {% endif %}
+</div>

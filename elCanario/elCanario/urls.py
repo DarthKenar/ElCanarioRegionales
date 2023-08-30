@@ -17,10 +17,9 @@ from django.contrib import admin
 from django.urls import path, include
 from authentication import views as auth_views
 from articles import views as articles_views
-from django.conf import settings
 
 from authentication import views as auth_views
-from django.conf import settings
+
 from articles.urls import articles_urlpatterns
 from customers.urls import customers_urlpatterns
 from orders.urls import orders_urlpatterns
@@ -81,7 +80,9 @@ htmx_urlpatterns = [
 
 ]
 
+from django.conf import settings
+
 if settings.DEBUG:
-    
     from django.conf.urls.static import static
     urlpatterns+= static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns+= static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
