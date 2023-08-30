@@ -1,21 +1,36 @@
-<div id="upload_image_profile_form">
-    <form hx-post="{% url 'settings:upload_profile_picture' %}" hx-target="#upload_image_profile_form" hx-swap="outerHTML" enctype="multipart/form-data" class="relative w-4/5 h-32 max-w-xs mb-10 bg-gray-100 rounded-lg shadow-inner">
-        {% csrf_token %}
-        <input type="file" id="profile_picture" name="profile_picture">
-        <label for="profile_picture" class="z-20 flex flex-col-reverse items-center justify-center w-full h-full cursor-pointer dropzone" id="profile-picture-dropzone">
-            <p class="z-10 text-xs font-light text-center text-gray-500">Drag & Drop your files here</p>
-            <svg class="z-10 w-8 h-8 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path>
-            </svg>
-        </label>
-        <button type="submit">Guardar</button>
-    </form>
-    <div class="image-preview">
-        <img class="max-w-[160px] max-h-[160px] rounded-full" id="image-preview" src="#" alt="Preview" style="display: none;">
+<div class="h-screen font-sans text-gray-900 border-box z-3" id="upload_image_profile_form">
+    <div class="flex justify-center w-full mx-auto sm:max-w-lg">
+        <div class="flex flex-col items-center justify-center w-full h-auto my-20 bg-amber-50 sm:w-3/4 sm:rounded-lg sm:shadow-xl">
+            <div class="mt-10 mb-10 text-center">
+                <h2 class="text-2xl font-semibold mb-2">Upload your user picture</h2>
+                <p class="text-xs text-gray-500">File should be of format .png .webp .jpg or .jpeg</p>
+            </div>
+            <div>
+                <form hx-post="{% url 'settings:upload_profile_picture' %}" hx-target="#upload_image_profile_form" hx-swap="outerHTML" enctype="multipart/form-data" class="relative w-4/5 h-32 max-w-xs mb-10 bg-gray-100 rounded-lg shadow-inner">
+                    {% csrf_token %}
+                    <input type="file" id="profile_picture" name="profile_picture">
+                    <label for="profile_picture" class="z-20 flex flex-col-reverse items-center justify-center w-full h-full cursor-pointer dropzone" id="profile-picture-dropzone">
+                        <p class="z-10 text-xs font-light text-center text-gray-500">Drag & Drop your files here</p>
+                        <svg class="z-10 w-8 h-8 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path>
+                        </svg>
+                    </label>
+                    <button ion-button icon-only class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer"  type="submit">
+                        <ion-icon name="save-outline" size="large"></ion-icon>
+                    </button>
+                </form>
+                <div class="image-preview flex items-center bg-gray-700">
+                    <img class="max-w-[160px] max-h-[160px] rounded-full" id="image-preview" src="#" alt="Preview" style="display: none;">
+                </div>
+                {% if upload_image_answer_right %}
+                    <output class="text-green-500 vanish">{{upload_image_answer_right}}</output>
+                {% elif upload_image_answer_error %}
+                    <output class="text-red-500 vanish">{{upload_image_answer_error}}</output>
+                {% endif %}
+            </div>
+        </div>
     </div>
-    {% if upload_image_answer_right %}
-        <output class="text-green-500 vanish">{{upload_image_answer_right}}</output>
-    {% elif upload_image_answer_error %}
-        <output class="text-red-500 vanish">{{upload_image_answer_error}}</output>
-    {% endif %}
 </div>
+
+
+

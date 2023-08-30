@@ -23,23 +23,14 @@
 {% endblock title %}
 {% block content %}
     {% include 'menu.html' %}
-        <h1>ESTAS EN SETTINGS</h1>
-        <div class="h-screen font-sans text-gray-900 border-box z-3">
-            <div class="flex justify-center w-full mx-auto sm:max-w-lg">
-                <div class="flex flex-col items-center justify-center w-full h-auto my-20 bg-amber-50 sm:w-3/4 sm:rounded-lg sm:shadow-xl">
-                    <div class="mt-10 mb-10 text-center">
-                        <h2 class="text-2xl font-semibold mb-2">Upload your user picture</h2>
-                        <p class="text-xs text-gray-500">File should be of format .png</p>
-                    </div>
 
-                    {% include 'upload_image_profile_form.html' %}
+    <h1>ESTAS EN SETTINGS</h1>
 
-                </div>
-            </div>
-        </div>    
+    {% include 'upload_image_profile_form.html' %}  
  
     {% include 'footer.html' %} 
     <script>
+        // Muestra una imagen previa de la foto a cargar.
         document.getElementById('profile_picture').addEventListener('change', function () {
             const fileInput = this;
             const imagePreview = document.getElementById('image-preview');

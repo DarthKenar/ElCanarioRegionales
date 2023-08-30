@@ -1,7 +1,7 @@
 from django.urls import path
 from customers.views import customers
 customers_urlpatterns = ([
-    path('customers', customers, name="customers"),
+    path('', customers, name="customers"),
     # path('customers', articles_views.customers, name="customers"),
     # path('customers_create', articles_views.customers_create, name="customers_create"),
     # path('customers_read_datatype', customers_read_datatype, name="customers_read_datatype"),
