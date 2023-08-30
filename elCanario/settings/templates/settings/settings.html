@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load custom_tags %}
+{% block title %}
+    <title>Settings - El Canario Regionales</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js"></script>
+    <script>
+        Dropzone.autoDiscover = false;
+
+        $(document).ready(function() {
+            $("#profile-picture-dropzone").dropzone({
+                url: "{% url 'settings:upload_profile_picture' %}",
+                maxFilesize: 200, // Tamaño máximo en MB
+                paramName: "profile_picture", // Nombre del campo en el formulario
+                acceptedFiles: "image/*", // Acepta solo archivos de imagen
+                init: function() {
+                    this.on("success", function(file, response) {
+                        // Lógica después de cargar la imagen
+                    });
+                }
+            });
+        });
+    </script>
+{% endblock title %}
+{% block content %}
+    {% include 'menu.html' %}
+        <h1>ESTAS EN SETTINGS</h1>
+        <div class="h-screen font-sans text-gray-900 border-box z-3">
+            <div class="flex justify-center w-full mx-auto sm:max-w-lg">
+                <div class="flex flex-col items-center justify-center w-full h-auto my-20 bg-amber-50 sm:w-3/4 sm:rounded-lg sm:shadow-xl">
+                    <div class="mt-10 mb-10 text-center">
+                        <h2 class="text-2xl font-semibold mb-2">Upload your user picture</h2>
+                        <p class="text-xs text-gray-500">File should be of format .png</p>
+                    </div>
+                    <form action="#" method="post" enctype="multipart/form-data" class="relative w-4/5 h-32 max-w-xs mb-10 bg-gray-100 rounded-lg shadow-inner">
+                        {% csrf_token %}
+                        <input type="file" id="file-upload" class="hidden" >
+                        <label for="file-upload" class="z-20 flex flex-col-reverse items-center justify-center w-full h-full cursor-pointer dropzone" id="profile-picture-dropzone">
+                            <p class="z-10 text-xs font-light text-center text-gray-500">Drag & Drop your files here</p>
+                            <svg class="z-10 w-8 h-8 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path>
+                            </svg>
+                        </label>
+                        <button type="submit">Guardar</button>
+                    </form>
+                </div>
+            </div>
+        </div>    
+ 
+    {% include 'footer.html' %} 
+{% endblock content %}

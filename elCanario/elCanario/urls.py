@@ -29,7 +29,9 @@ from orders.urls import orders_urlpatterns
 urlpatterns = [
     #settings module
     path('', include('settings.urls')),
+    #pwa module
     path('', include('pwa.urls')),
+    
     path('admin/', admin.site.urls),
 
     #LOGIN SECTION & HOME

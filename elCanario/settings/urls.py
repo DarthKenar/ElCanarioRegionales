@@ -14,9 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from .views import GeneralSettingsView
+from settings.views import GeneralSettingsView, upload_profile_picture
 
 app_name = 'settings'
 urlpatterns = [
-    path('settings', GeneralSettingsView.as_view(), name='general')
+    path('settings', GeneralSettingsView.as_view(), name='settings'),
+    path('upload_profile_picture/', upload_profile_picture, name='upload_profile_picture'),
 ]

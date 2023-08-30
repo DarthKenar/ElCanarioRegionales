@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import CustomUser
+from .models import UserProfileExtends
 # Register your models here.
 class AdminUser(admin.ModelAdmin):
-    list_display = ['picture']
+    list_display = ['user','profile_picture']
 
-admin.site.register(CustomUser, AdminUser)
+admin.site.register(UserProfileExtends, AdminUser)

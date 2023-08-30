@@ -1,10 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-#REVISAR MODELOS PARA 
-# Create your models here.
-class CustomUser(User):
-    picture = models.ImageField(blank=True, null=True, max_length=100, default="UserPictureDefault.png")
-    
 
-
-
+class UserProfileExtends(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_picture = models.ImageField(upload_to='static/img/profile-pictures/', null=True, blank=True, default="")
+    # url = models.CharField(auto_created="")
