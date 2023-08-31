@@ -12,7 +12,7 @@ from django.views.generic import TemplateView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-class ArticleListView(LoginRequiredMixin, ListView):
+class ArticleListView(ListView):#LoginRequiredMixin,
     model = Article
     template_name = 'articles.html'
 
