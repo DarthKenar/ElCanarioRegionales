@@ -32,9 +32,12 @@ def upload_profile_picture(request):
         # Abrir la imagen y verificar su tamaño
         try:
             img = Image.open(image_file)
-            if img.width > 160 or img.height > 160:
-                context = {'upload_image_answer_error': 'La imagen debe tener un tamaño máximo de 160x160 píxeles.'}
+            if img.width > 500 or img.height > 500:
+                context = {'upload_image_answer_error': 'La imagen debe tener un tamaño máximo de 500x500 píxeles.'}
                 return render_login_required(request, template, context)
+            #if img.size > 10:
+            #    context = {'upload_image_answer_error': 'La imagen debe tener un peso mayor a 10'}
+            #    return render_login_required(request, template, context)
         except Exception as e:
             context = {'upload_image_answer_error': f'Error al procesar la imagen: {str(e)}'}
             return render_login_required(request, template, context)
