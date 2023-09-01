@@ -1,0 +1,24 @@
+<div id="customers_search_data" >
+    {% if customer_list %}
+        <div class="w-[90%] mx-auto bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100">
+            {% if answer_error_name %}
+                <output class="font-bold empty:hidden cursor-default text-red-600 appear" type="text">{{answer_error_name}}</output><br>
+            {% endif %}
+            {% if article_delete_answer %}
+                <output class="font-bold empty:hidden cursor-default text-red-600 appear" type="text">{{customer_delete_answer}}</output><br>
+            {% endif %}
+            <output class="font-bold empty:hidden cursor-default appear text-green-600" type="text">Customers found: <b>{{ customer_list.count }}</b>.</output>
+        </div>
+        {% include 'customers_table.html' %}
+    {% else %}
+        {% if value %}
+            <div class="w-[90%] mx-auto bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100">
+                <output class="font-bold empty:hidden cursor-default text-red-600 appear" type="text">No Customers found for: <b> {{datatype}} {{value}}</b></output>
+            </div>
+        {% else %}
+            <div class="w-[90%] mx-auto bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100">
+                <output class="font-bold empty:hidden cursor-default text-red-600 appear" type="text">No Customers found. <b> {{datatype}} {{value}}</b></output>
+            </div>
+        {% endif %}
+    {% endif %}
+</div>

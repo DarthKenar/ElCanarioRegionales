@@ -12,8 +12,14 @@
         {% include 'articles_table.html' %}
     {% else %}
         
+    {% if value %}
         <div class="w-[90%] mx-auto bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100">
-            <output class="font-bold empty:hidden cursor-default text-red-600 appear" type="text">No articles found for: <b> {{datatype}} {{value}}</b></output>
+            <output class="font-bold empty:hidden cursor-default text-red-600 appear" type="text">No Articles found for: <b> {{datatype}} {{value}}</b></output>
         </div>
+    {% else %}
+        <div class="w-[90%] mx-auto bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100">
+            <output class="font-bold empty:hidden cursor-default text-red-600 appear" type="text">No Articles found. <b> {{datatype}} {{value}}</b></output>
+        </div>
+    {% endif %}
     {% endif %}
 </div>
