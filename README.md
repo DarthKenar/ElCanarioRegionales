@@ -1,5 +1,9 @@
 # DOCUMENTATION/DOCUMENTACION
 
+Credentials:
+Admin: 'admin'
+Password: '1234'
+
 [English documentation][English]
 [Spanish documentation][Spanish]
 
