@@ -1,6 +1,6 @@
 # DOCUMENTATION/DOCUMENTACION
 
-Credentials:
+Credentials: 
 Admin: 'admin'
 
 Password: '1234'
