@@ -1,18 +1,22 @@
 from typing import Any, Dict
+from urllib import request
+
+from articles.models import Article, ArticleValue, Category, Promotion, Value
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.query import QuerySet
-from django.shortcuts import render, get_object_or_404, redirect
-from articles.models import Category, Value, Article, ArticleValue, Promotion
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_protect
-from elCanario.utils import *
-from django.views.generic.list import ListView
-from django.views.generic.detail import DetailView
 from django.views.generic import TemplateView
-from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
 
-class ArticleListView(ListView):#LoginRequiredMixin,
+from elCanario.utils import *
+
+
+class ArticleListView(LoginRequiredMixin,ListView):#LoginRequiredMixin,
     model = Article
     template_name = 'articles.html'
 
@@ -121,10 +125,6 @@ def articles_update_name_check(request, pk):
         context, any_error = name_already_in_db(article_name_input, Article, context)
     context["article_to_update"] = article_to_update
     return render_login_required(request, template, context)
-
-
-
-
 def articles_create_calculator(request):
 
     template = "articles_create_calculator.html"
@@ -328,7 +328,8 @@ def articles_update_confirm(request, id):
 #         context.update({"categories": categories})
 #         return context
 @csrf_protect
-def article_delete(request, pk):
+def article_delete(request:object, pk:int)-> HttpResponse:
+    template = 'articles_search_data.html'
     context = {}
     try:
         article_to_delete = get_object_or_404(Article, id=pk)
@@ -338,7 +339,6 @@ def article_delete(request, pk):
     else:
         context["article_delete_answer"] = f"Se eliminó correctamente el artículo {article_to_delete.name}"
         article_to_delete.delete()
-        template = 'articles_search_data.html'
         articles = Article.objects.all()
         context.update({
                    "article_list": articles,

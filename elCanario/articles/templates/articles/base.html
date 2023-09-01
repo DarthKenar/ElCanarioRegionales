@@ -14,12 +14,12 @@
     <script src="{% static 'js/transitions.js' %}"></script>
     <!-- HTMX -->
     <script src="https://unpkg.com/htmx.org@1.8.6" integrity="sha384-Bj8qm/6B+71E6FQSySofJOUjA/gq330vEqjFx9LakWybUySyI1IQHwPtbTU7bNwx" crossorigin="anonymous"></script>
-    <!-- IONICONS -->
+    <!-- IONICONS --> 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     {% block title %}{% endblock title %}
 </head>
-<body class="bg-cover bg-center bg-gradient-to-tr from-amber-100 to-amber-50 min-h-full min-w-full">
+<body class="bg-cover bg-center bg-gradient-to-tr from-amber-100 to-amber-50 min-h-full min-w-full {% if request.path != '/' %}pt-[10%]{% endif %}"> 
     {% block content %}{% endblock content %}
 </body>
 </html>

@@ -1,13 +1,13 @@
-<nav class="flex mx-auto bg-gradient-to-tr from-amber-300 to-amber-100 rounded-b-xl  border-2 p-4 mb-8 shadow-slate-600 shadow-sm border-separate border-amber-100 max-sm:hidden">
+<nav class="top-0 w-full fixed flex justify-evenly items-center mx-auto bg-gradient-to-tr from-amber-300 to-amber-100 rounded-b-xl min-h-[8rem] mb-24 border-2 shadow-slate-600 shadow-sm border-separate border-amber-100 max-sm:hidden">
     {% if user.is_authenticated %}
         {% load custom_tags %}
         {% get_user_picture user as user_picture %}
-        <picture class="relative w-[15%] min-w-[15%]" >
-            <img class="absolute bottom-0 left-[50%] rounded-full w-[180px] h-[180px] max-w-[180px] max-h-[180px] border-2 border-amber-200 bg-amber-100" style="transform: translateX(-50%) translateY(50%);" src="{{user_picture}}" alt="{{ user.username }}'s Profile Picture">
+        <picture class="absolute w-[15%] min-w-[15%] h-full left-0 " >
+            <img class="absolute bottom-0 left-[50%] rounded-full w-[180px] h-[180px] max-w-[180px] max-h-[180px] bg-amber-100 border-2 border-amber-100 shadow-sm shadow-slate-600" style="transform: translateX(-50%) translateY(50%);" src="{{user_picture}}" alt="{{ user.username }}'s Profile Picture">
         </picture>
     {% endif %}
-    <ul class="flex justify-around bg-center p-2 w-[85%]">
-        <li>
+    <ul class="absolute right-0 flex justify-around content-center bg-center p-2 w-[85%]">
+        <li class="place-self-center">
             <form class="my-auto" action="{% url 'home' %}">
                 <button ion-button icon-only type="submit" class="text-sm font-mono text-amber-50  font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 p-2 px-10 m-2 mx-10 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
                     {% if request.path == '/home' %}
@@ -18,7 +18,7 @@
                 </button>
             </form>
         </li>
-        <li>
+        <li class="place-self-center">
             <form action="{% url 'orders:orders' %}">
                 <button ion-button icon-only type="submit" class="text-sm font-mono text-amber-50  font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 p-2 px-10 m-2 mx-10 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
                     {% if request.path == '/orders' %}
@@ -29,7 +29,7 @@
                 </button>
             </form>
         </li>
-        <li>
+        <li class="place-self-center">
             <form action="{% url 'articles:articles' %}">
                 <button ion-button icon-only type="submit" class="text-sm font-mono text-amber-50  font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 p-2 px-10 m-2 mx-10 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
                     {% if request.path == '/articles' %}
@@ -39,7 +39,7 @@
                     {% endif %}
                 </button>
             </form>
-        </li>
+        </li class="place-self-center">
             <form action="{% url 'customers:customers' %}">
                 <button ion-button icon-only type="submit" class="text-sm font-mono text-amber-50  font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 p-2 px-10 m-2 mx-10 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
                     {% if request.path == '/customers' %}
@@ -50,7 +50,7 @@
                 </button>
             </form>
         </li>
-        <li>
+        <li class="place-self-center">
             <form class="my-auto" action="{% url 'settings:settings' %}">
                 <button ion-button icon-only type="submit" class="text-sm font-mono text-amber-50  font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 p-2 px-10 m-2 mx-10 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
                     {% if request.path == '/settings' %}
@@ -64,7 +64,7 @@
     </ul>
 </nav>
 <!-- Phone Menu/Footer -->
-<nav class="h-24 bg-amber-200 fixed bottom-0 w-full flex justify-evenly items-center sm:hidden z-3">
+<nav class="h-24 bg-amber-200  bottom-0 w-full fixed flex justify-evenly items-center sm:hidden z-3">
     <form action="{% url 'home' %}">
         <button  ion-button icon-only type="submit">
             {% if request.path == '/home' %}

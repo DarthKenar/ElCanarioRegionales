@@ -4,5 +4,7 @@ class DollarConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'dollar'
 
-    def ready(self):
-        import dollar.tasks
+    #En produccion parece mostrar un error con el wsgi... 
+
+    # def ready(self):
+    #     import dollar.tasks

@@ -60,43 +60,25 @@ ion-icon {
   overflow-wrap: break-word;
 }
 
-@keyframes transicion-fotoperfil {
-  0% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(100px);
-  }
-  100% {
-    transform: translateX(200px);
-  }
-}
-
-@keyframes fade-in {
-  from { opacity: 0; }
-}
-
-@keyframes fade-out {
-  to { opacity: 0; }
-}
-
-@keyframes slide-from-right {
-  from { transform: translateX(30px); }
-}
-
-@keyframes slide-to-left {
-  to { transform: translateX(-30px); }
-}
-
-::view-transition-old(root) {
-  animation: 90ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
-    300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
-}
-
-::view-transition-new(root) {
-  animation: 210ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
-    300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
-}
 ion-icon {
   font-size: 16px;
+}
+
+/* Estilos para la mitad inferior de elementos con la clase sombreado-inferior-img-menu */
+.sombreado-inferior-img-menu {
+  position: relative;
+  overflow: hidden;
+}
+
+.sombreado-inferior-img-menu::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%; /* Ajusta la altura según sea necesario */
+  background-color: transparent; /* Cambia el color de fondo según sea necesario */
+  border: 2px solid currentColor; /* Cambia currentColor al color de borde que desees */
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2); /* Cambia los valores de sombra según sea necesario */
+  z-index: -1; /* Coloca el pseudo-elemento detrás del contenido */
 }

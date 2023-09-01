@@ -20,10 +20,6 @@ from articles import views as articles_views
 
 from authentication import views as auth_views
 
-from articles.urls import articles_urlpatterns
-from customers.urls import customers_urlpatterns
-from orders.urls import orders_urlpatterns
-
 
 urlpatterns = [
     #settings module
@@ -36,16 +32,16 @@ urlpatterns = [
     #LOGIN SECTION & HOME
     path('', auth_views.login_view, name="login"),
     path('login_search/', auth_views.search_user, name="login_search"),
-    path('home', auth_views.home, name="home"),
+    path('home', auth_views.home, name="home"), # type: ignore
 
     # ORDERS SECTION
-    path('orders', include(orders_urlpatterns)),
+    path('orders', include('orders.urls')),
 
     ## ARTICLES SECTIONS
-    path('articles', include(articles_urlpatterns)),
+    path('articles', include('articles.urls')),
 
     #CUSTOMERS
-    path('customers', include(customers_urlpatterns)),
+    path('customers', include('customers.urls')),
 
 ]
 htmx_urlpatterns = [

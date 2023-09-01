@@ -3,8 +3,8 @@ from articles.views import ArticleListView, ArticleDetailView, ReadDatatypeListV
 from articles.views import article_delete
 #temporaly imports for check templates
 from articles.views import *
-
-articles_urlpatterns = ([
+app_name = 'articles'
+urlpatterns = [
 
     path('',ArticleListView.as_view(),name='articles'),
     
@@ -46,4 +46,4 @@ articles_urlpatterns = ([
     path('categories_values_update/name/<int:val_id>', articles_value_update_name, name="value_update_name"),
     path('categories_values_delete/<int:cat_id>/<int:val_id>/<str:art_id>', articles_value_delete, name="value_delete"),
     path('categories_values_delete/<int:cat_id>/<int:val_id>', articles_value_delete, name="value_delete")
-], 'articles')
+]
