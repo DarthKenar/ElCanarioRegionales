@@ -24,12 +24,12 @@
         <form action="{% url 'login_search' %}" method="POST">
           {% csrf_token %}
           <div class="grid place-content-center">
-            <label for="username_input" class="rounded-sm font-mono my-2">Nombre de usuario:</label>
-            <input class="bg-amber-50 rounded-sm font-mono my-2" name="username_input" type="text" id="username_input" placeholder="Nombre de Usuario" required>
+            <label>Nombre de usuario:</label>
+            <input class="bg-amber-50 rounded-sm font-mono my-2 py-2" name="username_input" type="text" id="username_input" placeholder=" admin" required>
           </div>
           <div class="grid place-content-center">
-            <label for="password_input" class="rounded-sm font-mono my-2">Contraseña:</label>
-            <input class="bg-amber-50 rounded-sm font-mono my-2"  name="password_input" type="password" id="password_input" placeholder="Contraseña" required>
+            <label>Contraseña:</label>
+            <input class="bg-amber-50 rounded-sm font-mono my-2 py-2"  name="password_input" type="password" id="password_input" placeholder=" 1234" required>
           </div>
           <div class="grid place-content-end">
               <button ion-button icon-only type="submit">
