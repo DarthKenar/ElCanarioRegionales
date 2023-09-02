@@ -9,7 +9,7 @@ class MessageLog(models.Model):
 
         verbose_name = 'Message'
         verbose_name_plural = 'Messages'
-        ordering = ['date']
+        ordering = ['-date']
 
     def __str__(self):
         return f"Message: {self.info}, Date: {self.date}"

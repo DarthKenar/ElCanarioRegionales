@@ -9,12 +9,6 @@
     <div class="bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md  border-2 p-4 m-8 shadow-slate-600 shadow-md border-separate border-amber-100 transition duration-300 hover:shadow-slate-600 hover:shadow-sm">
         EL PRECIO DEL DOLAR HOY ES DE: {{dollar_price}}
     </div>
-    <div class="items-center justify-center bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md  border-2 p-4 m-8 shadow-slate-600 shadow-md border-separate border-amber-100 transition duration-300 hover:shadow-slate-600 hover:shadow-sm">
-        <h3>User: {{ user.username }}</h3>
-        <h3>E-mail: {{ user.email }}</h3>
-        {% get_user_picture user as user_picture %}
-        <img class="rounded-full max-w-[160px] max-h-[160px]" src="{{user_picture}}" alt="{{ user.username }}'s Profile Picture">
-    </div>
     <div>
         {% include 'messageslog.html' %}
     </div>

@@ -1,3 +1,4 @@
+from logging import info
 from typing import Any, Dict
 from urllib import request
 
@@ -14,6 +15,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from articles.utils import *
 from elCanario.utils import *
+from messageslog.models import MessageLog
 
 
 class ArticleListView(LoginRequiredMixin,ListView):#LoginRequiredMixin,
@@ -216,6 +218,10 @@ def articles_create_confirm(request):
             )
         
         article.save()
+        message = MessageLog(
+            info = f"Article whose name is {article.name}, with a buy price of {article.buy_price}, with an increase of {article.increase}, with a sell price of {article.sell_price}, and with {article.stock} stock has been Created."
+        )
+        message.save()
 
         for value in values_dict.values():
             if value != None:
@@ -302,6 +308,10 @@ def articles_update_confirm(request, id):
         article_to_update.stock = article_stock_input
 
         article_to_update.save()
+        message = MessageLog(
+            info = f"Article of id {article_to_update.id} whose name is {article_to_update.name}, with a buy price of {article_to_update.buy_price}, with an increase of {article_to_update.increase}, with a sell price of {article_to_update.sell_price}, and with {article_to_update.stock} stock has been updated."
+        )
+        message.save()
         delete_old_values(article_to_update)
 
         for value in values_dict.values():
@@ -345,8 +355,13 @@ def article_delete(request:object, pk:int)-> HttpResponse:
         context["article_delete_answer"] = f"El artículo seleccionado no pudo eliminarse porque no existe. ¿? "
         return render_login_required(request, template, context)
     else:
-        context["article_delete_answer"] = f"Se eliminó correctamente el artículo {article_to_delete.name}"
+        context["article_delete_answer"] = f"The article {article_to_delete.name} has been eliminated"
+        message = MessageLog(
+            info=f"The article {article_to_delete.name} has been eliminated"
+        )
+        message.save()
         article_to_delete.delete()
+
         articles = Article.objects.all()
         context.update({
                    "article_list": articles,
@@ -404,6 +419,10 @@ def articles_category_create(request, art_id=None):
     if any_error == False:
         category_to_save = Category(name=category_name)
         category_to_save.save()
+        message = MessageLog(
+            info = f"Se creo una nueva categoría con el nombre de '{category_to_save.name}'"
+        )
+        message.save()
         context['category_to_update'] = category_to_save
         context["answer_title_values"] = f"Add values to: {category_to_save.name}"
         context["answer"] = f"The category {category_to_save.name} has been successfully saved!"
@@ -442,6 +461,10 @@ def articles_category_value_create(request,cat_id, art_id=None):
             name = value_name
                     )
         value_to_update.save()
+        message = MessageLog(
+            info = f"Se creo un nuevo valor en la categoría '{category_to_update.name}' con el nombre de '{value_to_update.name}'"
+        )
+        message.save()
         context['answer'] = f'The value {value_name} was saved correctly for the category: {category_to_update.name}'
         context['values'] = Value.objects.filter(category_id = category_to_update)
     else:
@@ -519,8 +542,13 @@ def articles_category_update_name(request, cat_id, art_id=None):
 
     if search_any_error_in_name_field_bool == False and is_the_same_name_bool == False and name_already_in_db_bool == False:
         context['answer'] = f'Category has been successfully updated {category_to_update.name} --> {new_name}!'
+        message = MessageLog(
+            info=f"Category successfully updated: Old name: {category_to_update.name}, New name {new_name}"
+            )
+        message.save()
         category_to_update.name = new_name
         category_to_update.save()
+
     else:
         context['answer'] = f'Unable to update the category name {category_to_update.name} --> {new_name}!'
 
@@ -543,6 +571,10 @@ def articles_category_delete(request, cat_id, art_id=None):
     category_to_update = Category.objects.get(id = cat_id)
     context["answer"] = f"The category {category_to_update.name} has been eliminated."
     category_to_update.delete()
+    message = MessageLog(
+        info=f"The category {category_to_update.name} has been eliminated."
+    )
+    message.save()
     context["categories"] = Category.objects.all()
     return render_login_required(request, template, context)
 
@@ -561,10 +593,11 @@ def articles_value_delete(request, cat_id, val_id, art_id=None):
     category_to_update = Category.objects.get(id = cat_id)
     context['category_to_update'] = category_to_update
     context["answer"] = f"The value {value_to_update.name} has been removed from the category {category_to_update.name}"
+    message = MessageLog(
+        info=f"The value {value_to_update.name} has been removed from the category {category_to_update.name}"
+    )
+    message.save()
     value_to_update.delete()
-
-
-
     context["categories"] = Category.objects.all()
     context['values'] = Value.objects.filter(category_id = category_to_update)
     return render_login_required(request, template, context)
@@ -614,7 +647,11 @@ def articles_value_update_name(request, val_id, art_id=None):
         context['article_list'] = [article_to_update]
     
     if is_the_same_name_bool == False and is_empty_name_bool == False and name_already_in_db_bool == False:
-        context['answer'] = f'The value has been updated correctly: {value_to_update.name} --> {new_name}!'
+        context['answer'] = f"A category value {value_to_update.category_id.name} has been successfully updated: Previous value name: {category_to_update.name}, New name {new_name}."
+        message = MessageLog(
+            info=f"A category value {value_to_update.category_id.name} has been successfully updated: Previous value name: {category_to_update.name}, New name {new_name}."
+            )
+        message.save()
         value_to_update.name = new_name
         value_to_update.save()
     else:
