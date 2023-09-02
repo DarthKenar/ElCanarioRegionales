@@ -250,12 +250,14 @@ def articles_update_confirm(request, id):
     article_buy_price_input = request.GET['article_buy_price_input'].replace(',', '.')
     article_increase_input = request.GET['article_increase_input'].replace(',', '.')
     answer_calculator = request.GET['article_sell_price_input'].replace(',', '.')
+    article_stock_input = request.GET['article_stock_input']
 
     context.update({
         "article_name_input": article_name_input,
         "article_buy_price_input":article_buy_price_input,
         "article_increase_input":article_increase_input,
         "answer_calculator":answer_calculator,
+        "article_stock_input":article_stock_input,
                 })
     
     # conditions to save
@@ -268,11 +270,11 @@ def articles_update_confirm(request, id):
         error_context, name_already_in_db_bool = name_already_in_db(article_name_input, Article, context)
 
     error_context, calculator_check_bool = calculator_check(article_increase_input,article_buy_price_input, context)
-    
+    error_context, search_any_error_in_stock_field_bool = search_any_error_in_stock_field(article_stock_input,context)
     values_dict = get_values_for_categories(request)
     # end of conditions to save 
     if not article_name_input == article_to_update.name:
-        if search_any_error_in_name_field_bool == True or calculator_check_bool == True or name_already_in_db_bool == True:
+        if search_any_error_in_name_field_bool == True or calculator_check_bool == True or name_already_in_db_bool == True or search_any_error_in_stock_field_bool == True:
 
             any_error = True
             context.update(error_context)
@@ -291,11 +293,13 @@ def articles_update_confirm(request, id):
         context.pop("article_buy_price_input")
         context.pop("article_increase_input")
         context.pop("answer_calculator")
+        context.pop("article_stock_input")
 
         article_to_update.name = article_name_input
         article_to_update.buy_price = article_buy_price_input
         article_to_update.increase = article_increase_input
         article_to_update.sell_price = answer_calculator
+        article_to_update.stock = article_stock_input
 
         article_to_update.save()
         delete_old_values(article_to_update)
@@ -312,7 +316,6 @@ def articles_update_confirm(request, id):
         context["answer_save_right"] = f"The article {article_to_update.name} has been successfully updated"
         context["answer_articles_name"] = ""
         context["answer_category_id"] = ""
-        template = 'articles_create_save.html'
 
         categories = Category.objects.all()
         values = Value.objects.all()
