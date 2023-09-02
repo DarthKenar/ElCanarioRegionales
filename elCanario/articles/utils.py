@@ -354,7 +354,8 @@ def search_any_error_in_stock_field(stock_input:str, context: dict) -> Tuple[dic
     any_error = False
 
     if string_is_empty(stock_input):
-        context["answer_error_stock"] = ""
+        any_error = True
+        context["answer_error_stock"] = "The stock value must be complete"
     else:
         try:
             stock_input = int(stock_input) # type: ignore

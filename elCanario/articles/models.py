@@ -33,7 +33,7 @@ class Article(models.Model):
     buy_price = models.DecimalField(verbose_name="Buy price", max_digits=10, decimal_places=2, validators=[MinValueValidator(0.0)])
     increase = models.DecimalField(verbose_name="Increment", max_digits=10, decimal_places=2, validators=[MinValueValidator(0.0)])
     sell_price = models.DecimalField(verbose_name="Sell price", max_digits=10, decimal_places=2, validators=[MinValueValidator(0.0)])
-    stock = models.PositiveSmallIntegerField(verbose_name="Stock", default=0) #Value from 0 to 32767
+    stock = models.PositiveSmallIntegerField(verbose_name="Stock") #Value from 0 to 32767
 
     def __str__(self) -> str:
         return f"{self.name}"

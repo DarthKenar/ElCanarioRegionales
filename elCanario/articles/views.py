@@ -165,12 +165,14 @@ def articles_create_confirm(request):
     article_buy_price_input = request.GET['article_buy_price_input'].replace(',', '.')
     article_increase_input = request.GET['article_increase_input'].replace(',', '.')
     answer_calculator = request.GET['article_sell_price_input'].replace(',', '.')
+    article_stock_input = request.GET['article_stock_input']
 
     context.update({
         "article_name_input": article_name_input,
         "article_buy_price_input":article_buy_price_input,
         "article_increase_input":article_increase_input,
         "answer_calculator":answer_calculator,
+        "article_stock_input":article_stock_input,
                 })
     
     # conditions to save
@@ -178,10 +180,11 @@ def articles_create_confirm(request):
     error_context, search_any_error_in_name_field_bool = search_any_error_in_name_field(article_name_input, context)
     error_context, calculator_check_bool = calculator_check(article_increase_input,article_buy_price_input, context)
     error_context, name_already_in_db_bool = name_already_in_db(article_name_input, Article, context)
+    error_context, search_any_error_in_stock_field_bool = search_any_error_in_stock_field(article_stock_input,context)
     values_dict = get_values_for_categories(request)
     # end of conditions to save 
 
-    if search_any_error_in_name_field_bool == True or calculator_check_bool == True or name_already_in_db_bool == True:
+    if search_any_error_in_name_field_bool == True or calculator_check_bool == True or name_already_in_db_bool == True or search_any_error_in_stock_field_bool == True:
 
         any_error = True
         context.update(error_context)
@@ -202,12 +205,14 @@ def articles_create_confirm(request):
         context.pop("article_buy_price_input")
         context.pop("article_increase_input")
         context.pop("answer_calculator")
+        context.pop("article_stock_input")
 
         article = Article(
             name = title(article_name_input),
             buy_price = float(article_buy_price_input), 
             increase = float(article_increase_input),
-            sell_price = float(answer_calculator)
+            sell_price = float(answer_calculator),
+            stock = article_stock_input
             )
         
         article.save()
