@@ -4,14 +4,14 @@
     <table class="max-w-[90%] mx-auto font-mono  text-red-900  shadow-slate-600 shadow-sm bg-amber-200 border-separate border-2 border-amber-100 rounded-md p-4 m-8">
         <thead class="p-3 m-3">
             <tr class="bg-amber-300">
-                <th class="lg:m-4 md:m-4 max-sm:hidden">Message Info</th>
+                <th class="lg:m-4 md:m-4">Message Info</th>
                 <th class="lg:m-4 md:m-4 ">Date</th>
             </tr>
         </thead>
         <tbody class="bg-amber-100">
             {% for message in messagelog_list %}
                 <tr>
-                    <td class="lg:m-4 md:m-4 lg:px-12 md:px-12 max-sm:hidden" id="{{message.info}}">{{message.info}}</td>
+                    <td class="lg:m-4 md:m-4 lg:px-12 md:px-12" id="{{message.info}}">{{message.info}}</td>
 
                     <td class="lg:m-4 md:m-4 lg:px-12 md:px-12" id="{{message.date}}">{{message.date}}</td>
                 </tr>

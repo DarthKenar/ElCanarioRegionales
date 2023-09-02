@@ -228,33 +228,24 @@ def get_articles_by_native_datatype(datatype_input: str) -> dict:
                     2: "name",
                     3: "buy_price",
                     4: "increase",
-                    5: "sell_price"}
+                    5: "sell_price",
+                    6: "stock"}
     context.update({
                     "datatype_input": datatype_input,
-                    "articles_any": articles})
+                    "article_list": articles})
 
     if datatype_input == datatype_dict[1]:
-
-        context["datatype_input"] = datatype_input
         context["datatype"] = "Id"
-
     elif datatype_input == datatype_dict[2]:
-
         context["datatype"] = "Name"
-        
     elif datatype_input == datatype_dict[3]:
-
         context["datatype"] = "Buy price"
-
     elif datatype_input == datatype_dict[4]:
-
         context["datatype"] = "Increment"
-
-    else: #datatype_input == datatype_dict[5]
-
-        context["datatype_input"] = datatype_input
+    elif datatype_input == datatype_dict[5]:
         context["datatype"] = "Sell price"
-    
+    else:#datatype_input == datatype_dict[6]:
+        context["datatype"] = "Stock"
     return context
 
 
@@ -291,8 +282,10 @@ def get_articles_for_search_input_in_native_datatype(datatype_input:str, search_
         return Article.objects.filter(buy_price__startswith=search_input)
     elif datatype_input == "increase":
         return Article.objects.filter(increase__startswith=search_input)
-    else: #datatype_input == "sell_price":
+    elif datatype_input == "sell_price":
         return Article.objects.filter(sell_price__startswith=search_input)
+    else: #datatype_input == "stock":
+        return Article.objects.filter(stock__startswith=search_input)
 
 def get_context_for_search_input_in_native_datatype(datatype_input:str, search_input:str) -> dict:
     """gets the context that correspond to the value set in the selected native data type.
@@ -313,13 +306,15 @@ def get_context_for_search_input_in_native_datatype(datatype_input:str, search_i
     if datatype_input == "id":
         context["datatype"] = "Id:"
     elif datatype_input == "name":
-        context["datatype"] = "Nombre:"
+        context["datatype"] = "Name:"
     elif datatype_input == "buy_price":
-        context["datatype"] = "Precio de compra:"
+        context["datatype"] = "Buy Price:"
     elif datatype_input == "increase":
-        context["datatype"] = "Incremento:"
+        context["datatype"] = "Increment:"
     elif datatype_input == "sell_price":
-        context["datatype"] = "Precio de venta:"
+        context["datatype"] = "Sell Price:"
+    elif datatype_input == "stock":
+        context["datatype"] = "Stock:"
 
     return context
 

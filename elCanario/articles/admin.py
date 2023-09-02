@@ -13,30 +13,18 @@ class AdminValue(admin.ModelAdmin):
     list_display=['category_id','name']
 
 class AdminArticle(admin.ModelAdmin):
-    list_display=['name','buy_price','increase','sell_price']
+    list_display=['name','buy_price','increase','sell_price','stock']
     ordering = ['sell_price']
 
 class AdminArticleValue(admin.ModelAdmin):
     list_display=['article_id','value_id','category_id']
 
-class AdminStock(admin.ModelAdmin):
-    list_display=['article_id','stock']
-
-
 class AdminPromotion(admin.ModelAdmin):
     list_display=['name','discount','sell_price', 'remainder']
-
-
-
-
-
-
 
 admin.site.register(Category, AdminCategory)
 admin.site.register(Value, AdminValue)
 admin.site.register(Article, AdminArticle)
 admin.site.register(ArticleValue, AdminArticleValue)
-
-# admin.site.register(Stock,AdminStock)
 admin.site.register(Promotion,AdminPromotion)
 

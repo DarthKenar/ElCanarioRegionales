@@ -28,7 +28,7 @@ class Value(models.Model):
 
 class Article(models.Model):
     name = models.CharField(verbose_name="Name",max_length=100, unique=True)
-    image = models.ImageField(upload_to="articles", null=True)
+    image = models.ImageField(upload_to="articles", null=True, blank=True)
     characteristics_id = models.ManyToManyField(Value,related_name='characteristics_id', blank=True, through='ArticleValue')
     buy_price = models.DecimalField(verbose_name="Buy price", max_digits=10, decimal_places=2, validators=[MinValueValidator(0.0)])
     increase = models.DecimalField(verbose_name="Increment", max_digits=10, decimal_places=2, validators=[MinValueValidator(0.0)])
