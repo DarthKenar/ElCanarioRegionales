@@ -50,7 +50,8 @@ INSTALLED_APPS += [
     'customers',
     'dollar',
     'orders',
-    'expenses'
+    'expenses',
+    'messageslog'
 ]
 
 #For development
@@ -86,7 +87,8 @@ TEMPLATES = [
                  BASE_DIR / 'customers/templates/customers/partials', 
                  BASE_DIR / 'customers/templates/customers/htmx', 
                  BASE_DIR / "settings/templates/settings",
-                 BASE_DIR / "settings/templates/settings/htmx"],
+                 BASE_DIR / "settings/templates/settings/htmx",
+                 BASE_DIR / "messageslog/templates/messageslog/"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

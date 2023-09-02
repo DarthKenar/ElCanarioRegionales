@@ -1,5 +1,7 @@
 from django import template
 from ..models import Category
+from messageslog.models import MessageLog
+
 register = template.Library()
 from authentication.models import UserProfileExtends
 @register.filter
@@ -18,3 +20,11 @@ def get_user_picture(user):
         return user_profile.profile_picture.url if user_profile.profile_picture else ''
     except UserProfileExtends.DoesNotExist:
         return ""
+        
+@register.simple_tag
+def get_all_messageslog():
+    try:
+        messages = MessageLog.objects.all()
+        return messages
+    except Exception as e:
+        print(f"Error Exception: {e}")
