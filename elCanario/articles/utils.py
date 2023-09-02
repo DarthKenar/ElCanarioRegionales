@@ -260,8 +260,8 @@ def get_context_for_value_of_category(datatype_input: str,search_input: str) -> 
         dict: returns the values that will be needed in the context dictionary, are selected datatypes, filtered articles, list of datatypes for selection
     """
     context = {}
-    datatype_input = int(datatype_input)
-    search_input = int(search_input)
+    datatype_input = int(datatype_input) # type: ignore
+    search_input = int(search_input) # type: ignore
 
     category = Category.objects.get(id = datatype_input)
     value = Value.objects.get(id = search_input)
@@ -341,3 +341,25 @@ def keep_selected_values(request: object)->dict:
 
     return {"values_selected":values_selected}
 
+def search_any_error_in_stock_field(stock_input:str, context: dict) -> Tuple[dict,bool]:
+    """checks that it is not an empty string and checks that it is not different from an alphanumeric string
+
+    Args:
+        stock_input (str): stock string input to check
+        context (dict): the context for renaming the value of the key used as a response to the user is received
+
+    Returns:
+        Tuple[dict,bool]: returns in the first position the context and in the second position the boolean answer
+    """
+    any_error = False
+
+    if string_is_empty(stock_input):
+        context["answer_error_stock"] = ""
+    else:
+        try:
+            stock_input = int(stock_input) # type: ignore
+        except Exception as e:
+            any_error = True
+            context["answer_error_stock"] = "The stock value can only be numerical and integer"
+    return(context, any_error)
+    

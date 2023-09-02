@@ -39,8 +39,14 @@
   <input class="bg-amber-50 rounded-sm px-2" type="text" name="article_increase_input" id="article_increase_input" hx-get="{% url 'articles:create_calculator' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#article_sell_price_output" hx-include="[name='article_buy_price_input']" required value="{{article_increase_input}}">
   <label>%</label>
 </div>
+
 {% include 'articles_create_calculator.html' %}
 
+<div class="p-4 m-4">
+  <label class="italic px-2">Stock: </label>
+  <input class="bg-amber-50 rounded-sm px-2" hx-get="{% url 'articles:create_stock_check' %}" type="text" hx-target="#answer_article_stock" hx-trigger="keyup changed delay:200ms" hx-swap="outerHTML" name="article_stock_input" id="article_stock_input" value="{{article_stock_input}}" placeholder="defalut: 0">
+  {% include 'articles_create_stock_check.html' %}
+</div>
 
 <div class="grid place-content-end">
 

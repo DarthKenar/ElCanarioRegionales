@@ -619,3 +619,12 @@ def articles_value_update_name(request, val_id, art_id=None):
     context["name_value_edition"] = False
 
     return render_login_required(request, template, context)
+
+def create_stock_check(request):
+    template = "articles_create_stock_check.html"
+    stock_input:str = request.GET['article_stock_input']
+    context:dict = {}
+    context, any_error = search_any_error_in_stock_field(stock_input,context)
+    return render_login_required(request, template, context)
+
+    

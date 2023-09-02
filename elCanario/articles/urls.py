@@ -1,6 +1,6 @@
 from django.urls import path
 from articles.views import ArticleListView, ArticleDetailView, ReadDatatypeListView, ReadDataListView, ArticleCreateView, CategoriesView
-from articles.views import article_delete
+from articles.views import article_delete, create_stock_check
 #temporaly imports for check templates
 from articles.views import *
 app_name = 'articles'
@@ -21,6 +21,7 @@ urlpatterns = [
 
     path('create_name_check',articles_create_name_check, name="create_name_check"),
     path('create_sell_price_calculator', articles_create_calculator, name="create_calculator"),
+    path('create_stock_check', create_stock_check, name="create_stock_check"),
     path('create_confirm', articles_create_confirm, name="create_confirm"),
 
     #       ARTICLES UPDATE FUNCTIONS
