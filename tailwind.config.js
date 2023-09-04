@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["elCanario/settings/templates/settings/*.html","elCanario/articles/templates/articles/*.html","elCanario/articles/templates/articles/*/*.html","elCanario/authentication/templates/authentication/*.html","elCanario/customers/templates/customers/*.html"],
+  content: ["elCanario/settings/templates/settings/*.html","elCanario/articles/templates/articles/*.html","elCanario/articles/templates/articles/*/*.html","elCanario/authentication/templates/authentication/*.html","elCanario/customers/templates/customers/*.html","elCanario/customers/templates/customers/partials/*.html","elCanario/customers/templates/customers/htmx/*.html"],
   theme: {
     extend: {},
   },

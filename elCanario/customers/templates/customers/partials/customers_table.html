@@ -16,14 +16,12 @@
             {% for customer in customer_list %}
                 <tr>
                     
-                    <td class="lg:m-4 md:m-4 lg:px-12 md:px-12 max-sm:hidden" id="{{customer.id}}">{{customer.id}}</td>
-
-                    <td class="lg:m-4 md:m-4 lg:px-12 md:px-12">{{customer.name}}</td>
-
-                    <td class="lg:m-4 md:m-4 lg:px-12 md:px-12  tabular-nums slashed-zero">{{customer.phone_number}}</td>
-                    <td class="lg:m-4 md:m-4 lg:px-12 md:px-12  tabular-nums slashed-zero max-sm:hidden">{{customer.email}}</td>
-                    <td class="lg:m-4 md:m-4 lg:px-12 md:px-12  tabular-nums slashed-zero">{{customer.address}}</td>
-                    <td class="lg:m-4 md:m-4 lg:px-12 md:px-12  tabular-nums slashed-zero max-sm:hidden">{{customer.total_purchased}}</td>
+                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 max-sm:hidden" id="{{customer.id}}">{{customer.id}}</td>
+                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8">{{customer.name}}</td>
+                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 tabular-nums slashed-zero">{{customer.phone_number}}</td>
+                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 tabular-nums slashed-zero max-sm:hidden">{{customer.email}}</td>
+                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 tabular-nums slashed-zero">{{customer.address}}</td>
+                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 max-sm:hidden"> <p class="whitespace-nowrap">$ {{customer.total_purchased}}</td>
                     <td></td>
                 </tr>
             {% endfor %}

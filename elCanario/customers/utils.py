@@ -1,13 +1,13 @@
 from msilib.schema import CustomAction
 from typing import Tuple, Dict
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, QueryDict
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from articles.models import Category, Value, ArticleValue, Article
 from customers.models import Customer
 import re
 from elCanario.utils import string_is_empty
-def get_customers_for_search_input(datatype_input:str, search_input:str) -> object:
+def get_customers_for_search_input(datatype_input:str, search_input:str=''):
     if string_is_empty(search_input):
         return Customer.objects.all()
     if datatype_input == "id":
@@ -62,4 +62,30 @@ def get_context_for_search_input_in_customers_section(datatype_input:str, search
     elif datatype_input == "total_purchased":
         context["datatype_input"] = "total_purchased"
         context["datatype"] = "Total purchased:"
+    return context
+
+def get_context_for_datatype_input_in_customers_section(datatype_input:str):
+    context = {}
+    context["datatype_input"] = datatype_input
+    if datatype_input == "id":
+        context["datatype_input"] = "id"
+        context["datatype"] = "ID"
+    elif datatype_input == "address":
+        context["datatype_input"] = "address"
+        context["datatype"] = "Address"
+    elif datatype_input == "dni":
+        context["datatype_input"] = "dni"
+        context["datatype"] = "DNI"
+    elif datatype_input == "email":
+        context["datatype_input"] = "email"
+        context["datatype"] = "Email"
+    elif datatype_input == "name":
+        context["datatype_input"] = "name"
+        context["datatype"] = "Name"
+    elif datatype_input == "phone_number":
+        context["datatype_input"] = "phone_number"
+        context["datatype"] = "Phone number"
+    elif datatype_input == "total_purchased":
+        context["datatype_input"] = "total_purchased"
+        context["datatype"] = "Total purchased"
     return context

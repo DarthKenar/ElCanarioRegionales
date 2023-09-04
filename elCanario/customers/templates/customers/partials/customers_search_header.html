@@ -1,6 +1,6 @@
 <div class="w-[90%] mx-auto bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md border-2 p-4 shadow-slate-600 shadow-sm border-amber-100">
     <div class="sm:flex">
-        {% comment %} <div class="flex content-between sm:hidden pb-10">
+        <div class="flex content-between sm:hidden pb-10">
             <div class="basis-1/2 flex place-content-center">
                 <form action="{% url 'customers:create' %}">
                     <button  ion-button icon-only type="submit">
@@ -8,19 +8,19 @@
                     </button>
                 </form>
             </div>
-        </div> {% endcomment %}
+        </div>
         <div class=" flex place-content-start mt-5">
             <div class="flex items-center justify-center py-2 w-[30%]">
                 <label class="text-black font-sans font-bold mx-2 overflow-hidden " for="datatype_input">Search:</label>
             </div>
-            <select class="bg-amber-50 rounded-sm px-2 mx-2" name="datatype_input" id="datatype_input">
+            <select class="bg-amber-50 rounded-sm px-2 mx-2 py-2 w-[70%]" name="datatype_input" id="datatype_input" hx-get="{% url 'customers:read_datatype' %}" hx-target="#customers_search_datatype"  hx-trigger="change" hx-swap="outerHTML">
                 <option value="id" {% if datatype_input == "id" %} selected {% endif %}>ID</option>
                 <option value="name" {% if datatype_input == "name" %} selected {% endif %}>Name</option>
                 <option value="dni" {% if datatype_input == "dni" %} selected {% endif %}>DNI</option>
                 <option value="phone_number" {% if datatype_input == "phone_number" %} selected {% endif %}>Phone number</option>
                 <option value="email" {% if datatype_input == "email" %} selected {% endif %}>E-mail</option>
                 <option value="address" {% if datatype_input == "address" %} selected {% endif %}>Address</option>
-                <option value="total_purchased" {% if datatype_input == "total_purchased" %} selected {% endif %}>Address</option>
+                <option value="total_purchased" {% if datatype_input == "total_purchased" %} selected {% endif %}>Total purchased</option>
             </select>
             <input class="bg-amber-50 rounded-sm px-2 mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'customers:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#customers_search_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>
         </div>
