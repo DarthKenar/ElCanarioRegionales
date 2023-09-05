@@ -130,8 +130,8 @@ def name_already_in_db(name:str, Model:object, context:dict) -> Tuple[dict,bool]
     for obj in query:
         if obj.name == name:
             print(f" TRUE - name {name} is already in db!")
-            any_error = True
-            context["answer_error_name"] = f"The name {name} already exists!"
+            any_error = False
+            context["answer_error_name"] = f"Atention - The name {name} already exists! You can use it anyway"
         
     return context, any_error
 

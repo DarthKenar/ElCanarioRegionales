@@ -1,7 +1,6 @@
 from logging import info
 from typing import Any, Dict
 from urllib import request
-
 from articles.models import Article, ArticleValue, Category, Promotion, Value
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.query import QuerySet
@@ -24,7 +23,7 @@ class ArticleListView(LoginRequiredMixin,ListView):#LoginRequiredMixin,
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context["datatype"] = 'Nombre'
+        context["datatype"] = 'Name'
         context["datatype_input"] = 'name'
         context["answer"] = "Articles in Database"
         return context

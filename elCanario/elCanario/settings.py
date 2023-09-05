@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'pwa'
+    'pwa',
+    'widget_tweaks'
 ]
 #own apps
 INSTALLED_APPS += [
@@ -87,7 +88,8 @@ TEMPLATES = [
                  BASE_DIR / 'customers/templates/customers/htmx', 
                  BASE_DIR / "settings/templates/settings",
                  BASE_DIR / "settings/templates/settings/htmx",
-                 BASE_DIR / "messageslog/templates/messageslog/"],
+                 BASE_DIR / "messageslog/templates/messageslog/",
+                 BASE_DIR / "elCanario/templates/elCanario/"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

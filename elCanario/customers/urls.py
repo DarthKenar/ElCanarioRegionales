@@ -14,7 +14,7 @@ urlpatterns = [
     path('create_phone_number_check',PhoneNumberCheckView.as_view(),name='create_phone_number_check'),
     path('create_address_check',AddressCheckView.as_view(),name='create_address_check'),
     path('create_email_check',EmailCheckView.as_view(),name='create_email_check'),
-    path('create_confirm',CreateConfirmView.as_view(),name='create_confirm')
+    # path('create_confirm',CreateConfirmView.as_view(),name='create_confirm')
     # path('customers_update/<int:id>', articles_views.customers_read_data_update, name="customers_update"),
     # path('customers_delete/<int:id>', articles_views.customers_read_data_delete, name="customers_delete"),
 ]

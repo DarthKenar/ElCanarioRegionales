@@ -1,10 +1,16 @@
+from mailbox import Message
+from django.forms.models import BaseModelForm
+from django.http import HttpResponse
 from django.shortcuts import render
 from typing import Any, Dict
+from django.urls import reverse_lazy
 from customers.models import Customer
 from django.views.generic.list import ListView
 from django.views.generic import TemplateView
+from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.query import QuerySet
+from messageslog.models import MessageLog
 from customers.utils import get_context_for_search_input_in_customers_section, get_customers_for_search_input, get_context_for_datatype_input_in_customers_section
 from elCanario.utils import render_login_required, string_is_empty
 # Create your views here.
@@ -15,13 +21,26 @@ class CustomerListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context['datatype_input'] = 'name'
-        context["datatype"] = 'Nombre'
+        context["datatype"] = 'Name'
         context["answer"] = "Customers in Database"
         return context
     
 
-class CustomerCreateView(LoginRequiredMixin, TemplateView):
+class CustomerCreateView(LoginRequiredMixin, CreateView):
+    model = Customer
     template_name = 'customers_create.html'
+    success_url  = reverse_lazy('customers:customers')
+    fields=['name','dni','phone_number','address','email']
+
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        name = form.cleaned_data['name']
+        dni = form.cleaned_data['dni']
+        phone_number = form.cleaned_data['phone_number']
+        address = form.cleaned_data['address']
+        email = form.cleaned_data['email']
+        message = MessageLog(info=f"Customer created:\n\tName: {name}, Dni: {dni}, Phone number: {phone_number}, Addres: {address}, Email{email}")
+        message.save()
+        return super().form_valid(form)
 
 
 class ReadDataListView(LoginRequiredMixin, ListView):

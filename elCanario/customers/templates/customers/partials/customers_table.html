@@ -4,6 +4,7 @@
             <tr class="bg-amber-300">
                 <th class="lg:m-4 md:m-4 max-sm:hidden">Id</th>
                 <th class="lg:m-4 md:m-4 ">Name</th>
+                <th class="lg:m-4 md:m-4 max-sm:hidden">DNI</th>
                 <th class="lg:m-4 md:m-4 ">Phone number</th>
                 <th class="lg:m-4 md:m-4 max-sm:hidden">E-mail</th>
                 <th class="lg:m-4 md:m-4 ">Address</th>
@@ -16,12 +17,13 @@
             {% for customer in customer_list %}
                 <tr>
                     
-                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 max-sm:hidden" id="{{customer.id}}">{{customer.id}}</td>
-                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8">{{customer.name}}</td>
-                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 tabular-nums slashed-zero">{{customer.phone_number}}</td>
-                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 tabular-nums slashed-zero max-sm:hidden">{{customer.email}}</td>
-                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 tabular-nums slashed-zero">{{customer.address}}</td>
-                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 max-sm:hidden"> <p class="whitespace-nowrap">$ {{customer.total_purchased}}</td>
+                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 max-sm:hidden whitespace-nowrap" id="{{customer.id}}">{{customer.id}}</td>
+                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 max-sm:hidden whitespace-nowrap">{{customer.name}}</td>
+                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 whitespace-nowrap">{% if customer.dni == None %}-{% else %}{{customer.dni}}{% endif %}</td>
+                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 tabular-nums slashed-zero whitespace-nowrap">{% if customer.phone_number == None %}-{% else %}{{customer.phone_number}}{% endif %}</td>
+                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 tabular-nums slashed-zero max-sm:hidden whitespace-nowrap">{% if customer.email == None %}-{% else %}{{customer.email}}{% endif %}</td>
+                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 tabular-nums slashed-zero">{% if customer.address == None %}-{% else %}{{customer.address}}{% endif %}</td>
+                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 max-sm:hidden"> <p class="whitespace-nowrap">$ {{customer.total_purchased}}</p></td>
                     <td></td>
                 </tr>
             {% endfor %}
