@@ -3,7 +3,7 @@
 
 ## Sección Clientes
 
-- [ ] Crear la vista de tipo de dato para que cuando elija un nuevo tipo de dato, se reinicie el campo de datos. (datatype customers)
+- [x] Crear la vista de tipo de dato para que cuando elija un nuevo tipo de dato, se reinicie el campo de datos. (datatype customers)
 - [ ] Crear el botón Crear Cliente con su respectiva vista.
 - [ ] Agregar funcionalidad boton eliminar cliente.
 - [ ] Agregar funcionalidad boton editar cliente y su respectiva vista.
@@ -16,6 +16,8 @@
 - [ ] Falta Recalibrar el responsive para las diferentes secciones de tabla clientes.
 
 ## Sección Artículos
+
+- [ ] Modificar requisitos de nombres para artículos
 
 ### Artículos atributo stock añadir a
 
