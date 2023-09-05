@@ -71,3 +71,19 @@ class ReadDataTypeListView(LoginRequiredMixin, ListView):
         datatype_input = self.request.GET["datatype_input"].strip()
         context.update(get_context_for_datatype_input_in_customers_section(datatype_input))
         return context
+
+class NameCheckView(LoginRequiredMixin,TemplateView):
+    template_name = 'answer_customer_name.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+class DniCheckView(LoginRequiredMixin,TemplateView):
+    template_name = 'answer_customer_dni.html'
+class PhoneNumberCheckView(LoginRequiredMixin,TemplateView):
+    template_name = 'answer_customer_phone_number.html'
+class AddressCheckView(LoginRequiredMixin,TemplateView):
+    template_name = 'answer_customer_address.html'
+class EmailCheckView(LoginRequiredMixin,TemplateView):
+    template_name = 'answer_customer_email.html'
+class CreateConfirmView(LoginRequiredMixin,TemplateView):#Esta clase no creo que pueda ser un template view porque debe manejar una solicitud post
+    template_name = 'template.html'

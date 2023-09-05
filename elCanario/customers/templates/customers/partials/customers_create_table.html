@@ -2,44 +2,35 @@
 <div class="p-4 m-4">
   <label class="italic px-2">Name*: </label>
   <input class="bg-amber-50 rounded-sm px-2" type="text" name="customer_name" id="customer_name" hx-get="{% url 'Customer:create_name_check' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:200ms" hx-target="#answer_customer_name" required value="{{customer_name}}">
-  <div id="answer_customer_name">
-    <output class="font-bold empty:hidden cursor-default text-red-600 appear" >{{answer_error_name}}</output>
-  </div>
+  {% include 'answer_customer_name.html' %}
 </div>
 <div class="p-4 m-4">
   <label class="italic px-2">DNI: </label>
   <input class="bg-amber-50 rounded-sm px-2" type="text" name="customer_dni" id="customer_dni" hx-get="{% url 'customers:create_dni_check' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#answer_customer_dni" value="{{customer_dni}}" >
-  <div id="answer_customer_dni">
-    <output class="font-bold empty:hidden cursor-default text-red-600 appear" >{{answer_error_dni}}</output>
-  </div>
+  {% include 'answer_customer_dni.html' %}
+
 </div>
 <div class="p-4 m-4">
   <label class="italic px-2">Phone number: </label>
   <input class="bg-amber-50 rounded-sm px-2" type="text" name="customer_phone_number" id="customer_phone_number" hx-get="{% url 'customers:create_phone_number_check' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#answer_customer_phone_number" value="{{customer_phone_number}}">
-  <div id="answer_customer_phone_number">
-    <output class="font-bold empty:hidden cursor-default text-red-600 appear" >{{answer_error_phone_number}}</output>
-  </div>
+  {% include 'answer_customer_phone_number.html' %}
+
 </div>
 <div class="p-4 m-4">
   <label class="italic px-2">Address: </label>
   <input class="bg-amber-50 rounded-sm px-2" type="text" name="customer_address" id="customer_address" hx-get="{% url 'customers:create_address_check' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#answer_customer_address" value="{{customer_address}}">
-  <div id="answer_customer_address">
-    <output class="font-bold empty:hidden cursor-default text-red-600 appear" >{{answer_error_address}}</output>
-  </div>
+  {% include 'answer_customer_address.html' %}
 </div>
 <div class="p-4 m-4">
   <label class="italic px-2">Email: </label>
   <input class="bg-amber-50 rounded-sm px-2" type="text" name="customer_email" id="customer_email" hx-get="{% url 'customers:create_email_check' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#answer_customer_email" value="{{customer_email}}">
-  <div id="answer_customer_email">
-    <output class="font-bold empty:hidden cursor-default text-red-600 appear" >{{answer_error_email}}</output>
-  </div>
+  {% include 'answer_customer_email.html' %}
 </div>
 <div class="grid place-content-end">
-
     <button ion-button icon-only type="submit" hx-get="{% url 'customers:create_confirm' %}" hx-trigger="click" hx-include="#customer_name, #customer_dni, #customer_phone_number, #customer_address, #customer_email" hx-target="#answer_customer_create" hx-swap="outerHTML">
         <ion-icon class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" name="save-outline"></ion-icon>
     </button>
-    <div id="answer_customer_create">
-      <output class="font-bold empty:hidden cursor-default text-red-600 appear" >{{answer_customer_create}}</output>
-    </div>
+    {% if answer_customer_create %}
+        <output class="font-bold empty:hidden cursor-default text-red-600 appear" >{{answer_customer_create}}</output>
+    {% endif %}
 </div>
