@@ -82,7 +82,7 @@
                                             ></ion-icon>
                                         </button>
                                     </form>
-                                    <form hx-delete="{% url 'articles:category_delete' cat_id=category.id art_id=article_to_update.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-confirm="¿Está seguro de que desea eliminar la categoría: {{category.name}}?">
+                                    <form hx-delete="{% url 'articles:category_delete' cat_id=category.id art_id=article_to_update.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-confirm="Are you sure you want to delete the category: {{category.name}}?">
                                         <button type="submit" ion-button icon-only >
                                             <ion-icon name="trash-outline" 
                                                 
@@ -99,7 +99,7 @@
                                             ></ion-icon>
                                         </button>
                                     </form>
-                                    <form hx-delete="{% url 'articles:category_delete' cat_id=category.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-confirm="¿Está seguro de que desea eliminar la categoría: {{category.name}}?">
+                                    <form hx-delete="{% url 'articles:category_delete' cat_id=category.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-confirm="Are you sure you want to delete the category {{category.name}}?">
                                         <button type="submit" ion-button icon-only >
                                             <ion-icon name="trash-outline" 
                                                 
@@ -200,7 +200,7 @@
                                         ></ion-icon>
                                     </button>
                                 </form>
-                                <form hx-delete="{% url 'articles:value_delete' cat_id=category_to_update.id val_id=value.id art_id=article_to_update.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-confirm="¿Está seguro de que desea eliminar el valor: {{value.name}}?">
+                                <form hx-delete="{% url 'articles:value_delete' cat_id=category_to_update.id val_id=value.id art_id=article_to_update.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-confirm="Are you sure you want to delete the value {{value.name}}?">
                                     <button type="submit" ion-button icon-only >
                                         <ion-icon name="trash-outline" 
                                             
@@ -217,7 +217,7 @@
                                         ></ion-icon>
                                     </button>
                                 </form>
-                                <form hx-delete="{% url 'articles:value_delete' cat_id=category_to_update.id val_id=value.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-confirm="¿Está seguro de que desea eliminar el valor: {{value.name}}?">
+                                <form hx-delete="{% url 'articles:value_delete' cat_id=category_to_update.id val_id=value.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-confirm="Are you sure you want to delete the value {{value.name}}?">
                                     <button type="submit" ion-button icon-only >
                                         <ion-icon name="trash-outline" 
                                             

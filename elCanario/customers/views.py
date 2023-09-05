@@ -8,9 +8,11 @@ from customers.models import Customer
 from django.views.generic.list import ListView
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView
+from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.query import QuerySet
 from messageslog.models import MessageLog
+from django.shortcuts import get_object_or_404
 from customers.utils import get_context_for_search_input_in_customers_section, get_customers_for_search_input, get_context_for_datatype_input_in_customers_section
 from elCanario.utils import render_login_required, string_is_empty
 # Create your views here.
@@ -104,5 +106,20 @@ class AddressCheckView(LoginRequiredMixin,TemplateView):
     template_name = 'answer_customer_address.html'
 class EmailCheckView(LoginRequiredMixin,TemplateView):
     template_name = 'answer_customer_email.html'
-class CreateConfirmView(LoginRequiredMixin,TemplateView):#Esta clase no creo que pueda ser un template view porque debe manejar una solicitud post
-    template_name = 'template.html'
+@csrf_protect
+def customer_delete(request:object, pk:int)-> HttpResponse:
+    template = 'customers_search_data.html'
+    context = {}
+    try:
+        customer = get_object_or_404(Customer, id=pk)
+    except Exception as e:
+        context["customer_delete_answer"] = f"The selected item could not be deleted because it does not exist. Contact support."
+        return render_login_required(request, template, context)
+    else:
+        context["customer_delete_answer"] = f"Customer {customer.name} has been eliminated"
+        message = MessageLog(info=f"Customer {customer.name} has been eliminated")
+        message.save()
+        customer.delete()
+        articles = Customer.objects.all()
+        context.update({"customer_list": articles,})
+        return render_login_required(request, template, context)    

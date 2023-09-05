@@ -24,7 +24,21 @@
                     <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 tabular-nums slashed-zero max-sm:hidden whitespace-nowrap">{% if customer.email == None %}-{% else %}{{customer.email}}{% endif %}</td>
                     <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 tabular-nums slashed-zero">{% if customer.address == None %}-{% else %}{{customer.address}}{% endif %}</td>
                     <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 max-sm:hidden"> <p class="whitespace-nowrap">$ {{customer.total_purchased}}</p></td>
-                    <td></td>
+                    <td class="flex mx-2">
+                        {% comment  %}
+                            <form action="{% url 'customers:update' pk=customer.id %}" method="GET">
+                                <button ion-button icon-only type="submit" class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 mx-2 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
+                                    <ion-icon name="create-outline"></ion-icon>
+                                </button>
+                            </form>
+                        {% endcomment %}
+                        <form hx-delete="{% url 'customers:delete' pk=customer.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#customers_search_data" hx-confirm="Are you sure you want to delete the customer: {{customer.name}}?">
+                            {% csrf_token %}
+                            <button type="submit" ion-button icon-only class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
+                                <ion-icon name="trash-outline"></ion-icon>
+                            </button>
+                        </form>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
