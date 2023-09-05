@@ -44,7 +44,6 @@ INSTALLED_APPS = [
 ]
 #own apps
 INSTALLED_APPS += [
-    
     'articles',
     'authentication',
     'customers',

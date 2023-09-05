@@ -26,7 +26,6 @@ urlpatterns = [
     path('', include('settings.urls')),
     #pwa module
     path('', include('pwa.urls')),
-    
     path('admin/', admin.site.urls),
 
     #LOGIN SECTION & HOME
@@ -73,7 +72,6 @@ htmx_urlpatterns = [
     path('articles_categories_values_update/name/<int:val_id>', articles_views.articles_value_update_name, name="value_update_name"),
     path('articles_categories_values_delete/<int:cat_id>/<int:val_id>/<str:art_id>', articles_views.articles_value_delete, name="value_delete"),
     path('articles_categories_values_delete/<int:cat_id>/<int:val_id>', articles_views.articles_value_delete, name="value_delete"),
-
 ]
 
 from django.conf import settings
