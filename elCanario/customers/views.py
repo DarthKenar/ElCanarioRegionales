@@ -91,14 +91,22 @@ class ReadDataTypeListView(LoginRequiredMixin, ListView):
         datatype_input = self.request.GET["datatype_input"].strip()
         context.update(get_context_for_datatype_input_in_customers_section(datatype_input))
         return context
+class CustomerUpdateTemplate(LoginRequiredMixin, TemplateView):
+    template_name = "customers_update.html"
 
-class CustomerUpdateView(UpdateView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        objeto_id = self.kwargs.get('pk')
+        object = get_object_or_404(Customer,id=objeto_id)
+        context['object'] = object
+        return context
+class CustomerUpdateView(LoginRequiredMixin, UpdateView):
     model = Customer
     fields=['name','dni','phone_number','address','email']
-    template_name_suffix = "s_update_form"
+    template_name = "customers_update_form.html"
     success_url  = reverse_lazy('customers:update')
     def get_success_url(self) -> str:
-        return reverse_lazy('customers:update', args=[f"{self.object.id}"])
+        return reverse_lazy('customers:update', args=[f"{self.object.id}"]) + '?ok'
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         name = form.cleaned_data['name']
@@ -109,6 +117,7 @@ class CustomerUpdateView(UpdateView):
         message = MessageLog(info=f"Customer updated:\n\tName: {name}, Dni: {dni}, Phone number: {phone_number}, Addres: {address}, Email{email}")
         message.save()
         return super().form_valid(form)
+    
 @csrf_protect
 def customer_delete(request:object, pk:int)-> HttpResponse:
     template = 'customers_search_data.html'
