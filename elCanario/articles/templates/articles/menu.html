@@ -10,14 +10,14 @@
             </picture>
         {% else %}
             <picture class="absolute w-[15%] min-w-[15%] h-full left-0 z-2" >
-                <img class="absolute bottom-0 left-[50%] rounded-full w-[180px] h-[180px] max-w-[180px] max-h-[180px] bg-amber-100 z-3" style="transform: translateX(-50%) translateY(50%);" src="{% static 'img/profile-pictures/default-profile-picture.png' %}" alt="{{ user.username }}'s Profile Picture">
+                <img class="absolute bottom-0 left-[50%] rounded-full w-[180px] h-[180px] max-w-[180px] max-h-[180px] bg-amber-100 z-3" style="transform: translateX(-50%) translateY(50%);" src="{% static 'img/elcanarioregionales-logo-160x160.png' %}" alt="{{ user.username }}'s Profile Picture">
                 <div class="absolute bottom-0 left-[50%] rounded-full w-[200px] h-[200px] bg-amber-300 border-2 shadow-slate-600 shadow-sm border-amber-100 -z-10 mitad-superior-transparente" style="transform: translateX(-50%) translateY(50%);"></div>
             </picture>
         {% endif %}
 
     {% else %}
         <picture class="absolute w-[15%] min-w-[15%] h-full left-0 z-2" >
-            <img class="absolute bottom-0 left-[50%] rounded-full w-[180px] h-[180px] max-w-[180px] max-h-[180px] bg-amber-100 z-3" style="transform: translateX(-50%) translateY(50%);" src="{% static '/img/profile_offline.png' %}">
+            <img class="absolute bottom-0 left-[50%] rounded-full w-[180px] h-[180px] max-w-[180px] max-h-[180px] bg-amber-100 z-3" style="transform: translateX(-50%) translateY(50%);" src="{% static '/img/profile-offline-picture.png' %}">
             <div class="absolute bottom-0 left-[50%] rounded-full w-[200px] h-[200px] bg-amber-300 border-2 shadow-slate-600 shadow-sm border-amber-100 -z-10 mitad-superior-transparente" style="transform: translateX(-50%) translateY(50%);"></div>
         </picture>
     {% endif %}
