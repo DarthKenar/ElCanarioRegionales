@@ -1,7 +1,9 @@
 from mailbox import Message
+from customers.forms import TuFormulario
 from django.forms.models import BaseModelForm
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render
+import json
+from urllib.parse import parse_qs
 from typing import Any, Dict, List
 from django.urls import reverse_lazy
 from customers.models import Customer
@@ -14,7 +16,7 @@ from django.db.models.query import QuerySet
 from messageslog.models import MessageLog
 from django.shortcuts import get_object_or_404
 from customers.utils import get_context_for_search_input_in_customers_section, get_customers_for_search_input, get_context_for_datatype_input_in_customers_section
-from elCanario.utils import render_login_required, string_is_empty
+from elCanario.utils import render_login_required
 # Create your views here.
 
 class CustomerListView(LoginRequiredMixin, ListView):
@@ -76,7 +78,7 @@ class ReadDataTypeListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         datatype_input = self.request.GET["datatype_input"].strip()
         return get_customers_for_search_input(datatype_input,"")
-    
+
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         """
         Overrides the get_context_data method of the parent class to add additional context data to the view.
@@ -91,26 +93,34 @@ class ReadDataTypeListView(LoginRequiredMixin, ListView):
         datatype_input = self.request.GET["datatype_input"].strip()
         context.update(get_context_for_datatype_input_in_customers_section(datatype_input))
         return context
-# class CustomerUpdateTemplate(LoginRequiredMixin, TemplateView):
-#     template_name = "customers_update.html"
+    
 
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         objeto_id = self.kwargs.get('pk')
-#         object = get_object_or_404(Customer,id=objeto_id)
-#         context['object'] = object
-#         return context
+class CustomerUpdateTemplate(LoginRequiredMixin, TemplateView):
+    template_name = "customers_update_form.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        objeto_id = self.kwargs.get('pk')
+        object = get_object_or_404(Customer,id=objeto_id)
+        context['object'] = object
+        context['template_name'] = self.template_name
+        form = TuFormulario()
+        context['form'] = form
+        return context
+    
 class CustomerUpdateView(LoginRequiredMixin, UpdateView):
     model = Customer
-    fields=['name','dni','phone_number','address','email']
-    success_url  = reverse_lazy('customers:update')
+    form_class = TuFormulario
+    template_name = "customers_update.html"
+    success_url = reverse_lazy('customers:update_htmx')
+    
     def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
         self.template_name = "customers_update_form.html"
-        print("metodo POSTsss")
         return super().post(request, *args, **kwargs)
     
     def get_success_url(self) -> str:
-        return reverse_lazy('customers:update', args=[f"{self.object.id}"]) + '?ok'
+        form_data = json.dumps({'form_data': self.get_form().data})
+        return reverse_lazy('customers:update_htmx', args=[f"{self.object.id}"]) + f'?correct'
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         name = form.cleaned_data['name']
@@ -120,7 +130,14 @@ class CustomerUpdateView(LoginRequiredMixin, UpdateView):
         email = form.cleaned_data['email']
         message = MessageLog(info=f"Customer updated:\n\tName: {name}, Dni: {dni}, Phone number: {phone_number}, Addres: {address}, Email{email}")
         message.save()
+
+        #si el formulario es válido comprobar si lo hace desde el botón. si lo hace desde el botón, devolver el formulario válido, sino no devolverlo. entonces cuando el form sea inválido devolverá los errores normalmente.
         return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        # Redirigir a una página de error en caso de validación de formulario fallida
+        self.get_context_data().update({'correct':'No se guardó correctamente'})
+        return reverse_lazy('customers:update_htmx')
     
 @csrf_protect
 def customer_delete(request:object, pk:int)-> HttpResponse:
