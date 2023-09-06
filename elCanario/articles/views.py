@@ -187,6 +187,7 @@ def articles_create_confirm(request):
         context["answer_save_error"] = "The item has not been created, please check the fields again."
         return render_login_required(request, template, context)
     else:
+        
         context.pop("article_name_input")
         context.pop("article_buy_price_input")
         context.pop("article_increase_input")
@@ -212,6 +213,7 @@ def articles_create_confirm(request):
         context["answer_save_right"] = f"The article {article.name} has been saved correctly"
         context["answer_articles_name"] = ""
         context["answer_category_id"] = ""
+        context["answer_error_name"] = ""
         return render_login_required(request, template, context)
 
 def articles_update_confirm(request, id):

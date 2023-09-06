@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from customers.models import Customer
 from django.views.generic.list import ListView
 from django.views.generic import TemplateView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.query import QuerySet
@@ -52,7 +52,6 @@ class ReadDataListView(LoginRequiredMixin, ListView):
     def get_queryset(self) -> QuerySet[Any]:
         search_input = self.request.GET["search_input"].strip()
         datatype_input = self.request.GET["datatype_input"].strip()
-
         return get_customers_for_search_input(datatype_input, search_input)
                 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
@@ -93,19 +92,21 @@ class ReadDataTypeListView(LoginRequiredMixin, ListView):
         context.update(get_context_for_datatype_input_in_customers_section(datatype_input))
         return context
 
-class NameCheckView(LoginRequiredMixin,TemplateView):
-    template_name = 'answer_customer_name.html'
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
-class DniCheckView(LoginRequiredMixin,TemplateView):
-    template_name = 'answer_customer_dni.html'
-class PhoneNumberCheckView(LoginRequiredMixin,TemplateView):
-    template_name = 'answer_customer_phone_number.html'
-class AddressCheckView(LoginRequiredMixin,TemplateView):
-    template_name = 'answer_customer_address.html'
-class EmailCheckView(LoginRequiredMixin,TemplateView):
-    template_name = 'answer_customer_email.html'
+class CustomerUpdateView(UpdateView):
+    model = Customer
+    template_name = 'customers_update.html'
+    success_url  = reverse_lazy('customers:customers')
+    fields=['name','dni','phone_number','address','email']
+    
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        name = form.cleaned_data['name']
+        dni = form.cleaned_data['dni']
+        phone_number = form.cleaned_data['phone_number']
+        address = form.cleaned_data['address']
+        email = form.cleaned_data['email']
+        message = MessageLog(info=f"Customer updated:\n\tName: {name}, Dni: {dni}, Phone number: {phone_number}, Addres: {address}, Email{email}")
+        message.save()
+        return super().form_valid(form)
 @csrf_protect
 def customer_delete(request:object, pk:int)-> HttpResponse:
     template = 'customers_search_data.html'
@@ -122,4 +123,4 @@ def customer_delete(request:object, pk:int)-> HttpResponse:
         customer.delete()
         articles = Customer.objects.all()
         context.update({"customer_list": articles,})
-        return render_login_required(request, template, context)    
+        return render_login_required(request, template, context)
