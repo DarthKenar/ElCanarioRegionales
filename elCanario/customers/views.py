@@ -2,7 +2,7 @@ from mailbox import Message
 from django.forms.models import BaseModelForm
 from django.http import HttpResponse
 from django.shortcuts import render
-from typing import Any, Dict
+from typing import Any, Dict, List
 from django.urls import reverse_lazy
 from customers.models import Customer
 from django.views.generic.list import ListView
@@ -94,10 +94,12 @@ class ReadDataTypeListView(LoginRequiredMixin, ListView):
 
 class CustomerUpdateView(UpdateView):
     model = Customer
-    template_name = 'customers_update.html'
-    success_url  = reverse_lazy('customers:customers')
     fields=['name','dni','phone_number','address','email']
-    
+    template_name_suffix = "s_update_form"
+    success_url  = reverse_lazy('customers:update')
+    def get_success_url(self) -> str:
+        return reverse_lazy('customers:update', args=[f"{self.object.id}"])
+
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         name = form.cleaned_data['name']
         dni = form.cleaned_data['dni']
