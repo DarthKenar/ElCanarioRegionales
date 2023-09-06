@@ -25,8 +25,7 @@
                     <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 tabular-nums slashed-zero">{% if customer.address == None %}-{% else %}{{customer.address}}{% endif %}</td>
                     <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 max-sm:hidden"> <p class="whitespace-nowrap">$ {{customer.total_purchased}}</p></td>
                     <td class="flex mx-2">
-                        <form action="{% url 'customers:update-template' pk=customer.id %}" method="POST">
-                            {% csrf_token %}
+                        <form action="{% url 'customers:update' pk=customer.id %}" method="GET">
                             <button ion-button icon-only type="submit" class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 mx-2 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
                                 <ion-icon name="create-outline"></ion-icon>
                             </button>

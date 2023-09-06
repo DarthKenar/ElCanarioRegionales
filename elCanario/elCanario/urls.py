@@ -31,16 +31,16 @@ urlpatterns = [
     #LOGIN SECTION & HOME
     path('', auth_views.login_view, name="login"),
     path('login_search/', auth_views.search_user, name="login_search"),
-    path('home', auth_views.home, name="home"), # type: ignore
+    path('home/', auth_views.home, name="home"), # type: ignore
 
     # ORDERS SECTION
-    path('orders', include('orders.urls')),
+    path('orders/', include('orders.urls')),
 
     ## ARTICLES SECTIONS
-    path('articles', include('articles.urls')),
+    path('articles/', include('articles.urls')),
 
     #CUSTOMERS
-    path('customers', include('customers.urls')),
+    path('customers/', include('customers.urls')),
 
 ]
 htmx_urlpatterns = [

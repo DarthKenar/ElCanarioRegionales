@@ -1,6 +1,6 @@
 from mailbox import Message
 from django.forms.models import BaseModelForm
-from django.http import HttpResponse
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from typing import Any, Dict, List
 from django.urls import reverse_lazy
@@ -91,20 +91,24 @@ class ReadDataTypeListView(LoginRequiredMixin, ListView):
         datatype_input = self.request.GET["datatype_input"].strip()
         context.update(get_context_for_datatype_input_in_customers_section(datatype_input))
         return context
-class CustomerUpdateTemplate(LoginRequiredMixin, TemplateView):
-    template_name = "customers_update.html"
+# class CustomerUpdateTemplate(LoginRequiredMixin, TemplateView):
+#     template_name = "customers_update.html"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        objeto_id = self.kwargs.get('pk')
-        object = get_object_or_404(Customer,id=objeto_id)
-        context['object'] = object
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         objeto_id = self.kwargs.get('pk')
+#         object = get_object_or_404(Customer,id=objeto_id)
+#         context['object'] = object
+#         return context
 class CustomerUpdateView(LoginRequiredMixin, UpdateView):
     model = Customer
     fields=['name','dni','phone_number','address','email']
-    template_name = "customers_update_form.html"
     success_url  = reverse_lazy('customers:update')
+    def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+        self.template_name = "customers_update_form.html"
+        print("metodo POSTsss")
+        return super().post(request, *args, **kwargs)
+    
     def get_success_url(self) -> str:
         return reverse_lazy('customers:update', args=[f"{self.object.id}"]) + '?ok'
 
