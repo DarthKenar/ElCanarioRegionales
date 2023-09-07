@@ -97,14 +97,14 @@ class ReadDataTypeListView(LoginRequiredMixin, ListView):
 
 class CustomerUpdateTemplate(LoginRequiredMixin, TemplateView):
     template_name = "customers_update_form.html"
-
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         objeto_id = self.kwargs.get('pk')
         object = get_object_or_404(Customer,id=objeto_id)
+        print(object.name)
         context['object'] = object
-        context['template_name'] = self.template_name
-        form = TuFormulario()
+        form = TuFormulario(instance=object) 
         context['form'] = form
         return context
     
@@ -112,17 +112,16 @@ class CustomerUpdateView(LoginRequiredMixin, UpdateView):
     model = Customer
     form_class = TuFormulario
     template_name = "customers_update.html"
-    success_url = reverse_lazy('customers:update_htmx')
     
     def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
         self.template_name = "customers_update_form.html"
         return super().post(request, *args, **kwargs)
     
     def get_success_url(self) -> str:
-        form_data = json.dumps({'form_data': self.get_form().data})
-        return reverse_lazy('customers:update_htmx', args=[f"{self.object.id}"]) + f'?correct'
+        return reverse_lazy('customers:update_htmx', args=[f"{self.object.id}"]) + '?correct'
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        print("FORM VALID")
         name = form.cleaned_data['name']
         dni = form.cleaned_data['dni']
         phone_number = form.cleaned_data['phone_number']
@@ -130,14 +129,19 @@ class CustomerUpdateView(LoginRequiredMixin, UpdateView):
         email = form.cleaned_data['email']
         message = MessageLog(info=f"Customer updated:\n\tName: {name}, Dni: {dni}, Phone number: {phone_number}, Addres: {address}, Email{email}")
         message.save()
-
-        #si el formulario es válido comprobar si lo hace desde el botón. si lo hace desde el botón, devolver el formulario válido, sino no devolverlo. entonces cuando el form sea inválido devolverá los errores normalmente.
-        return super().form_valid(form)
-    
+        status = self.kwargs.get('status')
+        print(status)
+        if status == "True":
+            return super().form_valid(form) #Esto hace que se guarde.
+        else:
+            return self.render_to_response(self.get_context_data(form=form))
+        
     def form_invalid(self, form):
-        # Redirigir a una página de error en caso de validación de formulario fallida
-        self.get_context_data().update({'correct':'No se guardó correctamente'})
-        return reverse_lazy('customers:update_htmx')
+        # Renderizar la plantilla con el formulario y los errores
+        print("FORM INVALID")
+        self.template_name = "customers_update_form.html"
+        self.get_context_data(form=form)
+        return self.render_to_response(self.get_context_data(form=form))
     
 @csrf_protect
 def customer_delete(request:object, pk:int)-> HttpResponse:
