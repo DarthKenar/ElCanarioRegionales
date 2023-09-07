@@ -1,13 +1,19 @@
 <form id="form_update">
     {% load widget_tweaks %}
     {% load custom_filters %}
+    {% load custom_tags %}
     {% csrf_token %}
+    {% hx_post_render_field request.path object.id "False" %}
+    {% trigger_input %}"hx-trigger=keyup"
     {% for field in form %}
         <div class="p-4 m-4">
             <label for="id_{{field.label|lower|replace_spaces_with_underscore}}" class="italic px-2">{{field.label}}</label>
-            {{ field|attr:"hx-post:/customers/update/17/False"|attr:"hx-swap='outerHTML'"|attr:"hx-trigger=click"|attr:"hx-target=#form_update"}}
+            {% render_field field|attr:hx_post_render_field|attr:"hx-swap=outerHTML"|attr:trigger_input|attr:"hx-target=#form_update"  %}
+
             {{field.errors}} 
             {% comment  %}
+                field|attr:"hx-post:"|add:request.resolver_match.url_name|add:'/'|add:object.id|add:'/'|add:'False'"|attr:"hx-swap=outerHTML"|attr:"hx-trigger=keyup"|attr:"hx-target=#form_update"
+
                 "{% url 'customers:update' pk=object.id status='False' %}"
                 <!-- keyup changed delay:300ms -->
             {% endcomment %}

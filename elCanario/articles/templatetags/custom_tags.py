@@ -28,3 +28,11 @@ def get_all_messageslog():
         return messages
     except Exception as e:
         print(f"Error Exception: {e}")
+
+@register.simple_tag
+def hx_post_render_field(request_path, object_id, true_or_false):
+    return f"hx-post={request_path}/{object_id}/{true_or_false}"
+
+@register.simple_tag
+def trigger_input():
+    return "hx-trigger=keyup changed delay:300ms"
