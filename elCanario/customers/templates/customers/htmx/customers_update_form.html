@@ -3,20 +3,13 @@
     {% load custom_filters %}
     {% load custom_tags %}
     {% csrf_token %}
-    {% hx_post_render_field request.path object.id "False" %}
-    {% trigger_input %}"hx-trigger=keyup"
+    {% hx_post_render_field object.id "False" as hxpost%}
+    {% trigger_input as hxtrigger%}
     {% for field in form %}
         <div class="p-4 m-4">
             <label for="id_{{field.label|lower|replace_spaces_with_underscore}}" class="italic px-2">{{field.label}}</label>
-            {% render_field field|attr:hx_post_render_field|attr:"hx-swap=outerHTML"|attr:trigger_input|attr:"hx-target=#form_update"  %}
-
+            {% render_field field|attr:hxpost|attr:"hx-swap=outerHTML"|attr:"hx-trigger=keyup"|attr:"hx-target=#form_update"|add_class:"input" %}
             {{field.errors}} 
-            {% comment  %}
-                field|attr:"hx-post:"|add:request.resolver_match.url_name|add:'/'|add:object.id|add:'/'|add:'False'"|attr:"hx-swap=outerHTML"|attr:"hx-trigger=keyup"|attr:"hx-target=#form_update"
-
-                "{% url 'customers:update' pk=object.id status='False' %}"
-                <!-- keyup changed delay:300ms -->
-            {% endcomment %}
         </div>
     {% endfor %}
     <div class="grid place-content-end">

@@ -30,9 +30,9 @@ def get_all_messageslog():
         print(f"Error Exception: {e}")
 
 @register.simple_tag
-def hx_post_render_field(request_path, object_id, true_or_false):
-    return f"hx-post={request_path}/{object_id}/{true_or_false}"
+def hx_post_render_field(object_id, true_or_false):
+    return f"hx-post=/customers/update/{object_id}/{true_or_false}"
 
 @register.simple_tag
 def trigger_input():
-    return "hx-trigger=keyup changed delay:300ms"
+    return "hx-trigger=keyup&nbsp;changed&nbsp;delay:300ms"
