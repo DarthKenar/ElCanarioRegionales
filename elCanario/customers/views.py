@@ -139,7 +139,6 @@ class CustomerUpdateView(LoginRequiredMixin, UpdateView):
     def form_invalid(self, form):
         # Renderizar la plantilla con el formulario y los errores
         print("FORM INVALID")
-        self.template_name = "customers_update_form.html"
         self.get_context_data(form=form)
         return self.render_to_response(self.get_context_data(form=form))
     

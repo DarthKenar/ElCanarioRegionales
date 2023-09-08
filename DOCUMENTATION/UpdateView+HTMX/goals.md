@@ -5,7 +5,7 @@
 
 ## Entender como funciona UpdateView
 
-    UpdateView simplifica la creación de vistas para la edición y actualización de registros de un modelo de Django. A continuación, se explican las principales funcionalidades de UpdateView:
+    UpdateView simplifica la creación de vistas para la edición y actualización de registros de un modelo de Django. A continuación, se explican las principales características de UpdateView:
 
 - Modelo (model)
   - La vista UpdateView espera que se le proporcione el modelo (base de datos) al que está asociada

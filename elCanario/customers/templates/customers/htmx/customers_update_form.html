@@ -3,13 +3,13 @@
     {% load custom_filters %}
     {% load custom_tags %}
     {% csrf_token %}
-    {% hx_post_render_field object.id "False" as hxpost%}
+    {% hx_post_render_field object.id "False" as hx_post %}
     {% trigger_input as hxtrigger%}
     {% for field in form %}
         <div class="p-4 m-4">
             <label for="id_{{field.label|lower|replace_spaces_with_underscore}}" class="italic px-2">{{field.label}}</label>
-            {% render_field field|attr:hxpost|attr:"hx-swap=outerHTML"|attr:"hx-trigger=keyup"|attr:"hx-target=#form_update"|add_class:"input" %}
-            {{field.errors}} 
+            {% render_field field|attr:hx_post|attr:"hx-swap=outerHTML"|attr:"hx-target=#form_update"|add_class:"input" %}
+            {{field.errors}}
         </div>
     {% endfor %}
     <div class="grid place-content-end">
