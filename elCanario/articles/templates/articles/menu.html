@@ -1,77 +1,77 @@
-<nav class="top-0 w-full fixed flex justify-evenly items-center mx-auto bg-gradient-to-tr from-amber-300 to-amber-100 rounded-b-xl min-h-[8rem] mb-24 border-2 shadow-slate-600 shadow-sm border-separate border-amber-100 max-sm:hidden z-1">
+<nav class="top-0 w-full fixed flex justify-evenly items-center mx-auto bg-gradient-to-tr from-amber-300 to-amber-100 rounded-b-xl sm:min-h-[6rem] md:min-h-[7rem] lg:min-h-[8rem] mb-24 border-2 shadow-slate-600 shadow-sm border-separate border-amber-100 max-sm:hidden z-1">
     {% if user.is_authenticated %}
         {% load custom_tags %}
         {% load static %}
         {% get_user_picture user as user_picture %}
         {% if user_picture %}
-            <picture class="absolute w-[15%] min-w-[15%] h-full left-0 z-2" >
-                <img class="absolute bottom-0 left-[50%] rounded-full w-[180px] h-[180px] max-w-[180px] max-h-[180px] bg-amber-100 z-3" style="transform: translateX(-50%) translateY(50%);" src="{{user_picture}}" alt="{{ user.username }}'s Profile Picture">
-                <div class="absolute bottom-0 left-[50%] rounded-full w-[200px] h-[200px] bg-amber-300 border-2 shadow-slate-600 shadow-sm border-amber-100 -z-10 mitad-superior-transparente" style="transform: translateX(-50%) translateY(50%);"></div>
+            <picture class="absolute w-[20%] min-w-[20%] h-full left-0 z-2" >
+                <img class="absolute bottom-0 left-[50%] rounded-full w-[180px] h-[180px] max-w-[180px] max-h-[180px] bg-amber-100 z-3" style="transform: translateX(-45%) translateY(50%);" src="{{user_picture}}" alt="{{ user.username }}'s Profile Picture">
+                <div class="absolute bottom-0 left-[50%] rounded-full w-[200px] h-[200px] bg-amber-300 border-2 shadow-slate-600 shadow-sm border-amber-100 -z-10 mitad-superior-transparente" style="transform: translateX(-45%) translateY(50%);"></div>
             </picture>
         {% else %}
-            <picture class="absolute w-[15%] min-w-[15%] h-full left-0 z-2" >
-                <img class="absolute bottom-0 left-[50%] rounded-full w-[180px] h-[180px] max-w-[180px] max-h-[180px] bg-amber-100 z-3" style="transform: translateX(-50%) translateY(50%);" src="{% static 'img/elcanarioregionales-logo-160x160.png' %}" alt="{{ user.username }}'s Profile Picture">
-                <div class="absolute bottom-0 left-[50%] rounded-full w-[200px] h-[200px] bg-amber-300 border-2 shadow-slate-600 shadow-sm border-amber-100 -z-10 mitad-superior-transparente" style="transform: translateX(-50%) translateY(50%);"></div>
+            <picture class="absolute w-[20%] min-w-[20%] h-full left-0 z-2" >
+                <img class="absolute bottom-0 left-[50%] rounded-full sm:w-[110px] sm:h-[110px] sm:max-w-[110px] sm:max-h-[110px] md:w-[140px] md:h-[140px] md:max-w-[140px] md:max-h-[140px] lg:w-[180px] lg:h-[180px] lg:max-w-[180px] lg:max-h-[180px] bg-amber-100 z-3" style="transform: translateX(-45%) translateY(50%);" src="{% static 'img/elcanarioregionales-logo-160x160.png' %}" alt="{{ user.username }}'s Profile Picture">
+                <div class="absolute bottom-0 left-[50%] rounded-full sm:w-[125px] sm:h-[125px] md:w-[155px] md:h-[155px] lg:w-[200px] lg:h-[200px] bg-amber-300 border-2 shadow-slate-600 shadow-sm border-amber-100 -z-10 mitad-superior-transparente" style="transform: translateX(-45%) translateY(50%);"></div>
             </picture>
         {% endif %}
 
     {% else %}
-        <picture class="absolute w-[15%] min-w-[15%] h-full left-0 z-2" >
-            <img class="absolute bottom-0 left-[50%] rounded-full w-[180px] h-[180px] max-w-[180px] max-h-[180px] bg-amber-100 z-3" style="transform: translateX(-50%) translateY(50%);" src="{% static '/img/profile-offline-picture.png' %}">
-            <div class="absolute bottom-0 left-[50%] rounded-full w-[200px] h-[200px] bg-amber-300 border-2 shadow-slate-600 shadow-sm border-amber-100 -z-10 mitad-superior-transparente" style="transform: translateX(-50%) translateY(50%);"></div>
+        <picture class="absolute w-[20%] min-w-[20%] h-full left-0 z-2" >
+            <img class="absolute bottom-0 left-[50%] rounded-full w-[180px] h-[180px] max-w-[180px] max-h-[180px] bg-amber-100 z-3" style="transform: translateX(-45%) translateY(50%);" src="{% static '/img/profile-offline-picture.png' %}">
+            <div class="absolute bottom-0 left-[50%] rounded-full w-[200px] h-[200px] bg-amber-300 border-2 shadow-slate-600 shadow-sm border-amber-100 -z-10 mitad-superior-transparente" style="transform: translateX(-45%) translateY(50%);"></div>
         </picture>
     {% endif %}
-    <ul class="absolute right-0 flex justify-around content-center bg-center p-2 w-[85%]">
+    <ul class="absolute right-0 flex justify-around content-center bg-center p-2 w-[80%]">
         <li class="place-self-center">
             <form class="my-auto" action="{% url 'home' %}">
-                <button ion-button icon-only type="submit" class="text-sm font-mono text-amber-50  font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 p-2 px-10 m-2 mx-10 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
+                <button ion-button icon-only type="submit" class="text-sm font-mono text-amber-50  font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 p-2 sm:px-3 md:px-7 lg:px-10 sm:m-0.5 md:m-1 lg:m-2 mx-10 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
                     {% if request.path == '/home' %}
-                        <ion-icon size="large" title="Home" name="home" class="text-yellow-300 my-auto mx-1.5"></ion-icon>
+                        <ion-icon title="Home" name="home" class="text-yellow-300 my-auto mx-1.5 sm:text-sm md:text-xl lg:text-4xl"></ion-icon>
                     {% else %}
-                        <ion-icon size="large" title="Home" name="home-outline" class="my-auto mx-1.5"></ion-icon>
+                        <ion-icon title="Home" name="home-outline" class="my-auto mx-1.5 sm:text-sm md:text-xl lg:text-4xl"></ion-icon>
                     {% endif %}
                 </button>
             </form>
         </li>
         <li class="place-self-center">
             <form action="{% url 'orders:orders' %}">
-                <button ion-button icon-only type="submit" class="text-sm font-mono text-amber-50  font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 p-2 px-10 m-2 mx-10 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
+                <button ion-button icon-only type="submit" class="text-sm font-mono text-amber-50  font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 p-2 sm:px-3 md:px-7 lg:px-10 sm:m-0.5 md:m-1 lg:m-2 mx-10 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
                     {% if request.path == '/orders' %}
-                        <ion-icon size="large" title="Orders" name="cart" class="text-yellow-300 my-auto mx-1.5"></ion-icon>
+                        <ion-icon title="Orders" name="cart" class="text-yellow-300 my-auto mx-1.5 sm:text-sm md:text-xl lg:text-4xl"></ion-icon>
                     {% else %}
-                        <ion-icon size="large" title="Orders" name="cart-outline" class="my-auto mx-1.5"></ion-icon>
+                        <ion-icon title="Orders" name="cart-outline" class="my-auto mx-1.5 sm:text-sm md:text-xl lg:text-4xl"></ion-icon>
                     {% endif %}
                 </button>
             </form>
         </li>
         <li class="place-self-center">
             <form action="{% url 'articles:articles' %}">
-                <button ion-button icon-only type="submit" class="text-sm font-mono text-amber-50  font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 p-2 px-10 m-2 mx-10 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
+                <button ion-button icon-only type="submit" class="text-sm font-mono text-amber-50  font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 p-2 sm:px-3 md:px-7 lg:px-10 sm:m-0.5 md:m-1 lg:m-2 mx-10 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
                     {% if request.path == '/articles' %}
-                        <ion-icon size="large" title="Articles" name="layers" class="text-yellow-300 my-auto mx-1.5"></ion-icon>
+                        <ion-icon title="Articles" name="layers" class="text-yellow-300 my-auto mx-1.5 sm:text-sm md:text-xl lg:text-4xl"></ion-icon>
                     {% else %}
-                        <ion-icon size="large" title="Articles" name="layers-outline" class="my-auto mx-1.5"></ion-icon>
+                        <ion-icon title="Articles" name="layers-outline" class="my-auto mx-1.5 sm:text-sm md:text-xl lg:text-4xl"></ion-icon>
                     {% endif %}
                 </button>
             </form>
         </li class="place-self-center">
             <form action="{% url 'customers:customers' %}">
-                <button ion-button icon-only type="submit" class="text-sm font-mono text-amber-50  font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 p-2 px-10 m-2 mx-10 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
+                <button ion-button icon-only type="submit" class="text-sm font-mono text-amber-50  font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 p-2 sm:px-3 md:px-7 lg:px-10 sm:m-0.5 md:m-1 lg:m-2 mx-10 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
                     {% if request.path == '/customers' %}
-                        <ion-icon size="large" title="Customers" name="people" class="text-yellow-300 my-auto mx-1.5"></ion-icon>
+                        <ion-icon title="Customers" name="people" class="text-yellow-300 my-auto mx-1.5 sm:text-sm md:text-xl lg:text-4xl"></ion-icon>
                     {% else %}
-                        <ion-icon size="large" title="Customers" name="people-outline" class="my-auto mx-1.5"></ion-icon>
+                        <ion-icon title="Customers" name="people-outline" class="my-auto mx-1.5 sm:text-sm md:text-xl lg:text-4xl"></ion-icon>
                     {% endif %}
                 </button>
             </form>
         </li>
         <li class="place-self-center">
             <form class="my-auto" action="{% url 'settings:settings' %}">
-                <button ion-button icon-only type="submit" class="text-sm font-mono text-amber-50  font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 p-2 px-10 m-2 mx-10 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
+                <button ion-button icon-only type="submit" class="text-sm font-mono text-amber-50  font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 p-2 sm:px-3 md:px-7 lg:px-10 sm:m-0.5 md:m-1 lg:m-2 mx-10 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
                     {% if request.path == '/settings' %}
-                        <ion-icon size="large" title="Settings" name="settings" class="text-yellow-300 my-auto mx-1.5"></ion-icon>
+                        <ion-icon title="Settings" name="settings" class="text-yellow-300 my-auto mx-1.5 sm:text-sm md:text-xl lg:text-4xl"></ion-icon>
                     {% else %}
-                        <ion-icon size="large" title="Settings" name="settings-outline" class="my-auto mx-1.5"></ion-icon>
+                        <ion-icon title="Settings" name="settings-outline" class="my-auto mx-1.5 sm:text-sm md:text-xl lg:text-4xl"></ion-icon>
                     {% endif %}
                 </button>
             </form>
