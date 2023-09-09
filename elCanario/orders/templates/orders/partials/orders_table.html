@@ -21,17 +21,40 @@
                     <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 max-sm:hidden whitespace-nowrap" id="{{order.id}}">{{order.id}}</td>
                     <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 max-sm:hidden whitespace-nowrap">{{order.customer_id}}</td>
                     <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 whitespace-nowrap">
-                        asd
                         
-                        {{order.articles_cart.all}}
+                        <ul>
+                            {% for article in order.articles_cart.all %}
+                            <li>
+                                {{article}}
+                            </li>
+                            {% endfor %}
+                        </ul>
 
+                            
                     </td>
                     <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 tabular-nums slashed-zero whitespace-nowrap">{{order.article_quantity}}</td>
                     <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 tabular-nums slashed-zero max-sm:hidden whitespace-nowrap">{{order.total_pay}}</td>
                     <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 tabular-nums slashed-zero">{% if order.details == None %}-{% else %}{{order.details}}{% endif %}</td>
                     <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 max-sm:hidden"> <p class="whitespace-nowrap">{{order.creation_date}}</p></td>
                     <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 max-sm:hidden"> <p class="whitespace-nowrap">{{order.updated_date}}</p></td>
-                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 max-sm:hidden"> <p class="whitespace-nowrap">{{order.delivery_status}}</p></td>
+                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 max-sm:hidden"> 
+                        {% if order.delivery_status is True %}
+                            <p class="whitespace-nowrap text-green-600">
+                                <ion-icon name="checkmark-circle-outline"></ion-icon>
+                                Done
+                            </p>
+                        {% elif order.delivery_status is False %}
+                            <p class="whitespace-nowrap text-red-600">
+                                <ion-icon name="close-circle-outline" ></ion-icon>
+                                Canceled
+                            </p>
+                        {% else %}
+                            <p class="whitespace-nowrap ">
+                                <ion-icon name="ellipsis-horizontal-circle-outline" ></ion-icon>
+                                Pending
+                            </p>
+                        {% endif %}
+                    </td>
                     {% comment  %}
                         <td class="flex mx-2">
                             <form action="{% url 'customers:update' pk=customer.id %}" method="GET">

@@ -1,5 +1,5 @@
 #AUTO GENERATE fields
-from .models import Article, Category, Value, ArticleValue
+from articles.models import Article, Category, Value, ArticleValue
 import random
 
 
