@@ -4,8 +4,15 @@
 {% endblock title %}
 {% block content %}
     {% include 'menu.html' %}
-    <h1 class="text-center">   
-        Orders section in development
-    </h1>
+    <div id="orders_search_datatype">
+
+        {% include 'orders_search_header.html'%}
+
+        <div id="orders_search_data">
+
+            {% include 'orders_table.html' %}
+
+        </div>
+        
     {% include 'footer.html' %}
 {% endblock content %}

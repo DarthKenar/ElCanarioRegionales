@@ -1,0 +1,55 @@
+{% if order_list %}
+    <table class="mx-auto table-auto font-mono  text-red-900  shadow-slate-600 shadow-sm bg-amber-200 border-separate border-2 border-amber-100 rounded-md p-4 m-8">
+        <thead class="p-3 m-3">
+            <tr class="bg-amber-300">
+                <th class="lg:m-4 md:m-4 max-sm:hidden">ID</th>
+                <th class="lg:m-4 md:m-4 max-sm:hidden">Customer</th>
+                <th class="lg:m-4 md:m-4 ">Articles</th>
+                <th class="lg:m-4 md:m-4 max-sm:hidden">Quantity</th>
+                <th class="lg:m-4 md:m-4 ">Total Pay</th>
+                <th class="lg:m-4 md:m-4 max-sm:hidden">Details</th>
+                <th class="lg:m-4 md:m-4 ">Created</th>
+                <th class="lg:m-4 md:m-4 ">Updated</th>
+                <th class="lg:m-4 md:m-4 max-sm:hidden">Status</th>
+                <!-- <th class="lg:m-4 md:m-4 ">Cant. Pedidos</th> -->
+                <th>Functions</th>
+            </tr>
+        </thead>
+        <tbody class="bg-amber-100">
+            {% for order in order_list %}
+                <tr>
+                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 max-sm:hidden whitespace-nowrap" id="{{order.id}}">{{order.id}}</td>
+                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 max-sm:hidden whitespace-nowrap">{{order.customer_id}}</td>
+                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 whitespace-nowrap">
+                        asd
+                        
+                        {{order.articles_cart.all}}
+
+                    </td>
+                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 tabular-nums slashed-zero whitespace-nowrap">{{order.article_quantity}}</td>
+                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 tabular-nums slashed-zero max-sm:hidden whitespace-nowrap">{{order.total_pay}}</td>
+                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 tabular-nums slashed-zero">{% if order.details == None %}-{% else %}{{order.details}}{% endif %}</td>
+                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 max-sm:hidden"> <p class="whitespace-nowrap">{{order.creation_date}}</p></td>
+                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 max-sm:hidden"> <p class="whitespace-nowrap">{{order.updated_date}}</p></td>
+                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 max-sm:hidden"> <p class="whitespace-nowrap">{{order.delivery_status}}</p></td>
+                    {% comment  %}
+                        <td class="flex mx-2">
+                            <form action="{% url 'customers:update' pk=customer.id %}" method="GET">
+                                <button ion-button icon-only type="submit" class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 mx-2 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
+                                    <ion-icon name="create-outline"></ion-icon>
+                                </button>
+                            </form>
+                            <form hx-delete="{% url 'customers:delete' pk=customer.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#customers_search_data" hx-confirm="Are you sure you want to delete the customer: {{customer.name}}?">
+                                {% csrf_token %}
+                                <button type="submit" ion-button icon-only class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
+                                    <ion-icon name="trash-outline"></ion-icon>
+                                </button>
+                            </form>
+                        </td>
+                    {% endcomment %}
+                    <td></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}

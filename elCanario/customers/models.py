@@ -17,4 +17,4 @@ class Customer(models.Model):
     
     def __str__(self) -> str:
 
-        return f"{self.name}, {self.phone_number}"
+        return f"{self.name},\n{self.phone_number}"
