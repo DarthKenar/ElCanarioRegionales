@@ -2,44 +2,53 @@
 {% load static %}
 {% block title %}
   <title>Login</title>
-  <link rel="stylesheet" href="{% static 'css/tailwind.css' %}">
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css">
-  <!-- HTMX -->
-  <script src="https://unpkg.com/htmx.org@1.8.6" integrity="sha384-Bj8qm/6B+71E6FQSySofJOUjA/gq330vEqjFx9LakWybUySyI1IQHwPtbTU7bNwx" crossorigin="anonymous"></script>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
+
+        .font-family-karla {
+            font-family: karla;
+        }
+    </style>
 {% endblock title %}
 {% block content %}
-  <div class="relative flex min-h-screen flex-col justify-center overflow-hidden py-2 sm:py-12">
-    <div class="bg-gradient-to-tr from-amber-100 to-amber-300 rounded-md py-4 m-8 relative px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-10">
-      <div class="mx-auto max-w-md">
-        <div>
-          <h1 class="font-mono text-center text-xl my-2">Login</h1>
-        </div>
-        <form action="{% url 'login_search' %}" method="POST">
-          {% csrf_token %}
-          <div class="grid place-content-center">
-            <label>Nombre de usuario:</label>
-            <input class="bg-amber-50 rounded-sm font-mono my-2 py-2" name="username_input" type="text" id="username_input" placeholder=" admin" required>
-          </div>
-          <div class="grid place-content-center">
-            <label>Contraseña:</label>
-            <input class="bg-amber-50 rounded-sm font-mono my-2 py-2"  name="password_input" type="password" id="password_input" placeholder=" 1234" required>
-          </div>
-          <div class="grid place-content-end">
-              <button ion-button icon-only type="submit">
-                <ion-icon class="text-sm font-mono text-amber-50 font-bold rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 p-2 m-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer content-center" name="enter-outline" size="large"></ion-icon>
-              </button>
-          </div>
-        </form>
-        <div class="text-red-600">
-          {{answer_error}}
-        </div>
-      </div>      
-    </div>
-  </div>
+    <body class="font-family-karla h-screen bg-[#edf2f7]">
+        <div class="w-full flex flex-wrap">
 
+            <!-- Login Section -->
+            <div class="w-full md:w-1/2 flex flex-col">
+
+                <div class="flex justify-center md:justify-start pt-12 md:pl-12 md:-mb-24">
+                    <img src="{% static '/img/elcanarioregionales-logo-160x160.png' %}" alt="El Canario Regionales Logo">
+                </div>
+
+                <div class="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
+                    <p class="text-center text-3xl">Bienvenido.</p>
+                    <form action="{% url 'login_search' %}" method="POST" class="flex flex-col pt-3 md:pt-8">
+                        {% csrf_token %}
+                        <div class="flex flex-col pt-4">
+                            <label for="username_input" class="text-lg">Nombre de usuario:</label>
+                            <input type="text" name="username_input" id="username_input" placeholder="admin" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
+                        </div>
+        
+                        <div class="flex flex-col pt-4">
+                            <label for="password_input" class="text-lg">Contraseña</label>
+                            <input type="password" name="password_input" id="password_input"placeholder="1234" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
+                        </div>
+        
+                        <input type="submit" value="Log In" class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8 cursor-pointer">
+                    </form>
+                    <div class="text-center pt-12 pb-12">
+                        <p>No tienes una cuenta? <a href="#" class="underline font-semibold">Registrarse.</a></p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Image Section -->
+            <div class="w-1/2 shadow-2xl">
+                <img class="object-cover w-full h-screen hidden md:block" src="{% static 'img/fondo-login.webp' %}">
+            </div>
+        </div>
+
+    </body>
 {% endblock content %}
