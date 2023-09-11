@@ -21,7 +21,7 @@ class OrderListView(LoginRequiredMixin,ListView):
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context['datatype_input'] = 'order_id'
-        context["datatype"] = 'Order'
+        context["datatype"] = 'ID'
         context["answer"] = "Orders in Database"
         return context
     
@@ -34,10 +34,10 @@ class OrderCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         customer_id = form.cleaned_data['customer_id']
         articles_cart = form.cleaned_data['articles_cart']
-        article_quantity = form.cleaned_data['article_quantity']
-        total_pay = form.cleaned_data['total_pay']
+        print(articles_cart)
+        print(type(articles_cart))
         details = form.cleaned_data['details']
-        message = MessageLog(info=f"Order created:\n\tCustomer: {customer_id.name}, articles: {articles_cart}, articles quantity: {article_quantity}, Total $: {total_pay}, details: {details}")
+        message = MessageLog(info=f"Order created:\n\tCustomer: {customer_id.name}, articles: {articles_cart}, details: {details}")
         message.save()
         return super().form_valid(form)
     
@@ -61,7 +61,7 @@ class ReadDataListView(ListView):
 class ReadDataTypeListView(ListView):
     model = Order
     template_name = 'orders_search_datatype.html'
-    
+
     def get_queryset(self):
         datatype_input = self.request.GET["datatype_input"].strip()
         return get_orders_for_search_input(datatype_input,"")

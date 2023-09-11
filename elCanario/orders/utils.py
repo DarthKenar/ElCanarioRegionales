@@ -40,13 +40,16 @@ def get_context_for_search_input_in_orders_section(datatype_input:str, search_in
     context["datatype_input"] = datatype_input
     if datatype_input == "id":
         context["datatype_input"] = "id"
-        context["datatype"] = "Id:"
+        context["datatype"] = "ID"
     elif datatype_input == "customer_id":
         context["datatype_input"] = "customer_id"
-        context["datatype"] = "Customer:"
+        context["datatype"] = "Customer"
     elif datatype_input == "articles_cart":
         context["datatype_input"] = "articles_cart"
-        context["datatype"] = "Article/s:"
+        context["datatype"] = "Article/s"
+    elif datatype_input == "article_quantity":
+        context["datatype_input"] = "article_quantity"
+        context["datatype"] = "Articles quantity"
     elif datatype_input == "total_pay":
         context["datatype_input"] = "total_pay"
         context["datatype"] = "Total pay:"
@@ -69,13 +72,16 @@ def get_context_for_datatype_input_in_orders_section(datatype_input:str):
     context["datatype_input"] = datatype_input
     if datatype_input == "id":
         context["datatype_input"] = "id"
-        context["datatype"] = "Id:"
+        context["datatype"] = "ID"
     elif datatype_input == "customer_id":
         context["datatype_input"] = "customer_id"
-        context["datatype"] = "Customer:"
+        context["datatype"] = "Customer"
     elif datatype_input == "articles_cart":
         context["datatype_input"] = "articles_cart"
-        context["datatype"] = "Article/s:"
+        context["datatype"] = "Article/s"
+    elif datatype_input == "article_quantity":
+        context["datatype_input"] = "article_quantity"
+        context["datatype"] = "Articles quantity"
     elif datatype_input == "total_pay":
         context["datatype_input"] = "total_pay"
         context["datatype"] = "Total pay:"

@@ -19,10 +19,10 @@
                 <option value="articles_cart" {% if datatype_input == "articles_cart" %} selected {% endif %}>Articles</option>
                 <option value="article_quantity" {% if datatype_input == "article_quantity" %} selected {% endif %}>Quantity</option>
                 <option value="total_pay" {% if datatype_input == "total_pay" %} selected {% endif %}>Total Pay</option>
-                <option value="details" {% if datatype_input == "address" %} selected {% endif %}>Details</option>
-                <option value="creation_date" {% if datatype_input == "total_purchased" %} selected {% endif %}>Created</option>
-                <option value="updated_date" {% if datatype_input == "total_purchased" %} selected {% endif %}>Updated</option>
-                <option value="delivery_status" {% if datatype_input == "total_purchased" %} selected {% endif %}>Status</option>
+                <option value="details" {% if datatype_input == "details" %} selected {% endif %}>Details</option>
+                <option value="creation_date" {% if datatype_input == "creation_date" %} selected {% endif %}>Created</option>
+                <option value="updated_date" {% if datatype_input == "updated_date" %} selected {% endif %}>Updated</option>
+                <option value="delivery_status" {% if datatype_input == "delivery_status" %} selected {% endif %}>Status</option>
 
             </select>
             <input class="bg-amber-50 rounded-sm px-2 mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'orders:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#orders_search_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>
