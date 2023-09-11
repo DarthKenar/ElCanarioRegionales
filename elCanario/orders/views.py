@@ -20,7 +20,7 @@ class OrderListView(LoginRequiredMixin,ListView):
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context['datatype_input'] = 'order_id'
+        context['datatype_input'] = 'id'
         context["datatype"] = 'ID'
         context["answer"] = "Orders in Database"
         return context

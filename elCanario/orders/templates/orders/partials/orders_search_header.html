@@ -27,19 +27,25 @@
             </select>
             {% if datatype_input == 'id' or datatype_input == 'article_quantity' or datatype_input == 'total_pay' or datatype_input == 'details' %}<input class="bg-amber-50 rounded-sm px-2 mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'orders:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#orders_search_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>{% endif %}
             {% if datatype_input == 'customer_id' %}
-                <!-- mostrar lista de clientes -->
+                <select class="bg-amber-50 rounded-sm px-2 mx-2 py-2 w-[70%] placeholder="{{datatype}}" type="text" hx-get="{% url 'orders:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#orders_search_data" hx-swap="outerHTML" hx-trigger="change">
+                    {% for customer in customer_list %}
+                        <option value="{{customer.id}}">{{customer}}</option>
+                    {% endfor %}
+                </select>
             {% endif %}
             {% if datatype_input == 'articles_cart' %}
                 <!-- mostrar lista de articulos -->
             {% endif %}
-            {% if datatype_input == 'creation_date' %}
-                <!-- mostar almanaque para seleccion de fecha -->
+            {% if datatype_input == 'creation_date' or datatype_input == 'updated_date' %}
+            <input type="date">
             {% endif %}
-            {% if datatype_input == 'updated_date' %}
-                <!-- mostar almanaque para seleccion de fecha -->
-            {% endif %}            
             {% if datatype_input == 'delivery_status' %}
-                <!-- mostrar 3 opciones (op1 Done, op2 Pendiente, op3 Cancelado) -->
+            <select class="bg-amber-50 rounded-sm px-2 mx-2 py-2 w-[70%] placeholder="{{datatype}}" type="text" hx-get="{% url 'orders:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#orders_search_data" hx-swap="outerHTML" hx-trigger="change">
+                <option value="">All</option>
+                <option value="True">Done</option>
+                <option value='None'>Pending</option>
+                <option value="False">Canceled</option>
+            </select>
             {% endif %}
         </div>
         <div class="flex place-content-end">

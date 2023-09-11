@@ -1,3 +1,4 @@
+from customers.models import Customer
 from orders.models import Order
 from typing import Dict
 from elCanario.utils import string_is_empty
@@ -7,7 +8,7 @@ def get_orders_for_search_input(datatype_input:str, search_input:str=''):
     if datatype_input == "id":
         return Order.objects.filter(id__startswith=search_input)
     elif datatype_input == "customer_id":
-        return Order.objects.filter(customer_id__startswith=search_input) 
+        return Order.objects.filter(customer_id=search_input) 
     elif datatype_input == "articles_cart":
         return Order.objects.filter(articles_cart__startswith=search_input)
     elif datatype_input == "article_quantity":
@@ -21,7 +22,9 @@ def get_orders_for_search_input(datatype_input:str, search_input:str=''):
     elif datatype_input == "updated_date":
         return Order.objects.filter(updated_date__startswith=search_input)
     else:# datatype_input == "delivery_status":
-        return Order.objects.filter(delivery_status__startswith=search_input)
+        if search_input == 'None':
+            search_input = None # type: ignore
+        return Order.objects.filter(delivery_status=search_input)
     
 def get_context_for_search_input_in_orders_section(datatype_input:str, search_input:str) -> Dict[str,str]:
     """gets the orders that correspond to the value set in the selected native data type.
@@ -52,19 +55,19 @@ def get_context_for_search_input_in_orders_section(datatype_input:str, search_in
         context["datatype"] = "Articles quantity"
     elif datatype_input == "total_pay":
         context["datatype_input"] = "total_pay"
-        context["datatype"] = "Total pay:"
+        context["datatype"] = "Total pay"
     elif datatype_input == "details":
         context["datatype_input"] = "details"
-        context["datatype"] = "Details:"
+        context["datatype"] = "Details"
     elif datatype_input == "creation_date":
         context["datatype_input"] = "creation_date"
-        context["datatype"] = "Creation date:"
+        context["datatype"] = "Creation date"
     elif datatype_input == "updated_date":
         context["datatype_input"] = "updated_date"
-        context["datatype"] = "Updated date:"
+        context["datatype"] = "Updated date"
     else:# datatype_input == "delivery_status":
         context["datatype_input"] = "delivery_status"
-        context["datatype"] = "Delivery Status:"
+        context["datatype"] = "Delivery Status"
     return context
 
 def get_context_for_datatype_input_in_orders_section(datatype_input:str):
@@ -76,6 +79,7 @@ def get_context_for_datatype_input_in_orders_section(datatype_input:str):
     elif datatype_input == "customer_id":
         context["datatype_input"] = "customer_id"
         context["datatype"] = "Customer"
+        context["customer_list"] = Customer.objects.all()
     elif datatype_input == "articles_cart":
         context["datatype_input"] = "articles_cart"
         context["datatype"] = "Article/s"
@@ -84,17 +88,17 @@ def get_context_for_datatype_input_in_orders_section(datatype_input:str):
         context["datatype"] = "Articles quantity"
     elif datatype_input == "total_pay":
         context["datatype_input"] = "total_pay"
-        context["datatype"] = "Total pay:"
+        context["datatype"] = "Total pay"
     elif datatype_input == "details":
         context["datatype_input"] = "details"
-        context["datatype"] = "Details:"
+        context["datatype"] = "Details"
     elif datatype_input == "creation_date":
         context["datatype_input"] = "creation_date"
-        context["datatype"] = "Creation date:"
+        context["datatype"] = "Creation date"
     elif datatype_input == "updated_date":
         context["datatype_input"] = "updated_date"
-        context["datatype"] = "Updated date:"
+        context["datatype"] = "Updated date"
     else:# datatype_input == "delivery_status":
         context["datatype_input"] = "delivery_status"
-        context["datatype"] = "Delivery Status:"
+        context["datatype"] = "Delivery Status"
     return context
