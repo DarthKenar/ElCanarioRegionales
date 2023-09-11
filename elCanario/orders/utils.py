@@ -1,5 +1,6 @@
 from customers.models import Customer
 from orders.models import Order
+from articles.models import Article
 from typing import Dict
 from elCanario.utils import string_is_empty
 def get_orders_for_search_input(datatype_input:str, search_input:str=''):
@@ -10,7 +11,7 @@ def get_orders_for_search_input(datatype_input:str, search_input:str=''):
     elif datatype_input == "customer_id":
         return Order.objects.filter(customer_id=search_input) 
     elif datatype_input == "articles_cart":
-        return Order.objects.filter(articles_cart__startswith=search_input)
+        return Order.objects.filter(articles_cart=search_input)
     elif datatype_input == "article_quantity":
         return Order.objects.filter(article_quantity__startswith=search_input)
     elif datatype_input == "total_pay":
@@ -83,6 +84,7 @@ def get_context_for_datatype_input_in_orders_section(datatype_input:str):
     elif datatype_input == "articles_cart":
         context["datatype_input"] = "articles_cart"
         context["datatype"] = "Article/s"
+        context["article_list"] = Article.objects.all()
     elif datatype_input == "article_quantity":
         context["datatype_input"] = "article_quantity"
         context["datatype"] = "Articles quantity"
