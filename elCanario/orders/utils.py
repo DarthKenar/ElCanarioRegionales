@@ -1,8 +1,12 @@
+from attr import field
 from customers.models import Customer
 from orders.models import Order
 from articles.models import Article
 from typing import Dict
 from elCanario.utils import string_is_empty
+from django.utils import timezone
+from datetime import datetime
+import pytz
 def get_orders_for_search_input(datatype_input:str, search_input:str=''):
     if string_is_empty(search_input):
         return Order.objects.all()
@@ -19,9 +23,11 @@ def get_orders_for_search_input(datatype_input:str, search_input:str=''):
     elif datatype_input == "details":
         return Order.objects.filter(details__startswith=search_input)
     elif datatype_input == "creation_date":
-        return Order.objects.filter(creation_date__startswith=search_input)
+        fecha = timezone.make_aware(datetime.strptime(search_input, '%Y-%m-%d'))
+        return Order.objects.filter(creation_date__date=fecha)
     elif datatype_input == "updated_date":
-        return Order.objects.filter(updated_date__startswith=search_input)
+        #https://docs.djangoproject.com/en/4.2/ref/models/querysets/#dates
+        return Order.objects.filter(updated_date__date=search_input)
     else:# datatype_input == "delivery_status":
         if search_input == 'None':
             search_input = None # type: ignore
