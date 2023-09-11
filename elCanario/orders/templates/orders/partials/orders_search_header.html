@@ -25,7 +25,22 @@
                 <option value="delivery_status" {% if datatype_input == "delivery_status" %} selected {% endif %}>Status</option>
 
             </select>
-            <input class="bg-amber-50 rounded-sm px-2 mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'orders:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#orders_search_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>
+            {% if datatype_input == 'id' or datatype_input == 'article_quantity' or datatype_input == 'total_pay' or datatype_input == 'details' %}<input class="bg-amber-50 rounded-sm px-2 mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'orders:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#orders_search_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>{% endif %}
+            {% if datatype_input == 'customer_id' %}
+                <!-- mostrar lista de clientes -->
+            {% endif %}
+            {% if datatype_input == 'articles_cart' %}
+                <!-- mostrar lista de articulos -->
+            {% endif %}
+            {% if datatype_input == 'creation_date' %}
+                <!-- mostar almanaque para seleccion de fecha -->
+            {% endif %}
+            {% if datatype_input == 'updated_date' %}
+                <!-- mostar almanaque para seleccion de fecha -->
+            {% endif %}            
+            {% if datatype_input == 'delivery_status' %}
+                <!-- mostrar 3 opciones (op1 Done, op2 Pendiente, op3 Cancelado) -->
+            {% endif %}
         </div>
         <div class="flex place-content-end">
             <form action="{% url 'orders:create' %}">
