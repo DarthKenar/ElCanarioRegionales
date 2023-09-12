@@ -1,5 +1,5 @@
 from mailbox import Message
-from customers.forms import TuFormulario
+from customers.forms import CustomerForm
 from django.forms.models import BaseModelForm
 from django.http import HttpRequest, HttpResponse
 import json
@@ -33,21 +33,44 @@ class CustomerListView(LoginRequiredMixin, ListView):
 
 class CustomerCreateView(LoginRequiredMixin, CreateView):
     model = Customer
+    form_class = CustomerForm
     template_name = 'customers_create.html'
-    success_url  = reverse_lazy('customers:customers')
-    fields=['name','dni','phone_number','address','email']
+    success_url  = reverse_lazy('customers:customers')  
+
+    def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+        self.template_name = "customers_create_form.html"
+        return super().post(request, *args, **kwargs)
+    
+    def get_success_url(self) -> str:
+        return reverse_lazy('customers:create_htmx') + '?correct'
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
-        name = form.cleaned_data['name']
-        dni = form.cleaned_data['dni']
-        phone_number = form.cleaned_data['phone_number']
-        address = form.cleaned_data['address']
-        email = form.cleaned_data['email']
-        message = MessageLog(info=f"Customer created:\n\tName: {name}, Dni: {dni}, Phone number: {phone_number}, Addres: {address}, Email{email}")
-        message.save()
-        return super().form_valid(form)
-
-
+        status = self.kwargs.get('status')
+        if status == "True":
+            name = form.cleaned_data['name']
+            dni = form.cleaned_data['dni']
+            phone_number = form.cleaned_data['phone_number']
+            address = form.cleaned_data['address']
+            email = form.cleaned_data['email']
+            message = MessageLog(info=f"Customer created:\n\tName: {name}, Dni: {dni}, Phone number: {phone_number}, Addres: {address}, Email{email}")
+            message.save()
+            return super().form_valid(form) #Esto hace que se guarde.
+        else:
+            return self.render_to_response(self.get_context_data(form=form))
+        
+    def form_invalid(self, form):
+        # Renderizar la plantilla con el formulario y los errores
+        return self.render_to_response(self.get_context_data(form=form))
+    
+class CustomerCreateTemplate(LoginRequiredMixin,TemplateView):
+    template_name = 'customers_create_form.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        form = CustomerForm()
+        context['form'] = form
+        return context
+    
 class ReadDataListView(LoginRequiredMixin, ListView):
     template_name = 'customers_search_data.html'
     model = Customer
@@ -64,7 +87,6 @@ class ReadDataListView(LoginRequiredMixin, ListView):
         context["search_input"] = search_input
         context.update(get_context_for_search_input_in_customers_section(datatype_input,search_input))
         return context
-
 
 class ReadDataTypeListView(LoginRequiredMixin, ListView):
     model = Customer
@@ -90,14 +112,14 @@ class CustomerUpdateTemplate(LoginRequiredMixin, TemplateView):
         object = get_object_or_404(Customer,id=objeto_id)
         print(object.name)
         context['object'] = object
-        form = TuFormulario(instance=object) 
+        form = CustomerForm(instance=object) 
         context['form'] = form
         return context
 
 
 class CustomerUpdateView(LoginRequiredMixin, UpdateView):
     model = Customer
-    form_class = TuFormulario
+    form_class = CustomerForm
     template_name = "customers_update.html"
     
     def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:

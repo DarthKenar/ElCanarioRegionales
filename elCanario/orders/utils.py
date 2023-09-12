@@ -23,10 +23,10 @@ def get_orders_for_search_input(datatype_input:str, search_input:str=''):
     elif datatype_input == "details":
         return Order.objects.filter(details__startswith=search_input)
     elif datatype_input == "creation_date":
-        fecha = timezone.make_aware(datetime.strptime(search_input, '%Y-%m-%d'))
-        return Order.objects.filter(creation_date__date=fecha)
-    elif datatype_input == "updated_date":
         #https://docs.djangoproject.com/en/4.2/ref/models/querysets/#dates
+        date_input = timezone.make_aware(datetime.strptime(search_input, '%Y-%m-%d'))
+        return Order.objects.filter(creation_date__date=date_input)
+    elif datatype_input == "updated_date":
         return Order.objects.filter(updated_date__date=search_input)
     else:# datatype_input == "delivery_status":
         if search_input == 'None':

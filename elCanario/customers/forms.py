@@ -1,8 +1,8 @@
 from django import forms
 from customers.models import Customer
-class TuFormulario(forms.ModelForm):
+class CustomerForm(forms.ModelForm):
     class Meta:
-        trigger = {'hx-trigger':'keyup changed delay:300ms'}
+        trigger = {'hx-trigger':'blur'}
         model = Customer
         fields = ['name', 'dni', 'phone_number', 'address', 'email']
         widgets = {
