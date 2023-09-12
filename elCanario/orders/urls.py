@@ -13,5 +13,6 @@ urlpatterns = [
     path('update/<int:pk>', OrderUpdateView.as_view(), name="update"),
     path('update/<int:pk>/<str:status>', OrderUpdateView.as_view(), name="update"),
     path('update_form/<int:pk>', OrderUpdateTemplate.as_view(), name="update_htmx"),
+    
     path('delete/<int:pk>', order_delete, name="delete"),
 ]

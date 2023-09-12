@@ -293,7 +293,7 @@ def article_delete(request:object, pk:int)-> HttpResponse:
     try:
         article_to_delete = get_object_or_404(Article, id=pk)
     except Exception as e:
-        context["article_delete_answer"] = f"El artículo seleccionado no pudo eliminarse porque no existe. ¿? "
+        context["article_delete_answer"] = f"The selected article could not be deleted because it does not exist. Please contact Support"
         return render_login_required(request, template, context)
     else:
         context["article_delete_answer"] = f"The article {article_to_delete.name} has been eliminated"
@@ -301,7 +301,7 @@ def article_delete(request:object, pk:int)-> HttpResponse:
         message.save()
         article_to_delete.delete()
         articles = Article.objects.all()
-        context.update({"article_list": articles,})
+        context.update({"article_list": articles})
         return render_login_required(request, template, context)    
     
 class ArticleDetailView(LoginRequiredMixin, DetailView):
