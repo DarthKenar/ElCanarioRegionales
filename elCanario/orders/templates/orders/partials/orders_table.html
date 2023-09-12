@@ -31,7 +31,7 @@
                         
                     </td>
                     <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 tabular-nums slashed-zero whitespace-nowrap">{{order.article_quantity}}</td>
-                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 tabular-nums slashed-zero max-sm:hidden whitespace-nowrap">{{order.total_pay}}</td>
+                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 tabular-nums slashed-zero max-sm:hidden whitespace-nowrap">$ {{order.total_pay}}</td>
                     <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 tabular-nums slashed-zero">{% if order.details == None %}-{% else %}{{order.details}}{% endif %}</td>
                     <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 max-sm:hidden"> <p class="whitespace-nowrap">{{order.creation_date}}</p></td>
                     <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 max-sm:hidden"> <p class="whitespace-nowrap">{{order.updated_date}}</p></td>
