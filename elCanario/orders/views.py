@@ -147,7 +147,7 @@ def order_delete(request:object, pk:int)-> HttpResponse:
         context["order_delete_answer"] = f"The selected order could not be deleted because it does not exist. Contact support."
         return render_login_required(request, template, context)
     else:
-        context["customer_delete_answer"] = f"Order {order.pk} for {order.customer_id} has been eliminated"
+        context["order_delete_answer"] = f"Order {order.pk} for {order.customer_id} has been eliminated"
         message = MessageLog(info=f"Order {order.pk} for {order.customer_id} has been eliminated")
         message.save()
         order.delete()
