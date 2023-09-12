@@ -1,3 +1,4 @@
+from decimal import Decimal
 from attr import field
 from customers.models import Customer
 from orders.models import Order
@@ -110,3 +111,15 @@ def get_context_for_datatype_input_in_orders_section(datatype_input:str):
         context["datatype_input"] = "delivery_status"
         context["datatype"] = "Delivery Status"
     return context
+
+def update_article_quantity(order):
+    article_count  = order.articles_cart.count()
+    order.article_quantity = article_count
+    order.save()
+
+def update_total_pay(order):
+    total_pay = Decimal(0)
+    for articles in order.articles_cart.all():
+        total_pay += articles.sell_price
+    order.total_pay = total_pay
+    order.save()

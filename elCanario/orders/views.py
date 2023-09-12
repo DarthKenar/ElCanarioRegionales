@@ -1,10 +1,11 @@
+import decimal
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from typing import Any, Dict, List
 from orders.form import OrderForm
 from django.shortcuts import get_object_or_404
 from elCanario.utils import render_login_required
-from orders.utils import get_orders_for_search_input, get_context_for_search_input_in_orders_section, get_context_for_datatype_input_in_orders_section
+from orders.utils import update_article_quantity,update_total_pay, get_orders_for_search_input, get_context_for_search_input_in_orders_section, get_context_for_datatype_input_in_orders_section
 from django.http import HttpRequest, HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.list import ListView
@@ -91,6 +92,8 @@ class OrderCreateView(LoginRequiredMixin, CreateView):
             return self.render_to_response(self.get_context_data(form=form))
         
     def get_success_url(self) -> str:
+        update_article_quantity(self.object)
+        update_total_pay(self.object)
         return reverse_lazy('orders:create_htmx') + '?correct'
     
     def form_invalid(self, form: OrderForm) -> HttpResponse:
@@ -118,7 +121,9 @@ class OrderUpdateView(LoginRequiredMixin,UpdateView):
         return super().post(request, *args, **kwargs)
 
     def get_success_url(self) -> str:
-        return reverse_lazy('orders:update_htmx', args=[f"{self.object.id}"]) + '?correct'
+        update_article_quantity(self.object)
+        update_total_pay(self.object)
+        return reverse_lazy('orders:update_htmx', args=[f"{self.object.id}"]) + '?correct' # type: ignore
 
     def form_valid(self, form: OrderForm) -> HttpResponse:
         status = self.kwargs.get('status')
