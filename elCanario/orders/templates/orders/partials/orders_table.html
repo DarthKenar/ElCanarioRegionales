@@ -53,21 +53,22 @@
                             </p>
                         {% endif %}
                     </td>
-                    {% comment  %}
                         <td class="flex mx-2">
-                            <form action="{% url 'customers:update' pk=customer.id %}" method="GET">
+                            <form action="{% url 'orders:update' pk=order.id %}" method="GET">
                                 <button ion-button icon-only type="submit" class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 mx-2 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
                                     <ion-icon name="create-outline"></ion-icon>
                                 </button>
                             </form>
-                            <form hx-delete="{% url 'customers:delete' pk=customer.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#customers_search_data" hx-confirm="Are you sure you want to delete the customer: {{customer.name}}?">
-                                {% csrf_token %}
-                                <button type="submit" ion-button icon-only class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
-                                    <ion-icon name="trash-outline"></ion-icon>
-                                </button>
-                            </form>
+                            {% comment  %}
+                                <!-- <form hx-delete="{% url 'orders:delete' pk=order.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#customers_search_data" hx-confirm="Are you sure you want to delete the customer: {{customer.name}}?">
+                                    {% csrf_token %}
+                                    <button type="submit" ion-button icon-only class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
+                                        <ion-icon name="trash-outline"></ion-icon>
+                                    </button>
+                                </form> -->
+                            {% endcomment %}
+
                         </td>
-                    {% endcomment %}
                     <td></td>
                 </tr>
             {% endfor %}
