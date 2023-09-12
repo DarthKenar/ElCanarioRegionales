@@ -61,7 +61,8 @@ class CustomerCreateView(LoginRequiredMixin, CreateView):
     def form_invalid(self, form):
         # Renderizar la plantilla con el formulario y los errores
         return self.render_to_response(self.get_context_data(form=form))
-    
+
+
 class CustomerCreateTemplate(LoginRequiredMixin,TemplateView):
     template_name = 'create_form.html'
     
@@ -70,7 +71,8 @@ class CustomerCreateTemplate(LoginRequiredMixin,TemplateView):
         form = CustomerForm()
         context['form'] = form
         return context
-    
+
+
 class ReadDataListView(LoginRequiredMixin, ListView):
     template_name = 'customers_search_data.html'
     model = Customer
@@ -87,6 +89,7 @@ class ReadDataListView(LoginRequiredMixin, ListView):
         context["search_input"] = search_input
         context.update(get_context_for_search_input_in_customers_section(datatype_input,search_input))
         return context
+
 
 class ReadDataTypeListView(LoginRequiredMixin, ListView):
     model = Customer

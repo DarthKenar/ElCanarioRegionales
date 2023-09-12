@@ -7,7 +7,7 @@ class OrderForm(forms.ModelForm):
     
     class Meta:
         trigger = {'hx-trigger':'blur'}
-        choices = [('None','Pending'),('True','Done'),('False','Canceled')]
+        choices = [('True','Done'),('None','Pending'),('False','Canceled')]
         model = Order
         fields=['customer_id', 'articles_cart', 'details', 'delivery_status']
         widgets = {

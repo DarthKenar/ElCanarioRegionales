@@ -1,5 +1,5 @@
 from django.urls import path
-from orders.views import OrderListView, OrderCreateView, ReadDataListView, ReadDataTypeListView,OrderCreateTemplate, OrderUpdateTemplate,OrderUpdateView
+from orders.views import OrderListView, OrderCreateView, ReadDataListView, ReadDataTypeListView,OrderCreateTemplate, OrderUpdateTemplate,OrderUpdateView, order_delete
 app_name = 'orders'
 urlpatterns = [
     path('read', OrderListView.as_view(), name="orders"),
@@ -13,6 +13,5 @@ urlpatterns = [
     path('update/<int:pk>', OrderUpdateView.as_view(), name="update"),
     path('update/<int:pk>/<str:status>', OrderUpdateView.as_view(), name="update"),
     path('update_form/<int:pk>', OrderUpdateTemplate.as_view(), name="update_htmx"),
-    # path('delete/<int:pk>', OrderListView.as_view(), name="delete"),
-
+    path('delete/<int:pk>', order_delete, name="delete"),
 ]

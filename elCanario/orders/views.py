@@ -6,12 +6,12 @@ from django.shortcuts import get_object_or_404
 from elCanario.utils import render_login_required
 from orders.utils import get_orders_for_search_input, get_context_for_search_input_in_orders_section, get_context_for_datatype_input_in_orders_section
 from django.http import HttpRequest, HttpResponse
-from django.forms.models import BaseModelForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.list import ListView
 from django.db.models.query import QuerySet
 from django.views.generic import CreateView, UpdateView, TemplateView
-from orders.models import Order, ArticleOrder
+from orders.models import Order
+from django.views.decorators.csrf import csrf_protect
 from messageslog.models import MessageLog
 # Create your views here.
 # # ORDERS SECTION
@@ -135,3 +135,22 @@ class OrderUpdateView(LoginRequiredMixin,UpdateView):
     def form_invalid(self, form):
         # Renderizar la plantilla con el formulario y los errores
         return self.render_to_response(self.get_context_data(form=form))
+
+
+@csrf_protect
+def order_delete(request:object, pk:int)-> HttpResponse:
+    template = 'orders_search_data.html'
+    context = {}
+    try:
+        order = get_object_or_404(Order, id=pk)
+    except Exception as e:
+        context["order_delete_answer"] = f"The selected order could not be deleted because it does not exist. Contact support."
+        return render_login_required(request, template, context)
+    else:
+        context["customer_delete_answer"] = f"Order {order.pk} for {order.customer_id} has been eliminated"
+        message = MessageLog(info=f"Order {order.pk} for {order.customer_id} has been eliminated")
+        message.save()
+        order.delete()
+        orders = Order.objects.all()
+        context.update({"order_list": orders})
+        return render_login_required(request, template, context)

@@ -10,7 +10,7 @@ class Order(models.Model):
     details = models.TextField(verbose_name="Details", blank=True, null=True)
     creation_date = models.DateTimeField(auto_now_add=True, verbose_name="Creation date", editable=False, blank=True, null=True)
     updated_date = models.DateTimeField(auto_now=True,verbose_name="Date last modified", editable=False, blank=True, null=True)
-    delivery_status = models.BooleanField(verbose_name="Delivery status", default=False, blank=True, null=True)
+    delivery_status = models.BooleanField(verbose_name="Delivery status", default=None, blank=True, null=True)
 
     class Meta:
         verbose_name = "Order"
