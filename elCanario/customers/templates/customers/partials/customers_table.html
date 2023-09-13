@@ -1,5 +1,5 @@
 {% if customer_list %}
-    <table class="mx-auto table-auto font-mono  text-red-900  shadow-slate-600 shadow-sm bg-amber-200 border-separate border-2 border-amber-100 rounded-md p-4 m-8">
+    <table class="mx-auto max-w-[90%] table-auto font-mono  text-red-900  shadow-slate-600 shadow-sm bg-amber-200 border-separate border-2 border-amber-100 rounded-md p-4 m-8">
         <thead class="p-3 m-3">
             <tr class="bg-amber-300">
                 <th class="lg:m-4 md:m-4 max-sm:hidden">Id</th>
@@ -24,7 +24,7 @@
                     <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 tabular-nums slashed-zero max-sm:hidden whitespace-nowrap">{% if customer.email == None %}-{% else %}{{customer.email}}{% endif %}</td>
                     <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 tabular-nums slashed-zero">{% if customer.address == None %}-{% else %}{{customer.address}}{% endif %}</td>
                     <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 max-sm:hidden"> <p class="whitespace-nowrap">$ {{customer.total_purchased}}</p></td>
-                    <td class="max-sm:flex max-sm:flex-col sm:justify-center items-center">
+                    <td class="flex max-sm:flex-col sm:justify-center items-center">
                         <form class="py-1" action="{% url 'customers:update' pk=customer.id %}" method="GET">
                             <button ion-button icon-only type="submit" class="max-sm:mx-auto text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 mx-2 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
                                 <ion-icon name="create-outline"></ion-icon>

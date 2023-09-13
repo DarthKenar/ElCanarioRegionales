@@ -1,5 +1,5 @@
 {% if order_list %}
-    <table class="mx-auto max-w-[90%] table-fixed font-mono  text-red-900  shadow-slate-600 shadow-sm bg-amber-200 border-separate border-2 border-amber-100 rounded-md p-4 m-8">
+    <table class="table-fixed overflow-x-auto max-w-[90%] font-mono  text-red-900  shadow-slate-600 shadow-sm bg-amber-200 border-separate border-2 border-amber-100 rounded-md">
         <thead class="p-3 m-3">
             <tr class="bg-amber-300">
                 <th class="lg:m-4 md:m-2 max-sm:hidden max-md:hidden max-lg:hidden">ID</th>
@@ -73,7 +73,7 @@
                             </p>
                         {% endif %}
                     </td>
-                    <td class="flex mx-2 max-sm:hidden ">
+                    <td class="flex mx-2 max-sm:hidden items-center">
                         <form action="{% url 'orders:update' pk=order.id %}" method="GET">
                             <button ion-button icon-only type="submit" class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 mx-2 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
                                 <ion-icon name="create-outline"></ion-icon>

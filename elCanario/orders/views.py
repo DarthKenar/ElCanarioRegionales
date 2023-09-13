@@ -94,6 +94,7 @@ class OrderCreateView(LoginRequiredMixin, CreateView):
     def get_success_url(self) -> str:
         update_article_quantity(self.object)
         update_total_pay(self.object)
+        update_total_purchased(self.object)
         return reverse_lazy('orders:create_htmx') + '?correct'
     
     def form_invalid(self, form: OrderForm) -> HttpResponse:
