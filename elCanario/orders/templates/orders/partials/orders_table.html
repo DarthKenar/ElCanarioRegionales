@@ -1,25 +1,45 @@
 {% if order_list %}
-    <table class="mx-auto table-auto font-mono  text-red-900  shadow-slate-600 shadow-sm bg-amber-200 border-separate border-2 border-amber-100 rounded-md p-4 m-8">
+    <table class="mx-auto table-fixed font-mono  text-red-900  shadow-slate-600 shadow-sm bg-amber-200 border-separate border-2 border-amber-100 rounded-md p-4 m-8">
         <thead class="p-3 m-3">
             <tr class="bg-amber-300">
-                <th class="lg:m-4 md:m-4 max-sm:hidden">ID</th>
-                <th class="lg:m-4 md:m-4 max-sm:hidden">Customer</th>
-                <th class="lg:m-4 md:m-4 ">Articles</th>
-                <th class="lg:m-4 md:m-4 max-sm:hidden">Quantity</th>
-                <th class="lg:m-4 md:m-4 ">Total Pay</th>
-                <th class="lg:m-4 md:m-4 max-sm:hidden">Details</th>
-                <th class="lg:m-4 md:m-4 ">Created</th>
-                <th class="lg:m-4 md:m-4 ">Updated</th>
-                <th class="lg:m-4 md:m-4 max-sm:hidden">Status</th>
-                <th>Functions</th>
+                <th class="lg:m-4 md:m-2 max-sm:hidden max-md:hidden max-lg:hidden">ID</th>
+                <th class="lg:m-4 md:m-2 ">Customer</th>
+                <th class="lg:m-4 md:m-2 ">Articles</th>
+                <th class="lg:m-4 md:m-2 max-sm:hidden max-md:hidden max-lg:hidden">Quantity</th>
+                <th class="lg:m-4 md:m-2 ">Total Pay</th>
+                <th class="lg:m-4 md:m-2 max-sm:hidden max-md:hidden max-lg:hidden">Details</th>
+                <th class="lg:m-4 md:m-2 max-sm:hidden max-md:hidden max-lg:hidden">
+                    <div class="flex justify-center items-center">
+                        <ion-icon name="calendar-outline"></ion-icon>
+                        <b class="ml-1">Created</b>
+                    </div>
+                </th>
+                <th class="lg:m-4 md:m-2 max-sm:hidden max-md:hidden max-lg:hidden">
+                    <div class="flex justify-center items-center">
+                        <ion-icon name="refresh-circle-outline"></ion-icon>
+                        <b class="ml-1">Updated</b>
+                    </div>
+                </th>
+                <th class="lg:m-4 md:m-2 max-sm:hidden">Status</th>
+                <th class="lg:m-4 md:m-2 max-sm:hidden">
+                    <div class="flex justify-center items-center">
+                        <ion-icon name="code-working-outline"></ion-icon>
+                        <b class="ml-1">Functions</b>
+                    </div>
+                </th>
             </tr>
         </thead>
         <tbody class="bg-amber-100">
             {% for order in order_list %}
                 <tr>
-                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 max-sm:hidden whitespace-nowrap" id="{{order.id}}">{{order.id}}</td>
-                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 max-sm:hidden whitespace-nowrap">{{order.customer_id}}</td>
-                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 whitespace-nowrap">
+                    <td class="md:m-2 md:px-6 lg:m-4 lg:px-8 max-sm:hidden max-md:hidden max-lg:hidden whitespace-nowrap" id="{{order.id}}">{{order.id}}</td>
+                    <td class="md:m-2 md:px-6 lg:m-4 lg:px-8 whitespace-nowrap">
+                        <div class="max-lg:flex lg:justify-center max-lg:flex-col  lg:items-center">
+                            <span>{{order.customer_id.name}}</span>
+                            <span>{{order.customer_id.dni}}</span>
+                        </div>
+                    </td>
+                    <td class="md:m-2 md:px-6 lg:m-4 lg:px-8 whitespace-nowrap">
                         
                         <ul>
                             {% for article in order.articles_cart.all %}
@@ -30,12 +50,12 @@
                         </ul>
                         
                     </td>
-                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 tabular-nums slashed-zero whitespace-nowrap">{{order.article_quantity}}</td>
-                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 tabular-nums slashed-zero max-sm:hidden whitespace-nowrap">{{order.total_pay}}</td>
-                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 tabular-nums slashed-zero">{% if order.details == None %}-{% else %}{{order.details}}{% endif %}</td>
-                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 max-sm:hidden"> <p class="whitespace-nowrap">{{order.creation_date}}</p></td>
-                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 max-sm:hidden"> <p class="whitespace-nowrap">{{order.updated_date}}</p></td>
-                    <td class="md:m-3 md:px-6 lg:m-4 lg:px-8 max-sm:hidden"> 
+                    <td class="md:m-2 md:px-6 lg:m-4 lg:px-8 tabular-nums slashed-zero max-sm:hidden max-md:hidden max-lg:hidden whitespace-nowrap">{{order.article_quantity}}</td>
+                    <td class="md:m-2 md:px-6 lg:m-4 lg:px-8 tabular-nums slashed-zero whitespace-nowrap">$ {{order.total_pay}}</td>
+                    <td class="md:m-2 md:px-6 lg:m-4 lg:px-8 tabular-nums max-sm:hidden max-md:hidden max-lg:hidden slashed-zero">{% if order.details == None %}-{% else %}{{order.details}}{% endif %}</td>
+                    <td class="md:m-2 md:px-6 lg:m-4 lg:px-8 max-sm:hidden max-md:hidden max-lg:hidden"> <p class="whitespace-nowrap">{{order.creation_date}}</p></td>
+                    <td class="md:m-2 md:px-6 lg:m-4 lg:px-8 max-sm:hidden max-md:hidden max-lg:hidden"> <p class="whitespace-nowrap">{{order.updated_date}}</p></td>
+                    <td class="md:m-2 md:px-6 lg:m-4 lg:px-8 max-sm:hidden"> 
                         {% if order.delivery_status is True %}
                             <p class="whitespace-nowrap text-green-600">
                                 <ion-icon name="checkmark-circle-outline"></ion-icon>
@@ -53,7 +73,7 @@
                             </p>
                         {% endif %}
                     </td>
-                    <td class="flex mx-2">
+                    <td class="flex mx-2 max-sm:hidden">
                         <form action="{% url 'orders:update' pk=order.id %}" method="GET">
                             <button ion-button icon-only type="submit" class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 mx-2 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
                                 <ion-icon name="create-outline"></ion-icon>

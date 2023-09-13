@@ -1,5 +1,5 @@
 <div class="w-[90%] mx-auto bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md border-2 p-4 shadow-slate-600 shadow-sm border-amber-100">
-    <div class="sm:flex">
+    <div class="sm:flex sm:justify-start sm:items-start">
         <div class="flex content-between sm:hidden pb-10">
             <div class="basis-1/2 flex place-content-center">
                 <form action="{% url 'orders:create' %}">
@@ -35,7 +35,7 @@
                 </select>
             {% endif %}
             {% if datatype_input == 'articles_cart' %}
-                <select class="bg-amber-50 rounded-sm px-2 mx-2 py-2 w-[70%] placeholder="{{datatype}}" type="text" hx-get="{% url 'orders:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#orders_search_data" hx-swap="outerHTML" hx-trigger="change">
+                <select class="bg-amber-50 rounded-sm px-2 mx-2 py-2 w-[70%]" placeholder="{{datatype}}" type="text" hx-get="{% url 'orders:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#orders_search_data" hx-swap="outerHTML" hx-trigger="change">
                     <option value="">All</option>
                     {% for article in article_list %}
                         <option value="{{article.id}}">{{article}}</option>
@@ -54,10 +54,10 @@
             </select>
             {% endif %}
         </div>
-        <div class="flex place-content-end">
+        <div class="max-sm:hidden">
             <form action="{% url 'orders:create' %}">
-                <button  ion-button icon-only type="submit">
-                    <ion-icon title="Create Order" class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" name="add-circle-outline"></ion-icon>
+                <button  ion-button icon-only class="text-amber-50 mt-4 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit">
+                    <ion-icon title="Create Order" name="add-circle-outline"></ion-icon>
                 </button>
             </form>
         </div>
