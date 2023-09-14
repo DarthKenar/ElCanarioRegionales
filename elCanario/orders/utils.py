@@ -7,6 +7,8 @@ from typing import Dict
 from elCanario.utils import string_is_empty
 from django.utils import timezone
 from datetime import datetime
+from orders.models import Order
+from customers.models import Customer
 import pytz
 def get_orders_for_search_input(datatype_input:str, search_input:str=''):
     if string_is_empty(search_input):
@@ -123,3 +125,16 @@ def update_total_pay(order):
         total_pay += articles.sell_price
     order.total_pay = total_pay
     order.save()
+
+def update_total_purchased(order_form):
+    print("*"*10)
+    customer = Customer.objects.get(id = order_form.customer_id.id)
+    order_list_for_customer = Order.objects.filter(customer_id = customer)
+    print(order_list_for_customer)
+    total = Decimal(0)
+    for order in order_list_for_customer:
+        if order.delivery_status == True:
+            total = total + order.total_pay
+    customer.total_purchased = total
+    customer.save()
+    
