@@ -1,3 +1,4 @@
+{% if object_list %}
 <div class="flex flex-col">
     <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
@@ -7,18 +8,26 @@
               class="border-b bg-white font-medium dark:border-neutral-500 dark:bg-neutral-600">
               <tr>
                 <th scope="col" class="px-6 py-4">#</th>
-                <th scope="col" class="px-6 py-4">First</th>
-                <th scope="col" class="px-6 py-4">Last</th>
-                <th scope="col" class="px-6 py-4">Handle</th>
+                <th scope="col" class="px-6 py-4">Name</th>
+                <th scope="col" class="px-6 py-4">DNI</th>
+                <th scope="col" class="px-6 py-4">Phone number</th>
+                <th scope="col" class="px-6 py-4">E-mail</th>
+                <th scope="col" class="px-6 py-4">Address</th>
+                <th scope="col" class="px-6 py-4">Total purchased</th>
+                <th scope="col" class="px-6 py-4">Functions</th>
               </tr>
             </thead>
             <tbody>
+              {% for object in object_list %}
               <tr
                 class="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700">
-                <td class="whitespace-nowrap px-6 py-4 font-medium">1</td>
-                <td class="whitespace-nowrap px-6 py-4">Mark</td>
-                <td class="whitespace-nowrap px-6 py-4">Otto</td>
-                <td class="whitespace-nowrap px-6 py-4">@mdo</td>
+                <td class="whitespace-nowrap px-6 py-4 font-medium" id="{{object.id}}">{{object.id}}</td>
+                <td class="whitespace-nowrap px-6 py-4">{{customer.name}}</td>
+                <td class="whitespace-nowrap px-6 py-4">{{customer.name}}</td>
+                <td class="whitespace-nowrap px-6 py-4">{{customer.name}}</td>
+                <td class="whitespace-nowrap px-6 py-4">{{customer.name}}</td>
+                <td class="whitespace-nowrap px-6 py-4">{{customer.name}}</td>
+                <td class="whitespace-nowrap px-6 py-4">{{customer.name}}</td>
               </tr>
               <tr
                 class="border-b bg-white dark:border-neutral-500 dark:bg-neutral-600">
@@ -43,3 +52,4 @@
       </div>
     </div>
   </div>
+{% endif %}
