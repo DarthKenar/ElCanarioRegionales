@@ -12,7 +12,7 @@
         {% include 'menu_mobile.html' %}
     
         <div class="w-full overflow-x-hidden border-t flex flex-col">
-            <main class="w-full flex-grow p-6">
+            <main class="w-full flex-grow p-6" id="search_datatype">
                 {% block title_section_content_upper %}{% endblock title_section_content_upper %}
                 {% block section_content_upper %}{% endblock section_content_upper %}
                 <div class="w-full mt-12">
@@ -20,7 +20,7 @@
                         <!-- Latest Reports -->
                         <i class="fas fa-list mr-3"></i>{% block title_section_content_under %}{% endblock title_section_content_under %}
                     </p>
-                    <div class="bg-white overflow-auto">
+                    <div class="bg-white overflow-auto" id="search_data">
                         {% block section_content_under %}{% endblock section_content_under %}
                     </div>
                 </div>

@@ -6,18 +6,13 @@
     <h1 class="text-3xl text-black pb-6">Search articles:</h1>
 {% endblock title_section_content_upper %}
 {% block section_content_upper %}
-    {% include 'graphics.html' %}
+    {% include 'articles_search_header.html' %}
 {% endblock section_content_upper %}
 {% block title_section_content_under %}
     Articles list
 {% endblock title_section_content_under %}
 
 {% block section_content_under %}
-    <div id="search_datatype">
-        {% include 'articles_search_header.html'%}
-        <div id="search_data">
-            {% include 'articles_table.html' %}
-        </div>
-    </div>
+    {% include 'articles_table.html' %}
 {% endblock section_content_under %}
 

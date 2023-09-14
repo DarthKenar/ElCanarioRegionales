@@ -1,23 +1,31 @@
-{% extends 'base.html' %}
+{% extends 'base_home.html' %}
 {% load static %}
-{% block title %}
+{% block title_section %}
     <title>Customers - Canario Regionales</title>
-{% endblock title %}
-{% block content %}
-    {% include 'menu.html' %}
+{% endblock title_section %}
+{% block title_section_content_upper %}
+    <h1 class="text-3xl text-black pb-6">Search customers:</h1>
+{% endblock title_section_content_upper %}
+{% block section_content_upper %}
+    {% include 'customers_search_header.html'%}
+{% endblock section_content_upper %}
 
-    <div id="customers_search_datatype">
+{% block title_section_content_under %}
+    Customers list
+{% endblock title_section_content_under %}
+{% block section_content_under %}
+    {% include 'customers_table.html' %}
+{% endblock section_content_under %}
 
-        {% include 'customers_search_header.html'%}
+    
 
-        <div id="customers_search_data">
 
-            {% include 'customers_table.html' %}
 
-        </div>
-        
-    </div>
 
-    {% include 'footer.html' %}
-{% endblock content %}
- 
+
+
+
+
+
+
+

@@ -2,50 +2,27 @@
   <table class="min-w-full bg-white">
     <thead class="bg-gray-800 text-white">
         <tr>
-            <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Message Info</th>
-            <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Date</th>
-            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Made by</th>
+          <th class="text-left py-3 px-4 uppercase font-semibold text-sm">#</th>
+          <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Name</th>
+          <th class="text-left py-3 px-4 uppercase font-semibold text-sm">DNI</th>
+          <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Phone number</th>
+          <th class="text-left py-3 px-4 uppercase font-semibold text-sm">E-mail</th>
+          <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Address</th>
+          <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Total purchased</th>
+          <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Functions</th>
         </tr>
     </thead>
     <tbody class="text-gray-700">
-        {% for message in messagelog_list %}
+        {% for object in object_list %}
             <tr class="{% if forloop.counter|divisibleby:2  %}bg-gray-200{% endif %}" >
-                <td class="w-1/3 text-left py-3 px-4" id="{{message.info}}">{{message.info}}</td>
-                <td class="w-1/3 text-left py-3 px-4" id="{{message.date}}">{{message.date}}</td>
-                <td class="text-left py-3 px-4 hover:text-red-500" id="{{message.date}}">UserName</td>
-            </tr>
-        {% endfor %}
-    </tbody>
-  </table>
-  
-  <div class="flex flex-col overflow-x-auto max-w-[90%] items-center">
-    <div class="sm:-mx-6 lg:-mx-8">
-      <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-        <div class="overflow-x-auto">
-          <table class="min-w-full text-left text-sm font-light">
-            <thead class="border-b font-medium dark:border-neutral-500">
-              <tr>
-                <th scope="col" class="px-6 py-4">#</th>
-                <th scope="col" class="px-6 py-4">Name</th>
-                <th scope="col" class="px-6 py-4">DNI</th>
-                <th scope="col" class="px-6 py-4">Phone number</th>
-                <th scope="col" class="px-6 py-4">E-mail</th>
-                <th scope="col" class="px-6 py-4">Address</th>
-                <th scope="col" class="px-6 py-4">Total purchased</th>
-                <th scope="col" class="px-6 py-4">Functions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for object in object_list %}
-              <tr class="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
-                <td class="whitespace-nowrap px-6 py-4 font-medium" id="{{object.id}}">{{object.id}}</td>
-                <td class="whitespace-nowrap px-6 py-4">{{object.name}}</td>
-                <td class="whitespace-nowrap px-6 py-4">{% if object.dni == None %}-{% else %}{{object.dni}}{% endif %}</td>
-                <td class="whitespace-nowrap px-6 py-4">{% if object.phone_number == None %}-{% else %}{{object.phone_number}}{% endif %}</td>
-                <td class="whitespace-nowrap px-6 py-4">{% if object.email == None %}-{% else %}{{object.email}}{% endif %}</td>
-                <td class="whitespace-nowrap px-6 py-4">{% if object.address == None %}-{% else %}{{object.address}}{% endif %}</td>
-                <td class="whitespace-nowrap px-6 py-4">$ {{object.total_purchased}}</td>
-                <td class="whitespace-nowrap px-6 py-4 flex max-sm:flex-col sm:justify-center items-center">
+                <td class="w-1/3 text-left py-3 px-4" id="{{object.id}}">{{object.id}}</td>
+                <td class="w-1/3 text-left py-3 px-4">{{object.name}}</td>
+                <td class="text-left py-3 px-4">{% if object.dni == None %}-{% else %}{{object.dni}}{% endif %}</td>
+                <td class="text-left py-3 px-4">{% if object.phone_number == None %}-{% else %}{{object.phone_number}}{% endif %}</td>
+                <td class="text-left py-3 px-4">{% if object.email == None %}-{% else %}{{object.email}}{% endif %}</td>
+                <td class="text-left py-3 px-4">{% if object.address == None %}-{% else %}{{object.address}}{% endif %}</td>
+                <td class="text-left py-3 px-4">$ {{object.total_purchased}}</td>
+                <td class="text-left py-3 px-4">
                   <form class="py-1" action="{% url 'customers:update' pk=object.id %}" method="GET">
                       <button ion-button icon-only type="submit" class="max-sm:mx-auto text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 mx-2 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
                           <ion-icon name="create-outline"></ion-icon>
@@ -58,12 +35,8 @@
                       </button>
                   </form>
                 </td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
+            </tr>
+        {% endfor %}
+    </tbody>
+  </table>
 {% endif %}
