@@ -1,7 +1,7 @@
 
 <div class="bg-gray-800 text-white">
-    <div class="sm:flex sm:justify-center sm:items-center">
-        <div class="flex place-content-start max-sm:pt-2 justify-center">
+    <div class="sm:flex sm:justify-center sm:items-center justify-stretch">
+        <div class="flex place-content-start max-sm:pt-2">
             <div class="flex items-center justify-center py-2 w-[30%]">
                 <label class="font-sans font-bold mx-2 overflow-hidden " for="datatype_input">Search:</label>
             </div>
@@ -18,7 +18,7 @@
                 <option value="sell_price" {% if datatype_input == "sell_price" %} selected {% endif %}>Sell price</option>
                 <option value="stock" {% if datatype_input == "stock" %} selected {% endif %}>Stock</option>
             </select>
-            {% if datatype_input == 'id' or datatype_input == 'name' or datatype_input == 'buy_price' or datatype_input == 'increase' or datatype_input == 'sell_price' or datatype_input == 'stock' %}<input class="rounded-sm sm:px-2 sm:mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'articles:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>{% endif %}
+            {% if datatype_input == 'id' or datatype_input == 'name' or datatype_input == 'buy_price' or datatype_input == 'increase' or datatype_input == 'sell_price' or datatype_input == 'stock' %}<input class="text-black rounded-sm sm:px-2 sm:mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'articles:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>{% endif %}
             {% for category in categories %}
                 {% if datatype_input == category.id %}
                     <select class="text-black rounded-sm px-2 mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'articles:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_data" hx-swap="outerHTML" hx-trigger="change">

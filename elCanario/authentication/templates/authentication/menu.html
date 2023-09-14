@@ -8,23 +8,23 @@
         </form>
     </div>
     <nav class="text-white text-base font-semibold pt-3">
-        <a href="{% url 'home' %}" class="flex items-center active-nav-link text-white py-4 pl-6 nav-item">
+        <a href="{% url 'home' %}" class="flex items-center text-white {% if not 'home' in request.path %}hover:opacity-75 {% else %} active-nav-link  {% endif %}py-4 pl-6 nav-item">
             <i class="fas fa-tachometer-alt mr-3"></i>
             Dashboard
         </a>
-        <a href="{% url 'orders:orders' %}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+        <a href="{% url 'orders:orders' %}" class="flex items-center text-white {% if not 'orders' in request.path %}hover:opacity-75 {% else %} active-nav-link {% endif %} py-4 pl-6 nav-item">
             <i class="fas fa-table mr-3"></i>
             Orders
         </a>
-        <a href="{% url 'articles:articles' %}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+        <a href="{% url 'articles:articles' %}" class="flex items-center text-white {% if not 'articles' in request.path %}hover:opacity-75 {% else %} active-nav-link {% endif %} py-4 pl-6 nav-item">
             <i class="fas fa-align-left mr-3"></i>
             Articles
         </a>
-        <a href="{% url 'customers:customers' %}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+        <a href="{% url 'customers:customers' %}" class="flex items-center text-white {% if not 'customers' in request.path %}hover:opacity-75 {% else %} active-nav-link {% endif %} py-4 pl-6 nav-item">
             <i class="fas fa-tablet-alt mr-3"></i>
             Customers
         </a>
-        <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+        <a href="#" class="flex items-center text-white {% if not 'calendar' in request.path %}hover:opacity-75 {% else %} active-nav-link {% endif %} py-4 pl-6 nav-item">
             <i class="fas fa-calendar mr-3"></i>
             Calendar
         </a>

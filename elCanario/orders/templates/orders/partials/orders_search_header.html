@@ -1,19 +1,10 @@
-<div class="w-[90%] mx-auto bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md border-2 p-4 shadow-slate-600 shadow-sm border-amber-100">
-    <div class="sm:flex sm:justify-start sm:items-start">
-        <div class="flex content-between sm:hidden pb-10">
-            <div class="basis-1/2 flex place-content-center">
-                <form action="{% url 'orders:create' %}">
-                    <button  ion-button icon-only type="submit">
-                        <ion-icon title="Create Order" class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" name="add-circle-outline"></ion-icon>
-                    </button>
-                </form>
-            </div>
-        </div>
-        <div class=" flex place-content-start mt-5">
+<div class="bg-gray-800 text-white">
+    <div class="sm:flex sm:justify-center sm:items-center">
+        <div class="flex place-content-start max-sm:pt-2 justify-center">
             <div class="flex items-center justify-center py-2 w-[30%]">
-                <label class="text-black font-sans font-bold mx-2 overflow-hidden " for="datatype_input">Search:</label>
+                <label class="font-sans font-bold mx-2 overflow-hidden " for="datatype_input">Search:</label>
             </div>
-            <select class="bg-amber-50 rounded-sm px-2 mx-2 py-2 w-[70%]" name="datatype_input" id="datatype_input" hx-get="{% url 'orders:read_datatype' %}" hx-target="#search_datatype"  hx-trigger="change" hx-swap="outerHTML">
+            <select class="text-black rounded-sm px-2 mx-2 py-2 w-[70%]" name="datatype_input" id="datatype_input" hx-get="{% url 'orders:read_datatype' %}" hx-target="#search_datatype"  hx-trigger="change" hx-swap="outerHTML">
                 <option value="id" {% if datatype_input == "id" %} selected {% endif %}>ID</option>
                 <option value="customer_id" {% if datatype_input == "customer_id" %} selected {% endif %}>Customer</option>
                 <option value="articles_cart" {% if datatype_input == "articles_cart" %} selected {% endif %}>Articles</option>
@@ -23,11 +14,10 @@
                 <option value="creation_date" {% if datatype_input == "creation_date" %} selected {% endif %}>Created</option>
                 <option value="updated_date" {% if datatype_input == "updated_date" %} selected {% endif %}>Updated</option>
                 <option value="delivery_status" {% if datatype_input == "delivery_status" %} selected {% endif %}>Status</option>
-
             </select>
-            {% if datatype_input == 'id' or datatype_input == 'article_quantity' or datatype_input == 'total_pay' or datatype_input == 'details' %}<input class="bg-amber-50 rounded-sm sm:px-2 sm:mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'orders:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>{% endif %}
+            {% if datatype_input == 'id' or datatype_input == 'article_quantity' or datatype_input == 'total_pay' or datatype_input == 'details' %}<input class="text-black rounded-sm sm:px-2 sm:mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'orders:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>{% endif %}
             {% if datatype_input == 'customer_id' %}
-                <select class="bg-amber-50 rounded-sm px-2 mx-2 py-2 w-[70%]" placeholder="{{datatype}}" type="text" hx-get="{% url 'orders:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_data" hx-swap="outerHTML" hx-trigger="change">
+                <select class="text-black rounded-sm px-2 mx-2 py-2 w-[70%]" placeholder="{{datatype}}" type="text" hx-get="{% url 'orders:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_data" hx-swap="outerHTML" hx-trigger="change">
                     <option value="">All</option>
                     {% for customer in customer_list %}
                         <option value="{{customer.id}}">{{customer}}</option>
@@ -35,7 +25,7 @@
                 </select>
             {% endif %}
             {% if datatype_input == 'articles_cart' %}
-                <select class="bg-amber-50 rounded-sm px-2 mx-2 py-2 w-[70%]" placeholder="{{datatype}}" type="text" hx-get="{% url 'orders:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_data" hx-swap="outerHTML" hx-trigger="change">
+                <select class="text-black rounded-sm px-2 mx-2 py-2 w-[70%]" placeholder="{{datatype}}" type="text" hx-get="{% url 'orders:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_data" hx-swap="outerHTML" hx-trigger="change">
                     <option value="">All</option>
                     {% for article in article_list %}
                         <option value="{{article.id}}">{{article}}</option>
@@ -43,10 +33,10 @@
                 </select>
             {% endif %}
             {% if datatype_input == 'creation_date' or datatype_input == 'updated_date' %}
-                <input class="bg-amber-50 rounded-sm px-2 mx-2" type="date" hx-get="{% url 'orders:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_data" hx-swap="outerHTML" hx-trigger="change">
+                <input class="text-black rounded-sm px-2 mx-2" type="date" hx-get="{% url 'orders:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_data" hx-swap="outerHTML" hx-trigger="change">
             {% endif %}
             {% if datatype_input == 'delivery_status' %}
-            <select class="bg-amber-50 rounded-sm px-2 mx-2 py-2 w-[70%] placeholder="{{datatype}}" type="text" hx-get="{% url 'orders:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_data" hx-swap="outerHTML" hx-trigger="change">
+            <select class="text-black rounded-sm px-2 mx-2 py-2 w-[70%] placeholder="{{datatype}}" type="text" hx-get="{% url 'orders:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_data" hx-swap="outerHTML" hx-trigger="change">
                 <option value="">All</option>
                 <option value="True">Done</option>
                 <option value='None'>Pending</option>
