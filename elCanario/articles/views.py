@@ -23,9 +23,11 @@ class ArticleListView(LoginRequiredMixin,ListView):#LoginRequiredMixin,
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
+        categories = Category.objects.all()
         context["datatype"] = 'Name'
         context["datatype_input"] = 'name'
         context["answer"] = "Articles in Database"
+        context["categories"] = categories
         return context
 
 

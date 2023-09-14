@@ -1,24 +1,48 @@
 <div id="search_data" >
     {% if article_list %}
-        <div class="w-[90%] mx-auto bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100">
             {% if answer_error_name %}
-                <output class="font-bold empty:hidden cursor-default text-red-600 appear" type="text">{{answer_error_name}}</output><br>
+                <div class="bg-red-300 mb-2 border border-red-300 text-red-dark px-4 py-3 rounded relative appear" role="alert">
+                    <strong class="font-bold">Oops!</strong>
+                    <span class="block sm:inline">{{answer_error_name}}</span>
+                    <span class="absolute top-0 right-0 px-4 py-3">
+                        <svg class="fill-current h-6 w-6 text-red" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+                    </span>
+                </div>
             {% endif %}
             {% if article_delete_answer %}
-                <output class="font-bold empty:hidden cursor-default text-red-600 appear" type="text">{{article_delete_answer}}</output><br>
+                <div class="bg-orange-300 mb-2 border border-orange-300 text-orange-600 px-4 py-3 rounded relative appear" role="alert">
+                    <strong class="font-bold">Atention!</strong>
+                    <span class="block sm:inline">{{article_delete_answer}}</span>
+                    <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                        <svg class="fill-current h-6 w-6 text-orange" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+                    </span>
+                </div>
             {% endif %}
-            <output class="font-bold empty:hidden cursor-default appear text-green-600" type="text">Articles found: <b>{{ article_list.count }}</b>.</output>
-        </div>
+            <div class="bg-green-300 mb-2 border border-green-300 text-green-600 px-4 py-3 rounded relative appear" role="alert">
+                <strong class="font-bold">Yeaah!</strong>
+                <span class="block sm:inline">Number of articles found: <b>{{ article_list.count }}</span>
+                <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                    <svg class="fill-current h-6 w-6 text-green" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+                </span>
+            </div>
         {% include 'articles_table.html' %}
     {% else %}
         {% if value %}
-            <div class="w-[90%] mx-auto bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100">
-                <output class="font-bold empty:hidden cursor-default text-red-600 appear" type="text">No Articles found for: <b> {{datatype}} {{value}}</b></output>
+            <div class="bg-orange-300 mb-2 border border-orange-300 text-orange-600 px-4 py-3 rounded relative appear" role="alert">
+                <strong class="font-bold">Atention!</strong>
+                <span class="block sm:inline">No Articles found for: <b> {{datatype}} {{value}}</b></span>
+                <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                    <svg class="fill-current h-6 w-6 text-orange" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+                </span>
             </div>
         {% else %}
-            <div class="w-[90%] mx-auto bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100">
-                <output class="font-bold empty:hidden cursor-default text-red-600 appear" type="text">No Articles found. <b> {{datatype}} {{value}}</b></output>
-            </div>
+        <div class="bg-red-300 mb-2 border border-red-300 text-red-dark px-4 py-3 rounded relative appear" role="alert">
+            <strong class="font-bold">Oops!</strong>
+            <span class="block sm:inline">No Articles found. <b> {{datatype}} {{value}}</span>
+            <span class="absolute top-0 right-0 px-4 py-3">
+                <svg class="fill-current h-6 w-6 text-red" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+            </span>
+        </div>
         {% endif %}
     {% endif %}
 </div>

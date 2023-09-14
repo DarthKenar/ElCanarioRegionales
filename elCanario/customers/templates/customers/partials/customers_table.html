@@ -15,7 +15,7 @@
     <tbody class="text-gray-700">
         {% for object in object_list %}
             <tr class="{% if forloop.counter|divisibleby:2  %}bg-gray-200{% endif %}" >
-                <td class="w-1/3 text-left py-3 px-4" id="{{object.id}}">{{object.id}}</td>
+                <td class="text-left py-3 px-4" id="{{object.id}}">{{object.id}}</td>
                 <td class="w-1/3 text-left py-3 px-4">{{object.name}}</td>
                 <td class="text-left py-3 px-4">{% if object.dni == None %}-{% else %}{{object.dni}}{% endif %}</td>
                 <td class="text-left py-3 px-4">{% if object.phone_number == None %}-{% else %}{{object.phone_number}}{% endif %}</td>
