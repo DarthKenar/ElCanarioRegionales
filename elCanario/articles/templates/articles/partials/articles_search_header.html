@@ -34,7 +34,7 @@
                 <option value="stock" {% if datatype_input == "stock" %} selected {% endif %}>Stock</option>
             </select>
             <p></p>
-            {% if datatype_input == 'id' or datatype_input == 'name' or datatype_input == 'buy_price' or datatype_input == 'increase' or datatype_input == 'sell_price' or datatype_input == 'stock' %}<input class="bg-amber-50 rounded-sm px-2 mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'articles:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#articles_search_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>{% endif %}
+            {% if datatype_input == 'id' or datatype_input == 'name' or datatype_input == 'buy_price' or datatype_input == 'increase' or datatype_input == 'sell_price' or datatype_input == 'stock' %}<input class="bg-amber-50 rounded-sm sm:px-2 sm:mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'articles:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#articles_search_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>{% endif %}
             {% for category in categories %}
                 {% if datatype_input == category.id %}
                     <select class="bg-amber-50 rounded-sm px-2 mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'articles:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#articles_search_data" hx-swap="outerHTML" hx-trigger="change">

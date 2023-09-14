@@ -22,7 +22,7 @@
                 <option value="address" {% if datatype_input == "address" %} selected {% endif %}>Address</option>
                 <option value="total_purchased" {% if datatype_input == "total_purchased" %} selected {% endif %}>Total purchased</option>
             </select>
-            <input class="bg-amber-50 rounded-sm px-2 mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'customers:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#customers_search_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>
+            <input class="bg-amber-50 rounded-sm sm:px-2 sm:mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'customers:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#customers_search_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>
         </div>
         <div class="flex place-content-end items-center max-sm:hidden">
             <form action="{% url 'customers:create' %}">

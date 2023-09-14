@@ -25,7 +25,7 @@
                 <option value="delivery_status" {% if datatype_input == "delivery_status" %} selected {% endif %}>Status</option>
 
             </select>
-            {% if datatype_input == 'id' or datatype_input == 'article_quantity' or datatype_input == 'total_pay' or datatype_input == 'details' %}<input class="bg-amber-50 rounded-sm px-2 mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'orders:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#orders_search_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>{% endif %}
+            {% if datatype_input == 'id' or datatype_input == 'article_quantity' or datatype_input == 'total_pay' or datatype_input == 'details' %}<input class="bg-amber-50 rounded-sm sm:px-2 sm:mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'orders:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#orders_search_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>{% endif %}
             {% if datatype_input == 'customer_id' %}
                 <select class="bg-amber-50 rounded-sm px-2 mx-2 py-2 w-[70%] placeholder="{{datatype}}" type="text" hx-get="{% url 'orders:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#orders_search_data" hx-swap="outerHTML" hx-trigger="change">
                     <option value="">All</option>
