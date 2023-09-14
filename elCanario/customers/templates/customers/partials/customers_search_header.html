@@ -13,7 +13,7 @@
             <div class="flex items-center justify-center  py-2 w-[30%]">
                 <label class="text-black font-sans font-bold mx-2 overflow-hidden " for="datatype_input">Search:</label>
             </div>
-            <select class="bg-amber-50 rounded-sm px-2 mx-2 py-2 w-[70%]" name="datatype_input" id="datatype_input" hx-get="{% url 'customers:read_datatype' %}" hx-target="#customers_search_datatype"  hx-trigger="change" hx-swap="outerHTML">
+            <select class="bg-amber-50 rounded-sm px-2 mx-2 py-2 w-[70%]" name="datatype_input" id="datatype_input" hx-get="{% url 'customers:read_datatype' %}" hx-target="#search_datatype"  hx-trigger="change" hx-swap="outerHTML">
                 <option value="id" {% if datatype_input == "id" %} selected {% endif %}>ID</option>
                 <option value="name" {% if datatype_input == "name" %} selected {% endif %}>Name</option>
                 <option value="dni" {% if datatype_input == "dni" %} selected {% endif %}>DNI</option>
@@ -22,7 +22,7 @@
                 <option value="address" {% if datatype_input == "address" %} selected {% endif %}>Address</option>
                 <option value="total_purchased" {% if datatype_input == "total_purchased" %} selected {% endif %}>Total purchased</option>
             </select>
-            <input class="bg-amber-50 rounded-sm sm:px-2 sm:mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'customers:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#customers_search_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>
+            <input class="bg-amber-50 rounded-sm sm:px-2 sm:mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'customers:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>
         </div>
         <div class="flex place-content-end items-center max-sm:hidden">
             <form action="{% url 'customers:create' %}">

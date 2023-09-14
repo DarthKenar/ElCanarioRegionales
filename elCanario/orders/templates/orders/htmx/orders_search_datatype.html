@@ -1,6 +1,6 @@
-<div id="orders_search_datatype">
+<div id="search_datatype">
     {% include 'orders_search_header.html' %}
-    <div id="orders_search_data">
+    <div id="search_data">
         <div class="w-[90%] mx-auto bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md border-2 p-4 m-8 shadow-slate-600 shadow-sm border-separate border-amber-100">
             {% if order_list.count > 0 %}
                 <output class="font-bold empty:hidden cursor-default appear text-green-600" type="text">Number of orders found: <b>{{ order_list.count }}</b>.</output>

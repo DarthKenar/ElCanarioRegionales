@@ -1,17 +1,23 @@
-{% extends 'base.html' %}
-{% block title %}
+{% extends 'base_home.html' %}
+{% block title_section %}
     <title>Search Articles - Canario Regionales</title>
-{% endblock title %}
-{% block content %}
-    {% include 'menu.html' %}
-        {% load custom_tags %}
-        {% get_all_categories as categories %}
-        <div id="articles_search_datatype">
-            {% include 'articles_search_header.html'%}
-            <div id="articles_search_data">
-                {% include 'articles_table.html' %}
-            </div>
+{% endblock title_section %}
+{% block title_section_content_upper %}
+    <h1 class="text-3xl text-black pb-6">Search articles:</h1>
+{% endblock title_section_content_upper %}
+{% block section_content_upper %}
+    {% include 'graphics.html' %}
+{% endblock section_content_upper %}
+{% block title_section_content_under %}
+    Articles list
+{% endblock title_section_content_under %}
+
+{% block section_content_under %}
+    <div id="search_datatype">
+        {% include 'articles_search_header.html'%}
+        <div id="search_data">
+            {% include 'articles_table.html' %}
         </div>
-    {% include 'footer.html' %}
-{% endblock content %}
+    </div>
+{% endblock section_content_under %}
 
