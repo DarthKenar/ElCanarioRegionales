@@ -43,6 +43,10 @@ INSTALLED_APPS = [
     'pwa',
     'widget_tweaks'
 ]
+# Apps de terceros
+INSTALLED_APPS += [
+    "slippers",
+]
 #own apps
 INSTALLED_APPS += [
     'articles',
@@ -98,6 +102,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            "builtins": ["slippers.templatetags.slippers"],  # Slippers
         },
     },
 ]

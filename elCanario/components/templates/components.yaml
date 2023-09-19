@@ -1,0 +1,34 @@
+# Documentación de componentes:
+# Título
+# *atributos (opciones) (descripción)
+# children: (descripcion)
+
+components:
+
+  # Mensajes
+  # *type ("danger", "success", "warning", "info") "danger": rojo, "success": verde, "warning": naranja, "info", azul]
+  # *heading (Texto en negrita)
+  # *children (Texto simple - Introducir solo texto)
+  message: "molecules/message.html"
+
+  # Botones
+  # *type ("danger", "success", "warning", "info") "danger": rojo, "success": verde, "warning": naranja, "info", azul]
+  # *id (int - valor para id en etiqueta)
+  # *children (Texto simple - Introducir solo texto)
+  button: "molecules/button.html"
+
+  # Secciones
+  # *type ("full", "cols")
+  # *heading (str) (opcional)
+  # *children (html)
+  section: "molecules/section.html"
+
+  # Columnas (Para seccion componente section de Type = cols)
+  # *type ("full", "cols")
+  # *heading (str) (opcional)
+  # *children (html)
+  column: "molecules/column.html"
+
+  card: "molecules/card.html"
+  original_card: "molecules/original_card.html"
+

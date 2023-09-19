@@ -1,0 +1,15 @@
+<div class="m-2 border-solid border-gray-300 rounded border shadow-sm w-full md:w-1/2">
+    {% if heading %}
+        <div class="bg-gray-200 px-3 py-3 border-solid border-gray-300 border-b">
+            {{heading}}
+        </div>
+        <div class="p-3">
+            {{children}}
+        </div>
+    {% else %}
+        <div class="p-3">
+            {{children}}
+        </div>
+    {% endif %}
+</div>
+

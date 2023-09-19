@@ -1,0 +1,23 @@
+<div class="flex flex-col">
+    <!-- Card Sextion Starts Here -->
+    <div class="flex flex-1 flex-col md:flex-row lg:flex-row">
+        {% if type == "full" %}
+            <div class="m-2 border-solid border-gray-300 rounded border shadow-sm w-full">
+                {% if heading %}
+                    <div class="bg-gray-200 px-3 py-3 border-solid border-gray-200 border-b">
+                        {{heading}}
+                    </div>
+                    <div class="p-3">
+                        {{children}}
+                    </div>
+                {% else %}
+                    <div class="p-3">
+                        {{children}}
+                    </div>
+                {% endif %}
+            </div>
+        {% elif type == "cols" %}
+            {{children}}
+        {% endif %}
+    </div>
+</div>

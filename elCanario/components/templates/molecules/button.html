@@ -1,0 +1,14 @@
+<button id={{id}} 
+class="{% if type == 'info' %} bg-blue-500 hover:bg-blue-800 border-blue-800 
+{% elif type == 'success' %} bg-green-500 hover:bg-green-800 border-green-800 
+{% elif type == 'danger' %} bg-red-500 hover:bg-red-700 border-red-800 
+{% elif type == 'warning' %} bg-orange-500 hover:bg-orange-700 border-orange-800 
+{% endif %}
+{% if border == "False" %} 
+{% else %}
+border
+{% endif %}
+text-white font-bold py-2 px-4 rounded-lg">
+    {{children}}
+</button>
+
