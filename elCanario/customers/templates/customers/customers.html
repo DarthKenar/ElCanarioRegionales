@@ -11,10 +11,18 @@
     {% include 'customers_search_header.html'%}
 {% endblock section_content_upper %}
 {% block title_section_content_under %}
-    Customers list
-    {% #button type="success" url='customers:create' border="False" %}
-        Crear
-    {% /button %}
+    <div class="text-xl pb-3 flex items-center justify-between">
+        <!-- Latest Reports -->
+        <div class="text-xl pb-3 flex items-center">
+            <i class="fas fa-list mr-3"></i>
+            <span>Customers list</span>
+        </div>
+        <div class="text-base">
+            {% #button type="success" url='customers:create' border="False" %}
+                Crear
+            {% /button %}
+        </div>
+    </div>
 {% endblock title_section_content_under %}
 {% block section_content_under %}
     {% include 'customers_table.html' %}

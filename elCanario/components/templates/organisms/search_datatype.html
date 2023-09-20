@@ -8,9 +8,12 @@
                 <i class="fas fa-list mr-3"></i>
                 <span>{{object_type|title}} list</span>
             </div>
-            {% #button type="success" url=url_create border="False" %}
-                Crear
-            {% /button %}
+            <div class="text-base">
+                {% #button type="success" url=url_create border="False" %}
+                    Crear
+                {% /button %}
+            </div>
+
         </div>
         <div class="bg-white overflow-auto" id="search_data">
             {% if object_list.count > 0 %}
