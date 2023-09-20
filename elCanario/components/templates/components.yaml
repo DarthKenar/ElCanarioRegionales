@@ -43,6 +43,16 @@ components:
   # *total_purchased (str) (customer total purchased)
   card_customer: "molecules/card_customer.html"
 
+  # Card Order
+  # *id=order.id (order id)
+  # *name=order.customer_id.name
+  # *phone_number=order.customer_id.phone_number
+  # *total_pay=order.total_pay 
+  # *articles_cart=order.articles_cart.all 
+  # *article_quantity=order.article_quantity 
+  # *details=order.details
+  card_order: "molecules/card_order.html"
+
   # Search Header
   # children (necessary html labels for search any)
   search_header: "molecules/search_header.html"

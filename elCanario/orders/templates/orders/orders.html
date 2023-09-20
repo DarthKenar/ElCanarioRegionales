@@ -12,7 +12,18 @@
 {% endblock section_content_upper %}
 
 {% block title_section_content_under %}
-    Orders list
+    <div class="text-xl pb-3 flex items-center justify-between">
+        <!-- Latest Reports -->
+        <div class="text-xl pb-3 flex items-center">
+            <i class="fas fa-list mr-3"></i>
+            <span>Orders list</span>
+        </div>
+        <div class="text-base">
+            {% #button type="success" url='orders:create' border="False" %}
+                Create order
+            {% /button %}
+        </div>
+    </div>
 {% endblock title_section_content_under %}
 {% block section_content_under %}
     {% include 'orders_table.html' %}

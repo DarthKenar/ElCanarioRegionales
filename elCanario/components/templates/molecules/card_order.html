@@ -1,0 +1,44 @@
+{% load static %}
+<div class="relative mx-auto w-full max-w-sm pt-6">
+    <div  class="relative inline-block w-full transform transition-transform duration-300 ease-in-out">
+      <div class="rounded-lg">
+        <div class="">
+          <div class="mt-4 grid grid-cols-2">
+            <div class="flex items-center">
+              <div class="relative">
+                <h2 class="line-clamp-1 text-base font-medium text-gray-800 md:text-lg" title="New York"><b>{{name}}</b></h2>
+                <p class="mt-2 line-clamp-1 text-sm text-gray-800" title="New York, NY 10004, United States">Tel. {{phone_number}}</p>
+              </div>
+            </div>
+  
+            <div class="flex items-center justify-end">
+              <p class="text-primary inline-block break-words rounded-xl font-semibold leading-tight">
+                <span class="text-sm uppercase"> $ </span>
+                <span class="text-lg">{{total_pay}}</span>
+              </p>
+            </div>
+          </div>
+  
+          <div class="grid grid-cols-2 grid-rows-2 gap-4 border-b border-t border-gray-200 pb-3 pt-3 break-words">
+            {% for article in articles_cart %}
+                <p class="flex items-center text-gray-800 xl:flex-row xl:items-center text-ellipsis">
+                    <img width="24" height="24" src="https://img.icons8.com/fluency-systems-regular/48/arrow.png" alt="arrow"/>
+                    <span class="mt-0">{{article}}</span>
+                </p> 
+            {% endfor %}
+          </div>
+          <div class="border-b border-gray-200 py-3 w-full flex justify-around items-center">
+            <p>{{details}}</p>
+          </div>
+          <div class="border-b border-gray-200 py-3 w-full flex justify-around items-center">
+            {% #button type="warning" url='orders:update' id=id %}
+                Editar
+            {% /button %}
+            {% #button type="danger" url='orders:delete' id=id border="False" object_type="order" object_name=name %}
+                Eliminar
+            {% /button %}
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

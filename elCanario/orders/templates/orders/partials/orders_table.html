@@ -1,93 +1,9 @@
 {% if object_list %}
-  <table class="min-w-full bg-white">
-    <thead class="bg-gray-800 text-white">
-        <tr>
-          <th class="text-left py-3 px-4 uppercase font-semibold text-sm">#</th>
-          <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Customer</th>
-          <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Articles</th>
-          <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Quantity</th>
-          <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Total Pay</th>
-          <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Details</th>
-          <th class="text-left py-3 px-4 uppercase font-semibold text-sm">
-              <div class="flex justify-center items-center">
-                  <ion-icon name="calendar-outline"></ion-icon>
-                  <b class="ml-1">Created</b>
-              </div>
-          </th>
-          <th class="text-left py-3 px-4 uppercase font-semibold text-sm">
-              <div class="flex justify-center items-center">
-                  <ion-icon name="refresh-circle-outline"></ion-icon>
-                  <b class="ml-1">Updated</b>
-              </div>
-          </th>
-          <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Status</th>
-          <th class="text-left py-3 px-4 uppercase font-semibold text-sm">
-              <div class="flex justify-center items-center">
-                  <ion-icon name="code-working-outline"></ion-icon>
-                  <b class="ml-1">Functions</b>
-              </div>
-          </th>
-        </tr>
-    </thead>
-    <tbody class="text-gray-700">
-        {% for order in order_list %}
-        <tr class="{% if forloop.counter|divisibleby:2  %}bg-gray-200{% endif %}">
-            <td class="md:m-2 md:px-6 lg:m-4 lg:px-8 max-sm:hidden max-md:hidden max-lg:hidden whitespace-nowrap" id="{{order.id}}">{{order.id}}</td>
-            <td class="md:m-2 md:px-6 lg:m-4 lg:px-8 whitespace-nowrap">
-                <div class="max-lg:flex max-lg:flex-col lg:justify-center lg:items-center">
-                    <span>{{order.customer_id.name}}</span>
-                    <span>{{order.customer_id.dni}}</span>
-                </div>
-            </td>
-            <td class="md:m-2 md:px-6 lg:m-4 lg:px-8 whitespace-nowrap">
-                
-                <ul>
-                    {% for article in order.articles_cart.all %}
-                    <li>
-                        {{article}}
-                    </li>
-                    {% endfor %}
-                </ul>
-                
-            </td>
-            <td class="md:m-2 md:px-6 lg:m-4 lg:px-8 tabular-nums slashed-zero max-sm:hidden max-md:hidden max-lg:hidden whitespace-nowrap">{{order.article_quantity}}</td>
-            <td class="md:m-2 md:px-6 lg:m-4 lg:px-8 tabular-nums slashed-zero whitespace-nowrap">$ {{order.total_pay}}</td>
-            <td class="md:m-2 md:px-6 lg:m-4 lg:px-8 tabular-nums max-sm:hidden max-md:hidden max-lg:hidden slashed-zero">{% if order.details == None %}-{% else %}{{order.details}}{% endif %}</td>
-            <td class="md:m-2 md:px-6 lg:m-4 lg:px-8 max-sm:hidden max-md:hidden max-lg:hidden"> <p class="whitespace-nowrap">{{order.creation_date}}</p></td>
-            <td class="md:m-2 md:px-6 lg:m-4 lg:px-8 max-sm:hidden max-md:hidden max-lg:hidden"> <p class="whitespace-nowrap">{{order.updated_date}}</p></td>
-            <td class="md:m-2 md:px-6 lg:m-4 lg:px-8 max-sm:hidden"> 
-                {% if order.delivery_status is True %}
-                    <p class="whitespace-nowrap text-green-600">
-                        <ion-icon name="checkmark-circle-outline"></ion-icon>
-                        Done
-                    </p>
-                {% elif order.delivery_status is False %}
-                    <p class="whitespace-nowrap text-red-600">
-                        <ion-icon name="close-circle-outline" ></ion-icon>
-                        Canceled
-                    </p>
-                {% else %}
-                    <p class="whitespace-nowrap ">
-                        <ion-icon name="ellipsis-horizontal-circle-outline" ></ion-icon>
-                        Pending
-                    </p>
-                {% endif %}
-            </td>
-            <td class="text-left py-3 px-4 flex items-center justify-center">
-                <form action="{% url 'orders:update' pk=order.id %}" method="GET">
-                    <button ion-button icon-only type="submit" class="text-amber-50 rounded-tl-lg rounded-br-lg bg-[#3d68ff] px-4 mx-2 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
-                        <ion-icon name="create-outline"></ion-icon>
-                    </button>
-                </form>
-                <form hx-delete="{% url 'orders:delete' pk=order.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#search_data" hx-confirm="Are you sure you want to delete the order:  for {{order.customer_id}}?">
-                    {% csrf_token %}
-                    <button type="submit" ion-button icon-only class="text-amber-50 rounded-tl-lg rounded-br-lg bg-[#3d68ff] px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
-                        <ion-icon name="trash-outline"></ion-icon>
-                    </button>
-                </form>
-            </td>
-        </tr>
+  {% #section type="cols" %}
+    {% for object in object_list %}
+      {% #column %}
+        {% card_order id=object.id name=object.customer_id.name phone_number=object.customer_id.phone_number total_pay=object.total_pay articles_cart=object.articles_cart.all article_quantity=object.article_quantity details=object.details %}
+      {% /column %}
     {% endfor %}
-    </tbody>
-  </table>
+  {% /section %}
 {% endif %}

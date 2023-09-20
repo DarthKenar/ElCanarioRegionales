@@ -85,3 +85,13 @@ ion-icon {
 .mitad-superior-transparente{
   clip-path: polygon(0% 50%, 100% 50%, 100% 100%, 0% 100%);
 }
+/* .input {
+  font-weight: 700;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 0.125rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+} */
