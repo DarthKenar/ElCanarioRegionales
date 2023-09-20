@@ -1,27 +1,14 @@
-<div class="bg-gray-800 text-white">
-    <div class="sm:flex sm:justify-center sm:items-center">
-        <div class="flex place-content-start max-sm:pt-2 justify-center">
-            <div class="flex items-center justify-center py-2 w-[30%]">
-                <label class="font-sans font-bold mx-2 overflow-hidden " for="datatype_input">Search:</label>
-            </div>
-            <select class="text-black rounded-sm px-2 mx-2 py-2 w-[70%]" name="datatype_input" id="datatype_input" hx-get="{% url 'customers:read_datatype' %}" hx-target="#search_datatype"  hx-trigger="change" hx-swap="outerHTML">
-                <option value="id" {% if datatype_input == "id" %} selected {% endif %}>ID</option>
-                <option value="name" {% if datatype_input == "name" %} selected {% endif %}>Name</option>
-                <option value="dni" {% if datatype_input == "dni" %} selected {% endif %}>DNI</option>
-                <option value="phone_number" {% if datatype_input == "phone_number" %} selected {% endif %}>Phone number</option>
-                <option value="email" {% if datatype_input == "email" %} selected {% endif %}>E-mail</option>
-                <option value="address" {% if datatype_input == "address" %} selected {% endif %}>Address</option>
-                <option value="total_purchased" {% if datatype_input == "total_purchased" %} selected {% endif %}>Total purchased</option>
-            </select>
-            <input class="text-black  rounded-sm sm:px-2 sm:mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'customers:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>
-
-        </div>
-        <div class="basis-1/3 flex place-content-center items-center max-sm:hidden">
-            <form action="{% url 'customers:create' %}">
-                <button ion-button icon-only class="mt-4 rounded-tl-lg rounded-br-lg bg-[#3d68ff] px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit">
-                    <ion-icon title="Create Customer"name="add-circle-outline"></ion-icon>
-                </button>
-            </form>
-        </div>
+{% #search_header %}
+    <div class="flex">
+        <select class="font-bold py-2 px-4 rounded-sm bg-white" name="datatype_input" id="datatype_input" hx-get="{% url 'customers:read_datatype' %}" hx-target="#search_datatype"  hx-trigger="change" hx-swap="outerHTML">
+            <option value="id" {% if datatype_input == "id" %} selected {% endif %}>ID</option>
+            <option value="name" {% if datatype_input == "name" %} selected {% endif %}>Name</option>
+            <option value="dni" {% if datatype_input == "dni" %} selected {% endif %}>DNI</option>
+            <option value="phone_number" {% if datatype_input == "phone_number" %} selected {% endif %}>Phone number</option>
+            <option value="email" {% if datatype_input == "email" %} selected {% endif %}>E-mail</option>
+            <option value="address" {% if datatype_input == "address" %} selected {% endif %}>Address</option>
+            <option value="total_purchased" {% if datatype_input == "total_purchased" %} selected {% endif %}>Total purchased</option>
+        </select>
+        <input class="font-bold py-2 px-4 rounded-sm mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'customers:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms">
     </div>
-</div>
+{% /search_header %}

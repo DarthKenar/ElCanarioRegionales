@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 ]
 # Apps de terceros
 INSTALLED_APPS += [
+    "components",
     "slippers",
 ]
 #own apps

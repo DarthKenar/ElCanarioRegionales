@@ -1,42 +1,13 @@
 {% if object_list %}
-  <table class="min-w-full bg-white">
-    <thead class="bg-gray-800 text-white">
-        <tr>
-          <th class="text-left py-3 px-4 uppercase font-semibold text-sm">#</th>
-          <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Name</th>
-          <th class="text-left py-3 px-4 uppercase font-semibold text-sm">DNI</th>
-          <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Phone number</th>
-          <th class="text-left py-3 px-4 uppercase font-semibold text-sm">E-mail</th>
-          <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Address</th>
-          <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Total purchased</th>
-          <th class="text-left py-3 px-4 uppercase font-semibold text-sm flex items-center justify-center"><b>Functions</b></th>
-        </tr>
-    </thead>
-    <tbody class="text-gray-700">
-        {% for object in object_list %}
-            <tr class="{% if forloop.counter|divisibleby:2  %}bg-gray-200{% endif %}" >
-                <td class="text-left py-3 px-4" id="{{object.id}}">{{object.id}}</td>
-                <td class="w-1/3 text-left py-3 px-4">{{object.name}}</td>
-                <td class="text-left py-3 px-4">{% if object.dni == None %}-{% else %}{{object.dni}}{% endif %}</td>
-                <td class="text-left py-3 px-4">{% if object.phone_number == None %}-{% else %}{{object.phone_number}}{% endif %}</td>
-                <td class="text-left py-3 px-4">{% if object.email == None %}-{% else %}{{object.email}}{% endif %}</td>
-                <td class="text-left py-3 px-4">{% if object.address == None %}-{% else %}{{object.address}}{% endif %}</td>
-                <td class="text-left py-3 px-4">$ {{object.total_purchased}}</td>
-                <td class="text-left py-3 px-4 flex items-center justify-center">
-                  <form class="py-1" action="{% url 'customers:update' pk=object.id %}" method="GET">
-                      <button ion-button icon-only type="submit" class="max-sm:mx-auto text-amber-50 rounded-tl-lg rounded-br-lg bg-[#3d68ff] px-4 mx-2 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
-                          <ion-icon name="create-outline"></ion-icon>
-                      </button>
-                  </form>
-                  <form class="py-1" hx-delete="{% url 'customers:delete' pk=object.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#search_data" hx-confirm="Are you sure you want to delete the customer: {{customer.name}}?">
-                      {% csrf_token %}
-                      <button type="submit" ion-button icon-only class="max-sm:mx-auto text-amber-50 rounded-tl-lg rounded-br-lg bg-[#3d68ff] px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer">
-                          <ion-icon name="trash-outline"></ion-icon>
-                      </button>
-                  </form>
-                </td>
-            </tr>
-        {% endfor %}
-    </tbody>
-  </table>
+  {% #section type="cols" %}
+    {% for object in object_list %}
+      {% #column %}
+        {% #card_customer id=object.id name=object.name dni=object.dni phone_number=object.phone_number email=object.email address=object.address total_purchased=object.total_purchased%}
+          <span>texto de descripcion</span>
+        {% /card_customer %}
+      {% /column %}
+    {% endfor %}
+  {% /section %}
 {% endif %}
+
+

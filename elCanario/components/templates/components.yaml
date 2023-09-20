@@ -14,7 +14,7 @@ components:
   # Botones
   # *type ("danger", "success", "warning", "info") "danger": rojo, "success": verde, "warning": naranja, "info", azul]
   # *id (int - valor para id en etiqueta)
-  # *children (Texto simple - Introducir solo texto)
+  # *children (simple text)
   button: "molecules/button.html"
 
   # Secciones
@@ -29,6 +29,45 @@ components:
   # *children (html)
   column: "molecules/column.html"
 
+  # Card Customer
+  # *type ("order","article", "customer")
   card: "molecules/card.html"
-  original_card: "molecules/original_card.html"
 
+  # Card Customer
+  # *id (int) (customer id)
+  # *name (str) (customer name)
+  # *dni (int) (customer dni)
+  # *phone_number (int) (customer phone number)
+  # *email (str) (customer email)
+  # *address (str) (customer address)
+  # *total_purchased (str) (customer total purchased)
+  card_customer: "molecules/card_customer.html"
+
+  # Search Header
+  # children (necessary html labels for search any)
+  search_header: "molecules/search_header.html"
+  original_card: "molecules/original_card.html"
+  
+  #Organisms
+
+  #search_data
+  #object_type (customers, articles, orders, etc) (str = name)
+  #table ('customers_table.html', "articles_table.html", "orders_table.html") 
+  #object_list=object_list 
+  #answer_error_name=answer_error_name 
+  #delete_answer=delete_answer 
+  #datatype=datatype 
+  #value=value
+  search_data: "organisms/search_data.html"
+
+  #search_datatype
+  #object_type (customers, articles, orders, etc) (str = name)
+  #table ('customers_table.html', "articles_table.html", "orders_table.html")
+  #include_header (for include header: ej: 'customers_search_header.html','articles_search_header.html','orders_search_header.html')
+  #url_create ('customers:create')
+  #object_list=object_list
+  #answer_error_name=answer_error_name 
+  #delete_answer=delete_answer 
+  #datatype=datatype
+  #datatype_input=datatype_input
+  search_datatype: "organisms/search_datatype.html"

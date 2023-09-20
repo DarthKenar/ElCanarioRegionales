@@ -10,9 +10,11 @@
 {% block section_content_upper %}
     {% include 'customers_search_header.html'%}
 {% endblock section_content_upper %}
-
 {% block title_section_content_under %}
     Customers list
+    {% #button type="success" url='customers:create' border="False" %}
+        Crear
+    {% /button %}
 {% endblock title_section_content_under %}
 {% block section_content_under %}
     {% include 'customers_table.html' %}
