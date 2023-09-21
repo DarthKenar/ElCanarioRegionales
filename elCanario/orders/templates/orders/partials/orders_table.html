@@ -2,7 +2,7 @@
   {% #section type="cols" %}
     {% for object in object_list %}
       {% #column %}
-        {% card_order id=object.id name=object.customer_id.name phone_number=object.customer_id.phone_number total_pay=object.total_pay articles_cart=object.articles_cart.all article_quantity=object.article_quantity details=object.details %}
+        {% card_order id=object.id delivery_status=object.delivery_status name=object.customer_id.name phone_number=object.customer_id.phone_number total_pay=object.total_pay articles_cart=object.articles_cart.all article_quantity=object.article_quantity details=object.details %}
       {% /column %}
     {% endfor %}
   {% /section %}
