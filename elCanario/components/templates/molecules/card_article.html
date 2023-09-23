@@ -30,20 +30,21 @@
       </div>
       <div class="relative grid grid-cols-2 grid-rows-2 gap-4 py-3 break-words border-t border-b border-gray-200">
         {% for category in categories %} 
+          a
           {% with object.characteristics_id.all|filter_by_category:category as values %}
             {% if values %}
-              <span class="mt-0">{{category}}</span>
+              <span class="mt-0">{{category}} categoria</span>
               {% for value in values %}
                 <p class="flex items-center text-gray-800 xl:flex-row xl:items-center text-ellipsis">
                   <img width="24" height="24" src="https://img.icons8.com/fluency-systems-regular/48/arrow.png" alt="arrow" />
-                  <span class="mt-0">{{value.name}}</span>
+                  <span class="mt-0">{{value.name}} value</span>
                 </p>
               {% endfor %}
             {% endif %} 
           {% endwith %} 
         {% endfor %}
         <span class="absolute bottom-0 right-0 py-3 px3" title="Stock">
-          {{stock}}
+          {{stock}} 0
         </span>
       </div>
       <div class="flex items-center justify-around w-full py-3 border-b border-gray-200">

@@ -2,7 +2,7 @@
   {% #section type="cols" %}
     {% for object in object_list %}
       {% #column %}
-        {% card_article id=object.id name=object.name %}
+        {% card_article id=object.id name=object.name categories=categories object=object values=values buy_price=object.buy_price increase=object.increase sell_price=object.sell_price stock=object.stock %}
       {% /column %}
     {% endfor %}
   {% /section %}

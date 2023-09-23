@@ -53,16 +53,16 @@ components:
   # *details=order.details
   card_order: "molecules/card_order.html"
 
-  # Card Order
+  # Card Article
   # *id=order.id (order id)
   # *name=order.customer_id.name
   # *categories=categories
   # *object = object
   # *values = values
-  # *total_pay=order.total_pay 
-  # *articles_cart=order.articles_cart.all 
-  # *article_quantity=order.article_quantity 
-  # *details=order.details
+  # *buy_price = buy_price
+  # *increase = increase
+  # *sell_price = sell_price
+
   card_article: "molecules/card_article.html"
 
   # Search Header
