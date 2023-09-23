@@ -93,3 +93,5 @@ components:
   #datatype=datatype
   #datatype_input=datatype_input
   search_datatype: "organisms/search_datatype.html"
+
+  form: "molecules/form.html"

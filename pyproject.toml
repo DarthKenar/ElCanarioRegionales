@@ -27,3 +27,8 @@ createsuperuser = "python elCanario/manage.py createsuperuser --username='admin'
 server = "elCanario/manage.py runserver"
 collect = "elCanario/manage.py collectstatic"
 tail = "npx tailwindcss -o elCanario/articles/static/css/tailwind.css --watch"
+
+format = "black elCanario"
+indent = "djhtml elCanario/apps -t 4"
+linter = "ruff elCanario"
+test = "pytest elCanario"
