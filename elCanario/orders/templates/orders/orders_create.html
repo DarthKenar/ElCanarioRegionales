@@ -21,7 +21,7 @@
     </div>
 {% endblock title_section_content_under %}
 {% block section_content_under %}
-  {% form action="create" object_type="order" form=form %}
+  {% include 'create_form.html' %}
 {% endblock section_content_under %}
 
     
