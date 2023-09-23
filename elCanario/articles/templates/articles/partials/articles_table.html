@@ -1,9 +1,7 @@
 {% if object_list %}
-  {% #section type="cols" %}
+  {% #section type="cols-responsive" %}
     {% for object in object_list %}
-      {% #column %}
-        {% card_article img=object.image id=object.id name=object.name categories=categories object=object values=values buy_price=object.buy_price increase=object.increase sell_price=object.sell_price stock=object.stock %}
-      {% /column %}
+      {% card_article img=object.image id=object.id name=object.name categories=categories object=object values=values buy_price=object.buy_price increase=object.increase sell_price=object.sell_price stock=object.stock %}
     {% endfor %}
   {% /section %}
 {% endif %}
