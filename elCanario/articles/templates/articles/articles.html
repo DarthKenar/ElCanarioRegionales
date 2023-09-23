@@ -3,13 +3,22 @@
     <title>Search Articles - Canario Regionales</title>
 {% endblock title_section %}
 {% block title_section_content_upper %}
-    <h1 class="text-3xl text-black pb-6">Search articles:</h1>
+    <h1 class="pb-6 text-3xl text-black">Search articles:</h1>
 {% endblock title_section_content_upper %}
 {% block section_content_upper %}
     {% include 'articles_search_header.html' %}
 {% endblock section_content_upper %}
 {% block title_section_content_under %}
-    Articles list
+<div class="flex items-center justify-between pb-3 text-xl">
+    <!-- Latest Reports -->
+    <div class="flex items-center pb-3 text-xl">
+        <i class="mr-3 fas fa-list"></i>
+        <span>Articles List</span>
+    </div>
+    <div class="text-base">
+        {% button type="success" url='articles:create' border="False" text="Create Article" %}
+    </div>
+</div>
 {% endblock title_section_content_under %}
 
 {% block section_content_under %}

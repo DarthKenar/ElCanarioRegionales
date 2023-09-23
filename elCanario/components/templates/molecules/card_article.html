@@ -1,0 +1,58 @@
+{% load static %} {% load custom_tags %}
+<div class="relative w-full max-w-sm mx-auto">
+  <div class="relative inline-block w-full transition-transform duration-300 ease-in-out transform">
+    <div class="rounded-lg">
+      <div class="flex justify-between">
+        <div class="p-1 min-w-8 rounded-xl" title="ID">
+          <span>{{id}}</span>
+        </div>
+      </div>
+      <div class="grid grid-cols-3 py-3 border-t border-gray-200">
+        <div class="flex items-center">
+          <div class="relative">
+            <h2 class="text-base font-medium text-gray-800 line-clamp-1 md:text-lg">
+              <b>{{name}}</b>
+            </h2>
+            <p class="mt-2 text-sm text-gray-800 line-clamp-1">{{buy_price}}</p>
+          </div>
+        </div>
+        <div class="flex items-center">
+          <div class="relative bottom-0">{{increase}}</div>
+        </div>
+        <div class="flex items-center justify-end">
+          <p class="inline-block font-semibold leading-tight break-words text-primary rounded-xl">
+            <span class="text-sm uppercase"> $ </span>
+            <span class="text-lg" title="Sell Price">
+              {{sell_price}}
+            </span>
+          </p>
+        </div>
+      </div>
+      <div class="relative grid grid-cols-2 grid-rows-2 gap-4 py-3 break-words border-t border-b border-gray-200">
+        {% for category in categories %} 
+          {% with object.characteristics_id.all|filter_by_category:category as values %}
+            {% if values %}
+              <span class="mt-0">{{category}}</span>
+              {% for value in values %}
+                <p class="flex items-center text-gray-800 xl:flex-row xl:items-center text-ellipsis">
+                  <img width="24" height="24" src="https://img.icons8.com/fluency-systems-regular/48/arrow.png" alt="arrow" />
+                  <span class="mt-0">{{value.name}}</span>
+                </p>
+              {% endfor %}
+            {% endif %} 
+          {% endwith %} 
+        {% endfor %}
+        <span class="absolute bottom-0 right-0 py-3 px3" title="Stock">
+          {{stock}}
+        </span>
+      </div>
+      <div class="flex items-center justify-around w-full py-3 border-b border-gray-200">
+        {{details}} details
+      </div>
+      <div class="flex items-center justify-around w-full p-3 border-b border-gray-200">
+        {% button type="warning" url='articles:update' id=id border="False" text="Editar" %} 
+        {% button type="danger" url='articles:delete' id=id border="False" text="Eliminar" object_type="article" object_name=name %}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,48 +1,30 @@
-
-<div class="bg-gray-800 text-white">
-    <div class="sm:flex sm:justify-center sm:items-center justify-stretch">
-        <div class="flex place-content-start max-sm:pt-2">
-            <div class="flex items-center justify-center py-2 w-[30%]">
-                <label class="font-sans font-bold mx-2 overflow-hidden " for="datatype_input">Search:</label>
-            </div>
-            <select class="text-black rounded-sm px-2 mx-2 py-2 w-[70%]" name="datatype_input" id="datatype_input" hx-get="{% url 'articles:read_datatype' %}" hx-target="#search_datatype"  hx-trigger="change" hx-swap="outerHTML">
-                <option value="id" {% if datatype_input == "id" %} selected {% endif %}>ID</option>
-                <option value="name" {% if datatype_input == "name" %} selected {% endif %}>Name</option>
-                {% for category in categories %}
-
-                <option value="{{category.id}}" {% if datatype_input == category.id %} selected {% endif %}>{{category.name}}</option>
-                
-                {% endfor %}
-                <option value="buy_price" {% if datatype_input == "buy_price" %} selected {% endif %}>Buy price</option>
-                <option value="increase" {% if datatype_input == "increase" %} selected {% endif %}>Increment</option>
-                <option value="sell_price" {% if datatype_input == "sell_price" %} selected {% endif %}>Sell price</option>
-                <option value="stock" {% if datatype_input == "stock" %} selected {% endif %}>Stock</option>
-            </select>
-            {% if datatype_input == 'id' or datatype_input == 'name' or datatype_input == 'buy_price' or datatype_input == 'increase' or datatype_input == 'sell_price' or datatype_input == 'stock' %}<input class="text-black rounded-sm sm:px-2 sm:mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'articles:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>{% endif %}
+{% #search_header %}
+    <div class="flex">
+        <select class="px-4 py-2 font-bold bg-white rounded-sm" name="datatype_input" id="datatype_input" hx-get="{% url 'articles:read_datatype' %}" hx-target="#search_datatype"  hx-trigger="change" hx-swap="outerHTML">
+            <option value="id" {% if datatype_input == "id" %} selected {% endif %}>ID</option>
+            <option value="name" {% if datatype_input == "name" %} selected {% endif %}>Name</option>
             {% for category in categories %}
-                {% if datatype_input == category.id %}
-                    <select class="text-black rounded-sm px-2 mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'articles:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_data" hx-swap="outerHTML" hx-trigger="change">
-                        <option value=""></option>
-                        {% for value in values %}
 
-                        <option value="{{value.id}}">{{value.name}}</option>
-                        
-                        {% endfor %}
-                    </select>
-                {% endif %}
+            <option value="{{category.id}}" {% if datatype_input == category.id %} selected {% endif %}>{{category.name}}</option>
+            
             {% endfor %}
-        </div>
-        <div class="basis-1/3 flex place-content-center items-center max-sm:hidden">
-            <form action="{% url 'articles:create' %}">
-                <button ion-button icon-only class="mt-4 rounded-tl-lg rounded-br-lg bg-[#3d68ff] px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit">
-                    <ion-icon title="Create Article" name="add-circle-outline"></ion-icon>
-                </button>
-            </form>
-        </div>
-        <div class="basis-1/3 flex justify-around items-center max-sm:hidden">
-            <form action="{% url 'articles:categories' %}"> 
-                <input class="text-sm font-mono  mt-4 font-bold rounded-tl-lg rounded-br-lg bg-[#3d68ff] px-4 py-1 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit" value="Categories">
-            </form>
-        </div>
+            <option value="buy_price" {% if datatype_input == "buy_price" %} selected {% endif %}>Buy price</option>
+            <option value="increase" {% if datatype_input == "increase" %} selected {% endif %}>Increment</option>
+            <option value="sell_price" {% if datatype_input == "sell_price" %} selected {% endif %}>Sell price</option>
+            <option value="stock" {% if datatype_input == "stock" %} selected {% endif %}>Stock</option>
+        </select>
+        {% if datatype_input == 'id' or datatype_input == 'name' or datatype_input == 'buy_price' or datatype_input == 'increase' or datatype_input == 'sell_price' or datatype_input == 'stock' %}<input class="px-4 py-2 mx-2 font-bold rounded-sm" placeholder="{{datatype}}" type="text" hx-get="{% url 'articles:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>{% endif %}
+        {% for category in categories %}
+            {% if datatype_input == category.id %}
+                <select class="px-4 py-2 mx-2 font-bold rounded-sm" placeholder="{{datatype}}" type="text" hx-get="{% url 'articles:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_data" hx-swap="outerHTML" hx-trigger="change">
+                    <option value=""></option>
+                    {% for value in values %}
+
+                    <option value="{{value.id}}">{{value.name}}</option>
+                    
+                    {% endfor %}
+                </select>
+            {% endif %}
+        {% endfor %}
     </div>
-</div>
+{% /search_header %}

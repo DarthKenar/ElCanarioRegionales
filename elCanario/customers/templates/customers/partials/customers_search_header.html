@@ -1,6 +1,6 @@
 {% #search_header %}
     <div class="flex">
-        <select class="font-bold py-2 px-4 rounded-sm bg-white" name="datatype_input" id="datatype_input" hx-get="{% url 'customers:read_datatype' %}" hx-target="#search_datatype"  hx-trigger="change" hx-swap="outerHTML">
+        <select class="px-4 py-2 font-bold bg-white rounded-sm" name="datatype_input" id="datatype_input" hx-get="{% url 'customers:read_datatype' %}" hx-target="#search_datatype"  hx-trigger="change" hx-swap="outerHTML">
             <option value="id" {% if datatype_input == "id" %} selected {% endif %}>ID</option>
             <option value="name" {% if datatype_input == "name" %} selected {% endif %}>Name</option>
             <option value="dni" {% if datatype_input == "dni" %} selected {% endif %}>DNI</option>
@@ -9,6 +9,6 @@
             <option value="address" {% if datatype_input == "address" %} selected {% endif %}>Address</option>
             <option value="total_purchased" {% if datatype_input == "total_purchased" %} selected {% endif %}>Total purchased</option>
         </select>
-        <input class="font-bold py-2 px-4 rounded-sm mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'customers:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms">
+        <input class="px-4 py-2 mx-2 font-bold rounded-sm" placeholder="{{datatype}}" type="text" hx-get="{% url 'customers:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms">
     </div>
 {% /search_header %}
