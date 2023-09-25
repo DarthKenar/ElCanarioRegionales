@@ -28,7 +28,7 @@ class OrderListView(LoginRequiredMixin,ListView):
         context["answer"] = "Orders in Database"
         return context
     
-class ReadDataListView(ListView):
+class ReadDataListView(LoginRequiredMixin, ListView):
     model = Order
     template_name = 'orders_search_data.html'
 
@@ -46,7 +46,7 @@ class ReadDataListView(ListView):
         return context
 
 
-class ReadDataTypeListView(ListView):
+class ReadDataTypeListView(LoginRequiredMixin, ListView):
     model = Order
     template_name = 'orders_search_datatype.html'
 
@@ -100,7 +100,7 @@ class OrderCreateView(LoginRequiredMixin, CreateView):
     def form_invalid(self, form: OrderForm) -> HttpResponse:
         return self.render_to_response(self.get_context_data(form=form))
 
-class OrderUpdateTemplate(TemplateView):
+class OrderUpdateTemplate(LoginRequiredMixin, TemplateView):
     template_name = 'update_form.html'
 
     def get_context_data(self, **kwargs):
