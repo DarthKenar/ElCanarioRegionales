@@ -1,1 +1,51 @@
-{% form action="create" object_type="order" form=form url='orders:create' for_form='True' %} 
+<form class="min-h-screen flex items-center justify-center" id="form_create">
+    {% load widget_tweaks %}
+    {% load custom_filters %}
+    {% load custom_tags %}
+    {% csrf_token %}
+    
+    {% if csrf_token %}
+        SI ESTA EL CSRF TOKEN
+        {{csrf_token}}
+    {% else %}
+        NO ESTA EL CSRF TOKEN
+        {{csrf_token}}
+    {% endif %}
+
+    {% if 'customers' in request.path %}
+        {% hx_post_create_customers_render_field "False" as hx_post %}
+    {% elif 'orders' in request.path %}
+        {% hx_post_create_orders_render_field "False" as hx_post %}
+    {% endif %}
+    {% trigger_input as hxtrigger %}
+    <div class="max-w-md w-full p-6 bg-white rounded-lg shadow-lg">
+        <h1 class="text-2xl font-semibold text-center text-gray-500 mt-8 mb-6">Create Order</h1>
+        
+            {% for field in form %}
+                <div class="mb-4">
+                    <label for="id_{{field.label|lower|replace_spaces_with_underscore}}" class="block mb-2 text-sm text-gray-600">{{field.label}}</label>
+                    {% render_field field|attr:hx_post|attr:"hx-swap=outerHTML"|attr:"hx-target=#form_create"|add_class:"w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 input" %}
+                    {% for error in field.errors %}
+                        {% #message type="danger"  %}
+                            {{error}}
+                        {% /message %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <div class="w-full flex justify-end">
+                <button ion-button icon-only type="submit" hx-post="{% url 'customers:create' status='True' %}" hx-swap="outerHTML" hx-trigger="click" hx-target="#form_create" class=" bg-green-500 hover:bg-green-800 border-green-800 text-white font-bold py-2 px-4 rounded-lg cursor-pointer">
+                    <ion-icon name="save-outline"></ion-icon>
+                </button>
+            </div>
+            
+        {% if 'correct' in request.GET %}
+            {% #message type="success" %}
+                Saved correctly
+            {% /message %}
+        {% elif 'incorrect' in  request.GET %}
+            {% #message type="danger"  %}
+                Check all fields
+            {% /message %}
+        {% endif %}
+    </div>
+</form>

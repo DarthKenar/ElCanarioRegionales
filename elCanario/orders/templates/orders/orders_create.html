@@ -21,7 +21,13 @@
     </div>
 {% endblock title_section_content_under %}
 {% block section_content_under %}
-    {% form action="create" object_type="order" form=form url='orders:create' status='True' %} 
+
+    {% #section type="full" %}
+        {% comment %}
+            {% form request=request form=form action="create" object_type="order" url="orders:create" %}
+        {% endcomment %}    
+        {% include 'create_form.html' %}
+    {% /section %}
 {% endblock section_content_under %}
 
     
