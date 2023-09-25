@@ -3,14 +3,6 @@
     {% load custom_filters %}
     {% load custom_tags %}
     {% csrf_token %}
-    
-    {% if csrf_token %}
-        SI ESTA EL CSRF TOKEN
-        {{csrf_token}}
-    {% else %}
-        NO ESTA EL CSRF TOKEN
-        {{csrf_token}}
-    {% endif %}
 
     {% if 'customers' in request.path %}
         {% hx_post_create_customers_render_field "False" as hx_post %}
@@ -33,7 +25,7 @@
                 </div>
             {% endfor %}
             <div class="w-full flex justify-end">
-                <button ion-button icon-only type="submit" hx-post="{% url 'customers:create' status='True' %}" hx-swap="outerHTML" hx-trigger="click" hx-target="#form_create" class=" bg-green-500 hover:bg-green-800 border-green-800 text-white font-bold py-2 px-4 rounded-lg cursor-pointer">
+                <button ion-button icon-only type="submit" hx-post="{% url 'orders:create' status='True' %}" hx-swap="outerHTML" hx-trigger="click" hx-target="#form_create" class=" bg-green-500 hover:bg-green-800 border-green-800 text-white font-bold py-2 px-4 rounded-lg cursor-pointer">
                     <ion-icon name="save-outline"></ion-icon>
                 </button>
             </div>

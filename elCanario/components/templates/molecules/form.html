@@ -3,14 +3,6 @@
     {% load custom_filters %}
     {% load custom_tags %}
     {% csrf_token %}
-    
-    {% if csrf_token %}
-        SI ESTA EL CSRF TOKEN
-        {{csrf_token}}s
-    {% else %}
-        NO ESTA EL CSRF TOKEN
-        {{csrf_token}}s
-    {% endif %}
 
     {% if 'customers' in request.path %}
         {% hx_post_create_customers_render_field "False" as hx_post %}
@@ -18,7 +10,6 @@
         {% hx_post_create_orders_render_field "False" as hx_post %}
     {% endif %}
     {% trigger_input as hxtrigger %}
-    {% headers_input as hxheaders %}
     <div class="max-w-md w-full p-6 bg-white rounded-lg shadow-lg">
         <h1 class="text-2xl font-semibold text-center text-gray-500 mt-8 mb-6">{{action|title}} {{object_type|title}}</h1>
         
@@ -34,7 +25,7 @@
                 </div>
             {% endfor %}
             <div class="w-full flex justify-end">
-                {% button type="success" for_form="True" action=action url=url text="Create Order" %}
+                {% button type="success" for_form="True" action=action url=url text="Create Order" csrf_token=csrf_token %}
             </div>
             
         {% if 'correct' in request.GET %}
