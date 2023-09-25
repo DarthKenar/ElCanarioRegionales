@@ -9,13 +9,21 @@
     hx-get="{% url url %}">
     </input>
 {% elif type == 'success' %}
-    <form action="{% url url %}" method=method>
+    {% if for_form == "True" %}
         <input 
-        type="button"
         value="{{text}}"
-        class=" bg-green-500 hover:bg-green-800 border-green-800 text-white {{border}} font-bold py-2 px-4 rounded-lg cursor-pointer">
+        type="button" 
+        hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+        hx-post="{% url url status='True' %}" hx-swap="outerHTML" hx-trigger="click" hx-target="#form_{{action}}" class=" bg-green-500 hover:bg-green-800 border-green-800 text-white {{border}} font-bold py-2 px-4 rounded-lg cursor-pointer">
         </input>
-    </form>
+    {% else %}
+        <form action="{% url url %}" method={{method}}>
+                <button
+                class=" bg-green-500 hover:bg-green-800 border-green-800 text-white {{border}} font-bold py-2 px-4 rounded-lg cursor-pointer">
+                {{text}}
+                </button>
+        </form>
+    {% endif %}
 
 {% elif type == 'danger' %}
     <input 

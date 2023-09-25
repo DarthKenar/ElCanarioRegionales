@@ -16,12 +16,12 @@
         <!-- Latest Reports -->
         <div class="text-xl pb-3 flex items-center">
             <i class="fas fa-list mr-3"></i>
-            <span>Orders Create</span>
+            <span>Create Order Section</span>
         </div>
     </div>
 {% endblock title_section_content_under %}
 {% block section_content_under %}
-  {% include 'create_form.html' %}
+    {% form action="create" object_type="order" form=form url='orders:create' status='True' %} 
 {% endblock section_content_under %}
 
     
