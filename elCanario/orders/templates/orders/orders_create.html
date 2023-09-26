@@ -23,16 +23,18 @@
 {% block section_content_under %}
 
     {% #section type="full" %}
+    
         {% comment %}
             {% form request=request form=form action="create" object_type="order" url="orders:create" %} 
             {% include 'create_form.html' %}
         {% endcomment %}
+
         {% var url="orders:create" %}
         {% var object_type="order" %}
         {% var form=form %}
         {% var request=request %}
         {% var action="create" %}
-            {% include 'form.html' %}
+        {% include 'form.html' %}
     {% /section %}
 {% endblock section_content_under %}
 

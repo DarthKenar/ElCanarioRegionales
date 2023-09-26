@@ -3,7 +3,8 @@
     {% load custom_filters %}
     {% load custom_tags %}
     {% csrf_token %}
-
+    {% var id = id %}
+    FORMULARIO PARA EL ID: {{id}}
     {% if 'customers' in request.path %}
         {% hx_post_create_customers_render_field "False" as hx_post %}
     {% elif 'orders' in request.path %}
@@ -25,7 +26,7 @@
                 </div>
             {% endfor %}
             <div class="w-full flex justify-end">
-                {% button type="success" for_form="True" action=action url=url text="Create Order" csrf_token=csrf_token %}
+                {% button type="success" for_form="True" action=action url=url text="Save" csrf_token=csrf_token id=id %}
             </div>
             
         {% if 'correct' in request.GET %}
