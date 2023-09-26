@@ -61,7 +61,7 @@
       </div>
       <div class="flex items-center justify-around w-full p-3 border-b border-gray-200 bottom-0">
         {% button type="warning" url='articles:update' id=id border="False" text="Editar" %} 
-        {% button type="danger" url='articles:delete' id=id border="False" text="Eliminar" object_type="article" object_name=name %}
+        {% button type="danger" url='articles:delete' id=id border="False" text="Eliminar" object_type="article" object_name=name csrf_token=csrf_token%}
       </div>
     </div>
   </div>

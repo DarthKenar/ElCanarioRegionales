@@ -21,7 +21,7 @@
   
           <div class="border-t border-gray-200 py-3 w-full flex justify-around items-center">
             {% button type="warning" url='customers:update' id=id border="False" text="Editar" %}
-            {% button type="danger" url='customers:delete' id=id border="False" text="Eliminar" object_type="customer" object_name=name %}
+            {% button type="danger" url='customers:delete' id=id border="False" text="Eliminar" object_type="customer" object_name=name csrf_token=csrf_token%}
           </div>
   
           <div class="grid grid-cols-2 grid-rows-2 gap-4 border-b border-t border-gray-200 pb-3 pt-3 break-words">

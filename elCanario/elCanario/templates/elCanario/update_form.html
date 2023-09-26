@@ -13,9 +13,8 @@
 {% endif %}
 
 
+{% var id=object.id %}
 {% var request=request %}
-{% with text=action|title|add:" "|add:object_type|title %}
-    {% with url=object_type|add:'s:'|add:action %}
-        {% include 'form.html' %}
-    {% endwith %}
+{% with url=object_type|add:'s:'|add:action %}
+    {% include 'form.html' %}
 {% endwith %}

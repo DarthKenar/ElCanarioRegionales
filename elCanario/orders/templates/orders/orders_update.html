@@ -1,18 +1,37 @@
-{% extends 'base.html' %}
+{% extends 'base_home.html' %}
 {% load static %}
-{% block title %}
-  <title>Update Order - Canario Regionales</title>
-  <link rel="stylesheet" href="{% static 'css/forms.css' %}">
-{% endblock title %}
-{% block content %}
-  {% include 'menu.html' %}
-  <div class="relative flex min-h-screen flex-col justify-center overflow-hidden py-2 sm:py-12">
-    <div class="bg-gradient-to-tr from-amber-100 to-amber-300 rounded-md p-4 m-8 relative px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-10">
-      <div class="mx-auto max-w-md max-sm:pb-16" >
-        {% form action="update" object_type="order" form=form url='orders:update' %} 
-      </div>
-    </div>
-  </div>
-  {% include 'footer.html' %}
-{% endblock content %}
+{% block title_section %}
+    <title>Create Order - Canario Regionales</title>
+{% endblock title_section %}
 
+{% block title_section_content_upper %}
+    <h1 class="text-3xl text-black pb-6">Search Order:</h1>
+{% endblock title_section_content_upper %}
+{% block section_content_upper %}
+    {% include 'orders_search_header.html'%}
+{% endblock section_content_upper %}
+
+{% block title_section_content_under %}
+    <div class="text-xl pb-3 flex items-center justify-between">
+        <!-- Latest Reports -->
+        <div class="text-xl pb-3 flex items-center">
+            <i class="fas fa-list mr-3"></i>
+            <span>Update Order Section</span>
+        </div>
+    </div>
+{% endblock title_section_content_under %}
+{% block section_content_under %}
+
+    {% #section type="full" %}
+    {% comment  %}
+      {% var id=object.id %}
+      {% var url="orders:update" %}
+      {% var object_type="order" %}
+      {% var form=form %}
+      {% var request=request %}
+      {% var action="update" %}
+      {% include 'form.html' %}
+    {% endcomment %} 
+        {% form action="update" form=form request=request id=object.id object_type="order" url="orders:update" csrf_token=csrf_token %}
+    {% /section %}
+{% endblock section_content_under %}

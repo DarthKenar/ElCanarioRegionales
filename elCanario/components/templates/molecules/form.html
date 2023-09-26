@@ -3,12 +3,18 @@
     {% load custom_filters %}
     {% load custom_tags %}
     {% csrf_token %}
-    {% var id = id %}
-    FORMULARIO PARA EL ID: {{id}}
     {% if 'customers' in request.path %}
-        {% hx_post_create_customers_render_field "False" as hx_post %}
+        {% if action == "create" %}
+            {% hx_post_create_customers_render_field "False" as hx_post %}
+        {% elif action == "update" %}
+            {% hx_post_update_customers_render_field id "False" as hx_post %}
+        {% endif %}
     {% elif 'orders' in request.path %}
-        {% hx_post_create_orders_render_field "False" as hx_post %}
+        {% if action == "create" %}
+            {% hx_post_create_orders_render_field "False" as hx_post %}
+        {% elif action == "update" %}
+            {% hx_post_update_orders_render_field id "False" as hx_post %}
+        {% endif %}
     {% endif %}
     {% trigger_input as hxtrigger %}
     <div class="max-w-md w-full p-6 bg-white rounded-lg shadow-lg">

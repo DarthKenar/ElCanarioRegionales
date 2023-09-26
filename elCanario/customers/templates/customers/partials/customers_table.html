@@ -2,7 +2,7 @@
   {% #section type="cols" %}
     {% for object in object_list %}
       {% #column %}
-        {% card_customer id=object.id name=object.name dni=object.dni phone_number=object.phone_number email=object.email address=object.address total_purchased=object.total_purchased%}
+        {% card_customer id=object.id name=object.name dni=object.dni phone_number=object.phone_number email=object.email address=object.address total_purchased=object.total_purchased csrf_token=csrf_token%}
       {% /column %}
     {% endfor %}
   {% /section %}

@@ -1,5 +1,7 @@
 {% if border == "True" %}
     {% var border='border' %}
+{% else %}
+    {% var border='border' %}
 {% endif %}
 {% if type == 'info' %}
     <input 
@@ -24,7 +26,7 @@
             </button>
         {% endif %}
     {% else %}
-        <form action="{% url url %}" method={{method}}>
+        <form action="{% url url %}" method={{method}} class="{{border}}">
                 <button
                 class=" bg-green-500 hover:bg-green-800 border-green-800 text-white {{border}} font-bold py-2 px-4 rounded-lg cursor-pointer">
                 {{text}}
@@ -39,10 +41,9 @@
     {{text}}
     </button>
 {% elif type == 'warning' %}
-    <form action="{% url url pk=id %}" method="GET">
-        <button 
-        type="submit"
-        class=" bg-orange-500 hover:bg-orange-700 border-orange-800 text-white {{border}} font-bold py-2 px-4 rounded-lg cursor-pointer">
+    <form action="{% url url pk=id %}" method="GET" class="m-0">
+        <button class=" bg-orange-500 hover:bg-orange-700 border-orange-800 text-white {{border}} font-bold py-2 px-4 rounded-lg cursor-pointer"
+        type="submit">
         {{text}}
         </button>
     </form>
