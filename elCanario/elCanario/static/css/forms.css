@@ -1,7 +1,0 @@
-.errorlist li{
-    --tw-text-opacity: 1;
-    color: rgb(220 38 38 / var(--tw-text-opacity));
-    cursor: default;
-    font-weight: 700;
-    font-style: italic;
-}
