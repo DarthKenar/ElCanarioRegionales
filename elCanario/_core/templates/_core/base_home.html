@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
-{% block title %}
+{% block base_title %}
     {% block title_section %}{% endblock title_section %}
-{% endblock title %}
-{% block content %}
+{% endblock base_title %}
+{% block base_content %}
     {% include 'menu.html' %}
     <div class="w-full flex flex-col h-screen overflow-y-hidden">
         <!-- Desktop Header -->
@@ -114,4 +114,4 @@
             }
         });
     </script>
-{% endblock content %}
+{% endblock base_content %}

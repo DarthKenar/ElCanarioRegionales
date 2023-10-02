@@ -5,7 +5,11 @@
 {% endblock base_title %}
 {% block base_content %}
     <div class="flex flex-col justify-center items-center w-full">
-        <img class="py-20 w-[200px] h-[200px] max-w-[500px] max-h-[500px] " src="{% static 'img/logo-dark.png' %}" alt="El Canario Regionales">
-        <a class="bg-blue-500 hover:bg-blue-800 border-blue-800 text-white font-bold py-2 px-4 rounded-lg cursor-pointer" href="{% url 'account_login' %}">IR A LOGIN</a>
+        <img class="h-auto max-w-full p-10" src="{% static 'img/logo-dark.png' %}" alt="El Canario Regionales">
+        {% if not user.is_authenticated %}
+            <a class="bg-blue-500 hover:bg-blue-800 border-blue-800 text-white font-bold py-2 px-4 rounded-lg cursor-pointer" href="{% url 'account_login' %}">LOGIN</a>
+        {% else %}
+        <a class="bg-blue-500 hover:bg-blue-800 border-blue-800 text-white font-bold py-2 px-4 rounded-lg cursor-pointer" href="{% url 'core:home' %}">HOME</a>
+        {% endif %}
     </div>
 {% endblock base_content %}

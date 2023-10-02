@@ -94,4 +94,6 @@ components:
   #datatype_input=datatype_input
   search_datatype: "organisms/search_datatype.html"
 
+  #form for login
+  login_form: "organisms/login_form.html"
   form: "molecules/form.html"

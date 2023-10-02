@@ -8,7 +8,7 @@
         </form>
     </div>
     <nav class="text-white text-base font-semibold pt-3">
-        <a href="{% url 'home' %}" class="flex items-center text-white {% if not 'home' in request.path %}hover:opacity-75 {% else %} active-nav-link  {% endif %}py-4 pl-6 nav-item">
+        <a href="{% url 'core:home' %}" class="flex items-center text-white {% if not 'home' in request.path %}hover:opacity-75 {% else %} active-nav-link  {% endif %}py-4 pl-6 nav-item">
             <i class="fas fa-tachometer-alt mr-3"></i>
             Dashboard
         </a>

@@ -17,10 +17,9 @@ from django.contrib import admin
 from django.urls import path, include
 from articles import views as articles_views
 from _core.views import IndexView
-app_name = 'core'
 urlpatterns = [
     #settings module
-    path('', IndexView.as_view(), name="index"),
+    path('', include('_core.urls')),
     path('', include('settings.urls')),
     path('accounts/', include('allauth.urls')),
  
