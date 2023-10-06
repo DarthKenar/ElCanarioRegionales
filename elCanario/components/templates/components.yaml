@@ -17,6 +17,7 @@ components:
   # *children (simple text)
   button: "molecules/button.html"
 
+  button_form: "molecules/button_form.html" # text, class
   # Secciones
   # *type ("full", "cols")
   # *heading (str) (opcional)

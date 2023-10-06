@@ -1,46 +1,57 @@
 {% extends "account/base.html" %}
-
+{% load static %}
 {% load i18n %}
 {% load account socialaccount %}
 
 {% block head_title %}{% trans "Sign In" %}{% endblock head_title %}
+{% block extra_head %}
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
 
+        .font-family-karla {
+            font-family: karla;
+        }
+    </style>
+{% endblock extra_head %}
 {% block content %}
+    <body class="font-family-karla h-screen bg-[#edf2f7]">
+        <div class="w-full flex flex-wrap">
 
-<h1>{% trans "Sign In" %}</h1>
+            <!-- Login Section -->
+            <div class="w-full md:w-1/2 flex flex-col">
 
-{% get_providers as socialaccount_providers %}
+                <div class="flex justify-center md:justify-start pt-12 md:pl-12 md:-mb-24">
+                    <img src="{% static '/img/elcanarioregionales-logo-160x160.png' %}" alt="El Canario Regionales Logo">
+                </div>
 
-{% if socialaccount_providers %}
-<p>{% blocktrans with site.name as site_name %}Please sign in with one
-of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+                <div class="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
+                    <p class="text-center text-3xl">Bienvenido.</p>
+                    <form action="{% url 'account_login' %}" method="POST" class="login flex flex-col pt-3 md:pt-8">
+                        {% csrf_token %}
+                        <div class="flex flex-col pt-4">
+                            <label for="{{form.login.id_for_label}}" class="text-lg">Nombre de usuario:</label>
+                            <input type="text" name="email" id="{{form.login.id_for_label}}" placeholder="{{form.login.label}}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
+                        </div>
+        
+                        <div class="flex flex-col pt-4">
+                            <label for="{{form.password.id_for_label}}" class="text-lg">Contraseña</label>
+                            <input type="password" name="password" id="{{form.password.id_for_label}}"placeholder="{{form.password.label}}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
+                        </div>
+        
+                        <input type="submit" value="Log In" class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8 cursor-pointer">
+                    </form>
+                    <div class="text-center pt-12 pb-12">
+                        <p>No tienes una cuenta? <a href="#" class="underline font-semibold">Registrarse.</a></p>
+                    </div>
+                </div>
 
-<div class="socialaccount_ballot">
+            </div>
 
-  <ul class="socialaccount_providers">
-    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-  </ul>
+            <!-- Image Section -->
+            <div class="w-1/2 shadow-2xl">
+                <img class="object-cover w-full h-screen hidden md:block" src="{% static 'img/fondo-login.webp' %}">
+            </div>
+        </div>
 
-  <div class="login-or">{% trans 'or' %}</div>
-
-</div>
-
-{% include "socialaccount/snippets/login_extra.html" %}
-
-{% else %}
-<p>{% blocktrans %}If you have not created an account yet, then please
-<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
-{% endif %}
-
-<form class="login" method="POST" action="{% url 'account_login' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-  <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
-</form>
-
+    </body>
 {% endblock content %}
