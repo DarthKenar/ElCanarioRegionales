@@ -15,23 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from authentication import views as auth_views
 from articles import views as articles_views
-
-from authentication import views as auth_views
-
-
+from _core.views import IndexView
 urlpatterns = [
     #settings module
+    path('', include('_core.urls')),
     path('', include('settings.urls')),
+    path('accounts/', include('allauth.urls')),
+ 
     #pwa module
     path('', include('pwa.urls')),
     path('admin/', admin.site.urls),
-
-    #LOGIN SECTION & HOME
-    path('', auth_views.login_view, name="login"),
-    path('login_search/', auth_views.search_user, name="login_search"),
-    path('home/', auth_views.home, name="home"), # type: ignore
 
     # ORDERS SECTION
     path('orders/', include('orders.urls')),

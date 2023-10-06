@@ -1,0 +1,20 @@
+{% if "order" in request.path %}
+    {% var object_type="order" %}
+{% elif "article" in request.path %}
+    {% var object_type="article" %}
+{% elif "customer" in request.path %}
+    {% var object_type="customer" %}
+{% endif %}
+
+{% if "create" in request.path %}
+    {% var action="create" %}
+{% elif "update" in request.path %}
+    {% var action="update" %}
+{% endif %}
+
+{% var form=form %}
+{% var request=request %}
+
+{% with url=object_type|add:'s:'|add:action %}
+    {% include 'form.html' %}
+{% endwith %}

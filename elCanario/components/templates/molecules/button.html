@@ -1,0 +1,48 @@
+{% if border == "True" %}
+    {% var border='border' %}
+{% endif %}
+{% if type == 'info' %}
+    <input 
+    type="button"
+    value="{{text}}"
+    class="bg-blue-500 hover:bg-blue-800 border-blue-800 text-white {{border}} font-bold py-2 px-4 rounded-lg cursor-pointer"
+    hx-get="{% url url %}">
+    </input>
+{% elif type == 'success' %}
+    {% if for_form == "True" %}
+        {% if id %}
+            <button
+            type="submit"
+            hx-post="{% url url pk=id status='True' %}" hx-swap="outerHTML" hx-trigger="click" hx-target="#form_{{action}}" class=" bg-green-500 hover:bg-green-800 border-green-800 text-white {{border}} font-bold py-2 px-4 rounded-lg cursor-pointer">
+            {{text}} - {{id}}   
+            </button>
+        {% else %}
+            <button
+            type="submit"
+            hx-post="{% url url status='True' %}" hx-swap="outerHTML" hx-trigger="click" hx-target="#form_{{action}}" class=" bg-green-500 hover:bg-green-800 border-green-800 text-white {{border}} font-bold py-2 px-4 rounded-lg cursor-pointer">
+            {{text}} - {{id}}    
+            </button>
+        {% endif %}
+    {% else %}
+        <form action="{% url url %}" method={{method}} class="{{border}}">
+                <button
+                class=" bg-green-500 hover:bg-green-800 border-green-800 text-white {{border}} font-bold py-2 px-4 rounded-lg cursor-pointer">
+                {{text}}
+                </button>
+        </form>
+    {% endif %}
+
+{% elif type == 'danger' %}
+    <button 
+    class=" bg-red-500 hover:bg-red-700 border-red-800 text-white {{border}} font-bold py-2 px-4 rounded-lg cursor-pointer"
+    hx-delete="{% url url pk=id %}" hx-headers='{"X-CSRFToken": "{{csrf_token}}"}' hx-swap="outerHTML" hx-target="#search_data" hx-confirm="Are you sure you want to delete the {% if object_name %}{{object_type}}: {{object_name}}{% endif %}?">
+    {{text}}
+    </button>
+{% elif type == 'warning' %}
+    <form action="{% url url pk=id %}" method="GET" class="m-0">
+        <button class=" bg-orange-500 hover:bg-orange-700 border-orange-800 text-white {{border}} font-bold py-2 px-4 rounded-lg cursor-pointer"
+        type="submit">
+        {{text}}
+        </button>
+    </form>
+{% endif %}

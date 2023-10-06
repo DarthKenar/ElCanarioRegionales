@@ -1,18 +1,30 @@
-{% extends 'base.html' %}
-{% block title %}
+{% extends 'base_home.html' %}
+{% load static %}
+{% block title_section %}
     <title>Orders - Canario Regionales</title>
-{% endblock title %}
-{% block content %}
-    {% include 'menu.html' %}
-    <div id="orders_search_datatype">
+{% endblock title_section %}
 
-        {% include 'orders_search_header.html'%}
+{% block title_section_content_upper %}
+    <h1 class="text-3xl text-black pb-6">Search orders:</h1>
+{% endblock title_section_content_upper %}
+{% block section_content_upper %}
+    {% include 'orders_search_header.html'%}
+{% endblock section_content_upper %}
 
-        <div id="orders_search_data">
-
-            {% include 'orders_table.html' %}
-
+{% block title_section_content_under %}
+    <div class="text-xl pb-3 flex items-center justify-between">
+        <!-- Latest Reports -->
+        <div class="text-xl pb-3 flex items-center">
+            <i class="fas fa-list mr-3"></i>
+            <span>Orders list</span>
         </div>
-        
-    {% include 'footer.html' %}
-{% endblock content %}
+        <div class="text-base">
+            {% button type="success" url='orders:create' text="Create Order" method="GET" %}
+        </div>
+    </div>
+{% endblock title_section_content_under %}
+{% block section_content_under %}
+    {% include 'orders_table.html' %}
+{% endblock section_content_under %}
+
+    

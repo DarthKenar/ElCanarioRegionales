@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    <title>Offline</title>
+{% endblock title %}
+{% block content %}
+    {% include 'menu.html' %}
+    <h1 class="text-center text-3xl font-bold p-2">ESTAS DESCONECTADO, PORFAVOR REVISA TU CONEXION A INTERNET.</h1>
+    <div class="flex items-center justify-center">
+        <img src="{% static '/img/offline.gif' %}" width="50%" height="50%"></img>
+    </div>
+{% endblock content %}

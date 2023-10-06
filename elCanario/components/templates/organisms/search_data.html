@@ -1,0 +1,28 @@
+<div id="search_data" >
+    {% if object_list %}
+        {% if answer_error_name %}
+            {% #message type="danger" heading="Oops!" %}
+                {{answer_error_name}}
+            {% /message %}
+        {% endif %}
+        {% if delete_answer %}
+            {% #message type="danger" heading="Deleted!" %}
+                {{delete_answer}}
+            {% /message %}
+        {% endif %}
+        {% #message type="success" heading="Found!" %}
+            {{object_type}} found: <b>{{ object_list.count }}</b>.
+        {% /message %}
+        {% include table %}
+    {% else %}
+        {% if value %}
+            {% #message type="warning" heading="Oops!" %}
+                No {{object_type}} found for: <b> {{datatype}} {{value}}</b>
+            {% /message %}
+        {% else %}
+            {% #message type="danger" heading="Oops!" %}
+                No {{object_type}} found. <b> {{datatype}} {{value}}</b>
+            {% /message %}
+        {% endif %}
+    {% endif %}
+</div>

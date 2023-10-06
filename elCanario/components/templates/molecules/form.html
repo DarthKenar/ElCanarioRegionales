@@ -1,0 +1,48 @@
+<form class="min-h-screen flex items-center justify-center" id="form_{{action}}">
+    {% load widget_tweaks %}
+    {% load custom_filters %}
+    {% load custom_tags %}
+    {% csrf_token %}
+    {% if 'customers' in request.path %}
+        {% if action == "create" %}
+            {% hx_post_create_customers_render_field "False" as hx_post %}
+        {% elif action == "update" %}
+            {% hx_post_update_customers_render_field id "False" as hx_post %}
+        {% endif %}
+    {% elif 'orders' in request.path %}
+        {% if action == "create" %}
+            {% hx_post_create_orders_render_field "False" as hx_post %}
+        {% elif action == "update" %}
+            {% hx_post_update_orders_render_field id "False" as hx_post %}
+        {% endif %}
+    {% endif %}
+    {% trigger_input as hxtrigger %}
+    <div class="max-w-md w-full p-6 bg-white rounded-lg shadow-lg">
+        <h1 class="text-2xl font-semibold text-center text-gray-500 mt-8 mb-6">{{action|title}} {{object_type|title}}</h1>
+        
+            {% for field in form %}
+                <div class="mb-4">
+                    <label for="id_{{field.label|lower|replace_spaces_with_underscore}}" class="block mb-2 text-sm text-gray-600">{{field.label}}</label>
+                    {% render_field field|attr:hx_post|attr:"hx-swap=outerHTML"|attr:"hx-target=#form_create"|attr:'hx-headers={"X-CSRFToken": "{{ csrf_token }}"}'|add_class:"w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 input" %}
+                    {% for error in field.errors %}
+                        {% #message type="danger"  %}
+                            {{error}}
+                        {% /message %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <div class="w-full flex justify-end">
+                {% button type="success" for_form="True" action=action url=url text="Save" csrf_token=csrf_token id=id %}
+            </div>
+            
+        {% if 'correct' in request.GET %}
+            {% #message type="success" %}
+                Saved correctly
+            {% /message %}
+        {% elif 'incorrect' in  request.GET %}
+            {% #message type="danger"  %}
+                Check all fields
+            {% /message %}
+        {% endif %}
+    </div>
+</form>

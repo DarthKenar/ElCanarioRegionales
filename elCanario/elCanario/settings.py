@@ -43,16 +43,28 @@ INSTALLED_APPS = [
     'pwa',
     'widget_tweaks'
 ]
+# Apps de terceros
+INSTALLED_APPS += [
+    "components",
+    "slippers",
+]
 #own apps
 INSTALLED_APPS += [
     'articles',
-    'authentication',
     'customers',
     'dollar',
     'orders',
     'expenses',
     'messageslog'
 ]
+
+INSTALLED_APPS += [    # The following apps are required:
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    ]
 
 #For development
 # DEV_INSTALLED_APPS = [
@@ -69,6 +81,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'elCanario.urls'
@@ -79,7 +92,6 @@ TEMPLATES = [
         'DIRS': [BASE_DIR / 'articles/templates/articles/',
                  BASE_DIR / 'articles/templates/articles/partials',
                  BASE_DIR / 'articles/templates/articles/htmx',
-                 BASE_DIR / 'authentication/templates/authentication/',
                  BASE_DIR / 'orders/templates/orders', 
                  BASE_DIR / 'orders/templates/orders/partials', 
                  BASE_DIR / 'orders/templates/orders/htmx', 
@@ -89,7 +101,10 @@ TEMPLATES = [
                  BASE_DIR / "settings/templates/settings",
                  BASE_DIR / "settings/templates/settings/htmx",
                  BASE_DIR / "messageslog/templates/messageslog/",
-                 BASE_DIR / "elCanario/templates/elCanario/"],
+                 BASE_DIR / "elCanario/templates/elCanario/",
+                 BASE_DIR / "components/templates/molecules",
+                 BASE_DIR / "_core/templates/_core",
+                 BASE_DIR / "allauth/templates/"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -98,8 +113,17 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            "builtins": ["slippers.templatetags.slippers"],  # Slippers
         },
     },
+]
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 WSGI_APPLICATION = 'elCanario.wsgi.app'
@@ -138,6 +162,21 @@ DATABASES = {
 #     }
 # }
 
+# Provider specific settings
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        },
+        'OAUTH_PKCE_ENABLED': True,
+    }
+}
+
+SITE_ID = 1
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
