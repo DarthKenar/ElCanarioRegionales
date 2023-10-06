@@ -1,10 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [,"elCanario/*/templates/*/*.html","elCanario/*/templates/*/*/*.html","elCanario/*/templates/*.html",],
+  content: [
+  "elCanario/*/templates/*/*.html",
+  "elCanario/*/templates/*/*/*.html",
+  "elCanario/*/templates/*.html",
+  "./node_modules/tw-elements/dist/js/**/*.js"],
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require("tw-elements/dist/plugin.cjs")],
+  darkMode: "class"
 }
 
 // PATH
