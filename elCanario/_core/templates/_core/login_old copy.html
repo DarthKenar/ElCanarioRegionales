@@ -1,10 +1,7 @@
-{% extends "account/base.html" %}
+{% extends 'base.html' %}
 {% load static %}
-{% load i18n %}
-{% load account socialaccount %}
-
-{% block head_title %}{% trans "Sign In" %}{% endblock head_title %}
-{% block extra_head %}
+{% block title %}
+    <title>Login</title>
     <style>
         @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
 
@@ -12,8 +9,8 @@
             font-family: karla;
         }
     </style>
-{% endblock extra_head %}
-{% block content %}
+{% endblock title %}
+{% block base_content %}
     <body class="font-family-karla h-screen bg-[#edf2f7]">
         <div class="w-full flex flex-wrap">
 
@@ -26,16 +23,16 @@
 
                 <div class="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
                     <p class="text-center text-3xl">Bienvenido.</p>
-                    <form action="{% url 'account_login' %}" method="POST" class="login flex flex-col pt-3 md:pt-8">
+                    <form action="{% url 'login_search' %}" method="POST" class="flex flex-col pt-3 md:pt-8">
                         {% csrf_token %}
                         <div class="flex flex-col pt-4">
-                            <label for="{{form.login.id_for_label}}" class="text-lg">Nombre de usuario:</label>
-                            <input type="text" name="email" id="{{form.login.id_for_label}}" placeholder="{{form.login.label}}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
+                            <label for="username_input" class="text-lg">Nombre de usuario:</label>
+                            <input type="text" name="username_input" id="username_input" placeholder="admin" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
                         </div>
         
                         <div class="flex flex-col pt-4">
-                            <label for="{{form.password.id_for_label}}" class="text-lg">Contraseña</label>
-                            <input type="password" name="password" id="{{form.password.id_for_label}}"placeholder="{{form.password.label}}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
+                            <label for="password_input" class="text-lg">Contraseña</label>
+                            <input type="password" name="password_input" id="password_input"placeholder="1234" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
                         </div>
         
                         <input type="submit" value="Log In" class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8 cursor-pointer">
@@ -54,4 +51,4 @@
         </div>
 
     </body>
-{% endblock content %}
+{% endblock base_content %}
