@@ -11,7 +11,6 @@ module.exports = {
   plugins: [require("tw-elements/dist/plugin.cjs")],
   darkMode: "class"
 }
-
 // PATH
 
 // npx tailwindcss -o elCanario/elCanario/static/css/tailwind.css --watch
