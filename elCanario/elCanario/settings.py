@@ -67,10 +67,10 @@ INSTALLED_APPS += [    # The following apps are required:
     'allauth.socialaccount.providers.google',
     ]
 
-#For development
-# DEV_INSTALLED_APPS = [
-#     'django_extensions'
-#     ]
+# For development
+INSTALLED_APPS += [
+    'rosetta'
+    ]
 
 # INSTALLED_APPS += DEV_INSTALLED_APPS
 
@@ -201,7 +201,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'es'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'America/Buenos_Aires'
 
@@ -223,7 +223,7 @@ STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "static/"  
 
 STATICFILES_DIRS = [
-    BASE_DIR / "staticfiles",
+    BASE_DIR / "elCanario/staticfiles",
     BASE_DIR.parent / "node_modules",
 ]  
 

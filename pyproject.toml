@@ -33,3 +33,7 @@ format = "black elCanario"
 indent = "djhtml elCanario/apps -t 4"
 linter = "ruff elCanario"
 test = "pytest elCanario"
+[tool.pdm.dev-dependencies]
+dev = [
+    "django-rosetta>=0.9.9",
+]

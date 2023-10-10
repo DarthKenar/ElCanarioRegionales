@@ -74,3 +74,9 @@ if settings.DEBUG:
     from django.conf.urls.static import static
     urlpatterns+= static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns+= static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if 'rosetta' in settings.INSTALLED_APPS:
+    from django.conf.urls import include
+    urlpatterns += [
+        path(r'translate/', include('rosetta.urls')),
+    ]
