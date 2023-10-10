@@ -12,35 +12,36 @@
     <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4">
         <a href="{% url 'core:home' %}" class="flex items-center active-nav-link text-white py-2 pl-4 nav-item">
             <i class="fas fa-tachometer-alt mr-3"></i>
-            Dashboard
+            {% translate 'Dashboard' %}
         </a>
         <a href="{% url 'orders:orders' %}" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
             <i class="fas fa-sticky-note mr-3"></i>
-            Orders
+            {% translate 'Orders' %}
         </a>
         <a href="{% url 'articles:articles' %}" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
             <i class="fas fa-table mr-3"></i>
-            Articles
+            {% translate 'Articles' %}
         </a>
         <a href="{% url 'customers:customers' %}" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
             <i class="fas fa-align-left mr-3"></i>
-            Customers
-        </a>
-        <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-            <i class="fas fa-calendar mr-3"></i>
-            Calendar
-        </a>
-        <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-            <i class="fas fa-cogs mr-3"></i>
-            Support
+            {% translate 'Customers' %}
         </a>
         <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
             <i class="fas fa-user mr-3"></i>
-            My Account
+            {% translate 'My Account' %}
         </a>
-        <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+        <a href="https://wa.me/542615878046?text=Hola,%20he%20notado%20un%20error%20en%20el%20canario%20regionales.%20%0ALo%20que%20sucede%20es%20que%20-" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+            <i class="fas fa-cogs mr-3"></i>
+            {% translate 'Support' %}
+        </a>
+        <a href="https://wa.me/542615878046?text=Hola,%20he%20estado%20viendo%20tu%20sistema%20de%20El%20Canario%20Regionales%20y%20me%20parece%20genial!%20%0AMi%20nobre%20es%20-" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+            <i class="fas fa-cogs mr-3"></i>
+            {% trans 'Contact Us' %}
+        </a>
+
+        <a href="{% url 'account_logout' %}" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
             <i class="fas fa-sign-out-alt mr-3"></i>
-            Sign Out
+            {% translate 'Sign Out' %}
         </a>
         <button class="w-full bg-white cta-btn font-semibold py-2 mt-3 rounded-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
             <i class="fas fa-arrow-circle-up mr-3"></i> Upgrade to Pro!

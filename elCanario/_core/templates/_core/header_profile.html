@@ -1,14 +1,23 @@
 {% load custom_tags %}
 {% load i18n %}
+{% load static %}
 <header class="w-full items-center bg-white py-2 px-6 hidden sm:flex">
     <div class="w-1/2"></div>
     <div x-data="{ isOpen: false }" class="relative w-1/2 flex justify-end">
         <button @click="isOpen = !isOpen" class="realtive z-10 w-12 h-12 rounded-full overflow-hidden border-4 border-gray-400 hover:border-gray-300 focus:border-gray-300 focus:outline-none">
-            <img src="{{user_picture}}" alt="{{ user.username }}'s Profile Picture">
+            {% if user_picture %}
+                <img src="{{user_picture}}" alt="{{ user.username }}'s Profile Picture">
+            {% elif user.socialaccount_set.all.0.get_avatar_url %}
+                <img src="{{user.socialaccount_set.all.0.get_avatar_url}}" alt="{{ user.username }}'s Profile Picture">
+            {% else %}
+                <img src="{% static 'img/generic_picture.png' %}" alt="{{ user.username }}'s Profile Picture">
+            {% endif %}
+            
+            
         </button>
         <button x-show="isOpen" @click="isOpen = false" class="h-full w-full fixed inset-0 cursor-default"></button>
         <div x-show="isOpen" class="absolute w-40 bg-white rounded-lg shadow-lg py-2 mt-16">
-            <a href="#" class="block px-4 py-2 account-link hover:text-white">{% trans 'Account' %}</a>
+            <a href="#" class="block px-4 py-2 account-link hover:text-white">{% trans 'My Account' %}</a>
             <a target="_blank" href="https://wa.me/542615878046?text=Hola,%20he%20notado%20un%20error%20en%20el%20canario%20regionales.%20%0ALo%20que%20sucede%20es%20que%20-" class="block px-4 py-2 account-link hover:text-white">{% trans 'Support' %}</a>
             <a target="_blank" href="https://wa.me/542615878046?text=Hola,%20he%20estado%20viendo%20tu%20sistema%20de%20El%20Canario%20Regionales%20y%20me%20parece%20genial!%20%0AMi%20nobre%20es%20-" class="block px-4 py-2 account-link hover:text-white">{% trans 'Contact Us' %}</a>
             <a href="{% url 'account_logout' %}" class="block px-4 py-2 account-link hover:text-white">{% trans 'Sign Out' %}</a>
