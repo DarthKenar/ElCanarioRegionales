@@ -30,6 +30,7 @@
 
                     <form action="{% url 'account_login' %}" method="POST" class="flex flex-col pt-3 md:pt-8">
                         {% csrf_token %}
+                            
                             <div class="flex flex-col pt-4">
                                 <label for="{{form.login.id_for_label}}" class="text-lg">{{form.login.label}}</label>
                                 <input type="text" name="login" id="{{form.login.id_for_label}}" placeholder="{{form.login.label}}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
@@ -57,6 +58,9 @@
                                 {{form.remember.label}}
                                 </label>
                             </div>
+
+                            {% form_error_non_fields errors=form.non_field_errors %}
+
                         <input type="submit" value="Log In" class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8 cursor-pointer">
                     </form>
                     <a class="button secondaryAction text-center" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
