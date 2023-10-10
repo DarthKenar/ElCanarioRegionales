@@ -27,7 +27,7 @@ migrate = "elCanario/manage.py migrate"
 createsuperuser = "python elCanario/manage.py createsuperuser --username='admin' --email='ioseph.dev@gmail.com'"
 server = "elCanario/manage.py runserver"
 collect = "elCanario/manage.py collectstatic"
-tail = "npx tailwindcss -o elCanario/articles/static/css/tailwind.css --watch"
+tail = "npx tailwindcss -i elCanario/articles/static/css/input.css -o elCanario/articles/static/css/output.css --watch"
 
 format = "black elCanario"
 indent = "djhtml elCanario/apps -t 4"

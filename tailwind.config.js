@@ -8,11 +8,11 @@ module.exports = {
   theme: {
     extend: {},
   },
+  darkMode: "class",
   plugins: [require("tw-elements/dist/plugin.cjs")],
-  darkMode: "class"
 }
 // PATH
-
+// npx tailwindcss -i elCanario/articles/static/css/input.css -o elCanario/articles/static/css/output.css --watch
 // npx tailwindcss -o elCanario/elCanario/static/css/tailwind.css --watch
 // npx tailwindcss -o elCanario/articles/static/css/tailwind.css --watch
 // npx tailwindcss -o elCanario/authentication/static/css/tailwind.css --watch

@@ -212,8 +212,17 @@ LOGIN_URL = '/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
-STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL = "static/"  # Nuevo
+
+STATIC_ROOT = BASE_DIR / "static/"  # Nuevo
+
+STATICFILES_DIRS = [
+    BASE_DIR / "staticfiles",
+    BASE_DIR.parent / "node_modules",
+]  # Nuevo
+
+TE_URL = "node_modules/"  # Nuevo
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
