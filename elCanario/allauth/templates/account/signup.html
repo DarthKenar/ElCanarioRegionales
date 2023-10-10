@@ -21,8 +21,6 @@
       </div>
       <!-- Login Section -->
       <div class="w-full md:w-1/2 flex flex-col">
-        
-        {{form.as_p}}
           <div class="flex justify-center md:hidden pt-12 md:pl-12 md:-mb-24">
               <img src="{% static '/img/elcanarioregionales-logo-160x160.png' %}" alt="El Canario Regionales Logo">
           </div>
@@ -37,22 +35,28 @@
                       <input type="text" name="email" id="{{form.username.id_for_label}}" placeholder="{{form.username.label}}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
                   </div>
 
-                  
+                  {% form_error errors=form.username.errors %}
   
-                  <div class="flex flex-col pt-4">
+                  <div class="flex flex-col pt-0">
                       <label for="{{form.email.id_for_label}}" class="text-lg">{{form.email.label}}</label>
                       <input type="email" name="{{form.email.label|lower}}" id="{{form.email.id_for_label}}"placeholder="{{form.email.label}}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
                   </div>
 
-                  <div class="flex flex-col pt-4">
+                  {% form_error errors=form.email.errors %}
+
+                  <div class="flex flex-col pt-0">
                       <label for="{{form.password1.id_for_label}}" class="text-lg">{{form.password1.label}}</label>
                       <input type="password" name="{{form.password1.label|lower}}" id="{{form.password1.id_for_label}}"placeholder="{{form.password1.label}}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
                   </div>
 
-                  <div class="flex flex-col pt-4">
+                  {% form_error errors=form.password1.errors %}
+
+                  <div class="flex flex-col pt-0">
                       <label for="{{form.password2.id_for_label}}" class="text-lg">{{form.password2.label}}</label>
                       <input type="password" name="{{form.password2.label|lower}}" id="{{form.password2.id_for_label}}"placeholder="{{form.password2.label}}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
                   </div>
+
+                  {% form_error errors=form.password2.errors %}
 
                   <input type="submit" value="{{signup}}" class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8 cursor-pointer">
               </form>

@@ -3,6 +3,12 @@
 # *atributos (opciones) (descripción)
 # children: (descripcion)
 
+# Atomic Design
+# https://atomicdesign.bradfrost.com/chapter-2/
+
+# Using Slippers
+# https://pypi.org/project/slippers/
+# https://mitchel.me/slippers/
 components:
 
   # Mensajes
@@ -65,6 +71,8 @@ components:
   # *sell_price = sell_price
 
   card_article: "molecules/card_article.html"
+
+  form_error: "molecules/form_error.html"
 
   # Search Header
   # children (necessary html labels for search any)
