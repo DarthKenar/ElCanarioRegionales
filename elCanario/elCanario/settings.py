@@ -212,19 +212,22 @@ USE_TZ = True
 # Allauth
 
 LOGIN_REDIRECT_URL = reverse_lazy('core:home')
-
+LOGIN_URL = reverse_lazy('core:home')
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_MIN_LENGTH = 4
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
-STATIC_URL = "static/"  # Nuevo
+STATIC_URL = "static/"  
 
-STATIC_ROOT = BASE_DIR / "static/"  # Nuevo
+STATIC_ROOT = BASE_DIR / "static/"  
 
 STATICFILES_DIRS = [
     BASE_DIR / "staticfiles",
     BASE_DIR.parent / "node_modules",
-]  # Nuevo
+]  
 
-TE_URL = "node_modules/"  # Nuevo
+TE_URL = "node_modules/"  
 
 
 MEDIA_URL = '/media/'
