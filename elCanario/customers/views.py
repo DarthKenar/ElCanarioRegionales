@@ -2,7 +2,7 @@ from mailbox import Message
 from customers.forms import CustomerForm
 from django.forms.models import BaseModelForm
 from django.http import HttpRequest, HttpResponse
-from django.utils.translation import gettext
+from django.utils.translation import gettext_lazy as _
 from urllib.parse import parse_qs
 from typing import Any, Dict, List
 from django.urls import reverse_lazy
@@ -25,8 +25,8 @@ class CustomerListView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context['datatype_input'] = _('name')
-        context["datatype"] = gettext('Name')
+        context['datatype_input'] = 'name'
+        context["datatype"] = _('Name')
         context["answer"] = "Customers in Database"
         return context
 

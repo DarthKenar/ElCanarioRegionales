@@ -1,0 +1,123 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-10-11 04:06-0300\n"
+"PO-Revision-Date: 2023-10-11 04:14-0300\n"
+"Last-Translator:   <ioseph.dev@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Translated-Using: django-rosetta 0.9.9\n"
+
+#: .\elCanario\_core\templates\_core\graphics.html:19
+msgid "Monthly Reports"
+msgstr "Reportes Mensuales"
+
+#: .\elCanario\_core\templates\_core\graphics.html:19
+#: .\elCanario\_core\templates\_core\graphics.html:27
+msgid "(in development)"
+msgstr "(en desarrollo)"
+
+#: .\elCanario\_core\templates\_core\graphics.html:27
+msgid "Resolved Reports"
+msgstr "Reportes Resueltos"
+
+#: .\elCanario\_core\templates\_core\header_profile.html:20
+#: .\elCanario\_core\templates\_core\menu_mobile.html:32
+msgid "My Account"
+msgstr "Mi Cuenta"
+
+#: .\elCanario\_core\templates\_core\header_profile.html:21
+#: .\elCanario\_core\templates\_core\menu_mobile.html:36
+msgid "Support"
+msgstr "Soporte"
+
+#: .\elCanario\_core\templates\_core\header_profile.html:22
+#: .\elCanario\_core\templates\_core\menu_mobile.html:40
+msgid "Contact Us"
+msgstr "Contáctanos"
+
+#: .\elCanario\_core\templates\_core\header_profile.html:23
+#: .\elCanario\_core\templates\_core\menu_mobile.html:45
+msgid "Sign Out"
+msgstr "Salir"
+
+#: .\elCanario\_core\templates\_core\login_allauth_old.html:6
+#: .\elCanario\_core\templates\_core\login_allauth_old.html:9
+#: .\elCanario\components\templates\organisms\login_form.html:13
+msgid "Sign In"
+msgstr "Entrar"
+
+#: .\elCanario\_core\templates\_core\login_allauth_old.html:15
+#, python-format
+msgid ""
+"Please sign in with one\n"
+"of your existing third party accounts. Or, <a href=\"%(signup_url)s\">sign up</a>\n"
+"for a %(site_name)s account and sign in below:"
+msgstr ""
+
+#: .\elCanario\_core\templates\_core\login_allauth_old.html:25
+msgid "or"
+msgstr "o"
+
+#: .\elCanario\_core\templates\_core\login_allauth_old.html:32
+#, python-format
+msgid ""
+"If you have not created an account yet, then please\n"
+"<a href=\"%(signup_url)s\">sign up</a> first."
+msgstr ""
+
+#: .\elCanario\_core\templates\_core\login_allauth_old.html:42
+#: .\elCanario\components\templates\organisms\login_form.html:12
+msgid "Forgot Password?"
+msgstr "¿Ha olvidado su contraseña?"
+
+#: .\elCanario\_core\templates\_core\menu_mobile.html:16
+#, fuzzy
+msgid "Dashboard"
+msgstr "Escritorio"
+
+#: .\elCanario\_core\templates\_core\menu_mobile.html:20
+msgid "Orders"
+msgstr "Ordenes"
+
+#: .\elCanario\_core\templates\_core\menu_mobile.html:24
+msgid "Articles"
+msgstr "Artículos"
+
+#: .\elCanario\_core\templates\_core\menu_mobile.html:28
+msgid "Customers"
+msgstr "Clientes"
+
+#: .\elCanario\customers\templates\customers\customers_update.html:8
+msgid "Search Customer:"
+msgstr "Buscar Cliente:"
+
+#: .\elCanario\customers\templates\customers\customers_update.html:19
+msgid "Update Customer Section"
+msgstr "Sección Actualizar Cliente"
+
+#: .\elCanario\customers\views.py:29
+msgid "Name"
+msgstr "Nombre"
+
+#: .\elCanario\elCanario\settings.py:216
+msgid "English"
+msgstr "Ingles"
+
+#: .\elCanario\elCanario\settings.py:217
+msgid "Spanish"
+msgstr "Español"
+
+#~ msgid "name"
+#~ msgstr "nombre"

@@ -18,6 +18,9 @@ from django.urls import path, include
 from articles import views as articles_views
 from _core.views import IndexView
 urlpatterns = [
+    #https://docs.djangoproject.com/en/dev/topics/i18n/translation/#the-set-language-redirect-view
+    path("i18n/", include("django.conf.urls.i18n")),
+
     #settings module
     path('', include('_core.urls')),
     path('', include('settings.urls')),

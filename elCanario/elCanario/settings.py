@@ -1,4 +1,5 @@
 import os
+from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy
 """
 Django settings for elCanario project.
@@ -201,13 +202,20 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'America/Buenos_Aires'
 
 USE_I18N = True
 
 USE_TZ = True
+
+LOCALE_PATHS = (BASE_DIR / 'locale/',)
+
+LANGUAGES = (
+    ('en', _('English')),
+    ('es', _('Spanish')),
+    )
 
 # Allauth
 
