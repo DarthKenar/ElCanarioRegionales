@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}
+  <title>Create Article - Canario Regionales</title>
+{% endblock title %}
+{% block content %}
+  {% include 'menu.html' %}
+  <div>
+    <div>
+      <div id="article_create_answer">
+        {% include 'articles_create_table.html' %}
+      </div>
+    </div>
+  </div>
+  {% include 'footer.html' %}
+{% endblock content %}

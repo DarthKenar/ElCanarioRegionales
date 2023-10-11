@@ -21,8 +21,8 @@
     </div>
 {% endblock title_section_content_under %}
 {% block section_content_under %}
-
-    {% #section type="full" %}
+    <div id="articles_create_answer">
+        {% #section type="full" %}
         {% var url="customers:create" %}
         {% var object_type="customer" %}
         {% var form=form %}
@@ -30,6 +30,8 @@
         {% var action="create" %}
         {% include 'form.html' %}
     {% /section %}
+    </div>
+
 {% endblock section_content_under %}
 
     

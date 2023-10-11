@@ -1,0 +1,68 @@
+
+<h1>Editar Artículo {{article_to_update.name}}</h1>
+<div>
+  <label>Name*: </label>
+  <input hx-get="{% url 'articles:update_name_check' pk=article_to_update.id %}" type="text" hx-target="#answer_article_name" hx-trigger="keyup changed delay:200ms" hx-swap="outerHTML" name="article_name_input" id="article_name_input" value="{{article_to_update.name}}" required >
+  <div id="answer_article_name">
+    <output >{{answer_error_name}}</output>
+  </div>
+</div>
+{% for category in categories %}
+    <div >
+        <!-- Button to edit category -->
+        <form action="{% url 'articles:category_update' external_link="True" cat_id=category.id art_id=article_to_update.id  %}" method="GET">
+          <button ion-button icon-only type="submit">
+              <ion-icon name="create-outline" 
+              ></ion-icon>
+          </button>
+        </form>
+        <!-- Selection options -->
+        <label for="article_value_input">{{category.name}}: </label>
+        <select id = "{{category.id}}" name="category-{{category.id}}">
+            <option value=""></option>
+            {% load custom_tags %}
+            <!-- obtengo todos los valores para cada category (categoría) -->
+            {% with values|filter_by_category:category as values_for_category %}
+
+                {% for value in values_for_category %}
+                <!-- si muestro cada value acá imprimiría todos los valores para cada categoría-->
+                    {% if value in article_to_update.characteristics_id.all %}
+                        <option value="{{value.id}}" selected >{{value.name}}</option>
+                    {% else %}
+                        <option value="{{value.id}}">{{value.name}}</option>
+                    {% endif %}
+                {% endfor %}
+            {% endwith %}
+        </select>
+        <output id="answer_category_id">{{answer_category_id}}</output>
+    </div>
+{% endfor %}
+<div >
+  <label>Buy price*: </label>
+  <input type="text" name="article_buy_price_input" id="article_buy_price_input" hx-get="{% url 'articles:create_calculator' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#article_sell_price_output" hx-include="[name='article_increase_input']" value="{{article_to_update.buy_price}}" required >
+</div>
+<div >
+  <label >Increment*: </label>
+  <input  type="text" name="article_increase_input" id="article_increase_input" hx-get="{% url 'articles:create_calculator' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#article_sell_price_output" hx-include="[name='article_buy_price_input']" value="{{article_to_update.increase}}" required>
+  <label>%</label>
+</div>
+
+<div id="article_sell_price_output">
+  <label>Sell Price*: </label>
+  <input type="text" name="article_sell_price_input" id="article_sell_price_input" value="{{article_to_update.sell_price}}" readonly>{{article_to_update.sell_price}}</input>
+  <output id="answer_sell_price">{{answer_sell_price}}</output>
+</div>
+
+<div>
+  <label>Stock: </label>
+  <input hx-get="{% url 'articles:create_stock_check' %}" type="text" hx-target="#answer_article_stock" hx-trigger="keyup changed delay:200ms" hx-swap="outerHTML" name="article_stock_input" id="article_stock_input" value="{{article_to_update.stock}}" placeholder="defalut: 0">
+  {% include 'articles_create_stock_check.html' %}
+</div>
+
+<div >
+    <button ion-button icon-only type="submit" hx-get="{% url 'articles:update_confirm' id=article_to_update.id %}" hx-trigger="click" hx-include="#article_name_input,[name^='category-'],#article_buy_price_input, #article_increase_input, #article_sell_price_input, #article_stock_input" hx-target="#article_create_answer" hx-swap="outerHTML">
+        <ion-icon name="save-outline"></ion-icon>
+    </button>
+</div>
+
+{% include 'articles_table.html' %}
