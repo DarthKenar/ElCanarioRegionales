@@ -58,7 +58,7 @@
 
   {% endfor %}
 
-  <div class="grid grid-cols-3 gap-4">
+  <div class="grid grid-cols-2 gap-4">
     <!--Buy price input-->
     <div class="relative mb-6" data-te-input-wrapper-init>
       <input
@@ -87,11 +87,9 @@
       </label>
     </div>
     
-    <!--Sell price input-->
-    {% include 'articles_create_calculator.html' %}
-
   </div>
-
+  <!--Sell price input-->
+  {% include 'articles_create_calculator.html' %}
   <!--Submit button-->
   <button
     hx-get="{% url 'articles:create_confirm' %}" hx-trigger="click" hx-include="#article_name_input,[name^='category-'],#article_buy_price_input, #article_increase_input, #article_sell_price_input, #article_stock_input" hx-target="#article_create_answer" hx-swap="outerHTML"
