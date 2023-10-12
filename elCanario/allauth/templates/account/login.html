@@ -44,6 +44,7 @@
                             </div>
 
                             {% form_error errors=form.password.errors %}
+                            {% form_error_non_fields errors=form.non_field_errors %}
                             
                             <!--Default checkbox-->
                             <div class="pt-0 mb-[0.125rem] block min-h-[1.5rem] pl-[1.5rem]">
@@ -58,8 +59,6 @@
                                 {{form.remember.label}}
                                 </label>
                             </div>
-
-                            {% form_error_non_fields errors=form.non_field_errors %}
 
                         <input type="submit" value="Log In" class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8 cursor-pointer">
                     </form>
