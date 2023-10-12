@@ -1,3 +1,4 @@
+{% load i18n %}
 <form class="min-h-screen flex items-center justify-center" id="form_{{action}}">
     {% load widget_tweaks %}
     {% load custom_filters %}
@@ -37,11 +38,11 @@
             
         {% if 'correct' in request.GET %}
             {% #message type="success" %}
-                Saved correctly
+                {% translate 'Saved correctly' %}
             {% /message %}
         {% elif 'incorrect' in  request.GET %}
             {% #message type="danger"  %}
-                Check all fields
+                {% translate 'Check all fields' %}
             {% /message %}
         {% endif %}
     </div>

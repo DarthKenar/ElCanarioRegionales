@@ -4,13 +4,13 @@
     <title>Home</title>
 {% endblock title_section %}
 {% block title_section_content_upper %}
-    <h1 class="text-3xl text-black pb-6">Dashboard</h1>
+    <h1 class="text-3xl text-black pb-6">{% translate 'Dashboard' %}</h1>
 {% endblock title_section_content_upper %}
 {% block section_content_upper %}
     {% include 'graphics.html' %}
 {% endblock section_content_upper %}
 {% block title_section_content_under %}
-    Messages Log
+    {% translate 'Messages Log' %}
 {% endblock title_section_content_under %}
 {% block section_content_under %}
     {% include 'messagelog_list.html' %}

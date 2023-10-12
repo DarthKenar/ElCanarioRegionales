@@ -158,11 +158,11 @@ def customer_delete(request:object, pk:int)-> HttpResponse:
     try:
         customer = get_object_or_404(Customer, id=pk)
     except Exception as e:
-        context["delete_answer"] = f"The selected item could not be deleted because it does not exist. Contact support."
+        context["delete_answer"] = _("The selected item could not be deleted because it does not exist. Contact support.")
         return render_login_required(request, template, context)
     else:
-        context["delete_answer"] = f"Customer {customer.name} has been eliminated"
-        message = MessageLog(info=f"Customer {customer.name} has been eliminated")
+        context["delete_answer"] = _(f"Customer {customer.name} has been eliminated")
+        message = MessageLog(info= _(f"Customer {customer.name} has been eliminated"))
         message.save()
         customer.delete()
         articles = Customer.objects.all()

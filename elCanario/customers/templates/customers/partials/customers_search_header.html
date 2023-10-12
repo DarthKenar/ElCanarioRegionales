@@ -1,13 +1,14 @@
+{% load i18n %}
 {% #search_header %}
     <div class="flex">
         <select class="px-4 py-2 font-bold bg-white rounded-sm" name="datatype_input" id="datatype_input" hx-get="{% url 'customers:read_datatype' %}" hx-target="#search_datatype"  hx-trigger="change" hx-swap="outerHTML">
-            <option value="id" {% if datatype_input == "id" %} selected {% endif %}>ID</option>
-            <option value="name" {% if datatype_input == "name" %} selected {% endif %}>Name</option>
-            <option value="dni" {% if datatype_input == "dni" %} selected {% endif %}>DNI</option>
-            <option value="phone_number" {% if datatype_input == "phone_number" %} selected {% endif %}>Phone number</option>
-            <option value="email" {% if datatype_input == "email" %} selected {% endif %}>E-mail</option>
-            <option value="address" {% if datatype_input == "address" %} selected {% endif %}>Address</option>
-            <option value="total_purchased" {% if datatype_input == "total_purchased" %} selected {% endif %}>Total purchased</option>
+            <option value="id" {% if datatype_input == "id" %} selected {% endif %}>{% translate 'ID' %}</option>
+            <option value="name" {% if datatype_input == "name" %} selected {% endif %}>{% translate 'Name' %}</option>
+            <option value="dni" {% if datatype_input == "dni" %} selected {% endif %}>{% translate 'DNI' %}</option>
+            <option value="phone_number" {% if datatype_input == "phone_number" %} selected {% endif %}>{% translate 'Phone number' %}</option>
+            <option value="email" {% if datatype_input == "email" %} selected {% endif %}>{% translate 'E-mail' %}</option>
+            <option value="address" {% if datatype_input == "address" %} selected {% endif %}>{% translate 'Address' %}</option>
+            <option value="total_purchased" {% if datatype_input == "total_purchased" %} selected {% endif %}>{% translate 'Total purchased' %}</option>
         </select>
         <input class="px-4 py-2 mx-2 font-bold rounded-sm" placeholder="{{datatype}}" type="text" hx-get="{% url 'customers:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms">
     </div>

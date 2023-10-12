@@ -1,11 +1,12 @@
 {% extends 'base_home.html' %}
+{% load i18n %}
 {% load static %}
 {% block title_section %}
-    <title>Customers - Canario Regionales</title>
+    <title>{% translate 'Customers' %} - Canario Regionales</title>
 {% endblock title_section %}
 
 {% block title_section_content_upper %}
-    <h1 class="text-3xl text-black pb-6">Search customers:</h1>
+    <h1 class="text-3xl text-black pb-6">{% translate 'Search customers' %}:</h1>
 {% endblock title_section_content_upper %}
 {% block section_content_upper %}
     {% include 'customers_search_header.html'%}
@@ -15,7 +16,7 @@
         <!-- Latest Reports -->
         <div class="text-xl pb-3 flex items-center">
             <i class="fas fa-list mr-3"></i>
-            <span>Customers list</span>
+            <span>{% translate 'Customers list' %}</span>
         </div>
         <div class="text-base">
             {% button type="success" url='customers:create' border="False" text="Create Customer" method="GET" %}

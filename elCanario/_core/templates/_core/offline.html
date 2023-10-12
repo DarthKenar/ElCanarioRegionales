@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}
-    <title>Offline</title>
+    <title>{% translate 'Offline' %}</title>
 {% endblock title %}
 {% block content %}
     {% include 'menu.html' %}
-    <h1 class="text-center text-3xl font-bold p-2">ESTAS DESCONECTADO, PORFAVOR REVISA TU CONEXION A INTERNET.</h1>
+    <h1 class="text-center text-3xl font-bold p-2">{% translate 'YOU ARE OFFLINE, PLEASE CHECK YOUR INTERNET CONNECTION.' %}</h1>
     <div class="flex items-center justify-center">
         <img src="{% static '/img/offline.gif' %}" width="50%" height="50%"></img>
     </div>

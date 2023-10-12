@@ -2,7 +2,7 @@
 {% load i18n %}
 <header x-data="{ isOpen: false }" class="w-full bg-sidebar py-5 px-6 sm:hidden">
     <div class="flex items-center justify-between">
-        <a href="#" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Admin</a>
+        <a href="#" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">{% translate 'Admin' %}</a>
         <button @click="isOpen = !isOpen" class="text-white text-3xl focus:outline-none">
             <i x-show="!isOpen" class="fas fa-bars"></i>
             <i x-show="isOpen" class="fas fa-times"></i>
@@ -45,7 +45,7 @@
             {% translate 'Sign Out' %}
         </a>
         <button class="w-full bg-white cta-btn font-semibold py-2 mt-3 rounded-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
-            <i class="fas fa-arrow-circle-up mr-3"></i> Upgrade to Pro!
+            <i class="fas fa-arrow-circle-up mr-3"></i> {% translate 'Upgrade to Pro!' %}
         </button>
     </nav>
     <!-- <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">

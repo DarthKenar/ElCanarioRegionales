@@ -1,3 +1,4 @@
+{% load i18n %}
 <div id="search_data" >
     {% if object_list %}
         {% if answer_error_name %}
@@ -11,17 +12,17 @@
             {% /message %}
         {% endif %}
         {% #message type="success" heading="Found!" %}
-            {{object_type}} found: <b>{{ object_list.count }}</b>.
+            {{object_type}} {% translate 'found' %}: <b>{{ object_list.count }}</b>.
         {% /message %}
         {% include table %}
     {% else %}
         {% if value %}
             {% #message type="warning" heading="Oops!" %}
-                No {{object_type}} found for: <b> {{datatype}} {{value}}</b>
+                {% translate 'No' %} {{object_type}} {% translate 'found for' %}: <b> {{datatype}} {{value}}</b>
             {% /message %}
         {% else %}
             {% #message type="danger" heading="Oops!" %}
-                No {{object_type}} found. <b> {{datatype}} {{value}}</b>
+                {% translate 'No' %} {{object_type}} {% translate 'found' %}. <b> {{datatype}} {{value}}</b>
             {% /message %}
         {% endif %}
     {% endif %}

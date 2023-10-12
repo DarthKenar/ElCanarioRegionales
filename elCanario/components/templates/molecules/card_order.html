@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <div class="relative w-full max-w-sm mx-auto">
   <div  class="relative inline-block w-full transition-transform duration-300 ease-in-out transform">
     <div class="rounded-lg">
@@ -8,11 +9,11 @@
         </div>
         <div class="left-0 p-1 rounded-full" title="Status">
           {% if delivery_status == True %}
-            <span class="text-green-500"><b>Done</b></span>
+            <span class="text-green-500"><b>{% translate 'Done' %}</b></span>
           {% elif delivery_status == False %}
-            <span class="text-red-500"><b>Canceled</b></span>
+            <span class="text-red-500"><b>{% translate 'Canceled' %}</b></span>
           {% else %}
-          <span class="text-blue-500"><b>Pending</b></span>
+          <span class="text-blue-500"><b>{% translate 'Pending' %}</b></span>
           {% endif %}
         </div>
       </div>

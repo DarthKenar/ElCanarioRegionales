@@ -1,11 +1,12 @@
 {% extends 'base_home.html' %}
+{% load i18n %}
 {% load static %}
 {% block title_section %}
-    <title>Orders - Canario Regionales</title>
+    <title>{% translate 'Orders' %} - Canario Regionales</title>
 {% endblock title_section %}
 
 {% block title_section_content_upper %}
-    <h1 class="text-3xl text-black pb-6">Search orders:</h1>
+    <h1 class="text-3xl text-black pb-6">{% translate 'Search orders' %}:</h1>
 {% endblock title_section_content_upper %}
 {% block section_content_upper %}
     {% include 'orders_search_header.html'%}
@@ -16,7 +17,7 @@
         <!-- Latest Reports -->
         <div class="text-xl pb-3 flex items-center">
             <i class="fas fa-list mr-3"></i>
-            <span>Orders list</span>
+            <span>{% translate 'Orders list' %}</span>
         </div>
         <div class="text-base">
             {% button type="success" url='orders:create' text="Create Order" method="GET" %}
