@@ -1,0 +1,7 @@
+{% comment  %}
+    errors=form.non_field_errors
+{% endcomment %}
+{% if not errors %}
+    <p class="p-0 m-0 text-danger text-xs">&nbsp;</p>
+{% endif %}
+<p class="p-0 m-0 text-danger text-xs">{{ errors|first }}</p>

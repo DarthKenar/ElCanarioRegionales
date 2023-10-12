@@ -1,0 +1,23 @@
+{% load custom_tags %}
+{% load i18n %}
+{% get_all_messageslog as messagelog_list %}
+{% if messagelog_list %}
+    <table class="min-w-full bg-white">
+        <thead class="bg-gray-800 text-white">
+            <tr>
+                <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">{% translate 'Message Info' %}</th>
+                <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">{% translate 'Date' %}</th>
+                <th class="text-left py-3 px-4 uppercase font-semibold text-sm">{% translate 'Made by' %}</th>
+            </tr>
+        </thead>
+        <tbody class="text-gray-700">
+            {% for message in messagelog_list %}
+                <tr class="{% if forloop.counter|divisibleby:2  %}bg-gray-200{% endif %}" >
+                    <td class="w-1/3 text-left py-3 px-4" id="{{message.info}}">{{message.info}}</td>
+                    <td class="w-1/3 text-left py-3 px-4" id="{{message.date}}">{{message.date}}</td>
+                    <td class="text-left py-3 px-4 hover:text-red-500" id="{{message.date}}">{% translate 'UserName' %}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}

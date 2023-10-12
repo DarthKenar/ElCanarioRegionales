@@ -1,5 +1,6 @@
 from msilib.schema import CustomAction
 from typing import Tuple, Dict
+from django.utils.translation import gettext_lazy as _
 from django.http import HttpRequest, HttpResponse, QueryDict
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
@@ -43,25 +44,25 @@ def get_context_for_search_input_in_customers_section(datatype_input:str, search
 
     if datatype_input == "id":
         context["datatype_input"] = "id"
-        context["datatype"] = "Id:"
+        context["datatype"] = _("Id:")
     elif datatype_input == "address":
         context["datatype_input"] = "address"
-        context["datatype"] = "Address:"
+        context["datatype"] = _("Address:")
     elif datatype_input == "dni":
         context["datatype_input"] = "dni"
-        context["datatype"] = "DNI:"
+        context["datatype"] = _("DNI:")
     elif datatype_input == "email":
         context["datatype_input"] = "email"
-        context["datatype"] = "Email:"
+        context["datatype"] = _("Email:")
     elif datatype_input == "name":
         context["datatype_input"] = "name"
-        context["datatype"] = "Name:"
+        context["datatype"] = _("Name:")
     elif datatype_input == "phone_number":
         context["datatype_input"] = "phone_number"
-        context["datatype"] = "Phone number:"
+        context["datatype"] = _("Phone number:")
     elif datatype_input == "total_purchased":
         context["datatype_input"] = "total_purchased"
-        context["datatype"] = "Total purchased:"
+        context["datatype"] = _("Total purchased:")
     return context
 
 def get_context_for_datatype_input_in_customers_section(datatype_input:str):
@@ -69,23 +70,23 @@ def get_context_for_datatype_input_in_customers_section(datatype_input:str):
     context["datatype_input"] = datatype_input
     if datatype_input == "id":
         context["datatype_input"] = "id"
-        context["datatype"] = "ID"
+        context["datatype"] = _("ID")
     elif datatype_input == "address":
         context["datatype_input"] = "address"
-        context["datatype"] = "Address"
+        context["datatype"] = _("Address")
     elif datatype_input == "dni":
         context["datatype_input"] = "dni"
-        context["datatype"] = "DNI"
+        context["datatype"] = _("DNI")
     elif datatype_input == "email":
         context["datatype_input"] = "email"
-        context["datatype"] = "Email"
+        context["datatype"] = _("Email")
     elif datatype_input == "name":
         context["datatype_input"] = "name"
-        context["datatype"] = "Name"
+        context["datatype"] = _("Name")
     elif datatype_input == "phone_number":
         context["datatype_input"] = "phone_number"
-        context["datatype"] = "Phone number"
+        context["datatype"] = _("Phone number")
     elif datatype_input == "total_purchased":
         context["datatype_input"] = "total_purchased"
-        context["datatype"] = "Total purchased"
+        context["datatype"] = _("Total purchased")
     return context

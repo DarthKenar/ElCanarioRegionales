@@ -1,9 +1,9 @@
 from decimal import Decimal
-from attr import field
 from customers.models import Customer
 from orders.models import Order
 from articles.models import Article
 from typing import Dict
+from django.utils.translation import gettext_lazy as _
 from elCanario.utils import string_is_empty
 from django.utils import timezone
 from datetime import datetime
@@ -53,31 +53,31 @@ def get_context_for_search_input_in_orders_section(datatype_input:str, search_in
     context["datatype_input"] = datatype_input
     if datatype_input == "id":
         context["datatype_input"] = "id"
-        context["datatype"] = "ID"
+        context["datatype"] = _("ID")
     elif datatype_input == "customer_id":
         context["datatype_input"] = "customer_id"
-        context["datatype"] = "Customer"
+        context["datatype"] = _("Customer")
     elif datatype_input == "articles_cart":
         context["datatype_input"] = "articles_cart"
-        context["datatype"] = "Article/s"
+        context["datatype"] = _("Article/s")
     elif datatype_input == "article_quantity":
         context["datatype_input"] = "article_quantity"
-        context["datatype"] = "Articles quantity"
+        context["datatype"] = _("Articles quantity")
     elif datatype_input == "total_pay":
         context["datatype_input"] = "total_pay"
-        context["datatype"] = "Total pay"
+        context["datatype"] = _("Total pay")
     elif datatype_input == "details":
         context["datatype_input"] = "details"
-        context["datatype"] = "Details"
+        context["datatype"] = _("Details")
     elif datatype_input == "creation_date":
         context["datatype_input"] = "creation_date"
-        context["datatype"] = "Creation date"
+        context["datatype"] = _("Creation date")
     elif datatype_input == "updated_date":
         context["datatype_input"] = "updated_date"
-        context["datatype"] = "Updated date"
+        context["datatype"] = _("Updated date")
     else:# datatype_input == "delivery_status":
         context["datatype_input"] = "delivery_status"
-        context["datatype"] = "Delivery Status"
+        context["datatype"] = _("Delivery Status")
     return context
 
 def get_context_for_datatype_input_in_orders_section(datatype_input:str):
@@ -85,33 +85,33 @@ def get_context_for_datatype_input_in_orders_section(datatype_input:str):
     context["datatype_input"] = datatype_input
     if datatype_input == "id":
         context["datatype_input"] = "id"
-        context["datatype"] = "ID"
+        context["datatype"] = _("ID")
     elif datatype_input == "customer_id":
         context["datatype_input"] = "customer_id"
-        context["datatype"] = "Customer"
+        context["datatype"] = _("Customer")
         context["customer_list"] = Customer.objects.all()
     elif datatype_input == "articles_cart":
         context["datatype_input"] = "articles_cart"
-        context["datatype"] = "Article/s"
+        context["datatype"] = _("Article/s")
         context["article_list"] = Article.objects.all()
     elif datatype_input == "article_quantity":
         context["datatype_input"] = "article_quantity"
-        context["datatype"] = "Articles quantity"
+        context["datatype"] = _("Articles quantity")
     elif datatype_input == "total_pay":
         context["datatype_input"] = "total_pay"
-        context["datatype"] = "Total pay"
+        context["datatype"] = _("Total pay")
     elif datatype_input == "details":
         context["datatype_input"] = "details"
-        context["datatype"] = "Details"
+        context["datatype"] = _("Details")
     elif datatype_input == "creation_date":
         context["datatype_input"] = "creation_date"
-        context["datatype"] = "Creation date"
+        context["datatype"] = _("Creation date")
     elif datatype_input == "updated_date":
         context["datatype_input"] = "updated_date"
-        context["datatype"] = "Updated date"
+        context["datatype"] = _("Updated date")
     else:# datatype_input == "delivery_status":
         context["datatype_input"] = "delivery_status"
-        context["datatype"] = "Delivery Status"
+        context["datatype"] = _("Delivery Status")
     return context
 
 def update_article_quantity(order):

@@ -1,15 +1,42 @@
-{% extends 'base.html' %}
-{% block title %}
-  <title>Create Order - Canario Regionales</title>
-{% endblock title %}
-{% block content %}
-  {% include 'menu.html' %}
-  <div class="relative flex min-h-screen flex-col justify-center overflow-hidden py-2 sm:py-12">
-    <div class="bg-gradient-to-tr from-amber-100 to-amber-300 rounded-md p-4 m-8 relative px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-10">
-      <div class="mx-auto max-w-md max-sm:pb-16" id="answer_order_create">
-        {% include 'create_form.html' %}
-      </div>
+{% extends 'base_home.html' %}
+{% load i18n %}
+{% load static %}
+{% block title_section %}
+    <title>{% translate 'Create Order' %} - Canario Regionales</title>
+{% endblock title_section %}
+
+{% block title_section_content_upper %}
+    <h1 class="text-3xl text-black pb-6">{% translate 'Search orders' %}:</h1>
+{% endblock title_section_content_upper %}
+{% block section_content_upper %}
+    {% include 'orders_search_header.html'%}
+{% endblock section_content_upper %}
+
+{% block title_section_content_under %}
+    <div class="text-xl pb-3 flex items-center justify-between">
+        <!-- Latest Reports -->
+        <div class="text-xl pb-3 flex items-center">
+            <i class="fas fa-list mr-3"></i>
+            <span>{% translate 'Create Order Section' %}</span>
+        </div>
     </div>
-  </div>
-  {% include 'footer.html' %}
-{% endblock content %}
+{% endblock title_section_content_under %}
+{% block section_content_under %}
+
+    {% #section type="full" %}
+    
+        {% comment %}
+            {% form request=request form=form action="create" object_type="order" url="orders:create" %} 
+            {% include 'create_form.html' %}
+        {% endcomment %}
+
+        {% var url="orders:create" %}
+        {% var object_type="order" %}
+        {% var form=form %}
+        {% var request=request %}
+        {% var action="create" %}
+        {% include 'form.html' %}
+    {% /section %}
+{% endblock section_content_under %}
+
+    

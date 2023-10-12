@@ -1,65 +1,44 @@
-<div class="w-[90%] mx-auto bg-gradient-to-tr from-amber-300 to-amber-100 rounded-md border-2 p-4 shadow-slate-600 shadow-sm border-amber-100">
-    <div class="sm:flex sm:justify-start sm:items-start">
-        <div class="flex content-between sm:hidden pb-10">
-            <div class="basis-1/2 flex place-content-center">
-                <form action="{% url 'orders:create' %}">
-                    <button  ion-button icon-only type="submit">
-                        <ion-icon title="Create Order" class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" name="add-circle-outline"></ion-icon>
-                    </button>
-                </form>
-            </div>
-        </div>
-        <div class=" flex place-content-start mt-5">
-            <div class="flex items-center justify-center py-2 w-[30%]">
-                <label class="text-black font-sans font-bold mx-2 overflow-hidden " for="datatype_input">Search:</label>
-            </div>
-            <select class="bg-amber-50 rounded-sm px-2 mx-2 py-2 w-[70%]" name="datatype_input" id="datatype_input" hx-get="{% url 'orders:read_datatype' %}" hx-target="#orders_search_datatype"  hx-trigger="change" hx-swap="outerHTML">
-                <option value="id" {% if datatype_input == "id" %} selected {% endif %}>ID</option>
-                <option value="customer_id" {% if datatype_input == "customer_id" %} selected {% endif %}>Customer</option>
-                <option value="articles_cart" {% if datatype_input == "articles_cart" %} selected {% endif %}>Articles</option>
-                <option value="article_quantity" {% if datatype_input == "article_quantity" %} selected {% endif %}>Quantity</option>
-                <option value="total_pay" {% if datatype_input == "total_pay" %} selected {% endif %}>Total Pay</option>
-                <option value="details" {% if datatype_input == "details" %} selected {% endif %}>Details</option>
-                <option value="creation_date" {% if datatype_input == "creation_date" %} selected {% endif %}>Created</option>
-                <option value="updated_date" {% if datatype_input == "updated_date" %} selected {% endif %}>Updated</option>
-                <option value="delivery_status" {% if datatype_input == "delivery_status" %} selected {% endif %}>Status</option>
-
+{% load i18n %}
+{% #search_header %}
+    <div class="flex">
+        <select class="font-bold py-2 px-4 rounded-sm bg-white" name="datatype_input" id="datatype_input" hx-get="{% url 'orders:read_datatype' %}" hx-target="#search_datatype"  hx-trigger="change" hx-swap="outerHTML">
+            <option value="id" {% if datatype_input == "id" %} selected {% endif %}>{% translate 'ID' %}</option>
+            <option value="customer_id" {% if datatype_input == "customer_id" %} selected {% endif %}>{% translate 'Customer' %}</option>
+            <option value="articles_cart" {% if datatype_input == "articles_cart" %} selected {% endif %}>{% translate 'Articles' %}</option>
+            <option value="article_quantity" {% if datatype_input == "article_quantity" %} selected {% endif %}>{% translate 'Quantity' %}</option>
+            <option value="total_pay" {% if datatype_input == "total_pay" %} selected {% endif %}>{% translate 'Total Pay' %}</option>
+            <option value="details" {% if datatype_input == "details" %} selected {% endif %}>{% translate 'Details' %}</option>
+            <option value="creation_date" {% if datatype_input == "creation_date" %} selected {% endif %}>{% translate 'Created' %}</option>
+            <option value="updated_date" {% if datatype_input == "updated_date" %} selected {% endif %}>{% translate 'Updated' %}</option>
+            <option value="delivery_status" {% if datatype_input == "delivery_status" %} selected {% endif %}>{% translate 'Status' %}</option>
+        </select>
+        {% if datatype_input == 'id' or datatype_input == 'article_quantity' or datatype_input == 'total_pay' or datatype_input == 'details' %}<input class="font-bold py-2 px-4 rounded-sm mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'orders:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>{% endif %}
+        {% if datatype_input == 'customer_id' %}
+            <select class="font-bold py-2 px-4 rounded-sm bg-white" placeholder="{{datatype}}" type="text" hx-get="{% url 'orders:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_data" hx-swap="outerHTML" hx-trigger="change">
+                <option value="">{% translate 'All' %}</option>
+                {% for customer in customer_list %}
+                    <option value="{{customer.id}}">{{customer}}</option>
+                {% endfor %}
             </select>
-            {% if datatype_input == 'id' or datatype_input == 'article_quantity' or datatype_input == 'total_pay' or datatype_input == 'details' %}<input class="bg-amber-50 rounded-sm sm:px-2 sm:mx-2" placeholder="{{datatype}}" type="text" hx-get="{% url 'orders:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#orders_search_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>{% endif %}
-            {% if datatype_input == 'customer_id' %}
-                <select class="bg-amber-50 rounded-sm px-2 mx-2 py-2 w-[70%] placeholder="{{datatype}}" type="text" hx-get="{% url 'orders:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#orders_search_data" hx-swap="outerHTML" hx-trigger="change">
-                    <option value="">All</option>
-                    {% for customer in customer_list %}
-                        <option value="{{customer.id}}">{{customer}}</option>
-                    {% endfor %}
-                </select>
-            {% endif %}
-            {% if datatype_input == 'articles_cart' %}
-                <select class="bg-amber-50 rounded-sm px-2 mx-2 py-2 w-[70%]" placeholder="{{datatype}}" type="text" hx-get="{% url 'orders:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#orders_search_data" hx-swap="outerHTML" hx-trigger="change">
-                    <option value="">All</option>
-                    {% for article in article_list %}
-                        <option value="{{article.id}}">{{article}}</option>
-                    {% endfor %}
-                </select>
-            {% endif %}
-            {% if datatype_input == 'creation_date' or datatype_input == 'updated_date' %}
-                <input class="bg-amber-50 rounded-sm px-2 mx-2" type="date" hx-get="{% url 'orders:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#orders_search_data" hx-swap="outerHTML" hx-trigger="change">
-            {% endif %}
-            {% if datatype_input == 'delivery_status' %}
-            <select class="bg-amber-50 rounded-sm px-2 mx-2 py-2 w-[70%] placeholder="{{datatype}}" type="text" hx-get="{% url 'orders:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#orders_search_data" hx-swap="outerHTML" hx-trigger="change">
-                <option value="">All</option>
-                <option value="True">Done</option>
-                <option value='None'>Pending</option>
-                <option value="False">Canceled</option>
+        {% endif %}
+        {% if datatype_input == 'articles_cart' %}
+            <select class="font-bold py-2 px-4 rounded-sm bg-white" placeholder="{{datatype}}" type="text" hx-get="{% url 'orders:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_data" hx-swap="outerHTML" hx-trigger="change">
+                <option value="">{% translate 'All' %}</option>
+                {% for article in article_list %}
+                    <option value="{{article.id}}">{{article}}</option>
+                {% endfor %}
             </select>
-            {% endif %}
-        </div>
-        <div class="max-sm:hidden">
-            <form action="{% url 'orders:create' %}">
-                <button  ion-button icon-only class="text-amber-50 mt-4 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer" type="submit">
-                    <ion-icon title="Create Order" name="add-circle-outline"></ion-icon>
-                </button>
-            </form>
-        </div>
+        {% endif %}
+        {% if datatype_input == 'creation_date' or datatype_input == 'updated_date' %}
+            <input class="font-bold py-2 px-4 rounded-sm mx-2" type="date" hx-get="{% url 'orders:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_data" hx-swap="outerHTML" hx-trigger="change">
+        {% endif %}
+        {% if datatype_input == 'delivery_status' %}
+        <select class="font-bold py-2 px-4 rounded-sm bg-white" placeholder="{{datatype}}" type="text" hx-get="{% url 'orders:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_data" hx-swap="outerHTML" hx-trigger="change">
+            <option value="">{% translate 'All' %}</option>
+            <option value="True">{% translate 'Done' %}</option>
+            <option value='None'>{% translate 'Pending' %}</option>
+            <option value="False">{% translate 'Canceled' %}</option>
+        </select>
+        {% endif %}
     </div>
-</div>
+{% /search_header %}

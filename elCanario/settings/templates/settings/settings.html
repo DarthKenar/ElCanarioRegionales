@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load custom_tags %}
 {% block title %}
-    <title>Settings - El Canario Regionales</title>
+    <title>{% translate 'My Account - Settings' %} - El Canario Regionales</title>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js"></script>
     <script>
         Dropzone.autoDiscover = false;
@@ -24,7 +25,7 @@
 {% block content %}
     {% include 'menu.html' %}
 
-    <h1 class="text-center mx-10 border-2 p-5 border-r-emerald-500">IN DEVELOPMENT</h1>
+    <h1 class="text-center mx-10 border-2 p-5 border-r-emerald-500">{% translate 'IN DEVELOPMENT' %}</h1>
 
     {% include 'upload_image_profile_form.html' %}  
  

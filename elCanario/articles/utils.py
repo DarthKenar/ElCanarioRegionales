@@ -1,6 +1,7 @@
 from typing import Tuple, Dict
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
+from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.decorators import login_required
 from articles.models import Category, Value, ArticleValue, Article
 from customers.models import Customer
@@ -39,11 +40,11 @@ def calculator_check(increase: str, buy_price: str, context: dict) -> Tuple[dict
     if string_is_empty(increase) or string_is_empty(buy_price):
 
         error_any = True
-        context["answer_empty_error"] = "You must fill in the fields to calculate the selling price."
+        context["answer_empty_error"] = _("You must fill in the fields to calculate the selling price.")
 
     if not buy_price.replace(".","0",1).isnumeric() or  not increase.replace(".","0",1).isnumeric():
         error_any = True
-        context["answer_string_error"] = "The data entered must be numeric"
+        context["answer_string_error"] = _("The data entered must be numeric")
 
     return context, error_any
 def search_any_error_in_name_field(name_input:str, context: dict) -> Tuple[dict,bool]:
@@ -60,10 +61,10 @@ def search_any_error_in_name_field(name_input:str, context: dict) -> Tuple[dict,
 
     if name_input == "":
         any_error = True
-        context['answer_error_name'] = 'It is mandatory to fill in the name.'
+        context['answer_error_name'] = _('It is mandatory to fill in the name.')
     elif not name_input.isalpha():
         any_error = True
-        context['answer_error_name'] = 'The name must not contain numbers, symbols or spaces.'
+        context['answer_error_name'] = _('The name must not contain numbers, symbols or spaces.')
 
     return(context, any_error)
 
@@ -108,7 +109,7 @@ def string_has_internal_spaces(name:str, context) -> Tuple[dict,bool]:
 
     has_internal_spaces = bool(re.search(r'\S\s+\S', name))
     if has_internal_spaces:
-        context['answer_error_name'] = "The name must not contain spaces."
+        context['answer_error_name'] = _("The name must not contain spaces.")
     return context, has_internal_spaces
 
 def name_already_in_db(name:str, Model:object, context:dict) -> Tuple[dict,bool]:
@@ -131,7 +132,7 @@ def name_already_in_db(name:str, Model:object, context:dict) -> Tuple[dict,bool]
         if obj.name == name:
             print(f" TRUE - name {name} is already in db!")
             any_error = False # disabled == False
-            context["answer_error_name"] = f"Atention - The name {name} already exists! You can use it anyway"
+            context["answer_error_name"] = _(f"Atention - The name {name} already exists! You can use it anyway")
         
     return context, any_error
 
@@ -149,7 +150,7 @@ def is_empty_name(s: str, context: dict) -> Tuple[dict, bool]:
     
     any_error =  string_is_empty(s)
     if any_error == True:
-        context['answer_error_name'] = 'Complete the name is obligatory.'
+        context['answer_error_name'] = _('Complete the name is obligatory.')
     return context, any_error
 
 def delete_old_values(article: object) -> None:
@@ -184,7 +185,7 @@ def is_the_same_name(new_name:str, old_name:str, context: dict) -> Tuple[dict, b
     if new_name.strip().title() == old_name.strip().title():
         any_error = True
         context.update({
-            'answer_error_name': 'The old name and the new name are the same'
+            'answer_error_name': _('The old name and the new name are the same')
         })
     return context, any_error
 
@@ -235,17 +236,17 @@ def get_articles_by_native_datatype(datatype_input: str) -> dict:
                     "article_list": articles})
 
     if datatype_input == datatype_dict[1]:
-        context["datatype"] = "Id"
+        context["datatype"] = _("Id")
     elif datatype_input == datatype_dict[2]:
-        context["datatype"] = "Name"
+        context["datatype"] = _("Name")
     elif datatype_input == datatype_dict[3]:
-        context["datatype"] = "Buy price"
+        context["datatype"] = _("Buy price")
     elif datatype_input == datatype_dict[4]:
-        context["datatype"] = "Increment"
+        context["datatype"] = _("Increment")
     elif datatype_input == datatype_dict[5]:
-        context["datatype"] = "Sell price"
+        context["datatype"] = _("Sell price")
     else:#datatype_input == datatype_dict[6]:
-        context["datatype"] = "Stock"
+        context["datatype"] = _("Stock")
     return context
 
 
@@ -304,17 +305,17 @@ def get_context_for_search_input_in_native_datatype(datatype_input:str, search_i
     context["datatype_input"] = datatype_input
 
     if datatype_input == "id":
-        context["datatype"] = "Id:"
+        context["datatype"] = _("Id:")
     elif datatype_input == "name":
-        context["datatype"] = "Name:"
+        context["datatype"] = _("Name:")
     elif datatype_input == "buy_price":
-        context["datatype"] = "Buy Price:"
+        context["datatype"] = _("Buy Price:")
     elif datatype_input == "increase":
-        context["datatype"] = "Increment:"
+        context["datatype"] = _("Increment:")
     elif datatype_input == "sell_price":
-        context["datatype"] = "Sell Price:"
+        context["datatype"] = _("Sell Price:")
     elif datatype_input == "stock":
-        context["datatype"] = "Stock:"
+        context["datatype"] = _("Stock:")
 
     return context
 
@@ -355,12 +356,12 @@ def search_any_error_in_stock_field(stock_input:str, context: dict) -> Tuple[dic
 
     if string_is_empty(stock_input):
         any_error = True
-        context["answer_error_stock"] = "The stock value must be complete"
+        context["answer_error_stock"] = _("The stock value must be complete")
     else:
         try:
             stock_input = int(stock_input) # type: ignore
         except Exception as e:
             any_error = True
-            context["answer_error_stock"] = "The stock value can only be numerical and integer"
+            context["answer_error_stock"] = _("The stock value can only be numerical and integer")
     return(context, any_error)
     

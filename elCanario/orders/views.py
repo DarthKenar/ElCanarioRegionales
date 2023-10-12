@@ -2,6 +2,7 @@ import decimal
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from typing import Any, Dict, List
+from django.utils.translation import gettext_lazy as _
 from orders.form import OrderForm
 from django.shortcuts import get_object_or_404
 from elCanario.utils import render_login_required
@@ -25,10 +26,10 @@ class OrderListView(LoginRequiredMixin,ListView):
         context = super().get_context_data(**kwargs)
         context['datatype_input'] = 'id'
         context["datatype"] = 'ID'
-        context["answer"] = "Orders in Database"
+        context["answer"] = _("Orders in Database")
         return context
     
-class ReadDataListView(ListView):
+class ReadDataListView(LoginRequiredMixin, ListView):
     model = Order
     template_name = 'orders_search_data.html'
 
@@ -46,7 +47,7 @@ class ReadDataListView(ListView):
         return context
 
 
-class ReadDataTypeListView(ListView):
+class ReadDataTypeListView(LoginRequiredMixin, ListView):
     model = Order
     template_name = 'orders_search_datatype.html'
 
@@ -85,7 +86,7 @@ class OrderCreateView(LoginRequiredMixin, CreateView):
             customer_id = form.cleaned_data['customer_id']
             articles_cart = form.cleaned_data['articles_cart']
             details = form.cleaned_data['details']
-            message = MessageLog(info=f"Order created:\n\tCustomer: {customer_id.name}, articles: {articles_cart}, details: {details}")
+            message = MessageLog(info=_(f"Order created:\n\tCustomer: {customer_id.name}, articles: {articles_cart}, details: {details}"))
             message.save()
             return super().form_valid(form) #Esto hace que se guarde.
         else:
@@ -100,7 +101,7 @@ class OrderCreateView(LoginRequiredMixin, CreateView):
     def form_invalid(self, form: OrderForm) -> HttpResponse:
         return self.render_to_response(self.get_context_data(form=form))
 
-class OrderUpdateTemplate(TemplateView):
+class OrderUpdateTemplate(LoginRequiredMixin, TemplateView):
     template_name = 'update_form.html'
 
     def get_context_data(self, **kwargs):
@@ -133,7 +134,7 @@ class OrderUpdateView(LoginRequiredMixin,UpdateView):
             customer_id = form.cleaned_data['customer_id']
             articles_cart = form.cleaned_data['articles_cart']
             details = form.cleaned_data['details']
-            message = MessageLog(info=f"Order Edited:\n\tCustomer: {customer_id.name}, articles: {articles_cart}, details: {details}")
+            message = MessageLog(info=_(f"Order Edited:\n\tCustomer: {customer_id.name}, articles: {articles_cart}, details: {details}"))
             message.save()
             return super().form_valid(form)
         else:
@@ -151,11 +152,11 @@ def order_delete(request:object, pk:int)-> HttpResponse:
     try:
         order = get_object_or_404(Order, id=pk)
     except Exception as e:
-        context["order_delete_answer"] = f"The selected order could not be deleted because it does not exist. Contact support."
+        context["delete_answer"] = _(f"The selected order could not be deleted because it does not exist. Contact support.")
         return render_login_required(request, template, context)
     else:
-        context["order_delete_answer"] = f"Order {order.pk} for {order.customer_id} has been eliminated"
-        message = MessageLog(info=f"Order {order.pk} for {order.customer_id} has been eliminated")
+        context["delete_answer"] = _(f"Order {order.pk} for {order.customer_id} has been eliminated")
+        message = MessageLog(info=_(f"Order {order.pk} for {order.customer_id} has been eliminated"))
         message.save()
         order.delete()
         orders = Order.objects.all()

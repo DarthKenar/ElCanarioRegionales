@@ -2,7 +2,7 @@ from mailbox import Message
 from customers.forms import CustomerForm
 from django.forms.models import BaseModelForm
 from django.http import HttpRequest, HttpResponse
-import json
+from django.utils.translation import gettext_lazy as _
 from urllib.parse import parse_qs
 from typing import Any, Dict, List
 from django.urls import reverse_lazy
@@ -26,8 +26,8 @@ class CustomerListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context['datatype_input'] = 'name'
-        context["datatype"] = 'Name'
-        context["answer"] = "Customers in Database"
+        context["datatype"] = _('Name')
+        context["answer"] = _("Customers in Database")
         return context
 
 
@@ -158,11 +158,11 @@ def customer_delete(request:object, pk:int)-> HttpResponse:
     try:
         customer = get_object_or_404(Customer, id=pk)
     except Exception as e:
-        context["customer_delete_answer"] = f"The selected item could not be deleted because it does not exist. Contact support."
+        context["delete_answer"] = _("The selected item could not be deleted because it does not exist. Contact support.")
         return render_login_required(request, template, context)
     else:
-        context["customer_delete_answer"] = f"Customer {customer.name} has been eliminated"
-        message = MessageLog(info=f"Customer {customer.name} has been eliminated")
+        context["delete_answer"] = _(f"Customer {customer.name} has been eliminated")
+        message = MessageLog(info= _(f"Customer {customer.name} has been eliminated"))
         message.save()
         customer.delete()
         articles = Customer.objects.all()

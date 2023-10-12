@@ -1,0 +1,32 @@
+{% load i18n %}
+<main class="w-full flex-grow p-6" id="search_datatype">
+    <h1 class="text-3xl text-black pb-6">{% translate 'Search' %} {{object_type}}:</h1>
+    {% include include_header %}
+    <div class="w-full mt-12">
+        <div class="text-xl pb-3 flex items-center justify-between">
+            <!-- Latest Reports -->
+            <div class="text-xl pb-3 flex items-center">
+                <i class="fas fa-list mr-3"></i>
+                <span>{{object_type|title}} {% translate 'list' %}</span>
+            </div>
+            <div class="text-base">
+                {% #button type="success" url=url_create border="False" %}
+                    {% translate 'Create' %}
+                {% /button %}
+            </div>
+
+        </div>
+        <div class="bg-white overflow-auto" id="search_data">
+            {% if object_list.count > 0 %}
+                {% #message type="success" heading="Found!"%}
+                    {% translate 'Number of' %} {{object_type}} {% translate 'found' %}: <b>{{ object_list.count }}</b>.
+                {% /message %}
+            {% else %}
+                {% #message type="success" heading="Not found!"%}
+                    {% translate 'No' %} {{object_type}} {% translate 'were found' %}. {% translate 'DataBase its empty' %}.
+                {% /message %}
+            {% endif %}
+            {% include table %}
+        </div>
+    </div>
+</main>

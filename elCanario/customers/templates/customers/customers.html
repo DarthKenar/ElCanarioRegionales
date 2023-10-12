@@ -1,23 +1,41 @@
-{% extends 'base.html' %}
+{% extends 'base_home.html' %}
+{% load i18n %}
 {% load static %}
-{% block title %}
-    <title>Customers - Canario Regionales</title>
-{% endblock title %}
-{% block content %}
-    {% include 'menu.html' %}
+{% block title_section %}
+    <title>{% translate 'Customers' %} - Canario Regionales</title>
+{% endblock title_section %}
 
-    <div id="customers_search_datatype">
-
-        {% include 'customers_search_header.html'%}
-
-        <div id="customers_search_data">
-
-            {% include 'customers_table.html' %}
-
+{% block title_section_content_upper %}
+    <h1 class="text-3xl text-black pb-6">{% translate 'Search customers' %}:</h1>
+{% endblock title_section_content_upper %}
+{% block section_content_upper %}
+    {% include 'customers_search_header.html'%}
+{% endblock section_content_upper %}
+{% block title_section_content_under %}
+    <div class="text-xl pb-3 flex items-center justify-between">
+        <!-- Latest Reports -->
+        <div class="text-xl pb-3 flex items-center">
+            <i class="fas fa-list mr-3"></i>
+            <span>{% translate 'Customers list' %}</span>
         </div>
-        
+        <div class="text-base">
+            {% button type="success" url='customers:create' border="False" text="Create Customer" method="GET" %}
+        </div>
     </div>
+{% endblock title_section_content_under %}
+{% block section_content_under %}
+    {% include 'customers_table.html' %}
+{% endblock section_content_under %}
 
-    {% include 'footer.html' %}
-{% endblock content %}
- 
+    
+
+
+
+
+
+
+
+
+
+
+
