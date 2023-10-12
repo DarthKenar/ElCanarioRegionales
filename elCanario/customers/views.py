@@ -27,7 +27,7 @@ class CustomerListView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['datatype_input'] = 'name'
         context["datatype"] = _('Name')
-        context["answer"] = "Customers in Database"
+        context["answer"] = _("Customers in Database")
         return context
 
 

@@ -4,6 +4,7 @@ from urllib import request
 from articles.models import Article, ArticleValue, Category, Promotion, Value
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.query import QuerySet
+from django.utils.translation import gettext_lazy as _
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
@@ -24,9 +25,9 @@ class ArticleListView(LoginRequiredMixin,ListView):#LoginRequiredMixin,
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
         categories = Category.objects.all()
-        context["datatype"] = 'Name'
+        context["datatype"] = _('Name')
         context["datatype_input"] = 'name'
-        context["answer"] = "Articles in Database"
+        context["answer"] = _("Articles in Database")
         context["categories"] = categories
         return context
 
@@ -186,7 +187,7 @@ def articles_create_confirm(request):
     if any_error == True:
         # for render error answers
         context.update(values_dict)
-        context["answer_save_error"] = "The item has not been created, please check the fields again."
+        context["answer_save_error"] = _("The item has not been created, please check the fields again.")
         return render_login_required(request, template, context)
     else:
         
@@ -203,7 +204,7 @@ def articles_create_confirm(request):
             stock = article_stock_input
             )
         article.save()
-        message = MessageLog(info = f"Article whose name is {article.name}, with a buy price of {article.buy_price}, with an increase of {article.increase}, with a sell price of {article.sell_price}, and with {article.stock} stock has been Created.")
+        message = MessageLog(info = _(f"Article whose name is {article.name}, with a buy price of {article.buy_price}, with an increase of {article.increase}, with a sell price of {article.sell_price}, and with {article.stock} stock has been Created."))
         message.save()
         for value in values_dict.values():
             if value != None:
@@ -212,7 +213,7 @@ def articles_create_confirm(request):
                                     category_id = value.category_id,
                                     value_id = value)
                 article_value.save()
-        context["answer_save_right"] = f"The article {article.name} has been saved correctly"
+        context["answer_save_right"] = _(f"The article {article.name} has been saved correctly")
         context["answer_articles_name"] = ""
         context["answer_category_id"] = ""
         context["answer_error_name"] = ""
@@ -254,7 +255,7 @@ def articles_update_confirm(request, id):
     if any_error == True:
         # for render error answer
         context.update(values_dict)
-        context["answer_save_error"] = "The item has not been created, please check the fields again."
+        context["answer_save_error"] = _("The item has not been created, please check the fields again.")
         context["article_to_update"] = article_to_update
         return render_login_required(request, template, context)
     else:
@@ -269,7 +270,7 @@ def articles_update_confirm(request, id):
         article_to_update.sell_price = answer_calculator
         article_to_update.stock = article_stock_input
         article_to_update.save()
-        message = MessageLog(info = f"Article of id {article_to_update.id} whose name is {article_to_update.name}, with a buy price of {article_to_update.buy_price}, with an increase of {article_to_update.increase}, with a sell price of {article_to_update.sell_price}, and with {article_to_update.stock} stock has been updated.")
+        message = MessageLog(info = _(f"Article of id {article_to_update.id} whose name is {article_to_update.name}, with a buy price of {article_to_update.buy_price}, with an increase of {article_to_update.increase}, with a sell price of {article_to_update.sell_price}, and with {article_to_update.stock} stock has been updated."))
         message.save()
         delete_old_values(article_to_update)
         for value in values_dict.values():
@@ -279,7 +280,7 @@ def articles_update_confirm(request, id):
                                     category_id = value.category_id,
                                     value_id = value)
                 article_value.save()
-        context["answer_save_right"] = f"The article {article_to_update.name} has been successfully updated"
+        context["answer_save_right"] = _(f"The article {article_to_update.name} has been successfully updated")
         context["answer_articles_name"] = ""
         context["answer_category_id"] = ""
         categories = Category.objects.all()
@@ -295,11 +296,11 @@ def article_delete(request:object, pk:int)-> HttpResponse:
     try:
         article_to_delete = get_object_or_404(Article, id=pk)
     except Exception as e:
-        context["delete_answer"] = f"The selected article could not be deleted because it does not exist. Please contact Support"
+        context["delete_answer"] = _(f"The selected article could not be deleted because it does not exist. Please contact Support")
         return render_login_required(request, template, context)
     else:
-        context["delete_answer"] = f"The article {article_to_delete.name} has been eliminated"
-        message = MessageLog(info=f"The article {article_to_delete.name} has been eliminated")
+        context["delete_answer"] = _(f"The article {article_to_delete.name} has been eliminated")
+        message = MessageLog(info= _(f"The article {article_to_delete.name} has been eliminated"))
         message.save()
         article_to_delete.delete()
         articles = Article.objects.all()
@@ -352,13 +353,13 @@ def articles_category_create(request, art_id=None):
     if any_error == False:
         category_to_save = Category(name=category_name)
         category_to_save.save()
-        message = MessageLog(info = f"Se creo una nueva categoría con el nombre de '{category_to_save.name}'")
+        message = MessageLog(info = _(f"Se creo una nueva categoría con el nombre de '{category_to_save.name}'"))
         message.save()
         context['category_to_update'] = category_to_save
-        context["answer_title_values"] = f"Add values to: {category_to_save.name}"
-        context["answer"] = f"The category {category_to_save.name} has been successfully saved!"
+        context["answer_title_values"] = _(f"Add values to: {category_to_save.name}")
+        context["answer"] = _(f"The category {category_to_save.name} has been successfully saved!")
     else:
-        context["answer"] = "Category could not be saved!"
+        context["answer"] = _("Category could not be saved!")
     return render_login_required(request, template, context)
 
 def articles_category_value_create(request,cat_id, art_id=None):
@@ -383,12 +384,12 @@ def articles_category_value_create(request,cat_id, art_id=None):
                             category_id = category_to_update,
                             name = value_name)
         value_to_update.save()
-        message = MessageLog(info = f"Se creo un nuevo valor en la categoría '{category_to_update.name}' con el nombre de '{value_to_update.name}'")
+        message = MessageLog(info = _(f"Se creo un nuevo valor en la categoría '{category_to_update.name}' con el nombre de '{value_to_update.name}'"))
         message.save()
-        context['answer'] = f'The value {value_name} was saved correctly for the category: {category_to_update.name}'
+        context['answer'] = _(f'The value {value_name} was saved correctly for the category: {category_to_update.name}')
         context['values'] = Value.objects.filter(category_id = category_to_update)
     else:
-        context["answer"] = f"The value {value_name} could not be saved for the category: {category_to_update.name}"
+        context["answer"] = _(f"The value {value_name} could not be saved for the category: {category_to_update.name}")
         context['values'] = Value.objects.filter(category_id = category_to_update)
     return render_login_required(request, template, context)
 
@@ -429,7 +430,7 @@ def articles_category_update(request: object, external_link: str, cat_id:int, ar
         context['article_list'] = [article_to_update]
     context["categories"] = Category.objects.all()
     context['values'] = Value.objects.filter(category_id = category_to_update)
-    context["answer_title_values"] = f"Selected category: {category_to_update.name}"
+    context["answer_title_values"] = _(f"Selected category: {category_to_update.name}")
     context["name_category_edition"] = True
     return render_login_required(request, template, context)
 
@@ -450,16 +451,16 @@ def articles_category_update_name(request, cat_id, art_id=None):
         context['article_to_update'] = article_to_update
         context['article_list'] = [article_to_update]
     if search_any_error_in_name_field_bool == False and is_the_same_name_bool == False and name_already_in_db_bool == False:
-        context['answer'] = f'Category has been successfully updated {category_to_update.name} --> {new_name}!'
-        message = MessageLog(info=f"Category successfully updated: Old name: {category_to_update.name}, New name {new_name}")
+        context['answer'] = _(f'Category has been successfully updated {category_to_update.name} --> {new_name}!')
+        message = MessageLog(info=_(f"Category successfully updated: Old name: {category_to_update.name}, New name {new_name}"))
         message.save()
         category_to_update.name = new_name
         category_to_update.save()
     else:
-        context['answer'] = f'Unable to update the category name {category_to_update.name} --> {new_name}!'
+        context['answer'] = _(f'Unable to update the category name {category_to_update.name} --> {new_name}!')
     context["categories"] = Category.objects.all()
     context['values'] = Value.objects.filter(category_id = category_to_update)
-    context["answer_title_values"] = f"Selected category: {category_to_update.name}"
+    context["answer_title_values"] = _(f"Selected category: {category_to_update.name}")
     context["name_category_edition"] = False
     return render_login_required(request, template, context)
 def articles_category_delete(request, cat_id, art_id=None):
@@ -471,9 +472,9 @@ def articles_category_delete(request, cat_id, art_id=None):
         context['article_list'] = [article_to_update]
     context={}
     category_to_update = Category.objects.get(id = cat_id)
-    context["answer"] = f"The category {category_to_update.name} has been eliminated."
+    context["answer"] = _(f"The category {category_to_update.name} has been eliminated.")
     category_to_update.delete()
-    message = MessageLog(info=f"The category {category_to_update.name} has been eliminated.")
+    message = MessageLog(info=_(f"The category {category_to_update.name} has been eliminated."))
     message.save()
     context["categories"] = Category.objects.all()
     return render_login_required(request, template, context)
@@ -488,8 +489,8 @@ def articles_value_delete(request, cat_id, val_id, art_id=None):
         context['article_list'] = [article_to_update]
     category_to_update = Category.objects.get(id = cat_id)
     context['category_to_update'] = category_to_update
-    context["answer"] = f"The value {value_to_update.name} has been removed from the category {category_to_update.name}"
-    message = MessageLog(info=f"The value {value_to_update.name} has been removed from the category {category_to_update.name}")
+    context["answer"] = _(f"The value {value_to_update.name} has been removed from the category {category_to_update.name}")
+    message = MessageLog(info=_(f"The value {value_to_update.name} has been removed from the category {category_to_update.name}"))
     message.save()
     value_to_update.delete()
     context["categories"] = Category.objects.all()
@@ -509,7 +510,7 @@ def articles_value_update(request, cat_id, val_id, art_id=None):
     context["categories"] = Category.objects.all()
     context['value_to_update'] = value_to_update
     context['values'] = Value.objects.filter(category_id = category_to_update)
-    context["answer_title_values"] = f"Selected category: {category_to_update.name}"
+    context["answer_title_values"] = _(f"Selected category: {category_to_update.name}")
     context["name_value_edition"] = True
     return render_login_required(request, template, context)
 
@@ -528,16 +529,16 @@ def articles_value_update_name(request, val_id, art_id=None):
         context['article_to_update'] = article_to_update
         context['article_list'] = [article_to_update]
     if is_the_same_name_bool == False and is_empty_name_bool == False and name_already_in_db_bool == False:
-        context['answer'] = f"A category value {value_to_update.category_id.name} has been successfully updated: Previous value name: {category_to_update.name}, New name {new_name}."
-        message = MessageLog(info=f"A category value {value_to_update.category_id.name} has been successfully updated: Previous value name: {category_to_update.name}, New name {new_name}.")
+        context['answer'] = _(f"A category value {value_to_update.category_id.name} has been successfully updated: Previous value name: {category_to_update.name}, New name {new_name}.")
+        message = MessageLog(info=_(f"A category value {value_to_update.category_id.name} has been successfully updated: Previous value name: {category_to_update.name}, New name {new_name}."))
         message.save()
         value_to_update.name = new_name
         value_to_update.save()
     else:
-        context['answer'] = f'Unable to update the value name: {value_to_update.name} --> {new_name}!'
+        context['answer'] = _(f'Unable to update the value name: {value_to_update.name} --> {new_name}!')
     context['value_to_update'] = value_to_update
     context["categories"] = Category.objects.all()
     context['values'] = Value.objects.filter(category_id = category_to_update)
-    context["answer_title_values"] = f"Selected category: {category_to_update.name}"
+    context["answer_title_values"] = _(f"Selected category: {category_to_update.name}")
     context["name_value_edition"] = False
     return render_login_required(request, template, context)
