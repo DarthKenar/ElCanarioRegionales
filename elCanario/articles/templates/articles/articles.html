@@ -1,9 +1,10 @@
 {% extends 'base_home.html' %}
+{% load i18n %}
 {% block title_section %}
-    <title>Search Articles - Canario Regionales</title>
+    <title>{% translate 'Search Articles' %} - Canario Regionales</title>
 {% endblock title_section %}
 {% block title_section_content_upper %}
-    <h1 class="pb-6 text-3xl text-black">Search articles:</h1>
+    <h1 class="pb-6 text-3xl text-black">{% translate 'Search articles' %}:</h1>
 {% endblock title_section_content_upper %}
 {% block section_content_upper %}
     {% include 'articles_search_header.html' %}
@@ -13,11 +14,13 @@
     <!-- Latest Reports -->
     <div class="flex items-center pb-3 text-xl">
         <i class="mr-3 fas fa-list"></i>
-        <span>Articles List</span>
+        <span>{% translate 'Articles List' %}</span>
     </div>
-    <div class="text-base">
+    <div class="text-base flex gap-2">
+        {% button type="info" url='articles:categories' border="False" text="Categories" %}
         {% button type="success" url='articles:create' border="False" text="Create Article" %}
     </div>
+
 </div>
 {% endblock title_section_content_under %}
 
