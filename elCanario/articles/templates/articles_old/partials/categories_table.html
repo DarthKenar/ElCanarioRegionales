@@ -44,6 +44,7 @@
                             {% if name_category_edition %}
                                 {% if category_to_update == category %}
                                     
+                                    <!-- Se habilita el input y el boton para guardar actualizacion de nombre -->
                                     <td>
                                         {% if article_to_update %}
                                             <form class="flex justify-between" hx-post="{% url 'articles:category_update_name' cat_id=category.id art_id=article_to_update.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-include="[name='category_name_update']">

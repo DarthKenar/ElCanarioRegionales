@@ -472,7 +472,7 @@ def articles_category_delete(request, cat_id, art_id=None):
         context['article_list'] = [article_to_update]
     context={}
     category_to_update = Category.objects.get(id = cat_id)
-    context["answer"] = _(f"The category {category_to_update.name} has been eliminated.")
+    context["answer_delete"] = _(f"The category {category_to_update.name} has been eliminated.")
     category_to_update.delete()
     message = MessageLog(info=_(f"The category {category_to_update.name} has been eliminated."))
     message.save()
