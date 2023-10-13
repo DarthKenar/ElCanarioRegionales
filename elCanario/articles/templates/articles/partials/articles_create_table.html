@@ -56,7 +56,7 @@
     <p class="p-0 m-0 text-xs">&nbsp;</p>
     <output class="p-0 m-0 text-xs" id="answer_category_id">{{answer_category_id}}</output>
   {% endfor %}
-  
+
   <p class="p-0 m-0 text-xs">&nbsp;</p>
   <div class="grid grid-cols-2 gap-4">
     
@@ -89,8 +89,10 @@
     </div>
     
   </div>
+
   <!--Sell price input-->
   {% include 'articles_create_calculator.html' %}
+
   <!--Submit button-->
   <button
     hx-get="{% url 'articles:create_confirm' %}" hx-trigger="click" hx-include="#article_name_input,[name^='category-'],#article_buy_price_input, #article_increase_input, #article_sell_price_input, #article_stock_input" hx-target="#article_create_answer" hx-swap="outerHTML"
