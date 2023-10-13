@@ -958,6 +958,10 @@ input[type="range"]:active::-webkit-slider-thumb {
   margin: 2rem;
 }
 
+.m-auto {
+  margin: auto;
+}
+
 .\!my-0 {
   margin-top: 0px !important;
   margin-bottom: 0px !important;
@@ -1190,6 +1194,10 @@ input[type="range"]:active::-webkit-slider-thumb {
 
 .mt-\[0\.15rem\] {
   margin-top: 0.15rem;
+}
+
+.-ml-px {
+  margin-left: -1px;
 }
 
 .box-border {
@@ -2820,6 +2828,16 @@ input[type="range"]:active::-webkit-slider-thumb {
 .bg-neutral-200 {
   --tw-bg-opacity: 1;
   background-color: rgb(229 229 229 / var(--tw-bg-opacity));
+}
+
+.bg-secondary-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(248 249 249 / var(--tw-bg-opacity));
+}
+
+.bg-secondary {
+  --tw-bg-opacity: 1;
+  background-color: rgb(159 166 178 / var(--tw-bg-opacity));
 }
 
 .bg-gradient-to-tr {
