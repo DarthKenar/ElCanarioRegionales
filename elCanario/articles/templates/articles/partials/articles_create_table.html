@@ -3,7 +3,7 @@
   class="block max-w-md rounded-lg bg-white p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
   
   <!--Name input-->
-  <div class="relative mb-6" data-te-input-wrapper-init>
+  <div class="relative" data-te-input-wrapper-init>
     <input 
       type="text" hx-get="{% url 'articles:create_name_check' %}" hx-target="#answer_article_name" hx-trigger="keyup changed delay:200ms" hx-swap="outerHTML" name="article_name_input" id="article_name_input" required value="{{article_name_input}}"
       class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
@@ -14,12 +14,11 @@
       >{% translate 'Name' %}
     </label>
   </div>
-  <div id="answer_article_name">
-    <output >{{answer_error_name}}</output>
-  </div>
+
+  {% include 'articles_create_name_error.html' %}
 
   <!--Stock input-->
-  <div class="relative mb-6" data-te-input-wrapper-init>
+  <div class="relative" data-te-input-wrapper-init>
     <input
       type="text" hx-get="{% url 'articles:create_stock_check' %}" hx-target="#answer_article_stock" hx-trigger="keyup changed delay:200ms" hx-swap="outerHTML" name="article_stock_input" value="{{article_stock_input}}"
       class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
@@ -31,6 +30,7 @@
       >{% translate 'Stock' %}
     </label>
   </div>
+
   {% include 'articles_create_stock_check.html' %}
 
   {% for category in categories %}
@@ -41,7 +41,7 @@
         </button>
       </form>
     {% endcomment %}
-    <div class="pb-6">
+    <div>
       <select data-te-select-init id="{{category.id}}" name="category-{{category.id}}">
         <option value=""></option>
         {% load custom_tags %}
@@ -53,14 +53,15 @@
       </select>
       <label data-te-select-label-ref>{{category.name}}</label>
     </div>
-
-    <output id="answer_category_id">{{answer_category_id}}</output>
-
+    <p class="p-0 m-0 text-xs">&nbsp;</p>
+    <output class="p-0 m-0 text-xs" id="answer_category_id">{{answer_category_id}}</output>
   {% endfor %}
 
-  <div class="grid grid-cols-3 gap-4">
+  <p class="p-0 m-0 text-xs">&nbsp;</p>
+  <div class="grid grid-cols-2 gap-4">
+    
     <!--Buy price input-->
-    <div class="relative mb-6" data-te-input-wrapper-init>
+    <div class="relative" data-te-input-wrapper-init>
       <input
         type="text" name="article_buy_price_input" hx-get="{% url 'articles:create_calculator' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#article_sell_price_output" hx-include="[name='article_increase_input']" required value="{{article_buy_price_input}}"
         class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
@@ -74,7 +75,7 @@
     </div>
 
     <!--Increase percent input-->
-    <div class="relative mb-6" data-te-input-wrapper-init>
+    <div class="relative" data-te-input-wrapper-init>
       <input
         type="text" name="article_increase_input" hx-get="{% url 'articles:create_calculator' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#article_sell_price_output" hx-include="[name='article_buy_price_input']" required value="{{article_increase_input}}"
         class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
@@ -87,10 +88,10 @@
       </label>
     </div>
     
-    <!--Sell price input-->
-    {% include 'articles_create_calculator.html' %}
-
   </div>
+
+  <!--Sell price input-->
+  {% include 'articles_create_calculator.html' %}
 
   <!--Submit button-->
   <button

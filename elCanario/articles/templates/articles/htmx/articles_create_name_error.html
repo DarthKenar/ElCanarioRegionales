@@ -1,3 +1,9 @@
 <div id="answer_article_name">
-    <output class="font-bold empty:hidden cursor-default text-orange-600 appear">{{answer_error_name}}</output>
+    {% if answer_error_name %}
+        <p class="p-0 m-0 text-danger text-xs" >{{answer_error_name}}</p>
+        <p class="p-0 m-0 text-xs">&nbsp;</p>
+    {% else %}
+        <p class="p-0 m-0 text-xs">&nbsp;</p>
+        <p class="p-0 m-0 text-xs">&nbsp;</p>
+    {% endif %}
 </div>

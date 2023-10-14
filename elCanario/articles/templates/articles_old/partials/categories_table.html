@@ -39,18 +39,17 @@
                     <tbody class="bg-amber-100">
                     {% for category in categories %}
                         <tr>
-                            
                             <td>{{category.name}}</td>
                             {% if name_category_edition %}
                                 {% if category_to_update == category %}
                                     
+                                    <!-- Se habilita el input y el boton para guardar actualizacion de nombre -->
                                     <td>
                                         {% if article_to_update %}
                                             <form class="flex justify-between" hx-post="{% url 'articles:category_update_name' cat_id=category.id art_id=article_to_update.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-include="[name='category_name_update']">
                                                 <input class="w-full mr-2 bg-amber-50 rounded-sm px-2 mx-2" type="text" id="category_name_update" name="category_name_update" value="{{category.name}}">
                                                 <button ion-button icon-only type="submit">
                                                     <ion-icon name="save-outline" 
-                                                    
                                                     class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer mr-2"
                                                     ></ion-icon>
                                                 </button>
@@ -60,7 +59,6 @@
                                                 <input class="w-full mr-2 bg-amber-50 rounded-sm px-2 mx-2" type="text" id="category_name_update" name="category_name_update" value="{{category.name}}">
                                                 <button ion-button icon-only type="submit">
                                                     <ion-icon name="save-outline" 
-                                                    
                                                     class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer mr-2"
                                                     ></ion-icon>
                                                 </button>
@@ -77,7 +75,6 @@
                                     <form hx-get="{% url 'articles:category_update' external_link="False" cat_id=category.id art_id=article_to_update.id %}" hx-swap="outerHTML" hx-target="#articles_category_value_section" >
                                         <button ion-button icon-only type="submit">
                                             <ion-icon name="create-outline" 
-                                            
                                             class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer mr-2"
                                             ></ion-icon>
                                         </button>
@@ -85,7 +82,6 @@
                                     <form hx-delete="{% url 'articles:category_delete' cat_id=category.id art_id=article_to_update.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-confirm="Are you sure you want to delete the category: {{category.name}}?">
                                         <button type="submit" ion-button icon-only >
                                             <ion-icon name="trash-outline" 
-                                                
                                             class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer"
                                             ></ion-icon>
                                         </button>
@@ -94,7 +90,6 @@
                                     <form hx-get="{% url 'articles:category_update' external_link="False" cat_id=category.id  %}" hx-swap="outerHTML" hx-target="#articles_category_value_section" >
                                         <button ion-button icon-only type="submit">
                                             <ion-icon name="create-outline" 
-                                            
                                             class="text-amber-50 rounded-tl-lg rounded-br-lg bg-gradient-to-tr from-red-900 to-red-700 px-4 py-2 shadow-md shadow-slate-800 transition hover:-translate-y-0.5 duration-300 hover:shadow-xl hover:shadow-slate-400 cursor-pointer mr-2"
                                             ></ion-icon>
                                         </button>

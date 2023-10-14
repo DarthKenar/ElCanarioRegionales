@@ -2,12 +2,13 @@
     {% var border='border' %}
 {% endif %}
 {% if type == 'info' %}
-    <input 
-    type="button"
-    value="{{text}}"
-    class="bg-blue-500 hover:bg-blue-800 border-blue-800 text-white {{border}} font-bold py-2 px-4 rounded-lg cursor-pointer"
-    hx-get="{% url url %}">
-    </input>
+    <form action="{% url url %}" method={{method}} class="{{border}}">
+        <button
+        type="submit"
+        class="bg-blue-500 hover:bg-blue-800 border-blue-800 text-white {{border}} font-bold py-2 px-4 rounded-lg cursor-pointer">
+        {{text}}
+        </button>
+    </form>
 {% elif type == 'success' %}
     {% if for_form == "True" %}
         {% if id %}

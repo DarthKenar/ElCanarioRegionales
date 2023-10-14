@@ -85,7 +85,7 @@ components:
   search_header: "molecules/search_header.html"
   original_card: "molecules/original_card.html"
   
-  #Organisms
+  #! Organisms
 
   #search_data
   #object_type (customers, articles, orders, etc) (str = name)
@@ -96,6 +96,10 @@ components:
   #datatype=datatype 
   #value=value
   search_data: "organisms/search_data.html"
+
+  #title
+  #text = str
+  title: "molecules/title.html"
 
   #search_datatype
   #object_type (customers, articles, orders, etc) (str = name)
@@ -112,3 +116,6 @@ components:
   #form for login
   login_form: "organisms/login_form.html"
   form: "molecules/form.html"
+
+  #block_center
+  block_center: "organisms/block_center.html"

@@ -1,11 +1,26 @@
-{% extends 'base.html' %}
-{% block title %}
-    <title>Categories - Canario Regionales</title>    
-{% endblock title %}
-{% block content %}
-    {% include 'menu.html' %}
-    <div id="articles_category_value_section">
-        {% include 'categories_table.html' %}
+{% extends 'base_home.html' %}
+{% load i18n %}
+{% block title_section %}
+    <title>{% translate 'Categories' %} - Canario Regionales</title>
+{% endblock title_section %}
+{% block title_section_content_upper %}
+    <h1 class="pb-6 text-3xl text-black">Search articles:</h1>
+{% endblock title_section_content_upper %}
+{% block section_content_upper %}
+    {% include 'articles_search_header.html' %}
+{% endblock section_content_upper %}
+{% block title_section_content_under %}
+<div class="flex items-center justify-between pb-3 text-xl">
+    <!-- Latest Reports -->
+    <div class="flex items-center pb-3 text-xl">
+        <i class="mr-3 fas fa-list"></i>
+        <span>{% translate 'Categories & Values' %}</span>
     </div>
-    {% include 'footer.html' %}
-{% endblock content %}
+</div>
+{% endblock title_section_content_under %}
+
+{% block section_content_under %}
+    <section id="articles_category_value_section">
+        {% include 'categories_table.html' %}
+    </section>
+{% endblock section_content_under %}

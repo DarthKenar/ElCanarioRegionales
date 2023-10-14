@@ -9,10 +9,9 @@
                 <i class="fas fa-list mr-3"></i>
                 <span>{{object_type|title}} {% translate 'list' %}</span>
             </div>
+
             <div class="text-base">
-                {% #button type="success" url=url_create border="False" %}
-                    {% translate 'Create' %}
-                {% /button %}
+                {% button type="success" url=url_create border="False" text="Create Customer" %}
             </div>
 
         </div>
@@ -22,8 +21,8 @@
                     {% translate 'Number of' %} {{object_type}} {% translate 'found' %}: <b>{{ object_list.count }}</b>.
                 {% /message %}
             {% else %}
-                {% #message type="success" heading="Not found!"%}
-                    {% translate 'No' %} {{object_type}} {% translate 'were found' %}. {% translate 'DataBase its empty' %}.
+                {% #message type="warning" heading="Not found!"%}
+                    {% translate 'No' %} {{object_type|lower}} {% translate 'were found' %}. {% translate 'DataBase its empty' %}.
                 {% /message %}
             {% endif %}
             {% include table %}

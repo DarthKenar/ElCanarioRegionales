@@ -356,7 +356,6 @@ def articles_category_create(request, art_id=None):
         message = MessageLog(info = _(f"Se creo una nueva categoría con el nombre de '{category_to_save.name}'"))
         message.save()
         context['category_to_update'] = category_to_save
-        context["answer_title_values"] = _(f"Add values to: {category_to_save.name}")
         context["answer"] = _(f"The category {category_to_save.name} has been successfully saved!")
     else:
         context["answer"] = _("Category could not be saved!")
@@ -430,7 +429,6 @@ def articles_category_update(request: object, external_link: str, cat_id:int, ar
         context['article_list'] = [article_to_update]
     context["categories"] = Category.objects.all()
     context['values'] = Value.objects.filter(category_id = category_to_update)
-    context["answer_title_values"] = _(f"Selected category: {category_to_update.name}")
     context["name_category_edition"] = True
     return render_login_required(request, template, context)
 
@@ -460,7 +458,6 @@ def articles_category_update_name(request, cat_id, art_id=None):
         context['answer'] = _(f'Unable to update the category name {category_to_update.name} --> {new_name}!')
     context["categories"] = Category.objects.all()
     context['values'] = Value.objects.filter(category_id = category_to_update)
-    context["answer_title_values"] = _(f"Selected category: {category_to_update.name}")
     context["name_category_edition"] = False
     return render_login_required(request, template, context)
 def articles_category_delete(request, cat_id, art_id=None):
@@ -472,7 +469,7 @@ def articles_category_delete(request, cat_id, art_id=None):
         context['article_list'] = [article_to_update]
     context={}
     category_to_update = Category.objects.get(id = cat_id)
-    context["answer"] = _(f"The category {category_to_update.name} has been eliminated.")
+    context["answer_delete"] = _(f"The category {category_to_update.name} has been eliminated.")
     category_to_update.delete()
     message = MessageLog(info=_(f"The category {category_to_update.name} has been eliminated."))
     message.save()
@@ -510,7 +507,6 @@ def articles_value_update(request, cat_id, val_id, art_id=None):
     context["categories"] = Category.objects.all()
     context['value_to_update'] = value_to_update
     context['values'] = Value.objects.filter(category_id = category_to_update)
-    context["answer_title_values"] = _(f"Selected category: {category_to_update.name}")
     context["name_value_edition"] = True
     return render_login_required(request, template, context)
 
@@ -539,6 +535,5 @@ def articles_value_update_name(request, val_id, art_id=None):
     context['value_to_update'] = value_to_update
     context["categories"] = Category.objects.all()
     context['values'] = Value.objects.filter(category_id = category_to_update)
-    context["answer_title_values"] = _(f"Selected category: {category_to_update.name}")
     context["name_value_edition"] = False
     return render_login_required(request, template, context)
