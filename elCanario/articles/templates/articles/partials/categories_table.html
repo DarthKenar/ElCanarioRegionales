@@ -3,6 +3,9 @@
 
     <!-- Categories Section -->
     <section>
+        <p class="text-center md:py-4">
+            <strong class="text-lg">&nbsp;</strong>
+        </p>
         <form hx-post="{% url 'articles:category_create' %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-include="[name='category_name_new']">
             <div class="relative mb-4 flex flex-wrap items-stretch">
                 
@@ -16,7 +19,7 @@
                 <button
                 class="z-[2] inline-block rounded-r bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:z-[3] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
                 data-te-ripple-init
-                type="button"
+                type="submit"
                 id="button-addon2">
                 {% translate 'Create' %}
                 </button>
@@ -71,8 +74,8 @@
     <!-- Values Section -->
     <section>
         {% if category_to_update %}
-            <p class="text-center">
-                <strong class="p-2 text-lg">{{category_to_update.name}}</strong>
+            <p class="text-center md:py-4">
+                <strong class="text-lg">{{category_to_update.name}}</strong>
             </p>
 
             <form hx-post="{% url 'articles:value_create' cat_id=category_to_update.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-include="[name='value_name_new']">
@@ -82,9 +85,7 @@
                       name="value_name_new" 
                       id="value_name_new"
                       class="relative m-0 -mr-0.5 block w-[1px] min-w-0 flex-auto rounded-l border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
-                      placeholder="New Value"
-                      aria-label="Recipient's username"
-                      aria-describedby="button-addon2" />
+                      placeholder="New Value"/>
                     <button
                       class="z-[2] inline-block rounded-r bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:z-[3] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
                       data-te-ripple-init
@@ -110,15 +111,45 @@
                                     <tbody>
                                         {% for value in values %}
                                             <tr
-                                                class="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600 {% if category_to_update == category %}bg-neutral-200 dark:bg-neutral-700{% endif %}">
+                                                class="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600 {% if value_to_update == value %}bg-neutral-200 dark:bg-neutral-700 {% endif %}">
                                                 {% if name_value_edition %}
                                                     {% if value_to_update == value %}
+                                                        <td class="px-6 py-4">
+                                                            <input
+                                                            type="text"
+                                                            class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                                                            id="value_name_update" 
+                                                            name="value_name_update"
+                                                            value="{{value.name}}"
+                                                            placeholder="New name" />
+                                                        </td>
                                                     {% else %}
-                                                        <td class="whitespace-nowrap px-6 py-4">{{value.name}}</td>
+                                                    <td class="whitespace-nowrap px-6 py-4">{{value.name}}</td>
                                                     {% endif %}
+                                                {% else %}
+                                                    <td class="whitespace-nowrap px-6 py-4">{{value.name}}</td>
                                                 {% endif %}
                                                 
                                                         <td class="whitespace-nowrap px-6 py-4 flex justify-center items-center gap-3">
+                                                            {% if name_value_edition %}
+                                                                {% if value_to_update == value %}
+                                                                    <form class="flex justify-between" hx-post="{% url 'articles:value_update_name' val_id=value.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-include="[name='value_name_update']">
+                                                                        <button
+                                                                        type="submit"
+                                                                        class="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
+                                                                        {% translate 'Save' %}
+                                                                        </button>
+                                                                    </form>
+                                                                {% else %}
+                                                                    <form hx-get="{% url 'articles:value_update' cat_id=category_to_update.id val_id=value.id %}" hx-swap="outerHTML" hx-target="#articles_category_value_section" >
+                                                                        <button
+                                                                        type="submit"
+                                                                        class="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
+                                                                        {% translate 'Edit' %}
+                                                                        </button>
+                                                                    </form>
+                                                                {% endif %}
+                                                            {% else %}
                                                             
                                                             <form hx-get="{% url 'articles:value_update' cat_id=category_to_update.id val_id=value.id %}" hx-swap="outerHTML" hx-target="#articles_category_value_section" >
                                                                 <button
@@ -127,6 +158,8 @@
                                                                 {% translate 'Edit' %}
                                                                 </button>
                                                             </form>
+                                                            {% endif %}
+
                                                             <form hx-delete="{% url 'articles:value_delete' cat_id=category_to_update.id val_id=value.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-confirm="Are you sure you want to delete the value {{value.name}}?">
                                                                 <button
                                                                 type="submit"
