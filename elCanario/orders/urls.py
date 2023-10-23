@@ -1,6 +1,6 @@
 from django.urls import path
-from orders.views import OrderListView, OrderCreateView, ReadDataListView, ReadDataTypeListView, OrderUpdateTemplate,OrderUpdateView, order_delete
-# from orders.views import OrderCreateTemplate
+from orders.views import OrderListView, OrderCreateView, ReadDataListView, ReadDataTypeListView,OrderUpdateView, order_delete
+# from orders.views import OrderCreateTemplate, OrderUpdateTemplate
 app_name = 'orders'
 urlpatterns = [
     path('read', OrderListView.as_view(), name="orders"),

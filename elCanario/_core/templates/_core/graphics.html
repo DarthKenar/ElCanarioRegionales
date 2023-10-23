@@ -1,19 +1,4 @@
 {% load i18n %}
-<!-- https://docs.djangoproject.com/en/4.2/topics/i18n/translation/#miscellaneous -->
-<form action="{% url 'set_language' %}" method="post">{% csrf_token %}
-    <input name="next" type="hidden" value="{{ 'core:index' }}">
-    <select name="language">
-        {% get_current_language as LANGUAGE_CODE %}
-        {% get_available_languages as LANGUAGES %}
-        {% get_language_info_list for LANGUAGES as languages %}
-        {% for language in languages %}
-            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
-                {{ language.name_local }} ({{ language.code }})
-            </option>
-        {% endfor %}
-    </select>
-    <input type="submit" value="Go">
-</form>
 <div class="flex flex-wrap mt-6">
     <div class="w-full lg:w-1/2 pr-0 lg:pr-2">
         <p class="text-xl pb-3 flex items-center">

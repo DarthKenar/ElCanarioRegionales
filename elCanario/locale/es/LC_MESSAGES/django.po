@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-11 23:53-0300\n"
-"PO-Revision-Date: 2023-10-11 04:14-0300\n"
+"PO-Revision-Date: 2023-10-23 14:08-0300\n"
 "Last-Translator:   <ioseph.dev@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: .\elCanario\_core\templates\_core\base_home.html:28
 msgid "Built by"
-msgstr ""
+msgstr "Hecho por"
 
 #: .\elCanario\_core\templates\_core\graphics.html:20
 msgid "Monthly Reports"
@@ -65,24 +65,23 @@ msgstr "Escritorio"
 
 #: .\elCanario\_core\templates\_core\home.html:13
 msgid "Messages Log"
-msgstr ""
+msgstr "Registro de Mensajes"
 
 #: .\elCanario\_core\templates\_core\index.html:5
 msgid "Wellcome"
-msgstr ""
+msgstr "Bienvenido"
 
 #: .\elCanario\_core\templates\_core\login_allauth_old.html:6
 #: .\elCanario\_core\templates\_core\login_allauth_old.html:9
 #: .\elCanario\components\templates\organisms\login_form.html:13
 msgid "Sign In"
-msgstr "Entrar"
+msgstr "Logearse"
 
 #: .\elCanario\_core\templates\_core\login_allauth_old.html:15
 #, python-format
 msgid ""
 "Please sign in with one\n"
-"of your existing third party accounts. Or, <a href=\"%(signup_url)s\">sign "
-"up</a>\n"
+"of your existing third party accounts. Or, <a href=\"%(signup_url)s\">sign up</a>\n"
 "for a %(site_name)s account and sign in below:"
 msgstr ""
 
@@ -105,13 +104,13 @@ msgstr "¿Ha olvidado su contraseña?"
 #: .\elCanario\_core\templates\_core\menu.html:4
 #: .\elCanario\_core\templates\_core\menu_mobile.html:5
 msgid "Admin"
-msgstr ""
+msgstr "Admin"
 
 #: .\elCanario\_core\templates\_core\menu.html:7
 #: .\elCanario\orders\templates\orders\orders_create.html:5
 #: .\elCanario\orders\templates\orders\orders_update.html:5
 msgid "Create Order"
-msgstr ""
+msgstr "Crear Orden"
 
 #: .\elCanario\_core\templates\_core\menu.html:18
 #: .\elCanario\_core\templates\_core\menu_mobile.html:20
@@ -133,40 +132,38 @@ msgstr "Clientes"
 
 #: .\elCanario\_core\templates\_core\menu.html:30
 msgid "Calendar"
-msgstr ""
+msgstr "Calendario"
 
 #: .\elCanario\_core\templates\_core\menu.html:35
 #: .\elCanario\_core\templates\_core\menu_mobile.html:48
 msgid "Upgrade to Pro!"
-msgstr ""
+msgstr "Actualiza a Pro!"
 
 #: .\elCanario\_core\templates\_core\offline.html:5
 msgid "Offline"
-msgstr ""
+msgstr "Desconectado"
 
 #: .\elCanario\_core\templates\_core\offline.html:9
 msgid "YOU ARE OFFLINE, PLEASE CHECK YOUR INTERNET CONNECTION."
-msgstr ""
+msgstr "ESTAS DESCONECTADO, POR FAVOR REVISA TU CONECCION A INTERNET"
 
 #: .\elCanario\articles\templates\articles\articles_create.html:5
 msgid "Create Article -El Canario Regionales"
-msgstr ""
+msgstr "Crear Artículo - El Canario Regionales"
 
 #: .\elCanario\articles\templates\articles\articles_create.html:9
-#, fuzzy
 #| msgid "Articles"
 msgid "Search Articles"
-msgstr "Artículos"
+msgstr "Buscar Artículos"
 
 #: .\elCanario\articles\templates\articles\articles_create.html:20
-#, fuzzy
 #| msgid "Update Customer Section"
 msgid "Create Article Section"
-msgstr "Sección Actualizar Cliente"
+msgstr "Sección Actualizar Artículo"
 
 #: .\elCanario\articles\templates\articles\htmx\articles_create_calculator.html:16
 msgid "Sell Price"
-msgstr ""
+msgstr "Precio de Venta"
 
 #: .\elCanario\articles\templates\articles\partials\articles_create_table.html:10
 #: .\elCanario\articles\templates\articles\partials\articles_create_table.html:14
@@ -179,21 +176,21 @@ msgstr "Nombre"
 #: .\elCanario\articles\templates\articles\partials\articles_create_table.html:31
 #: .\elCanario\articles\utils.py:249
 msgid "Stock"
-msgstr ""
+msgstr "Stock"
 
 #: .\elCanario\articles\templates\articles\partials\articles_create_table.html:69
 #: .\elCanario\articles\templates\articles\partials\articles_create_table.html:73
 msgid "Buy Price"
-msgstr ""
+msgstr "Precio de Compra"
 
 #: .\elCanario\articles\templates\articles\partials\articles_create_table.html:83
 #: .\elCanario\articles\templates\articles\partials\articles_create_table.html:87
 msgid "Increase"
-msgstr ""
+msgstr "Incremento"
 
 #: .\elCanario\articles\templates\articles\partials\articles_create_table.html:102
 msgid "Guardar"
-msgstr ""
+msgstr "Guardar"
 
 #: .\elCanario\articles\utils.py:43
 msgid "You must fill in the fields to calculate the selling price."
@@ -289,9 +286,10 @@ msgstr ""
 #: .\elCanario\articles\views.py:207
 #, python-brace-format
 msgid ""
-"Article whose name is {article.name}, with a buy price of {article."
-"buy_price}, with an increase of {article.increase}, with a sell price of "
-"{article.sell_price}, and with {article.stock} stock has been Created."
+"Article whose name is {article.name}, with a buy price of "
+"{article.buy_price}, with an increase of {article.increase}, with a sell "
+"price of {article.sell_price}, and with {article.stock} stock has been "
+"Created."
 msgstr ""
 
 #: .\elCanario\articles\views.py:216
@@ -302,10 +300,11 @@ msgstr ""
 #: .\elCanario\articles\views.py:273
 #, python-brace-format
 msgid ""
-"Article of id {article_to_update.id} whose name is {article_to_update.name}, "
-"with a buy price of {article_to_update.buy_price}, with an increase of "
-"{article_to_update.increase}, with a sell price of {article_to_update."
-"sell_price}, and with {article_to_update.stock} stock has been updated."
+"Article of id {article_to_update.id} whose name is {article_to_update.name},"
+" with a buy price of {article_to_update.buy_price}, with an increase of "
+"{article_to_update.increase}, with a sell price of "
+"{article_to_update.sell_price}, and with {article_to_update.stock} stock has"
+" been updated."
 msgstr ""
 
 #: .\elCanario\articles\views.py:283
@@ -380,8 +379,8 @@ msgstr ""
 #: .\elCanario\articles\views.py:455
 #, python-brace-format
 msgid ""
-"Category successfully updated: Old name: {category_to_update.name}, New name "
-"{new_name}"
+"Category successfully updated: Old name: {category_to_update.name}, New name"
+" {new_name}"
 msgstr ""
 
 #: .\elCanario\articles\views.py:460
@@ -406,12 +405,14 @@ msgstr ""
 #, python-brace-format
 msgid ""
 "A category value {value_to_update.category_id.name} has been successfully "
-"updated: Previous value name: {category_to_update.name}, New name {new_name}."
+"updated: Previous value name: {category_to_update.name}, New name "
+"{new_name}."
 msgstr ""
 
 #: .\elCanario\articles\views.py:538
 #, python-brace-format
-msgid "Unable to update the value name: {value_to_update.name} --> {new_name}!"
+msgid ""
+"Unable to update the value name: {value_to_update.name} --> {new_name}!"
 msgstr ""
 
 #: .\elCanario\components\templates\molecules\card_order.html:12

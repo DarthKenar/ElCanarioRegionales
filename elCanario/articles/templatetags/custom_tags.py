@@ -21,24 +21,3 @@ def get_all_messageslog():
     except Exception as e:
         print(f"Error Exception: {e}")
 
-@register.simple_tag
-def hx_post_update_customers_render_field(object_id):
-    return f"customers:update {object_id}"
-
-
-@register.simple_tag
-def hx_post_create_customers_render_field():
-    return f"customers:create"
-
-@register.simple_tag
-def hx_post_update_orders_render_field(object_id):
-    return f"orders:update {object_id}"
-
-
-@register.simple_tag
-def hx_post_create_orders_render_field():
-    return f"orders:create"
-
-@register.simple_tag
-def trigger_input():
-    return "hx-trigger=keyup&nbsp;changed&nbsp;delay:300ms"

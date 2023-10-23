@@ -101,50 +101,43 @@ class OrderCreateView(LoginRequiredMixin, CreateView):
     # def form_invalid(self, form: OrderForm) -> HttpResponse:
     #     return self.render_to_response(self.get_context_data(form=form))
 
-class OrderUpdateTemplate(LoginRequiredMixin, TemplateView):
-    template_name = 'update_form.html'
+# class OrderUpdateTemplate(LoginRequiredMixin, TemplateView):
+#     template_name = 'update_form.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        objeto_id = self.kwargs.get('pk')
-        object = get_object_or_404(Order,id=objeto_id)
-        context['object'] = object
-        form = OrderForm(instance=object) 
-        context['form'] = form
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         objeto_id = self.kwargs.get('pk')
+#         object = get_object_or_404(Order,id=objeto_id)
+#         context['object'] = object
+#         form = OrderForm(instance=object) 
+#         context['form'] = form
+#         return context
     
 class OrderUpdateView(LoginRequiredMixin,UpdateView):
     model = Order
     form_class = OrderForm
     template_name = 'orders_update.html'
+    success_url = 'orders:orders'
 
     def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
-        self.template_name = "update_form.html"
+        self.template_name = "form.html"
         return super().post(request, *args, **kwargs)
 
     def get_success_url(self) -> str:
         update_article_quantity(self.object)
         update_total_pay(self.object)
         update_total_purchased(self.object)
-        return reverse_lazy('orders:update_htmx', args=[f"{self.object.id}"]) + '?correct' # type: ignore
+        return reverse_lazy('orders:update_htmx', args=[f"{self.object.id}"])
 
     def form_valid(self, form: OrderForm) -> HttpResponse:
-        status = self.kwargs.get('status')
-        if status == 'True':
-            customer_id = form.cleaned_data['customer_id']
-            articles_cart = form.cleaned_data['articles_cart']
-            details = form.cleaned_data['details']
-            message = MessageLog(info=_(f"Order Edited:\n\tCustomer: {customer_id.name}, articles: {articles_cart}, details: {details}"))
-            message.save()
-            return super().form_valid(form)
-        else:
-            return self.render_to_response(self.get_context_data(form=form))
-
-    def form_invalid(self, form):
-        # Renderizar la plantilla con el formulario y los errores
-        return self.render_to_response(self.get_context_data(form=form))
-
-
+        customer_id = form.cleaned_data['customer_id']
+        articles_cart = form.cleaned_data['articles_cart']
+        details = form.cleaned_data['details']
+        message = MessageLog(info=_(f"Order Edited:\n\tCustomer: {customer_id.name}, articles: {articles_cart}, details: {details}"))
+        message.save()
+        return super().form_valid(form)
+        
+        
 @csrf_protect
 def order_delete(request:object, pk:int)-> HttpResponse:
     template = 'orders_search_data.html'

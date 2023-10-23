@@ -1,10 +1,9 @@
 {% load i18n %}
 {% load custom_filters %}
-<form class="min-h-screen flex items-center justify-center" {% if 'customers' in request.path %} {% if action == "create"  %} action={% url "customers:create" %} {% elif action == "update" %} action={% url "customers:update" id %} {% endif %} {% elif 'orders' in request.path %} {% if action == "create" %} action={% url 'orders:create' %} {% elif action == "update" %} action={% url "orders:update" id %} {% endif %} {% endif %} id="form_{{action}}" method="POST">
+<form class="min-h-screen flex items-center justify-center" id="form_{{action}}" method="POST">
     {% csrf_token %}
     <div class="max-w-md w-full p-6 bg-white rounded-lg shadow-lg">
         <h1 class="text-2xl font-semibold text-center text-gray-500 mt-8 mb-6">{{action|title}} {{object_type|title}}</h1>
-        
             {% for field in form %}
                 <div class="mb-4">
                     <label for="id_{{field.label|lower|replace_spaces_with_underscore}}" class="block mb-2 text-sm text-gray-600">{{field.label}}</label>
@@ -17,7 +16,7 @@
                 </div>
             {% endfor %}
             <div class="w-full flex justify-end">
-                <button type="submit" class="btn">Enviar<button>
+                <button {% if 'customers' in request.path %} {% if action == "create"  %} hx-post={% url "customers:create" %} {% elif action == "update" %} hx-post={% url "customers:update" id %} {% endif %} {% elif 'orders' in request.path %} {% if action == "create" %} hx-post={% url 'orders:create' %} {% elif action == "update" %} hx-post={% url "orders:update" id %} {% endif %} {% endif %} class="btn">Enviar<button>
             </div>
     </div>
 </form>
