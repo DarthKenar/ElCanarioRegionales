@@ -45,7 +45,7 @@ class CustomerCreateView(LoginRequiredMixin, CreateView):
     template_name = 'customers_create.html'
 
     def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
-        self.template_name = "form.html"
+        self.template_name = "customers_create.html"
         return super().post(request, *args, **kwargs)
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
