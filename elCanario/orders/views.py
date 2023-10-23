@@ -61,45 +61,45 @@ class ReadDataTypeListView(LoginRequiredMixin, ListView):
         context.update(get_context_for_datatype_input_in_orders_section(datatype_input))
         return context
 
-class OrderCreateTemplate(LoginRequiredMixin, TemplateView):
-    template_name = 'create_form.html'
+# class OrderCreateTemplate(LoginRequiredMixin, TemplateView):
+#     template_name = 'create_form.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        form = OrderForm()
-        context['form'] = form
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         form = OrderForm()
+#         context['form'] = form
+#         return context
 
 class OrderCreateView(LoginRequiredMixin, CreateView):
     model = Order
+    form_class = OrderForm
     template_name = 'orders_create.html'
     success_url = reverse_lazy('orders:orders')
-    form_class = OrderForm
-
-    def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
-        self.template_name = "create_form.html"
-        return super().post(request, *args, **kwargs)
     
-    def form_valid(self, form: OrderForm) -> HttpResponse:
-        status = self.kwargs.get('status')
-        if status == "True":
-            customer_id = form.cleaned_data['customer_id']
-            articles_cart = form.cleaned_data['articles_cart']
-            details = form.cleaned_data['details']
-            message = MessageLog(info=_(f"Order created:\n\tCustomer: {customer_id.name}, articles: {articles_cart}, details: {details}"))
-            message.save()
-            return super().form_valid(form) #Esto hace que se guarde.
-        else:
-            return self.render_to_response(self.get_context_data(form=form))
+    # def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+    #     self.template_name = "create_form.html"
+    #     return super().post(request, *args, **kwargs)
+    
+    # def form_valid(self, form: OrderForm) -> HttpResponse:
+    #     status = self.kwargs.get('status')
+    #     if status == "True":
+    #         customer_id = form.cleaned_data['customer_id']
+    #         articles_cart = form.cleaned_data['articles_cart']
+    #         details = form.cleaned_data['details']
+    #         message = MessageLog(info=_(f"Order created:\n\tCustomer: {customer_id.name}, articles: {articles_cart}, details: {details}"))
+    #         message.save()
+    #         return super().form_valid(form) #Esto hace que se guarde.
+    #     else:
+    #         return self.render_to_response(self.get_context_data(form=form))
         
-    def get_success_url(self) -> str:
-        update_article_quantity(self.object)
-        update_total_pay(self.object)
-        update_total_purchased(self.object)
-        return reverse_lazy('orders:create_htmx') + '?correct'
+    # def get_success_url(self) -> str:
+    #     update_article_quantity(self.object)
+    #     update_total_pay(self.object)
+    #     update_total_purchased(self.object)
+    #     return reverse_lazy('orders:create_htmx') + '?correct'
     
-    def form_invalid(self, form: OrderForm) -> HttpResponse:
-        return self.render_to_response(self.get_context_data(form=form))
+    # def form_invalid(self, form: OrderForm) -> HttpResponse:
+    #     return self.render_to_response(self.get_context_data(form=form))
 
 class OrderUpdateTemplate(LoginRequiredMixin, TemplateView):
     template_name = 'update_form.html'

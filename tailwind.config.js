@@ -9,7 +9,10 @@ module.exports = {
     extend: {},
   },
   darkMode: "class",
-  plugins: [require("tw-elements/dist/plugin.cjs")],
+  plugins: [
+    require("tw-elements/dist/plugin.cjs"),
+    require("daisyui"),
+  ],
 }
 // PATH
 // npx tailwindcss -i elCanario/elCanario/staticfiles/css/input.css -o elCanario/elCanario/staticfiles/css/output.css --watch

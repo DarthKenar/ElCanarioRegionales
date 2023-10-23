@@ -22,22 +22,22 @@ def get_all_messageslog():
         print(f"Error Exception: {e}")
 
 @register.simple_tag
-def hx_post_update_customers_render_field(object_id, true_or_false):
-    return f"hx-post=/customers/update/{object_id}/{true_or_false}"
+def hx_post_update_customers_render_field(object_id):
+    return f"customers:update {object_id}"
 
 
 @register.simple_tag
-def hx_post_create_customers_render_field(true_or_false):
-    return f"hx-post=/customers/create/{true_or_false}"
+def hx_post_create_customers_render_field():
+    return f"customers:create"
 
 @register.simple_tag
-def hx_post_update_orders_render_field(object_id, true_or_false):
-    return f"hx-post=/orders/update/{object_id}/{true_or_false}"
+def hx_post_update_orders_render_field(object_id):
+    return f"orders:update {object_id}"
 
 
 @register.simple_tag
-def hx_post_create_orders_render_field(true_or_false):
-    return f"hx-post=/orders/create/{true_or_false}"
+def hx_post_create_orders_render_field():
+    return f"orders:create"
 
 @register.simple_tag
 def trigger_input():

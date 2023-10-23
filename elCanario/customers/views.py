@@ -35,42 +35,17 @@ class CustomerCreateView(LoginRequiredMixin, CreateView):
     model = Customer
     form_class = CustomerForm
     template_name = 'customers_create.html'
-    success_url  = reverse_lazy('customers:customers')  
-
-    def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
-        self.template_name = "create_form.html"
-        return super().post(request, *args, **kwargs)
-    
-    def get_success_url(self) -> str:
-        return reverse_lazy('customers:create_htmx') + '?correct'
+    success_url  = reverse_lazy('customers:customers')
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
-        status = self.kwargs.get('status')
-        if status == "True":
-            name = form.cleaned_data['name']
-            dni = form.cleaned_data['dni']
-            phone_number = form.cleaned_data['phone_number']
-            address = form.cleaned_data['address']
-            email = form.cleaned_data['email']
-            message = MessageLog(info=f"Customer created:\n\tName: {name}, Dni: {dni}, Phone number: {phone_number}, Addres: {address}, Email{email}")
-            message.save()
-            return super().form_valid(form) #Esto hace que se guarde.
-        else:
-            return self.render_to_response(self.get_context_data(form=form))
-        
-    def form_invalid(self, form):
-        # Renderizar la plantilla con el formulario y los errores
-        return self.render_to_response(self.get_context_data(form=form))
-
-
-class CustomerCreateTemplate(LoginRequiredMixin,TemplateView):
-    template_name = 'create_form.html'
-    
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        form = CustomerForm()
-        context['form'] = form
-        return context
+        name = form.cleaned_data['name']
+        dni = form.cleaned_data['dni']
+        phone_number = form.cleaned_data['phone_number']
+        address = form.cleaned_data['address']
+        email = form.cleaned_data['email']
+        message = MessageLog(info=f"Customer created:\n\tName: {name}, Dni: {dni}, Phone number: {phone_number}, Addres: {address}, Email{email}")
+        message.save()
+        return super().form_valid(form) #Esto hace que se guarde.
 
 
 class ReadDataListView(LoginRequiredMixin, ListView):
