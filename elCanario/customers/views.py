@@ -30,23 +30,17 @@ class CustomerListView(LoginRequiredMixin, ListView):
         context["answer"] = _("Customers in Database")
         return context
 
-class CustomerCreateTemplate(LoginRequiredMixin, TemplateView):
-    template_name = 'form.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        form = CustomerForm()
-        context['form'] = form
-        return context
-
 class CustomerCreateView(LoginRequiredMixin, CreateView):
     model = Customer
     form_class = CustomerForm
     template_name = 'customers_create.html'
 
     def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
-        self.template_name = "customers_create.html"
+        self.template_name = "create_form.html"
         return super().post(request, *args, **kwargs)
+    
+    def get_success_url(self) -> str:
+        return reverse_lazy('customers:create_htmx') + '?correct'
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         name = form.cleaned_data['name']
@@ -58,8 +52,15 @@ class CustomerCreateView(LoginRequiredMixin, CreateView):
         message.save()
         return super().form_valid(form) #Esto hace que se guarde.
 
-    def get_success_url(self) -> str:
-        return reverse_lazy('customers:create_htmx') + '?success'
+
+class CustomerCreateTemplate(LoginRequiredMixin,TemplateView):
+    template_name = 'create_form.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        form = CustomerForm()
+        context['form'] = form
+        return context
 
 class ReadDataListView(LoginRequiredMixin, ListView):
     template_name = 'customers_search_data.html'
