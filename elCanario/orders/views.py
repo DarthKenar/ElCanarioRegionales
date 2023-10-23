@@ -127,7 +127,7 @@ class OrderUpdateView(LoginRequiredMixin,UpdateView):
         update_article_quantity(self.object)
         update_total_pay(self.object)
         update_total_purchased(self.object)
-        return reverse_lazy('orders:update_htmx', args=[f"{self.object.id}"])
+        return reverse_lazy('orders:update', args=[f"{self.object.id}"])
 
     def form_valid(self, form: OrderForm) -> HttpResponse:
         customer_id = form.cleaned_data['customer_id']
