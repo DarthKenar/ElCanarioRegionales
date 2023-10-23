@@ -1,6 +1,6 @@
 from django.urls import path
-from customers.views import ReadDataListView, CustomerListView, CustomerCreateView, ReadDataTypeListView,CustomerUpdateView
-from customers.views import customer_delete, CustomerUpdateTemplate
+from customers.views import ReadDataListView, CustomerUpdateTemplate, CustomerListView, CustomerCreateView, ReadDataTypeListView,CustomerUpdateView
+from customers.views import customer_delete
 # from customers.views import CustomerCreateTemplate
 
 app_name = 'customers'
@@ -15,7 +15,7 @@ urlpatterns = [
 
     path('update/<int:pk>/', CustomerUpdateView.as_view(), name="update"),
     # path('update/<int:pk>/<str:status>', CustomerUpdateView.as_view(), name="update"),
-    # path('update_form/<int:pk>/', CustomerUpdateTemplate.as_view(), name="update_htmx"),
+    path('update_form/<int:pk>/', CustomerUpdateTemplate.as_view(), name="update_htmx"),
 
     path('delete/<int:pk>', customer_delete, name="delete"),
 ]

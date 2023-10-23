@@ -82,7 +82,7 @@ class ReadDataTypeListView(LoginRequiredMixin, ListView):
 
 
 class CustomerUpdateTemplate(LoginRequiredMixin, TemplateView):
-    template_name = "update_form.html"
+    template_name = "form.html"
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -92,6 +92,7 @@ class CustomerUpdateTemplate(LoginRequiredMixin, TemplateView):
         context['object'] = object
         form = CustomerForm(instance=object) 
         context['form'] = form
+        context['success'] = True
         return context
 
 
@@ -100,30 +101,22 @@ class CustomerUpdateView(LoginRequiredMixin, UpdateView):
     form_class = CustomerForm
     template_name = "customers_update.html"
     
-    def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
-        self.template_name = "update_form.html"
-        return super().post(request, *args, **kwargs)
-    
     def get_success_url(self) -> str:
         return reverse_lazy('customers:update_htmx', args=[f"{self.object.id}"]) + '?correct'
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
-        status = self.kwargs.get('status')
-        if status == "True":
-            name = form.cleaned_data['name']
-            dni = form.cleaned_data['dni']
-            phone_number = form.cleaned_data['phone_number']
-            address = form.cleaned_data['address']
-            email = form.cleaned_data['email']
-            message = MessageLog(info=f"Customer updated:\n\tName: {name}, Dni: {dni}, Phone number: {phone_number}, Addres: {address}, Email{email}")
-            message.save()
-            return super().form_valid(form) #Esto hace que se guarde.
-        else:
-            return self.render_to_response(self.get_context_data(form=form))
-        
-    def form_invalid(self, form):
-        # Renderizar la plantilla con el formulario y los errores
-        return self.render_to_response(self.get_context_data(form=form))
+        name = form.cleaned_data['name']
+        dni = form.cleaned_data['dni']
+        phone_number = form.cleaned_data['phone_number']
+        address = form.cleaned_data['address']
+        email = form.cleaned_data['email']
+        message = MessageLog(info=f"Customer updated:\n\tName: {name}, Dni: {dni}, Phone number: {phone_number}, Addres: {address}, Email{email}")
+        message.save()
+        return super().form_valid(form) #Esto hace que se guarde.
+    
+    
+
+
 
 
 @csrf_protect
