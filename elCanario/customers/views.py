@@ -30,12 +30,23 @@ class CustomerListView(LoginRequiredMixin, ListView):
         context["answer"] = _("Customers in Database")
         return context
 
+class CustomerCreateTemplate(LoginRequiredMixin, TemplateView):
+    template_name = 'form.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        form = CustomerForm()
+        context['form'] = form
+        return context
 
 class CustomerCreateView(LoginRequiredMixin, CreateView):
     model = Customer
     form_class = CustomerForm
     template_name = 'customers_create.html'
-    success_url  = reverse_lazy('customers:customers')
+
+    def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+        self.template_name = "form.html"
+        return super().post(request, *args, **kwargs)
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         name = form.cleaned_data['name']
@@ -47,6 +58,8 @@ class CustomerCreateView(LoginRequiredMixin, CreateView):
         message.save()
         return super().form_valid(form) #Esto hace que se guarde.
 
+    def get_success_url(self) -> str:
+        return reverse_lazy('customers:create_htmx') + '?success'
 
 class ReadDataListView(LoginRequiredMixin, ListView):
     template_name = 'customers_search_data.html'
@@ -92,7 +105,6 @@ class CustomerUpdateTemplate(LoginRequiredMixin, TemplateView):
         context['object'] = object
         form = CustomerForm(instance=object) 
         context['form'] = form
-        context['success'] = True
         return context
 
 
@@ -102,7 +114,7 @@ class CustomerUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "customers_update.html"
     
     def get_success_url(self) -> str:
-        return reverse_lazy('customers:update_htmx', args=[f"{self.object.id}"]) + '?correct'
+        return reverse_lazy('customers:update_htmx', args=[f"{self.object.id}"]) + '?success'
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         name = form.cleaned_data['name']
@@ -113,10 +125,6 @@ class CustomerUpdateView(LoginRequiredMixin, UpdateView):
         message = MessageLog(info=f"Customer updated:\n\tName: {name}, Dni: {dni}, Phone number: {phone_number}, Addres: {address}, Email{email}")
         message.save()
         return super().form_valid(form) #Esto hace que se guarde.
-    
-    
-
-
 
 
 @csrf_protect

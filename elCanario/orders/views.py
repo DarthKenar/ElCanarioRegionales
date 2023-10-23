@@ -111,7 +111,6 @@ class OrderUpdateTemplate(LoginRequiredMixin, TemplateView):
         context['object'] = object
         form = OrderForm(instance=object) 
         context['form'] = form
-        context['success'] = True
         return context
     
 class OrderUpdateView(LoginRequiredMixin,UpdateView):
@@ -123,7 +122,7 @@ class OrderUpdateView(LoginRequiredMixin,UpdateView):
         update_article_quantity(self.object)
         update_total_pay(self.object)
         update_total_purchased(self.object)
-        return reverse_lazy('orders:update_htmx', args=[f"{self.object.id}"])
+        return reverse_lazy('orders:update_htmx', args=[f"{self.object.id}"]) + '?success'
 
     def form_valid(self, form: OrderForm) -> HttpResponse:
         customer_id = form.cleaned_data['customer_id']

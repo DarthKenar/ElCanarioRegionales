@@ -18,8 +18,8 @@
             <div class="w-full flex justify-end">
                 <button type="submit" class="btn" {% if 'customers' in request.path %} {% if action == "create"  %} hx-post={% url "customers:create" %} {% elif action == "update" %} hx-post={% url "customers:update" id %} {% endif %} {% elif 'orders' in request.path %} {% if action == "create" %} hx-post={% url 'orders:create' %} {% elif action == "update" %} hx-post={% url "orders:update" id %} {% endif %} {% endif %} hx-swap="outerHTML" hx-trigger="click" hx-target="#form_{{action}}">Enviar<button>
             </div>
-            {% if success %}
-                {% #message type="success"  %}
+            {% if 'success' in request.path %}
+                {% #message type="success" %}
                     {% translate 'Se actualizó correctamente' %}
                 {% /message %}
             {% endif %}
