@@ -30,37 +30,6 @@ class CustomerListView(LoginRequiredMixin, ListView):
         context["answer"] = _("Customers in Database")
         return context
 
-class CustomerCreateView(LoginRequiredMixin, CreateView):
-    model = Customer
-    form_class = CustomerForm
-    template_name = 'customers_create.html'
-
-    def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
-        self.template_name = "create_form.html"
-        return super().post(request, *args, **kwargs)
-    
-    def get_success_url(self) -> str:
-        return reverse_lazy('customers:create_htmx') + '?correct'
-
-    def form_valid(self, form: BaseModelForm) -> HttpResponse:
-        name = form.cleaned_data['name']
-        dni = form.cleaned_data['dni']
-        phone_number = form.cleaned_data['phone_number']
-        address = form.cleaned_data['address']
-        email = form.cleaned_data['email']
-        message = MessageLog(info=f"Customer created:\n\tName: {name}, Dni: {dni}, Phone number: {phone_number}, Addres: {address}, Email{email}")
-        message.save()
-        return super().form_valid(form) #Esto hace que se guarde.
-
-
-class CustomerCreateTemplate(LoginRequiredMixin,TemplateView):
-    template_name = 'create_form.html'
-    
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        form = CustomerForm()
-        context['form'] = form
-        return context
 
 class ReadDataListView(LoginRequiredMixin, ListView):
     template_name = 'customers_search_data.html'
@@ -95,16 +64,35 @@ class ReadDataTypeListView(LoginRequiredMixin, ListView):
         return context
 
 
-class CustomerUpdateTemplate(LoginRequiredMixin, TemplateView):
-    template_name = "form.html"
+class CustomerCreateView(LoginRequiredMixin, CreateView):
+    model = Customer
+    form_class = CustomerForm
+    template_name = 'customers_create.html'
+
+    def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+        self.template_name = "create_form.html"
+        return super().post(request, *args, **kwargs)
+
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        name = form.cleaned_data['name']
+        dni = form.cleaned_data['dni']
+        phone_number = form.cleaned_data['phone_number']
+        address = form.cleaned_data['address']
+        email = form.cleaned_data['email']
+        message = MessageLog(info=f"Customer created:\n\tName: {name}, Dni: {dni}, Phone number: {phone_number}, Addres: {address}, Email{email}")
+        message.save()
+        return super().form_valid(form) #Esto hace que se guarde.
+
+    def get_success_url(self) -> str:
+        return reverse_lazy('customers:create_htmx') + '?success'
+
+
+class CustomerCreateTemplate(LoginRequiredMixin,TemplateView):
+    template_name = 'create_form.html'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        objeto_id = self.kwargs.get('pk')
-        object = get_object_or_404(Customer,id=objeto_id)
-        print(object.name)
-        context['object'] = object
-        form = CustomerForm(instance=object) 
+        form = CustomerForm()
         context['form'] = form
         return context
 
@@ -114,8 +102,9 @@ class CustomerUpdateView(LoginRequiredMixin, UpdateView):
     form_class = CustomerForm
     template_name = "customers_update.html"
     
-    def get_success_url(self) -> str:
-        return reverse_lazy('customers:update_htmx', args=[f"{self.object.id}"]) + '?success'
+    def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+        self.template_name = "update_form.html"
+        return super().post(request, *args, **kwargs)
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         name = form.cleaned_data['name']
@@ -126,6 +115,22 @@ class CustomerUpdateView(LoginRequiredMixin, UpdateView):
         message = MessageLog(info=f"Customer updated:\n\tName: {name}, Dni: {dni}, Phone number: {phone_number}, Addres: {address}, Email{email}")
         message.save()
         return super().form_valid(form) #Esto hace que se guarde.
+
+    def get_success_url(self) -> str:
+        return reverse_lazy('customers:update_htmx', args=[f"{self.object.id}"]) + '?success'
+
+        
+class CustomerUpdateTemplate(LoginRequiredMixin, TemplateView):
+    template_name = "update_form.html"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        objeto_id = self.kwargs.get('pk')
+        object = get_object_or_404(Customer,id=objeto_id)
+        context['object'] = object
+        form = CustomerForm(instance=object) 
+        context['form'] = form
+        return context
 
 
 @csrf_protect

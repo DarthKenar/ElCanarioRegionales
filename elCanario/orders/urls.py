@@ -1,6 +1,6 @@
 from django.urls import path
-from orders.views import OrderListView, OrderUpdateTemplate, OrderCreateView, ReadDataListView, ReadDataTypeListView,OrderUpdateView, order_delete
-# from orders.views import OrderCreateTemplate
+from orders.views import OrderListView, OrderCreateTemplate, OrderUpdateTemplate, OrderCreateView, ReadDataListView, ReadDataTypeListView,OrderUpdateView, order_delete
+
 app_name = 'orders'
 urlpatterns = [
     path('read', OrderListView.as_view(), name="orders"),
@@ -9,11 +9,11 @@ urlpatterns = [
 
     path('create', OrderCreateView.as_view(), name="create"), #GET
     # path('create/<str:status>', OrderCreateView.as_view(), name="create"), #POST status!
-    # path('create_form', OrderCreateTemplate.as_view(), name="create_htmx"), #POST render form
+    path('create_form', OrderCreateTemplate.as_view(), name="create_htmx"), #POST render form
 
     path('update/<int:pk>', OrderUpdateView.as_view(), name="update"),
     # path('update/<int:pk>/<str:status>', OrderUpdateView.as_view(), name="update"),
-    path('update_form/<int:pk>', OrderUpdateTemplate.as_view(), name="update_htmx"),
+    path('update_form/<int:pk>/', OrderUpdateTemplate.as_view(), name="update_htmx"),
     
     path('delete/<int:pk>', order_delete, name="delete"),
 ]
