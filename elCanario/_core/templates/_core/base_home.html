@@ -12,19 +12,19 @@
                 {% include 'menu_mobile.html' %}
             {% endcomment %}
         </div>
-        <div class="row-span-2 w-full h-fullrelative">
+        <div class="row-span-2 w-full h-full relative">
             {% include 'header_profile.html' %}
             <main id="search_datatype" class="flex flex-col overflow-auto" style="height: calc(100% - 4rem);">
-                {% block title_section_content_upper %}{% endblock title_section_content_upper %}
+                <h1 class="pb-6 p-2 text-3xl">{% block title_section_content_upper %}{% endblock title_section_content_upper %}:</h1>
                 {% block section_content_upper %}{% endblock section_content_upper %}
                 {% block title_section_content_under %}{% endblock title_section_content_under %}
                 <div id="search_data">
                     {% block section_content_under %}{% endblock section_content_under %}
                 </div>
             </main>
-            <footer class="footer footer-center p-4 bg-base-300 text-base-content absolute bottom-0">
+            <footer class="footer footer-center p-5 bg-base-300 text-base-content absolute bottom-0">
                 <aside>
-                  <p>Copyright © 2023 - All right reserved by ACME Industries Ltd</p>
+                  <p>Copyright © 2023 - Open Source by <a href="https://f-vega.com" class="font-semibold">Federico Vega</a></p>
                 </aside>
             </footer>
         </div>

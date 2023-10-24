@@ -8,11 +8,13 @@ module.exports = {
   theme: {
     extend: {},
   },
-  darkMode: "class",
   plugins: [
     require("tw-elements/dist/plugin.cjs"),
     require("daisyui"),
   ],
+  daisyui: {
+    themes: ["light", "dark", "valentine","cyberpunk","retro"],
+  },
 }
 // PATH
 // npx tailwindcss -i elCanario/elCanario/staticfiles/css/input.css -o elCanario/elCanario/staticfiles/css/output.css --watch

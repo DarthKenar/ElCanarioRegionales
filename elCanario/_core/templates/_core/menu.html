@@ -9,27 +9,27 @@
         </form>
     </div>
     <nav class="text-base font-semibold pt-3 px-2">
-        <a href="{% url 'core:home' %}" class="btn flex items-center {% if 'home' in request.path %} btn-accent {% else %} btn-neutral {% endif %} my-4">
+        <a href="{% url 'core:home' %}" class="btn flex items-center {% if 'home' in request.path %} btn-accent {% else %} btn-outline {% endif %} my-4">
             <i class=""></i>
             {% translate 'Dashboard' %}
         </a>
-        <a href="{% url 'orders:orders' %}" class="btn flex items-center {% if 'orders' in request.path %} btn-accent {% else %} btn-neutral {% endif %} my-4">
+        <a href="{% url 'orders:orders' %}" class="btn flex items-center {% if 'orders' in request.path %} btn-accent {% else %} btn-outline {% endif %} my-4">
             <i class=""></i>
             {% translate 'Orders' %}
         </a>
-        <a href="{% url 'articles:articles' %}" class="btn flex items-center {% if 'articles' in request.path %} btn-accent {% else %} btn-neutral {% endif %} my-4">
+        <a href="{% url 'articles:articles' %}" class="btn flex items-center {% if 'articles' in request.path %} btn-accent {% else %} btn-outline {% endif %} my-4">
             <i class=""></i>
             {% translate 'Articles' %}
         </a>
-        <a href="{% url 'customers:customers' %}" class="btn flex items-center {% if 'customers' in request.path %} btn-accent {% else %} btn-neutral {% endif %} my-4">
+        <a href="{% url 'customers:customers' %}" class="btn flex items-center {% if 'customers' in request.path %} btn-accent {% else %} btn-outline {% endif %} my-4">
             <i class=""></i>
             {% translate 'Customers' %}
         </a>
-        <a href="#" class="btn btn-disabled cursor-not-allowed flex items-center {% if 'calendar' in request.path %} btn-accent {% endif %}my-4">
+        <a href="#" class="btn btn-disabled flex items-center {% if 'calendar' in request.path %} btn-outline {% endif %}my-4">
             <i class=""></i>
             {% translate 'Calendar' %}
         </a>
-        <a href="#" class="btn btn-secondary absolute bottom-0 mx-auto" style="width: calc(90%);">
+        <a href="#" class="btn btn-secondary absolute bottom-0 mb-1 mx-auto" style="width: calc(95%);">
             <i class="fas fa-arrow-circle-up mr-3"></i>
             {% translate 'Upgrade to Pro!' %}
         </a>

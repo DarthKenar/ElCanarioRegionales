@@ -4,7 +4,7 @@
     <title>{% translate 'My Account' %} - Canario Regionales</title>
 {% endblock title_section %}
 {% block title_section_content_upper %}
-    <h1 class="pb-6 text-3xl text-black">{% translate 'My Account' %}:</h1>
+    {% translate 'My Account' %}
 {% endblock title_section_content_upper %}
 {% block section_content_upper %}
 {% endblock section_content_upper %}
@@ -15,7 +15,8 @@
         <i class="mr-3 fas fa-list"></i>
         <span>{% translate 'My Account' %}</span>
     </div>
-    <div class="text-base flex gap-2">
+    <div class=" flex gap-2">
+        {% theme_switch %}
     </div>
 </div>
 {% endblock title_section_content_under %}

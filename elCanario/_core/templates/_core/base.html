@@ -18,6 +18,8 @@
         <script src="https://unpkg.com/htmx.org@1.8.6" integrity="sha384-Bj8qm/6B+71E6FQSySofJOUjA/gq330vEqjFx9LakWybUySyI1IQHwPtbTU7bNwx" crossorigin="anonymous"></script>
         <!-- Tailwind -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+        <!-- THEME CHANGER -->
+        <script src="https://cdn.jsdelivr.net/npm/theme-change@2.0.2/index.js"></script>
         <title>
             {% block title %}{% endblock title %}
         </title>
@@ -29,7 +31,9 @@
             {% block extra_content %}{% endblock extra_content %}
         </div>
         <script src="{% static 'tw-elements/dist/js/tw-elements.umd.min.js' %}" type="text/javascript"></script>
+
     </body>
+    
 </html>
 
 
