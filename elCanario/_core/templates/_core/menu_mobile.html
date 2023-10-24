@@ -1,6 +1,6 @@
 <!-- Mobile Header & Nav -->
 {% load i18n %}
-<header x-data="{ isOpen: false }" class="w-full bg-sidebar py-5 px-6 sm:hidden">
+<header class="w-full py-5 sm:hidden">
     <div class="flex items-center justify-between">
         <a href="#" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">{% translate 'Admin' %}</a>
         <button @click="isOpen = !isOpen" class="text-white text-3xl focus:outline-none">
@@ -8,9 +8,8 @@
             <i x-show="isOpen" class="fas fa-times"></i>
         </button>
     </div>
-
     <!-- Dropdown Nav -->
-    <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4">
+    <nav class="flex flex-col pt-4">
         <a href="{% url 'core:home' %}" class="flex items-center active-nav-link text-white py-2 pl-4 nav-item">
             <i class="fas fa-tachometer-alt mr-3"></i>
             {% translate 'Dashboard' %}
@@ -43,11 +42,9 @@
             <i class="fas fa-sign-out-alt mr-3"></i>
             {% translate 'Sign Out' %}
         </a>
-        <button class="w-full bg-white cta-btn font-semibold py-2 mt-3 rounded-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
+        <button class="w-full btn btn-secondary flex items-center justify-center">
             <i class="fas fa-arrow-circle-up mr-3"></i> {% translate 'Upgrade to Pro!' %}
         </button>
     </nav>
-    <!-- <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
-        <i class="fas fa-plus mr-3"></i> New Report
-    </button> -->
 </header>
+

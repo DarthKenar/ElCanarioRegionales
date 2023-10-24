@@ -4,16 +4,18 @@
     {% block title_section %}{% endblock title_section %}
 {% endblock base_title %}
 {% block base_content %}
-    {% include 'menu.html' %}
-    <div class="w-full flex flex-col h-screen overflow-y-hidden">
-        <!-- Desktop Header -->
 
-        {% include 'header_profile.html' %}
-
-        {% include 'menu_mobile.html' %}
     
-        <div class="w-full overflow-x-hidden border-t flex flex-col">
-            <main class="w-full flex-grow p-6" id="search_datatype">
+
+    <div class="flex flex-row">
+        <!-- Desktop Header -->
+        <div class="row-span-1">
+            {% include 'menu.html' %}
+            {% include 'menu_mobile.html' %}
+        </div>
+        <div class="row-span-2 w-full">
+            {% include 'header_profile.html' %}
+            <main class="" id="search_datatype">
                 {% block title_section_content_upper %}{% endblock title_section_content_upper %}
                 {% block section_content_upper %}{% endblock section_content_upper %}
                 <div class="w-full mt-12">
@@ -23,11 +25,9 @@
                     </div>
                 </div>
             </main>
-    
             <footer class="w-full bg-white text-right p-4">
                 {% translate 'Built by' %} <a target="_blank" href="https://f-vega.com" class="underline">Federico Vega</a>.
             </footer>
         </div>
-        
     </div>
 {% endblock base_content %}
