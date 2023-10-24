@@ -24,9 +24,10 @@
         {% block base_head %}{% endblock base_head %}
     </head>
     <body> 
-        {% block base_content %}{% endblock base_content %}
-        
-        {% block extra_content %}{% endblock extra_content %}
+        <div style="height: 100%; max-height: 100vh;">
+            {% block base_content %}{% endblock base_content %}
+            {% block extra_content %}{% endblock extra_content %}
+        </div>
         <script src="{% static 'tw-elements/dist/js/tw-elements.umd.min.js' %}" type="text/javascript"></script>
     </body>
 </html>

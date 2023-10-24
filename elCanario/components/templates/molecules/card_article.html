@@ -1,37 +1,35 @@
 {% load static %} {% load custom_tags %}
-<div class="relative w-full max-w-sm mx-auto">
+<div class="relative w-full max-w-sm mx-auto bg-base-300 rounded-lg">
   <div class="relative inline-block w-full transition-transform duration-300 ease-in-out transform">
     <div class="rounded-lg">
-        <div class="relative flex h-60 justify-center overflow-hidden rounded-lg">
-          <div class="w-full transform transition-transform duration-500 ease-in-out hover:scale-110">
-            {% if img %}
-              <img src="{% static img %}" alt="{{name}}" />
-            {% else %}
-              <img src="{% static 'img/generic_stock.png' %}" alt="stock" />
-            {% endif %}
-          </div>
-          <div class="absolute bottom-0 mb-3 flex justify-center">
-            <div class="flex space-x-5 overflow-hidden rounded-lg bg-white/70 px-4 py-1 shadow">
-              <p class="flex items-center font-medium text-gray-500">
-                {{name}}
-              </p>
-            </div>
-          </div>
-          <span class="absolute left-0 top-0 z-10 ml-3 mt-3 inline-flex py-1 px-3 select-none text-sm font-medium text-white bg-blue-500 rounded-full" title="ID"> 
-            {{id}}
-          </span>
+      <div class="relative flex h-60 justify-center overflow-hidden rounded-lg rounded-b-none">
+        <div class="w-full transform transition-transform duration-500 ease-in-out hover:scale-110">
+          {% if img %}
+            <img src="{% static img %}" alt="{{name}}" />
+          {% else %}
+            <img src="{% static 'img/generic_stock.png' %}" alt="stock" />
+          {% endif %}
         </div>
-      
-
-      <div class="grid grid-cols-3 py-3 border-t border-gray-200">
+        <div class="absolute bottom-0 mb-3 flex justify-center">
+          <div class="flex space-x-5 overflow-hidden rounded-lg px-4 py-1 shadow">
+            <p class="flex items-center font-medium">
+              {{name}}
+            </p>
+          </div>
+        </div>
+        <span class="absolute left-0 top-0 z-10 ml-3 mt-3 inline-flex py-1 px-3 select-none text-sm font-medium rounded-full" title="ID"> 
+          {{id}}
+        </span>
+      </div>
+      <div class="grid grid-cols-3 py-3 border-t">
         <div class="flex items-center">
-          <p class="mt-2 text-sm text-gray-800 line-clamp-1" title="Buy price">{{buy_price}}</p>
+          <p class="mt-2 text-sm line-clamp-1" title="Buy price">{{buy_price}}</p>
         </div>
         <div class="flex items-center justify-center">
-          <p class="mt-2 text-sm text-gray-800 line-clamp-1" title="Increase">{{increase}}</p>
+          <p class="mt-2 text-sm line-clamp-1" title="Increase">{{increase}}</p>
         </div>
         <div class="flex items-center justify-end">
-          <p class="inline-block font-semibold leading-tight break-words text-primary rounded-xl">
+          <p class="inline-block font-semibold leading-tight break-words rounded-xl">
             <span class="text-sm uppercase"> $ </span>
             <span class="text-lg" title="Sell price">
               {{sell_price}}
@@ -39,16 +37,16 @@
           </p>
         </div>
       </div>
-      <div class="relative grid grid-cols-2 grid-rows-2 gap-4 py-3 break-words border-t border-b border-gray-200">
+      <div class="relative grid grid-cols-2 grid-rows-2 gap-4 py-3 break-words border-t border-b">
         {% for category in categories %}
           {% with object.characteristics_id.all|filter_by_category:category as values %}
             {% if values %}
-              <p class="flex items-center text-gray-800 xl:flex-row xl:items-center text-ellipsis">
+              <p class="flex items-center xl:flex-row xl:items-center text-ellipsis">
                 <span class="mt-0 px-2">{{category.name}}</span>
                 <img width="24" height="24" src="https://img.icons8.com/fluency-systems-regular/48/arrow.png" alt="arrow" />
               </p>
               {% for value in values %}
-                <p class="flex items-center text-gray-800 xl:flex-row xl:items-center text-ellipsis">
+                <p class="flex items-center xl:flex-row xl:items-center text-ellipsis">
                   <span class="mt-0">{{value.name}}</span>
                 </p>
               {% endfor %}
@@ -59,7 +57,7 @@
           {{stock}}
         </span>
       </div>
-      <div class="flex items-center justify-around w-full p-3 border-b border-gray-200 bottom-0">
+      <div class="flex items-center justify-around w-full p-3 border-b bottom-0">
         {% button type="warning" url='articles:update' id=id border="False" text="Editar" %} 
         {% button type="danger" url='articles:delete' id=id border="False" text="Eliminar" object_type="article" object_name=name csrf_token=csrf_token%}
       </div>

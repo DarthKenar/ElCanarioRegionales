@@ -4,29 +4,28 @@
     {% block title_section %}{% endblock title_section %}
 {% endblock base_title %}
 {% block base_content %}
-
-    
-
-    <div class="flex flex-row">
-        <!-- Desktop Header -->
-        <div class="row-span-1">
+    <div class="flex flex-row h-full" >
+        <!-- Desktop Header --> 
+        <div class="row-span-1 h-full">
             {% include 'menu.html' %}
-            {% include 'menu_mobile.html' %}
+            {% comment  %}
+                {% include 'menu_mobile.html' %}
+            {% endcomment %}
         </div>
-        <div class="row-span-2 w-full">
+        <div class="row-span-2 w-full h-fullrelative">
             {% include 'header_profile.html' %}
-            <main class="" id="search_datatype">
+            <main id="search_datatype" class="flex flex-col overflow-auto" style="height: calc(100% - 4rem);">
                 {% block title_section_content_upper %}{% endblock title_section_content_upper %}
                 {% block section_content_upper %}{% endblock section_content_upper %}
-                <div class="w-full mt-12">
-                    {% block title_section_content_under %}{% endblock title_section_content_under %}
-                    <div class="bg-white overflow-auto" id="search_data">
-                        {% block section_content_under %}{% endblock section_content_under %}
-                    </div>
+                {% block title_section_content_under %}{% endblock title_section_content_under %}
+                <div id="search_data">
+                    {% block section_content_under %}{% endblock section_content_under %}
                 </div>
             </main>
-            <footer class="w-full bg-white text-right p-4">
-                {% translate 'Built by' %} <a target="_blank" href="https://f-vega.com" class="underline">Federico Vega</a>.
+            <footer class="footer footer-center p-4 bg-base-300 text-base-content absolute bottom-0">
+                <aside>
+                  <p>Copyright © 2023 - All right reserved by ACME Industries Ltd</p>
+                </aside>
             </footer>
         </div>
     </div>
