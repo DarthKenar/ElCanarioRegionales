@@ -1,70 +1,83 @@
-{% extends 'base.html' %}
+{% extends "account/base.html" %}
+
 {% load static %}
 {% load i18n %}
-{% block base_head %}
-  <style>
-    @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
-    .font-family-karla {
-        font-family: karla;
-    }
-  </style>
-{% endblock base_head %}
-{% block title %}{% trans "Signup" %}{% endblock title %}
-{% block base_content %}
-{% trans 'Sign Up' as signup %}
-<body class="font-family-karla h-screen bg-[#edf2f7]">
-  <div class="w-full flex flex-wrap">
-      
-      <!-- Image Section -->
-      <div class="w-1/2 shadow-2xl">
-        <img class="object-cover w-full h-screen hidden md:block" src="{% static 'img/fondo-signup.webp' %}">
-      </div>
-      <!-- Login Section -->
-      <div class="w-full md:w-1/2 flex flex-col">
-          <div class="flex justify-center md:hidden pt-12 md:pl-12 md:-mb-24">
-              <img src="{% static '/img/elcanarioregionales-logo-160x160.png' %}" alt="El Canario Regionales Logo">
-          </div>
 
-          <div class="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
-              <p class="text-center text-3xl">{{signup}}</p>
-              <form action="{% url 'account_signup' %}" method="POST" class="flex flex-col pt-3 md:pt-8">
-                  {% csrf_token %}
+{% block head_title %}
+    {% trans "Sign Up" %}
+{% endblock head_title %}
 
-                  <div class="flex flex-col pt-4">
-                      <label for="{{form.username.id_for_label}}" class="text-lg">{{form.username.label}}</label>
-                      <input type="text" name="username" id="{{form.username.id_for_label}}" placeholder="{{form.username.label}}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
-                  </div>
+{% block content %}
+    {% trans "Sign Up" as signup %}
+    {% title text=signup %}
+    <section class="flex justify-center items-center">
+        {% #block_center %}
+            {% #block_card class="h-80" %}
+                <div class="form-control py-2">
+                    <p>
+                        {% blocktrans %}Already have an account? Then please <a class="btn btn-sm text-sm font-normal lowercase" href="{{ login_url }}">sign in</a> .{% endblocktrans %}
+                    </p> 
+                </div>
+    
+                <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+                    {% csrf_token %}
+                    <div class="form-control">
+                        <label class="input-group input-group-sm">
+                            <span class="w-full">{{ form.email.label }}</span>
+                            <input id="{{ form.email.id_for_label }}"
+                                name="email"
+                                autocomplete="email"
+                                type="text"
+                                placeholder="{{ form.email.label }}"
+                                class="input input-bordered input-sm"
+                                required />
+                        </label>
+                    </div>
 
-                  {% form_error errors=form.username.errors %}
-  
-                  <div class="flex flex-col pt-0">
-                      <label for="{{form.email.id_for_label}}" class="text-lg">{{form.email.label}}</label>
-                      <input type="email" name="{{form.email.label|lower}}" id="{{form.email.id_for_label}}"placeholder="{{form.email.label}}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
-                  </div>
+                    {% form_error errors=form.email.errors %}
 
-                  {% form_error errors=form.email.errors %}
+                    <div class="form-control py-0">
+                        <label class="input-group input-group-sm">
+                            <span class="w-full">{{ form.password1.label }}</span>
+                            <input id="{{ form.password1.id_for_label }}"
+                                type="password"
+                                name="password1"
+                                autocomplete="current-password"
+                                placeholder="{{ form.password1.label }}"
+                                class="input input-bordered input-sm" />
+                        </label>
+                    </div>
 
-                  <div class="flex flex-col pt-0">
-                      <label for="{{form.password1.id_for_label}}" class="text-lg">{{form.password1.label}}</label>
-                      <input type="password" name="password1" id="{{form.password1.id_for_label}}"placeholder="{{form.password1.label}}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
-                  </div>
+                    {% form_error errors=form.password1.errors %}
 
-                  {% form_error errors=form.password1.errors %}
+                    <div class="form-control py-0">
+                        <label class="input-group input-group-sm">
+                            <span class="w-full">{{ form.password2.label }}</span>
+                            <input id="{{ form.password2.id_for_label }}"
+                                type="password"
+                                name="password2"
+                                autocomplete="current-password"
+                                placeholder="{{ form.password2.label }}"
+                                class="input input-bordered input-sm" />
+                        </label>
+                    </div>
 
-                  <div class="flex flex-col pt-0">
-                      <label for="{{form.password2.id_for_label}}" class="text-lg">{{form.password2.label}}</label>
-                      <input type="password" name="password2" id="{{form.password2.id_for_label}}"placeholder="{{form.password2.label}}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
-                  </div>
+                    {% form_error  errors=form.password2.errors %}
 
-                  {% form_error errors=form.password2.errors %}
-
-                  <input type="submit" value="{{signup}}" class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8 cursor-pointer">
-              </form>
-              <div class="text-center pt-12 pb-12">
-                  <p>{% trans "Already have an account?" %} <a href="{% url 'account_login' %}" class="underline font-semibold">{% trans 'Log In' %}</a></p>
-              </div>
-          </div>
-      </div>
-  </div>
-</body>
-{% endblock base_content %}
+                    {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                    {% endif %}
+                    <div class="form-control py-2">
+                        <div class="flex items-center justify-between ">
+                            <a class="button secondaryAction text-sm mx-3" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+                            <button class="btn btn-ghost" type="submit">{{signup}}</button>
+                        </div>
+                    </div>
+                    {% if form.errors %}
+                        {% for error in form.non_field_errors %}<p class="p-0 m-0 text-error text-xs">{{ error }}</p>{% endfor %}
+                    {% endif %}
+                </form>
+            {% /block_card %}
+        {% /block_center %}
+    </section>
+{% endblock content %}

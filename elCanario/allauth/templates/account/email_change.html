@@ -1,33 +1,51 @@
 {% extends "account/base.html" %}
+
 {% load i18n %}
+
 {% block head_title %}
     {% trans "Email Address" %}
 {% endblock head_title %}
+
 {% block content %}
-    <h1>{% trans "Email Address" %}</h1>
-    {% if emailaddresses %}
-        {% if current_emailaddress %}
-            <p>
-                {% trans 'The following email address is associated with your account:' %} <a href="mailto:{{ current_emailaddress.email }}">{{ current_emailaddress.email }}</a>
-            </p>
-        {% endif %}
-        {% if new_emailaddress %}
-            <p>
-                {% trans 'Your email address is still pending verification:' %} <a href="mailto:{{ new_emailaddress.email }}">{{ new_emailaddress.email }}</a>
-            </p>
+    {% trans "Email Address" as emailaddress %}
+
+    {% title text=emailaddress %}
+    {% #block_center %}
+        {% #block_card %}
+            {% if emailaddresses %}
+
+                {% if current_emailaddress %}
+                    <p>
+                        {% trans 'The following email address is associated with your account:' %} <a class="btn btn-sm text-sm font-normal lowercase" href="mailto:{{ current_emailaddress.email }}">{{ current_emailaddress.email }}</a>
+                    </p>
+                {% endif %}
+                {% if new_emailaddress %}
+                    <p>
+                        {% trans 'Your email address is still pending verification:' %} <a class="btn btn-sm text-sm font-normal lowercase" href="mailto:{{ new_emailaddress.email }}">{{ new_emailaddress.email }}</a>
+                    </p>
+                    <form method="post" action="{% url 'account_email' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="email" value="{{ new_emailaddress.email }}">
+                        <button class="btn" type="submit" name="action_send">{% trans 'Re-send Verification' %}</button>
+                    </form>
+                {% endif %}
+            {% else %}
+                {% include "account/snippets/warn_no_email.html" %}
+            {% endif %}
+        {% /block_card %}
+    {% /block_center %}
+    
+    {% trans "Change Email Address" as changeemailaddress %}
+
+    {% title text=changeemailaddress %}
+    {% #block_center %}
+        {% #block_card class="h-32" %}
             <form method="post" action="{% url 'account_email' %}">
                 {% csrf_token %}
-                <input type="hidden" name="email" value="{{ new_emailaddress.email }}">
-                <button type="submit" name="action_send">{% trans 'Re-send Verification' %}</button>
+                {{ form.as_p }}
+                <button class="btn btn-ghost" name="action_add" type="submit">{% trans "Change Email" %}</button>
             </form>
-        {% endif %}
-    {% else %}
-        {% include "account/snippets/warn_no_email.html" %}
-    {% endif %}
-    <h2>{% trans "Change Email Address" %}</h2>
-    <form method="post" action="{% url 'account_email' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button name="action_add" type="submit">{% trans "Change Email" %}</button>
-    </form>
+        {% #block_card %}
+    {% /block_center %}
+
 {% endblock content %}

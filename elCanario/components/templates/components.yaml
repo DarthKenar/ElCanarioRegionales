@@ -119,3 +119,16 @@ components:
 
   #block_center
   block_center: "organisms/block_center.html"
+
+  #! atomics
+  theme_switch: "atomics/theme_switch.html"
+  title: "atomics/title.html" # text
+  form_error: "atomics/form_error.html" #errors (lista de errores. Ej: errors = form.{field}.errors)
+  form_field: "atomics/form_field.html" #label, id, first?, input_name, input_autocomplete, input_type
+  message_info: "atomics/message_info.html" #text
+  
+  #! containers
+  menu: "containers/menu.html"
+  block_center: "containers/block_center.html"
+  block_card: "containers/block_card.html"
+  block_message: "containers/block_message.html"

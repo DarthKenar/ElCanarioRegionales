@@ -9,28 +9,28 @@
         </form>
     </div>
     <nav class="text-white text-base font-semibold pt-3">
-        <a href="{% url 'core:home' %}" class="flex items-center text-white {% if not 'home' in request.path %}hover:opacity-75 {% else %} active-nav-link  {% endif %}py-4 pl-6 nav-item">
-            <i class="fas fa-tachometer-alt mr-3"></i>
+        <a href="{% url 'core:home' %}" class="btn flex items-center {% if 'home' in request.path %} btn-accent {% endif %} my-4">
+            <i class=""></i>
             {% translate 'Dashboard' %}
         </a>
-        <a href="{% url 'orders:orders' %}" class="flex items-center text-white {% if not 'orders' in request.path %}hover:opacity-75 {% else %} active-nav-link {% endif %} py-4 pl-6 nav-item">
-            <i class="fas fa-table mr-3"></i>
+        <a href="{% url 'orders:orders' %}" class="btn flex items-center {% if 'orders' in request.path %} btn-accent {% endif %}my-4">
+            <i class=""></i>
             {% translate 'Orders' %}
         </a>
-        <a href="{% url 'articles:articles' %}" class="flex items-center text-white {% if not 'articles' in request.path %}hover:opacity-75 {% else %} active-nav-link {% endif %} py-4 pl-6 nav-item">
-            <i class="fas fa-align-left mr-3"></i>
+        <a href="{% url 'articles:articles' %}" class="btn flex items-center {% if 'articles' in request.path %} btn-accent {% endif %}my-4">
+            <i class=""></i>
             {% translate 'Articles' %}
         </a>
-        <a href="{% url 'customers:customers' %}" class="flex items-center text-white {% if not 'customers' in request.path %}hover:opacity-75 {% else %} active-nav-link {% endif %} py-4 pl-6 nav-item">
-            <i class="fas fa-tablet-alt mr-3"></i>
+        <a href="{% url 'customers:customers' %}" class="btn flex items-center {% if 'customers' in request.path %} btn-accent {% endif %}my-4">
+            <i class=""></i>
             {% translate 'Customers' %}
         </a>
-        <a href="#" class="flex items-center text-white {% if not 'calendar' in request.path %}hover:opacity-75 {% else %} active-nav-link {% endif %} py-4 pl-6 nav-item">
-            <i class="fas fa-calendar mr-3"></i>
+        <a href="#" class="btn flex items-center {% if 'calendar' in request.path %} btn-accent {% endif %}my-4">
+            <i class=""></i>
             {% translate 'Calendar' %}
         </a>
     </nav>
-    <a href="#" class="absolute w-full upgrade-btn bottom-0 active-nav-link text-white flex items-center justify-center py-4">
+    <a href="#" class="absolute w-full bottom-0 active-nav-link flex items-center justify-center btn">
         <i class="fas fa-arrow-circle-up mr-3"></i>
         {% translate 'Upgrade to Pro!' %}
     </a>

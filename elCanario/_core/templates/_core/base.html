@@ -18,26 +18,12 @@
         <script src="https://unpkg.com/htmx.org@1.8.6" integrity="sha384-Bj8qm/6B+71E6FQSySofJOUjA/gq330vEqjFx9LakWybUySyI1IQHwPtbTU7bNwx" crossorigin="anonymous"></script>
         <!-- Tailwind -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-        <!-- IONICONS --> 
-        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-        <style>
-            @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
-            .font-family-karla { font-family: karla; }
-            .bg-sidebar { background: #3d68ff; }
-            .cta-btn { color: #3d68ff; }
-            .upgrade-btn { background: #1947ee; }
-            .upgrade-btn:hover { background: #0038fd; }
-            .active-nav-link { background: #1947ee; }
-            .nav-item:hover { background: #1947ee; }
-            .account-link:hover { background: #3d68ff; }
-        </style>
         <title>
             {% block title %}{% endblock title %}
         </title>
         {% block base_head %}{% endblock base_head %}
     </head>
-    <body class="bg-gray-100 font-family-karla flex"> 
+    <body> 
         {% block base_content %}{% endblock base_content %}
         
         {% block extra_content %}{% endblock extra_content %}

@@ -10,17 +10,17 @@
     {% include 'articles_search_header.html' %}
 {% endblock section_content_upper %}
 {% block title_section_content_under %}
-<div class="flex items-center justify-between pb-3 text-xl">
-    <!-- Latest Reports -->
-    <div class="flex items-center pb-3 text-xl">
-        <i class="mr-3 fas fa-list"></i>
-        <span>{% translate 'Articles List' %}</span>
+    <div class="flex items-center justify-between pb-3 text-xl">
+        <!-- Latest Reports -->
+        <div class="flex items-center pb-3 text-xl">
+            <i class="mr-3 fas fa-list"></i>
+            <span>{% translate 'Articles List' %}</span>
+        </div>
+        <div class="text-base flex gap-2">
+            {% button type="info" url='articles:categories' border="False" text="Categories" %}
+            {% button type="success" url='articles:create' border="False" text="Create Article" %}
+        </div>
     </div>
-    <div class="text-base flex gap-2">
-        {% button type="info" url='articles:categories' border="False" text="Categories" %}
-        {% button type="success" url='articles:create' border="False" text="Create Article" %}
-    </div>
-</div>
 {% endblock title_section_content_under %}
 
 {% block section_content_under %}

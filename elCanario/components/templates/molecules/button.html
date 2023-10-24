@@ -46,4 +46,6 @@
         {{text}}
         </button>
     </form>
+{% else %}
+    <a class="btn btn-primary" href="{% url url %}">{{ text }}</a>
 {% endif %}
