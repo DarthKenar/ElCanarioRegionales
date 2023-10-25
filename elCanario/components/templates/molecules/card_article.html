@@ -1,9 +1,9 @@
 {% load static %} {% load custom_tags %}
 <div class="m-2">
-  <div class="relative w-full max-w-sm mx-auto bg-base-300 rounded-lg">
+  <div class="relative w-full max-w-sm mx-auto bg-base-300" style="border-radius: var(--rounded-btn, 0.5rem/* 8px */);">
     <div class="relative inline-block w-full transition-transform duration-300 ease-in-out transform">
       <div class="rounded-lg">
-        <div class="relative flex h-60 justify-center overflow-hidden rounded-lg rounded-b-none">
+        <div class="relative flex h-60 justify-center overflow-hidden rounded-b-none" style="border-radius: var(--rounded-btn, 0.5rem/* 8px */);">
           <div class="w-full transform transition-transform duration-500 ease-in-out hover:scale-110">
             {% if img %}
               <img src="{% static img %}" alt="{{name}}" />
