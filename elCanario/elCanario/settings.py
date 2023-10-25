@@ -1,6 +1,7 @@
 import os
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy
+from auth import *
 """
 Django settings for elCanario project.
 
@@ -106,7 +107,7 @@ TEMPLATES = [
                  BASE_DIR / "elCanario/templates/elCanario/",
                  BASE_DIR / "components/templates/molecules",
                  BASE_DIR / "_core/templates/_core",
-                 BASE_DIR / "allauth/templates/"],
+                 BASE_DIR / "auth/templates/"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -242,7 +243,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 PWA_APP_NAME = "EL CANARIO REGIONALES"
-PWA_APP_DESCRIPTION = "For Luci whit <3"
+PWA_APP_DESCRIPTION = "Contact me: federico_vega22@hotmail.com"
 PWA_APP_THEME_COLOR = '#991b1b'
 PWA_APP_BACKGROUND_COLOR = '#fde68a'
 
@@ -254,3 +255,11 @@ PWA_APP_ICONS = [
 ]
 
 PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR,'serviceworker.js')
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = DEFAULT_FROM_EMAIL = "federico.vega2222@gmail.com"
+
+if DEBUG:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
