@@ -21,21 +21,18 @@
     height: 0%;
   }
 } */
-ion-icon {
-  pointer-events: none;
-}
-.vanish {
-  animation: fadeout 1s;
-  animation-delay: 3s;
-  animation-fill-mode: forwards;
+div.vanish {
+  animation: fadeout .3s forwards;
 }
 
 @keyframes fadeout {
-  from {opacity: 1;}
-  to {opacity: 0;}
+  to{
+    opacity: 0;
+    display: none;
+  }
 }
 .appear {
-  animation: fadein 1s;
+  animation: fadein .5s;
   animation-fill-mode: forwards;
 }
 
