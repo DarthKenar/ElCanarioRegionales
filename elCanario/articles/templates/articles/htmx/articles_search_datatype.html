@@ -1,14 +1,15 @@
 {% load i18n %}
-<main class="w-full flex-grow p-6" id="search_datatype">
-    <h1 class="text-3xl text-black pb-6">{% translate 'Search articles' %}:</h1>
-    {% load custom_tags %}
-    {% get_all_categories as categories %}
+{% load custom_tags %}
+{% get_all_categories as categories %}
+
+
+<main class="flex flex-col overflow-auto p-2" id="search_datatype" style="height: calc(100% - 4rem);">
+    <h1 class="pb-6 p-2 text-3xl">{% translate 'Search articles' %}:</h1>
     {% include 'articles_search_header.html' %}
-    <div class="w-full mt-12">
+    <div class="w-full">
         <div class="flex items-center justify-between pb-3 text-xl">
             <!-- Latest Reports -->
-            <div class="flex items-center pb-3 text-xl">
-                <i class="mr-3 fas fa-list"></i>
+            <div class="flex items-center pb-3 px-3 text-xl">
                 <span>{% translate 'Articles List' %}</span>
             </div>
             <div class="text-base flex gap-2">
@@ -16,7 +17,7 @@
                 {% button type="success" url='articles:create' border="False" text="Create Article" %}
             </div>
         </div>
-        <div class="bg-white overflow-auto" id="search_data">
+        <div id="search_data">
             {% if article_list.count > 0 %}
                 {% #message type="success" %}
                     {% translate 'Number of articles found:' %} <b>{{ article_list.count }}</b>
