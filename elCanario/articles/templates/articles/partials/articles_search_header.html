@@ -1,30 +1,26 @@
-{% #search_header %}
-    <div class="flex">
-        <select class="px-4 py-2 font-bold bg-white rounded-sm" name="datatype_input" id="datatype_input" hx-get="{% url 'articles:read_datatype' %}" hx-target="#search_datatype"  hx-trigger="change" hx-swap="outerHTML">
+<div class="form-control xs:px-2 py-4">
+    <div class="input-group">
+        <select class="select select-bordered" name="datatype_input" id="datatype_input" hx-get="{% url 'articles:read_datatype' %}" hx-target="#search_datatype"  hx-trigger="change" hx-swap="outerHTML">
             <option value="id" {% if datatype_input == "id" %} selected {% endif %}>ID</option>
             <option value="name" {% if datatype_input == "name" %} selected {% endif %}>Name</option>
             {% for category in categories %}
-
-            <option value="{{category.id}}" {% if datatype_input == category.id %} selected {% endif %}>{{category.name}}</option>
-            
+                <option value="{{category.id}}" {% if datatype_input == category.id %} selected {% endif %}>{{category.name}}</option>
             {% endfor %}
             <option value="buy_price" {% if datatype_input == "buy_price" %} selected {% endif %}>Buy price</option>
             <option value="increase" {% if datatype_input == "increase" %} selected {% endif %}>Increment</option>
             <option value="sell_price" {% if datatype_input == "sell_price" %} selected {% endif %}>Sell price</option>
             <option value="stock" {% if datatype_input == "stock" %} selected {% endif %}>Stock</option>
         </select>
-        {% if datatype_input == 'id' or datatype_input == 'name' or datatype_input == 'buy_price' or datatype_input == 'increase' or datatype_input == 'sell_price' or datatype_input == 'stock' %}<input class="px-4 py-2 mx-2 font-bold rounded-sm" placeholder="{{datatype}}" type="text" hx-get="{% url 'articles:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>{% endif %}
+        {% if datatype_input == 'id' or datatype_input == 'name' or datatype_input == 'buy_price' or datatype_input == 'increase' or datatype_input == 'sell_price' or datatype_input == 'stock' %}<input class="input max-xs:w-28 max-sm:w-36 bg-base-300" placeholder="{{datatype}}" type="text" hx-get="{% url 'articles:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_data" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms"></input>{% endif %}
         {% for category in categories %}
             {% if datatype_input == category.id %}
-                <select class="px-4 py-2 mx-2 font-bold rounded-sm" placeholder="{{datatype}}" type="text" hx-get="{% url 'articles:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_data" hx-swap="outerHTML" hx-trigger="change">
+                <select class="select select-bordered max-xs:w-28 max-sm:w-36 bg-base-300" placeholder="{{datatype}}" type="text" hx-get="{% url 'articles:read_data' %}" hx-include="#datatype_input" name="search_input" id="search_input" hx-target="#search_data" hx-swap="outerHTML" hx-trigger="change">
                     <option value=""></option>
                     {% for value in values %}
-
                         <option value="{{value.id}}">{{value.name}}</option>
-                    
                     {% endfor %}
                 </select>
             {% endif %}
         {% endfor %}
     </div>
-{% /search_header %}
+</div>
