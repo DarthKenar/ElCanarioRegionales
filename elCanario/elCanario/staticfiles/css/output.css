@@ -6877,6 +6877,11 @@ details.collapse summary::-webkit-details-marker {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.text-base-200 {
+  --tw-text-opacity: 1;
+  color: hsl(var(--b2) / var(--tw-text-opacity));
+}
+
 .underline {
   text-decoration-line: underline;
 }
