@@ -218,7 +218,7 @@ LOCALE_PATHS = (BASE_DIR / 'locale/',)
 # Allauth
 
 LOGIN_REDIRECT_URL = reverse_lazy('core:home')
-LOGIN_URL = reverse_lazy('core:home')
+LOGIN_URL = reverse_lazy('core:index')
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_MIN_LENGTH = 4

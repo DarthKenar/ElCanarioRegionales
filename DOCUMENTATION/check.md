@@ -11,3 +11,7 @@
 - [x] Ahora el botón de seleccion de idioma funciona correctamente
 - [x] Se corrigió el borde de las cartas de artículos
 - [ ] Se corrigió el menú mobile version
+
+- [ ] Agregar el menú mobile
+- [ ] Agregar al display de arriba a la derecha los elementos faltantes como upgrade to pro etc
+- [ ] ocultar footer
