@@ -22,11 +22,12 @@
                     {% block section_content_under %}{% endblock section_content_under %}
                 </div>
             </main>
-            <footer class="max-xs:hidden footer footer-center p-5 bg-base-300 text-base-content absolute bottom-0">
+            <footer class="max-sm:hidden footer footer-center p-5 bg-base-300 text-base-content absolute bottom-0">
                 <aside>
                     <p><a class="line-through">Copyright © 2023</a> - Open Source Dev by <a href="https://f-vega.com" class="font-semibold">Federico Vega</a></p>
                 </aside>
             </footer>
+            {% include 'navbar_mobile.html' %}
         </div>
     </div>
 {% endblock base_content %}
