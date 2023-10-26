@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-11 02:22-0300\n"
+"POT-Creation-Date: 2023-10-25 21:20-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,97 +18,66 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\elCanario\allauth\templates\account\account_inactive.html:5
-#: .\elCanario\allauth\templates\account\account_inactive.html:8
+#: .\auth\templates\account\account_inactive.html:6
+#: .\auth\templates\account\account_inactive.html:10
 msgid "Account Inactive"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\account_inactive.html:10
+#: .\auth\templates\account\account_inactive.html:15
 msgid "This account is inactive."
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\base.html:21
+#: .\auth\templates\account\base.html:22
 msgid "Messages:"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\base.html:31
-msgid "Menu:"
-msgstr ""
-
-#: .\elCanario\allauth\templates\account\base.html:34
-#: .\elCanario\allauth\templates\account\email_change.html:31
-msgid "Change Email"
-msgstr ""
-
-#: .\elCanario\allauth\templates\account\base.html:35
-#: .\elCanario\allauth\templates\account\logout.html:5
-#: .\elCanario\allauth\templates\account\logout.html:8
-#: .\elCanario\allauth\templates\account\logout.html:17
-msgid "Sign Out"
-msgstr ""
-
-#: .\elCanario\allauth\templates\account\base.html:37
-#: .\elCanario\allauth\templates\mfa\authenticate.html:4
-#: .\elCanario\allauth\templates\mfa\authenticate.html:16
-#: .\elCanario\allauth\templates\socialaccount\login.html:4
-msgid "Sign In"
-msgstr ""
-
-#: .\elCanario\allauth\templates\account\base.html:38
-#: .\elCanario\allauth\templates\account\signup.html:14
-#: .\elCanario\allauth\templates\socialaccount\signup.html:8
-#: .\elCanario\allauth\templates\socialaccount\signup.html:19
-msgid "Sign Up"
-msgstr ""
-
-#: .\elCanario\allauth\templates\account\email.html:5
-#: .\elCanario\allauth\templates\account\email.html:8
+#: .\auth\templates\account\email.html:6 .\auth\templates\account\email.html:10
 msgid "Email Addresses"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\email.html:10
+#: .\auth\templates\account\email.html:15
 msgid "The following email addresses are associated with your account:"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\email.html:24
+#: .\auth\templates\account\email.html:29
 msgid "Verified"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\email.html:26
+#: .\auth\templates\account\email.html:31
 msgid "Unverified"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\email.html:28
+#: .\auth\templates\account\email.html:34
 msgid "Primary"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\email.html:34
+#: .\auth\templates\account\email.html:40
 msgid "Make Primary"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\email.html:35
-#: .\elCanario\allauth\templates\account\email_change.html:21
+#: .\auth\templates\account\email.html:41
+#: .\auth\templates\account\email_change.html:29
 msgid "Re-send Verification"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\email.html:36
-#: .\elCanario\allauth\templates\socialaccount\connections.html:35
+#: .\auth\templates\account\email.html:42
+#: .\auth\templates\socialaccount\connections.html:35
 msgid "Remove"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\email.html:47
+#: .\auth\templates\account\email.html:50
 msgid "Add Email Address"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\email.html:52
+#: .\auth\templates\account\email.html:54
 msgid "Add Email"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\email.html:62
+#: .\auth\templates\account\email.html:62
 msgid "Do you really want to remove the selected email address?"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\email\account_already_exists_message.txt:4
+#: .\auth\templates\account\email\account_already_exists_message.txt:4
 #, python-format
 msgid ""
 "You are receiving this email because you or someone else tried to signup for "
@@ -126,23 +95,23 @@ msgid ""
 "%(password_reset_url)s"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\email\account_already_exists_subject.txt:3
+#: .\auth\templates\account\email\account_already_exists_subject.txt:3
 msgid "Account Already Exists"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\email\base_message.txt:1
+#: .\auth\templates\account\email\base_message.txt:1
 #, python-format
 msgid "Hello from %(site_name)s!"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\email\base_message.txt:5
+#: .\auth\templates\account\email\base_message.txt:5
 #, python-format
 msgid ""
 "Thank you for using %(site_name)s!\n"
 "%(site_domain)s"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\email\email_confirmation_message.txt:5
+#: .\auth\templates\account\email\email_confirmation_message.txt:5
 #, python-format
 msgid ""
 "You're receiving this email because user %(user_display)s has given your "
@@ -151,11 +120,11 @@ msgid ""
 "To confirm this is correct, go to %(activate_url)s"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\email\email_confirmation_subject.txt:3
+#: .\auth\templates\account\email\email_confirmation_subject.txt:3
 msgid "Please Confirm Your Email Address"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\email\password_reset_key_message.txt:4
+#: .\auth\templates\account\email\password_reset_key_message.txt:4
 msgid ""
 "You're receiving this email because you or someone else has requested a "
 "password reset for your user account.\n"
@@ -163,17 +132,17 @@ msgid ""
 "link below to reset your password."
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\email\password_reset_key_message.txt:9
+#: .\auth\templates\account\email\password_reset_key_message.txt:9
 #, python-format
 msgid "In case you forgot, your username is %(username)s."
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\email\password_reset_key_subject.txt:3
-#: .\elCanario\allauth\templates\account\email\unknown_account_subject.txt:3
+#: .\auth\templates\account\email\password_reset_key_subject.txt:3
+#: .\auth\templates\account\email\unknown_account_subject.txt:3
 msgid "Password Reset Email"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\email\unknown_account_message.txt:4
+#: .\auth\templates\account\email\unknown_account_message.txt:4
 #, python-format
 msgid ""
 "You are receiving this email because you or someone else has requested a\n"
@@ -186,163 +155,177 @@ msgid ""
 "If it was you, you can sign up for an account using the link below."
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\email_change.html:4
-#: .\elCanario\allauth\templates\account\email_change.html:7
+#: .\auth\templates\account\email_change.html:6
+#: .\auth\templates\account\email_change.html:10
 msgid "Email Address"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\email_change.html:11
+#: .\auth\templates\account\email_change.html:19
 msgid "The following email address is associated with your account:"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\email_change.html:16
+#: .\auth\templates\account\email_change.html:24
 msgid "Your email address is still pending verification:"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\email_change.html:27
+#: .\auth\templates\account\email_change.html:38
 msgid "Change Email Address"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\email_confirm.html:6
-#: .\elCanario\allauth\templates\account\email_confirm.html:10
+#: .\auth\templates\account\email_change.html:46
+msgid "Change Email"
+msgstr ""
+
+#: .\auth\templates\account\email_confirm.html:7
+#: .\auth\templates\account\email_confirm.html:12
 msgid "Confirm Email Address"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\email_confirm.html:17
+#: .\auth\templates\account\email_confirm.html:22
 #, python-format
 msgid ""
 "Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is an email "
 "address for user %(user_display)s."
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\email_confirm.html:21
-#: .\elCanario\allauth\templates\account\reauthenticate.html:19
+#: .\auth\templates\account\email_confirm.html:26
+#: .\auth\templates\account\reauthenticate.html:19
 msgid "Confirm"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\email_confirm.html:24
-#: .\elCanario\allauth\templates\account\messages\email_confirmation_failed.txt:2
+#: .\auth\templates\account\email_confirm.html:30
+#: .\auth\templates\account\messages\email_confirmation_failed.txt:2
 #, python-format
 msgid ""
 "Unable to confirm %(email)s because it is already confirmed by a different "
 "account."
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\email_confirm.html:31
+#: .\auth\templates\account\email_confirm.html:36
 #, python-format
 msgid ""
-"This email confirmation link expired or is invalid. Please <a href="
-"\"%(email_url)s\">issue a new email confirmation request</a>."
+"This email confirmation link expired or is invalid. Please <a class=\"btn "
+"btn-sm\" href=\"%(email_url)s\">issue a new email confirmation request</a>."
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\login.html:5
-msgid "Login"
+#: .\auth\templates\account\login.html:7 .\auth\templates\account\login.html:59
+#: .\auth\templates\mfa\authenticate.html:4
+#: .\auth\templates\mfa\authenticate.html:16
+#: .\auth\templates\socialaccount\login.html:6
+msgid "Sign In"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\login.html:28
-msgid "Welcome."
+#: .\auth\templates\account\login.html:26
+msgid "Sign up with Google"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\login.html:66
-#: .\elCanario\allauth\templates\account\password_change.html:14
+#: .\auth\templates\account\login.html:31
+msgid "OR"
+msgstr ""
+
+#: .\auth\templates\account\login.html:58
+#: .\auth\templates\account\password_change.html:14
+#: .\auth\templates\account\signup.html:72
 msgid "Forgot Password?"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\login.html:68
-msgid "Don't have an account?"
+#: .\auth\templates\account\logout.html:5
+#: .\auth\templates\account\logout.html:8
+#: .\auth\templates\account\logout.html:20
+msgid "Sign Out"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\logout.html:10
+#: .\auth\templates\account\logout.html:13
 msgid "Are you sure you want to sign out?"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\messages\cannot_delete_primary_email.txt:2
+#: .\auth\templates\account\messages\cannot_delete_primary_email.txt:2
 #, python-format
 msgid "You cannot remove your primary email address (%(email)s)."
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\messages\email_confirmation_sent.txt:2
+#: .\auth\templates\account\messages\email_confirmation_sent.txt:2
 #, python-format
 msgid "Confirmation email sent to %(email)s."
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\messages\email_confirmed.txt:2
+#: .\auth\templates\account\messages\email_confirmed.txt:2
 #, python-format
 msgid "You have confirmed %(email)s."
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\messages\email_deleted.txt:2
+#: .\auth\templates\account\messages\email_deleted.txt:2
 #, python-format
 msgid "Removed email address %(email)s."
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\messages\logged_in.txt:4
+#: .\auth\templates\account\messages\logged_in.txt:4
 #, python-format
 msgid "Successfully signed in as %(name)s."
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\messages\logged_out.txt:2
+#: .\auth\templates\account\messages\logged_out.txt:2
 msgid "You have signed out."
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\messages\password_changed.txt:2
+#: .\auth\templates\account\messages\password_changed.txt:2
 msgid "Password successfully changed."
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\messages\password_set.txt:2
+#: .\auth\templates\account\messages\password_set.txt:2
 msgid "Password successfully set."
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\messages\primary_email_set.txt:2
+#: .\auth\templates\account\messages\primary_email_set.txt:2
 msgid "Primary email address set."
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\messages\unverified_primary_email.txt:2
+#: .\auth\templates\account\messages\unverified_primary_email.txt:2
 msgid "Your primary email address must be verified."
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\password_change.html:5
-#: .\elCanario\allauth\templates\account\password_change.html:8
-#: .\elCanario\allauth\templates\account\password_change.html:13
-#: .\elCanario\allauth\templates\account\password_reset_from_key.html:4
-#: .\elCanario\allauth\templates\account\password_reset_from_key.html:7
-#: .\elCanario\allauth\templates\account\password_reset_from_key_done.html:4
-#: .\elCanario\allauth\templates\account\password_reset_from_key_done.html:7
+#: .\auth\templates\account\password_change.html:5
+#: .\auth\templates\account\password_change.html:8
+#: .\auth\templates\account\password_change.html:13
+#: .\auth\templates\account\password_reset_from_key.html:4
+#: .\auth\templates\account\password_reset_from_key.html:7
+#: .\auth\templates\account\password_reset_from_key_done.html:4
+#: .\auth\templates\account\password_reset_from_key_done.html:7
 msgid "Change Password"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\password_reset.html:6
-#: .\elCanario\allauth\templates\account\password_reset.html:10
-#: .\elCanario\allauth\templates\account\password_reset_done.html:6
-#: .\elCanario\allauth\templates\account\password_reset_done.html:9
+#: .\auth\templates\account\password_reset.html:7
+#: .\auth\templates\account\password_reset.html:11
+#: .\auth\templates\account\password_reset_done.html:7
+#: .\auth\templates\account\password_reset_done.html:12
 msgid "Password Reset"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\password_reset.html:15
+#: .\auth\templates\account\password_reset.html:21
 msgid ""
 "Forgotten your password? Enter your email address below, and we'll send you "
 "an email allowing you to reset it."
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\password_reset.html:20
+#: .\auth\templates\account\password_reset.html:29
 msgid "Reset My Password"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\password_reset.html:23
+#: .\auth\templates\account\password_reset.html:34
 msgid "Please contact us if you have any trouble resetting your password."
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\password_reset_done.html:15
+#: .\auth\templates\account\password_reset_done.html:20
 msgid ""
 "We have sent you an email. If you have not received it please check your "
 "spam folder. Otherwise contact us if you do not receive it in a few minutes."
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\password_reset_from_key.html:7
+#: .\auth\templates\account\password_reset_from_key.html:7
 msgid "Bad Token"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\password_reset_from_key.html:11
+#: .\auth\templates\account\password_reset_from_key.html:11
 #, python-format
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
@@ -350,78 +333,79 @@ msgid ""
 "a>."
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\password_reset_from_key.html:16
+#: .\auth\templates\account\password_reset_from_key.html:16
 msgid "change password"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\password_reset_from_key_done.html:8
+#: .\auth\templates\account\password_reset_from_key_done.html:8
 msgid "Your password is now changed."
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\password_set.html:5
-#: .\elCanario\allauth\templates\account\password_set.html:8
-#: .\elCanario\allauth\templates\account\password_set.html:13
+#: .\auth\templates\account\password_set.html:5
+#: .\auth\templates\account\password_set.html:8
+#: .\auth\templates\account\password_set.html:13
 msgid "Set Password"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\reauthenticate.html:5
-#: .\elCanario\allauth\templates\account\reauthenticate.html:9
+#: .\auth\templates\account\reauthenticate.html:5
+#: .\auth\templates\account\reauthenticate.html:9
 msgid "Confirm Access"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\reauthenticate.html:11
+#: .\auth\templates\account\reauthenticate.html:11
 msgid "To safeguard the security of your account, please enter your password:"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\signup.html:12
-#: .\elCanario\allauth\templates\socialaccount\signup.html:5
-msgid "Signup"
+#: .\auth\templates\account\signup.html:7
+#: .\auth\templates\account\signup.html:11
+#: .\auth\templates\socialaccount\signup.html:8
+#: .\auth\templates\socialaccount\signup.html:19
+msgid "Sign Up"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\signup.html:64
-msgid "Already have an account?"
+#: .\auth\templates\account\signup.html:18
+#, python-format
+msgid ""
+"Already have an account? Then please <a class=\"btn btn-sm text-sm font-"
+"normal lowercase\" href=\"%(login_url)s\">sign in</a> ."
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\signup.html:64
-msgid "Log In"
-msgstr ""
-
-#: .\elCanario\allauth\templates\account\signup_closed.html:5
-#: .\elCanario\allauth\templates\account\signup_closed.html:8
+#: .\auth\templates\account\signup_closed.html:5
+#: .\auth\templates\account\signup_closed.html:8
 msgid "Sign Up Closed"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\signup_closed.html:10
+#: .\auth\templates\account\signup_closed.html:10
 msgid "We are sorry, but the sign up is currently closed."
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\snippets\already_logged_in.html:5
+#: .\auth\templates\account\snippets\already_logged_in.html:5
 msgid "Note"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\snippets\already_logged_in.html:5
+#: .\auth\templates\account\snippets\already_logged_in.html:5
 #, python-format
 msgid "you are already logged in as %(user_display)s."
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\snippets\warn_no_email.html:3
+#: .\auth\templates\account\snippets\warn_no_email.html:3
 msgid "Warning:"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\snippets\warn_no_email.html:3
+#: .\auth\templates\account\snippets\warn_no_email.html:3
 msgid ""
 "You currently do not have any email address set up. You should really add an "
 "email address so you can receive notifications, reset your password, etc."
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\verification_sent.html:5
-#: .\elCanario\allauth\templates\account\verification_sent.html:8
-#: .\elCanario\allauth\templates\account\verified_email_required.html:5
-#: .\elCanario\allauth\templates\account\verified_email_required.html:8
+#: .\auth\templates\account\verification_sent.html:5
+#: .\auth\templates\account\verification_sent.html:8
+#: .\auth\templates\account\verified_email_required.html:5
+#: .\auth\templates\account\verified_email_required.html:8
 msgid "Verify Your Email Address"
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\verification_sent.html:10
+#: .\auth\templates\account\verification_sent.html:10
 msgid ""
 "We have sent an email to you for verification. Follow the link provided to "
 "finalize the signup process. If you do not see the verification email in "
@@ -429,14 +413,14 @@ msgid ""
 "receive the verification email within a few minutes."
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\verified_email_required.html:12
+#: .\auth\templates\account\verified_email_required.html:12
 msgid ""
 "This part of the site requires us to verify that\n"
 "you are who you claim to be. For this purpose, we require that you\n"
 "verify ownership of your email address. "
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\verified_email_required.html:16
+#: .\auth\templates\account\verified_email_required.html:16
 msgid ""
 "We have sent an email to you for\n"
 "verification. Please click on the link inside that email. If you do not see "
@@ -445,57 +429,55 @@ msgid ""
 "contact us if you do not receive it within a few minutes."
 msgstr ""
 
-#: .\elCanario\allauth\templates\account\verified_email_required.html:20
+#: .\auth\templates\account\verified_email_required.html:20
 #, python-format
 msgid ""
 "<strong>Note:</strong> you can still <a href=\"%(email_url)s\">change your "
 "email address</a>."
 msgstr ""
 
-#: .\elCanario\allauth\templates\mfa\authenticate.html:7
-#: .\elCanario\allauth\templates\mfa\index.html:4
-#: .\elCanario\allauth\templates\mfa\index.html:7
+#: .\auth\templates\mfa\authenticate.html:7 .\auth\templates\mfa\index.html:4
+#: .\auth\templates\mfa\index.html:7
 msgid "Two-Factor Authentication"
 msgstr ""
 
-#: .\elCanario\allauth\templates\mfa\authenticate.html:9
+#: .\auth\templates\mfa\authenticate.html:9
 msgid ""
 "Your account is protected by two-factor authentication. Please enter an "
 "authenticator code:"
 msgstr ""
 
-#: .\elCanario\allauth\templates\mfa\index.html:9
-#: .\elCanario\allauth\templates\mfa\totp\base.html:4
+#: .\auth\templates\mfa\index.html:9 .\auth\templates\mfa\totp\base.html:4
 msgid "Authenticator App"
 msgstr ""
 
-#: .\elCanario\allauth\templates\mfa\index.html:11
+#: .\auth\templates\mfa\index.html:11
 msgid "Authentication using an authenticator app is active."
 msgstr ""
 
-#: .\elCanario\allauth\templates\mfa\index.html:14
-#: .\elCanario\allauth\templates\mfa\totp\deactivate_form.html:11
+#: .\auth\templates\mfa\index.html:14
+#: .\auth\templates\mfa\totp\deactivate_form.html:11
 msgid "Deactivate"
 msgstr ""
 
-#: .\elCanario\allauth\templates\mfa\index.html:18
+#: .\auth\templates\mfa\index.html:18
 msgid "An authenticator app is not active."
 msgstr ""
 
-#: .\elCanario\allauth\templates\mfa\index.html:21
-#: .\elCanario\allauth\templates\mfa\totp\activate_form.html:16
+#: .\auth\templates\mfa\index.html:21
+#: .\auth\templates\mfa\totp\activate_form.html:16
 msgid "Activate"
 msgstr ""
 
-#: .\elCanario\allauth\templates\mfa\index.html:27
-#: .\elCanario\allauth\templates\mfa\recovery_codes\base.html:4
-#: .\elCanario\allauth\templates\mfa\recovery_codes\generate.html:4
-#: .\elCanario\allauth\templates\mfa\recovery_codes\index.html:4
+#: .\auth\templates\mfa\index.html:27
+#: .\auth\templates\mfa\recovery_codes\base.html:4
+#: .\auth\templates\mfa\recovery_codes\generate.html:4
+#: .\auth\templates\mfa\recovery_codes\index.html:4
 msgid "Recovery Codes"
 msgstr ""
 
-#: .\elCanario\allauth\templates\mfa\index.html:30
-#: .\elCanario\allauth\templates\mfa\recovery_codes\index.html:6
+#: .\auth\templates\mfa\index.html:30
+#: .\auth\templates\mfa\recovery_codes\index.html:6
 #, python-format
 msgid ""
 "There is %(unused_count)s out of %(total_count)s recovery codes available."
@@ -504,128 +486,128 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: .\elCanario\allauth\templates\mfa\index.html:34
+#: .\auth\templates\mfa\index.html:34
 msgid "View codes"
 msgstr ""
 
-#: .\elCanario\allauth\templates\mfa\index.html:37
-#: .\elCanario\allauth\templates\mfa\recovery_codes\index.html:16
+#: .\auth\templates\mfa\index.html:37
+#: .\auth\templates\mfa\recovery_codes\index.html:16
 msgid "Download codes"
 msgstr ""
 
-#: .\elCanario\allauth\templates\mfa\index.html:40
-#: .\elCanario\allauth\templates\mfa\recovery_codes\index.html:20
+#: .\auth\templates\mfa\index.html:40
+#: .\auth\templates\mfa\recovery_codes\index.html:20
 msgid "Generate new codes"
 msgstr ""
 
-#: .\elCanario\allauth\templates\mfa\index.html:44
+#: .\auth\templates\mfa\index.html:44
 msgid "No recovery codes set up."
 msgstr ""
 
-#: .\elCanario\allauth\templates\mfa\messages\recovery_codes_generated.txt:2
+#: .\auth\templates\mfa\messages\recovery_codes_generated.txt:2
 msgid "A new set of recovery codes has been generated."
 msgstr ""
 
-#: .\elCanario\allauth\templates\mfa\messages\totp_activated.txt:2
+#: .\auth\templates\mfa\messages\totp_activated.txt:2
 msgid "Authenticator app activated."
 msgstr ""
 
-#: .\elCanario\allauth\templates\mfa\messages\totp_deactivated.txt:2
+#: .\auth\templates\mfa\messages\totp_deactivated.txt:2
 msgid "Authenticator app deactivated."
 msgstr ""
 
-#: .\elCanario\allauth\templates\mfa\recovery_codes\generate.html:6
+#: .\auth\templates\mfa\recovery_codes\generate.html:6
 msgid ""
 "You are about to generate a new set of recovery codes for your account. This "
 "action will invalidate your existing codes. Are you sure?"
 msgstr ""
 
-#: .\elCanario\allauth\templates\mfa\recovery_codes\generate.html:11
+#: .\auth\templates\mfa\recovery_codes\generate.html:11
 msgid "Generate"
 msgstr ""
 
-#: .\elCanario\allauth\templates\mfa\totp\activate_form.html:4
+#: .\auth\templates\mfa\totp\activate_form.html:4
 msgid "Activate Authenticator App"
 msgstr ""
 
-#: .\elCanario\allauth\templates\mfa\totp\activate_form.html:9
+#: .\auth\templates\mfa\totp\activate_form.html:9
 msgid "Authenticator secret"
 msgstr ""
 
-#: .\elCanario\allauth\templates\mfa\totp\deactivate_form.html:4
+#: .\auth\templates\mfa\totp\deactivate_form.html:4
 msgid "Deactivate Authenticator App"
 msgstr ""
 
-#: .\elCanario\allauth\templates\mfa\totp\deactivate_form.html:6
+#: .\auth\templates\mfa\totp\deactivate_form.html:6
 msgid ""
 "You are about to deactivate authenticator app based authentication. Are you "
 "sure?"
 msgstr ""
 
-#: .\elCanario\allauth\templates\openid\login.html:9
+#: .\auth\templates\openid\login.html:9
 msgid "OpenID Sign In"
 msgstr ""
 
-#: .\elCanario\allauth\templates\socialaccount\authentication_error.html:5
-#: .\elCanario\allauth\templates\socialaccount\authentication_error.html:8
+#: .\auth\templates\socialaccount\authentication_error.html:5
+#: .\auth\templates\socialaccount\authentication_error.html:8
 msgid "Social Network Login Failure"
 msgstr ""
 
-#: .\elCanario\allauth\templates\socialaccount\authentication_error.html:10
+#: .\auth\templates\socialaccount\authentication_error.html:10
 msgid ""
 "An error occurred while attempting to login via your social network account."
 msgstr ""
 
-#: .\elCanario\allauth\templates\socialaccount\connections.html:5
-#: .\elCanario\allauth\templates\socialaccount\connections.html:8
+#: .\auth\templates\socialaccount\connections.html:5
+#: .\auth\templates\socialaccount\connections.html:8
 msgid "Account Connections"
 msgstr ""
 
-#: .\elCanario\allauth\templates\socialaccount\connections.html:11
+#: .\auth\templates\socialaccount\connections.html:11
 msgid ""
 "You can sign in to your account using any of the following third party "
 "accounts:"
 msgstr ""
 
-#: .\elCanario\allauth\templates\socialaccount\connections.html:43
+#: .\auth\templates\socialaccount\connections.html:43
 msgid ""
 "You currently have no social network accounts connected to this account."
 msgstr ""
 
-#: .\elCanario\allauth\templates\socialaccount\connections.html:46
+#: .\auth\templates\socialaccount\connections.html:46
 msgid "Add a 3rd Party Account"
 msgstr ""
 
-#: .\elCanario\allauth\templates\socialaccount\login.html:8
+#: .\auth\templates\socialaccount\login.html:12
 #, python-format
 msgid "Connect %(provider)s"
 msgstr ""
 
-#: .\elCanario\allauth\templates\socialaccount\login.html:10
+#: .\auth\templates\socialaccount\login.html:16
 #, python-format
 msgid "You are about to connect a new third party account from %(provider)s."
 msgstr ""
 
-#: .\elCanario\allauth\templates\socialaccount\login.html:12
+#: .\auth\templates\socialaccount\login.html:21
 #, python-format
 msgid "Sign In Via %(provider)s"
 msgstr ""
 
-#: .\elCanario\allauth\templates\socialaccount\login.html:14
+#: .\auth\templates\socialaccount\login.html:24
 #, python-format
 msgid "You are about to sign in using a third party account from %(provider)s."
 msgstr ""
 
-#: .\elCanario\allauth\templates\socialaccount\login.html:19
+#: .\auth\templates\socialaccount\login.html:29
 msgid "Continue"
 msgstr ""
 
-#: .\elCanario\allauth\templates\socialaccount\login_cancelled.html:5
-#: .\elCanario\allauth\templates\socialaccount\login_cancelled.html:9
+#: .\auth\templates\socialaccount\login_cancelled.html:5
+#: .\auth\templates\socialaccount\login_cancelled.html:9
 msgid "Login Cancelled"
 msgstr ""
 
-#: .\elCanario\allauth\templates\socialaccount\login_cancelled.html:13
+#: .\auth\templates\socialaccount\login_cancelled.html:13
 #, python-format
 msgid ""
 "You decided to cancel logging in to our site using one of your existing "
@@ -633,21 +615,29 @@ msgid ""
 "\">sign in</a>."
 msgstr ""
 
-#: .\elCanario\allauth\templates\socialaccount\messages\account_connected.txt:2
+#: .\auth\templates\socialaccount\messages\account_connected.txt:2
 msgid "The social account has been connected."
 msgstr ""
 
-#: .\elCanario\allauth\templates\socialaccount\messages\account_connected_other.txt:2
+#: .\auth\templates\socialaccount\messages\account_connected_other.txt:2
 msgid "The social account is already connected to a different account."
 msgstr ""
 
-#: .\elCanario\allauth\templates\socialaccount\messages\account_disconnected.txt:2
+#: .\auth\templates\socialaccount\messages\account_disconnected.txt:2
 msgid "The social account has been disconnected."
 msgstr ""
 
-#: .\elCanario\allauth\templates\socialaccount\signup.html:10
+#: .\auth\templates\socialaccount\signup.html:5
+msgid "Signup"
+msgstr ""
+
+#: .\auth\templates\socialaccount\signup.html:10
 #, python-format
 msgid ""
 "You are about to use your %(provider_name)s account to login to\n"
 "%(site_name)s. As a final step, please complete the following form:"
+msgstr ""
+
+#: .\auth\templates\socialaccount\snippets\provider_list.html:21
+msgid "Sign up with"
 msgstr ""

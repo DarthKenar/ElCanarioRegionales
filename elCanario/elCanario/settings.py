@@ -213,10 +213,6 @@ USE_TZ = True
 
 LOCALE_PATHS = (BASE_DIR / 'locale/',)
 
-LANGUAGES = (
-    ('en', _('English')),
-    ('es', _('Spanish')),
-    )
 
 # Allauth
 
@@ -263,3 +259,11 @@ EMAIL_HOST_USER = DEFAULT_FROM_EMAIL = "federico.vega2222@gmail.com"
 
 if DEBUG:
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+#ROSETTA
+ROSETTA_STORAGE_CLASS = 'rosetta.storage.CacheRosettaStorage'
+LANGUAGES = (
+    ('en', _('English')),
+    ('es', _('Spanish')),
+    )
+ROSETTA_LOGIN_URL = LOGIN_URL

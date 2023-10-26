@@ -353,7 +353,7 @@ def articles_category_create(request, art_id=None):
     if any_error == False:
         category_to_save = Category(name=category_name)
         category_to_save.save()
-        message = MessageLog(info = _(f"Se creo una nueva categoría con el nombre de '{category_to_save.name}'"))
+        message = MessageLog(info = _(f"New category whit name '{category_to_save.name}' has been created."))
         message.save()
         context['category_to_update'] = category_to_save
         context["answer"] = _(f"The category {category_to_save.name} has been successfully saved!")
@@ -383,7 +383,7 @@ def articles_category_value_create(request,cat_id, art_id=None):
                             category_id = category_to_update,
                             name = value_name)
         value_to_update.save()
-        message = MessageLog(info = _(f"Se creo un nuevo valor en la categoría '{category_to_update.name}' con el nombre de '{value_to_update.name}'"))
+        message = MessageLog(info = _(f"A new value for the category '{category_to_update.name}'has been created whit the name '{value_to_update.name}'"))
         message.save()
         context['answer'] = _(f'The value {value_name} was saved correctly for the category: {category_to_update.name}')
         context['values'] = Value.objects.filter(category_id = category_to_update)
