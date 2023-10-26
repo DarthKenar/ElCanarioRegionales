@@ -21,7 +21,7 @@
     height: 0%;
   }
 } */
-div.vanish {
+div.vanish.vanish-trigger {
   animation: fadeout .3s forwards;
 }
 
@@ -39,4 +39,10 @@ div.vanish {
 @keyframes fadein {
   from {opacity: 0;}
   to {opacity: 1;}
+}
+
+.card-article-border{
+  border-radius: var(--rounded-btn, 0.5rem/* 8px */);
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
 }

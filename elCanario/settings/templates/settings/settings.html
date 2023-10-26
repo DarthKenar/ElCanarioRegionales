@@ -9,19 +9,24 @@
 {% block section_content_upper %}
 {% endblock section_content_upper %}
 {% block title_section_content_under %}
-<div class="flex items-center justify-between pb-3 text-xl">
-    <!-- Latest Reports -->
-    <div class="flex items-center pb-3 text-xl">
-        <i class="mr-3 fas fa-list"></i>
-        <span>{% translate 'My Account' %}</span>
-    </div>
-    <div class=" flex gap-2">
-        {% theme_switch %}
-    </div>
-</div>
 {% endblock title_section_content_under %}
 
 {% block section_content_under %}
-    {% include 'languages.html' %}
+    <section class="flex justify-center items-center">
+        <div class="flex flex-col max-lg:w-full lg:w-5/6">
+            <div class="grid h-40 card bg-base-300 rounded-box place-items-center">
+                <h2 class="text-3xl p-2">{% translate 'Change Theme' %}</h2>
+                {% theme_switch %}
+            </div> 
+            <div class="divider"></div> 
+            <div class="grid h-40 card bg-base-300 rounded-box place-items-center">
+                <h2 class="text-3xl p-2">{% translate 'Change Language' %}</h2>
+                {% include 'languages.html' %}
+            </div>
+        </div>
+    </section>
+
+    
+    
 {% endblock section_content_under %}
 

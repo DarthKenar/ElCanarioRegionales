@@ -21,7 +21,10 @@
         <div class="grid grid-cols-2 py-3 border-t border-base-content p-4">
           <div class="flex items-center">
             <div class="relative">
-              <h2 class="text-base font-medium line-clamp-1 md:text-lg"><b>{{name}}</b></h2>
+              <div class="flex items-center justify-center">
+                <svg class="mr-2 mt-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                <h2 class="text-base font-medium line-clamp-1 md:text-lg"><b>{{name}}</b></h2>
+              </div>
               <p class="mt-2 text-sm line-clamp-1">Tel. {{phone_number}}</p>
             </div>
           </div>
@@ -35,7 +38,7 @@
         <div class="relative grid grid-cols-2 grid-rows-2 gap-4 p-4 break-words border-t border-b border-base-content">
           {% for article in articles_cart %}
             <p class="flex items-center xl:flex-row xl:items-center text-ellipsis">
-                <img width="24" height="24" src="https://img.icons8.com/fluency-systems-regular/48/arrow.png" alt="arrow"/>
+              <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive max-md:hidden"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
                 <span class="mt-0">{{article}}</span>
             </p> 
           {% endfor %}
