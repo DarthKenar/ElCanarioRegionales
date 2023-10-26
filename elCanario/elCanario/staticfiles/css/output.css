@@ -5209,6 +5209,10 @@ details.collapse summary::-webkit-details-marker {
   flex-shrink: 0;
 }
 
+.flex-grow {
+  flex-grow: 1;
+}
+
 .grow {
   flex-grow: 1;
 }
@@ -7243,6 +7247,31 @@ details.collapse summary::-webkit-details-marker {
       --tw-bg-opacity: 1;
       background-color: hsl(var(--b3) / var(--tw-bg-opacity));
     }
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:divider-horizontal {
+    flex-direction: column;
+  }
+
+  .lg\:divider-horizontal:before {
+    height: 100%;
+    width: 0.125rem;
+  }
+
+  .lg\:divider-horizontal:after {
+    height: 100%;
+    width: 0.125rem;
+  }
+
+  .lg\:divider-horizontal {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    height: auto;
+    width: 1rem;
   }
 }
 
