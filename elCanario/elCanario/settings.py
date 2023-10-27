@@ -243,12 +243,33 @@ PWA_APP_NAME = "EL CANARIO REGIONALES"
 PWA_APP_DESCRIPTION = "Contact me: federico_vega22@hotmail.com"
 PWA_APP_THEME_COLOR = '#991b1b'
 PWA_APP_BACKGROUND_COLOR = '#fde68a'
+PWA_APP_DEBUG_MODE = False
 
 PWA_APP_ICONS = [
     {
-        "src": "static/img/elcanarioregionales-logo-160x160.png",
-        "sizes": "160x160"
-    }
+        "src": "/static/img/pwa/elcanarioregionales-logo-16x16.png",
+        "sizes": "16x16"
+    },
+    {
+        "src": "/static/img/pwa/elcanarioregionales-logo-32x32.png",
+        "sizes": "32x32"
+    },
+    {
+        "src": "/static/img/pwa/elcanarioregionales-logo-48x48.png",
+        "sizes": "48x48"
+    },
+    {
+        "src": "/static/img/pwa/elcanarioregionales-logo-144x144.png",
+        "sizes": "144x144"
+    },
+    {
+        "src": "/static/img/pwa/elcanarioregionales-logo-192x192.png",
+        "sizes": "192x192"
+    },
+    {
+        "src": "/static/img/pwa/elcanarioregionales-logo-512x512.png",
+        "sizes": "512x512"
+    },
 ]
 
 PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR,'serviceworker.js')

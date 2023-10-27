@@ -8,7 +8,7 @@
             <tr>
                 <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">{% translate 'Message Info' %}</th>
                 <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">{% translate 'Date' %}</th>
-                <th class="text-left py-3 px-4 uppercase font-semibold text-sm">{% translate 'Made by' %}</th>
+                <th class="text-left py-3 px-4 uppercase font-semibold text-sm max-sm:hidden">{% translate 'Made by' %}</th>
             </tr>
         </thead>
         <tbody>
@@ -17,7 +17,7 @@
                 <tr class="hover:bg-base-300 {% if forloop.counter|divisibleby:2  %}bg-base-200{% endif %}">
                     <td class="w-1/3 text-left py-3 px-4" id="{{message.info}}">{{message.info}}</td>
                     <td class="w-1/3 text-left py-3 px-4" id="{{message.date}}">{{message.date}}</td>
-                    <td class="text-left py-3 px-4 hover:text-accent" id="{{message.date}}">{% translate 'UserName' %}</td>
+                    <td class="text-left py-3 px-4 hover:text-info max-sm:hidden" id="{{message.date}}">{% translate 'UserName' %}</td>
                 </tr>
             {% endfor %}
         </tbody>

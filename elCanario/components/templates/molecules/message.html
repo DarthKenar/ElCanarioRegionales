@@ -10,14 +10,12 @@
     {% var class="bg-warning-100 text-warning-700" %} 
 {% elif type == "info" %} 
     {% var class="bg-info-100 text-info-700" %}
-{% elif type == "light" %} 
-    {% var class="bg-light-100 text-light-700" %}
-{% elif type == "dark" %} 
-    {% var class="bg-dark-100 text-dark-700" %}
+{% elif type == "base" %} 
+    {% var class="bg-base-300 text-base-content" %}
 {% endif %}  
 
 <div
-  class="relative m-4 rounded-lg  px-6 py-5 text-base {{class}} appear vanish-trigger w-full"
+  class="relative m-4 rounded-lg px-6 py-5 text-base {{class}} appear vanish-trigger w-full"
   role="alert" style="border-radius: var(--rounded-btn, 0.5rem/* 8px */);">
   {{children}}
   <button type="button" class="absolute right-0 px-4">
