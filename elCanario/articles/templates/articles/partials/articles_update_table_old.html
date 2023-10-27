@@ -1,0 +1,61 @@
+{% load i18n %}
+<div>
+  
+  <!--Name input-->
+
+  <!--Stock input-->
+
+
+  {% for category in categories %}
+
+    {% comment  %}
+      <form action="{% url 'articles:category_update' external_link="True" cat_id=category.id art_id=article_to_update.id %}" method="GET">
+        <button type="submit" >
+        </button>
+      </form>
+    {% endcomment %}
+
+
+  <div class="grid grid-cols-2 gap-4">
+    <!--Buy price input-->
+    <div class="relative" data-te-input-wrapper-init>
+      <input
+        type="text" name="article_buy_price_input" hx-get="{% url 'articles:create_calculator' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#article_sell_price_output" hx-include="[name='article_increase_input']" required value="{{article_to_update.buy_price}}"
+        class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+        id="article_buy_price_input"
+        placeholder="{% translate 'Buy Price' %}" />
+      <label
+        for="article_buy_price_input"
+        class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
+        >{% translate 'Buy Price' %}
+      </label>
+    </div>
+
+    <!--Increase percent input-->
+    <div class="relative" data-te-input-wrapper-init>
+      <input
+        type="text" name="article_increase_input" hx-get="{% url 'articles:create_calculator' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#article_sell_price_output" hx-include="[name='article_buy_price_input']" required value="{{article_to_update.increase}}"
+        class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-0 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+        id="article_increase_input"
+        placeholder="{% translate 'Increase' %}" />
+      <label
+        for="article_increase_input"
+        class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
+        >{% translate 'Increase' %}
+      </label>
+    </div>
+  </div>
+
+  <!--Sell price input-->
+  {% include 'articles_create_calculator.html' %}
+
+  <!--Submit button-->
+  <button
+    hx-get="{% url 'articles:update_confirm' id=article_to_update.id %}" hx-trigger="click" hx-include="#article_name_input,[name^='category-'],#article_buy_price_input, #article_increase_input, #article_sell_price_input, #article_stock_input" hx-target="#article_update_answer" hx-swap="outerHTML"
+    class="inline-block w-full rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
+    data-te-ripple-init
+    data-te-ripple-color="light">
+    {% translate 'Save' %}
+  </button>
+</div>
+
