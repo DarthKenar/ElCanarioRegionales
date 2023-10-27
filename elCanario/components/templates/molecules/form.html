@@ -1,28 +1,46 @@
 {% load i18n %}
 {% load custom_filters %}
-<form class="min-h-screen flex items-center justify-center" id="form_{{action}}" method="POST">
-    {% csrf_token %}
-    <div class="max-w-md w-full p-6 bg-white rounded-lg shadow-lg">
-        <h1 class="text-2xl font-semibold text-center text-gray-500 mt-8 mb-6">{{action|title}} {{object_type|title}}</h1>
+<div class="grid flex-grow h-auto card bg-base-300 rounded-box place-items-center py-10 max-sm:px-1 sm:px-4">
+    <form class="w-full" id="form_{{action}}" method="POST">
+        {% csrf_token %}
+        <div class="w-full text-center">
+
+            {% comment  %}
+                {% if action == "create" %}
+                    {% if object_type == "order" %}
+
+                    {% elif object_type == "customer" %}
+
+                    {% endif %}
+                {% elif action == "update" %}
+                    {% if object_type == "order" %}
+
+                    {% elif object_type == "customer" %}
+
+                    {% endif %}
+                {% endif %}
+            {% endcomment %}
+
+            <h1 class="text-2xl">{{action|title}} {{object_type|title}}</h1>
             {% for field in form %}
-                <div class="mb-4">
-                    <label for="id_{{field.label|lower|replace_spaces_with_underscore}}" class="block mb-2 text-sm text-gray-600">{{field.label}}</label>
-                    {{ field }}
-                    {% for error in field.errors %}
-                        {% #message type="danger"  %}
-                            {{error}}
-                        {% /message %}
-                    {% endfor %}
-                </div>
+            <div class="w-full py-4 text-left">
+                <label class="text-left w-full" for="id_{{field.label|lower|replace_spaces_with_underscore}}">{{field.label}}</label>
+                {{ field }}
+                {% for error in field.errors %}
+                    {% #message type="danger"  %}
+                        {{error}}
+                    {% /message %}
+                {% endfor %}
+            </div>
             {% endfor %}
-            <div class="w-full flex justify-end">
-                <button type="submit" class="btn" {% if 'customers' in request.path %} {% if action == "create"  %} hx-post={% url "customers:create" %} {% elif action == "update" %} hx-post={% url "customers:update" id %} {% endif %} {% elif 'orders' in request.path %} {% if action == "create" %} hx-post={% url 'orders:create' %} {% elif action == "update" %} hx-post={% url "orders:update" id %} {% endif %} {% endif %} hx-swap="outerHTML" hx-trigger="click" hx-target="#form_{{action}}">Enviar<button>
+            <div class="w-full flex justify-center items-center">
+                <button type="submit" class="btn btn-success" {% if 'customers' in request.path %} {% if action == "create"  %} hx-post={% url "customers:create" %} {% elif action == "update" %} hx-post={% url "customers:update" id %} {% endif %} {% elif 'orders' in request.path %} {% if action == "create" %} hx-post={% url 'orders:create' %} {% elif action == "update" %} hx-post={% url "orders:update" id %} {% endif %} {% endif %} hx-swap="outerHTML" hx-trigger="click" hx-target="#form_{{action}}">Enviar<button>
             </div>
             {% if 'success' in request.GET %}
                 {% #message type="success" %}
                     {% translate "Correctly" %} {{action}}
                 {% /message %}
             {% endif %}
-        {{action}}
-    </div>
-</form>
+        </div>
+    </form>
+</div>

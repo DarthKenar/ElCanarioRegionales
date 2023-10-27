@@ -6,7 +6,7 @@
 {% endblock title_section %}
 
 {% block title_section_content_upper %}
-    <h1 class="text-3xl text-black pb-6">{% translate 'Search Customer' %}:</h1>
+    <h1 class="text-3xl">{% translate 'Search Customer' %}:</h1>
 {% endblock title_section_content_upper %}
 {% block section_content_upper %}
     {% include 'customers_search_header.html'%}
@@ -16,21 +16,18 @@
     <div class="text-xl pb-3 flex items-center justify-between">
         <!-- Latest Reports -->
         <div class="text-xl pb-3 flex items-center">
-            <i class="fas fa-list mr-3"></i>
             <span>{% translate 'Create Customer Section' %}</span>
         </div>
     </div>
 {% endblock title_section_content_under %}
 {% block section_content_under %}
-    <div id="articles_create_answer">
-        {% #section type="full" %}
-            {% var url="customers:create" %}
-            {% var object_type="customer" %}
-            {% var form=form %}
-            {% var request=request %}
-            {% var action="create" %}
-            {% include 'form.html' %}
-        {% /section %}
+    <div class="mx-auto max-w-md">
+        {% var url="customers:create" %}
+        {% var object_type="customer" %}
+        {% var form=form %}
+        {% var request=request %}
+        {% var action="create" %}
+        {% include 'form.html' %}
     </div>
 
 {% endblock section_content_under %}

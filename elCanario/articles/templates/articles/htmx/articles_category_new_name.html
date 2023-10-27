@@ -1,7 +1,6 @@
 <form hx-post="{% url 'articles:category_update_name' cat_id=category_to_update.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-include="[name='category_name_update']">
     <div>
-        <span
-          >{% translate 'New name:' %}</span
+        <span>{% translate 'New name:' %}</span
         >
         <input
           type="text"
