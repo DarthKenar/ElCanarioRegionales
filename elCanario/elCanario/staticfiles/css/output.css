@@ -6483,10 +6483,6 @@ details.collapse summary::-webkit-details-marker {
   text-align: right;
 }
 
-.text-start {
-  text-align: start;
-}
-
 .align-middle {
   vertical-align: middle;
 }

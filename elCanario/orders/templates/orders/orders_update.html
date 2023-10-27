@@ -22,7 +22,7 @@
     </div>
 {% endblock title_section_content_under %}
 {% block section_content_under %}
-    {% #section type="full" %}
+    <div class="mx-auto max-w-md">
         {% var id=object.id %}
         {% var url="orders:update" %}
         {% var object_type="order" %}
@@ -30,5 +30,5 @@
         {% var request=request %}
         {% var action="update" %}
         {% include 'form.html' %}
-    {% /section %}
+    </div>
 {% endblock section_content_under %}
