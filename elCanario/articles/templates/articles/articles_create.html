@@ -22,16 +22,14 @@
     </div>
 {% endblock title_section_content_under %}
 {% block section_content_under %}
-    {% #section type="full" %}
-        <div class="mx-auto max-w-md" id="article_create_answer">
-            {% var url="orders:create" %}
-            {% var object_type="order" %}
-            {% var form=form %}
-            {% var request=request %}
-            {% var action="create" %}
-            {% include 'articles_create_table.html' %}
-        </div>
-    {% /section %}
+    <div class="mx-auto max-w-md" id="article_create_answer">
+        {% var url="orders:create" %}
+        {% var object_type="order" %}
+        {% var form=form %}
+        {% var request=request %}
+        {% var action="create" %}
+        {% include 'articles_create_table.html' %}
+    </div>
 {% endblock section_content_under %}
 
     

@@ -1317,6 +1317,19 @@ html {
   opacity: 0;
 }
 
+.collapse-content {
+  visibility: hidden;
+  grid-column-start: 1;
+  grid-row-start: 2;
+  min-height: 0px;
+  transition: visibility 0.2s;
+  transition: padding 0.2s ease-out,
+    background-color 0.2s ease-out;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  cursor: unset;
+}
+
 .collapse[open],
 .collapse-open,
 .collapse:focus:not(.collapse-close) {
@@ -2780,6 +2793,46 @@ details.collapse summary::-webkit-details-marker {
   outline-color: hsl(var(--bc) / 1);
 }
 
+.collapse-arrow > .collapse-title:after {
+  position: absolute;
+  display: block;
+  height: 0.5rem;
+  width: 0.5rem;
+  --tw-translate-y: -100%;
+  --tw-rotate: 45deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  transition-duration: 150ms;
+  transition-duration: 0.2s;
+  top: 50%;
+  right: 1.4rem;
+  content: "";
+  transform-origin: 75% 75%;
+  box-shadow: 2px 2px;
+  pointer-events: none;
+}
+
+[dir="rtl"] .collapse-arrow > .collapse-title:after {
+  --tw-rotate: -45deg;
+}
+
+.collapse-plus > .collapse-title:after {
+  position: absolute;
+  display: block;
+  height: 0.5rem;
+  width: 0.5rem;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  transition-duration: 300ms;
+  top: 0.9rem;
+  right: 1.4rem;
+  content: "+";
+  pointer-events: none;
+}
+
 .collapse:not(.collapse-open):not(.collapse-close) > input[type="checkbox"],
 .collapse:not(.collapse-open):not(.collapse-close) > input[type="radio"]:not(:checked),
 .collapse:not(.collapse-open):not(.collapse-close) > .collapse-title {
@@ -2788,6 +2841,10 @@ details.collapse summary::-webkit-details-marker {
 
 .collapse:focus:not(.collapse-open):not(.collapse-close):not(.collapse[open]) > .collapse-title {
   cursor: unset;
+}
+
+.collapse-title {
+  position: relative;
 }
 
 :where(.collapse > input[type="checkbox"]),
@@ -2878,6 +2935,13 @@ details.collapse summary::-webkit-details-marker {
 .label-text {
   font-size: 0.875rem;
   line-height: 1.25rem;
+  --tw-text-opacity: 1;
+  color: hsl(var(--bc) / var(--tw-text-opacity));
+}
+
+.label-text-alt {
+  font-size: 0.75rem;
+  line-height: 1rem;
   --tw-text-opacity: 1;
   color: hsl(var(--bc) / var(--tw-text-opacity));
 }
@@ -3708,6 +3772,10 @@ details.collapse summary::-webkit-details-marker {
 
 .btn-wide {
   width: 16rem;
+}
+
+.btn-block {
+  width: 100%;
 }
 
 .btn-square:where(.btn-xs) {
@@ -5991,11 +6059,6 @@ details.collapse summary::-webkit-details-marker {
   background-color: inherit;
 }
 
-.bg-neutral-100 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(245 245 245 / var(--tw-bg-opacity));
-}
-
 .bg-neutral-600 {
   --tw-bg-opacity: 1;
   background-color: rgb(82 82 82 / var(--tw-bg-opacity));
@@ -6354,10 +6417,6 @@ details.collapse summary::-webkit-details-marker {
 
 .pl-2 {
   padding-left: 0.5rem;
-}
-
-.pl-4 {
-  padding-left: 1rem;
 }
 
 .pl-\[1\.5rem\] {
@@ -6724,6 +6783,11 @@ details.collapse summary::-webkit-details-marker {
   color: hsl(var(--b1) / var(--tw-text-opacity));
 }
 
+.text-base-200 {
+  --tw-text-opacity: 1;
+  color: hsl(var(--b2) / var(--tw-text-opacity));
+}
+
 .text-base-content {
   --tw-text-opacity: 1;
   color: hsl(var(--bc) / var(--tw-text-opacity));
@@ -6877,11 +6941,6 @@ details.collapse summary::-webkit-details-marker {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.text-base-200 {
-  --tw-text-opacity: 1;
-  color: hsl(var(--b2) / var(--tw-text-opacity));
-}
-
 .underline {
   text-decoration-line: underline;
 }
@@ -6916,10 +6975,6 @@ details.collapse summary::-webkit-details-marker {
 
 .opacity-50 {
   opacity: 0.5;
-}
-
-.opacity-75 {
-  opacity: 0.75;
 }
 
 .opacity-\[\.53\] {
@@ -7564,11 +7619,6 @@ details.collapse summary::-webkit-details-marker {
 .hover\:text-accent:hover {
   --tw-text-opacity: 1;
   color: hsl(var(--a) / var(--tw-text-opacity));
-}
-
-.hover\:text-gray-300:hover {
-  --tw-text-opacity: 1;
-  color: rgb(209 213 219 / var(--tw-text-opacity));
 }
 
 .hover\:text-primary:hover {
@@ -8830,6 +8880,10 @@ details.collapse summary::-webkit-details-marker {
     margin-right: 0.25rem;
   }
 
+  .max-sm\:mr-1 {
+    margin-right: 0.25rem;
+  }
+
   .max-sm\:hidden {
     display: none;
   }
@@ -8854,6 +8908,11 @@ details.collapse summary::-webkit-details-marker {
     margin-right: 0px;
   }
 
+  .max-xs\:mx-0\.5 {
+    margin-left: 0.125rem;
+    margin-right: 0.125rem;
+  }
+
   .max-xs\:w-28 {
     width: 7rem;
   }
@@ -8869,6 +8928,10 @@ details.collapse summary::-webkit-details-marker {
 @media (min-width: 640px) {
   .sm\:mx-2 {
     margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+
+  .sm\:mr-2 {
     margin-right: 0.5rem;
   }
 

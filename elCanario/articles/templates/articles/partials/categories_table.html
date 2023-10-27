@@ -3,10 +3,21 @@
     <!-- Categories Block -->
     <div class="grid flex-grow h-auto card bg-base-300 rounded-box place-items-center py-10 max-sm:px-1 sm:px-4">
         <section>
-            <div class="p-2 w-full flex items-center justify-center">
-                <input class="input input-xs sm:input-sm md:input-md max-xs:mx-0 max-sm:mx-1 sm:mx-2" id="category_name_new" name="category_name_new" type="text" placeholder="{% translate 'New category' %}"/>
-                <a class="btn btn-success btn-xs sm:btn-sm md:btn-md max-xs:mx-0 max-sm:mx-1 sm:mx-2" type="submit" hx-post="{% url 'articles:category_create' %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-include="[name='category_name_new']"> {% translate 'Create' %}</a>
+            <div class="flex items-center justify-center py-4 max-xs:mx-0.5 max-sm:mx-1 sm:mx-2">
+                <div class="form-control w-full ">
+                    <label class="label" for="category_name_new">
+                        <span class="label-text-alt">{% translate 'Name' %}</span>
+                    </label>
+                    <input class="input" id="category_name_new" name="category_name_new" type="text" placeholder="{% translate 'New category' %}"/>
+                </div>
+                <div class="form-control max-xs:mx-0.5 max-sm:mx-1 sm:mx-2">
+                    <label class="label">
+                        <span class="label-text-alt">&nbsp;</span>
+                    </label>
+                    <a class="btn btn-success" type="submit" hx-post="{% url 'articles:category_create' %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-include="[name='category_name_new']"> {% translate 'Create' %}</a>
+                </div>
             </div>
+
             {% if categories %}
                 <div>
                     <div>
@@ -24,8 +35,8 @@
                                             <tr>
                                                 <td ><b>{{category.name}}</b></td>
                                                 <td class="flex items-center justify-center">
-                                                    <a class="btn btn-warning btn-xs sm:btn-sm md:btn-md max-xs:mx-0 max-sm:mx-1 sm:mx-2" type="submit" hx-get="{% url 'articles:category_update' external_link="False" cat_id=category.id  %}" hx-swap="outerHTML" hx-target="#articles_category_value_section">{% translate 'Edit' %}</a>
-                                                    <a class="btn btn-error btn-xs sm:btn-sm md:btn-md max-xs:mx-0 max-sm:mx-1 sm:mx-2" type="submit" hx-delete="{% url 'articles:category_delete' cat_id=category.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-confirm="Are you sure you want to delete the category {{category.name}}?">{% translate 'Delete' %}</a>
+                                                    <a class="btn btn-warning btn-sm md:btn-md max-xs:mx-0.5 max-sm:mx-1 sm:mx-2" type="submit" hx-get="{% url 'articles:category_update' external_link="False" cat_id=category.id  %}" hx-swap="outerHTML" hx-target="#articles_category_value_section">{% translate 'Edit' %}</a>
+                                                    <a class="btn btn-error btn-sm md:btn-md max-xs:mx-0.5 max-sm:mx-1 sm:mx-2" type="submit" hx-delete="{% url 'articles:category_delete' cat_id=category.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-confirm="Are you sure you want to delete the category {{category.name}}?">{% translate 'Delete' %}</a>
                                                 </td>
                                             </tr>
                                         {% endfor %}
@@ -44,12 +55,22 @@
     <div class="grid flex-grow h-auto card bg-base-300 rounded-box place-items-center py-10 max-sm:px-1 sm:px-4">
         <section>
             {% if category_to_update %}
-                <p class="flex justify-center items-center w-full py-10">
+                <p class="flex justify-center items-center w-full py-6">
                     <strong>{{category_to_update.name}}</strong>
                 </p>
-                <div class="p-2 w-full flex items-center justify-center">
-                    <input class="input input-xs sm:input-sm md:input-md max-xs:mx-0 max-sm:mx-1 sm:mx-2" type="text" name="value_name_new" id="value_name_new" placeholder="{% translate 'Value name' %}"/>
-                    <a class="btn btn-success btn-xs sm:btn-sm md:btn-md max-xs:mx-0 max-sm:mx-1 sm:mx-2" type="submit" hx-post="{% url 'articles:value_create' cat_id=category_to_update.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-include="[name='value_name_new']">{% translate 'Create' %}</a>
+                <div class="flex items-center justify-center py-4 ">
+                    <div class="form-control w-full max-xs:mx-0.5 max-sm:mx-1 sm:mx-2">
+                        <label class="label" for="value_name_new">
+                            <span class="label-text-alt">{% translate 'Name' %}</span>
+                        </label>
+                        <input class="input w-full" type="text" name="value_name_new" id="value_name_new" placeholder="{% translate 'New value' %}"/>
+                    </div>
+                    <div class="form-control max-xs:mx-0.5 max-sm:mx-1 sm:mx-2">
+                        <label class="label">
+                            <span class="label-text-alt">&nbsp;</span>
+                        </label>
+                        <a class="btn btn-success" type="submit" hx-post="{% url 'articles:value_create' cat_id=category_to_update.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-include="[name='value_name_new']">{% translate 'Create' %}</a>
+                    </div>
                 </div>
 
                 {% if values %}
@@ -70,7 +91,7 @@
                                                     {% if name_value_edition %}
                                                         {% if value_to_update == value %}
                                                             <td>
-                                                                <input class="input input-xs sm:input-sm md:input-md max-xs:mx-0 max-sm:mx-1 sm:mx-2" type="text" id="value_name_update" name="value_name_update" value="{{value.name}}" placeholder="New name" />
+                                                                <input class="input input-xs sm:input-sm md:input-md max-xs:mx-0 max-sm:mr-1 sm:mr-2 w-full" type="text" id="value_name_update" name="value_name_update" value="{{value.name}}" placeholder="New name" />
                                                             </td>
                                                         {% else %}
                                                             <td>{{value.name}}</td>
@@ -79,20 +100,20 @@
                                                         <td>{{value.name}}</td>
                                                     {% endif %}
                                                     
-                                                    <td>
+                                                    <td class="flex items-center justify-center">
                                                         {% if name_value_edition %}
                                                             {% if value_to_update == value %}
-                                                                <a class="btn btn-success btn-xs sm:btn-sm md:btn-md max-xs:mx-0 max-sm:mx-1 sm:mx-2" type="submit" hx-post="{% url 'articles:value_update_name' val_id=value.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-include="[name='value_name_update']">{% translate 'Save' %}</a>
+                                                                <a class="btn btn-success btn-sm md:btn-md max-xs:mx-0.5 max-sm:mx-1 sm:mx-2" type="submit" hx-post="{% url 'articles:value_update_name' val_id=value.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-include="[name='value_name_update']">{% translate 'Save' %}</a>
                                                             {% else %}
-                                                                <a class="btn btn-info btn-xs sm:btn-sm md:btn-md max-xs:mx-0 max-sm:mx-1 sm:mx-2" type="submit" hx-get="{% url 'articles:value_update' cat_id=category_to_update.id val_id=value.id %}" hx-swap="outerHTML" hx-target="#articles_category_value_section">{% translate 'Edit' %}</a>
+                                                                <a class="btn btn-warning btn-sm md:btn-md max-xs:mx-0.5 max-sm:mx-1 sm:mx-2" type="submit" hx-get="{% url 'articles:value_update' cat_id=category_to_update.id val_id=value.id %}" hx-swap="outerHTML" hx-target="#articles_category_value_section">{% translate 'Edit' %}</a>
                                                             {% endif %}
                                                         {% else %}
                                                         
-                                                            <a class="btn btn-warning btn-xs sm:btn-sm md:btn-md max-xs:mx-0 max-sm:mx-1 sm:mx-2" type="submit" hx-get="{% url 'articles:value_update' cat_id=category_to_update.id val_id=value.id %}" hx-swap="outerHTML" hx-target="#articles_category_value_section">{% translate 'Edit' %}</a>
+                                                            <a class="btn btn-warning btn-sm md:btn-md max-xs:mx-0.5 max-sm:mx-1 sm:mx-2" type="submit" hx-get="{% url 'articles:value_update' cat_id=category_to_update.id val_id=value.id %}" hx-swap="outerHTML" hx-target="#articles_category_value_section">{% translate 'Edit' %}</a>
                                                         
                                                         {% endif %}
 
-                                                        <a class="btn btn-error btn-xs sm:btn-sm md:btn-md max-xs:mx-0 max-sm:mx-1 sm:mx-2" type="submit" hx-delete="{% url 'articles:value_delete' cat_id=category_to_update.id val_id=value.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-confirm="Are you sure you want to delete the value {{value.name}}?">{% translate 'Delete' %}</a>
+                                                        <a class="btn btn-error btn-sm md:btn-md max-xs:mx-0.5 max-sm:mx-1 sm:mx-2" type="submit" hx-delete="{% url 'articles:value_delete' cat_id=category_to_update.id val_id=value.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-confirm="Are you sure you want to delete the value {{value.name}}?">{% translate 'Delete' %}</a>
 
                                                     </td>
                                                 </tr>
@@ -107,6 +128,4 @@
             {% endif %}
         </section>
     </div>
-</div>
-<div id="categories_table">
 </div>

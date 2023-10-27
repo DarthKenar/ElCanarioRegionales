@@ -1,105 +1,78 @@
 {% load i18n %}
-<div
-  class="block max-w-md rounded-lg bg-white p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
-  
+<!-- class="input max-xs:mx-0 max-sm:mx-1 sm:mx-2" INPUT -->
+<!-- class="btn max-xs:mx-0 max-sm:mx-1 sm:mx-2" BUTTON -->
+<div class="grid flex-grow h-auto card bg-base-300 rounded-box place-items-center py-10 max-sm:px-1 sm:px-4">
   <!--Name input-->
-  <div class="relative" data-te-input-wrapper-init>
-    <input 
-      type="text" hx-get="{% url 'articles:create_name_check' %}" hx-target="#answer_article_name" hx-trigger="keyup changed delay:200ms" hx-swap="outerHTML" name="article_name_input" id="article_name_input" required value="{{article_name_input}}"
-      class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-      placeholder="{% translate 'Name' %}" />
-    <label
-      for="article_name_input"
-      class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-neutral-200"
-      >{% translate 'Name' %}
+  <div class="form-control w-full">
+    <label class="label" for="article_name_input">
+      <span class="label-text-alt">{% translate 'Name' %}</span>
     </label>
+    <input class="input max-xs:mx-0 max-sm:mx-1 sm:mx-2" type="text" hx-get="{% url 'articles:create_name_check' %}" hx-target="#answer_article_name" hx-trigger="keyup changed delay:200ms" hx-swap="outerHTML" name="article_name_input" id="article_name_input" required value="{{article_name_input}}" placeholder="{% translate 'Name' %}" />
   </div>
 
   {% include 'articles_create_name_error.html' %}
 
   <!--Stock input-->
-  <div class="relative" data-te-input-wrapper-init>
-    <input
-      type="text" hx-get="{% url 'articles:create_stock_check' %}" hx-target="#answer_article_stock" hx-trigger="keyup changed delay:200ms" hx-swap="outerHTML" name="article_stock_input" value="{{article_stock_input}}"
-      class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-      id="article_stock_input"
-      placeholder="defalut: 0" />
-    <label
-      for="article_stock_input"
-      class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-neutral-200"
-      >{% translate 'Stock' %}
-    </label>
+  <div class="form-control w-full">
+    <label class="label" for="article_stock_input"><span class="label-text-alt">{% translate 'Stock' %}</span></label>
+    <input class="input max-xs:mx-0 max-sm:mx-1 sm:mx-2" type="text" hx-get="{% url 'articles:create_stock_check' %}" hx-target="#answer_article_stock" hx-trigger="keyup changed delay:200ms" hx-swap="outerHTML" name="article_stock_input" value="{{article_stock_input}}" id="article_stock_input" placeholder="{% translate 'Stock' %}" />
   </div>
 
   {% include 'articles_create_stock_check.html' %}
 
-  {% for category in categories %}
-
-    {% comment  %}
-      <form action="{% url 'articles:category_update' external_link="True" cat_id=category.id %}" method="GET">
-        <button type="submit" class="inline-block rounded-full bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
-        </button>
-      </form>
-    {% endcomment %}
-    <div>
-      <select data-te-select-init id="{{category.id}}" name="category-{{category.id}}">
-        <option value=""></option>
-        {% load custom_tags %}
-        {% with values|filter_by_category:category as values_for_category %}
-            {% for value in values_for_category %}
-            <option value="{{value.id}}" {% if value.id in values_selected %} selected {% endif %}>{{value.name}}</option>
-            {% endfor %}
-        {% endwith %}
-      </select>
-      <label data-te-select-label-ref>{{category.name}}</label>
+  <!-- Categories -->
+  <div class="collapse bg-base-200 collapse-arrow">
+    <input type="checkbox" /> 
+    <div class="collapse-title text-base">
+      {% translate 'Categories' %}
     </div>
-    <p class="p-0 m-0 text-xs">&nbsp;</p>
-    <output class="p-0 m-0 text-xs" id="answer_category_id">{{answer_category_id}}</output>
-  {% endfor %}
+    <div class="collapse-content">
+      {% for category in categories %}
+        {% comment  %}
+          <form action="{% url 'articles:category_update' external_link="True" cat_id=category.id %}" method="GET">
+            <button type="submit"></button>
+          </form>
+        {% endcomment %}
+        <div class="form-control w-full">
+          <label class="label" for="{{category.id}}"><span class="label-text-alt">{{category.name}}</span></label>
+          <select class="select" id="{{category.id}}" name="category-{{category.id}}">
+            <option value=""></option>
+            {% load custom_tags %}
+            {% with values|filter_by_category:category as values_for_category %}
+                {% for value in values_for_category %}
+                <option value="{{value.id}}" {% if value.id in values_selected %} selected {% endif %}>{{value.name}}</option>
+                {% endfor %}
+            {% endwith %}
+          </select>
+        </div>
+        <p class="p-0 m-0 text-xs">&nbsp;</p>
+        <output class="p-0 m-0 text-xs" id="answer_category_id">{{answer_category_id}}</output>
+      {% endfor %}
+    </div>
+  </div>
 
   <p class="p-0 m-0 text-xs">&nbsp;</p>
-  <div class="grid grid-cols-2 gap-4">
-    
-    <!--Buy price input-->
-    <div class="relative" data-te-input-wrapper-init>
-      <input
-        type="text" name="article_buy_price_input" hx-get="{% url 'articles:create_calculator' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#article_sell_price_output" hx-include="[name='article_increase_input']" required value="{{article_buy_price_input}}"
-        class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-        id="article_buy_price_input"
-        placeholder="{% translate 'Buy Price' %}" />
-      <label
-        for="article_buy_price_input"
-        class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
-        >{% translate 'Buy Price' %}
-      </label>
-    </div>
+  <p class="p-0 m-0 text-xs">&nbsp;</p>
+  
 
-    <!--Increase percent input-->
-    <div class="relative" data-te-input-wrapper-init>
-      <input
-        type="text" name="article_increase_input" hx-get="{% url 'articles:create_calculator' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#article_sell_price_output" hx-include="[name='article_buy_price_input']" required value="{{article_increase_input}}"
-        class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-        id="article_increase_input"
-        placeholder="{% translate 'Increase' %}" />
-      <label
-        for="article_increase_input"
-        class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
-        >{% translate 'Increase' %}
-      </label>
+  <!--Buy price input-->
+  <div class="form-control w-full max-xs:mx-0 max-sm:mx-1 sm:mx-2">
+    <label class="label" for="article_buy_price_input"><span class="label-text-alt">{% translate 'Buy Price' %}</span><span class="label-text-alt">{% translate 'Increase' %}</span></label>
+    <div class="join w-full">
+      <input class="input w-full max-xs:mx-0.5 max-sm:mx-1 sm:mx-2" type="text" name="article_buy_price_input" hx-get="{% url 'articles:create_calculator' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#article_sell_price_output" hx-include="[name='article_increase_input']" required value="{{article_buy_price_input}}" id="article_buy_price_input" placeholder="{% translate 'Buy Price' %}"/>
+      <input class="input w-full max-xs:mx-0.5 max-sm:mx-1 sm:mx-2" type="text" name="article_increase_input" hx-get="{% url 'articles:create_calculator' %}" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms" hx-target="#article_sell_price_output" hx-include="[name='article_buy_price_input']" required value="{{article_increase_input}}" id="article_increase_input" placeholder="{% translate 'Increase' %}" />
     </div>
-    
   </div>
 
   <!--Sell price input-->
   {% include 'articles_create_calculator.html' %}
 
   <!--Submit button-->
-  <button
-    hx-get="{% url 'articles:create_confirm' %}" hx-trigger="click" hx-include="#article_name_input,[name^='category-'],#article_buy_price_input, #article_increase_input, #article_sell_price_input, #article_stock_input" hx-target="#article_create_answer" hx-swap="outerHTML"
-    class="inline-block w-full rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
-    data-te-ripple-init
-    data-te-ripple-color="light">
-    {% translate 'Save' %}
-  </button>
+  <div class="flex justify-center items-center">
+    <button class="btn btn-success btn-block max-xs:mx-0.5 max-sm:mx-1 sm:mx-2" hx-get="{% url 'articles:create_confirm' %}" hx-trigger="click" hx-include="#article_name_input,[name^='category-'],#article_buy_price_input, #article_increase_input, #article_sell_price_input, #article_stock_input" hx-target="#article_create_answer" hx-swap="outerHTML">
+      {% translate 'Save' %}
+    </button>
+  </div>
+
 </div>
 
