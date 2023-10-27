@@ -1,11 +1,11 @@
 {% load i18n %}
 {% load custom_filters %}
-<div class="grid flex-grow h-auto card bg-base-300 rounded-box place-items-center py-10 max-sm:px-1 sm:px-4" id="form_{{action}}">
     {% if 'success' in request.GET %}
         {% #message type="success" %}
-            {% translate "Correctly" %} {{action}}
+            {% translate "Operation successfully completed" %}
         {% /message %}
     {% endif %}
+<div class="grid flex-grow h-auto card bg-base-300 rounded-box place-items-center py-10 max-sm:px-1 sm:px-4" id="form_{{action}}">
     <form class="w-full" method="POST">
         {% csrf_token %}
         <div class="w-full text-center flex flex-col items-center justify-center">
