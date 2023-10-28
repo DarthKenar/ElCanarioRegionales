@@ -28,13 +28,11 @@
     </div>
     <div class="collapse-content">
       {% for category in categories %}
-        {% comment  %}
-          <form action="{% url 'articles:category_update' external_link="True" cat_id=category.id %}" method="GET">
-            <button type="submit"></button>
-          </form>
-        {% endcomment %}
         <div class="form-control w-full">
-          <label class="label" for="{{category.id}}"><span class="label-text-alt">{{category.name}}</span></label>
+          <label class="label">
+            <span class="label-text" for="{{category.id}}">{{category.name}}</span>
+            <a class="btn btn-warning btn-xs" type="submit" href="{% url 'articles:category_update' external_link="True" cat_id=category.id cat_update_name=None %}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></a>
+          </label>
           <select class="select" id="{{category.id}}" name="category-{{category.id}}">
             <option value=""></option>
             {% load custom_tags %}
