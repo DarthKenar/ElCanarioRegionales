@@ -4,8 +4,10 @@
         {% var article_cache=' ' %}
     {% else %}
         {% var article_cache=article_to_update.id %}
+        {% card_article img=article_to_update.image id=article_to_update.id name=article_to_update.name categories=categories object=article_to_update values=values buy_price=article_to_update.buy_price increase=article_to_update.increase sell_price=article_to_update.sell_price stock=article_to_update.stock csrf_token=csrf_token%}
+        <!-- Divisor -->
+        <div class="divider lg:divider-horizontal"></div> 
     {% endif %}
-    {% card_article img=article_to_update.image id=article_to_update.id name=article_to_update.name categories=categories object=article_to_update values=values buy_price=article_to_update.buy_price increase=article_to_update.increase sell_price=article_to_update.sell_price stock=article_to_update.stock csrf_token=csrf_token%}
     <!-- Categories Block -->
     <div class="grid flex-grow h-auto card bg-base-300 rounded-box place-items-center py-10 max-sm:px-1 sm:px-4">
         <section>

@@ -16,8 +16,8 @@
             <span>{% translate 'Articles List' %}</span>
         </div>
         <div class="text-base flex gap-2">
-            {% button type="info" url='articles:categories' border="False" text="Categories" %}
-            {% button type="success" url='articles:create' border="False" text="Create Article" %}
+            <a class="btn btn-info" href="{% url 'articles:categories' %}">Categories</a>
+            <a class="btn btn-success" href="{% url 'articles:create' %}">Create Article</a>
         </div>
     </div>
 {% endblock title_section_content_under %}
