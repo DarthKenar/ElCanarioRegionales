@@ -1,6 +1,7 @@
 import os
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy
+from auth import *
 """
 Django settings for elCanario project.
 
@@ -84,6 +85,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
+    'django.middleware.locale.LocaleMiddleware'
 ]
 
 ROOT_URLCONF = 'elCanario.urls'
@@ -101,12 +103,12 @@ TEMPLATES = [
                  BASE_DIR / 'customers/templates/customers/partials', 
                  BASE_DIR / 'customers/templates/customers/htmx', 
                  BASE_DIR / "settings/templates/settings",
-                 BASE_DIR / "settings/templates/settings/htmx",
+                 BASE_DIR / "settings/templates/settings/includes",
                  BASE_DIR / "messageslog/templates/messageslog/",
                  BASE_DIR / "elCanario/templates/elCanario/",
                  BASE_DIR / "components/templates/molecules",
                  BASE_DIR / "_core/templates/_core",
-                 BASE_DIR / "allauth/templates/"],
+                 BASE_DIR / "auth/templates/"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -212,15 +214,11 @@ USE_TZ = True
 
 LOCALE_PATHS = (BASE_DIR / 'locale/',)
 
-LANGUAGES = (
-    ('en', _('English')),
-    ('es', _('Spanish')),
-    )
 
 # Allauth
 
 LOGIN_REDIRECT_URL = reverse_lazy('core:home')
-LOGIN_URL = reverse_lazy('core:home')
+LOGIN_URL = reverse_lazy('core:index')
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_MIN_LENGTH = 4
@@ -242,15 +240,51 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 PWA_APP_NAME = "EL CANARIO REGIONALES"
-PWA_APP_DESCRIPTION = "For Luci whit <3"
+PWA_APP_DESCRIPTION = "Contact me: federico_vega22@hotmail.com"
 PWA_APP_THEME_COLOR = '#991b1b'
 PWA_APP_BACKGROUND_COLOR = '#fde68a'
 
 PWA_APP_ICONS = [
     {
-        "src": "static/img/elcanarioregionales-logo-160x160.png",
-        "sizes": "160x160"
-    }
+        "src": "/static/img/pwa/logo-light-16x16.png",
+        "sizes": "16x16"
+    },
+    {
+        "src": "/static/img/pwa/logo-light-32x32.png",
+        "sizes": "32x32"
+    },
+    {
+        "src": "/static/img/pwa/logo-light-48x48.png",
+        "sizes": "48x48"
+    },
+    {
+        "src": "/static/img/pwa/logo-light-144x144.png",
+        "sizes": "144x144"
+    },
+    {
+        "src": "/static/img/pwa/logo-light-192x192.png",
+        "sizes": "192x192"
+    },
+    {
+        "src": "/static/img/pwa/logo-light-512x512.png",
+        "sizes": "512x512"
+    },
 ]
 
 PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR,'serviceworker.js')
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = DEFAULT_FROM_EMAIL = "federico.vega2222@gmail.com"
+
+if DEBUG:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+#ROSETTA
+ROSETTA_STORAGE_CLASS = 'rosetta.storage.CacheRosettaStorage'
+LANGUAGES = (
+    ('en', _('English')),
+    ('es', _('Spanish')),
+    )
+ROSETTA_LOGIN_URL = LOGIN_URL

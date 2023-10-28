@@ -16,27 +16,19 @@
     <div class="text-xl pb-3 flex items-center justify-between">
         <!-- Latest Reports -->
         <div class="text-xl pb-3 flex items-center">
-            <i class="fas fa-list mr-3"></i>
             <span>{% translate 'Create Order Section' %}</span>
         </div>
     </div>
 {% endblock title_section_content_under %}
 {% block section_content_under %}
-
-    {% #section type="full" %}
-    
-        {% comment %}
-            {% form request=request form=form action="create" object_type="order" url="orders:create" %} 
-            {% include 'create_form.html' %}
-        {% endcomment %}
-
+    <div class="mx-auto max-w-md">
         {% var url="orders:create" %}
         {% var object_type="order" %}
         {% var form=form %}
         {% var request=request %}
         {% var action="create" %}
         {% include 'form.html' %}
-    {% /section %}
+    </div>
 {% endblock section_content_under %}
 
     

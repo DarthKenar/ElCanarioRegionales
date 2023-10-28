@@ -1,0 +1,17 @@
+{% comment  %}
+    -No tiene atributos
+{% endcomment %}
+
+{% load i18n %}
+
+<div class="form-control w-full max-w-xs p-4">
+    <select data-choose-theme class="select select-bordered">
+        <option disabled selected>{% trans "Select Theme" %}</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+        <option value="valentine">Pink</option>
+        <option value="retro">Retro</option>
+        <option value="cyberpunk">CyberPunk</option>
+        <option value="luci">Luci <3</option>
+    </select>
+</div>

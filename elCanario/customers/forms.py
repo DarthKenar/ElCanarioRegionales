@@ -1,14 +1,15 @@
 from django import forms
 from customers.models import Customer
+from django.utils.translation import gettext_lazy as _
 class CustomerForm(forms.ModelForm):
     class Meta:
-        trigger = {'hx-trigger':'blur'}
+        style_input = "input w-full"
         model = Customer
         fields = ['name', 'dni', 'phone_number', 'address', 'email']
         widgets = {
-            'name': forms.TextInput(attrs=trigger),
-            'dni': forms.TextInput(attrs=trigger),
-            'phone_number': forms.TextInput(attrs=trigger),
-            'address': forms.TextInput(attrs=trigger),
-            'email': forms.EmailInput(attrs=trigger)
+            'name': forms.TextInput(attrs={"class":style_input, "placeholder":_("Name")},),
+            'dni': forms.TextInput(attrs={"class":style_input, "placeholder":_("Dni")}),
+            'phone_number': forms.TextInput(attrs={"class":style_input, "placeholder":_("Phone number")}),
+            'address': forms.TextInput(attrs={"class":style_input, "placeholder":_("Address")}),
+            'email': forms.EmailInput(attrs={"class":style_input, "placeholder":_("Email")})
         }

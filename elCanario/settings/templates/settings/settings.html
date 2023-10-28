@@ -1,53 +1,32 @@
-{% extends 'base.html' %}
+{% extends 'base_home.html' %}
 {% load i18n %}
-{% load custom_tags %}
-{% block title %}
-    <title>{% translate 'My Account - Settings' %} - El Canario Regionales</title>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js"></script>
-    <script>
-        Dropzone.autoDiscover = false;
+{% block title_section %}
+    <title>{% translate 'My Account' %} - Canario Regionales</title>
+{% endblock title_section %}
+{% block title_section_content_upper %}
+    {% translate 'My Account' %}
+{% endblock title_section_content_upper %}
+{% block section_content_upper %}
+{% endblock section_content_upper %}
+{% block title_section_content_under %}
+{% endblock title_section_content_under %}
 
-        $(document).ready(function() {
-            $("#profile-picture-dropzone").dropzone({
-                url: "{% url 'settings:upload_profile_picture' %}",
-                maxFilesize: 200, // Tamaño máximo en MB
-                paramName: "profile_picture", // Nombre del campo en el formulario
-                acceptedFiles: "image/*", // Acepta solo archivos de imagen
-                init: function() {
-                    this.on("success", function(file, response) {
-                        // Lógica después de cargar la imagen
-                    });
-                }
-            });
-        });
-    </script> -->
-{% endblock title %}
-{% block content %}
-    {% include 'menu.html' %}
+{% block section_content_under %}
+    <section class="flex justify-center items-center">
+        <div class="flex flex-col max-lg:w-full lg:w-5/6">
+            <div class="grid h-40 card bg-base-300 rounded-box place-items-center">
+                <h2 class="text-3xl p-2">{% translate 'Change Theme' %}</h2>
+                {% theme_switch %}
+            </div> 
+            <div class="divider"></div> 
+            <div class="grid h-40 card bg-base-300 rounded-box place-items-center">
+                <h2 class="text-3xl p-2">{% translate 'Change Language' %}</h2>
+                {% include 'languages.html' %}
+            </div>
+        </div>
+    </section>
 
-    <h1 class="text-center mx-10 border-2 p-5 border-r-emerald-500">{% translate 'IN DEVELOPMENT' %}</h1>
+    
+    
+{% endblock section_content_under %}
 
-    {% include 'upload_image_profile_form.html' %}  
- 
-    {% include 'footer.html' %} 
-    <script>
-        // Muestra una imagen previa de la foto a cargar.
-        document.getElementById('profile_picture').addEventListener('change', function () {
-            const fileInput = this;
-            const imagePreview = document.getElementById('image-preview');
-        
-            if (fileInput.files && fileInput.files[0]) {
-                const reader = new FileReader();
-        
-                reader.onload = function (e) {
-                    imagePreview.src = e.target.result;
-                    imagePreview.style.display = 'block';
-                };
-        
-                reader.readAsDataURL(fileInput.files[0]);
-            } else {
-                imagePreview.style.display = 'none';
-            }
-        });
-    </script>
-{% endblock content %}

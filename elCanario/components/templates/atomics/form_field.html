@@ -1,0 +1,32 @@
+{% comment  %}
+    label = form.{name}.label
+    id = form.{name}.id_for_label
+    first (opcional) = True/False (Se le agrega un padding top)
+
+    name = ej: login
+    autocomplete = ej: email
+    type = ej: text
+
+{% endcomment %}
+{% if first is "True" %}
+    {% var first="pt-4" %}
+{% endif %}
+{% if not input_type %}
+    {% var input_type="text" %}
+{% endif %}
+{% if not placeholder %}
+    {% var placeholder="" %}
+{% endif %}
+
+<div class="form-control {{first}}">
+    <label class="input-group input-group-sm">
+        <span class="w-full">{{ label }}</span>
+        <input id="{{ id }}"
+            name="{{name}}"
+            autocomplete="{{autocomplete}}"
+            type="{{type}}"
+            placeholder="{{ label }}"
+            class="input input-bordered input-sm"
+            required />
+    </label>
+</div>

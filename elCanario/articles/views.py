@@ -353,7 +353,7 @@ def articles_category_create(request, art_id=None):
     if any_error == False:
         category_to_save = Category(name=category_name)
         category_to_save.save()
-        message = MessageLog(info = _(f"Se creo una nueva categoría con el nombre de '{category_to_save.name}'"))
+        message = MessageLog(info = _(f"New category whit name '{category_to_save.name}' has been created."))
         message.save()
         context['category_to_update'] = category_to_save
         context["answer"] = _(f"The category {category_to_save.name} has been successfully saved!")
@@ -383,7 +383,7 @@ def articles_category_value_create(request,cat_id, art_id=None):
                             category_id = category_to_update,
                             name = value_name)
         value_to_update.save()
-        message = MessageLog(info = _(f"Se creo un nuevo valor en la categoría '{category_to_update.name}' con el nombre de '{value_to_update.name}'"))
+        message = MessageLog(info = _(f"A new value for the category '{category_to_update.name}'has been created whit the name '{value_to_update.name}'"))
         message.save()
         context['answer'] = _(f'The value {value_name} was saved correctly for the category: {category_to_update.name}')
         context['values'] = Value.objects.filter(category_id = category_to_update)
@@ -392,7 +392,7 @@ def articles_category_value_create(request,cat_id, art_id=None):
         context['values'] = Value.objects.filter(category_id = category_to_update)
     return render_login_required(request, template, context)
 
-def articles_category_update(request: object, external_link: str, cat_id:int, art_id:str=None) -> HttpResponse:
+def articles_category_update(request: object, external_link: str, cat_id:int, art_id:str=None, cat_update_name:str=None) -> HttpResponse:
     """redirects to the categories section taking the article with it.
         This is done in order to update the data in the categories section and then be able to edit the article easily.
 
@@ -429,7 +429,8 @@ def articles_category_update(request: object, external_link: str, cat_id:int, ar
         context['article_list'] = [article_to_update]
     context["categories"] = Category.objects.all()
     context['values'] = Value.objects.filter(category_id = category_to_update)
-    context["name_category_edition"] = True
+    if cat_update_name == "True":
+        context["name_category_edition"] = True
     return render_login_required(request, template, context)
 
 def articles_category_update_name(request, cat_id, art_id=None):

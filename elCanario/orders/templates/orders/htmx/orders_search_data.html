@@ -1,19 +1,19 @@
 {% load i18n %}
 <div id="search_data" >
-    {% if order_list %}
+    {% if object_list %}
         {% if answer_error_name %}
             {% #message type="danger" %}
                 {{answer_error_name}}
             {% /message %}
         {% endif %}
-        {% if order_delete_answer %}
+        {% if delete_answer %}
             {% #message type="danger" %}
                 {{order_delete_answer}}
             {% /message %}
         {% endif %}
-            {% #message type="info" %}
-                {{order_delete_answer}}
-            {% /message %}
+        {% #message type="success" %}
+            {% translate 'Number of orders found:' %} {{object_list.count}}
+        {% /message %}
         {% include 'orders_table.html' %}
     {% else %}
         {% if value %}

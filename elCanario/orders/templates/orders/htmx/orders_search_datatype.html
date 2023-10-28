@@ -1,19 +1,18 @@
 {% load i18n %}
-<main class="w-full flex-grow p-6" id="search_datatype">
-    <h1 class="text-3xl text-black pb-6">{% translate 'Search orders' %}:</h1>
+<main class="flex flex-col overflow-auto p-2 pb-20" id="search_datatype">
+    <h1 class="pb-6 p-2 text-3xl">{% translate 'Search orders' %}:</h1>
     {% include 'orders_search_header.html' %}
-    <div class="w-full mt-12">
-        <div class="text-xl pb-3 flex items-center justify-between">
+    <div class="w-full">
+        <div class="flex items-center justify-between pb-3 text-xl">
             <!-- Latest Reports -->
-            <div class="text-xl pb-3 flex items-center">
-                <i class="fas fa-list mr-3"></i>
+            <div class="flex items-center pb-3 px-3 text-xl">
                 <span>{% translate 'Orders list' %}</span>
             </div>
-            <div class="text-base">
+            <div class="text-base flex gap-2">
                 {% button type="success" url='orders:create' text="Create Order" method="GET" %}
             </div>
         </div>
-        <div class="bg-white overflow-auto" id="search_data">
+        <div id="search_data">
             {% if object_list.count > 0 %}
                 {% #message type="success" %}
                     {% translate 'Number of orders found:' %} <b>{{ order_list.count }}</b>

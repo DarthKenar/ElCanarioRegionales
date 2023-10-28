@@ -1,8 +1,10 @@
 {
   "devDependencies": {
+    "daisyui": "^3.9.3",
     "tailwindcss": "^3.3.3"
   },
   "dependencies": {
+    "theme-change": "^2.5.0",
     "tw-elements": "^1.0.0"
   }
 }

@@ -1,51 +1,58 @@
 {% load static %}
 {% load i18n %}
-<div class="relative w-full max-w-sm mx-auto">
-  <div  class="relative inline-block w-full transition-transform duration-300 ease-in-out transform">
-    <div class="rounded-lg">
-      <div class="flex justify-between">
-        <div class="p-1 min-w-8 rounded-xl" title="ID">
-          <span>{{id}}</span>
-        </div>
-        <div class="left-0 p-1 rounded-full" title="Status">
-          {% if delivery_status == True %}
-            <span class="text-green-500"><b>{% translate 'Done' %}</b></span>
-          {% elif delivery_status == False %}
-            <span class="text-red-500"><b>{% translate 'Canceled' %}</b></span>
-          {% else %}
-          <span class="text-blue-500"><b>{% translate 'Pending' %}</b></span>
-          {% endif %}
-        </div>
-      </div>
-      <div class="grid grid-cols-2 py-3 border-t border-gray-200 ">
-        <div class="flex items-center">
-          <div class="relative">
-            <h2 class="text-base font-medium text-gray-800 line-clamp-1 md:text-lg"><b>{{name}}</b></h2>
-            <p class="mt-2 text-sm text-gray-800 line-clamp-1">Tel. {{phone_number}}</p>
+<div class="m-2">
+  <div class="relative w-full max-w-sm mx-auto bg-base-200" style="border-radius: var(--rounded-btn, 0.5rem/* 8px */);">
+    <div  class="relative inline-block w-full transition-transform duration-300 ease-in-out transform">
+      <div class="rounded-lg">
+        <div class="flex justify-between p-4">
+          <div class="p-1 min-w-8 rounded-xl" title="ID">
+            <span>{{id}}</span>
+          </div>
+          <div class="left-0 p-1 rounded-full" title="Status">
+            {% if delivery_status == True %}
+              <span class="text-success"><b>{% translate 'Done' %}</b></span>
+            {% elif delivery_status == False %}
+              <span class="text-danger"><b>{% translate 'Canceled' %}</b></span>
+            {% else %}
+            <span class="text-info"><b>{% translate 'Pending' %}</b></span>
+            {% endif %}
           </div>
         </div>
-        <div class="flex items-center justify-end">
-          <p class="inline-block font-semibold leading-tight break-words text-primary rounded-xl">
-            <span class="text-sm uppercase"> $ </span>
-            <span class="text-lg" title="Total amount to pay">{{total_pay}}</span>
-          </p>
+        <div class="grid grid-cols-2 py-3 border-t border-base-content p-4">
+          <div class="flex items-center">
+            <div class="relative">
+              <div class="flex items-center justify-center">
+                <svg class="mr-2 mt-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                <h2 class="text-base font-medium line-clamp-1 md:text-lg"><b>{{name}}</b></h2>
+              </div>
+              <p class="mt-2 text-sm line-clamp-1">Tel. {{phone_number}}</p>
+            </div>
+          </div>
+          <div class="flex items-center justify-end">
+            <p class="inline-block font-semibold leading-tight break-words rounded-xl">
+              <span class="text-sm uppercase"> $ </span>
+              <span class="text-lg" title="Total amount to pay">{{total_pay}}</span>
+            </p>
+          </div>
         </div>
-      </div>
-      <div class="relative grid grid-cols-2 grid-rows-2 gap-4 py-3 break-words border-t border-b border-gray-200">
-        {% for article in articles_cart %}
-          <p class="flex items-center text-gray-800 xl:flex-row xl:items-center text-ellipsis">
-              <img width="24" height="24" src="https://img.icons8.com/fluency-systems-regular/48/arrow.png" alt="arrow"/>
-              <span class="mt-0">{{article}}</span>
-          </p> 
-        {% endfor %}
-        <span class="absolute bottom-0 right-0 py-3 px3" title="Articles quantity">{{article_quantity}}</span>
-      </div>
-      <div class="flex items-center justify-around w-full py-3 border-b border-gray-200">
-        {{details}}
-      </div>
-      <div class="flex items-center justify-around w-full p-3 border-b border-gray-200 ">
-        {% button type="warning" url='orders:update' id=id border="False" text="Editar" %}
-        {% button type="danger" url='orders:delete' id=id border="False" text="Eliminar" object_type="order" object_name=name csrf_token=csrf_token %}
+        <div class="relative grid grid-cols-2 grid-rows-2 gap-4 p-4 break-words border-t border-b border-base-content">
+          {% for article in articles_cart %}
+            <p class="flex items-center xl:flex-row xl:items-center text-ellipsis">
+              <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive max-md:hidden"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
+                <span class="mt-0">{{article}}</span>
+            </p> 
+          {% endfor %}
+          <span class="absolute bottom-0 right-0 btn btn-xs bg-base-content hover:bg-base-content text-base-100 cursor-default font-medium p-1 m-1" title="Stock">
+            {{article_quantity}}
+          </span>
+        </div>
+        <div class="flex items-center justify-around w-full p-4 border-b border-base-content">
+          {{details}}
+        </div>
+        <div class="flex items-center justify-around w-full p-3">
+          {% button type="warning" url='orders:update' id=id border="False" text="Editar" %}
+          {% button type="danger" url='orders:delete' id=id border="False" text="Eliminar" object_type="order" object_name=name csrf_token=csrf_token %}
+        </div>
       </div>
     </div>
   </div>

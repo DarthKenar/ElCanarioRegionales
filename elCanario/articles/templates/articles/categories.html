@@ -4,7 +4,7 @@
     <title>{% translate 'Categories' %} - Canario Regionales</title>
 {% endblock title_section %}
 {% block title_section_content_upper %}
-    <h1 class="pb-6 text-3xl text-black">Search articles:</h1>
+    {% translate 'Search articles' %}
 {% endblock title_section_content_upper %}
 {% block section_content_upper %}
     {% include 'articles_search_header.html' %}
@@ -12,8 +12,7 @@
 {% block title_section_content_under %}
 <div class="flex items-center justify-between pb-3 text-xl">
     <!-- Latest Reports -->
-    <div class="flex items-center pb-3 text-xl">
-        <i class="mr-3 fas fa-list"></i>
+    <div class="flex items-center pb-3 text-xl px-2">
         <span>{% translate 'Categories & Values' %}</span>
     </div>
 </div>

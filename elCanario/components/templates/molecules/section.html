@@ -2,9 +2,9 @@
     <!-- Card Sextion Starts Here -->
     <div class="flex flex-1 flex-col lg:flex-row">
         {% if type == "full" %}
-            <div class="m-2 border-solid border-gray-300 rounded border shadow-sm w-full">
+            <div class="m-2 shadow-sm w-full">
                 {% if heading %}
-                    <div class="bg-gray-200 px-3 py-3 border-solid border-gray-200 border-b">
+                    <div class="px-3 py-3">
                         {{heading}}
                     </div>
                     <div class="p-3">
@@ -19,7 +19,7 @@
         {% elif type == "cols" %}
             {{children}}
         {% elif type == "cols-responsive" %}
-            <div class="grid max-sm:grid-cols-1 max-md:grid-cols-2 max-lg:grid-cols-3 lg:grid-cols-4 w-full">
+            <div class="grid max-sm:grid-cols-1 max-lg:grid-cols-2 max-xl:grid-cols-3 xl:grid-cols-4 w-full">
                 {{children}}
             </div>
         {% endif %}

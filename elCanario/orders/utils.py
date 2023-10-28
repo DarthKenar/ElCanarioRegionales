@@ -127,10 +127,8 @@ def update_total_pay(order):
     order.save()
 
 def update_total_purchased(order_form):
-    print("*"*10)
     customer = Customer.objects.get(id = order_form.customer_id.id)
     order_list_for_customer = Order.objects.filter(customer_id = customer)
-    print(order_list_for_customer)
     total = Decimal(0)
     for order in order_list_for_customer:
         if order.delivery_status == True:

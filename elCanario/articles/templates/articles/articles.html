@@ -4,23 +4,22 @@
     <title>{% translate 'Search Articles' %} - Canario Regionales</title>
 {% endblock title_section %}
 {% block title_section_content_upper %}
-    <h1 class="pb-6 text-3xl text-black">{% translate 'Search articles' %}:</h1>
+    {% translate 'Search articles' %}:
 {% endblock title_section_content_upper %}
 {% block section_content_upper %}
     {% include 'articles_search_header.html' %}
 {% endblock section_content_upper %}
 {% block title_section_content_under %}
-<div class="flex items-center justify-between pb-3 text-xl">
-    <!-- Latest Reports -->
-    <div class="flex items-center pb-3 text-xl">
-        <i class="mr-3 fas fa-list"></i>
-        <span>{% translate 'Articles List' %}</span>
+    <div class="flex items-center justify-between pb-3 text-xl">
+        <!-- Latest Reports -->
+        <div class="flex items-center pb-3 px-3 text-xl">
+            <span>{% translate 'Articles List' %}</span>
+        </div>
+        <div class="text-base flex gap-2">
+            <a class="btn btn-info" href="{% url 'articles:categories' %}">Categories</a>
+            <a class="btn btn-success" href="{% url 'articles:create' %}">Create Article</a>
+        </div>
     </div>
-    <div class="text-base flex gap-2">
-        {% button type="info" url='articles:categories' border="False" text="Categories" %}
-        {% button type="success" url='articles:create' border="False" text="Create Article" %}
-    </div>
-</div>
 {% endblock title_section_content_under %}
 
 {% block section_content_under %}
