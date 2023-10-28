@@ -1,5 +1,11 @@
 {% load i18n %}
 <div class="flex flex-col w-full lg:flex-row" id="categories_table" >
+    {% if not article_to_update %}
+        {% var article_cache=' ' %}
+    {% else %}
+        {% var article_cache=article_to_update.id %}
+    {% endif %}
+    {% card_article img=article_to_update.image id=article_to_update.id name=article_to_update.name categories=categories object=article_to_update values=values buy_price=article_to_update.buy_price increase=article_to_update.increase sell_price=article_to_update.sell_price stock=article_to_update.stock csrf_token=csrf_token%}
     <!-- Categories Block -->
     <div class="grid flex-grow h-auto card bg-base-300 rounded-box place-items-center py-10 max-sm:px-1 sm:px-4">
         <section>
@@ -14,7 +20,7 @@
                     <label class="label">
                         <span class="label-text-alt">&nbsp;</span>
                     </label>
-                    <a class="btn btn-success" type="submit" hx-post="{% url 'articles:category_create' %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-include="[name='category_name_new']"> {% translate 'Create' %}</a>
+                    <a class="btn btn-success" type="submit" hx-post="{% url 'articles:category_create' art_id=article_cache %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-include="[name='category_name_new']"> {% translate 'Create' %}</a>
                 </div>
             </div>
 
@@ -35,8 +41,8 @@
                                             <tr>
                                                 <td ><b>{{category.name}}</b></td>
                                                 <td class="flex items-center justify-center">
-                                                    <a class="btn btn-warning btn-sm md:btn-md max-xs:mx-0.5 max-sm:mx-1 sm:mx-2" type="submit" hx-get="{% url 'articles:category_update' external_link="False" cat_id=category.id cat_update_name=None %}" hx-swap="outerHTML" hx-target="#articles_category_value_section">{% translate 'Edit' %}</a>
-                                                    <a class="btn btn-error btn-sm md:btn-md max-xs:mx-0.5 max-sm:mx-1 sm:mx-2" type="submit" hx-delete="{% url 'articles:category_delete' cat_id=category.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-confirm="Are you sure you want to delete the category {{category.name}}?">{% translate 'Delete' %}</a>
+                                                    <a class="btn btn-warning btn-sm md:btn-md max-xs:mx-0.5 max-sm:mx-1 sm:mx-2" type="submit" hx-get="{% url 'articles:category_update' external_link="False" cat_id=category.id art_id=article_cache cat_update_name=None %}" hx-swap="outerHTML" hx-target="#articles_category_value_section">{% translate 'Edit' %}</a>
+                                                    <a class="btn btn-error btn-sm md:btn-md max-xs:mx-0.5 max-sm:mx-1 sm:mx-2" type="submit" hx-delete="{% url 'articles:category_delete' cat_id=category.id art_id=article_cache %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-confirm="Are you sure you want to delete the category {{category.name}}?">{% translate 'Delete' %}</a>
                                                 </td>
                                             </tr>
                                         {% endfor %}
@@ -58,10 +64,10 @@
                 <div class="flex justify-center items-center w-full">
                     <div class="indicator px-4">
                         {% if name_category_edition %}
-                            <button class="indicator-item badge badge-success" type="submit" id="update_name" hx-post="{% url 'articles:category_update_name' cat_id=category_to_update.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-include="[name='category_name_update']"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>
+                            <button class="indicator-item badge badge-success" type="submit" id="update_name" hx-post="{% url 'articles:category_update_name' cat_id=category_to_update.id art_id=article_cache %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-include="[name='category_name_update']"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>
                             <input for="update_name" class="input input-sm" type="text" id="category_name_update" name="category_name_update" value="{{category_to_update.name}}">
                         {% else %}
-                            <button class="indicator-item badge badge-warning" hx-get="{% url 'articles:category_update' external_link="False" cat_id=category_to_update.id cat_update_name="True" %}" hx-swap="outerHTML" hx-target="#articles_category_value_section"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>
+                            <button class="indicator-item badge badge-warning" hx-get="{% url 'articles:category_update' external_link="False" cat_id=category_to_update.id art_id=article_cache cat_update_name="True" %}" hx-swap="outerHTML" hx-target="#articles_category_value_section"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>
                             <strong>{{category_to_update.name}}</strong>
                         {% endif %}
                     </div>
@@ -77,7 +83,7 @@
                         <label class="label">
                             <span class="label-text-alt">&nbsp;</span>
                         </label>
-                        <a class="btn btn-success" type="submit" hx-post="{% url 'articles:value_create' cat_id=category_to_update.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-include="[name='value_name_new']">{% translate 'Create' %}</a>
+                        <a class="btn btn-success" type="submit" hx-post="{% url 'articles:value_create' art_id=article_cache cat_id=category_to_update.id art_id=article_cache%}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-include="[name='value_name_new']">{% translate 'Create' %}</a>
                     </div>
                 </div>
 
@@ -111,17 +117,17 @@
                                                     <td class="flex items-center justify-center">
                                                         {% if name_value_edition %}
                                                             {% if value_to_update == value %}
-                                                                <a class="btn btn-success btn-sm md:btn-md max-xs:mx-0.5 max-sm:mx-1 sm:mx-2" type="submit" hx-post="{% url 'articles:value_update_name' val_id=value.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-include="[name='value_name_update']">{% translate 'Save' %}</a>
+                                                                <a class="btn btn-success btn-sm md:btn-md max-xs:mx-0.5 max-sm:mx-1 sm:mx-2" type="submit" hx-post="{% url 'articles:value_update_name' val_id=value.id art_id=article_cache %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-include="[name='value_name_update']">{% translate 'Save' %}</a>
                                                             {% else %}
-                                                                <a class="btn btn-warning btn-sm md:btn-md max-xs:mx-0.5 max-sm:mx-1 sm:mx-2" type="submit" hx-get="{% url 'articles:value_update' cat_id=category_to_update.id val_id=value.id %}" hx-swap="outerHTML" hx-target="#articles_category_value_section">{% translate 'Edit' %}</a>
+                                                                <a class="btn btn-warning btn-sm md:btn-md max-xs:mx-0.5 max-sm:mx-1 sm:mx-2" type="submit" hx-get="{% url 'articles:value_update' cat_id=category_to_update.id val_id=value.id art_id=article_cache %}" hx-swap="outerHTML" hx-target="#articles_category_value_section">{% translate 'Edit' %}</a>
                                                             {% endif %}
                                                         {% else %}
                                                         
-                                                            <a class="btn btn-warning btn-sm md:btn-md max-xs:mx-0.5 max-sm:mx-1 sm:mx-2" type="submit" hx-get="{% url 'articles:value_update' cat_id=category_to_update.id val_id=value.id %}" hx-swap="outerHTML" hx-target="#articles_category_value_section">{% translate 'Edit' %}</a>
+                                                            <a class="btn btn-warning btn-sm md:btn-md max-xs:mx-0.5 max-sm:mx-1 sm:mx-2" type="submit" hx-get="{% url 'articles:value_update' cat_id=category_to_update.id val_id=value.id art_id=article_cache %}" hx-swap="outerHTML" hx-target="#articles_category_value_section">{% translate 'Edit' %}</a>
                                                         
                                                         {% endif %}
 
-                                                        <a class="btn btn-error btn-sm md:btn-md max-xs:mx-0.5 max-sm:mx-1 sm:mx-2" type="submit" hx-delete="{% url 'articles:value_delete' cat_id=category_to_update.id val_id=value.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-confirm="Are you sure you want to delete the value {{value.name}}?">{% translate 'Delete' %}</a>
+                                                        <a class="btn btn-error btn-sm md:btn-md max-xs:mx-0.5 max-sm:mx-1 sm:mx-2" type="submit" hx-delete="{% url 'articles:value_delete' cat_id=category_to_update.id val_id=value.id art_id=article_cache%}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="outerHTML" hx-target="#articles_category_value_section" hx-confirm="Are you sure you want to delete the value {{value.name}}?">{% translate 'Delete' %}</a>
 
                                                     </td>
                                                 </tr>
