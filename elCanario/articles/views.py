@@ -392,7 +392,7 @@ def articles_category_value_create(request,cat_id, art_id=None):
         context['values'] = Value.objects.filter(category_id = category_to_update)
     return render_login_required(request, template, context)
 
-def articles_category_update(request: object, external_link: str, cat_id:int, art_id:str=None) -> HttpResponse:
+def articles_category_update(request: object, external_link: str, cat_id:int, art_id:str=None, cat_update_name:str=None) -> HttpResponse:
     """redirects to the categories section taking the article with it.
         This is done in order to update the data in the categories section and then be able to edit the article easily.
 
@@ -429,7 +429,8 @@ def articles_category_update(request: object, external_link: str, cat_id:int, ar
         context['article_list'] = [article_to_update]
     context["categories"] = Category.objects.all()
     context['values'] = Value.objects.filter(category_id = category_to_update)
-    context["name_category_edition"] = True
+    if cat_update_name == "True":
+        context["name_category_edition"] = True
     return render_login_required(request, template, context)
 
 def articles_category_update_name(request, cat_id, art_id=None):

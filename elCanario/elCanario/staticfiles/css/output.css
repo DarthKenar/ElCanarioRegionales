@@ -2297,30 +2297,12 @@ html {
   border-color: hsl(var(--b1) / var(--tw-border-opacity));
 }
 
-.badge-primary {
-  --tw-border-opacity: 1;
-  border-color: hsl(var(--p) / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: hsl(var(--p) / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: hsl(var(--pc) / var(--tw-text-opacity));
-}
-
-.badge-secondary {
-  --tw-border-opacity: 1;
-  border-color: hsl(var(--s) / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: hsl(var(--s) / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: hsl(var(--sc) / var(--tw-text-opacity));
-}
-
-.badge-info {
+.badge-success {
   border-color: transparent;
   --tw-bg-opacity: 1;
-  background-color: hsl(var(--in) / var(--tw-bg-opacity));
+  background-color: hsl(var(--su) / var(--tw-bg-opacity));
   --tw-text-opacity: 1;
-  color: hsl(var(--inc) / var(--tw-text-opacity));
+  color: hsl(var(--suc) / var(--tw-text-opacity));
 }
 
 .badge-warning {
@@ -2331,19 +2313,9 @@ html {
   color: hsl(var(--wac) / var(--tw-text-opacity));
 }
 
-.badge-outline.badge-primary {
+.badge-outline.badge-success {
   --tw-text-opacity: 1;
-  color: hsl(var(--p) / var(--tw-text-opacity));
-}
-
-.badge-outline.badge-secondary {
-  --tw-text-opacity: 1;
-  color: hsl(var(--s) / var(--tw-text-opacity));
-}
-
-.badge-outline.badge-info {
-  --tw-text-opacity: 1;
-  color: hsl(var(--in) / var(--tw-text-opacity));
+  color: hsl(var(--su) / var(--tw-text-opacity));
 }
 
 .badge-outline.badge-warning {
@@ -3985,6 +3957,15 @@ details.collapse summary::-webkit-details-marker {
   line-height: 1.625;
 }
 
+.input-md {
+  height: 3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  line-height: 2;
+}
+
 .input-sm {
   height: 2rem;
   padding-left: 0.75rem;
@@ -4855,10 +4836,6 @@ details.collapse summary::-webkit-details-marker {
   margin-top: 0.15rem;
 }
 
-.ml-4 {
-  margin-left: 1rem;
-}
-
 .box-border {
   box-sizing: border-box;
 }
@@ -5296,10 +5273,6 @@ details.collapse summary::-webkit-details-marker {
 
 .w-screen {
   width: 100vw;
-}
-
-.w-32 {
-  width: 8rem;
 }
 
 .min-w-0 {
@@ -7412,11 +7385,6 @@ details.collapse summary::-webkit-details-marker {
     height: auto;
     width: 1rem;
   }
-}
-
-.first-letter\:py-6::first-letter {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
 }
 
 .selection\:bg-transparent *::-moz-selection {

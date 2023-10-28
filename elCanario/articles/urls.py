@@ -33,8 +33,8 @@ urlpatterns = [
 
     path('categories_create/<str:art_id>', articles_category_create, name="category_create"),
     path('categories_create', articles_category_create, name="category_create"),
-    path('categories_update/<str:external_link>/<int:cat_id>/<str:art_id>', articles_category_update, name="category_update"),
-    path('categories_update/<str:external_link>/<int:cat_id>', articles_category_update, name="category_update"),
+    path('categories_update/<str:external_link>/<int:cat_id>/<str:art_id>/<str:cat_update_name>', articles_category_update, name="category_update"),
+    path('categories_update/<str:external_link>/<int:cat_id>/<str:cat_update_name>', articles_category_update, name="category_update"),
     path('categories_update_name/<int:cat_id>/<str:art_id>', articles_category_update_name, name="category_update_name"),
     path('categories_update_name/<int:cat_id>', articles_category_update_name, name="category_update_name"),
     path('categories_delete/<int:cat_id>/<str:art_id>', articles_category_delete, name="category_delete"),

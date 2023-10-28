@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-25 21:57-0300\n"
-"PO-Revision-Date: 2023-10-25 21:57-0300\n"
+"PO-Revision-Date: 2023-10-28 02:47-0300\n"
 "Last-Translator:   <ioseph.dev@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -430,7 +430,7 @@ msgstr ""
 "{category_to_update.name}"
 
 #: .\articles\views.py:452
-#, python-brace-format
+#, python-brace-format, fuzzy
 msgid ""
 "Category has been successfully updated {category_to_update.name} --> "
 "{new_name}!"
