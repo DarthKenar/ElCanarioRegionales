@@ -8,7 +8,7 @@
     </div>
     <div class="flex-none gap-2">
         <div class="form-control max-sm:hidden">
-            <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" disabled  />
+            <a href="{% url 'settings:settings' %}" class="btn btn-ghost normal-case text-xl">{{user.username|title}}</a>
         </div>
         <div class="dropdown dropdown-end">
             <label tabindex="0" class="btn btn-ghost btn-circle avatar">
@@ -23,7 +23,7 @@
                 </div>
             </label>
             <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
-                <li><a href="{% url 'settings:settings' %}">{% trans 'Profile' %}</a></li> 
+                <li ><a href="{% url 'settings:settings' %}">{% trans 'Profile' %}</a></li> 
                 <li><a target="_blank" href="https://wa.me/542615878046?text=Hola,%20he%20notado%20un%20error%20en%20El%20Canario%20Regionales.%20%0ALo%20que%20sucede%20es%20que%20-">{% trans 'Support' %}</a></li>
                 <li><a target="_blank" class="justify-between" href="https://wa.me/542615878046?text=Hola,%20he%20estado%20viendo%20tu%20sistema%20de%20El%20Canario%20Regionales%20y%20me%20parece%20genial!%20%0AMi%20nombre%20es%20-">{% trans 'Contact Us' %}<span class="badge">New</span></a></li>
                 <li><a href="{% url 'account_logout' %}">{% trans 'Sign Out' %}</a></li>

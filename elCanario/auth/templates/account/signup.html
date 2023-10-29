@@ -11,16 +11,33 @@
     {% trans "Sign Up" as signup %}
     {% title text=signup %}
     <section class="flex justify-center items-center">
-        {% #block_center %}
+        {% #block_center form=form %}
             <div class="form-control py-10">
                 <p>
                     {% blocktrans %}Already have an account? Then please <a class="btn btn-sm text-sm font-normal lowercase" href="{{ login_url }}">sign in</a> .{% endblocktrans %}
                 </p> 
             </div>
-            {% #block_card class="h-80 px-6" %}
+            {% #block_card class="h-80 px-6" form=form %}
     
                 <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
                     {% csrf_token %}
+                    <div class="form-control">
+                        <label class="input-group input-group-sm">
+                            <span class="w-full">{{ form.username.label }}</span>
+                            <input id="{{ form.username.id_for_label }}"
+                                name="username"
+                                autocomplete="username"
+                                type="text"
+                                maxlength="150"
+                                minlength="4"
+                                placeholder="{{ form.username.label }}"
+                                class="input input-bordered input-sm"
+                                required />
+                        </label>
+                    </div>
+
+                    {% form_error errors=form.username.errors %}
+
                     <div class="form-control">
                         <label class="input-group input-group-sm">
                             <span class="w-full">{{ form.email.label }}</span>
@@ -75,6 +92,9 @@
                     </div>
                     {% if form.errors %}
                         {% for error in form.non_field_errors %}<p class="p-0 m-0 text-error text-xs">{{ error }}</p>{% endfor %}
+                    {% endif %}
+                    {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                     {% endif %}
                 </form>
             {% /block_card %}

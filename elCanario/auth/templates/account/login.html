@@ -9,17 +9,16 @@
 {% block base_head %}
 {% endblock base_head %}
 {% block base_content %}
-    <div class="w-full flex flex-wrap">
-
+    
+    <div class="w-full flex">
         <!-- Login Section -->
-        <div class="w-full md:w-1/2 flex justify-center items-center relative max-sm:py-20 max-sm:h-full">
-            <div class="w-full absolute top-0 z-50 ">
+        <div class="w-full md:w-1/2 flex justify-center items-center relative max-md:py-32">
+            <div class="absolute top-0 w-full">
                 {% menu %}
             </div>
+            
             {% #block_center %}
-
-                <div class="flex flex-col w-full border-opacity-50 ">
-    
+                
                     {% #block_card class="h-24" %}
                         <div class="p-2">
                             <a class="btn btn-outline"
@@ -63,14 +62,13 @@
                             </div>
                         </form>
                     {% /block_card %}
-                </div>
 
             {% /block_center %}
 
         </div>
 
         <!-- Image Section -->
-        <div class="w-1/2 shadow-2xl">
+        <div class="md:w-1/2 shadow-2xl max-md::hidden">
             <img class="object-cover w-full h-screen hidden md:block" src="{% static 'img/fondo-login.webp' %}">
         </div>
     </div>
