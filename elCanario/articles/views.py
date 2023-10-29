@@ -406,19 +406,11 @@ def articles_category_update(request: object, external_link: str, cat_id:int, ar
         HttpResponse: If the editing of the selected category is requested from a page external to the category section, the httpResponse template will be that of the category section and will add the category to be edited and the article from which it was selected to the context.
                     In case the edition is made from the same category section, it does not send the article from which the edition was requested and will return a partial template response.
     """
-    print("external_link -->", external_link)
-    print("External Link type", type(external_link))
-    print("CAT_ID -->", type(cat_id), f"cat_id {cat_id}")
-    print("ART_ID -->", type(art_id), f"art_id {art_id}")
 
     external_link = true_or_false_str_to_bool(external_link)
     if external_link == False:
-        print("NOT EXTERNAL LINK", external_link)
-        print("External Link type", type(external_link))
         template = "articles_category_value_section.html"
     else: 
-        print("EXTERNAL LINK", external_link)
-        print("External Link type", type(external_link))
         template = "categories.html"
     context={}
     category_to_update = Category.objects.get(id = cat_id)

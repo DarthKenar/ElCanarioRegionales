@@ -143,7 +143,6 @@ def customer_delete(request:object, pk:int)-> HttpResponse:
         context["delete_answer"] = _("The selected item could not be deleted because it does not exist. Contact support.")
         return render_login_required(request, template, context)
     else:
-        print("EL SISTEMA ESTA BORRANDO UNA ORDEN")
         context["delete_answer"] = _(f"Customer {customer.name} has been eliminated")
         message = MessageLog(info= _(f"Customer {customer.name} has been eliminated"))
         message.save()
