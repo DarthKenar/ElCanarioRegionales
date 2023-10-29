@@ -1,4 +1,3 @@
-from msilib.schema import CustomAction
 from typing import Tuple, Dict
 from django.utils.translation import gettext_lazy as _
 from django.http import HttpRequest, HttpResponse, QueryDict

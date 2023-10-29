@@ -1,5 +1,4 @@
 from random import choices
-import attr
 from django import forms
 from orders.models import Order
 from articles.models import Article
