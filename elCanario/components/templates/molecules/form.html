@@ -15,7 +15,6 @@
             <div class="w-full py-4 flex flex-col items-center justify-center">
 
                 {% if object_type == "order" %}
-                    
                     <label class="text-left w-full" for="id_{{field.label|lower|replace_spaces_with_underscore}}">{{field.label}}</label>
                     {{ field }}
                 {% elif object_type == "customer" %}
@@ -28,6 +27,7 @@
                         {{error}}
                     {% /message %}
                 {% endfor %}
+                
             </div>
             {% endfor %}
             <div class="w-full flex justify-center items-center">
