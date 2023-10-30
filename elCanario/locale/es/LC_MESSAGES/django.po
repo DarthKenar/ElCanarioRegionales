@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-30 10:39-0300\n"
-"PO-Revision-Date: 2023-10-30 10:53-0300\n"
+"POT-Creation-Date: 2023-10-30 11:50-0300\n"
+"PO-Revision-Date: 2023-10-30 11:54-0300\n"
 "Last-Translator:   <ioseph.dev@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -339,11 +339,6 @@ msgstr "El artículo no fue creado, porfavor revisa los campos."
 
 #: .\elCanario\articles\views.py:207
 #, python-brace-format
-#| msgid ""
-#| "Article whose name is {article.name}, with a buy price of "
-#| "{article.buy_price}, with an increase of {article.increase}, with a sell "
-#| "price of {article.sell_price}, and with {article.stock} stock has been "
-#| "Created."
 msgid ""
 "ARTICLE CREATED - Name: {article.name},\n"
 "Buy price: {article.buy_price},\n"
@@ -365,12 +360,6 @@ msgstr "El artículo {article.name} se creó correctamente."
 
 #: .\elCanario\articles\views.py:273
 #, python-brace-format
-#| msgid ""
-#| "Article of id {article_to_update.id} whose name is {article_to_update.name},"
-#| " with a buy price of {article_to_update.buy_price}, with an increase of "
-#| "{article_to_update.increase}, with a sell price of "
-#| "{article_to_update.sell_price}, and with {article_to_update.stock} stock has"
-#| " been updated."
 msgid ""
 "ARTICLUE UPDATED - Id: {article_to_update.id},\n"
 "Name: {article_to_update.name},\n"
@@ -407,13 +396,11 @@ msgstr "El artículo {article_to_delete.name} ha sido eliminado"
 
 #: .\elCanario\articles\views.py:303
 #, python-brace-format
-#| msgid "The category {category_to_update.name} has been eliminated."
 msgid "ARTICLE DELETED -  Name: {article_to_delete.name}."
 msgstr "ARTICLE DELETED - Nombre: {article_to_delete.name}."
 
 #: .\elCanario\articles\views.py:356
 #, python-brace-format
-#| msgid "The category {category_to_update.name} has been eliminated."
 msgid "CATEGORY CREATED - Name: {category_to_save.name}."
 msgstr "CATEGORY CREATED - Nombre: {category_to_save.name}."
 
@@ -428,9 +415,6 @@ msgstr "La categoría no podía guardarse."
 
 #: .\elCanario\articles\views.py:386
 #, python-brace-format
-#| msgid ""
-#| "The value {value_to_update.name} has been removed from the category "
-#| "{category_to_update.name}"
 msgid ""
 "VALUE CREATED - Name: {value_to_update.name},Category: "
 "{category_to_update.name}."
@@ -467,9 +451,6 @@ msgstr ""
 
 #: .\elCanario\articles\views.py:446
 #, python-brace-format
-#| msgid ""
-#| "Category successfully updated: Old name: {category_to_update.name}, New name"
-#| " {new_name}"
 msgid ""
 "CATEGORY NAME UPDATED: - Previous name: {category_to_update.name},\n"
 "New name: {new_name}."
@@ -492,7 +473,6 @@ msgstr "La categoría {category_to_update.name} ha sido eliminada."
 
 #: .\elCanario\articles\views.py:467
 #, python-brace-format
-#| msgid "The category {category_to_update.name} has been eliminated."
 msgid "CATEGORY DELETED - Category: {category_to_update.name}."
 msgstr "CATEGORY DELETED - Categoría: {category_to_update.name}."
 
@@ -507,7 +487,6 @@ msgstr ""
 
 #: .\elCanario\articles\views.py:483
 #, python-brace-format
-#| msgid "The category {category_to_update.name} has been eliminated."
 msgid ""
 "VALUE DELETED - Name: {value_to_update.name}\n"
 "Category: {category_to_update.name}."
@@ -528,9 +507,6 @@ msgstr ""
 
 #: .\elCanario\articles\views.py:522
 #, python-brace-format
-#| msgid ""
-#| "Category successfully updated: Old name: {category_to_update.name}, New name"
-#| " {new_name}"
 msgid ""
 "VALUE NAME UPDATED - Category {category_to_update.name}\n"
 "Previous Name: {value_to_update.name}\n"
@@ -542,8 +518,6 @@ msgstr ""
 
 #: .\elCanario\articles\views.py:527
 #, python-brace-format
-#| msgid ""
-#| "Unable to update the value name: {value_to_update.name} --> {new_name}!"
 msgid ""
 "Unable to update the value name: {value_to_update.name} --to--> {new_name}!"
 msgstr ""
@@ -788,11 +762,11 @@ msgstr "El Cliente {customer.name} fue eliminado."
 msgid "CUSTOMER DELETED - Name: {customer.name}"
 msgstr "CUSTOMER DELETED - Nombre: {customer.name}"
 
-#: .\elCanario\elCanario\settings.py:287
+#: .\elCanario\elCanario\settings.py:288
 msgid "English"
 msgstr "Inglés"
 
-#: .\elCanario\elCanario\settings.py:288
+#: .\elCanario\elCanario\settings.py:289
 msgid "Spanish"
 msgstr "Español"
 
@@ -924,9 +898,6 @@ msgstr "Ventas en la Base de datos"
 
 #: .\elCanario\orders\views.py:79
 #, python-brace-format
-#| msgid ""
-#| "Order Edited:\n"
-#| "\tCustomer: {customer_id.name}, articles: {articles_cart}, details: {details}"
 msgid ""
 "ORDER CREATED - Customer: {customer_id.name}, articles: {articles_cart}, "
 "details: {details}."
@@ -938,9 +909,6 @@ msgstr ""
 
 #: .\elCanario\orders\views.py:113
 #, python-brace-format
-#| msgid ""
-#| "Order Edited:\n"
-#| "\tCustomer: {customer_id.name}, articles: {articles_cart}, details: {details}"
 msgid ""
 "ORDER UPDATED - Customer: {customer_id.name}, articles: {articles_cart}, "
 "details: {details}."
@@ -960,7 +928,6 @@ msgstr ""
 
 #: .\elCanario\orders\views.py:147
 #, python-brace-format
-#| msgid "Order {order.pk} for {order.customer_id} has been eliminated"
 msgid "Order {order.pk} for {order.customer_id} has been eliminated."
 msgstr "Venta {order.pk} para {order.customer_id} ha sido eliminado"
 
@@ -977,18 +944,44 @@ msgstr ""
 msgid "Go"
 msgstr "Cambiar"
 
-#: .\elCanario\settings\templates\settings\settings.html:4
-#: .\elCanario\settings\templates\settings\settings.html:7
+#: .\elCanario\settings\templates\settings\settings.html:5
+#: .\elCanario\settings\templates\settings\settings.html:8
 msgid "My Account"
 msgstr "Mi Cuenta"
 
 #: .\elCanario\settings\templates\settings\settings.html:18
+msgid "EXPERIENCE SETTINGS"
+msgstr "CONFIGURACION DE DISEÑO"
+
+#: .\elCanario\settings\templates\settings\settings.html:21
 msgid "Change Theme"
 msgstr "Cambiar Tema"
 
-#: .\elCanario\settings\templates\settings\settings.html:23
+#: .\elCanario\settings\templates\settings\settings.html:26
 msgid "Change Language"
 msgstr "Cambiar Lenguaje"
+
+#: .\elCanario\settings\templates\settings\settings.html:30
+msgid "AUTENTIFICATION SETTINGS"
+msgstr "CONFIGURACION DE AUTENTIFICACION"
+
+#: .\elCanario\settings\templates\settings\settings.html:33
+#: .\elCanario\settings\templates\settings\settings.html:34
+#| msgid "Forgot Password?"
+msgid "Change Password"
+msgstr "Cambiar Contraseña"
+
+#: .\elCanario\settings\templates\settings\settings.html:38
+msgid "Emails Management"
+msgstr "Email"
+
+#: .\elCanario\settings\templates\settings\settings.html:40
+msgid "Verify Email"
+msgstr "Verificar Email"
+
+#: .\elCanario\settings\templates\settings\settings.html:42
+msgid "Verified"
+msgstr "Verificado"
 
 #, python-brace-format
 #~ msgid "New category whit name '{category_to_save.name}' has been created."

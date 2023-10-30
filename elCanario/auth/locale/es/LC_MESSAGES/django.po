@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-30 07:16-0300\n"
+"POT-Creation-Date: 2023-10-30 11:50-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,41 +36,41 @@ msgstr ""
 msgid "The following email addresses are associated with your account:"
 msgstr ""
 
-#: .\elCanario\auth\templates\account\email.html:29
+#: .\elCanario\auth\templates\account\email.html:28
 msgid "Verified"
 msgstr ""
 
-#: .\elCanario\auth\templates\account\email.html:31
+#: .\elCanario\auth\templates\account\email.html:30
 msgid "Unverified"
 msgstr ""
 
-#: .\elCanario\auth\templates\account\email.html:34
+#: .\elCanario\auth\templates\account\email.html:33
 msgid "Primary"
 msgstr ""
 
-#: .\elCanario\auth\templates\account\email.html:40
+#: .\elCanario\auth\templates\account\email.html:38
 msgid "Make Primary"
 msgstr ""
 
-#: .\elCanario\auth\templates\account\email.html:41
+#: .\elCanario\auth\templates\account\email.html:39
 #: .\elCanario\auth\templates\account\email_change.html:29
 msgid "Re-send Verification"
 msgstr ""
 
-#: .\elCanario\auth\templates\account\email.html:42
+#: .\elCanario\auth\templates\account\email.html:40
 #: .\elCanario\auth\templates\socialaccount\connections.html:35
 msgid "Remove"
 msgstr ""
 
-#: .\elCanario\auth\templates\account\email.html:50
+#: .\elCanario\auth\templates\account\email.html:48
 msgid "Add Email Address"
 msgstr ""
 
-#: .\elCanario\auth\templates\account\email.html:54
+#: .\elCanario\auth\templates\account\email.html:52
 msgid "Add Email"
 msgstr ""
 
-#: .\elCanario\auth\templates\account\email.html:62
+#: .\elCanario\auth\templates\account\email.html:60
 msgid "Do you really want to remove the selected email address?"
 msgstr ""
 
