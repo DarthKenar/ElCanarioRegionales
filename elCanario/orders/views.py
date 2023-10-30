@@ -76,7 +76,7 @@ class OrderCreateView(LoginRequiredMixin, CreateView):
         articles_cart = form.cleaned_data['articles_cart']
         articles = [art.name for art in articles_cart]
         details = form.cleaned_data['details']
-        message = MessageLog(info=f_("ORDER CREATED\n\tCustomer: {customer_id.name}, articles: {articles_cart}, details: {details}."))
+        message = MessageLog(info=_(f"ORDER CREATED\n\tCustomer: {customer_id.name}, articles: {articles_cart}, details: {details}."))
         message.save()
         return super().form_valid(form) #Esto hace que se guarde.
 
@@ -110,7 +110,7 @@ class OrderUpdateView(LoginRequiredMixin,UpdateView):
         customer_id = form.cleaned_data['customer_id']
         articles_cart = form.cleaned_data['articles_cart']
         details = form.cleaned_data['details']
-        message = MessageLog(info=f_("ORDER UPDATED\n\tCustomer: {customer_id.name}, articles: {articles_cart}, details: {details}."))
+        message = MessageLog(info=_(f"ORDER UPDATED\n\tCustomer: {customer_id.name}, articles: {articles_cart}, details: {details}."))
         message.save()
         return super().form_valid(form)
 
@@ -141,11 +141,11 @@ def order_delete(request:object, pk:int)-> HttpResponse:
     try:
         order = get_object_or_404(Order, id=pk)
     except Exception as e:
-        context["delete_answer"] = f_("The selected order could not be deleted because it does not exist. Contact support.")
+        context["delete_answer"] = _(f"The selected order could not be deleted because it does not exist. Contact support.")
         return render_login_required(request, template, context)
     else:
-        context["delete_answer"] = f_("Order {order.pk} for {order.customer_id} has been eliminated.")
-        message = MessageLog(info=f_("ORDER DELETED\n\tOrder id: {order.pk},\nCustomer: {order.customer_id}."))
+        context["delete_answer"] = _(f"Order {order.pk} for {order.customer_id} has been eliminated.")
+        message = MessageLog(info=_(f"ORDER DELETED\n\tOrder id: {order.pk},\nCustomer: {order.customer_id}."))
         message.save()
         order.delete()
         orders = Order.objects.all()

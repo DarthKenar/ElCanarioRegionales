@@ -79,7 +79,7 @@ class CustomerCreateView(LoginRequiredMixin, CreateView):
         phone_number = form.cleaned_data['phone_number']
         address = form.cleaned_data['address']
         email = form.cleaned_data['email']
-        message = MessageLog(info=f_("CUSTOMER CREATED\n\tName: {name},\n Dni: {dni},\n Phone number: {phone_number},\n Addres: {address},\n Email{email}"))
+        message = MessageLog(info=_(f"CUSTOMER CREATED\n\tName: {name},\n Dni: {dni},\n Phone number: {phone_number},\n Addres: {address},\n Email{email}"))
         message.save()
         return super().form_valid(form) #Esto hace que se guarde.
 
@@ -112,7 +112,7 @@ class CustomerUpdateView(LoginRequiredMixin, UpdateView):
         phone_number = form.cleaned_data['phone_number']
         address = form.cleaned_data['address']
         email = form.cleaned_data['email']
-        message = MessageLog(info=f_("CUSTOMER UPDATED\n\tName: {name},\n Dni: {dni},\n Phone number: {phone_number},\n Addres: {address},\n Email{email}"))
+        message = MessageLog(info=_(f"CUSTOMER UPDATED\n\tName: {name},\n Dni: {dni},\n Phone number: {phone_number},\n Addres: {address},\n Email{email}"))
         message.save()
         return super().form_valid(form) #Esto hace que se guarde.
 
