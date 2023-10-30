@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-28 18:46-0300\n"
+"POT-Creation-Date: 2023-10-30 07:16-0300\n"
 "PO-Revision-Date: 2023-10-28 19:02-0300\n"
 "Last-Translator:   <ioseph.dev@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -190,7 +190,7 @@ msgstr "No items were found with values in the selected category."
 #: .\elCanario\components\templates\molecules\card_customer.html:11
 #: .\elCanario\customers\forms.py:10
 #: .\elCanario\customers\templates\customers\partials\customers_search_header.html:6
-#: .\elCanario\customers\utils.py:85 .\elCanario\customers\views.py:29
+#: .\elCanario\customers\utils.py:84 .\elCanario\customers\views.py:29
 msgid "Name"
 msgstr "Name"
 
@@ -222,7 +222,6 @@ msgid "Save"
 msgstr "Save"
 
 #: .\elCanario\articles\templates\articles\partials\categories_table.html:19
-#| msgid "New Category"
 msgid "New category"
 msgstr "New category"
 
@@ -248,7 +247,6 @@ msgid "Delete"
 msgstr "Delete"
 
 #: .\elCanario\articles\templates\articles\partials\categories_table.html:82
-#| msgid "New name:"
 msgid "New value"
 msgstr "New value"
 
@@ -297,11 +295,11 @@ msgstr "Buy price"
 msgid "Increment"
 msgstr "Increment"
 
-#: .\elCanario\articles\utils.py:308 .\elCanario\customers\utils.py:47
+#: .\elCanario\articles\utils.py:308 .\elCanario\customers\utils.py:46
 msgid "Id:"
 msgstr "Id:"
 
-#: .\elCanario\articles\utils.py:310 .\elCanario\customers\utils.py:59
+#: .\elCanario\articles\utils.py:310 .\elCanario\customers\utils.py:58
 msgid "Name:"
 msgstr "Name:"
 
@@ -337,79 +335,14 @@ msgstr "Articles in Database"
 msgid "The item has not been created, please check the fields again."
 msgstr "The item has not been created, please check the fields again."
 
-#: .\elCanario\articles\views.py:207
-#, python-brace-format
-msgid ""
-"Article whose name is {article.name}, with a buy price of "
-"{article.buy_price}, with an increase of {article.increase}, with a sell "
-"price of {article.sell_price}, and with {article.stock} stock has been "
-"Created."
-msgstr ""
-"Article whose name is {article.name}, with a buy price of "
-"{article.buy_price}, with an increase of {article.increase}, with a sell "
-"price of {article.sell_price}, and with {article.stock} stock has been "
-"Created."
-
-#: .\elCanario\articles\views.py:216
-#, python-brace-format
-msgid "The article {article.name} has been saved correctly"
-msgstr "The article {article.name} has been saved correctly"
-
-#: .\elCanario\articles\views.py:273
-#, python-brace-format
-msgid ""
-"Article of id {article_to_update.id} whose name is {article_to_update.name},"
-" with a buy price of {article_to_update.buy_price}, with an increase of "
-"{article_to_update.increase}, with a sell price of "
-"{article_to_update.sell_price}, and with {article_to_update.stock} stock has"
-" been updated."
-msgstr ""
-"Article of id {article_to_update.id} whose name is {article_to_update.name},"
-" with a buy price of {article_to_update.buy_price}, with an increase of "
-"{article_to_update.increase}, with a sell price of "
-"{article_to_update.sell_price}, and with {article_to_update.stock} stock has"
-" been updated."
-
 #: .\elCanario\articles\views.py:283
 #, python-brace-format
 msgid "The article {article_to_update.name} has been successfully updated"
 msgstr "The article {article_to_update.name} has been successfully updated"
 
-#: .\elCanario\articles\views.py:299
-msgid ""
-"The selected article could not be deleted because it does not exist. Please "
-"contact Support"
-msgstr ""
-"The selected article could not be deleted because it does not exist. Please "
-"contact Support"
-
-#: .\elCanario\articles\views.py:302 .\elCanario\articles\views.py:303
-#, python-brace-format
-msgid "The article {article_to_delete.name} has been eliminated"
-msgstr "The article {article_to_delete.name} has been eliminated"
-
-#: .\elCanario\articles\views.py:356
-#, python-brace-format
-msgid "New category whit name '{category_to_save.name}' has been created."
-msgstr "New category whit name '{category_to_save.name}' has been created."
-
-#: .\elCanario\articles\views.py:359
-#, python-brace-format
-msgid "The category {category_to_save.name} has been successfully saved!"
-msgstr "The category {category_to_save.name} has been successfully saved!"
-
 #: .\elCanario\articles\views.py:361
 msgid "Category could not be saved!"
 msgstr "Category could not be saved!"
-
-#: .\elCanario\articles\views.py:386
-#, python-brace-format
-msgid ""
-"A new value for the category '{category_to_update.name}'has been created "
-"whit the name '{value_to_update.name}'"
-msgstr ""
-"A new value for the category '{category_to_update.name}'has been created "
-"whit the name '{value_to_update.name}'"
 
 #: .\elCanario\articles\views.py:388
 #, python-brace-format
@@ -429,7 +362,7 @@ msgstr ""
 "The value {value_name} could not be saved for the category: "
 "{category_to_update.name}"
 
-#: .\elCanario\articles\views.py:453
+#: .\elCanario\articles\views.py:445
 #, python-brace-format
 msgid ""
 "Category has been successfully updated {category_to_update.name} --> "
@@ -438,28 +371,40 @@ msgstr ""
 "Category has been successfully updated {category_to_update.name} --> "
 "{new_name}!"
 
-#: .\elCanario\articles\views.py:454
-#, python-brace-format
+#: .\elCanario\articles\views.py:446
+#, fuzzy, python-brace-format
+#| msgid ""
+#| "Category successfully updated: Old name: {category_to_update.name}, New "
+#| "name {new_name}"
 msgid ""
-"Category successfully updated: Old name: {category_to_update.name}, New name"
-" {new_name}"
+"CATEGORY NAME UPDATED:\n"
+"\tPrevious name: {category_to_update.name},\n"
+"New name: {new_name}."
 msgstr ""
-"Category successfully updated: Old name: {category_to_update.name}, New name"
-" {new_name}"
+"Category successfully updated: Old name: {category_to_update.name}, New name "
+"{new_name}"
 
-#: .\elCanario\articles\views.py:459
+#: .\elCanario\articles\views.py:451
 #, python-brace-format
 msgid ""
 "Unable to update the category name {category_to_update.name} --> {new_name}!"
 msgstr ""
 "Unable to update the category name {category_to_update.name} --> {new_name}!"
 
-#: .\elCanario\articles\views.py:473 .\elCanario\articles\views.py:475
+#: .\elCanario\articles\views.py:465
 #, python-brace-format
 msgid "The category {category_to_update.name} has been eliminated."
 msgstr "The category {category_to_update.name} has been eliminated."
 
-#: .\elCanario\articles\views.py:490 .\elCanario\articles\views.py:491
+#: .\elCanario\articles\views.py:467
+#, fuzzy, python-brace-format
+#| msgid "The category {category_to_update.name} has been eliminated."
+msgid ""
+"CATEGORY DELETED\n"
+"\tCategory: {category_to_update.name}."
+msgstr "The category {category_to_update.name} has been eliminated."
+
+#: .\elCanario\articles\views.py:482
 #, python-brace-format
 msgid ""
 "The value {value_to_update.name} has been removed from the category "
@@ -468,21 +413,21 @@ msgstr ""
 "The value {value_to_update.name} has been removed from the category "
 "{category_to_update.name}"
 
-#: .\elCanario\articles\views.py:529 .\elCanario\articles\views.py:530
+#: .\elCanario\articles\views.py:521
 #, python-brace-format
 msgid ""
 "A category value {value_to_update.category_id.name} has been successfully "
-"updated: Previous value name: {category_to_update.name}, New name "
-"{new_name}."
+"updated: Previous value name: {category_to_update.name}, New name {new_name}."
 msgstr ""
 "A category value {value_to_update.category_id.name} has been successfully "
-"updated: Previous value name: {category_to_update.name}, New name "
-"{new_name}."
+"updated: Previous value name: {category_to_update.name}, New name {new_name}."
 
-#: .\elCanario\articles\views.py:535
-#, python-brace-format
+#: .\elCanario\articles\views.py:527
+#, fuzzy, python-brace-format
+#| msgid ""
+#| "Unable to update the value name: {value_to_update.name} --> {new_name}!"
 msgid ""
-"Unable to update the value name: {value_to_update.name} --> {new_name}!"
+"Unable to update the value name: {value_to_update.name} --to--> {new_name}!"
 msgstr ""
 "Unable to update the value name: {value_to_update.name} --> {new_name}!"
 
@@ -509,7 +454,7 @@ msgstr "Sign Up"
 #: .\elCanario\components\templates\molecules\card_customer.html:18
 #: .\elCanario\customers\forms.py:12
 #: .\elCanario\customers\templates\customers\partials\customers_search_header.html:8
-#: .\elCanario\customers\utils.py:88
+#: .\elCanario\customers\utils.py:87
 msgid "Phone number"
 msgstr "Phone number"
 
@@ -520,7 +465,7 @@ msgstr "Total Purchased"
 #: .\elCanario\components\templates\molecules\card_customer.html:26
 #: .\elCanario\customers\forms.py:13
 #: .\elCanario\customers\templates\customers\partials\customers_search_header.html:10
-#: .\elCanario\customers\utils.py:76
+#: .\elCanario\customers\utils.py:75
 msgid "Address"
 msgstr "Address"
 
@@ -530,7 +475,7 @@ msgid "Dni"
 msgstr "Dni"
 
 #: .\elCanario\components\templates\molecules\card_customer.html:36
-#: .\elCanario\customers\forms.py:14 .\elCanario\customers\utils.py:82
+#: .\elCanario\customers\forms.py:14 .\elCanario\customers\utils.py:81
 msgid "Email"
 msgstr "Email"
 
@@ -623,14 +568,14 @@ msgid "Update Customer Section"
 msgstr "Update Customer Section"
 
 #: .\elCanario\customers\templates\customers\partials\customers_search_header.html:5
-#: .\elCanario\customers\utils.py:73
+#: .\elCanario\customers\utils.py:72
 #: .\elCanario\orders\templates\orders\partials\orders_search_header.html:5
 #: .\elCanario\orders\utils.py:56 .\elCanario\orders\utils.py:88
 msgid "ID"
 msgstr "ID"
 
 #: .\elCanario\customers\templates\customers\partials\customers_search_header.html:7
-#: .\elCanario\customers\utils.py:79
+#: .\elCanario\customers\utils.py:78
 msgid "DNI"
 msgstr "DNI"
 
@@ -639,27 +584,27 @@ msgid "E-mail"
 msgstr "E-mail"
 
 #: .\elCanario\customers\templates\customers\partials\customers_search_header.html:11
-#: .\elCanario\customers\utils.py:91
+#: .\elCanario\customers\utils.py:90
 msgid "Total purchased"
 msgstr "Total purchased"
 
-#: .\elCanario\customers\utils.py:50
+#: .\elCanario\customers\utils.py:49
 msgid "Address:"
 msgstr "Address:"
 
-#: .\elCanario\customers\utils.py:53
+#: .\elCanario\customers\utils.py:52
 msgid "DNI:"
 msgstr "DNI:"
 
-#: .\elCanario\customers\utils.py:56
+#: .\elCanario\customers\utils.py:55
 msgid "Email:"
 msgstr "Email:"
 
-#: .\elCanario\customers\utils.py:62
+#: .\elCanario\customers\utils.py:61
 msgid "Phone number:"
 msgstr "Phone number:"
 
-#: .\elCanario\customers\utils.py:65
+#: .\elCanario\customers\utils.py:64
 msgid "Total purchased:"
 msgstr "Total purchased:"
 
@@ -675,10 +620,17 @@ msgstr ""
 "The selected item could not be deleted because it does not exist. Contact "
 "support."
 
-#: .\elCanario\customers\views.py:147 .\elCanario\customers\views.py:148
+#: .\elCanario\customers\views.py:146
 #, python-brace-format
 msgid "Customer {customer.name} has been eliminated"
 msgstr "Customer {customer.name} has been eliminated"
+
+#: .\elCanario\customers\views.py:147
+#, python-brace-format
+msgid ""
+"CUSTOMER DELETED\n"
+"\tName: {customer.name}"
+msgstr ""
 
 #: .\elCanario\elCanario\settings.py:287
 msgid "English"
@@ -808,37 +760,6 @@ msgstr "Delivery Status"
 msgid "Orders in Database"
 msgstr "Orders in Database"
 
-#: .\elCanario\orders\views.py:78
-#, python-brace-format
-msgid ""
-"Order created:\n"
-"\tCustomer: {customer_id.name}, articles: {articles_cart}, details: {details}"
-msgstr ""
-"Order created:\n"
-"Customer: {customer_id.name}, articles: {articles_cart}, details: {details}"
-
-#: .\elCanario\orders\views.py:112
-#, python-brace-format
-msgid ""
-"Order Edited:\n"
-"\tCustomer: {customer_id.name}, articles: {articles_cart}, details: {details}"
-msgstr ""
-"Order Edited:\n"
-"Customer: {customer_id.name}, articles: {articles_cart}, details: {details}"
-
-#: .\elCanario\orders\views.py:143
-msgid ""
-"The selected order could not be deleted because it does not exist. Contact "
-"support."
-msgstr ""
-"The selected order could not be deleted because it does not exist. Contact "
-"support."
-
-#: .\elCanario\orders\views.py:147 .\elCanario\orders\views.py:148
-#, python-brace-format
-msgid "Order {order.pk} for {order.customer_id} has been eliminated"
-msgstr "Order {order.pk} for {order.customer_id} has been eliminated"
-
 #: .\elCanario\settings\templates\settings\includes\languages.html:16
 msgid "Go"
 msgstr "Go"
@@ -849,7 +770,6 @@ msgid "My Account"
 msgstr "My Account"
 
 #: .\elCanario\settings\templates\settings\settings.html:18
-#| msgid "Change Email"
 msgid "Change Theme"
 msgstr "Change Theme"
 
@@ -857,11 +777,98 @@ msgstr "Change Theme"
 msgid "Change Language"
 msgstr "Change Language"
 
+#, python-brace-format
+#~ msgid ""
+#~ "Article whose name is {article.name}, with a buy price of {article."
+#~ "buy_price}, with an increase of {article.increase}, with a sell price of "
+#~ "{article.sell_price}, and with {article.stock} stock has been Created."
+#~ msgstr ""
+#~ "Article whose name is {article.name}, with a buy price of {article."
+#~ "buy_price}, with an increase of {article.increase}, with a sell price of "
+#~ "{article.sell_price}, and with {article.stock} stock has been Created."
+
+#, python-brace-format
+#~ msgid "The article {article.name} has been saved correctly"
+#~ msgstr "The article {article.name} has been saved correctly"
+
+#, python-brace-format
+#~ msgid ""
+#~ "Article of id {article_to_update.id} whose name is {article_to_update."
+#~ "name}, with a buy price of {article_to_update.buy_price}, with an "
+#~ "increase of {article_to_update.increase}, with a sell price of "
+#~ "{article_to_update.sell_price}, and with {article_to_update.stock} stock "
+#~ "has been updated."
+#~ msgstr ""
+#~ "Article of id {article_to_update.id} whose name is {article_to_update."
+#~ "name}, with a buy price of {article_to_update.buy_price}, with an "
+#~ "increase of {article_to_update.increase}, with a sell price of "
+#~ "{article_to_update.sell_price}, and with {article_to_update.stock} stock "
+#~ "has been updated."
+
+#~ msgid ""
+#~ "The selected article could not be deleted because it does not exist. "
+#~ "Please contact Support"
+#~ msgstr ""
+#~ "The selected article could not be deleted because it does not exist. "
+#~ "Please contact Support"
+
+#, python-brace-format
+#~ msgid "The article {article_to_delete.name} has been eliminated"
+#~ msgstr "The article {article_to_delete.name} has been eliminated"
+
+#, python-brace-format
+#~ msgid "New category whit name '{category_to_save.name}' has been created."
+#~ msgstr "New category whit name '{category_to_save.name}' has been created."
+
+#, python-brace-format
+#~ msgid "The category {category_to_save.name} has been successfully saved!"
+#~ msgstr "The category {category_to_save.name} has been successfully saved!"
+
+#, python-brace-format
+#~ msgid ""
+#~ "A new value for the category '{category_to_update.name}'has been created "
+#~ "whit the name '{value_to_update.name}'"
+#~ msgstr ""
+#~ "A new value for the category '{category_to_update.name}'has been created "
+#~ "whit the name '{value_to_update.name}'"
+
+#, python-brace-format
+#~ msgid ""
+#~ "Order created:\n"
+#~ "\tCustomer: {customer_id.name}, articles: {articles_cart}, details: "
+#~ "{details}"
+#~ msgstr ""
+#~ "Order created:\n"
+#~ "Customer: {customer_id.name}, articles: {articles_cart}, details: "
+#~ "{details}"
+
+#, python-brace-format
+#~ msgid ""
+#~ "Order Edited:\n"
+#~ "\tCustomer: {customer_id.name}, articles: {articles_cart}, details: "
+#~ "{details}"
+#~ msgstr ""
+#~ "Order Edited:\n"
+#~ "Customer: {customer_id.name}, articles: {articles_cart}, details: "
+#~ "{details}"
+
+#~ msgid ""
+#~ "The selected order could not be deleted because it does not exist. "
+#~ "Contact support."
+#~ msgstr ""
+#~ "The selected order could not be deleted because it does not exist. "
+#~ "Contact support."
+
+#, python-brace-format
+#~ msgid "Order {order.pk} for {order.customer_id} has been eliminated"
+#~ msgstr "Order {order.pk} for {order.customer_id} has been eliminated"
+
 #~ msgid "Correctly"
 #~ msgstr "Correctly"
 
 #, python-brace-format
-#~ msgid "Se creo una nueva categoría con el nombre de '{category_to_save.name}'"
+#~ msgid ""
+#~ "Se creo una nueva categoría con el nombre de '{category_to_save.name}'"
 #~ msgstr ""
 #~ "Se creo una nueva categoría con el nombre de '{category_to_save.name}'"
 
