@@ -1,4 +1,5 @@
 {% extends 'base_home.html' %}
+
 {% load i18n %}
 {% block title_section %}
     <title>{% translate 'My Account' %} - Canario Regionales</title>
@@ -14,6 +15,8 @@
 {% block section_content_under %}
     <section class="flex justify-center items-center">
         <div class="flex flex-col max-lg:w-full lg:w-5/6">
+            <h1>{% translate 'EXPERIENCE SETTINGS' %}</h1>
+            <div class="divider"></div>
             <div class="grid h-40 card bg-base-300 rounded-box place-items-center">
                 <h2 class="text-3xl p-2">{% translate 'Change Theme' %}</h2>
                 {% theme_switch %}
@@ -22,6 +25,22 @@
             <div class="grid h-40 card bg-base-300 rounded-box place-items-center">
                 <h2 class="text-3xl p-2">{% translate 'Change Language' %}</h2>
                 {% include 'languages.html' %}
+            </div>
+            <div class="divider"></div>
+                <h1>{% translate 'AUTENTIFICATION SETTINGS' %}</h1>
+            <div class="divider"></div>
+            <div class="grid h-40 card bg-base-300 rounded-box place-items-center">
+                <h2 class="text-3xl p-2">{% translate 'Change Password' %}</h2>
+                <a href="{% url 'account_set_password' %}" class="btn btn-outline">{% translate 'Change Password' %}</a>
+            </div>
+            <div class="divider"></div>
+            <div class="grid h-40 card bg-base-300 rounded-box place-items-center">
+                <h2 class="text-3xl p-2">{% translate 'Emails Management' %}</h2>
+                {% if user.emailverified %}
+                    <a href="{% url 'account_email' %}" class="btn btn-outline">{% translate 'Verify Email' %}</a>
+                {% else %}
+                    <a href="#" class="btn btn-disabled">{% translate 'Verified' %}</a>
+                {% endif %}
             </div>
         </div>
     </section>

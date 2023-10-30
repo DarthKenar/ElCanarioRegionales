@@ -5915,6 +5915,10 @@ details.collapse summary::-webkit-details-marker {
   border-top-width: 0px;
 }
 
+.border-s {
+  border-inline-start-width: 1px;
+}
+
 .\!border-solid {
   border-style: solid !important;
 }
@@ -6004,6 +6008,11 @@ details.collapse summary::-webkit-details-marker {
 .border-white {
   --tw-border-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
+}
+
+.border-success {
+  --tw-border-opacity: 1;
+  border-color: rgb(20 164 77 / var(--tw-border-opacity));
 }
 
 .border-t-transparent {
