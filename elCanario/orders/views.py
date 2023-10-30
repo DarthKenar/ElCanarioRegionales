@@ -123,7 +123,7 @@ class OrderCreateView(LoginRequiredMixin, CreateView):
         details = form.cleaned_data['details']
         message = MessageLog(info=_(f"ORDER CREATED - Customer: {customer_id.name}, articles: {articles}, details: {details}."))
         message.save()
-        return super().form_valid(form) #Esto hace que se guarde.
+        return super().form_valid(form)
 
     def get_success_url(self) -> str:
         """Once the order is saved, the quantity of items, the total price paid and the total sales price of the order are updated.
@@ -229,7 +229,7 @@ def order_delete(request:object, pk:int)-> HttpResponse:
     - Login required.
     Args:
         request (object): request
-        pk (int): Identifier of the object to be deleted.
+        pk (int): Identifier of the order to be deleted.
 
     Returns:
         HttpResponse: returns the list of all orders in context

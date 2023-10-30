@@ -11,7 +11,7 @@ from orders.models import Order
 from customers.models import Customer
 import pytz
 def get_orders_for_search_input(datatype_input:str, search_input:str=''):
-    """Filters items depending on the type of search entered by the user
+    """Filters orders depending on the type of search entered by the user
 
     Args:
         datatype_input (str): Type of data entered by the user
