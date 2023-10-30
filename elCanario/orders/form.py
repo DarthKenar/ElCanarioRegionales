@@ -14,3 +14,16 @@ class OrderForm(forms.ModelForm):
             'details': forms.Textarea(attrs={'class':'textarea textarea-bordered w-full'}),
             'delivery_status': forms.Select(attrs={'class':'select select-bordered w-full'}, choices=choices)
         }
+
+    def clean(self):
+        cleaned_data = super().clean()
+        customer_id = cleaned_data.get('customer_id')
+        delivery_status = cleaned_data.get('delivery_status')
+
+        if delivery_status == None:
+            existing_orders = Order.objects.filter(customer_id=customer_id)
+
+            if existing_orders.exists():
+                self.add_error('customer_id',f"A pending order already exists for the customer {customer_id.name}")
+
+        return cleaned_data

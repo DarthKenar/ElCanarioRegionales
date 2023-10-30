@@ -28,11 +28,11 @@ createsuperuser = "python elCanario/manage.py createsuperuser --username='admin'
 server = "elCanario/manage.py runserver"
 collect = "elCanario/manage.py collectstatic"
 tail = "npx tailwindcss -i elCanario/elCanario/staticfiles/css/input.css -o elCanario/elCanario/staticfiles/css/output.css --watch"
+test = "elCanario/manage.py test"
 
 format = "black elCanario"
 indent = "djhtml elCanario/apps -t 4"
 linter = "ruff elCanario"
-test = "pytest elCanario"
 [tool.pdm.dev-dependencies]
 dev = [
     "django-rosetta>=0.9.9",

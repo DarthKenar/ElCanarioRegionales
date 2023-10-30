@@ -1,9 +1,12 @@
 from django.db import models
 from articles import models as articles_models
 from customers import models as customers_models
+from django.utils.translation import gettext_lazy as _
+from django.core.exceptions import ValidationError
 # Create your models here.
+
 class Order(models.Model):
-    customer_id = models.ForeignKey(customers_models.Customer,verbose_name="Customer", on_delete=models.CASCADE)
+    customer_id = models.ForeignKey(customers_models.Customer,verbose_name="Customer", on_delete=models.CASCADE, unique=False)
     articles_cart = models.ManyToManyField(articles_models.Article, verbose_name="Articles", related_name="articles_cart", through="ArticleOrder")
     article_quantity = models.PositiveSmallIntegerField(verbose_name="Articles Quantity", editable=False, blank=True, null=True)
     total_pay = models.DecimalField(verbose_name="Total pay", max_digits=10, decimal_places=2, editable=False, blank=True, null=True)
@@ -20,6 +23,18 @@ class Order(models.Model):
     def __str__(self) -> str:
         return f"Customer: {self.customer_id.name}, phone: {self.customer_id.phone_number}, total: {self.total_pay}, status: {self.delivery_status}"
 
+    def clean(self):
+        if self.delivery_status is None:
+            existing_orders = Order.objects.filter(customer_id=self.customer_id_id, delivery_status=None)
+    
+            if existing_orders.exists():
+                raise ValidationError(_(f"A pending order already exists for the customer {self.customer_id.name}"))
+                
+        super().clean()
+
+    def save(self, *args, **kwargs):
+        self.clean()
+        super().save(*args, **kwargs)
 
 class ArticleOrder(models.Model):
     article_id = models.ForeignKey(articles_models.Article,on_delete=models.CASCADE)
