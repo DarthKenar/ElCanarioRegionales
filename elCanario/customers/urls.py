@@ -12,7 +12,6 @@ urlpatterns = [
     path('create_form', CustomerCreateTemplate.as_view(), name="create_htmx"),
 
     path('update/<int:pk>/', CustomerUpdateView.as_view(), name="update"),
-    # path('update/<int:pk>/<str:status>', CustomerUpdateView.as_view(), name="update"),
     path('update_form/<int:pk>/', CustomerUpdateTemplate.as_view(), name="update_htmx"),
 
     path('delete/<int:pk>', customer_delete, name="delete"),
