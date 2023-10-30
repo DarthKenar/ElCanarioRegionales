@@ -79,7 +79,7 @@ class CustomerCreateView(LoginRequiredMixin, CreateView):
         phone_number = form.cleaned_data['phone_number']
         address = form.cleaned_data['address']
         email = form.cleaned_data['email']
-        message = MessageLog(info=f"Customer created:\n\tName: {name}, Dni: {dni}, Phone number: {phone_number}, Addres: {address}, Email{email}")
+        message = MessageLog(info=f_("CUSTOMER CREATED\n\tName: {name},\n Dni: {dni},\n Phone number: {phone_number},\n Addres: {address},\n Email{email}"))
         message.save()
         return super().form_valid(form) #Esto hace que se guarde.
 
@@ -112,7 +112,7 @@ class CustomerUpdateView(LoginRequiredMixin, UpdateView):
         phone_number = form.cleaned_data['phone_number']
         address = form.cleaned_data['address']
         email = form.cleaned_data['email']
-        message = MessageLog(info=f"Customer updated:\n\tName: {name}, Dni: {dni}, Phone number: {phone_number}, Addres: {address}, Email{email}")
+        message = MessageLog(info=f_("CUSTOMER UPDATED\n\tName: {name},\n Dni: {dni},\n Phone number: {phone_number},\n Addres: {address},\n Email{email}"))
         message.save()
         return super().form_valid(form) #Esto hace que se guarde.
 
@@ -144,7 +144,7 @@ def customer_delete(request:object, pk:int)-> HttpResponse:
         return render_login_required(request, template, context)
     else:
         context["delete_answer"] = _(f"Customer {customer.name} has been eliminated")
-        message = MessageLog(info= _(f"Customer {customer.name} has been eliminated"))
+        message = MessageLog(info= _(f"CUSTOMER DELETED\n\tName: {customer.name}"))
         message.save()
         customer.delete()
         articles = Customer.objects.all()
