@@ -13,6 +13,7 @@ class Category(models.Model):
         verbose_name_plural = 'Categories'
         ordering = ['name']
 
+
 class Value(models.Model):
     name = models.CharField(max_length=100)
     category_id = models.ForeignKey(Category,on_delete=models.CASCADE)
@@ -25,6 +26,7 @@ class Value(models.Model):
         verbose_name = 'Value'
         verbose_name_plural = 'Values'
         ordering = ['name']
+
 
 class Article(models.Model):
     name = models.CharField(verbose_name="Name",max_length=100)
@@ -43,6 +45,7 @@ class Article(models.Model):
         verbose_name_plural = 'Articles'
         ordering = ['name']
 
+
 class ArticleValue(models.Model):
     article_id = models.ForeignKey(Article,on_delete=models.CASCADE)
     category_id = models.ForeignKey(Category, on_delete=models.CASCADE)
@@ -58,33 +61,16 @@ class ArticleValue(models.Model):
         if self.category_id != self.value_id.category_id:
             raise ValidationError(f"Value ({self.value_id.name}) does not correspond to category ({self.category_id.name})")
 
-####################
-# class Stock(models.Model):
-    
-#     article_id = models.OneToOneField(Article,verbose_name="Article", on_delete=models.CASCADE)
-#     stock = models.PositiveSmallIntegerField(verbose_name="Stock", default=0) #Value from 0 to 32767
-    
-#     class Meta:
-
-#         verbose_name = "Stock"
-#         verbose_name_plural = "Stocks"
-#         ordering = ['article_id','stock']
-    
-#     def __str__(self) -> str:
-
-#         return f"{self.article_id.name}, {self.stock}"
-
 
 class Promotion(models.Model):
-    
     name = models.CharField(verbose_name="Name",max_length=100, unique=True)
     article_id = models.ManyToManyField(Article, verbose_name="Articles", through="ArticlePromotion")
     discount = models.DecimalField(verbose_name="Discount", max_digits=3, decimal_places=2, validators=[MinValueValidator(0.0), MaxValueValidator(100.0)])
     sell_price = models.DecimalField(verbose_name="$ SALE", max_digits=10, decimal_places=2, validators=[MinValueValidator(0.0)])
     remainder = models.SmallIntegerField(verbose_name="Remaining amount", blank=True, null=True)
+
     class Meta:
 
-        
         verbose_name = "Promotion"
         verbose_name_plural = "Promotions"
         ordering = ['sell_price']
