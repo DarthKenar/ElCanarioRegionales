@@ -19,6 +19,15 @@ from messageslog.models import MessageLog
 
 
 class ArticleListView(LoginRequiredMixin,ListView):#LoginRequiredMixin,
+    """List all existing articles
+
+    Args:
+        LoginRequiredMixin: Allow access to the view for registered users only.
+        ListView: ListView Generic
+
+    Returns:
+        HttpResponse: /read
+    """
     model = Article
     template_name = 'articles.html'
 
@@ -32,31 +41,19 @@ class ArticleListView(LoginRequiredMixin,ListView):#LoginRequiredMixin,
         return context
 
 
-class ReadDatatypeListView(LoginRequiredMixin, ListView):
-    template_name = 'articles_search_datatype.html'
-    model = Article
-    
-    def get_queryset(self) -> QuerySet[Any]:
-        category_selected = self.request.GET['datatype_input'].strip()
-        if category_selected.isnumeric():
-            category = Category.objects.get(id = category_selected)
-            return Article.objects.filter(characteristics_id__category_id=category)
-        else:
-            return Article.objects.all()
-
-    def get_context_data(self, **kwargs):
-        datatype_input = self.request.GET['datatype_input'].strip()
-        context = super().get_context_data(**kwargs)
-        if datatype_input.isnumeric():
-            # if numeric, the user has selected some category as data type
-            context.update(get_context_by_category(datatype_input))
-        else:
-            # if not numeric, the user has selected some article native field as data type
-            context.update(get_articles_by_native_datatype(datatype_input))
-        return context
-
-
 class ReadDataListView(LoginRequiredMixin, ListView):
+    """Lists all existing articles that match the specific value entered/selected (Data).
+    For example: Assuming that the Article Model has a "Name" attribute
+    DataType: Name
+    Data: Table
+
+    Args:
+        LoginRequiredMixin: Allow access to the view for registered users only.
+        ListView: ListView Generic
+
+    Returns:
+        HttpResponse: /read_data
+    """
     template_name = 'articles_search_data.html'
     model = Article
 
@@ -96,7 +93,54 @@ class ReadDataListView(LoginRequiredMixin, ListView):
         return context
 
 
+class ReadDatatypeListView(LoginRequiredMixin, ListView):
+    """Lists all existing Articles that match the selected Data Type, corresponding attribute of the Article model.
+    For example: Assuming that the Article model has an attribute "Name
+    Data Type: Name
+    Data: ...
+
+    Args:
+        LoginRequiredMixin: Allow access to the view only to registered users.
+        ListView: Generic ListView
+
+    Returns:
+        HttpResponse: /read_datatype
+    """
+    template_name = 'articles_search_datatype.html'
+    model = Article
+    
+    def get_queryset(self) -> QuerySet[Any]:
+        category_selected = self.request.GET['datatype_input'].strip()
+        if category_selected.isnumeric():
+            category = Category.objects.get(id = category_selected)
+            return Article.objects.filter(characteristics_id__category_id=category)
+        else:
+            return Article.objects.all()
+
+    def get_context_data(self, **kwargs):
+        datatype_input = self.request.GET['datatype_input'].strip()
+        context = super().get_context_data(**kwargs)
+        if datatype_input.isnumeric():
+            # if numeric, the user has selected some category as data type
+            context.update(get_context_by_category(datatype_input))
+        else:
+            # if not numeric, the user has selected some article native field as data type
+            context.update(get_articles_by_native_datatype(datatype_input))
+        return context
+
+
 class ArticleCreateView(LoginRequiredMixin, TemplateView):
+    """Redirects the user to create an Article in case you use the GET method, if you use the POST method it is assumed that you are already in the form checking the fields and saving the article if possible.
+
+    Args:
+        LoginRequiredMixin: Allow access to the view for registered users only.
+        CreateView: CreateView Generic
+
+    Returns:
+        HttpResponse: 
+            GET: Redirects to the creation form
+            POST: A portion of the html is replaced using htmx  
+    """
     template_name = 'articles_create.html'
 
     def get_context_data(self, **kwargs):
@@ -107,8 +151,16 @@ class ArticleCreateView(LoginRequiredMixin, TemplateView):
                    "values":values}
         return context
 
-
 def articles_create_name_check(request):
+    """Check that the name is correct (go through the validators) and add the errors to the context if there are any
+    (validators for create name)
+
+    Args:
+        request (request):
+
+    Returns:
+        render_login_required: render_login_required
+    """
     template = "articles_create_name_error.html"
     context = {}
     article_name_input = request.GET['article_name_input'].strip().title()
@@ -116,8 +168,16 @@ def articles_create_name_check(request):
     context, any_error = name_already_in_db(article_name_input, Article, context)
     return render_login_required(request, template, context)
 
-
 def articles_update_name_check(request, pk):
+    """Check that the name is correct (go through the validators) and add the errors to the context if there are any
+    (validators for update name)
+
+    Args:
+        request (request):
+
+    Returns:
+        render_login_required: render_login_required
+    """
     template = "articles_create_name_error.html"
     context = {}
     article_name_input = request.GET['article_name_input'].strip().title()
@@ -127,7 +187,17 @@ def articles_update_name_check(request, pk):
         context, any_error = name_already_in_db(article_name_input, Article, context)
     context["article_to_update"] = article_to_update
     return render_login_required(request, template, context)
+
 def articles_create_calculator(request):
+    """Creates the sell_price according to the purchase price and the increment and adds to the context the errors if any
+
+    Args:
+        request (request):
+
+    Returns:
+        render_login_required: render_login_required
+    """
+
     template = "articles_create_calculator.html"
     context = {}
     buy_price = request.GET['article_buy_price_input'].replace(',', '.')
@@ -145,6 +215,14 @@ def articles_create_calculator(request):
     return render_login_required(request, template, context)
 
 def create_stock_check(request):
+    """Checks for errors in the Stock field and adds the answers to the context if there are any errors.
+
+    Args:
+        request (request):
+
+    Returns:
+        render_login_required: render_login_required
+    """
     template = "articles_create_stock_check.html"
     stock_input:str = request.GET['article_stock_input']
     context:dict = {}
@@ -152,6 +230,15 @@ def create_stock_check(request):
     return render_login_required(request, template, context)
 
 def articles_create_confirm(request):
+    """Checks that there are no errors in all fields, saves the item and adds a successful response if there are no errors, otherwise if there are errors it does not save the article and adds to the context responses to the errors.
+    It also creates an object of type MessageLog to log the creation of the object if no errors are found.
+
+    Args:
+        request (request):
+
+    Returns:
+        render_login_required: render_login_required
+    """
     template = 'articles_create_save.html'
     any_error = False
     context = {}
@@ -190,7 +277,6 @@ def articles_create_confirm(request):
         context["answer_save_error"] = _("The item has not been created, please check the fields again.")
         return render_login_required(request, template, context)
     else:
-        
         context.pop("article_name_input")
         context.pop("article_buy_price_input")
         context.pop("article_increase_input")
@@ -220,6 +306,15 @@ def articles_create_confirm(request):
         return render_login_required(request, template, context)
 
 def articles_update_confirm(request, id):
+    """Checks that there are no errors in all fields, saves the item and adds a successful response if there are no errors, otherwise if there are errors it does not update the article and adds to the context responses to the errors.
+    It also creates an object of type MessageLog to log the updating of the object if no errors are found.
+
+    Args:
+        request (request):
+
+    Returns:
+        render_login_required: render_login_required
+    """
     template = "articles_create_save.html"
     any_error = False
     context = {}
@@ -270,7 +365,7 @@ def articles_update_confirm(request, id):
         article_to_update.sell_price = answer_calculator
         article_to_update.stock = article_stock_input
         article_to_update.save()
-        message = MessageLog(info = _(f"ARTICLUE UPDATED - Id: {article_to_update.id},\nName: {article_to_update.name},\nBuy price: {article_to_update.buy_price},\nIncrease {article_to_update.increase},\nSell price: {article_to_update.sell_price},\nStock: {article_to_update.stock}."))
+        message = MessageLog(info = _(f"ARTICLE UPDATED - Id: {article_to_update.id},\nName: {article_to_update.name},\nBuy price: {article_to_update.buy_price},\nIncrease {article_to_update.increase},\nSell price: {article_to_update.sell_price},\nStock: {article_to_update.stock}."))
         message.save()
         delete_old_values(article_to_update)
         for value in values_dict.values():
@@ -291,6 +386,16 @@ def articles_update_confirm(request, id):
 
 @csrf_protect
 def article_delete(request:object, pk:int)-> HttpResponse:
+    """View used for the deletion of an object of type Article. An object of type Messagge log is created when the object is successfully deleted.
+    - Has crsf protection.
+    - Login required.
+    Args:
+        request (object): request
+        pk (int): Identifier of the article to be deleted.
+
+    Returns:
+        HttpResponse: returns the list of all articles in context
+    """
     template = 'articles_search_data.html'
     context = {}
     try:
@@ -308,6 +413,15 @@ def article_delete(request:object, pk:int)-> HttpResponse:
         return render_login_required(request, template, context)    
     
 class ArticleDetailView(LoginRequiredMixin, DetailView):
+    """Renders the template to update a specific article
+
+    Args:
+        LoginRequiredMixin: Allow access to the view for registered users only.
+        DetailView: DetailView Generic
+
+    Returns:
+        HttpResponse: HttpResponse
+    """
     model = Article
     template_name = 'articles_update.html'
     
@@ -324,6 +438,15 @@ class ArticleDetailView(LoginRequiredMixin, DetailView):
     
 
 class CategoriesView(LoginRequiredMixin, TemplateView):
+    """Render template to access the Categories section
+
+    Args:
+        LoginRequiredMixin: Allow access to the view for registered users only.
+        TemplateView: TemplateView Generic
+
+    Returns:
+        HttpResponse: HttpResponse
+    """
     template_name = 'categories.html'
 
     def get_context_data(self, **kwargs):
