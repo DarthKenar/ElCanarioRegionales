@@ -7,12 +7,10 @@ urlpatterns = [
     path('read_data', ReadDataListView.as_view(), name="read_data"),
     path('read_datatype', ReadDataTypeListView.as_view(), name="read_datatype"),
 
-    path('create', OrderCreateView.as_view(), name="create"), #GET
-    # path('create/<str:status>', OrderCreateView.as_view(), name="create"), #POST status!
-    path('create_form', OrderCreateTemplate.as_view(), name="create_htmx"), #POST render form
+    path('create', OrderCreateView.as_view(), name="create"), #for GET
+    path('create_form', OrderCreateTemplate.as_view(), name="create_htmx"), #for POST
 
     path('update/<int:pk>', OrderUpdateView.as_view(), name="update"),
-    # path('update/<int:pk>/<str:status>', OrderUpdateView.as_view(), name="update"),
     path('update_form/<int:pk>/', OrderUpdateTemplate.as_view(), name="update_htmx"),
     
     path('delete/<int:pk>', order_delete, name="delete"),

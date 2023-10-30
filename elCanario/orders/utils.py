@@ -11,6 +11,15 @@ from orders.models import Order
 from customers.models import Customer
 import pytz
 def get_orders_for_search_input(datatype_input:str, search_input:str=''):
+    """Filters items depending on the type of search entered by the user
+
+    Args:
+        datatype_input (str): Type of data entered by the user
+        search_input (str, optional): Specific data entered by the user. Defaults to ''.
+
+    Returns:
+        Query_set: List of filtered orders
+    """
     if string_is_empty(search_input):
         return Order.objects.all()
     if datatype_input == "id":
@@ -37,7 +46,7 @@ def get_orders_for_search_input(datatype_input:str, search_input:str=''):
         return Order.objects.filter(delivery_status=search_input)
     
 def get_context_for_search_input_in_orders_section(datatype_input:str, search_input:str) -> Dict[str,str]:
-    """gets the orders that correspond to the value set in the selected native data type.
+    """gets the contextual answers that correspond to the value set for the user.
 
     Native data type is understood as attributes of the orders model.
     
@@ -81,6 +90,17 @@ def get_context_for_search_input_in_orders_section(datatype_input:str, search_in
     return context
 
 def get_context_for_datatype_input_in_orders_section(datatype_input:str):
+    """gets the contextual answers that correspond to the value set in the selected native data type.
+
+    Native data type is understood as attributes of the orders model.
+    
+    Args:
+        datatype_input (str): corresponds to the data type to search for.
+        search_input (str): corresponds to the value to search according to datatype_input.
+
+    Returns:
+        dict: returns the values that will be needed in the context dictionary, are selected datatypes, filtered orders, list of datatypes to select
+    """
     context = {}
     context["datatype_input"] = datatype_input
     if datatype_input == "id":
@@ -115,19 +135,34 @@ def get_context_for_datatype_input_in_orders_section(datatype_input:str):
     return context
 
 def update_article_quantity(order):
+    """Update the quantity of items in the order
+
+    Args:
+        order (Order): Receives an object of type order to modify its article_quantity attribute
+    """
     article_count  = order.articles_cart.count()
     order.article_quantity = article_count
     order.save()
 
 def update_total_pay(order):
+    """Update the total pay in the order
+
+    Args:
+        order (Order): Receives an object of type order to modify its total_pay attribute
+    """
     total_pay = Decimal(0)
     for articles in order.articles_cart.all():
         total_pay += articles.sell_price
     order.total_pay = total_pay
     order.save()
 
-def update_total_purchased(order_form):
-    customer = Customer.objects.get(id = order_form.customer_id.id)
+def update_total_purchased(order):
+    """Update the total purchased in the order (total sum of the price of the articles included in the order)
+
+    Args:
+        order (Order): Receives an object of type order to modify its total_purchased attribute
+    """
+    customer = Customer.objects.get(id = order.customer_id.id)
     order_list_for_customer = Order.objects.filter(customer_id = customer)
     total = Decimal(0)
     for order in order_list_for_customer:

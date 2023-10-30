@@ -22,7 +22,6 @@ class OrderForm(forms.ModelForm):
 
         if delivery_status == None:
             existing_orders = Order.objects.filter(customer_id=customer_id)
-
             if existing_orders.exists():
                 self.add_error('customer_id',f"A pending order already exists for the customer {customer_id.name}")
 
