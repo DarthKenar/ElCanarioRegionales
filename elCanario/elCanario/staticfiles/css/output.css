@@ -5915,10 +5915,6 @@ details.collapse summary::-webkit-details-marker {
   border-top-width: 0px;
 }
 
-.border-s {
-  border-inline-start-width: 1px;
-}
-
 .\!border-solid {
   border-style: solid !important;
 }
@@ -6008,11 +6004,6 @@ details.collapse summary::-webkit-details-marker {
 .border-white {
   --tw-border-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
-}
-
-.border-success {
-  --tw-border-opacity: 1;
-  border-color: rgb(20 164 77 / var(--tw-border-opacity));
 }
 
 .border-t-transparent {
@@ -7313,6 +7304,43 @@ details.collapse summary::-webkit-details-marker {
       --tw-bg-opacity: 1;
       background-color: hsl(var(--b3) / var(--tw-bg-opacity));
     }
+  }
+}
+
+@media not all and (min-width: 640px) {
+  .max-sm\:btn-sm {
+    height: 2rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    min-height: 2rem;
+    font-size: 0.875rem;
+  }
+
+  .btn-square:where(.max-sm\:btn-sm) {
+    height: 2rem;
+    width: 2rem;
+    padding: 0px;
+  }
+
+  .max-sm\:btn-sm {
+    height: 2rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    min-height: 2rem;
+    font-size: 0.875rem;
+  }
+
+  .btn-square:where(.max-sm\:btn-sm) {
+    height: 2rem;
+    width: 2rem;
+    padding: 0px;
+  }
+
+  .btn-circle:where(.max-sm\:btn-sm) {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 9999px;
+    padding: 0px;
   }
 }
 
@@ -8910,6 +8938,11 @@ details.collapse summary::-webkit-details-marker {
     margin-right: 0.25rem;
   }
 
+  .max-sm\:my-1 {
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+  }
+
   .max-sm\:mr-1 {
     margin-right: 0.25rem;
   }
@@ -8926,9 +8959,18 @@ details.collapse summary::-webkit-details-marker {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 
+  .max-sm\:flex-col {
+    flex-direction: column;
+  }
+
   .max-sm\:px-1 {
     padding-left: 0.25rem;
     padding-right: 0.25rem;
+  }
+
+  .max-sm\:py-1 {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
   }
 }
 
@@ -8963,6 +9005,10 @@ details.collapse summary::-webkit-details-marker {
 
   .sm\:mr-2 {
     margin-right: 0.5rem;
+  }
+
+  .sm\:flex {
+    display: flex;
   }
 
   .sm\:hidden {
