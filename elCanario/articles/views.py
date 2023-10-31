@@ -409,7 +409,7 @@ def article_delete(request:HttpRequest, pk:int)-> HttpResponse:
         message.save()
         article_to_delete.delete()
         articles = Article.objects.all()
-        context.update({"article_list": articles})
+        context.update({"object_list": articles})
         return render_login_required(request, template, context)    
     
 class ArticleDetailView(LoginRequiredMixin, DetailView):

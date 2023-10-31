@@ -1,2 +1,30 @@
-{% #search_data object_type="Customers" table='customers_table.html' object_list=object_list answer_error_name=answer_error_name delete_answer=delete_answer datatype=datatype value=value%}
-{% /search_data %}
+{% csrf_token as crsf_token %}
+{% load i18n %}
+<div id="search_data" >
+    {% if object_list %}
+        {% if answer_error_name %}
+            {% #message type="danger" heading="Oops!" %}
+                {{answer_error_name}}
+            {% /message %}
+        {% endif %}
+        {% if delete_answer %}
+            {% #message type="danger" heading="Deleted!" %}
+                {{delete_answer}}
+            {% /message %}
+        {% endif %}
+        {% #message type="success" heading="Found!" %}
+            Customers {% translate 'found' %}: <b>{{ object_list.count }}</b>.
+        {% /message %}
+    {% else %}
+        {% if value %}
+            {% #message type="warning" heading="Oops!" %}
+                {% translate 'No' %} Customers {% translate 'found for' %}: <b> {{datatype}} {{value}}</b>
+            {% /message %}
+        {% else %}
+            {% #message type="danger" heading="Oops!" %}
+                {% translate 'No' %} Customers {% translate 'found' %}. <b> {{datatype}} {{value}}</b>
+            {% /message %}
+        {% endif %}
+    {% endif %}
+    {% include 'customers_table.html' %}
+</div>

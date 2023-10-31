@@ -1,6 +1,6 @@
 {% load i18n %}
 <div id="search_data" >
-    {% if article_list %}
+    {% if object_list %}
             {% if answer_error_name %}
                 {% #message type="danger" %}
                     {{answer_error_name}}
@@ -12,7 +12,7 @@
                 {% /message %}
             {% endif %}
                 {% #message type="success" %}
-                    {% translate 'Number of articles found:' %}<b>{{ article_list.count }}</b>
+                    {% translate 'Number of articles found:' %}<b>{{ object_list.count }}</b>
                 {% /message %}
         {% include 'articles_table.html' %}
     {% else %}

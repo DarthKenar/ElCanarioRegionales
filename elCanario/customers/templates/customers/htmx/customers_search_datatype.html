@@ -1,2 +1,3 @@
-{% #search_datatype object_type="customers" table="customers_table.html" include_header="customers_search_header.html" url_create="customers:create" object_list=object_list datatype_input=datatype_input datatype=datatype %}
+{% csrf_token as crsf_token %}
+{% #search_datatype object_type="customers" table="customers_table.html" include_header="customers_search_header.html" url_create="customers:create" object_list=object_list datatype_input=datatype_input datatype=datatype crsf_token=crsf_token %}
 {% /search_datatype %}

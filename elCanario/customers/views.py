@@ -242,6 +242,6 @@ def customer_delete(request:object, pk:int)-> HttpResponse:
         message = MessageLog(info= _(f"CUSTOMER DELETED - Name: {customer.name}"))
         message.save()
         customer.delete()
-        articles = Customer.objects.all()
-        context.update({"object_list": articles})
+        customers = Customer.objects.all()
+        context.update({"object_list": customers})
         return render_login_required(request, template, context)

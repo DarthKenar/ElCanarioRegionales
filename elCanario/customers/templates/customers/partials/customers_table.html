@@ -1,9 +1,12 @@
 {% if object_list %}
-  {% #section type="cols-responsive" %}
-    {% for object in object_list %}
-      {% card_customer id=object.id name=object.name dni=object.dni phone_number=object.phone_number email=object.email address=object.address total_purchased=object.total_purchased csrf_token=csrf_token%}
-    {% endfor %}
-  {% /section %}
+  <div class="flex flex-col">
+    <!-- Card Sextion Starts Here -->
+    <div class="flex flex-1 flex-col lg:flex-row">
+      <div class="grid max-sm:grid-cols-1 max-lg:grid-cols-2 max-xl:grid-cols-3 xl:grid-cols-4 w-full">
+        {% for object in object_list %}
+          {% card_customer id=object.id name=object.name dni=object.dni phone_number=object.phone_number email=object.email address=object.address total_purchased=object.total_purchased csrf_token=csrf_token %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
 {% endif %}
-
-
