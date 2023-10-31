@@ -8,8 +8,7 @@ from customers.models import Customer
 import re
 from elCanario.utils import string_is_empty
 def title(title: str)->str:
-    """get a string and returns the first letter of the word in upper case and the others in lower case.
-
+    """get a string and returns the first letter of the word in upper case and the others in lower case. Avoids errors TypeError, ValueError in case you do not send a string as a parameter.
     Args:
         title (str): name to title.
 

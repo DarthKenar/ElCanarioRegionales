@@ -1,6 +1,8 @@
----
-title: articles App
----
+# ARTICLES
+
+## Article Model Relationships
+
+``` mermaid
 erDiagram 
     Article one or zero to many ArticleValue : characteristics_id
     Article |o--|| ArticlePromotion : in
@@ -69,5 +71,75 @@ erDiagram
         name CharField
         phone_number CharField
     }
+```
 
-    
+---
+
+### CREATE
+
+- ArticleCreateView
+
+:::elCanario.articles.views.ArticleCreateView
+
+- articles_create_name_check
+
+:::elCanario.articles.views.articles_create_name_check
+
+- articles_create_calculator
+
+:::elCanario.articles.views.articles_create_calculator
+
+- create_stock_check
+
+:::elCanario.articles.views.create_stock_check
+
+- articles_create_confirm
+
+:::elCanario.articles.views.articles_create_confirm
+
+---
+
+### READ
+
+- ArticleListView
+
+:::elCanario.articles.views.ArticleListView
+
+- ReadDataListView
+
+:::elCanario.articles.views.ReadDataListView
+
+- ReadDatatypeListView
+
+:::elCanario.articles.views.ReadDatatypeListView
+
+---
+
+### UPDATE
+
+> Update uses the same validator functions as CREATE except for the name and to confirm the update of the article.
+
+- ArticleDetailView
+
+:::elCanario.articles.views.ArticleDetailView
+
+- articles_update_name_check
+
+:::elCanario.articles.views.articles_update_name_check
+
+- articles_update_confirm
+
+:::elCanario.articles.views.articles_update_confirm
+
+---
+
+### DELETE
+
+- article_delete
+
+:::elCanario.articles.views.article_delete
+
+---
+
+## Categories - Values
+

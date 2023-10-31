@@ -1,0 +1,34 @@
+site_name: El Canario Regionales
+
+theme:
+  name: material
+  logo: assets/logo-light.png
+  favicon: images/logo-light-48x48.png
+  palette:
+    primary: indigo
+    accent: indigo
+  language: en
+
+plugins:
+- mkdocstrings:
+    default_handler: python
+
+nav:
+  - Home: 
+      index.md
+
+  - Articles:
+      articles/index.md
+  - Customers:
+      customers/index.md
+  - Orders:
+      orders/index.md
+
+markdown_extensions:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+repo_url: https://github.com/DarthKenar/ElCanarioRegionales

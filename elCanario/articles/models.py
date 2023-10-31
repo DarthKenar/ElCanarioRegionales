@@ -57,7 +57,6 @@ class ArticleValue(models.Model):
         verbose_name_plural = "Values and articles Categories"
 
     def clean(self) -> None:
-
         if self.category_id != self.value_id.category_id:
             raise ValidationError(f"Value ({self.value_id.name}) does not correspond to category ({self.category_id.name})")
 
@@ -70,13 +69,11 @@ class Promotion(models.Model):
     remainder = models.SmallIntegerField(verbose_name="Remaining amount", blank=True, null=True)
 
     class Meta:
-
         verbose_name = "Promotion"
         verbose_name_plural = "Promotions"
         ordering = ['sell_price']
     
     def __str__(self) -> str:
-
         return f"{self.promotion_name}, {self.article_id}, {self.discount}, {self.sell_price}"
 
 class ArticlePromotion(models.Model):

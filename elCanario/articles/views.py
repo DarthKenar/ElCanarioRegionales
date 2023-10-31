@@ -18,7 +18,7 @@ from elCanario.utils import *
 from messageslog.models import MessageLog
 
 
-class ArticleListView(LoginRequiredMixin,ListView):#LoginRequiredMixin,
+class ArticleListView(LoginRequiredMixin,ListView):
     """List all existing articles
 
     Args:
@@ -156,10 +156,10 @@ def articles_create_name_check(request):
     (validators for create name)
 
     Args:
-        request (request):
+        request (HttpRequest): request
 
     Returns:
-        render_login_required: render_login_required
+        render_login_required (function): render_login_required
     """
     template = "articles_create_name_error.html"
     context = {}
@@ -173,10 +173,10 @@ def articles_update_name_check(request, pk):
     (validators for update name)
 
     Args:
-        request (request):
+        request (HttpRequest): request
 
     Returns:
-        render_login_required: render_login_required
+        render_login_required (function): render_login_required
     """
     template = "articles_create_name_error.html"
     context = {}
@@ -192,10 +192,10 @@ def articles_create_calculator(request):
     """Creates the sell_price according to the purchase price and the increment and adds to the context the errors if any
 
     Args:
-        request (request):
+        request (HttpRequest): request
 
     Returns:
-        render_login_required: render_login_required
+        render_login_required (function): render_login_required
     """
 
     template = "articles_create_calculator.html"
@@ -218,10 +218,10 @@ def create_stock_check(request):
     """Checks for errors in the Stock field and adds the answers to the context if there are any errors.
 
     Args:
-        request (request):
-
+        request (HttpRequest): request
+ 
     Returns:
-        render_login_required: render_login_required
+        render_login_required (function): render_login_required
     """
     template = "articles_create_stock_check.html"
     stock_input:str = request.GET['article_stock_input']
@@ -234,10 +234,10 @@ def articles_create_confirm(request):
     It also creates an object of type MessageLog to log the creation of the object if no errors are found.
 
     Args:
-        request (request):
+        request (HttpRequest): request
 
     Returns:
-        render_login_required: render_login_required
+        render_login_required (function): render_login_required
     """
     template = 'articles_create_save.html'
     any_error = False
@@ -310,10 +310,10 @@ def articles_update_confirm(request, id):
     It also creates an object of type MessageLog to log the updating of the object if no errors are found.
 
     Args:
-        request (request):
+        request (HttpRequest): request
 
     Returns:
-        render_login_required: render_login_required
+        render_login_required (function): render_login_required
     """
     template = "articles_create_save.html"
     any_error = False
@@ -385,12 +385,12 @@ def articles_update_confirm(request, id):
         return render(request, template, context)
 
 @csrf_protect
-def article_delete(request:object, pk:int)-> HttpResponse:
+def article_delete(request:HttpRequest, pk:int)-> HttpResponse:
     """View used for the deletion of an object of type Article. An object of type Messagge log is created when the object is successfully deleted.
     - Has crsf protection.
     - Login required.
     Args:
-        request (object): request
+        request (HttpRequest): request
         pk (int): Identifier of the article to be deleted.
 
     Returns:
@@ -436,6 +436,7 @@ class ArticleDetailView(LoginRequiredMixin, DetailView):
                         "article_to_update":article_to_update})
         return context
     
+#CATEGORIES
 
 class CategoriesView(LoginRequiredMixin, TemplateView):
     """Render template to access the Categories section
@@ -455,8 +456,16 @@ class CategoriesView(LoginRequiredMixin, TemplateView):
         return context
     
 
-def articles_category_create(request, art_id=None):
+def articles_category_create(request, art_id:str=None):
+    """Creates a new category in case there are no errors, if there are any, renders them by context
 
+    Args:
+        request (HttpRequest): request
+        art_id (str, optional): There is an option to edit a category but send an article id by context to continue editing it.
+
+    Returns:
+        render_login_required (function): render_login_required
+    """
     template = 'articles_category_value_section.html'
     category_name = request.POST["category_name_new"].strip().title()
     context = {}
@@ -482,10 +491,20 @@ def articles_category_create(request, art_id=None):
         context["answer"] = _(f"The category {category_to_save.name} has been successfully saved!")
     else:
         context["answer"] = _("Category could not be saved!")
+
     return render_login_required(request, template, context)
 
-def articles_category_value_create(request,cat_id, art_id=None):
+def articles_category_value_create(request,cat_id:str, art_id:str=None):
+    """Creates a new value for the category selected (cat_id) in case there are no errors, if there are any, renders them by context
 
+    Args:
+        request (HttpRequest): request
+        cat_id (str): Category to which the value will be assigned
+        art_id (str, optional): There is an option to edit a category but send an article id by context to continue editing it.
+
+    Returns:
+        render_login_required (function): render_login_required
+    """
     template = 'articles_category_value_section.html'
     context={}
     context["categories"] = Category.objects.all()
@@ -506,7 +525,7 @@ def articles_category_value_create(request,cat_id, art_id=None):
                             category_id = category_to_update,
                             name = value_name)
         value_to_update.save()
-        message = MessageLog(info = _(f"VALUE CREATED - Name: {value_to_update.name},Category: {category_to_update.name}."))
+        message = MessageLog(info = _(f"VALUE CREATED - Name: {value_to_update.name}, Category: {category_to_update.name}."))
         message.save()
         context['answer'] = _(f'The value {value_name} was saved correctly for the category: {category_to_update.name}')
         context['values'] = Value.objects.filter(category_id = category_to_update)
@@ -520,10 +539,10 @@ def articles_category_update(request: object, external_link: str, cat_id:int, ar
         This is done in order to update the data in the categories section and then be able to edit the article easily.
 
     Args:
-        request (_type_): request
-        external_link (str): _description_
-        cat_id (int): _description_
-        art_id (str, optional): _description_. Defaults to None.
+        request (HttpRequest): request
+        external_link (str): It is used to know if the editing of a category is selected from the same category section or not. This is used to know whether to render the whole template or a portion of it using htmx.
+        cat_id (str): Selected category for editing
+        art_id (str, optional): There is an option to edit a category but send an article id by context to continue editing it.
 
     Returns:
         HttpResponse: If the editing of the selected category is requested from a page external to the category section, the httpResponse template will be that of the category section and will add the category to be edited and the article from which it was selected to the context.
@@ -549,7 +568,16 @@ def articles_category_update(request: object, external_link: str, cat_id:int, ar
     return render_login_required(request, template, context)
 
 def articles_category_update_name(request, cat_id, art_id=None):
+    """Updates the category name if there are no errors, otherwise the errors are rendered by context.
 
+    Args:
+        request (HttpRequest): request
+        cat_id (str): Selected category for update name
+        art_id (str, optional): There is an option to edit a category but send an article id by context to continue editing it.
+
+    Returns:
+        render_login_required (function): render_login_required
+    """
     template = 'articles_category_value_section.html'
     context={}
     category_to_update = Category.objects.get(id = cat_id)
@@ -576,8 +604,18 @@ def articles_category_update_name(request, cat_id, art_id=None):
     context['values'] = Value.objects.filter(category_id = category_to_update)
     context["name_category_edition"] = False
     return render_login_required(request, template, context)
-def articles_category_delete(request, cat_id, art_id=None):
+    
+def articles_category_delete(request, cat_id: str, art_id:str=None):
+    """ Deletes the selected cat_id category
 
+    Args:
+        request (HttpRequest): request
+        cat_id (str): Category selected for deletion
+        art_id (str, optional): There is an option to edit a category but send an article id by context to continue editing it.
+
+    Returns:
+        render_login_required (function): render_login_required
+    """
     template = 'articles_category_value_section.html'
     if not string_is_empty(art_id):
         article_to_update = Article.objects.get(id = art_id)
@@ -592,7 +630,18 @@ def articles_category_delete(request, cat_id, art_id=None):
     context["categories"] = Category.objects.all()
     return render_login_required(request, template, context)
 
-def articles_value_delete(request, cat_id, val_id, art_id=None):
+def articles_value_delete(request, cat_id: str, val_id: str, art_id:str=None):
+    """ Deletes the selected val_id value from cat_id category
+
+    Args:
+        request (HttpRequest): request
+        cat_id (str): Category selected
+        val_id (str): Value selected for deletion
+        art_id (str, optional): There is an option to edit a category but send an article id by context to continue editing it.
+
+    Returns:
+        render_login_required (function): render_login_required
+    """
     template = 'articles_category_value_section.html'
     context={}
     value_to_update = Value.objects.get(id = val_id)
@@ -611,6 +660,17 @@ def articles_value_delete(request, cat_id, val_id, art_id=None):
     return render_login_required(request, template, context)
 
 def articles_value_update(request, cat_id, val_id, art_id=None):
+    """ Enables editing of the selected value val_id of the selected category cat_id giving way to articles_value_update_name.
+
+    Args:
+        request (HttpRequest): request
+        cat_id (str): Category selected
+        val_id (str): Value selected
+        art_id (str, optional): There is an option to edit a category but send an article id by context to continue editing it.
+
+    Returns:
+        render_login_required (function): render_login_required
+    """
     context={}
     value_to_update = Value.objects.get(id = val_id)
     template = 'articles_category_value_section.html'
@@ -627,6 +687,16 @@ def articles_value_update(request, cat_id, val_id, art_id=None):
     return render_login_required(request, template, context)
 
 def articles_value_update_name(request, val_id, art_id=None):
+    """ Update the name of the selected category value
+
+    Args:
+        request (HttpRequest): request
+        val_id (str): Value selected
+        art_id (str, optional): There is an option to edit a category but send an article id by context to continue editing it.
+
+    Returns:
+        render_login_required (function): render_login_required
+    """
     template = 'articles_category_value_section.html'
     context={}
     new_name = request.POST['value_name_update'].strip().title()
