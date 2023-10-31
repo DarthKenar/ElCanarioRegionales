@@ -89,3 +89,14 @@ erDiagram
 ```
 
 ---
+
+## DEPENDENCIES
+
+- [django-allauth](https://github.com/pennersr/django-allauth)
+- [slippers](https://github.com/mixxorz/slippers)
+- [django-widget-tweaks](https://github.com/jazzband/django-widget-tweaks)
+
+### Tools
+
+- [TailWinds](https://tailwindcss.com/)
+- [DaisyUI](https://daisyui.com/)

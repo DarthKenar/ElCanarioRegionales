@@ -2,7 +2,7 @@
 
 ---
 
-### CREATE
+## CREATE
 
 - ArticleCreateView
 
@@ -26,7 +26,7 @@
 
 ---
 
-### READ
+## READ
 
 - ArticleListView
 
@@ -42,7 +42,7 @@
 
 ---
 
-### UPDATE
+## UPDATE
 
 > Update uses the same validator functions as CREATE except for the name and to confirm the update of the article.
 
@@ -60,7 +60,7 @@
 
 ---
 
-### DELETE
+## DELETE
 
 - article_delete
 
@@ -70,37 +70,37 @@
 
 ## Categories - Values
 
-### CREATE - Categories
+## CREATE - Categories
 
 - articles_category_create
   
 :::elCanario.articles.views.articles_category_create
 
-### READ - Categories
+## READ - Categories
 
 - CategoriesView
   
 :::elCanario.articles.views.CategoriesView
 
-### UPDATE - Categories
+## UPDATE - Categories
 
 - articles_category_update_name
   
 :::elCanario.articles.views.articles_category_update_name
 
-### DELETE - Categories
+## DELETE - Categories
 
 - articles_category_delete
   
 :::elCanario.articles.views.articles_category_delete
 
-### CREATE - Values
+## CREATE - Values
 
 - articles_category_value_create
   
 :::elCanario.articles.views.articles_category_value_create
 
-### READ - Values
+## READ - Values
 
 - articles_category_update
   
@@ -114,13 +114,13 @@
   
 :::elCanario.articles.views.articles_value_update
 
-### UPDATE - Values
+## UPDATE - Values
 
 - articles_value_update_name
   
 :::elCanario.articles.views.articles_value_update_name
 
-### DELETE - Values
+## DELETE - Values
 
 - articles_value_delete
   
