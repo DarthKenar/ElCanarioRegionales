@@ -1,4 +1,4 @@
-# ARTICLES
+# *ARTICLES*
 
 ---
 
@@ -68,7 +68,7 @@
 
 ---
 
-## Categories - Values
+### *CATEGORIES*
 
 ## CREATE - Categories
 
@@ -93,6 +93,8 @@
 - articles_category_delete
   
 :::elCanario.articles.views.articles_category_delete
+
+### *VALUES*
 
 ## CREATE - Values
 
