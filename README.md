@@ -23,6 +23,21 @@ pip install mkdocs
 mkdocs serve
 ```
 
+![MKDOCS](docs/images/mkdocs.png)
+
+#### Para ejecutar la aplicacion con PDM
+
+##### Si no tienes pdm
+
+```bash
+pip install pdm
+```
+
+##### Si tienes pdm
+
+```bash
+pdm server
+```
 
 [English documentation][English]
 
