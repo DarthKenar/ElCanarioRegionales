@@ -92,11 +92,19 @@ erDiagram
 
 ## DEPENDENCIES
 
-- [django-allauth](https://github.com/pennersr/django-allauth)
-- [slippers](https://github.com/mixxorz/slippers)
-- [django-widget-tweaks](https://github.com/jazzband/django-widget-tweaks)
+| Package | Description | Link |
+| ----------- | ---|---|
+| "django>=4.2.6" | Web framekork | [Django](https://www.djangoproject.com/) |
+| "django-allauth>=0.58.1" | Social Authentication |[django-allauth](https://github.com/pennersr/django-allauth)|
+| "django-pwa>=1.1.0" | Aplicación Web Progresiva | [django-pwa](https://github.com/silviolleite/django-pwa) |
+| "django-widget-tweaks>=1.5.0" | Form Render | [django-widget-tweaks](https://github.com/jazzband/django-widget-tweaks) |
+| "slippers>=0.6.2" |Components whit template tags| [slippers](https://github.com/mixxorz/slippers) |
+| "Pillow>=10.1.0" ||[Pillow](https://github.com/python-pillow/Pillow)|
+| "pytz>=2023.3.post1" ||[pytz](https://github.com/stub42/pytz)|
 
 ### Tools
 
 - [TailWinds](https://tailwindcss.com/)
 - [DaisyUI](https://daisyui.com/)
+- [Feathericons](https://feathericons.com/)
+- [HTMX](https://htmx.org/)

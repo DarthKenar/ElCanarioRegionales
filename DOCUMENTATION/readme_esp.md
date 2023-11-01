@@ -2,7 +2,6 @@
 
 ## Introducción
 
-Esta aplicacion esta siendo desarrollada para elCanarioRegionales, en función de facilitar la administración y venta de productos regionales Argentinos.
 
 Instagram del emprendimiento!
 [@elcanario.regionales](https://www.instagram.com/elcanario.regionales/)

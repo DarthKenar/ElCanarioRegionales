@@ -1,10 +1,28 @@
 # DOCUMENTATION/DOCUMENTACION
+## Objetivo
 
-Credentials: 
+> Aplicación web para control de Stock, Clientes y Ordenes para un pequeño negocio.
 
-Admin: 'admin'
+## Getting Started
 
-Password: '1234'
+### Clone proyect
+
+```bash
+git clone https://github.com/DarthKenar/ElCanarioRegionales.git
+```
+
+#### Instala mkdocs para visualizar la documentacion completa del proyecto
+
+```bash
+pip install mkdocs
+```
+
+#### En la ruta actual del proyecto ejecuta
+
+```bash
+mkdocs serve
+```
+
 
 [English documentation][English]
 
