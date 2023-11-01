@@ -8953,6 +8953,14 @@ details.collapse summary::-webkit-details-marker {
     flex-direction: column;
   }
 
+  .max-sm\:items-center {
+    align-items: center;
+  }
+
+  .max-sm\:justify-center {
+    justify-content: center;
+  }
+
   .max-sm\:px-1 {
     padding-left: 0.25rem;
     padding-right: 0.25rem;

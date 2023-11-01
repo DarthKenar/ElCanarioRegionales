@@ -10,7 +10,7 @@
 {% endblock base_head %}
 {% block base_content %}
     
-    <div class="w-full flex">
+    <div class="w-full flex max-sm:justify-center max-sm:items-center">
         <!-- Login Section -->
         <div class="w-full md:w-1/2 flex justify-center items-center relative ">
             <div class="absolute top-0 w-full">
@@ -19,11 +19,11 @@
             
             {% translate 'Sign In' as signin %}
 
-            {% #block_center %}
-            
+            <div class="py-10">
+
                 {% title text=signin %}
                 
-                {% #block_card class="h-24" %}
+                {% #block_card class="h-24 px-2" %}
                     <div class="p-2">
                         <a class="btn btn-outline"
                         href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">
@@ -35,7 +35,7 @@
 
                 <div class="divider">{% trans 'OR' %}</div>
 
-                {% #block_card class="h-72" %}
+                {% #block_card class="h-72 px-2" %}
                     <form class="login" method="POST" action="{% url 'account_login' %}">
                         {% csrf_token %}
                         {% form_field label=form.login.label id=form.login.id_for_label first="True" name="login" autocomplete="email" type="text" %}
@@ -67,7 +67,7 @@
                     </form>
                 {% /block_card %}
 
-            {% /block_center %}
+            </div>
 
         </div>
 
