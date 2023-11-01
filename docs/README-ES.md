@@ -8,7 +8,11 @@
 
 # Objetivo
 
-> Aplicación web para control de Stock, Clientes y Ordenes para un pequeño negocio.
+## Description
+
+Originalmente la aplicacion web El Canario Regionales fue creada para la gestion de un pequeño negocio de artículos regionales argentinos ([@elcanario.regionales](https://www.instagram.com/elcanario.regionales/)), aunque su uso puede ser general para cualquier negocio ABM.
+Dada su naturaleza y escalabilidad sería cuestion de reemplazar logotipos, tipografias y algunas otras pequeñas cosas.
+Al usar DaisyUI esto se vuelve muy sencillo.
 
 ## PRESENTACIÓN
 

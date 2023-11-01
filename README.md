@@ -5,7 +5,7 @@
 # Goal
 
 > Web application to control Stock, Customers and Orders for a small business.
-> 
+
 ---
 
 ## PREVIEW
@@ -163,7 +163,7 @@ py manage.py runserver
 
 ---
 
-## Diagrama de Modelos
+## Models Relationships
 
 ```mermaid
 erDiagram 

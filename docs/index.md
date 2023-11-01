@@ -4,7 +4,9 @@
 
 ## Description
 
-[@elcanario.regionales](https://www.instagram.com/elcanario.regionales/)
+Originally the web application El Canario Regionales was created for the management of a small business of regional articles from Argentina ([@elcanario.regionales](https://www.instagram.com/elcanario.regionales/)), although its use can be general for any CRM business.
+Given its nature and scalability it would be a matter of replacing logos, fonts and some other small things.
+Using DaisyUI this becomes very simple.
 
 ## Features
 
