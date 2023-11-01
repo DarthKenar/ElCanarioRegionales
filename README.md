@@ -24,7 +24,7 @@ git clone https://github.com/DarthKenar/ElCanarioRegionales.git
 pip install mkdocs
 ```
 
-#### In the current project directory run
+#### In the current project directory run documet server
 
 ```bash
 mkdocs serve
@@ -64,19 +64,19 @@ pdm server
 
 ---
 
-#### > To run the application with PIP
+#### > To run the application with PIP, create a virtual enviroment
 
 ```bash
-py -m venv nombre_del_entorno
+py -m venv enviroment_name
 ```
 
 #### Activates the virtual environment
 
 ```bash
-source nombre_del_entorno/bin/activate
+source enviroment_name/bin/activate
 ```
 
-#### In the activated virtual environment
+#### In the activated virtual environment install requirements
 
 ```bash
 pip install -r requirements.txt

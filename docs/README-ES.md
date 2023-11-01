@@ -44,19 +44,19 @@ pip install pdm
 
 ##### Si tienes pdm o una vez que lo tengas
 
-#### Instala las dependencias en el entorno virtual con
+#### Instala las dependencias en el entorno virtual
 
 ```bash
 pdm install
 ```
 
-#### Realiza las migraciones para utilizar una base de datos local con
+#### Realiza las migraciones para utilizar una base de datos local
 
 ```bash
 pdm migrate
 ```
 
-#### Ejecuta el servidor con
+#### Ejecuta el servidor
 
 ```bash
 pdm server
@@ -64,7 +64,7 @@ pdm server
 
 ---
 
-#### > Para ejecutar la aplicacion con PIP
+#### > Para ejecutar la aplicacion con PIP, primero creamos un entorno virtual
 
 ```bash
 py -m venv nombre_del_entorno
