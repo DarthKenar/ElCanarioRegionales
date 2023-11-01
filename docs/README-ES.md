@@ -199,11 +199,11 @@ erDiagram
 
 ### CAMBIA DE IDIOMA
 
-![Alt text](images/switch-lenguage.gif)
+![CAMBIA DE IDIOMA](images/switch-lenguage.gif)
 
 ### CAMBIA DE TEMA
 
-![Alt text](images/switch-theme.gif)
+![CAMBIA DE TEMA](images/switch-theme.gif)
 
 [Volver][volver]
 
