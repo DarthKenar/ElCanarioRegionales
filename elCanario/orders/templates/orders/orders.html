@@ -19,7 +19,8 @@
             <span>{% translate 'Orders list' %}</span>
         </div>
         <div class="text-base">
-            {% button type="success" url='orders:create' text="Create Order" method="GET" %}
+            {% translate 'Create Order' as createorder %}
+            {% button type="success" url='orders:create' text=createorder method="GET" %}
         </div>
     </div>
 {% endblock title_section_content_under %}

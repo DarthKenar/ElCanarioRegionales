@@ -13,7 +13,7 @@
 
     {% title text=confirmemailaddress %}
 
-    {% #block_center %}
+    <div class="py-10">
         {% #block_card class="h-64" %}
             {% if confirmation %}
                 {% user_display confirmation.email_address.user as user_display %}
@@ -37,5 +37,5 @@
                 </p>
             {% endif %}
         {% /block_card %}
-    {% /block_center %}
+    </div>
 {% endblock content %}

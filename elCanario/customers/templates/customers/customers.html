@@ -18,7 +18,8 @@
             <span>{% translate 'Customers list' %}</span>
         </div>
         <div class="text-base">
-            {% button type="success" url='customers:create' border="False" text="Create Customer" method="GET" %}
+            {% translate 'Create Customer' as createcustomer %}
+            {% button type="success" url='customers:create' border="False" text=createcustomer method="GET" %}
         </div>
     </div>
 {% endblock title_section_content_under %}

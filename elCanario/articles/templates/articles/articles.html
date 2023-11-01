@@ -16,8 +16,8 @@
             <span>{% translate 'Articles List' %}</span>
         </div>
         <div class="text-base flex gap-2 max-sm:flex-col">
-            <a class="btn btn-info max-sm:btn-sm max-sm:my-1" href="{% url 'articles:categories' %}">Categories</a>
-            <a class="btn btn-success max-sm:btn-sm max-sm:my-1" href="{% url 'articles:create' %}">Create Article</a>
+            <a class="btn btn-info max-sm:btn-sm max-sm:my-1" href="{% url 'articles:categories' %}">{% translate 'Categories' %}</a>
+            <a class="btn btn-success max-sm:btn-sm max-sm:my-1" href="{% url 'articles:create' %}">{% translate 'Create Article' %}</a>
         </div>
     </div>
 {% endblock title_section_content_under %}

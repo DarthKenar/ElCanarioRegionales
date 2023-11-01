@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-31 23:31-0300\n"
-"PO-Revision-Date: 2023-10-31 23:43-0300\n"
+"POT-Creation-Date: 2023-11-01 19:07-0300\n"
+"PO-Revision-Date: 2023-11-01 19:09-0300\n"
 "Last-Translator:   <ioseph.dev@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -18,6 +18,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.9.9\n"
+
+#: .\elCanario\_core\templates\_core\footer.html:4
+msgid "Developed by"
+msgstr "Hecho por"
 
 #: .\elCanario\_core\templates\_core\graphics.html:5
 msgid "Monthly Reports"
@@ -65,6 +69,7 @@ msgid "Admin"
 msgstr "Admin"
 
 #: .\elCanario\_core\templates\_core\menu.html:7
+#: .\elCanario\orders\templates\orders\orders.html:22
 #: .\elCanario\orders\templates\orders\orders_create.html:5
 #: .\elCanario\orders\templates\orders\orders_update.html:5
 msgid "Create Order"
@@ -121,6 +126,18 @@ msgstr "Buscar artículos"
 msgid "Articles List"
 msgstr "Lista de Artículos"
 
+#: .\elCanario\articles\templates\articles\articles.html:19
+#: .\elCanario\articles\templates\articles\categories.html:4
+#: .\elCanario\articles\templates\articles\partials\articles_create_table.html:27
+#: .\elCanario\articles\templates\articles\partials\articles_update_table.html:28
+msgid "Categories"
+msgstr "Categorías"
+
+#: .\elCanario\articles\templates\articles\articles.html:20
+#| msgid "Create Article Section"
+msgid "Create Article"
+msgstr "Crear Artículo"
+
 #: .\elCanario\articles\templates\articles\articles_create.html:5
 #: .\elCanario\articles\templates\articles\articles_update.html:6
 msgid "Create Article -El Canario Regionales"
@@ -138,12 +155,6 @@ msgstr "Sección Actualizar Artículo"
 msgid "Editing article"
 msgstr "Editando artículo"
 
-#: .\elCanario\articles\templates\articles\categories.html:4
-#: .\elCanario\articles\templates\articles\partials\articles_create_table.html:27
-#: .\elCanario\articles\templates\articles\partials\articles_update_table.html:28
-msgid "Categories"
-msgstr "Categorías"
-
 #: .\elCanario\articles\templates\articles\categories.html:16
 msgid "Categories & Values"
 msgstr "Categorías y Valores"
@@ -157,6 +168,7 @@ msgid "Save name"
 msgstr "Guardar Nombre"
 
 #: .\elCanario\articles\templates\articles\htmx\articles_create_calculator.html:16
+#: .\elCanario\articles\templates\articles\partials\articles_search_header.html:12
 #: .\elCanario\articles\utils.py:246
 msgid "Sell price"
 msgstr "Precio de venta"
@@ -180,6 +192,7 @@ msgstr "No se encontraron artículos con valores en la categoría seleccionada."
 
 #: .\elCanario\articles\templates\articles\partials\articles_create_table.html:8
 #: .\elCanario\articles\templates\articles\partials\articles_create_table.html:10
+#: .\elCanario\articles\templates\articles\partials\articles_search_header.html:6
 #: .\elCanario\articles\templates\articles\partials\articles_update_table.html:7
 #: .\elCanario\articles\templates\articles\partials\articles_update_table.html:9
 #: .\elCanario\articles\templates\articles\partials\categories_table.html:17
@@ -196,6 +209,7 @@ msgstr "Nombre"
 
 #: .\elCanario\articles\templates\articles\partials\articles_create_table.html:17
 #: .\elCanario\articles\templates\articles\partials\articles_create_table.html:18
+#: .\elCanario\articles\templates\articles\partials\articles_search_header.html:13
 #: .\elCanario\articles\templates\articles\partials\articles_update_table.html:17
 #: .\elCanario\articles\utils.py:248
 msgid "Stock"
@@ -220,6 +234,24 @@ msgstr "Incremento"
 #: .\elCanario\articles\templates\articles\partials\categories_table.html:122
 msgid "Save"
 msgstr "Guardar"
+
+#: .\elCanario\articles\templates\articles\partials\articles_search_header.html:5
+#: .\elCanario\customers\templates\customers\partials\customers_search_header.html:5
+#: .\elCanario\customers\utils.py:92
+#: .\elCanario\orders\templates\orders\partials\orders_search_header.html:5
+#: .\elCanario\orders\utils.py:65 .\elCanario\orders\utils.py:108
+msgid "ID"
+msgstr "ID"
+
+#: .\elCanario\articles\templates\articles\partials\articles_search_header.html:10
+#: .\elCanario\articles\utils.py:242
+msgid "Buy price"
+msgstr "Precio de compra"
+
+#: .\elCanario\articles\templates\articles\partials\articles_search_header.html:11
+#: .\elCanario\articles\utils.py:244
+msgid "Increment"
+msgstr "Incremento"
 
 #: .\elCanario\articles\templates\articles\partials\categories_table.html:19
 msgid "New category"
@@ -289,14 +321,6 @@ msgstr "El anterior nombre y el nuevo nombre son iguales."
 msgid "Id"
 msgstr "Id"
 
-#: .\elCanario\articles\utils.py:242
-msgid "Buy price"
-msgstr "Precio de compra"
-
-#: .\elCanario\articles\utils.py:244
-msgid "Increment"
-msgstr "Incremento"
-
 #: .\elCanario\articles\utils.py:307 .\elCanario\customers\utils.py:55
 msgid "Id:"
 msgstr "Id:"
@@ -360,13 +384,6 @@ msgstr "El artículo {article.name} se creó correctamente."
 
 #: .\elCanario\articles\views.py:368
 #, python-brace-format
-#| msgid ""
-#| "ARTICLUE UPDATED - Id: {article_to_update.id},\n"
-#| "Name: {article_to_update.name},\n"
-#| "Buy price: {article_to_update.buy_price},\n"
-#| "Increase {article_to_update.increase},\n"
-#| "Sell price: {article_to_update.sell_price},\n"
-#| "Stock: {article_to_update.stock}."
 msgid ""
 "ARTICLE UPDATED - Id: {article_to_update.id},\n"
 "Name: {article_to_update.name},\n"
@@ -421,9 +438,6 @@ msgstr "La categoría no podía guardarse."
 
 #: .\elCanario\articles\views.py:528
 #, python-brace-format
-#| msgid ""
-#| "VALUE CREATED - Name: {value_to_update.name},Category: "
-#| "{category_to_update.name}."
 msgid ""
 "VALUE CREATED - Name: {value_to_update.name}, Category: "
 "{category_to_update.name}."
@@ -601,6 +615,10 @@ msgstr "Pendiente"
 msgid "Operation successfully completed"
 msgstr "Operación completada satisfactoriamente."
 
+#: .\elCanario\components\templates\molecules\form.html:34
+msgid "Guardar"
+msgstr "Guardar"
+
 #: .\elCanario\components\templates\organisms\login_form.html:12
 msgid "Forgot Password?"
 msgstr "¿Ha olvidado su contraseña?"
@@ -662,6 +680,7 @@ msgstr "Buscar Clientes:"
 msgid "Customers list"
 msgstr "Lista de clientes"
 
+#: .\elCanario\customers\templates\customers\customers.html:21
 #: .\elCanario\customers\templates\customers\customers_create.html:5
 #: .\elCanario\customers\templates\customers\customers_update.html:5
 msgid "Create Customer"
@@ -682,13 +701,6 @@ msgstr "Buscar Cliente:"
 #: .\elCanario\customers\templates\customers\customers_update.html:20
 msgid "Update Customer Section"
 msgstr "Sección Actualizar Cliente"
-
-#: .\elCanario\customers\templates\customers\partials\customers_search_header.html:5
-#: .\elCanario\customers\utils.py:92
-#: .\elCanario\orders\templates\orders\partials\orders_search_header.html:5
-#: .\elCanario\orders\utils.py:65 .\elCanario\orders\utils.py:108
-msgid "ID"
-msgstr "ID"
 
 #: .\elCanario\customers\templates\customers\partials\customers_search_header.html:7
 #: .\elCanario\customers\utils.py:98
@@ -907,9 +919,6 @@ msgstr "Ventas en la Base de datos"
 
 #: .\elCanario\orders\views.py:124
 #, python-brace-format
-#| msgid ""
-#| "ORDER CREATED - Customer: {customer_id.name}, articles: {articles_cart}, "
-#| "details: {details}."
 msgid ""
 "ORDER CREATED - Customer: {customer_id.name}, articles: {articles}, details:"
 " {details}."
@@ -921,9 +930,6 @@ msgstr ""
 
 #: .\elCanario\orders\views.py:186
 #, python-brace-format
-#| msgid ""
-#| "ORDER UPDATED - Customer: {customer_id.name}, articles: {articles_cart}, "
-#| "details: {details}."
 msgid ""
 "ORDER UPDATED - Customer: {customer_id.name}, articles: {articles}, details:"
 " {details}."
@@ -1027,9 +1033,6 @@ msgstr "Verificado"
 
 #~ msgid "Correctly"
 #~ msgstr "Correctamente"
-
-#~ msgid "Guardar"
-#~ msgstr "Guardar"
 
 #~ msgid "Built by"
 #~ msgstr "Hecho por"

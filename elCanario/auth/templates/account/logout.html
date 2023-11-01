@@ -8,8 +8,8 @@
   {% trans "Sign Out" as signout %}
   {% title text=signout %}
   <section class="flex items-center justify-center">
-  {% #block_center %}
-      {% #block_card class="h-32" %}
+    <div class="py-10">
+      {% #block_card class="h-32 px-4" %}
           <p>{% trans 'Are you sure you want to sign out?' %}</p>
           <form method="post" action="{% url 'account_logout' %}">
               {% csrf_token %}
@@ -22,6 +22,6 @@
               
           </form>
       {% /block_card %}
-  {% /block_center %}
+    </div>
   </section>
 {% endblock base_content %}

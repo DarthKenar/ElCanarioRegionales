@@ -10,10 +10,10 @@
     {% trans "Account Inactive" as  inactive %}
 
     {% title text=inactive %}
-    {% #block_center %}
-        {% #block_card class="h-24" %}
+    <div class="py-10">
+        {% #block_card class="h-24 px-4" %}
             <p>{% trans "This account is inactive." %}</p>
         {% /block_card %}
-    {% /block_center %}
+    </div>
     
 {% endblock content %}

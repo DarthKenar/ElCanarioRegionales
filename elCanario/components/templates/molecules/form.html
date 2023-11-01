@@ -31,7 +31,7 @@
             </div>
             {% endfor %}
             <div class="w-full flex justify-center items-center">
-                <button type="submit" class="btn btn-success" {% if 'customers' in request.path %} {% if action == "create"  %} hx-post={% url "customers:create" %} {% elif action == "update" %} hx-post={% url "customers:update" id %} {% endif %} {% elif 'orders' in request.path %} {% if action == "create" %} hx-post={% url 'orders:create' %} {% elif action == "update" %} hx-post={% url "orders:update" id %} {% endif %} {% endif %} hx-swap="outerHTML" hx-trigger="click" hx-target="#form_{{action}}">Enviar<button>
+                <button type="submit" class="btn btn-success" {% if 'customers' in request.path %} {% if action == "create"  %} hx-post={% url "customers:create" %} {% elif action == "update" %} hx-post={% url "customers:update" id %} {% endif %} {% elif 'orders' in request.path %} {% if action == "create" %} hx-post={% url 'orders:create' %} {% elif action == "update" %} hx-post={% url "orders:update" id %} {% endif %} {% endif %} hx-swap="outerHTML" hx-trigger="click" hx-target="#form_{{action}}">{% translate 'Guardar' %}<button>
             </div>
         </div>
     </form>
