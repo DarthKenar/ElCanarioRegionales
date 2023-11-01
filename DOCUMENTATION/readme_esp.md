@@ -1,6 +1,6 @@
 [Volver][volver]
 
-![Logo ElCanarioRegionales](logo-header-sinfondo.png.png)
+![Logo ElCanarioRegionales](../docs/images/logo-header.png)
 
 # Objetivo
 
@@ -105,6 +105,8 @@ py manage.py migrate
 ---
 
 ## PREVIEW
+
+
 
 [Volver][volver]
 
