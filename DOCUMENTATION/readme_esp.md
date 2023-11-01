@@ -1,51 +1,111 @@
-# El Canario Regionales
+[Volver][volver]
 
-## Introducción
+![Logo ElCanarioRegionales](logo-header-sinfondo.png.png)
 
+# Objetivo
 
-Instagram del emprendimiento!
-[@elcanario.regionales](https://www.instagram.com/elcanario.regionales/)
+> Aplicación web para control de Stock, Clientes y Ordenes para un pequeño negocio.
 
-## Objetivos de la aplicacion
+## Primeros pasos
 
-    - Manipular artículos y su respectivo stock.
-    - Administrar información clientes para sus respectivos pedidos.
-      - Administrar los pedidos.
-    - Administrar las gastos y las ganancias de el emprendimiento.
-## Integración con Api de terceros:
+## Con python instalado
 
-    ---Dalor Value in BCRA
-    fintech/ar/bcra/dolar_value 
-    
-    ---
-    
-    ---
+[Download Python](https://www.python.org/downloads/release/python-3120/)
 
-## Acceso
+### Clonar proyecto
 
-    - Para acceder a la aplicación es necesario logearse con las siguientes credenciales:
-      - User: admin
-      - Password: 1234
+```bash
+git clone https://github.com/DarthKenar/ElCanarioRegionales.git
+```
 
-## Aclaraciones para desarrolladores
+#### Instala mkdocs para visualizar la documentacion completa del proyecto
 
-Aplicacion desarrollada en [Django](https://www.djangoproject.com/), [HTMX](https://htmx.org/) y [TAILWINDS](https://tailwindcss.com/).
+```bash
+pip install mkdocs
+```
 
-Base de datos utilizada: [Posgresql](https://www.postgresql.org/)
+#### En el directorio actual del proyecto ejecuta
 
-    - El codigo carece de funciones realizadas en JS gracias a la utilizacion de HTMX y su facilidad en para realizar peticiones AJAX 
-  
-Información adicional:
+```bash
+mkdocs serve
+```
 
-    - Durante la fase de desarrollo se estará utilizando SQLite3 para que quien descargue el proyecto pueda interactuar rapidamente con las funcionalidades del sistema.
+![MKDOCS](../docs/images/mkdocs.png)
 
-DOCUMENTACION:
+---
 
-- [.Diagrama de modelos][modelos]
-- [ScreenShots][screenshots]
+#### > Para ejecutar la aplicacion con PDM
 
-[VOLVER][volver]
+##### Si no tienes pdm (instálalo)
+
+```bash
+pip install pdm
+```
+
+##### Si tienes pdm o una vez que lo tengas
+
+#### Instala las dependencias en el entorno virtual con
+
+```bash
+pdm install
+```
+#### Realiza las migraciones para utilizar una base de datos local con
+
+```bash
+pdm migrate
+```
+
+#### Ejecuta el servidor con
+
+```bash
+pdm server
+```
+
+---
+
+#### > Para ejecutar la aplicacion con PIP
+
+```bash
+py -m venv nombre_del_entorno
+```
+
+#### Activa el entorno virtual
+
+```bash
+source nombre_del_entorno/bin/activate
+```
+
+#### En el entorno virtual activado
+
+```bash
+pip install -r requirements.txt
+```
+
+#### Con las dependencias ya instaladas nos dirigimos a la carpeta que contiene el archivo python manage
+
+```bash
+cd ElCanarioRegionales
+cd elCanario
+```
+
+#### Comprobamos que en el directorio se encuentre el archivo python manage
+
+```bash
+cd dir
+```
+
+![List directory](../docs/images/path.png)
+
+#### Realizamos las migraciones para tener una base de datos local
+
+```python
+py manage.py migrate
+```
+
+---
+
+## PREVIEW
+
+[Volver][volver]
 
 [volver]: /README.md
-[modelos]: /DOCUMENTATION/diagram_models.mmd
-[screenshots]: /DOCUMENTATION/images.md

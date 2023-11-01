@@ -1,52 +1,6 @@
-# Objetivo
 
-> Aplicación web para control de Stock, Clientes y Ordenes para un pequeño negocio.
+[Documentacion en Español][Spanish] <--
 
-## Getting Started
 
-### Clone proyect
 
-```bash
-git clone https://github.com/DarthKenar/ElCanarioRegionales.git
-```
-
-#### Instala mkdocs para visualizar la documentacion completa del proyecto
-
-```bash
-pip install mkdocs
-```
-
-#### En el directorio actual del proyecto ejecuta
-
-```bash
-mkdocs serve
-```
-
-![MKDOCS](docs/images/mkdocs.png)
-
-#### Para ejecutar la aplicacion con PDM
-
-##### Si no tienes pdm
-
-```bash
-pip install pdm
-```
-
-##### Si tienes pdm
-
-```bash
-pdm server
-```
-
-#### Para ejecutar la aplicacion con pip en un entorno virtual
-
-```bash
-py -m venv nombre_del_entorno
-```
-
-[English documentation][English]
-
-[Spanish documentation][Spanish]
-
-[English]: /DOCUMENTATION/readme_eng.md
 [Spanish]: /DOCUMENTATION/readme_esp.md
