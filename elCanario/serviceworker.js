@@ -3,6 +3,12 @@
 var staticCacheName = "django-pwa-v" + new Date().getTime();
 var filesToCache = [
     '/offline/',
+    '/static/img/pwa/offline.gif',
+    '/static/img/pwa/logo-light-48x48.png',
+    '/static/img/pwa/logo-light-192x192.png',
+    '/static/img/pwa/logo-light-32x32.png',
+    '/static/img/pwa/logo-light-16x16.png',
+    '/static/img/pwa/logo-light-512x512.png',
 ];
 
 // Cache on install

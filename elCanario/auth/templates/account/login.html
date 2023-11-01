@@ -12,56 +12,60 @@
     
     <div class="w-full flex">
         <!-- Login Section -->
-        <div class="w-full md:w-1/2 flex justify-center items-center relative max-md:py-32">
+        <div class="w-full md:w-1/2 flex justify-center items-center relative ">
             <div class="absolute top-0 w-full">
                 {% menu %}
             </div>
             
+            {% translate 'Sign In' as signin %}
+
             {% #block_center %}
+            
+                {% title text=signin %}
                 
-                    {% #block_card class="h-24" %}
-                        <div class="p-2">
-                            <a class="btn btn-outline"
-                            href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">
-                                <img class="w-6 h-6 mr-2" src="{% static 'img/google.svg' %}" alt="Google">
-                                <span>{% trans "Sign up with Google" %}</span>
-                            </a>
+                {% #block_card class="h-24" %}
+                    <div class="p-2">
+                        <a class="btn btn-outline"
+                        href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">
+                            <img class="w-6 h-6 mr-2" src="{% static 'img/google.svg' %}" alt="Google">
+                            <span>{% trans "Sign up with Google" %}</span>
+                        </a>
+                    </div>
+                {% /block_card %}
+
+                <div class="divider">{% trans 'OR' %}</div>
+
+                {% #block_card class="h-72" %}
+                    <form class="login" method="POST" action="{% url 'account_login' %}">
+                        {% csrf_token %}
+                        {% form_field label=form.login.label id=form.login.id_for_label first="True" name="login" autocomplete="email" type="text" %}
+                        {% form_error errors=form.login.errors %}
+                        {% form_field label=form.password.label id=form.password.id_for_label name="password" autocomplete="current-password" type="password" %}
+                        {% form_error errors=form.password.errors %}
+
+                        <div class="form-control py-0">
+                            <label class="label cursor-pointer mx-3">
+                                <span class="label-text ">{{ form.remember.label }}</span>
+                                <input id="{{ form.remember.label }}" type="checkbox" checked="checked" class="checkbox" />
+                            </label>
                         </div>
-                    {% /block_card %}
-    
-                    <div class="divider">{% trans 'OR' %}</div>
-    
-                    {% #block_card class="h-72" %}
-                        <form class="login" method="POST" action="{% url 'account_login' %}">
-                            {% csrf_token %}
-                            {% form_field label=form.login.label id=form.login.id_for_label first="True" name="login" autocomplete="email" type="text" %}
-                            {% form_error errors=form.login.errors %}
-                            {% form_field label=form.password.label id=form.password.id_for_label name="password" autocomplete="current-password" type="password" %}
-                            {% form_error errors=form.password.errors %}
-    
-                            <div class="form-control py-0">
-                                <label class="label cursor-pointer mx-3">
-                                    <span class="label-text ">{{ form.remember.label }}</span>
-                                    <input id="{{ form.remember.label }}" type="checkbox" checked="checked" class="checkbox" />
-                                </label>
+
+                        {% if form.errors %}
+                            {% for error in form.non_field_errors %}<p class="p-0 m-0 text-error text-xs">{{ error }}</p>{% endfor %}
+                        {% endif %}
+
+                        {% if redirect_field_value %}
+                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                        {% endif %}
+                        
+                        <div class="form-control py-0">
+                            <div class="flex items-center justify-between ">
+                                <a class="button secondaryAction text-sm mx-3" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+                                <button class="btn btn-ghost" type="submit">{{signin}}</button>
                             </div>
-    
-                            {% if form.errors %}
-                                {% for error in form.non_field_errors %}<p class="p-0 m-0 text-error text-xs">{{ error }}</p>{% endfor %}
-                            {% endif %}
-    
-                            {% if redirect_field_value %}
-                                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-                            {% endif %}
-                            
-                            <div class="form-control py-0">
-                                <div class="flex items-center justify-between ">
-                                    <a class="button secondaryAction text-sm mx-3" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-                                    <button class="btn btn-ghost" type="submit">{% trans "Sign In" %}</button>
-                                </div>
-                            </div>
-                        </form>
-                    {% /block_card %}
+                        </div>
+                    </form>
+                {% /block_card %}
 
             {% /block_center %}
 

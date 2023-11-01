@@ -1,103 +1,117 @@
-{% extends "account/base.html" %}
-
+{% extends "base.html" %}
 {% load static %}
 {% load i18n %}
-
-{% block head_title %}
+{% block title %}
     {% trans "Sign Up" %}
-{% endblock head_title %}
+{% endblock title %}
+{% block base_head %}
+{% endblock base_head %}
+{% block base_content %}
+    <div class="w-full flex">
+        <!-- Image Section -->
+        <div class="md:w-1/2 shadow-2xl max-md::hidden">
+            <img class="object-cover w-full h-screen hidden md:block" src="{% static 'img/fondo-signup.webp' %}">
+        </div>
 
-{% block content %}
-    {% trans "Sign Up" as signup %}
-    {% title text=signup %}
-    <section class="flex justify-center items-center w-full">
-        {% #block_center form=form %}
-            <div class="form-control">
-                <p class="text-center p-6">
-                    {% blocktrans %}Already have an account? Then please <a class="btn btn-sm text-sm font-normal lowercase" href="{{ login_url }}">sign in</a> .{% endblocktrans %}
-                </p> 
+        <!-- Login Section -->
+        <div class="w-full md:w-1/2 flex justify-center items-center relative">
+            <div class="absolute top-0 w-full">
+                {% menu %}
             </div>
-            {% #block_card class="h-80 py-6 px-4" form=form %}
-    
-                <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
-                    {% csrf_token %}
-                    <div class="form-control">
-                        <label class="input-group input-group-sm">
-                            <span class="w-full">{{ form.username.label }}</span>
-                            <input id="{{ form.username.id_for_label }}"
-                                name="username"
-                                autocomplete="username"
-                                type="text"
-                                maxlength="150"
-                                minlength="4"
-                                placeholder="{{ form.username.label }}"
-                                class="input input-bordered input-sm"
-                                required />
-                        </label>
-                    </div>
 
-                    {% form_error errors=form.username.errors %}
+            {% translate 'Sign Up' as signup %}
 
-                    <div class="form-control">
-                        <label class="input-group input-group-sm">
-                            <span class="w-full">{{ form.email.label }}</span>
-                            <input id="{{ form.email.id_for_label }}"
-                                name="email"
-                                autocomplete="email"
-                                type="text"
-                                placeholder="{{ form.email.label }}"
-                                class="input input-bordered input-sm"
-                                required />
-                        </label>
-                    </div>
+            {% #block_center %}
 
-                    {% form_error errors=form.email.errors %}
+                {% title text=signup %}
 
-                    <div class="form-control py-0">
-                        <label class="input-group input-group-sm">
-                            <span class="w-full">{{ form.password1.label }}</span>
-                            <input id="{{ form.password1.id_for_label }}"
-                                type="password"
-                                name="password1"
-                                autocomplete="current-password"
-                                placeholder="{{ form.password1.label }}"
-                                class="input input-bordered input-sm" />
-                        </label>
-                    </div>
-
-                    {% form_error errors=form.password1.errors %}
-
-                    <div class="form-control py-0">
-                        <label class="input-group input-group-sm">
-                            <span class="w-full">{{ form.password2.label }}</span>
-                            <input id="{{ form.password2.id_for_label }}"
-                                type="password"
-                                name="password2"
-                                autocomplete="current-password"
-                                placeholder="{{ form.password2.label }}"
-                                class="input input-bordered input-sm" />
-                        </label>
-                    </div>
-
-                    {% form_error  errors=form.password2.errors %}
-
-                    {% if redirect_field_value %}
-                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-                    {% endif %}
-                    <div class="form-control py-2">
-                        <div class="flex items-center justify-between ">
-                            <a class="button secondaryAction text-sm mx-3" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-                            <button class="btn btn-ghost" type="submit">{{signup}}</button>
+                <div class="form-control">
+                    <p class="text-center p-6">
+                        {% blocktrans %}Already have an account? Then please <a class="btn btn-sm text-sm font-normal lowercase" href="{{ login_url }}">sign in</a> .{% endblocktrans %}
+                    </p> 
+                </div>
+                {% #block_card class="h-80 py-6 px-4" form=form %}
+        
+                    <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+                        {% csrf_token %}
+                        <div class="form-control">
+                            <label class="input-group input-group-sm">
+                                <span class="w-full">{{ form.username.label }}</span>
+                                <input id="{{ form.username.id_for_label }}"
+                                    name="username"
+                                    autocomplete="username"
+                                    type="text"
+                                    maxlength="150"
+                                    minlength="4"
+                                    placeholder="{{ form.username.label }}"
+                                    class="input input-bordered input-sm"
+                                    required />
+                            </label>
                         </div>
-                    </div>
-                    {% if form.errors %}
-                        {% for error in form.non_field_errors %}<p class="p-0 m-0 text-error text-xs">{{ error }}</p>{% endfor %}
-                    {% endif %}
-                    {% if redirect_field_value %}
-                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-                    {% endif %}
-                </form>
-            {% /block_card %}
-        {% /block_center %}
-    </section>
-{% endblock content %}
+
+                        {% form_error errors=form.username.errors %}
+
+                        <div class="form-control">
+                            <label class="input-group input-group-sm">
+                                <span class="w-full">{{ form.email.label }}</span>
+                                <input id="{{ form.email.id_for_label }}"
+                                    name="email"
+                                    autocomplete="email"
+                                    type="text"
+                                    placeholder="{{ form.email.label }}"
+                                    class="input input-bordered input-sm"
+                                    required />
+                            </label>
+                        </div>
+
+                        {% form_error errors=form.email.errors %}
+
+                        <div class="form-control py-0">
+                            <label class="input-group input-group-sm">
+                                <span class="w-full">{{ form.password1.label }}</span>
+                                <input id="{{ form.password1.id_for_label }}"
+                                    type="password"
+                                    name="password1"
+                                    autocomplete="current-password"
+                                    placeholder="{{ form.password1.label }}"
+                                    class="input input-bordered input-sm" />
+                            </label>
+                        </div>
+
+                        {% form_error errors=form.password1.errors %}
+
+                        <div class="form-control py-0">
+                            <label class="input-group input-group-sm">
+                                <span class="w-full">{{ form.password2.label }}</span>
+                                <input id="{{ form.password2.id_for_label }}"
+                                    type="password"
+                                    name="password2"
+                                    autocomplete="current-password"
+                                    placeholder="{{ form.password2.label }}"
+                                    class="input input-bordered input-sm" />
+                            </label>
+                        </div>
+
+                        {% form_error  errors=form.password2.errors %}
+
+                        {% if redirect_field_value %}
+                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                        {% endif %}
+                        <div class="form-control py-2">
+                            <div class="flex items-center justify-between ">
+                                <a class="button secondaryAction text-sm mx-3" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+                                <button class="btn btn-ghost" type="submit">{{signup}}</button>
+                            </div>
+                        </div>
+                        {% if form.errors %}
+                            {% for error in form.non_field_errors %}<p class="p-0 m-0 text-error text-xs">{{ error }}</p>{% endfor %}
+                        {% endif %}
+                        {% if redirect_field_value %}
+                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                        {% endif %}
+                    </form>
+                {% /block_card %}
+            {% /block_center %}
+        </div>
+    </div>
+{% endblock base_content %}

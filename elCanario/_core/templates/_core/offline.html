@@ -2,12 +2,12 @@
 {% load i18n %}
 {% load static %}
 {% block title %}
-    <title>{% translate 'Offline' %}</title>
+    {% translate 'Offline' %}
 {% endblock title %}
-{% block content %}
-    {% include 'menu.html' %}
+{% block base_content %}
+    {% menu %}
     <h1 class="text-center text-3xl font-bold p-2">{% translate 'YOU ARE OFFLINE, PLEASE CHECK YOUR INTERNET CONNECTION.' %}</h1>
     <div class="flex items-center justify-center">
-        <img src="{% static '/img/offline.gif' %}" width="50%" height="50%"></img>
+        <img src="{% static '/img/pwa/offline.gif' %}" width="50%" height="50%"></img>
     </div>
-{% endblock content %}
+{% endblock base_content %}

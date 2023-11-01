@@ -1,7 +1,8 @@
 from django.db import models
 from articles import models as articles_models
 from customers import models as customers_models
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as __
 from django.core.exceptions import ValidationError
 # Create your models here.
 
@@ -28,7 +29,7 @@ class Order(models.Model):
             existing_orders = Order.objects.filter(customer_id=self.customer_id_id, delivery_status=None)
     
             if existing_orders.exists():
-                raise ValidationError(_(f"A pending order already exists for the customer {self.customer_id.name}"))
+                raise ValidationError(__(f"A pending order already exists for the customer {self.customer_id.name}"))
                 
         super().clean()
 

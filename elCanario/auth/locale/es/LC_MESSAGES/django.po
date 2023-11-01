@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-30 11:50-0300\n"
+"POT-Creation-Date: 2023-10-31 23:01-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -206,24 +206,23 @@ msgid ""
 msgstr ""
 
 #: .\elCanario\auth\templates\account\login.html:7
-#: .\elCanario\auth\templates\account\login.html:60
+#: .\elCanario\auth\templates\account\login.html:20
 #: .\elCanario\auth\templates\mfa\authenticate.html:4
 #: .\elCanario\auth\templates\mfa\authenticate.html:16
 #: .\elCanario\auth\templates\socialaccount\login.html:6
 msgid "Sign In"
 msgstr ""
 
-#: .\elCanario\auth\templates\account\login.html:27
+#: .\elCanario\auth\templates\account\login.html:31
 msgid "Sign up with Google"
 msgstr ""
 
-#: .\elCanario\auth\templates\account\login.html:32
+#: .\elCanario\auth\templates\account\login.html:36
 msgid "OR"
 msgstr ""
 
-#: .\elCanario\auth\templates\account\login.html:59
-#: .\elCanario\auth\templates\account\password_change.html:14
-#: .\elCanario\auth\templates\account\signup.html:89
+#: .\elCanario\auth\templates\account\login.html:63
+#: .\elCanario\auth\templates\account\signup.html:102
 msgid "Forgot Password?"
 msgstr ""
 
@@ -284,7 +283,7 @@ msgstr ""
 
 #: .\elCanario\auth\templates\account\password_change.html:5
 #: .\elCanario\auth\templates\account\password_change.html:8
-#: .\elCanario\auth\templates\account\password_change.html:13
+#: .\elCanario\auth\templates\account\password_change.html:59
 #: .\elCanario\auth\templates\account\password_reset_from_key.html:4
 #: .\elCanario\auth\templates\account\password_reset_from_key.html:7
 #: .\elCanario\auth\templates\account\password_reset_from_key_done.html:4
@@ -341,7 +340,7 @@ msgstr ""
 
 #: .\elCanario\auth\templates\account\password_set.html:5
 #: .\elCanario\auth\templates\account\password_set.html:8
-#: .\elCanario\auth\templates\account\password_set.html:13
+#: .\elCanario\auth\templates\account\password_set.html:45
 msgid "Set Password"
 msgstr ""
 
@@ -354,14 +353,14 @@ msgstr ""
 msgid "To safeguard the security of your account, please enter your password:"
 msgstr ""
 
-#: .\elCanario\auth\templates\account\signup.html:7
-#: .\elCanario\auth\templates\account\signup.html:11
+#: .\elCanario\auth\templates\account\signup.html:5
+#: .\elCanario\auth\templates\account\signup.html:22
 #: .\elCanario\auth\templates\socialaccount\signup.html:8
 #: .\elCanario\auth\templates\socialaccount\signup.html:19
 msgid "Sign Up"
 msgstr ""
 
-#: .\elCanario\auth\templates\account\signup.html:17
+#: .\elCanario\auth\templates\account\signup.html:30
 #, python-format
 msgid ""
 "Already have an account? Then please <a class=\"btn btn-sm text-sm font-"
