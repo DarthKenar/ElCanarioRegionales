@@ -1,5 +1,4 @@
-# DOCUMENTATION/DOCUMENTACION
-## Objetivo
+# Objetivo
 
 > Aplicación web para control de Stock, Clientes y Ordenes para un pequeño negocio.
 
@@ -17,7 +16,7 @@ git clone https://github.com/DarthKenar/ElCanarioRegionales.git
 pip install mkdocs
 ```
 
-#### En la ruta actual del proyecto ejecuta
+#### En el directorio actual del proyecto ejecuta
 
 ```bash
 mkdocs serve
@@ -37,6 +36,12 @@ pip install pdm
 
 ```bash
 pdm server
+```
+
+#### Para ejecutar la aplicacion con pip en un entorno virtual
+
+```bash
+py -m venv nombre_del_entorno
 ```
 
 [English documentation][English]
