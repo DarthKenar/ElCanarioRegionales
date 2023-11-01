@@ -9,7 +9,7 @@
 ## Features
 
 - Create, edit, delete _customers_.
-- Creates, edits, deletes _items_ for articles
+- Creates, edits, deletes _articles_.
   - Creates, edits or deletes _categories_ for articles
     - Creates, edits or deletes _values_ related to a specific category (to relate them to a specific article)
 - Create, edit, delete _orders_.
@@ -22,7 +22,7 @@
   - Email confirmation (not mandatory for practical purposes)
   - Dual authentication system (2FA) (not mandatory for practical purposes)
   - and much more...
-- Filtering of Cards (objects [Customers, Orders, Items]) based on any of their attributes (Implemented HTMX dynamic page)
+- Filtering of Cards (objects [Customers, Orders, Articles]) based on any of their attributes (Implemented HTMX dynamic page)
 - Install the application on your cell phone (Progressive web application)
 
 ## Project layout
