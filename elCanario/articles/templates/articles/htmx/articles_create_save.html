@@ -1,18 +1,14 @@
 <div class="mx-auto max-w-md" id="article_create_answer">
-  {% include 'articles_create_table.html' %}
   {% if answer_save_error %}
-    <p class="font-bold empty:hidden cursor-default vanish text-danger">{{answer_save_error}}</p>
-    <p class="p-0 m-0 text-xs">&nbsp;</p>
-  {% else %}
-    <p class="p-0 m-0 text-xs">&nbsp;</p>
-    <p class="p-0 m-0 text-xs">&nbsp;</p>
+    {% #message type="danger" %}
+      {{answer_save_error}}
+    {% /message %}
   {% endif %}
   {% if answer_save_right %}
-    <p class="font-bold empty:hidden vanish cursor-default text-success">{{answer_save_right}}</p>
-    <p class="p-0 m-0 text-xs">&nbsp;</p>
-  {% else %}
-    <p class="p-0 m-0 text-xs">&nbsp;</p>
-    <p class="p-0 m-0 text-xs">&nbsp;</p>
+    {% #message type="success" %}
+      {{answer_save_right}}
+    {% /message %}
   {% endif %}
+  {% include 'articles_create_table.html' %}
 </div>
 

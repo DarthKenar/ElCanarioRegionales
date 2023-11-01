@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-01 19:07-0300\n"
-"PO-Revision-Date: 2023-11-01 19:09-0300\n"
+"POT-Creation-Date: 2023-11-01 19:28-0300\n"
+"PO-Revision-Date: 2023-11-01 19:23-0300\n"
 "Last-Translator:   <ioseph.dev@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -134,7 +134,6 @@ msgid "Categories"
 msgstr "Categorías"
 
 #: .\elCanario\articles\templates\articles\articles.html:20
-#| msgid "Create Article Section"
 msgid "Create Article"
 msgstr "Crear Artículo"
 
@@ -306,8 +305,7 @@ msgstr "El nombre no debe contener espacios."
 #, python-brace-format
 msgid "Atention - The name {name} already exists! You can use it anyway"
 msgstr ""
-"Atención - El nombre {name} ya existe! Aunque puedes usarlo de todas "
-"maneras."
+"Atención - El nombre {name} ya existe! Aunque puedes usarlo de todas maneras."
 
 #: .\elCanario\articles\utils.py:152
 msgid "Complete the name is obligatory."
@@ -380,7 +378,7 @@ msgstr ""
 #: .\elCanario\articles\views.py:302
 #, python-brace-format
 msgid "The article {article.name} has been saved correctly"
-msgstr "El artículo {article.name} se creó correctamente."
+msgstr "El artículo {article.name} se guardó correctamente."
 
 #: .\elCanario\articles\views.py:368
 #, python-brace-format
@@ -439,8 +437,8 @@ msgstr "La categoría no podía guardarse."
 #: .\elCanario\articles\views.py:528
 #, python-brace-format
 msgid ""
-"VALUE CREATED - Name: {value_to_update.name}, Category: "
-"{category_to_update.name}."
+"VALUE CREATED - Name: {value_to_update.name}, Category: {category_to_update."
+"name}."
 msgstr ""
 "VALOR CREADO - \n"
 "Nombre: {value_to_update.name},\n"
@@ -487,8 +485,8 @@ msgstr ""
 msgid ""
 "Unable to update the category name {category_to_update.name} --> {new_name}!"
 msgstr ""
-"¡No se ha podido actualizar el nombre de la categoría "
-"{category_to_update.name} --> {new_name}!"
+"¡No se ha podido actualizar el nombre de la categoría {category_to_update."
+"name} --> {new_name}!"
 
 #: .\elCanario\articles\views.py:626
 #, python-brace-format
@@ -522,8 +520,7 @@ msgstr ""
 #, python-brace-format
 msgid ""
 "A category value {value_to_update.category_id.name} has been successfully "
-"updated: Previous value name: {category_to_update.name}, New name "
-"{new_name}."
+"updated: Previous value name: {category_to_update.name}, New name {new_name}."
 msgstr ""
 "Un valor de categoría {value_to_update.category_id.name} se ha actualizado "
 "correctamente: Nombre del valor anterior: {category_to_update.name}, Nuevo "
@@ -545,8 +542,8 @@ msgstr ""
 msgid ""
 "Unable to update the value name: {value_to_update.name} --to--> {new_name}!"
 msgstr ""
-"¡No se ha podido actualizar el nombre del valor: {valor_a_actualizar.nombre}"
-" --> {new_name}!"
+"¡No se ha podido actualizar el nombre del valor: {valor_a_actualizar.nombre} "
+"--> {new_name}!"
 
 #: .\elCanario\components\templates\atomics\theme_switch.html:9
 msgid "Select Theme"
@@ -920,8 +917,8 @@ msgstr "Ventas en la Base de datos"
 #: .\elCanario\orders\views.py:124
 #, python-brace-format
 msgid ""
-"ORDER CREATED - Customer: {customer_id.name}, articles: {articles}, details:"
-" {details}."
+"ORDER CREATED - Customer: {customer_id.name}, articles: {articles}, details: "
+"{details}."
 msgstr ""
 "ORDEN CREADA -\n"
 "Cliente: {customer_id.name}\n"
@@ -931,8 +928,8 @@ msgstr ""
 #: .\elCanario\orders\views.py:186
 #, python-brace-format
 msgid ""
-"ORDER UPDATED - Customer: {customer_id.name}, articles: {articles}, details:"
-" {details}."
+"ORDER UPDATED - Customer: {customer_id.name}, articles: {articles}, details: "
+"{details}."
 msgstr ""
 "ORDEN ACTUALIZADA -\n"
 "Cliente: {customer_id.name}\n"
@@ -944,8 +941,8 @@ msgid ""
 "The selected order could not be deleted because it does not exist. Contact "
 "support."
 msgstr ""
-"No se ha podido eliminar el pedido seleccionado porque no existe. Póngase en"
-" contacto con el servicio de asistencia."
+"No se ha podido eliminar el pedido seleccionado porque no existe. Póngase en "
+"contacto con el servicio de asistencia."
 
 #: .\elCanario\orders\views.py:245
 #, python-brace-format
@@ -1006,7 +1003,8 @@ msgstr "Verificado"
 #, python-brace-format
 #~ msgid ""
 #~ "A pending order already exists for the customer {self.customer_id.name}"
-#~ msgstr "Ya existe un pedido pendiente para el cliente {self.customer_id.name}"
+#~ msgstr ""
+#~ "Ya existe un pedido pendiente para el cliente {self.customer_id.name}"
 
 #, python-brace-format
 #~ msgid "New category whit name '{category_to_save.name}' has been created."
@@ -1018,13 +1016,14 @@ msgstr "Verificado"
 #~ "A new value for the category '{category_to_update.name}'has been created "
 #~ "whit the name '{value_to_update.name}'"
 #~ msgstr ""
-#~ "Se ha creado un nuevo valor para la categoría \"{category_to_update.name}\" "
-#~ "con el nombre \"{value_to_update.name}\"."
+#~ "Se ha creado un nuevo valor para la categoría \"{category_to_update."
+#~ "name}\" con el nombre \"{value_to_update.name}\"."
 
 #, python-brace-format
 #~ msgid ""
 #~ "Order created:\n"
-#~ "\tCustomer: {customer_id.name}, articles: {articles_cart}, details: {details}"
+#~ "\tCustomer: {customer_id.name}, articles: {articles_cart}, details: "
+#~ "{details}"
 #~ msgstr ""
 #~ "Venta Creada:\n"
 #~ "Ciente: {customer_id.name}\n"

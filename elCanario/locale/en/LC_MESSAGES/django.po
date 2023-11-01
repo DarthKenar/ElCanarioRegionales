@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-01 19:07-0300\n"
+"POT-Creation-Date: 2023-11-01 19:28-0300\n"
 "PO-Revision-Date: 2023-11-01 19:09-0300\n"
 "Last-Translator:   <ioseph.dev@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -134,7 +134,6 @@ msgid "Categories"
 msgstr "Categories"
 
 #: .\elCanario\articles\templates\articles\articles.html:20
-#| msgid "Create Article Section"
 msgid "Create Article"
 msgstr "Create Article"
 
@@ -436,11 +435,11 @@ msgstr "Category could not be saved!"
 #: .\elCanario\articles\views.py:528
 #, python-brace-format
 msgid ""
-"VALUE CREATED - Name: {value_to_update.name}, Category: "
-"{category_to_update.name}."
+"VALUE CREATED - Name: {value_to_update.name}, Category: {category_to_update."
+"name}."
 msgstr ""
-"VALUE CREATED - Name: {value_to_update.name}, Category: "
-"{category_to_update.name}."
+"VALUE CREATED - Name: {value_to_update.name}, Category: {category_to_update."
+"name}."
 
 #: .\elCanario\articles\views.py:530
 #, python-brace-format
@@ -517,12 +516,10 @@ msgstr ""
 #, python-brace-format
 msgid ""
 "A category value {value_to_update.category_id.name} has been successfully "
-"updated: Previous value name: {category_to_update.name}, New name "
-"{new_name}."
+"updated: Previous value name: {category_to_update.name}, New name {new_name}."
 msgstr ""
 "A category value {value_to_update.category_id.name} has been successfully "
-"updated: Previous value name: {category_to_update.name}, New name "
-"{new_name}."
+"updated: Previous value name: {category_to_update.name}, New name {new_name}."
 
 #: .\elCanario\articles\views.py:715
 #, python-brace-format
@@ -913,20 +910,20 @@ msgstr "Orders in Database"
 #: .\elCanario\orders\views.py:124
 #, python-brace-format
 msgid ""
-"ORDER CREATED - Customer: {customer_id.name}, articles: {articles}, details:"
-" {details}."
+"ORDER CREATED - Customer: {customer_id.name}, articles: {articles}, details: "
+"{details}."
 msgstr ""
-"ORDER CREATED - Customer: {customer_id.name}, articles: {articles}, details:"
-" {details}."
+"ORDER CREATED - Customer: {customer_id.name}, articles: {articles}, details: "
+"{details}."
 
 #: .\elCanario\orders\views.py:186
 #, python-brace-format
 msgid ""
-"ORDER UPDATED - Customer: {customer_id.name}, articles: {articles}, details:"
-" {details}."
+"ORDER UPDATED - Customer: {customer_id.name}, articles: {articles}, details: "
+"{details}."
 msgstr ""
-"ORDER UPDATED - Customer: {customer_id.name}, articles: {articles}, details:"
-" {details}."
+"ORDER UPDATED - Customer: {customer_id.name}, articles: {articles}, details: "
+"{details}."
 
 #: .\elCanario\orders\views.py:242
 msgid ""
@@ -1013,16 +1010,19 @@ msgstr "Verified"
 #, python-brace-format
 #~ msgid ""
 #~ "Order created:\n"
-#~ "\tCustomer: {customer_id.name}, articles: {articles_cart}, details: {details}"
+#~ "\tCustomer: {customer_id.name}, articles: {articles_cart}, details: "
+#~ "{details}"
 #~ msgstr ""
 #~ "Order created:\n"
-#~ "Customer: {customer_id.name}, articles: {articles_cart}, details: {details}"
+#~ "Customer: {customer_id.name}, articles: {articles_cart}, details: "
+#~ "{details}"
 
 #~ msgid "Correctly"
 #~ msgstr "Correctly"
 
 #, python-brace-format
-#~ msgid "Se creo una nueva categoría con el nombre de '{category_to_save.name}'"
+#~ msgid ""
+#~ "Se creo una nueva categoría con el nombre de '{category_to_save.name}'"
 #~ msgstr ""
 #~ "Se creo una nueva categoría con el nombre de '{category_to_save.name}'"
 
