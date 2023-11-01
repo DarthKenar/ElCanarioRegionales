@@ -1,10 +1,45 @@
 ![Logo ElCanarioRegionales](docs/images/logo-header.png)
 
-[Spanish Documantation][Spanish] <--
+[Documentación en Español][Spanish] <--
 
 # Goal
 
 > Web application to control Stock, Customers and Orders for a small business.
+> 
+---
+
+## PREVIEW
+
+### RESPONSIVE DESIGN
+
+![RESPONSIVE DESIGN](docs/images/responsive_design.png)
+
+### CHANGE LANGUAGE
+
+![CHANGE LANGUAGE](docs/images/switch-lenguage.gif)
+
+### CHANGE THEME
+
+![CHANGE THEME](docs/images/switch-theme.gif)
+
+#### Features
+
+- Create, edit, delete _customers_.
+- Creates, edits, deletes _items_ for articles
+  - Creates, edits or deletes _categories_ for articles
+    - Creates, edits or deletes _values_ related to a specific category (to relate them to a specific article)
+- Create, edit, delete _orders_.
+- Automatic creation of log of actions displayed on the main panel (desktop)
+- Full authentication system
+  - Login (or register) with Google account
+  - Registration
+  - Login with Google account
+  - Password recovery
+  - Email confirmation (not mandatory for practical purposes)
+  - Dual authentication system (2FA) (not mandatory for practical purposes)
+  - and much more...
+- Filtering of Cards (objects [Customers, Orders, Items]) based on any of their attributes (Implemented HTMX dynamic page)
+- Install the application on your cell phone (Progressive web application)
 
 ## Getting started
 
@@ -18,7 +53,13 @@
 git clone https://github.com/DarthKenar/ElCanarioRegionales.git
 ```
 
-#### Install mkdocs to view the complete project documentation.
+#### Full Online Technical Documantation
+
+[Documentation Link](https://darthkenar.github.io/ElCanarioRegionales/)
+
+#### Full offline Technical Documentation
+
+#### Install mkdocs to view the complete project documentation in local server
 
 ```bash
 pip install mkdocs
@@ -31,6 +72,10 @@ mkdocs serve
 ```
 
 ![MKDOCS](docs/images/mkdocs.png)
+
+---
+
+### RUN APLICATION
 
 ---
 
@@ -190,19 +235,5 @@ erDiagram
         phone_number CharField
     }
 ```
-
-## PREVIEW
-
-### RESPONSIVE DESIGN
-
-![RESPONSIVE DESIGN](docs/images/responsive_design.png)
-
-### CHANGE LANGUAGE
-
-![CHANGE LANGUAGE](docs/images/switch-lenguage.gif)
-
-### CHANGE THEME
-
-![CHANGE THEME](docs/images/switch-theme.gif)
 
 [Spanish]: /docs/README-ES.md

@@ -2,9 +2,46 @@
 
 ![Logo ElCanarioRegionales](images/logo-header.png)
 
+#### Documentacion Técnica Online Completa
+
+[Documentation Link](https://darthkenar.github.io/ElCanarioRegionales/)
+
 # Objetivo
 
 > Aplicación web para control de Stock, Clientes y Ordenes para un pequeño negocio.
+
+## PRESENTACIÓN
+
+### DISEÑO RESPONSIVE
+
+![DISEÑO RESPONSIVE](images/responsive_design.png)
+
+### CAMBIA DE IDIOMA
+
+![CAMBIA DE IDIOMA](images/switch-lenguage.gif)
+
+### CAMBIA DE TEMA
+
+![CAMBIA DE TEMA](images/switch-theme.gif)
+
+#### Funcionalidades
+
+- Crea, edita, elimina _clientes_
+- Crea, edita, elimina _artículos_
+  - Crea, edita o elimina _categorías_ para artículos
+    - Crea, edita o elimina _valores_ relacionados con una categoría específica (para relacionarlos con un artículo específico)
+- Crea, edita, elimina _ordenes_
+- Creacion automática de registro de acciones mostradas en el panel principal (escritorio)
+- Sistema de autentificación completo
+  - Inicio de sesión (o registro) con cuenta de Google
+  - Registro
+  - Inicio de sesión
+  - Recuperacion de contraseña
+  - Confirmación de e-mails (no obligatorio a fines practicos)
+  - Sistema de doble autentificacion (2FA) (no obligatorio a fines practicos)
+  - y mucho más...
+- Filtrado de Cartas (objetos [Clientes, Ordenes, Artículos]) en base a cualquiera de sus atributos (Implementado HTMX pagina dinámica)
+- Instala la aplicacion en tu celular (Aplicación web progresiva)
 
 ## Primeros pasos
 
@@ -190,20 +227,6 @@ erDiagram
         phone_number CharField
     }
 ```
-
-## PREVIEW
-
-### DISEÑO RESPONSIVE
-
-![DISEÑO RESPONSIVE](images/responsive_design.png)
-
-### CAMBIA DE IDIOMA
-
-![CAMBIA DE IDIOMA](images/switch-lenguage.gif)
-
-### CAMBIA DE TEMA
-
-![CAMBIA DE TEMA](images/switch-theme.gif)
 
 [Volver][volver]
 

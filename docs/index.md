@@ -1,5 +1,30 @@
 # Welcome to El Canario Regionales
 
+![El Canario Regionales Logo](images/logo-header.png)
+
+## Description
+
+[@elcanario.regionales](https://www.instagram.com/elcanario.regionales/)
+
+## Features
+
+- Create, edit, delete _customers_.
+- Creates, edits, deletes _items_ for articles
+  - Creates, edits or deletes _categories_ for articles
+    - Creates, edits or deletes _values_ related to a specific category (to relate them to a specific article)
+- Create, edit, delete _orders_.
+- Automatic creation of log of actions displayed on the main panel (desktop)
+- Full authentication system
+  - Login (or register) with Google account
+  - Registration
+  - Login with Google account
+  - Password recovery
+  - Email confirmation (not mandatory for practical purposes)
+  - Dual authentication system (2FA) (not mandatory for practical purposes)
+  - and much more...
+- Filtering of Cards (objects [Customers, Orders, Items]) based on any of their attributes (Implemented HTMX dynamic page)
+- Install the application on your cell phone (Progressive web application)
+
 ## Project layout
 
 ``` bash
@@ -108,3 +133,17 @@ erDiagram
 - [DaisyUI](https://daisyui.com/)
 - [Feathericons](https://feathericons.com/)
 - [HTMX](https://htmx.org/)
+
+## PREVIEW
+
+### RESPONSIVE DESIGN
+
+![RESPONSIVE DESIGN](images/responsive_design.png)
+
+### CHANGE LANGUAGE
+
+![CHANGE LANGUAGE](images/switch-lenguage.gif)
+
+### CHANGE THEME
+
+![CHANGE THEME](images/switch-theme.gif)
