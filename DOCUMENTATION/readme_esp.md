@@ -98,15 +98,13 @@ cd dir
 
 #### Realizamos las migraciones para tener una base de datos local
 
-```python
+```bash
 py manage.py migrate
 ```
 
 ---
 
 ## PREVIEW
-
-
 
 [Volver][volver]
 
