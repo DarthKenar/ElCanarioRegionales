@@ -10,14 +10,14 @@
 {% block content %}
     {% trans "Sign Up" as signup %}
     {% title text=signup %}
-    <section class="flex justify-center items-center">
+    <section class="flex justify-center items-center w-full">
         {% #block_center form=form %}
             <div class="form-control">
-                <p>
+                <p class="text-center p-6">
                     {% blocktrans %}Already have an account? Then please <a class="btn btn-sm text-sm font-normal lowercase" href="{{ login_url }}">sign in</a> .{% endblocktrans %}
                 </p> 
             </div>
-            {% #block_card class="h-80 p-6" form=form %}
+            {% #block_card class="h-80 py-6 px-4" form=form %}
     
                 <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
                     {% csrf_token %}
