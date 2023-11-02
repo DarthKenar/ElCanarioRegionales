@@ -24,19 +24,6 @@ class Order(models.Model):
     def __str__(self) -> str:
         return f"Customer: {self.customer_id.name}, phone: {self.customer_id.phone_number}, total: {self.total_pay}, status: {self.delivery_status}"
 
-    def clean(self):
-        if self.delivery_status is None:
-            existing_orders = Order.objects.filter(customer_id=self.customer_id_id, delivery_status=None)
-    
-            if existing_orders.exists():
-                raise ValidationError(__(f"A pending order already exists for the customer {self.customer_id.name}"))
-                
-        super().clean()
-
-    def save(self, *args, **kwargs):
-        self.clean()
-        super().save(*args, **kwargs)
-
 class ArticleOrder(models.Model):
     article_id = models.ForeignKey(articles_models.Article,on_delete=models.CASCADE)
     order_id = models.ForeignKey(Order, on_delete=models.CASCADE)
