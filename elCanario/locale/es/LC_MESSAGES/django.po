@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-01 19:28-0300\n"
+"POT-Creation-Date: 2023-11-02 04:07-0300\n"
 "PO-Revision-Date: 2023-11-01 19:23-0300\n"
 "Last-Translator:   <ioseph.dev@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -71,6 +71,7 @@ msgstr "Admin"
 #: .\elCanario\_core\templates\_core\menu.html:7
 #: .\elCanario\orders\templates\orders\orders.html:22
 #: .\elCanario\orders\templates\orders\orders_create.html:5
+#: .\elCanario\orders\templates\orders\orders_create.html:24
 #: .\elCanario\orders\templates\orders\orders_update.html:5
 msgid "Create Order"
 msgstr "Crear Orden"
@@ -83,6 +84,7 @@ msgstr "Ordenes"
 
 #: .\elCanario\_core\templates\_core\menu.html:22
 #: .\elCanario\_core\templates\_core\navbar_mobile.html:13
+#: .\elCanario\orders\form.py:20
 #: .\elCanario\orders\templates\orders\partials\orders_search_header.html:7
 msgid "Articles"
 msgstr "Artículos"
@@ -200,7 +202,7 @@ msgstr "No se encontraron artículos con valores en la categoría seleccionada."
 #: .\elCanario\articles\templates\articles\partials\categories_table.html:100
 #: .\elCanario\articles\utils.py:240 .\elCanario\articles\views.py:37
 #: .\elCanario\components\templates\molecules\card_customer.html:11
-#: .\elCanario\customers\forms.py:10
+#: .\elCanario\customers\forms.py:11 .\elCanario\customers\forms.py:18
 #: .\elCanario\customers\templates\customers\partials\customers_search_header.html:6
 #: .\elCanario\customers\utils.py:104 .\elCanario\customers\views.py:38
 msgid "Name"
@@ -556,7 +558,6 @@ msgstr "Cambiar Email"
 
 #: .\elCanario\components\templates\containers\menu.html:28
 #: .\elCanario\components\templates\containers\menu.html:52
-#: .\elCanario\components\templates\organisms\login_form.html:13
 msgid "Sign In"
 msgstr "Iniciar Sesión"
 
@@ -566,7 +567,7 @@ msgid "Sign Up"
 msgstr "Registrarse"
 
 #: .\elCanario\components\templates\molecules\card_customer.html:18
-#: .\elCanario\customers\forms.py:12
+#: .\elCanario\customers\forms.py:13 .\elCanario\customers\forms.py:20
 #: .\elCanario\customers\templates\customers\partials\customers_search_header.html:8
 #: .\elCanario\customers\utils.py:107
 msgid "Phone number"
@@ -577,19 +578,20 @@ msgid "Total Purchased"
 msgstr "Total adquirido"
 
 #: .\elCanario\components\templates\molecules\card_customer.html:26
-#: .\elCanario\customers\forms.py:13
+#: .\elCanario\customers\forms.py:14 .\elCanario\customers\forms.py:21
 #: .\elCanario\customers\templates\customers\partials\customers_search_header.html:10
 #: .\elCanario\customers\utils.py:95
 msgid "Address"
 msgstr "Dirección"
 
 #: .\elCanario\components\templates\molecules\card_customer.html:30
-#: .\elCanario\customers\forms.py:11
+#: .\elCanario\customers\forms.py:12 .\elCanario\customers\forms.py:19
 msgid "Dni"
 msgstr "Dni"
 
 #: .\elCanario\components\templates\molecules\card_customer.html:36
-#: .\elCanario\customers\forms.py:14 .\elCanario\customers\utils.py:101
+#: .\elCanario\customers\forms.py:15 .\elCanario\customers\forms.py:22
+#: .\elCanario\customers\utils.py:101
 msgid "Email"
 msgstr "Email"
 
@@ -612,13 +614,9 @@ msgstr "Pendiente"
 msgid "Operation successfully completed"
 msgstr "Operación completada satisfactoriamente."
 
-#: .\elCanario\components\templates\molecules\form.html:34
+#: .\elCanario\components\templates\molecules\form.html:25
 msgid "Guardar"
 msgstr "Guardar"
-
-#: .\elCanario\components\templates\organisms\login_form.html:12
-msgid "Forgot Password?"
-msgstr "¿Ha olvidado su contraseña?"
 
 #: .\elCanario\components\templates\organisms\search_data.html:15
 #: .\elCanario\components\templates\organisms\search_data.html:25
@@ -679,6 +677,7 @@ msgstr "Lista de clientes"
 
 #: .\elCanario\customers\templates\customers\customers.html:21
 #: .\elCanario\customers\templates\customers\customers_create.html:5
+#: .\elCanario\customers\templates\customers\customers_create.html:24
 #: .\elCanario\customers\templates\customers\customers_update.html:5
 msgid "Create Customer"
 msgstr "Crear Cliente"
@@ -810,6 +809,23 @@ msgstr "Hecho por"
 msgid "UserName"
 msgstr "Nombre de Usuario"
 
+#: .\elCanario\orders\form.py:19
+#: .\elCanario\orders\templates\orders\partials\orders_search_header.html:6
+#: .\elCanario\orders\utils.py:68 .\elCanario\orders\utils.py:111
+msgid "Customer"
+msgstr "Clientes"
+
+#: .\elCanario\orders\form.py:21
+#: .\elCanario\orders\templates\orders\partials\orders_search_header.html:10
+#: .\elCanario\orders\utils.py:80 .\elCanario\orders\utils.py:125
+msgid "Details"
+msgstr "Detalles"
+
+#: .\elCanario\orders\form.py:22
+#: .\elCanario\orders\templates\orders\partials\orders_search_header.html:13
+msgid "Status"
+msgstr "Estado"
+
 #: .\elCanario\orders\templates\orders\htmx\orders_search_data.html:15
 #: .\elCanario\orders\templates\orders\htmx\orders_search_datatype.html:18
 msgid "Number of orders found:"
@@ -850,11 +866,6 @@ msgstr "Buscar Venta"
 msgid "Update Order Section"
 msgstr "Sección Actualizar Venta"
 
-#: .\elCanario\orders\templates\orders\partials\orders_search_header.html:6
-#: .\elCanario\orders\utils.py:68 .\elCanario\orders\utils.py:111
-msgid "Customer"
-msgstr "Clientes"
-
 #: .\elCanario\orders\templates\orders\partials\orders_search_header.html:8
 msgid "Quantity"
 msgstr "Cantidad"
@@ -863,11 +874,6 @@ msgstr "Cantidad"
 msgid "Total Pay"
 msgstr "Pago Total"
 
-#: .\elCanario\orders\templates\orders\partials\orders_search_header.html:10
-#: .\elCanario\orders\utils.py:80 .\elCanario\orders\utils.py:125
-msgid "Details"
-msgstr "Detalles"
-
 #: .\elCanario\orders\templates\orders\partials\orders_search_header.html:11
 msgid "Created"
 msgstr "Creado"
@@ -875,10 +881,6 @@ msgstr "Creado"
 #: .\elCanario\orders\templates\orders\partials\orders_search_header.html:12
 msgid "Updated"
 msgstr "Actualizado"
-
-#: .\elCanario\orders\templates\orders\partials\orders_search_header.html:13
-msgid "Status"
-msgstr "Estado"
 
 #: .\elCanario\orders\templates\orders\partials\orders_search_header.html:18
 #: .\elCanario\orders\templates\orders\partials\orders_search_header.html:26
@@ -999,6 +1001,9 @@ msgstr "Verificar Email"
 #: .\elCanario\settings\templates\settings\settings.html:42
 msgid "Verified"
 msgstr "Verificado"
+
+#~ msgid "Forgot Password?"
+#~ msgstr "¿Ha olvidado su contraseña?"
 
 #, python-brace-format
 #~ msgid ""

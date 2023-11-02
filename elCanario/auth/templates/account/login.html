@@ -18,7 +18,8 @@
             </div>
             
             {% translate 'Sign In' as signin %}
-
+            {% translate "Sign up with Google" as google_label %}
+            
             <div class="py-10">
 
                 {% title text=signin %}
@@ -28,7 +29,7 @@
                         <a class="btn btn-outline"
                         href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">
                             <img class="w-6 h-6 mr-2" src="{% static 'img/google.svg' %}" alt="Google">
-                            <span>{% trans "Sign up with Google" %}</span>
+                            <span>{{google_label}}</span>
                         </a>
                     </div>
                 {% /block_card %}

@@ -21,9 +21,10 @@
     </div>
 {% endblock title_section_content_under %}
 {% block section_content_under %}
+    {% translate 'Create Order' as title %}
     <div class="mx-auto max-w-md">
         {% var url="orders:create" %}
-        {% var object_type="order" %}
+        {% var title=title %}
         {% var form=form %}
         {% var request=request %}
         {% var action="create" %}

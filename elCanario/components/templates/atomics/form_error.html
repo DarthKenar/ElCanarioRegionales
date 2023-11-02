@@ -1,8 +1,13 @@
 {% comment  %}
     errors = form.{field}.errors
 {% endcomment %}
+<div class="w-full text-left">
+    {% if not errors %}
+        <p class="p-0 m-0 text-error text-xs">&nbsp;</p>
+    {% else %}
+        {% for error in errors %}<p class="p-0 m-0 text-error text-xs">{{ error }}</p>{% endfor %}
+    {% endif %}
+</div>
 
-{% if not errors %}
-    <p class="p-0 m-0 text-error text-xs">&nbsp;</p>
-{% endif %}
-{% for error in errors %}<p class="p-0 m-0 text-error text-xs">{{ error }}</p>{% endfor %}
+
+

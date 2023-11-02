@@ -4811,10 +4811,6 @@ details.collapse summary::-webkit-details-marker {
   margin-top: 0.75rem;
 }
 
-.mt-4 {
-  margin-top: 1rem;
-}
-
 .mt-5 {
   margin-top: 1.25rem;
 }
@@ -5962,11 +5958,6 @@ details.collapse summary::-webkit-details-marker {
   border-color: hsl(var(--bc) / var(--tw-border-opacity));
 }
 
-.border-gray-200 {
-  --tw-border-opacity: 1;
-  border-color: rgb(229 231 235 / var(--tw-border-opacity));
-}
-
 .border-gray-300 {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
@@ -6188,10 +6179,6 @@ details.collapse summary::-webkit-details-marker {
 
 .bg-white\/30 {
   background-color: rgb(255 255 255 / 0.3);
-}
-
-.bg-white\/70 {
-  background-color: rgb(255 255 255 / 0.7);
 }
 
 .bg-zinc-500 {
@@ -6528,10 +6515,6 @@ details.collapse summary::-webkit-details-marker {
 
 .pt-4 {
   padding-top: 1rem;
-}
-
-.pt-6 {
-  padding-top: 1.5rem;
 }
 
 .pt-8 {
@@ -6907,11 +6890,6 @@ details.collapse summary::-webkit-details-marker {
 .text-gray-700 {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity));
-}
-
-.text-gray-800 {
-  --tw-text-opacity: 1;
-  color: rgb(31 41 55 / var(--tw-text-opacity));
 }
 
 .text-green-600 {
@@ -9103,14 +9081,6 @@ details.collapse summary::-webkit-details-marker {
 @media (min-width: 1280px) {
   .xl\:mt-0 {
     margin-top: 0px;
-  }
-
-  .xl\:h-4 {
-    height: 1rem;
-  }
-
-  .xl\:w-4 {
-    width: 1rem;
   }
 
   .xl\:grid-cols-4 {

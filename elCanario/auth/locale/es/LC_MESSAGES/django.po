@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-31 23:01-0300\n"
+"POT-Creation-Date: 2023-11-02 04:12-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -213,15 +213,15 @@ msgstr ""
 msgid "Sign In"
 msgstr ""
 
-#: .\elCanario\auth\templates\account\login.html:31
+#: .\elCanario\auth\templates\account\login.html:21
 msgid "Sign up with Google"
 msgstr ""
 
-#: .\elCanario\auth\templates\account\login.html:36
+#: .\elCanario\auth\templates\account\login.html:37
 msgid "OR"
 msgstr ""
 
-#: .\elCanario\auth\templates\account\login.html:63
+#: .\elCanario\auth\templates\account\login.html:64
 #: .\elCanario\auth\templates\account\signup.html:102
 msgid "Forgot Password?"
 msgstr ""
