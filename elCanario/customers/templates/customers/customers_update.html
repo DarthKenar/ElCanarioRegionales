@@ -22,11 +22,13 @@
     </div>
 {% endblock title_section_content_under %}
 {% block section_content_under %}
+    {% translate 'Update Customer' as title %}
     <div class="mx-auto max-w-md">
         {% var id=object.id %}
         {% var url="customers:update" %}
         {% var object_type="customer" %}
         {% var form=form %}
+        {% var title=title %}
         {% var request=request %}
         {% var action="update" %}
         {% include 'form.html' %}

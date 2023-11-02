@@ -10,7 +10,7 @@
         {% csrf_token %}
         <div class="w-full text-center flex flex-col items-center justify-center">
 
-            <h1 class="text-2xl">{{title}}</h1>
+            <h1 class="text-2xl">{{title}} {% if action == 'update' %}{{object.id}}{% endif %}</h1>
 
             {% for field in form %}
                 <div class="w-full flex flex-col items-center justify-center">

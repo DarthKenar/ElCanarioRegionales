@@ -246,6 +246,7 @@ def articles_create_confirm(request):
     values = Value.objects.all()
     context["categories"] = categories
     context["values"] = values
+    context["title"] = _("Create Article")
     article_name_input = request.GET["article_name_input"].strip().title()
     article_buy_price_input = request.GET['article_buy_price_input'].replace(',', '.')
     article_increase_input = request.GET['article_increase_input'].replace(',', '.')
@@ -323,6 +324,7 @@ def articles_update_confirm(request, id):
     article_to_update = Article.objects.get(id=id)
     context["categories"] = categories
     context["values"] = values
+    context["title"] = _("Update Article")
     article_name_input = request.GET["article_name_input"].strip().title()
     article_buy_price_input = request.GET['article_buy_price_input'].replace(',', '.')
     article_increase_input = request.GET['article_increase_input'].replace(',', '.')

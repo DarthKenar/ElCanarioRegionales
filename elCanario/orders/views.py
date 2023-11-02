@@ -137,6 +137,11 @@ class OrderCreateView(LoginRequiredMixin, CreateView):
         update_total_purchased(self.object)
         return reverse_lazy('orders:create_htmx') + '?success'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = _("Create Order")
+        return context
+
 
 class OrderCreateTemplate(LoginRequiredMixin, TemplateView):
     """View that is used only when the OrderCreateView creation form was successful. This view is the one used to replace one part of the html with another using htmx.
@@ -154,6 +159,7 @@ class OrderCreateTemplate(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         form = OrderForm()
         context['form'] = form
+        context['title'] = _("Create Order")
         return context
 
     
@@ -198,7 +204,11 @@ class OrderUpdateView(LoginRequiredMixin,UpdateView):
         update_total_pay(self.object)
         update_total_purchased(self.object)
         return reverse_lazy('orders:update_htmx', args=[f"{self.object.id}"]) + '?success'
-
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = _("Update Order")
+        return context
 
 class OrderUpdateTemplate(LoginRequiredMixin, TemplateView):
     """View that is used only when the OrderUpdateView update form is successful. This view is the one used to replace one part of the html with another using htmx.
@@ -217,6 +227,7 @@ class OrderUpdateTemplate(LoginRequiredMixin, TemplateView):
         objeto_id = self.kwargs.get('pk')
         object = get_object_or_404(Order,id=objeto_id)
         context['object'] = object
+        context["title"] = _("Update Order")
         form = OrderForm(instance=object) 
         context['form'] = form
         return context

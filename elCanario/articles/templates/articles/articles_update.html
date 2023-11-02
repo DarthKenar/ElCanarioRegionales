@@ -25,10 +25,11 @@
 {% block section_content_under %}
 
     {% #section type="full" %}
-        <h1 class="text-center mx-auto py-4 text-2xl">{% translate 'Editing article' %} {{article_to_update.id}}</h1>
+        {% translate "Update Article" as title %}
         <div class="mx-auto max-w-md" id="article_update_answer">
             {% var url="orders:create" %}
             {% var object_type="order" %}
+            {% var title=title %}
             {% var form=form %}
             {% var request=request %}
             {% var action="create" %}

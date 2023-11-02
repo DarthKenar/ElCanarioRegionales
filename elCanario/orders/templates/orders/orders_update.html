@@ -22,10 +22,12 @@
     </div>
 {% endblock title_section_content_under %}
 {% block section_content_under %}
+    {% translate 'Update Order' as title %}
     <div class="mx-auto max-w-md">
         {% var id=object.id %}
         {% var url="orders:update" %}
         {% var object_type="order" %}
+        {% var title=title %}
         {% var form=form %}
         {% var request=request %}
         {% var action="update" %}

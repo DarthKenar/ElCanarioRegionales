@@ -136,6 +136,10 @@ class CustomerCreateView(LoginRequiredMixin, CreateView):
         """
         return reverse_lazy('customers:create_htmx') + '?success'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = _("Create Customer")
+        return context
 
 class CustomerCreateTemplate(LoginRequiredMixin,TemplateView):
     """View that is used only when the CustomerCreateView creation form was successful. This view is the one used to replace one part of the html with another using htmx.
@@ -152,6 +156,7 @@ class CustomerCreateTemplate(LoginRequiredMixin,TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         form = CustomerForm()
+        context["title"] = _("Create Customer")
         context['form'] = form
         return context
 
@@ -195,6 +200,10 @@ class CustomerUpdateView(LoginRequiredMixin, UpdateView):
         """
         return reverse_lazy('customers:update_htmx', args=[f"{self.object.id}"]) + '?success'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = _("Update Customer")
+        return context
         
 class CustomerUpdateTemplate(LoginRequiredMixin, TemplateView):
     """View that is used only when the CustomerUpdateView update form is successful. This view is the one used to replace one part of the html with another using htmx.
@@ -213,7 +222,8 @@ class CustomerUpdateTemplate(LoginRequiredMixin, TemplateView):
         objeto_id = self.kwargs.get('pk')
         object = get_object_or_404(Customer,id=objeto_id)
         context['object'] = object
-        form = CustomerForm(instance=object) 
+        form = CustomerForm(instance=object)
+        context["title"] = _("Update Customer")
         context['form'] = form
         return context
 
