@@ -128,7 +128,7 @@ erDiagram
 
 ---
 
-## DEPENDENCIES
+## Dependencies
 
 | Package | Description | Link |
 | ----------- | ---|---|
@@ -151,16 +151,16 @@ For django-allauth I have disabled two-factor authentication, email confirmation
 - [Feathericons](https://feathericons.com/)
 - [HTMX](https://htmx.org/)
 
-## PREVIEW
+## Preview
 
-### RESPONSIVE DESIGN
+### Responsive Design
 
 ![RESPONSIVE DESIGN](images/responsive_design.png)
 
-### CHANGE LANGUAGE
+### Change lenguage
 
 ![CHANGE LANGUAGE](images/switch-lenguage.gif)
 
-### CHANGE THEME
+### Change theme
 
 ![CHANGE THEME](images/switch-theme.gif)

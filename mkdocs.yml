@@ -14,15 +14,16 @@ plugins:
     default_handler: python
 
 nav:
-  - Home: 
+  - Introduction: 
       index.md
-
   - Articles:
       articles/index.md
   - Customers:
       customers/index.md
   - Orders:
       orders/index.md
+  - MessagesLog:
+      messageslog/index.md
 
 markdown_extensions:
   - pymdownx.superfences:
