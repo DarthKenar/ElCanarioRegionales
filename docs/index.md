@@ -11,21 +11,32 @@ Using DaisyUI this becomes very simple.
 ## Features
 
 - Create, edit, delete _customers_.
+
 - Creates, edits, deletes _articles_.
   - Creates, edits or deletes _categories_ for articles
-    - Creates, edits or deletes _values_ related to a specific category (to relate them to a specific article)
+  - Creates, edits or deletes _values_ related to a specific category (to relate them to a specific article)
+
 - Create, edit, delete _orders_.
+
 - Automatic creation of log of actions displayed on the main panel (desktop)
+
 - Full authentication system
-  - Login (or register) with Google account
-  - Registration
-  - Login with Google account
+  - Log In (or Sign Up) with Google account
+  - Log In - Sign Up Standard Mode
   - Password recovery
-  - Email confirmation (not mandatory for practical purposes)
-  - Dual authentication system (2FA) (not mandatory for practical purposes)
-  - and much more...
+  - Email confirmation (disabled for practical purposes)
+  - Dual authentication system (disabled for practical purposes)
+  - and more...
+
 - Filtering of Cards (objects [Customers, Orders, Articles]) based on any of their attributes (Implemented HTMX dynamic page)
+
 - Install the application on your cell phone (Progressive web application)
+
+- Change lenguage for your account
+
+- Change theme for your account
+
+- All actions taken will be saved and displayed on dashboard.
 
 ## Project layout
 
@@ -42,7 +53,7 @@ DataBase
 manage.py
 ```
 
-## Models Relationships
+## Main Models Relationships
 
 ``` mermaid
 erDiagram 
@@ -123,11 +134,15 @@ erDiagram
 | ----------- | ---|---|
 | "django>=4.2.6" | Web framekork | [Django](https://www.djangoproject.com/) |
 | "django-allauth>=0.58.1" | Social Authentication |[django-allauth](https://github.com/pennersr/django-allauth)|
-| "django-pwa>=1.1.0" | Aplicación Web Progresiva | [django-pwa](https://github.com/silviolleite/django-pwa) |
+| "django-pwa>=1.1.0" | Progressive Web Aplication | [django-pwa](https://github.com/silviolleite/django-pwa) |
 | "django-widget-tweaks>=1.5.0" | Form Render | [django-widget-tweaks](https://github.com/jazzband/django-widget-tweaks) |
 | "slippers>=0.6.2" |Components whit template tags| [slippers](https://github.com/mixxorz/slippers) |
-| "Pillow>=10.1.0" ||[Pillow](https://github.com/python-pillow/Pillow)|
-| "pytz>=2023.3.post1" ||[pytz](https://github.com/stub42/pytz)|
+| "Pillow>=10.1.0" |Images|[Pillow](https://github.com/python-pillow/Pillow)|
+| "pytz>=2023.3.post1" |Time Zone|[pytz](https://github.com/stub42/pytz)|
+
+### Notes
+
+For django-allauth I have disabled two-factor authentication, email confirmation (verification) and some other features for practical purposes, so that anyone who wants to log in and test the application would find it easier.
 
 ### Tools
 
