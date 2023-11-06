@@ -7,7 +7,7 @@ from django.db.models.signals import post_save, post_delete
 from django.utils.translation import gettext_lazy as _
 from django.dispatch import receiver
 
-#https://docs.djangoproject.com/en/4.2/topics/signals/
+#https://docs.djangoproject.com/en/4.2/topics/signals/#connecting-to-signals-sent-by-specific-senders
 
 #! Articles
 
