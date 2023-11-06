@@ -1,4 +1,3 @@
-from mailbox import Message
 from customers.forms import CustomerForm
 from django.forms.models import BaseModelForm
 from django.http import HttpRequest, HttpResponse
@@ -13,7 +12,6 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.query import QuerySet
-from messageslog.models import MessageLog
 from django.shortcuts import get_object_or_404
 from customers.utils import get_context_for_search_input_in_customers_section, get_customers_for_search_input, get_context_for_datatype_input_in_customers_section
 from elCanario.utils import render_login_required
@@ -117,22 +115,10 @@ class CustomerCreateView(LoginRequiredMixin, CreateView):
         self.template_name = "create_form.html"
         return super().post(request, *args, **kwargs)
 
-    def form_valid(self, form: BaseModelForm) -> HttpResponse:
-        """If the form is valid a message type object will be created to display in the LOG."""
-        name = form.cleaned_data['name']
-        dni = form.cleaned_data['dni']
-        phone_number = form.cleaned_data['phone_number']
-        address = form.cleaned_data['address']
-        email = form.cleaned_data['email']
-        message = MessageLog(info=_(f"CUSTOMER CREATED - Name: {name},\n Dni: {dni},\n Phone number: {phone_number},\n Addres: {address},\n Email{email}"))
-        message.save()
-        return super().form_valid(form)
-
     def get_success_url(self) -> str:
         """
         Returns:
                 HttpResponse: A part of the html is replaced with htmx replacing the old form with a new empty one.
-                Success is added to the response to display a success message to the user if this word exists in the response.
         """
         return reverse_lazy('customers:create_htmx') + '?success'
 
@@ -181,17 +167,6 @@ class CustomerUpdateView(LoginRequiredMixin, UpdateView):
         self.template_name = "update_form.html"
         return super().post(request, *args, **kwargs)
 
-    def form_valid(self, form: BaseModelForm) -> HttpResponse:
-        """If the form is valid a message type object will be created to display in the LOG."""
-        name = form.cleaned_data['name']
-        dni = form.cleaned_data['dni']
-        phone_number = form.cleaned_data['phone_number']
-        address = form.cleaned_data['address']
-        email = form.cleaned_data['email']
-        message = MessageLog(info=_(f"CUSTOMER UPDATED - Name: {name},\n Dni: {dni},\n Phone number: {phone_number},\n Addres: {address},\n Email{email}"))
-        message.save()
-        return super().form_valid(form) #Esto hace que se guarde.
-
     def get_success_url(self) -> str:
         """
         Returns:
@@ -230,7 +205,7 @@ class CustomerUpdateTemplate(LoginRequiredMixin, TemplateView):
 
 @csrf_protect
 def customer_delete(request:object, pk:int)-> HttpResponse:
-    """View used for the deletion of an object of type Customer. An object of type Messagge log is created when the object is successfully deleted.
+    """View used for the deletion of an object of type Customer.
     - Has crsf protection.
     - Login required.
     Args:
@@ -249,8 +224,6 @@ def customer_delete(request:object, pk:int)-> HttpResponse:
         return render_login_required(request, template, context)
     else:
         context["delete_answer"] = _(f"Customer {customer.name} has been eliminated")
-        message = MessageLog(info= _(f"CUSTOMER DELETED - Name: {customer.name}"))
-        message.save()
         customer.delete()
         customers = Customer.objects.all()
         context.update({"object_list": customers})

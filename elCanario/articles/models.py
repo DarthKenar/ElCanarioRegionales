@@ -38,7 +38,7 @@ class Article(models.Model):
     stock = models.PositiveSmallIntegerField(verbose_name="Stock") #Value from 0 to 32767
 
     def __str__(self) -> str:
-        return f"{self.name}, {self.sell_price}"
+        return f"{self.pk}, {self.name}, {self.sell_price}"
 
     class Meta:
         verbose_name = 'Article'

@@ -14,7 +14,6 @@ from django.db.models.query import QuerySet
 from django.views.generic import CreateView, UpdateView, TemplateView
 from orders.models import Order
 from django.views.decorators.csrf import csrf_protect
-from messageslog.models import MessageLog
 # Create your views here.
 # # ORDERS SECTION
 
@@ -114,16 +113,6 @@ class OrderCreateView(LoginRequiredMixin, CreateView):
     def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
         self.template_name = "create_form.html"
         return super().post(request, *args, **kwargs)
-    
-    def form_valid(self, form: OrderForm) -> HttpResponse:
-        """If the form is valid a message type object will be created to display in the LOG."""
-        customer_id = form.cleaned_data['customer_id']
-        articles_cart = form.cleaned_data['articles_cart']
-        articles = [art.name for art in articles_cart]
-        details = form.cleaned_data['details']
-        message = MessageLog(info=_(f"ORDER CREATED - Customer: {customer_id.name}, articles: {articles}, details: {details}."))
-        message.save()
-        return super().form_valid(form)
 
     def get_success_url(self) -> str:
         """Once the order is saved, the quantity of items, the total price paid and the total sales price of the order are updated.
@@ -183,22 +172,11 @@ class OrderUpdateView(LoginRequiredMixin,UpdateView):
         self.template_name = "update_form.html"
         return super().post(request, *args, **kwargs)
 
-    def form_valid(self, form: OrderForm) -> HttpResponse:
-        """If the form is valid a message type object will be created to display in the LOG."""
-        customer_id = form.cleaned_data['customer_id']
-        articles_cart = form.cleaned_data['articles_cart']
-        articles = [art.name for art in articles_cart]
-        details = form.cleaned_data['details']
-        message = MessageLog(info=_(f"ORDER UPDATED - Customer: {customer_id.name}, articles: {articles}, details: {details}."))
-        message.save()
-        return super().form_valid(form)
-
     def get_success_url(self) -> str:
         """Once the order is saved, the quantity of items, the total price paid and the total sales price of the order are updated.
 
         Returns:
                 HttpResponse: A part of the html is replaced with htmx replacing the old form with a new empty one.
-                Success is added to the response to a success display a message to the user if this word exists in the response.
         """
         update_article_quantity(self.object)
         update_total_pay(self.object)
@@ -235,7 +213,7 @@ class OrderUpdateTemplate(LoginRequiredMixin, TemplateView):
 
 @csrf_protect
 def order_delete(request:object, pk:int)-> HttpResponse:
-    """View used for the deletion of an object of type Order. An object of type Messagge log is created when the object is successfully deleted.
+    """View used for the deletion of an object of type Order.
     - Has crsf protection.
     - Login required.
     Args:
@@ -254,8 +232,6 @@ def order_delete(request:object, pk:int)-> HttpResponse:
         return render_login_required(request, template, context)
     else:
         context["delete_answer"] = _(f"Order {order.pk} for {order.customer_id} has been eliminated.")
-        message = MessageLog(info=_(f"ORDER DELETED - Order id: {order.pk},\nCustomer: {order.customer_id}."))
-        message.save()
         order.delete()
         orders = Order.objects.all()
         context.update({"object_list": orders})
