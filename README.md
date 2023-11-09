@@ -46,6 +46,7 @@ Using DaisyUI this becomes very simple.
   - and much more...
 - Filtering of Cards (objects [Customers, Orders, Items]) based on any of their attributes (Implemented HTMX dynamic page)
 - Install the application on your cell phone (Progressive web application)
+- And more...
 
 ## Getting started
 
