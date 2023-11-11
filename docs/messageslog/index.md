@@ -45,5 +45,5 @@ sequenceDiagram
 To run the unit tests of the following module please follow the instructions below
 
 ```python
-asd asd py
+py manage.py test
 ```
