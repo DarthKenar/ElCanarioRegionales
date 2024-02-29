@@ -5,7 +5,7 @@
 
 #### Full Online Technical Documantation
 
-[Documentation Link](https://darthkenar.github.io/ElCanarioRegionales/)
+[Full Documentation (English)](https://darthkenar.github.io/ElCanarioRegionales/) <--
 
 # Goal
 
