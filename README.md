@@ -1,6 +1,7 @@
 ![Logo ElCanarioRegionales](docs/images/logo-header.png)
 
---> [Despliegue Online](http://federicovega.pythonanywhere.com/) 
+
+#### Documentación parcial Online (para una documentación completa porfavor ingrese [aquí](https://darthkenar.github.io/ElCanarioRegionales/))
 
 [Documentación en Español][Spanish] <--
 
