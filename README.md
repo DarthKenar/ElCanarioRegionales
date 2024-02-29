@@ -3,7 +3,7 @@
 
 #### Documentación parcial Online (para una documentación completa porfavor ingrese [aquí](https://darthkenar.github.io/ElCanarioRegionales/))
 
-[Documentación en Español][Spanish] <--
+[Readme en español][Spanish] <--
 
 
 #### Full Online Technical Documantation
