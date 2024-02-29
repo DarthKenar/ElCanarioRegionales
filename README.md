@@ -2,6 +2,11 @@
 
 [Documentación en Español][Spanish] <--
 
+
+#### Full Online Technical Documantation
+
+[Documentation Link](https://darthkenar.github.io/ElCanarioRegionales/)
+
 # Goal
 
 > Web application to control Stock, Customers and Orders for a small business.
@@ -58,26 +63,6 @@ Using DaisyUI this becomes very simple.
 ```bash
 git clone https://github.com/DarthKenar/ElCanarioRegionales.git
 ```
-
-#### Full Online Technical Documantation
-
-[Documentation Link](https://darthkenar.github.io/ElCanarioRegionales/)
-
-#### Full offline Technical Documentation
-
-#### Install mkdocs to view the complete project documentation in local server
-
-```bash
-pip install mkdocs
-```
-
-#### In the current project directory run documet server
-
-```bash
-mkdocs serve
-```
-
-![MKDOCS](docs/images/mkdocs.png)
 
 ---
 
