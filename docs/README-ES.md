@@ -2,9 +2,11 @@
 
 ![Logo ElCanarioRegionales](images/logo-header.png)
 
-#### Documentacion Técnica Online Completa
+[read this README in English][volver] <--
 
-[Documentation Link](https://darthkenar.github.io/ElCanarioRegionales/)
+#### Full Online Technical Documantation
+
+[Documentación Completa (Inglés)](https://darthkenar.github.io/ElCanarioRegionales/) <--
 
 # Objetivo
 
