@@ -1,9 +1,6 @@
 ![Logo ElCanarioRegionales](docs/images/logo-header.png)
 
-
-#### Documentación parcial Online (para una documentación completa porfavor ingrese [aquí](https://darthkenar.github.io/ElCanarioRegionales/))
-
-[Readme en español][Spanish] <--
+[Leer este Readme en español][Spanish] <--
 
 
 #### Full Online Technical Documantation
